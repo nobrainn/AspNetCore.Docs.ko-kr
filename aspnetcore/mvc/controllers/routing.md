@@ -5,12 +5,12 @@ description: ASP.NET Core MVC가 라우팅 미들웨어를 사용하여 들어�
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: c63313ec060c5be368fcbd20edf5f0d557046d2e
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 74afd0a076ca8bd753000f547ef0a26308e8a884
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977221"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123494"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 작업에 라우팅
 
@@ -93,10 +93,11 @@ endpoints.MapDefaultControllerRoute();
 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-라우팅은 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> 및 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 미들웨어를 사용하여 구성됩니다. 컨트롤러를 사용하려면 다음을 수행하십시오.
-
-* <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> 내부를 `UseEndpoints` 호출하여 [특성 라우팅된](#ar) 컨트롤러를 매핑합니다.
-* <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> 호출하거나 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>, [기존에 라우팅된 컨트롤러를](#cr) 매핑합니다.
+> [!IMPORTANT]
+> 라우팅은 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> 및 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 미들웨어를 사용하여 구성됩니다. 컨트롤러를 사용하려면 다음을 수행하십시오.
+>
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> 내부를 `UseEndpoints` 호출하여 [특성 라우팅된](#ar) 컨트롤러를 매핑합니다.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> 호출하거나 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>, [기존에 라우팅된 컨트롤러를](#cr) 매핑합니다.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
