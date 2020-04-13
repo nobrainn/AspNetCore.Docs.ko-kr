@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/8/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 7f329ffb4c63e8699663f49720145984bb8802fd
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 0afd39fdb5a6f570e0e78ad54f6c436460bad3a6
+ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994602"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81223961"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core의 Razor 파일 컴파일
 
@@ -31,7 +31,7 @@ Razor 파일의 빌드 및 게시 시점 컴파일은 Razor SDK에서 기본적�
 
 1. [Microsoft.AspNetCore.Mvc.Razor.Runtime컴파일](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet 패키지를 설치합니다.
 
-1. `AddRazorRuntimeCompilation`에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. 예를 들어:
+1. <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. 다음은 그 예입니다.
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -61,29 +61,15 @@ Razor 파일의 빌드 및 게시 시점 컴파일은 Razor SDK에서 기본적�
 
 1. `AddRazorRuntimeCompilation`에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. `ASPNETCORE_ENVIRONMENT` 변수가 `Development`로 설정된 경우에만 디버그 모드에서 실행되도록 조건부로 `AddRazorRuntimeCompilation`을 실행합니다.
 
-    ```csharp
-    public IWebHostEnvironment Env { get; set; }
+  [!code-csharp[](~/mvc/views/view-compilation/sample/Startup.cs?name=snippet)]
 
-    public void ConfigureServices(IServiceCollection services)
-    {
-        IMvcBuilder builder = services.AddRazorPages();
+## <a name="additional-resources"></a>추가 자료
 
-    #if DEBUG
-        if (Env.IsDevelopment())
-        {
-            builder.AddRazorRuntimeCompilation();
-        }
-    #endif
-
-        // code omitted for brevity
-    }
-    ```
-
-## <a name="additional-resources"></a>추가 리소스
-
+* [Razor컴파일온빌드 및 Razor컴파일온퍼퍼퍼표](xref:razor-pages/sdk#properties) 속성.
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
+* 프로젝트 전체에서 런타임 컴파일 작업을 수행한다는 샘플은 [GitHub의 런타임 컴파일 샘플을](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) 참조하십시오.
 
 ::: moniker-end
 
@@ -104,7 +90,7 @@ Razor 파일의 빌드 및 게시 시점 컴파일은 Razor SDK에서 기본적�
 
 빌드 시 컴파일은 Razor 파일의 런타임 컴파일에 의해 보완됩니다. *.cshtml* 파일의 내용이 변경되면 ASP.NET Core MVC는 Razor 파일을 다시 컴파일합니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
