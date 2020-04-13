@@ -5,17 +5,17 @@ description: 이 문서에서는 ASP.NET Core Blazor가 처리되지 않은 예�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 03/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 2177edb9c3197588a9335f3d14495b86d5d53f65
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 4fdaf7fb90d126b8f7f029aac3af49eec3b69e74
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80218923"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80382277"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱에서 오류 처리
 
@@ -57,7 +57,28 @@ Blazor 서버 앱에서 *Pages/_Host.cshtml* 파일의 환경을 사용자 지�
 </div>
 ```
 
-`blazor-error-ui` 요소는 Blazor 템플릿에 포함된 스타일에 의해 숨겨지고 오류가 발생할 때 표시됩니다.
+`blazor-error-ui` 요소는 Blazor 템플릿(*wwwroot/css/site.css*)에 포함된 스타일에 의해 숨겨지고 오류가 발생하면 표시됩니다.
+
+```css
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+```
 
 ## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor 서버 앱이 처리되지 않은 예외에 반응하는 방법
 

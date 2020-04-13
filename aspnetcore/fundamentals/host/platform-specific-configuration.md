@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: 71fd5cf1934b5374e0a393e055db23b98c03b62f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ac667b0205f5daad395d86fbe129beb509a044a6
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647913"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417618"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core에서 호스팅 시작 어셈블리 사용
 
@@ -429,7 +429,7 @@ dotnet nuget locals all --clear
 
 **런타임 저장소 배포 어셈블리에서 활성화**
 
-1. *StartupDiagnostics* 프로젝트는 [PowerShell](/powershell/scripting/powershell-scripting)을 사용하여 해당 *StartupDiagnostics.deps.json* 파일을 수정합니다. PowerShell은 Windows 7 SP1 및 Windows Server 2008 R2 SP1부터 Windows에서 기본적으로 설치됩니다. 다른 플랫폼에서 PowerShell을 가져오려면 [Windows PowerShell 설치](/powershell/scripting/setup/installing-powershell#powershell-core)를 참조하세요.
+1. *StartupDiagnostics* 프로젝트는 [PowerShell](/powershell/scripting/powershell-scripting)을 사용하여 해당 *StartupDiagnostics.deps.json* 파일을 수정합니다. PowerShell은 Windows 7 SP1 및 Windows Server 2008 R2 SP1부터 Windows에서 기본적으로 설치됩니다. 다른 플랫폼에서 PowerShell을 가져오려면 [다양한 버전의 PowerShell 설치](/powershell/scripting/install/installing-powershell)를 참조하세요.
 1. *RuntimeStore* 폴더에서 *build.ps1* 스크립트를 실행합니다. 스크립트는 다음을 수행합니다.
    * *obj\packages* 폴더에 `StartupDiagnostics` 패키지를 생성합니다.
    * *store* 폴더에서 `StartupDiagnostics`의 런타임 저장소를 생성합니다. 해당 스크립트에서 `dotnet store` 명령은 Windows에 배포된 호스팅 시작에서 `win7-x64` [RID(런타임 식별자)](/dotnet/core/rid-catalog)를 사용합니다. 다른 런타임에 호스팅 시작을 제공할 때 스크립트의 줄 37에서 올바른 RID로 대체합니다. `StartupDiagnostics`의 런타임 저장소는 나중에 어셈블리가 사용될 컴퓨터의 사용자 또는 시스템의 런타임 저장소로 이동됩니다. `StartupDiagnostics` 어셈블리의 사용자 런타임 저장소 설치 위치는 *.dotnet/store/x64/netcoreapp3.0/startupdiagnostics/1.0.0/lib/netcoreapp3.0/StartupDiagnostics.dll*입니다.
@@ -815,7 +815,7 @@ dotnet nuget locals all --clear
 
 **런타임 저장소 배포 어셈블리에서 활성화**
 
-1. *StartupDiagnostics* 프로젝트는 [PowerShell](/powershell/scripting/powershell-scripting)을 사용하여 해당 *StartupDiagnostics.deps.json* 파일을 수정합니다. PowerShell은 Windows 7 SP1 및 Windows Server 2008 R2 SP1부터 Windows에서 기본적으로 설치됩니다. 다른 플랫폼에서 PowerShell을 가져오려면 [Windows PowerShell 설치](/powershell/scripting/setup/installing-powershell#powershell-core)를 참조하세요.
+1. *StartupDiagnostics* 프로젝트는 [PowerShell](/powershell/scripting/powershell-scripting)을 사용하여 해당 *StartupDiagnostics.deps.json* 파일을 수정합니다. PowerShell은 Windows 7 SP1 및 Windows Server 2008 R2 SP1부터 Windows에서 기본적으로 설치됩니다. 다른 플랫폼에서 PowerShell을 가져오려면 [다양한 버전의 PowerShell 설치](/powershell/scripting/install/installing-powershell)를 참조하세요.
 1. *RuntimeStore* 폴더에서 *build.ps1* 스크립트를 실행합니다. 스크립트는 다음을 수행합니다.
    * *obj\packages* 폴더에 `StartupDiagnostics` 패키지를 생성합니다.
    * *store* 폴더에서 `StartupDiagnostics`의 런타임 저장소를 생성합니다. 해당 스크립트에서 `dotnet store` 명령은 Windows에 배포된 호스팅 시작에서 `win7-x64` [RID(런타임 식별자)](/dotnet/core/rid-catalog)를 사용합니다. 다른 런타임에 호스팅 시작을 제공할 때 스크립트의 줄 37에서 올바른 RID로 대체합니다. `StartupDiagnostics`의 런타임 저장소는 나중에 어셈블리가 사용될 컴퓨터의 사용자 또는 시스템의 런타임 저장소로 이동됩니다. `StartupDiagnostics` 어셈블리의 사용자 런타임 저장소 설치 위치는 *.dotnet/store/x64/netcoreapp2.2/startupdiagnostics/1.0.0/lib/netcoreapp2.2/StartupDiagnostics.dll*입니다.

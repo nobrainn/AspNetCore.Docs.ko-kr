@@ -5,17 +5,17 @@ description: ASP.NET Core, CDN(콘텐츠 배달 네트워크), 파일 서버 및
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 04/06/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: ea2c625f424447209a362cdc58bdb18be061e47f
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511355"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80751126"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
 
@@ -93,6 +93,22 @@ Blazor 프로젝트가 게시되면 다음 IIS 구성을 사용하여 *web.confi
 * URL 재작성 모듈 규칙을 설정합니다.
   * 앱의 정적 자산이 상주하는 하위 디렉터리(*wwwroot/{PATH REQUESTED}* )를 제공합니다.
   * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서(*wwwroot/index.html*)로 리디렉션되도록 SPA 대체(fallback) 라우팅을 만듭니다.
+  
+#### <a name="use-a-custom-webconfig"></a>사용자 지정 web.config 사용
+
+사용자 지정 *web .config* 파일을 사용하려면
+
+1. 프로젝트 폴더의 루트에 사용자 지정 *web.config* 파일을 저장합니다.
+1. 프로젝트 파일( *.csproj*)에 다음 대상을 추가합니다.
+
+   ```xml
+   <Target Name="CopyWebConfigOnPublish" AfterTargets="Publish">
+     <Copy SourceFiles="web.config" DestinationFolder="$(PublishDir)" />
+   </Target>
+   ```
+   
+> [!NOTE]
+> MSBuild 속성 `<IsWebConfigTransformDisabled>`를 `true`로 설정하여 사용하는 것은 [IIS에 배포된 ASP.NET Core 앱용이므로](xref:host-and-deploy/iis/index#webconfig-file) Blazor WebAssembly 앱에서는 지원되지 않습니다. 자세한 내용은 [Copy target required to provide custom Blazor WASM web.config(dotnet/aspnetcore #20569)](https://github.com/dotnet/aspnetcore/issues/20569)(사용자 지정 Blazor WASM web.config를 제공하는 데 필요한 대상 복사)를 참조하세요.
 
 #### <a name="install-the-url-rewrite-module"></a>URL 재작성 모듈 설치
 

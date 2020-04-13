@@ -1,131 +1,150 @@
 ---
-title: ASP.NET Core Blazor 디버그
+title: ASP.NET Core Blazor WebAssembly 디버그
 author: guardrex
 description: Blazor 앱을 디버그하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/16/2020
+ms.date: 03/26/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 1b0035af48b82807a6ae14835a41a1ecbef06bb6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648315"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80381877"
 ---
-# <a name="debug-aspnet-core-blazor"></a>ASP.NET Core Blazor 디버그
+# <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Chromium 기반 브라우저(Chrome/Edge)에서 브라우저 개발 도구를 사용하여 Blazor WebAssembly를 디버깅하도록 하는 ‘초기’ 지원이 있습니다.  개발 중인 기능은 다음과 같습니다.
+Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우저 개발 도구를 사용하여 디버그할 수 있습니다.  또는 Visual Studio나 Visual Studio Code를 사용하여 앱을 디버그할 수도 있습니다.
 
-* Visual Studio에서 디버깅을 완전히 사용할 수 있도록 합니다.
-* Visual Studio Code에서 디버깅을 사용할 수 있도록 합니다.
-
-디버거 기능은 제한적입니다. 사용 가능한 시나리오는 다음과 같습니다.
+사용 가능한 시나리오는 다음과 같습니다.
 
 * 중단점을 설정하고 제거합니다.
-* 코드를 한 단계씩 실행(`F10`)하거나 코드 실행을 다시 시작(`F8`)합니다.
-* ‘지역’ 표시에서 `int`, `string` 및 `bool` 형식의 지역 변수 값을 확인합니다. 
+* Visual Studio 및 Visual Studio Code에서 디버깅 지원으로 앱을 실행합니다(<kbd>F5</kbd> 키 지원).
+* 코드를 한 단계씩 실행합니다(<kbd>F10</kbd> 키).
+* 브라우저에서 <kbd>F8</kbd> 키를 사용하여 또는 Visual Studio나 Visual Studio Code에서 <kbd>F5</kbd> 키를 사용하여 코드 실행을 다시 시작합니다.
+* ‘로컬’ 표시에서 지역 변수의 값을 확인합니다. 
 * JavaScript에서 .NET으로 이동하고 .NET에서 JavaScript로 이동하는 호출 체인을 포함하여 호출 스택을 확인합니다.
 
-다음은 수행할 수 ‘없습니다’. 
+현재 사용 가능하지 ‘않은’ 시나리오는 다음과 같습니다. 
 
-* `int`, `string` 또는 `bool`이 아닌 지역 변수의 값을 확인합니다.
-* 클래스 속성 또는 필드의 값을 확인합니다.
-* 변수를 마우스로 가리켜 해당 값을 확인합니다.
-* 콘솔에서 식을 계산합니다.
-* 비동기 호출을 한 단계씩 실행합니다.
-* 대부분의 다른 일반적인 디버깅 시나리오를 수행합니다.
+* 배열을 검사합니다.
+* 마우스를 올려 멤버를 검사합니다.
+* 디버그 모드로 관리 코드를 한 단계씩 실행합니다.
+* 값 형식에 대한 전체 지원을 받습니다.
+* 처리되지 않은 예외에서 중단합니다.
+* 앱 시작 중에 중단점을 적중시킵니다.
+* 서비스 작업자를 사용하여 앱을 디버그합니다.
 
-엔지니어링 팀은 추가 디버깅 시나리오 개발에 지속해서 주력하고 있습니다.
+향후 릴리스에서 계속해서 디버깅 환경을 개선하기 위해 노력하겠습니다.
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
 디버깅 작업에는 다음 브라우저 중 하나가 필요합니다.
 
+* Microsoft Edge(버전 80 이상)
 * Google Chrome(버전 70 이상)
-* Microsoft Edge 미리 보기([Edge Dev 채널](https://www.microsoftedgeinsider.com))
 
-## <a name="procedure"></a>프로시저
+## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio 및 Visual Studio Code의 디버깅 사용 설정
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+ASP.NET Core 3.2 미리 보기 3 이상 Blazor WebAssembly 프로젝트 템플릿을 사용하여 만든 새 프로젝트에서는 자동으로 디버깅을 사용하도록 설정됩니다.
 
-> [!WARNING]
-> Visual Studio의 디버깅 지원은 초기 개발 단계에 있습니다. **F5** 디버깅은 현재 지원되지 않습니다.
+기존 Blazor WebAssembly 앱에서 디버깅을 사용하도록 설정하려면 각 시작 프로필이 다음 `inspectUri` 속성을 포함하도록 프로젝트의 *launchSettings.json* 파일을 업데이트합니다.
 
-1. 디버깅하지 않고 `Debug` 구성에서 Blazor WebAssembly 앱을 실행합니다(**F5** 대신 **Ctrl**+**F5** 사용).
-1. 앱의 디버그 속성(**디버그** 메뉴의 마지막 항목)을 열고 HTTP **앱 URL**을 복사합니다. Chromium 기반 브라우저(Edge 베타 또는 Chrome)를 사용하여 앱의 HTTP 주소(HTTPS 주소 아님)로 이동합니다.
-1. 브라우저 창에서 개발자 도구 패널이 아니라 앱에 키보드 포커스를 놓습니다. 이 절차에서는 개발자 도구 패널을 닫은 상태로 유지하는 것이 가장 좋습니다. 디버깅이 시작된 후 개발자 도구 패널을 다시 열 수 있습니다.
-1. 다음과 같은 Blazor 특정 바로 가기 키를 선택합니다.
+```json
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+```
 
-   * Windows의 경우 `Shift+Alt+D`
-   * macOS의 경우 `Shift+Cmd+D`
+업데이트하면 *launchSettings.json* 파일이 다음 예와 비슷해집니다.
 
-   **디버깅 가능한 브라우저 탭을 찾을 수 없음**이 표시되는 경우 [원격 디버깅 사용](#enable-remote-debugging)을 참조하세요.
-   
-   원격 디버깅을 사용하도록 설정한 후 다음을 수행합니다.
-   
-   1\. 새 브라우저 창이 열립니다. 이전 창을 닫습니다.
+[!code-json[](debug/launchSettings.json?highlight=14,22)]
 
-   2\. 브라우저 창에서 앱에 키보드 포커스를 놓습니다.
+`inspectUri` 속성은
 
-   3\. 새 브라우저 창에서 Blazor 특정 바로 가기 키(Windows의 경우 `Shift+Alt+D`, macOS의 경우 `Shift+Cmd+D`)를 선택합니다.
+* 앱이 Blazor WebAssembly 앱인지를 감지할 수 있도록 IDE를 설정합니다.
+* Blazor의 디버깅 프록시를 통해 브라우저에 연결하도록 스크립트 디버깅 인프라에 지시합니다.
 
-   4\. **DevTools** 탭이 브라우저에서 열립니다. **브라우저 창에서 앱의 탭을 다시 선택합니다.**
+## <a name="visual-studio"></a>Visual Studio
 
-   앱을 Visual Studio에 연결하려면 [Visual Studio에서 프로세스에 연결](#attach-to-process-in-visual-studio) 섹션을 참조하세요.
+Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면
 
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+1. [최신 미리 보기 릴리스의 Visual Studio 2019 16.6](https://visualstudio.com/preview)(미리 보기 2 이상)을 설치했는지 확인합니다.
+1. ASP.NET Core가 호스트한 새 Blazor WebAssembly 앱을 만듭니다.
+1. <kbd>F5</kbd> 키를 눌러 디버거에서 앱을 실행합니다.
+1. `IncrementCount` 메서드의 *Counter.razor*에 중단점을 설정합니다.
+1. **카운터** 탭으로 이동하여 중단점을 적중시키도록 단추를 선택합니다.
 
-1. `--configuration Debug` 옵션을 [dotnet run](/dotnet/core/tools/dotnet-run) 명령에 전달(`dotnet run --configuration Debug`)하여 `Debug` 구성에서 Blazor WebAssembly 앱을 실행합니다.
-1. 셸의 창에 표시된 HTTP URL에 있는 앱으로 이동합니다.
-1. 개발자 도구 패널이 아니라 앱에 키보드 포커스를 놓습니다. 이 절차에서는 개발자 도구 패널을 닫은 상태로 유지하는 것이 가장 좋습니다. 디버깅이 시작된 후 개발자 도구 패널을 다시 열 수 있습니다.
-1. 다음과 같은 Blazor 특정 바로 가기 키를 선택합니다.
+   ![디버그 카운터](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
-   * Windows의 경우 `Shift+Alt+D`
-   * macOS의 경우 `Shift+Cmd+D`
+1. 로컬 창에서 `currentCount` 필드의 값을 확인합니다.
 
-   **디버깅 가능한 브라우저 탭을 찾을 수 없음**이 표시되는 경우 [원격 디버깅 사용](#enable-remote-debugging)을 참조하세요.
-   
-   원격 디버깅을 사용하도록 설정한 후 다음을 수행합니다.
-   
-   1\. 새 브라우저 창이 열립니다. 이전 창을 닫습니다.
+   ![로컬 보기](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-locals.png)
 
-   2\. 브라우저 창에서 개발자 도구 패널이 아니라 앱에 키보드 포커스를 놓습니다.
+1. <kbd>F5</kbd> 키를 눌러 실행을 계속합니다.
 
-   3\. 새 브라우저 창에서 Blazor 특정 바로 가기 키(Windows의 경우 `Shift+Alt+D`, macOS의 경우 `Shift+Cmd+D`)를 선택합니다.
+Blazor WebAssembly 앱을 디버그하는 동안 서버 코드도 디버그할 수 있습니다.
 
----
+1. `OnInitializedAsync`의 *FetchData.razor* 페이지에 중단점을 설정합니다.
+1. `Get` 작업 메서드의 `WeatherForecastController`에 중단점을 설정합니다.
+1. **데이터 페치** 탭으로 이동하여 `FetchData` 구성 요소가 서버에 HTTP 요청을 보내기 직전에 첫 번째 중단점을 적중시킵니다.
 
-## <a name="enable-remote-debugging"></a>원격 디버깅 사용
+   ![데이터 페치 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
-원격 디버깅을 사용하지 않도록 설정한 경우, **디버그 가능한 브라우저 탭을 찾을 수 없음** 오류 페이지가 Chrome에서 생성됩니다. 오류 페이지에는 Blazor 디버깅 프록시가 앱에 연결할 수 있도록 디버깅 포트가 열린 상태로 Chrome을 실행하는 방법에 대한 지침이 포함되어 있습니다. ‘Chrome 인스턴스를 모두 닫고’, 지침에 따라 Chrome을 다시 시작합니다. 
+1. <kbd>F5</kbd> 키를 눌러 실행을 계속하고 서버에서 `WeatherForecastController`의 중단점을 적중시킵니다.
 
-## <a name="debug-the-app"></a>앱 디버그
+   ![서버 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
-원격 디버깅을 사용하도록 설정하여 Chrome을 실행한 후 디버깅 바로 가기 키를 누르면 새 디버거 탭이 열립니다. 잠시 후에 **소스** 탭에 앱의 .NET 어셈블리 목록이 표시됩니다. 각 어셈블리를 펼쳐 디버깅에 사용할 수 있는 *.cs*/ *.razor* 소스 파일을 찾습니다. 중단점을 설정하고 앱의 탭으로 다시 전환한 다음, 코드를 실행하면 중단점이 적중됩니다. 중단점이 적중되면 코드를 한 단계씩 실행(`F10`)하거나 코드 실행을 정상적으로 다시 시작(`F8`)합니다.
+1. <kbd>F5</kbd> 키를 다시 눌러 실행이 계속되도록 하고 날씨 예측 테이블이 렌더링되는지 확인합니다.
+
+## <a name="visual-studio-code"></a>Visual Studio Code
+
+Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
+ 
+1. [C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)을 설치하고, `debug.javascript.usePreview`를 `true`로 설정하여 [JavaScript Debugger(Nightly)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 확장을 설치합니다.
+
+   ![확장](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
+
+   ![JS 미리 보기 디버거](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
+
+1. 디버깅이 사용 설정된 상태에서 기존 Blazor WebAssembly 앱을 엽니다.
+
+   * 디버깅을 사용하도록 설정하려면 추가 설정이 필요하다는 다음 알림이 표시되는 경우, 올바른 확장을 설치했고 JavaScript 미리 보기 디버깅을 사용하도록 설정했는지 확인한 다음에 창을 다시 로드합니다.
+
+     ![추가 설정 필요](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+
+   * 알림에서 빌드 및 디버깅을 위해 앱에 필요한 자산을 추가할지 묻습니다. **예**를 선택합니다.
+
+     ![필요한 자산 추가](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
+
+1. 디버거를 앱에서 시작하는 작업은 두 단계로 진행되는 프로세스입니다.
+
+   1\. **먼저** **.NET Core 시작(Blazor 독립 실행형)** 시작 구성을 사용하여 앱을 시작합니다.
+
+   2\. **앱이 시작된 후에** **Chrome의 .NET Core Debug Blazor 웹 어셈블리** 시작 구성을 사용하여 브라우저를 시작합니다(Chrome 필요). Chrome 대신 Edge를 사용하려면 *.vscode/launch.json*에 있는 시작 구성의 `type`을 `pwa-chrome`에서 `pwa-msedge`로 변경합니다.
+
+1. `Counter` 구성 요소의 `IncrementCount` 메서드에 중단점을 설정하고 단추를 선택하여 중단점을 적중시킵니다.
+
+   ![VS Code의 카운터 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
+
+## <a name="debug-in-the-browser"></a>브라우저에서 디버그
+
+1. 개발 환경에서 앱의 디버그 빌드를 실행합니다.
+
+1. <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd>를 누릅니다.
+
+1. 브라우저는 원격 디버깅이 설정된 상태로 실행되어야 합니다. 원격 디버깅을 사용하지 않도록 설정한 경우, **디버그 가능한 브라우저 탭을 찾을 수 없음** 오류 페이지가 생성됩니다. 오류 페이지에는 Blazor 디버깅 프록시가 앱에 연결할 수 있도록 디버깅 포트가 열려 있는 상태에서 브라우저를 실행하는 작업에 대한 지침이 포함되어 있습니다. ‘모든 브라우저 인스턴스를 닫고’ 지침에 따라 브라우저를 다시 시작합니다. 
+
+원격 디버깅을 사용하도록 설정하여 브라우저를 실행한 후 디버깅 바로 가기 키를 누르면 새 디버거 탭이 열립니다. 잠시 후에 **소스** 탭에 앱의 .NET 어셈블리 목록이 표시됩니다. 각 어셈블리를 펼쳐 디버깅에 사용할 수 있는 *.cs*/ *.razor* 소스 파일을 찾습니다. 중단점을 설정하고 앱의 탭으로 다시 전환한 다음, 코드를 실행하면 중단점이 적중됩니다. 중단점이 적중되면 코드를 한 단계씩 실행(<kbd>F10</kbd> 키)하거나 코드 실행을 정상적으로 다시 시작(<kbd>F8</kbd> 키)합니다.
 
 Blazor에서는 [Chrome DevTools 프로토콜](https://chromedevtools.github.io/devtools-protocol/)을 구현하고 .NET 특정 정보를 사용하여 프로토콜을 보강하는 디버깅 프록시를 제공합니다. 디버깅 바로 가기 키를 누르면 Blazor는 프록시에 있는 Chrome DevTools를 가리킵니다. 프록시는 디버그하려는 브라우저 창에 연결되므로 원격 디버깅을 사용하도록 설정해야 합니다.
-
-## <a name="attach-to-process-in-visual-studio"></a>Visual Studio에서 프로세스에 연결
-
-Visual Studio에서 앱의 프로세스에 연결하는 것은 **F5** 디버깅을 개발하는 동안 Blazor WebAssembly에 ‘임시로’ 사용되는 디버깅 시나리오입니다. 
-
-실행 중인 앱의 프로세스를 Visual Studio에 연결하려면 다음을 수행합니다.
-
-1. Visual Studio에서 **디버그** > **프로세스에 연결**을 선택합니다.
-1. **연결 형식**에서 **Chrome devtools 프로토콜 websocket**(인증 없음)을 선택합니다.
-1. **연결 대상**에 앱의 HTTP 주소(HTTPS 주소 아님)를 붙여넣습니다.
-1. **새로 고침**을 선택하여 **사용 가능한 프로세스**에 있는 항목을 새로 고칩니다.
-1. 디버그할 브라우저 프로세스를 선택하고 **연결**을 선택합니다.
-1. **코드 형식 선택** 대화 상자에서 연결할 특정 브라우저(Edge 또는 Chrome)의 코드 형식을 선택하고 **확인**을 선택합니다.
 
 ## <a name="browser-source-maps"></a>브라우저 소스 맵
 

@@ -8,12 +8,12 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 8935e665dfd5d8f9afa002f475c202ec0f0ee657
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2dff64f1f2d67b8a1e676acf6cf131b684099750
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78650793"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80405879"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
@@ -94,6 +94,9 @@ gRPC는 다음과 같은 시나리오에 적합합니다.
 [gRPC-웹](https://grpc.io/docs/tutorials/basic/web.html)은 브라우저에서 제한적 gRPC 지원을 제공하는 gRPC 팀의 추가 기술입니다. gRPC-웹은 모든 최신 브라우저를 지원하는 JavaScript 클라이언트와 서버 상의 gRPC-웹 프록시의 두 부분으로 구성됩니다. gRPC-웹 클라이언트는 프록시를 호출하고 프록시는 gRPC 요청을 gRPC 서버에 전달합니다.
 
 gRPC-웹에서 모든 gRPC 기능을 지원하지는 않습니다. 클라이언트 및 양방향 스트리밍이 지원되지 않으며 서버 스트리밍이 제한적으로 지원됩니다.
+
+> [!TIP]
+> .NET Core는 gRPC-Web에 대한 실험적인 지원을 제공합니다. 자세한 내용은 <xref:grpc/browser>를 참조하세요.
 
 ### <a name="not-human-readable"></a>사람이 읽을 수 없음
 

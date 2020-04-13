@@ -5,17 +5,17 @@ description: Blazor WebAssembly 및 Blazor 서버 호스팅 모델을 이해합�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/18/2020
+ms.date: 03/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: e6ce2be53c35268854e0e8d408b649a8c6ef497e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0dfc991f76acb227ce9ea27a07fbae50571f0117
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646803"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80471835"
 ---
 # <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -58,6 +58,8 @@ Blazor WebAssembly 호스팅에는 다음과 같은 단점이 있습니다.
 * 다운로드 크기가 더 크고 앱 로드 시간이 더 깁니다.
 * .NET 런타임 및 도구 지원의 완성도가 더 낮습니다. 예를 들어 [.NET Standard](/dotnet/standard/net-standard) 지원 및 디버깅에 대한 제한 사항이 있습니다.
 
+Blazor가 호스트하는 앱 모델은 [Docker 컨테이너](/dotnet/standard/microservices-architecture/container-docker-introduction/index)를 지원합니다. Visual Studio에서 서버 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **Docker 지원**을 선택합니다.
+
 ## <a name="opno-locblazor-server"></a>Blazor 서버
 
 Blazor 서버 호스팅 모델을 사용하는 경우, 서버의 ASP.NET Core 앱 내에서 앱이 실행됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
@@ -71,7 +73,7 @@ ASP.NET Core 앱은 앱의 `Startup` 클래스를 참조하여 다음을 추가�
 * 서버 쪽 서비스
 * 요청 처리 파이프라인에 앱 추가
 
-`blazor.server.js` 스크립트&dagger;는 클라이언트 연결을 설정합니다. 필요에 따라(예: 네트워크 연결이 끊어진 경우) 앱 상태를 유지하고 복원하는 것은 앱의 책임입니다.
+`blazor.server.js` 스크립트는 클라이언트 연결을 설정합니다. 필요에 따라(예: 네트워크 연결이 끊어진 경우) 앱 상태를 유지하고 복원하는 것은 앱의 책임입니다. `blazor.server.js` 스크립트는 ASP.NET Core 공유 프레임워크의 포함 리소스에서 제공됩니다.
 
 Blazor 서버 호스팅 모델은 다음과 같은 몇 가지 혜택을 제공합니다.
 
@@ -88,7 +90,7 @@ Blazor 서버 호스팅에는 다음과 같은 단점이 있습니다.
 * 여러 사용자가 있는 앱의 경우 확장성 구현이 어렵습니다. 서버에서 여러 개의 클라이언트 연결을 관리하고 클라이언트 상태를 처리해야 합니다.
 * 앱을 제공하려면 ASP.NET Core 서버가 필요합니다. 서버리스 배포 시나리오가 불가능합니다(예: CDN에서 앱 제공).
 
-&dagger;`blazor.server.js` 스크립트는 ASP.NET Core 공유 프레임워크에 포함 리소스에서 제공됩니다.
+Blazor 서버 앱 모델은 [Docker 컨테이너](/dotnet/standard/microservices-architecture/container-docker-introduction/index)를 지원합니다. Visual Studio에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **Docker 지원**을 선택합니다.
 
 ### <a name="comparison-to-server-rendered-ui"></a>서버에서 렌더링된 UI와 비교
 

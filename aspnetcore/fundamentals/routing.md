@@ -5,14 +5,14 @@ description: ASP.NET Core 라우팅이 HTTP 요청을 일치시키고 실행 가
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 3/25/2020
+ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 2ebba716de90f142a66cf7619b5a4b0c77684bd4
-ms.sourcegitcommit: 0c62042d7d030ec5296c73bccd9f9b961d84496a
+ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80270448"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80751153"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -494,7 +494,7 @@ URL 생성은 다음과 같습니다.
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false`와 일치. 대/소문자 구분하지 않음 |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서). 위의 경고를 참조하세요. |
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서) 위의 경고를 참조하세요. |
 | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | 유효한 `decimal` 값 일치(고정 문화권에서) 위의 경고를 참조하세요.|
 | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | 유효한 `double` 값 일치(고정 문화권에서) 위의 경고를 참조하세요.|
 | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | 유효한 `float` 값 일치(고정 문화권에서) 위의 경고를 참조하세요.|
@@ -580,7 +580,7 @@ ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase 
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/TestController.cs?name=snippet&highlight=6,13)]
 
-[MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x/RoutingSample/Extensions/ControllerContextExtensions.cs) 메서드는 [샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x)에 포함되어 있으며 라우팅 정보를 표시하는 데 사용됩니다.
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 `MyCustomConstraint`를 구현하면 경로 매개 변수에 `0`이 적용되지 않습니다.
 
@@ -984,6 +984,8 @@ app.UseEndpoints(endpoints =>
 * 엔드포인트와 일치하지 않는 요청
 
 따라서 권한 부여 미들웨어는 라우팅 컨텍스트 외에서도 유용합니다. 권한 부여 미들웨어는 기존 미들웨어 프로그래밍에 사용할 수 있습니다.
+
+[!INCLUDE[](~/includes/dbg-route.md)]
 
 ::: moniker-end
 
@@ -1424,7 +1426,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false와 일치. 대/소문자 구분하지 않음 |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서). 이전 경고를 참조하세요.|
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | 유효한 `decimal` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | 유효한 `double` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | 유효한 `float` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
@@ -1626,7 +1628,7 @@ URL 생성 지원을 사용하면 URL을 하드 코딩하지 않고 앱을 개�
 * 응답은 라우팅을 사용하여 경로 정보에 따라 URL을 생성(예: 리디렉션 또는 링크)하므로 하드 코딩된 URL을 방지하여 유지 관리에 도움이 됩니다.
 * URL 생성은 임의의 확장성을 지원하는 경로를 기반으로 합니다. <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>는 URL을 작성하는 메서드를 제공합니다.
 <!-- fix [middleware](xref:fundamentals/middleware/index) -->
-라우팅은 <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> 클래스에 의해 `[middleware](xref:fundamentals/middleware/index)` 파이프라인에 연결되어 있습니다. [ASP.NET Core MVC](xref:mvc/overview)는 라우팅을 해당 구성의 일부로 미들웨어 파이프라인에 추가하고, MVC 및 Razor Pages 앱에서 라우팅을 처리합니다. 라우팅을 독립 실행형 구성 요소로 사용하는 방법을 알아보려면 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션을 참조하세요.
+라우팅은 <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> 클래스에 의해 [미들웨어](xref:fundamentals/middleware/index) 파이프라인에 연결되어 있습니다. [ASP.NET Core MVC](xref:mvc/overview)는 라우팅을 해당 구성의 일부로 미들웨어 파이프라인에 추가하고, MVC 및 Razor Pages 앱에서 라우팅을 처리합니다. 라우팅을 독립 실행형 구성 요소로 사용하는 방법을 알아보려면 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션을 참조하세요.
 
 ### <a name="url-matching"></a>URL 일치
 
@@ -1874,7 +1876,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서). 이전 경고를 참조하세요.|
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | 유효한 `decimal` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | 유효한 `double` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | 유효한 `float` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
@@ -1980,6 +1982,5 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 ## <a name="complex-segments"></a>복잡한 세그먼트
 
 복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
-
 
 ::: moniker-end

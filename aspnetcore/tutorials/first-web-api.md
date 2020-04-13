@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 uid: tutorials/first-web-api
-ms.openlocfilehash: 55dfc05b5c96f7fa060d537745bac969e92daa9b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644967"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417655"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -135,7 +135,7 @@ IIS Express 인증서를 신뢰해야 하는지 묻는 대화 상자가 표시�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [https://localhost:5001/WeatherForecast](https://localhost:5001/WeatherForecast)로 이동합니다.
+Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 `https://localhost:5001/WeatherForecast` URL로 이동합니다.
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
@@ -374,8 +374,8 @@ ASP.NET Core 템플릿과 관련해서 다음 사항을 확인합니다.
 
 브라우저 또는 Postman에서 두 개의 엔드포인트를 호출하여 앱을 테스트합니다. 예를 들어:
 
-* [https://localhost:5001/api/TodoItems](https://localhost:5001/api/TodoItems)
-* [https://localhost:5001/api/TodoItems/1](https://localhost:5001/api/TodoItems/1)
+* `https://localhost:5001/api/TodoItems`
+* `https://localhost:5001/api/TodoItems/1`
 
 `GetTodoItems`를 호출하면 다음과 비슷한 응답이 생성됩니다.
 
@@ -606,7 +606,7 @@ IIS Express 인증서를 신뢰해야 하는지 묻는 대화 상자가 표시�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [https://localhost:5001/api/values](https://localhost:5001/api/values)로 이동합니다.
+Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 `https://localhost:5001/api/values` URL로 이동합니다.
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
@@ -892,7 +892,7 @@ ID = 1인 할 일 항목을 업데이트하고 해당 이름을 "feed fish"로 �
 Postman을 사용하여 할 일 항목을 삭제합니다.
 
 * 메서드를 `DELETE`로 설정합니다.
-* 예를 들어 삭제할 개체의 URI를 `https://localhost:5001/api/todo/1`로 설정합니다.
+* 삭제할 개체의 URI를 설정합니다(예: `https://localhost:5001/api/todo/1`).
 * **보내기**를 선택합니다.
 
 샘플 앱을 사용하면 모든 항목을 삭제할 수 있습니다. 하지만 마지막 항목이 삭제되면 다음에 API를 호출하는 경우 모델 클래스 생성자에서 새로운 항목이 생성됩니다.

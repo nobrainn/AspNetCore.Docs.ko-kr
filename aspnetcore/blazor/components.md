@@ -5,17 +5,17 @@ description: 데이터에 바인딩하고, 이벤트를 처리하고, 구성 요
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 03/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 7afc9250cdfb4b791ef939ead0f41b503d83fad8
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511277"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80306505"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -301,6 +301,8 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 > [!IMPORTANT]
 > `_loginDialog` 변수는 구성 요소가 렌더링된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료한 후에 구성 요소 참조를 조작하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](xref:blazor/lifecycle#after-component-render)를 사용합니다.
+
+루프의 구성 요소를 참조하려면 [Capture references to multiple similar child-components(dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358)(여러 비슷한 자식 구성 요소에 대한 참조 캡처)를 참조하세요.
 
 구성 요소 참조 캡처에는 [요소 참조 캡처](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)와 유사한 구문을 사용하지만 JavaScript interop 기능이 아닙니다. 구성 요소 참조는 JavaScript 코드에 전달되지 않으며, .NET 코드에서만 사용됩니다.
 
