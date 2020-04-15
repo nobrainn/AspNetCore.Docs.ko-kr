@@ -7,18 +7,18 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 32315267e0672b0747917228f08591a15e4449f8
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 12c86456dad86731b86487a3a4dd725f36677002
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277251"
+ms.locfileid: "81384042"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET 코어와 마이크로 소프트 계정 외부 로그인 설정
 
 작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-이 샘플에서는 [사용자가 이전 페이지에서](xref:security/authentication/social/index)만든 ASP.NET Core 3.0 프로젝트를 사용하여 Microsoft 계정으로 로그인할 수 있도록 하는 방법을 보여 주었습니다.
+이 샘플에서는 [사용자가 이전 페이지에서](xref:security/authentication/social/index)만든 ASP.NET Core 3.0 프로젝트를 사용하여 사용자 자신의 업무, 학교 또는 개인 Microsoft 계정으로 로그인할 수 있도록 하는 방법을 보여 주었습니다.
 
 ## <a name="create-the-app-in-microsoft-developer-portal"></a>Microsoft 개발자 포털에서 앱 만들기
 
