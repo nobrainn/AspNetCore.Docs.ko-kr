@@ -4,14 +4,14 @@ author: rick-anderson
 description: Razor 파일의 컴파일이 ASP.NET Core 앱에서 발생하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 04/14/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 67bbeb88cd944791b522900b69bd10cff38c9f3a
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 3d871ab960de28a565280d9e4cb2c597832e2455
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277273"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440937"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core의 Razor 파일 컴파일
 
@@ -51,7 +51,7 @@ dotnet new webapp --razor-runtime-compilation
 기존 프로젝트의 모든 환경에 대해 런타임 컴파일을 사용하려면 다음을 수행합니다.
 
 1. [Microsoft.AspNetCore.Mvc.Razor.Runtime컴파일](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet 패키지를 설치합니다.
-1. <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. 다음은 그 예입니다.
+1. <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. 예를 들어:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -83,13 +83,23 @@ dotnet new webapp --razor-runtime-compilation
 
 프로젝트 `Startup` 클래스에는 코드를 변경할 필요가 없습니다. 런타임시 ASP.NET Core는 에서 `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` [어셈블리 수준 HostingStartup 특성을](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) 검색합니다. 속성은 `HostingStartup` 실행할 앱 시작 코드를 지정합니다. 이 시작 코드는 런타임 컴파일을 가능하게 합니다.
 
+## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Razor 클래스 라이브러리에 대한 런타임 컴파일 사용
+
+Razor 페이지 프로젝트가 *MyClassLib이라는* [Razor 클래스 라이브러리(RCL)를](xref:razor-pages/ui-class) 참조하는 시나리오를 생각해 보십시오. RCL에는 팀의 모든 MVC 및 Razor 페이지 프로젝트가 사용하는 *_Layout.cshtml* 파일이 포함되어 있습니다. 해당 RCL에서 *_Layout.cshtml* 파일에 대한 런타임 컴파일을 사용하려고 합니다. Razor 페이지 프로젝트에서 다음 을 변경합니다.
+
+1. 런타임 컴파일을 [조건부로 사용하여 기존 프로젝트에서 런타임 컴파일을 사용하도록 설정합니다.](#conditionally-enable-runtime-compilation-in-an-existing-project)
+1. 런타임 컴파일 옵션을 다음과 `Startup.ConfigureServices`같은 방법으로 구성합니다.
+
+    [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
+
+    앞의 코드에서 *MyClassLib* RCL에 대한 절대 경로가 생성됩니다. [PhysicalFileProvider API는](xref:fundamentals/file-providers#physicalfileprovider) 해당 절대 경로에서 디렉터리 및 파일을 찾는 데 사용됩니다. 마지막으로 RCL의 `PhysicalFileProvider` *.cshtml* 파일에 액세스할 수 있는 파일 공급자 컬렉션에 인스턴스가 추가됩니다.
+
 ## <a name="additional-resources"></a>추가 자료
 
 * [Razor컴파일온빌드 및 Razor컴파일온퍼퍼퍼표](xref:razor-pages/sdk#properties) 속성.
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* 프로젝트 전체에서 런타임 컴파일 작업을 수행한다는 샘플은 [GitHub의 런타임 컴파일 샘플을](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) 참조하십시오.
 
 ::: moniker-end
 
@@ -107,7 +117,7 @@ Razor 파일의 빌드 시간 및 게시 시간 컴파일은 Razor SDK에 의해
 
 1. [Microsoft.AspNetCore.Mvc.Razor.Runtime컴파일](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet 패키지를 설치합니다.
 
-1. <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. 다음은 그 예입니다.
+1. <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>에 대한 호출을 포함하도록 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트합니다. 예를 들어:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)

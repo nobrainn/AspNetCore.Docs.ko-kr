@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 uid: security/cors
-ms.openlocfilehash: 601e26e1990a86ad60aa50c8c93ffa490ff6b708
-ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
+ms.openlocfilehash: e7731fd967c206679ac93209fdb84f40367bea37
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81007186"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440911"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>코어에서 CORS 간 요청(CORS) ASP.NET
 
@@ -109,7 +109,7 @@ CORS 미들웨어는 교차 원산지 요청을 처리합니다. 다음 코드�
 
 끝점 라우팅을 사용하면 다음과 같은 확장 메서드 집합을 사용하여 <xref:Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions.RequireCors*> 끝점별로 CORS를 사용할 수 있습니다.
 
-[!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,41,44)]
+[!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
 위의 코드에서
 
@@ -605,7 +605,7 @@ C:\Program Files\Git\mingw64\bin\
 
 배포된 샘플의 [테스트 페이지에서](https://cors1.azurewebsites.net/test?number=2) 이전 코드를 테스트합니다. **컨트롤러** 드롭다운 목록에서 **프리플라이트** 를 선택한 다음 **컨트롤러 를 설정합니다.** 끝점에 대한 모든 `TodoItems2Controller` CORS 호출이 성공합니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [CORS(크로스-원본 자원 공유)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS 모듈 시작](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -1011,7 +1011,7 @@ CORS 지원 엔드포인트는 [Fiddler](https://www.telerik.com/fiddler) 또는
 
 IIS에 배포할 때 서버가 익명 액세스를 허용하도록 구성되지 않은 경우 Windows 인증 전에 CORS를 실행해야 합니다. 이 시나리오를 지원하려면 [IIS CORS 모듈을](https://www.iis.net/downloads/microsoft/iis-cors-module) 앱에 대해 설치하고 구성해야 합니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [CORS(크로스-원본 자원 공유)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS 모듈 시작](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

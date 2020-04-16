@@ -9,12 +9,12 @@ ms.date: 04/08/2020
 no-loc:
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: a99c1dd2aba6ef6ff925783762a98e2c81ed7225
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 43b2cacf9f415ec422a00b28246f30c8ad74de29
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994577"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440859"
 ---
 # <a name="aspnet-core-opno-locsignalr-javascript-client"></a>ASP.NET SignalR 코어 자바 스크립트 클라이언트
 
@@ -145,7 +145,7 @@ SignalR에서 정의된 `SendAsync` 메서드 이름과 인수를 일치시켜 �
 
 메서드를 `catch` 메서드 끝에 `start` 연결하여 클라이언트 측 오류를 처리합니다. 브라우저 `console.error` 콘솔에 오류를 출력하는 데 사용합니다.
 
-[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=49-51)]
+[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=50)]
 
 연결이 이루어질 때 로거 및 이벤트 유형을 전달하여 클라이언트 측 로그 추적을 설정합니다. 메시지는 지정된 로그 수준 이상으로 기록됩니다. 사용 가능한 로그 수준은 다음과 같습니다.
 
@@ -178,7 +178,7 @@ const connection = new signalR.HubConnectionBuilder()
 다시 연결 시도를 `HubConnection` 시작하기 전에 `HubConnectionState.Reconnecting` 상태가 상태로 전환되고 `onreconnecting` 자동으로 다시 `Disconnected` `onclose` `HubConnection` 연결되지 않은 것처럼 콜백을 트리거하는 대신 콜백을 발생시면 됩니다. 이렇게 하면 연결이 손실되었음을 사용자에게 경고하고 UI 요소를 사용하지 않도록 설정할 수 있습니다.
 
 ```javascript
-connection.onreconnecting((error) => {
+connection.onreconnecting(error => {
     console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
 
     document.getElementById("messageInput").disabled = true;
@@ -197,7 +197,7 @@ connection.onreconnecting((error) => {
 > 협상을 [건너뛰도록](xref:signalr/configuration#configure-client-options) `connectionId` 구성된 경우 콜백의 `HubConnection` 매개 변수가 정의되지 않습니다. `onreconnected`
 
 ```javascript
-connection.onreconnected((connectionId) => {
+connection.onreconnected(connectionId => {
     console.assert(connection.state === signalR.HubConnectionState.Connected);
 
     document.getElementById("messageInput").disabled = false;
@@ -227,7 +227,7 @@ async function start() {
 클라이언트가 처음 네 번의 시도 내에서 성공적으로 `HubConnection` 다시 연결되지 `Disconnected` 않으면 클라이언트가 상태로 전환되어 [onclose](/javascript/api/%40aspnet/signalr/hubconnection#onclose) 콜백을 발생시면 됩니다. 이렇게 하면 연결이 영구적으로 손실되었음을 사용자에게 알리고 페이지를 새로 고칠 것을 권장합니다.
 
 ```javascript
-connection.onclose((error) => {
+connection.onclose(error => {
     console.assert(connection.state === signalR.HubConnectionState.Disconnected);
 
     document.getElementById("messageInput").disabled = true;
@@ -303,7 +303,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 실제 구현은 포기하기 전에 지수 백오프를 사용하거나 지정된 횟수로 다시 시도합니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [JavaScript API 참조](/javascript/api/?view=signalr-js-latest)
 * [자바 스크립트 튜토리얼](xref:tutorials/signalr)

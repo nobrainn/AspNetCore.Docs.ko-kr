@@ -4,17 +4,17 @@ author: guardrex
 ms.author: riande
 description: ASP.NET 핵심 구성 요소 태그 도우미를 사용하여 페이지 및 보기에서 Razor 구성 요소를 렌더링하는 방법을 알아봅니다.
 ms.custom: mvc
-ms.date: 04/01/2020
+ms.date: 04/15/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: aaa4b92a8912b4f52d861ed07432aa7cf3ca5240
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123423"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440963"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET 코어의 구성 요소 태그 도우미
 
@@ -24,7 +24,7 @@ ms.locfileid: "81123423"
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-문서의 페이지 및 보기 섹션에서 구성 요소를 사용할 앱 <xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views> *준비의* 지침을 따릅니다.
+문서의 페이지 및 보기 섹션에서 구성 요소를 사용할 앱 <xref:blazor/integrate-components#prepare-the-app> *준비의* 지침을 따릅니다.
 
 ## <a name="component-tag-helper"></a>구성 요소 태그 도우미
 
@@ -155,7 +155,7 @@ public class MyClass
 * 페이지로 미리 렌더링됩니다.
 * 페이지에서 정적 HTML로 렌더링되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보가 포함되어 있는 경우.
 
-| 렌더 모드 | Description |
+| 렌더 모드 | 설명 |
 | ----------- | ----------- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 구성 요소를 정적 HTML로 렌더링하고 서버 Blazor 앱에 대한 마커를 포함합니다. 사용자 에이전트가 시작되면 이 마커가 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | 서버 앱에 대한 Blazor 마커를 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트가 시작되면 이 마커가 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
@@ -165,7 +165,7 @@ public class MyClass
 
 정적 HTML 페이지에서 서버 구성 요소를 렌더링하는 것은 지원되지 않습니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>
 * <xref:mvc/views/tag-helpers/intro>
