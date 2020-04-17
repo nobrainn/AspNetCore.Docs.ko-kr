@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417652"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81384052"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -205,7 +205,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
   * 데이터 파일( *.db*)
 * [웹 루트](#web-root)(일반적으로 *wwwroot* 폴더)
 
-개발 중에는 콘텐츠 루트가 기본적으로 프로젝트의 루트 디렉터리로 설정됩니다. 이 디렉터리는 앱의 콘텐츠 파일과 [웹 루트](#web-root)의 기본 경로이기도 합니다. [호스트를 빌드](#host)할 때는 경로를 설정하여 다른 콘텐츠 루트를 지정하세요. 자세한 내용은 [콘텐츠 루트](xref:fundamentals/host/generic-host#contentrootpath-1)를 참조하세요.
+개발 중에는 콘텐츠 루트가 기본적으로 프로젝트의 루트 디렉터리로 설정됩니다. 이 디렉터리는 앱의 콘텐츠 파일과 [웹 루트](#web-root)의 기본 경로이기도 합니다. [호스트를 빌드](#host)할 때는 경로를 설정하여 다른 콘텐츠 루트를 지정하세요. 자세한 내용은 [콘텐츠 루트](xref:fundamentals/host/generic-host#contentroot)를 참조하세요.
 
 ## <a name="web-root"></a>웹 루트
 
@@ -215,7 +215,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 * JavaScript( *.js*)
 * 이미지( *.png*, *.jpg*)
 
-정적 파일은 기본적으로 웹 루트 디렉터리와 그 하위 디렉터리에서만 제공됩니다. 웹 루트 경로는 기본적으로 *{content root}/wwwroot*로 설정됩니다. [호스트를 빌드](#host)할 때는 경로를 설정하여 다른 웹 루트를 지정하세요. 자세한 내용은 [웹 루트](xref:fundamentals/host/generic-host#webroot-1)를 참조하세요.
+정적 파일은 기본적으로 웹 루트 디렉터리와 그 하위 디렉터리에서만 제공됩니다. 웹 루트 경로는 기본적으로 *{content root}/wwwroot*로 설정됩니다. [호스트를 빌드](#host)할 때는 경로를 설정하여 다른 웹 루트를 지정하세요. 자세한 내용은 [웹 루트](xref:fundamentals/host/generic-host#webroot)를 참조하세요.
 
 프로젝트 파일에서 [\<Content> project item](/visualstudio/msbuild/common-msbuild-project-items#content)을 사용하여 *wwwroot*에 파일을 게시하지 못하도록 합니다. 다음 예제에서는 *wwwroot/local*과 그 하위 디렉터리에서 콘텐츠가 게시되지 못하도록 합니다.
 
@@ -363,7 +363,7 @@ ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestre
 
 ## <a name="configuration"></a>Configuration
 
-ASP.NET Core는 정렬된 일련의 구성 공급 기업에서 이름-값 쌍으로 설정을 가져오는 구성 프레임워크를 제공합니다. *.json* 파일, *.xml* 파일, 환경 변수 및 명령줄 인수와 같은 다양한 소스의 기본 제공 구성 공급 기업이 있습니다. 또는 사용자 지정 구성 공급 기업을 작성할 수도 있습니다.
+ASP.NET Core는 정렬된 일련의 구성 공급 기업에서 이름-값 쌍으로 설정을 가져오는 구성 프레임워크를 제공합니다. *.json* 파일, *.xml* 파일, 환경 변수 및 명령줄 인수와 같은 다양한 원본의 기본 제공 구성 공급 기업이 있습니다. 또는 사용자 지정 구성 공급 기업을 작성할 수도 있습니다.
 
 예를 들어 구성이 *appsettings.json* 및 환경 변수에서 제공되도록 지정할 수 있습니다. 그런 다음, *ConnectionString* 값이 요청되면 프레임워크는 먼저 *appsettings.json* 파일을 찾습니다. 값을 찾았지만 환경 변수에서도 값을 찾을 수 있다면 환경 변수의 값이 우선 적용됩니다.
 
@@ -435,7 +435,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 `HttpClient` 인스턴스를 만들기 위해 `IHttpClientFactory`를 구현할 수 있습니다. 팩터리는 다음과 같습니다.
 
 * 논리적 `HttpClient` 인스턴스를 구성하고 이름을 지정하기 위한 중앙 위치를 제공합니다. 예를 들어, *github* 클라이언트는 GitHub에 액세스하도록 등록 및 구성할 수 있습니다. 기본 클라이언트는 다른 용도로 등록할 수 있습니다.
-* 나가는 요청 미들웨어 파이프라인을 빌드하기 위해 여러 위임 처리기를 연결하고 등록하도록 지원합니다. 이 패턴은 ASP.NET Core의 인바운드 미들웨어 파이프라인과 비슷합니다. 이 패턴은 캐싱, 오류 처리, serialization 및 로깅을 포함한 HTTP 요청을 둘러싼 횡단 관심사를 관리하기 위한 메커니즘을 제공합니다.
+* 나가는 요청 미들웨어 파이프라인을 빌드하기 위해 여러 위임 처리기를 연결하고 등록하도록 지원합니다. 이 패턴은 ASP.NET Core의 인바운드 미들웨어 파이프라인과 비슷합니다. 이 패턴은 캐싱, 오류 처리, 직렬화 및 로깅을 포함한 HTTP 요청을 둘러싼 횡단 관심사를 관리하기 위한 메커니즘을 제공합니다.
 * 일시적인 오류를 처리하기 위해 널리 사용되는 타사 라이브러리인 *Polly*와 통합합니다.
 * `HttpClient` 수명을 수동으로 관리할 때 발생하는 일반적인 DNS 문제를 피하기 위해 기본 `HttpClientHandler` 인스턴스의 풀링 및 수명을 관리합니다.
 * 팩터리에서 만든 클라이언트를 통해 전송된 모든 요청에 대해 구성 가능한 로깅 경험(`ILogger`을 통해)을 추가합니다.
