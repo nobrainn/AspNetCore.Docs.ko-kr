@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 03/27/2020
-  ms.openlocfilehash: fb6d03616560649a336df8a624e7fb59006a7ea8
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+  ms.date: 04/15/2020
+  ms.openlocfilehash: c0f987396a4bfcdbc8c189938125eb2a65dadc8a
+  ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
   ms.translationtype: HT
   ms.contentlocale: ko-KR
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80366639"
+  ms.lasthandoff: 04/17/2020
+  ms.locfileid: "81542421"
 highlightedContent:
   items:
   - title: 아무 플랫폼에서 5분 만에 ASP.NET Core 앱 만들기
@@ -41,7 +41,7 @@ highlightedContent:
     url: tutorials/signalr.md
   - title: 첫 번째 데이터 기반 MVC 웹앱 만들기
     itemType: get-started
-    url: tutorials/first-mvc-app/index.md
+    url: tutorials/first-mvc-app//start-mvc.md
 conceptualContent:
   title: ASP.NET Core 앱 개발
   summary: 대화형 웹앱, 웹 API, MVC 패턴화 앱, 실시간 앱 등 선택
@@ -184,13 +184,13 @@ conceptualContent:
   - title: 데이터 기반 웹앱
     summary: ASP.NET Core에서 데이터 기반 웹앱 만들기
     links:
-    - url: tutorials/first-mvc-app/working-with-sql.md
+    - url: tutorials/first-mvc-app/start-mvc.md
       itemType: tutorial
       text: ASP.NET Core를 사용한 SQL
     - url: blazor/data-binding.md
       itemType: concept
       text: ASP.NET Core Blazor의 데이터 바인딩
-    - url: tutorials/razor-pages/sql.md
+    - url: tutorials/razor-pages/razor-pages-start.md
       itemType: tutorial
       text: SQL Server Express 및 Razor Pages
     - url: data/ef-rp/intro.md
