@@ -4,14 +4,14 @@ author: ardalis
 description: ASP.NET Core Web API에서 응답 데이터의 서식을 지정하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 12/05/2019
+ms.date: 04/17/2020
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 908016720ade67a02ebe30d1dcb7929ad7592270
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 392e4905126ffb6801cc55055f1d511f5fa99dd1
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653043"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642704"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -25,20 +25,20 @@ ASP.NET Core MVC는 응답 데이터 서식 지정을 지원합니다. 응답 �
 
 일부 작업 결과 형식은 <xref:Microsoft.AspNetCore.Mvc.JsonResult> 및 <xref:Microsoft.AspNetCore.Mvc.ContentResult>와 같이 특정 형식과 관련됩니다. 작업은 클라이언트 기본 설정에 관계 없이 특정 형식으로 서식이 지정된 결과를 반환할 수 있습니다. 예를 들어 `JsonResult`를 반환하면 JSON 형식의 데이터가 반환됩니다. `ContentResult` 또는 문자열 하나를 반환하면 일반 텍스트 형식의 문자열 데이터가 반환됩니다.
 
-특정 형식을 반환하는 작업은 필요하지 않습니다. ASP.NET Core는 모든 개체 반환 값을 지원합니다.  <xref:Microsoft.AspNetCore.Mvc.IActionResult> 형식이 아닌 개체를 반환하는 작업의 결과는 적절한 <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 구현을 사용하여 직렬화됩니다. 자세한 내용은 <xref:web-api/action-return-types>을 참조하세요.
+특정 형식을 반환하는 작업은 필요하지 않습니다. ASP.NET Core는 모든 개체 반환 값을 지원합니다.  <xref:Microsoft.AspNetCore.Mvc.IActionResult> 형식이 아닌 개체를 반환하는 작업의 결과는 적절한 <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 구현을 사용하여 직렬화됩니다. 자세한 내용은 <xref:web-api/action-return-types>를 참조하세요.
 
 기본 제공 도우미 메서드 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*>는 다음 JSON 형식 데이터를 반환합니다. [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
 샘플 다운로드는 작성자 목록을 반환합니다. F12 브라우저 개발자 도구 또는 이전 코드의 [Postman](https://www.getpostman.com/tools) 사용:
 
-* **Content-type:** `application/json; charset=utf-8`을 포함 하는 응답 헤더가 표시 됩니다.
+* **content-type:이 포함된 응답 헤더 ** `application/json; charset=utf-8`이 표시됩니다.
 * 요청 헤더가 표시됩니다. 예를 들어 `Accept` 헤더가 있습니다. `Accept` 헤더는 앞의 코드에서 무시됩니다.
 
 서식 있는 일반 텍스트 데이터를 반환하려면 <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> 및 <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> 도우미를 사용합니다.
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_about)]
 
-위의 코드에서 반환된 `Content-Type`은 `text/plain`입니다. 문자열을 반환하면 `Content-Type`의 `text/plain`이 제공됩니다.
+위의 코드에서 반환된 `Content-Type`은 `text/plain`입니다. 문자열을 반환하면 `text/plain`의 `Content-Type`이 제공됩니다.
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_string)]
 
@@ -76,7 +76,7 @@ ASP.NET Core MVC는 응답 데이터 서식 지정을 지원합니다. 응답 �
 
 클라이언트의 요청을 충족할 수 있는 포맷터가 없는 경우 ASP.NET Core는 다음을 수행합니다.
 
-* `406 Not Acceptable`이 설정된 경우 <xref:Microsoft.AspNetCore.Mvc.MvcOptions>을 반환하거나
+* <xref:Microsoft.AspNetCore.Mvc.MvcOptions>이 설정된 경우 `406 Not Acceptable`을 반환하거나
 * 응답을 생성할 수 있는 첫 번째 포맷터를 찾으려고 시도합니다.
 
 요청된 형식에 대해 포맷터가 구성되지 않은 경우에는 개체의 서식을 지정할 수 있는 첫 번째 포맷터가 사용됩니다. 요청에 `Accept` 헤더가 표시되지 않을 경우 다음이 수행됩니다.
@@ -128,10 +128,10 @@ Accept 헤더에 `*/*`가 포함되는 경우, `RespectBrowserAcceptHeader`가 <
 services.AddControllers().AddJsonOptions(options =>
 {
     // Use the default property (Pascal) casing.
-    options.SerializerOptions.PropertyNamingPolicy = null;
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
 
     // Configure a custom converter.
-    options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
+    options.JsonSerializerOptions.Converters.Add(new MyCustomJsonConverter());
 });
 ```
 
@@ -158,7 +158,7 @@ ASP.NET Core 3.0 이전에는 `Newtonsoft.Json` 패키지를 사용하여 구현
 * `Newtonsoft.Json` 속성을 사용합니다. 예를 들어 `[JsonProperty]` 또는 `[JsonIgnore]`입니다.
 * 직렬화 설정을 사용자 지정합니다.
 * `Newtonsoft.Json`은 제공하는 기능에 의존합니다.
-* `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings`를 구성하는 경우. ASP.NET Core 3.0 이전의 `JsonResult.SerializerSettings`는 `JsonSerializerSettings` 고유의 `Newtonsoft.Json`의 인스턴스를 허용합니다.
+* `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings`를 구성하는 경우. ASP.NET Core 3.0 이전의 `JsonResult.SerializerSettings`는 `Newtonsoft.Json` 고유의 `JsonSerializerSettings`의 인스턴스를 허용합니다.
 * [OpenAPI](<xref:tutorials/web-api-help-pages-using-swagger>) 문서를 생성하는 경우.
 
 `Newtonsoft.Json` 기반 포맷터의 기능은 `Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions.SerializerSettings`를 사용하여 구성할 수 있습니다.
@@ -170,7 +170,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
     // Configure a custom converter
-    options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
+    options.SerializerSettings.Converters.Add(new MyCustomJsonConverter());
 });
 ```
 
@@ -206,11 +206,11 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 ### <a name="specify-a-format"></a>형식 지정
 
-응답 형식을 제한하려면 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터를 적용합니다. 대부분 [필터](xref:mvc/controllers/filters)와 마찬가지로, `[Produces]`는 작업, 컨트롤러 또는 전역 범위에 적용할 수 있습니다.
+응답 형식을 제한하려면 필터를 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 적용합니다. 대부분의 [필터와](xref:mvc/controllers/filters) `[Produces]` 마찬가지로 작업, 컨트롤러 또는 전역 범위에 적용할 수 있습니다.
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
-위의 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터:
+앞의 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터는 다음과 같은 것입니다.
 
 * 컨트롤러 내의 모든 작업이 JSON 형식 응답을 반환하도록 강제합니다.
 * 다른 포맷터가 구성되고 클라이언트에서 다른 형식을 지정하는 경우 JSON이 반환됩니다.
@@ -219,7 +219,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 ### <a name="special-case-formatters"></a>특수한 사례 포맷터
 
-일부 특수한 경우 기본 제공 포맷터를 사용하여 구현됩니다. 기본적으로 `string` 반환 형식은 *text/plain*(*헤더를 통해 요청된 경우*text/html`Accept`)으로 형식이 지정됩니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter>를 제거하여 삭제할 수 있습니다. 포맷터들은 `ConfigureServices` 방법에서 제거됩니다. 모델 개체 반환 형식이 있는 작업은 `204 No Content`을 반환하는 경우 `null`를 반환합니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter>를 제거하여 삭제할 수 있습니다. 다음 코드를 `StringOutputFormatter` 및 `HttpNoContentOutputFormatter`를 제거합니다.
+일부 특수한 경우 기본 제공 포맷터를 사용하여 구현됩니다. 기본적으로 `string` 반환 형식은 *text/plain*(`Accept` 헤더를 통해 요청된 경우 *text/html*)으로 형식이 지정됩니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter>를 제거하여 삭제할 수 있습니다. 포맷터들은 `ConfigureServices` 방법에서 제거됩니다. 모델 개체 반환 형식이 있는 작업은 `null`을 반환하는 경우 `204 No Content`를 반환합니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter>를 제거하여 삭제할 수 있습니다. 다음 코드를 `StringOutputFormatter` 및 `HttpNoContentOutputFormatter`를 제거합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]
@@ -246,7 +246,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 특성은 `RouteData`에서 형식 값의 존재 여부를 검사하며, 응답이 생성될 때 응답 형식을 적절한 포맷터에 매핑합니다.
+위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. 특성은 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 에 `RouteData` 형식 값이 있는지 확인하고 응답이 생성될 때 응답 형식을 적절한 formatter에 매핑합니다.
 
 |           라우팅        |             포맷터              |
 |------------------------|------------------------------------|
