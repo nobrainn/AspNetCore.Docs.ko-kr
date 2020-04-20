@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: d76ca78bc988f859b4e99752a0e88735e1df1d82
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 506f01ace72d6e915c0f3ebdaae5b4a3328a79b9
+ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501336"
+ms.lasthandoff: 04/10/2020
+ms.locfileid: "81007160"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -311,7 +311,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 * 계층적 키
   * 구성 API 내에서는 콜론 구분 기호(`:`)가 모든 플랫폼에 적용됩니다.
   * 환경 변수에서는 콜론 구분 기호가 일부 플랫폼에 적용되지 않을 수 있습니다. 두 개의 밑줄(`__`)은 모든 플랫폼에서 지원되며 콜론(`:`)으로 자동 변환됩니다.
-  * Azure Key Vault에서 계층적 키는 `--`를 구분 기호로 사용합니다. 비밀을 앱의 구성으로 로드할 때 `--`를 `:`으로 바꾸는 코드를 작성하세요.
+  * Azure Key Vault에서 계층적 키는 `--`를 구분 기호로 사용합니다. [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)는 암호를 앱의 구성으로 로드할 때 `--`를 자동으로 `:`으로 바꿉니다.
 * <xref:Microsoft.Extensions.Configuration.ConfigurationBinder>는 구성 키에 배열 인덱스를 사용하여 배열을 개체에 바인딩하는 것을 지원합니다. 배열 바인딩에 대해서는 [클래스에 배열 바인딩](#boa) 섹션에서 설명합니다.
 
 구성 값은,

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: cb5f774db5fab46a57f8ca4bbbca148f20f371ba
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 78eb6f467c7e779e1bf998e8ac8e917a90895db9
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644535"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440729"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>Docker 컨테이너에서 ASP.NET Core 호스트
 
@@ -39,3 +39,5 @@ PowerShell을 사용하여 Azure의 Docker 호스트에 ASP.NET Core 앱을 배�
 
 [프록시 서버 및 부하 분산 장치를 사용하도록 ASP.NET Core 구성](xref:host-and-deploy/proxy-load-balancer)  
 프록시 서버 및 부하 분산 장치 외에도 호스팅되는 앱에 추가 구성이 필요할 수 있습니다. 프록시를 통해 요청을 전달하면 체계 및 클라이언트 IP와 같은 원래 요청에 대한 정보를 모호하게 합니다. 앱에 대한 수동 요청에 대한 정보를 전달해야 할 수도 있습니다.
+
+[Docker 및 소형 컨테이너를 사용하는 GC](xref:performance/memory#sc) 소형 컨테이너를 사용하여 GC 선택을 설명합니다.
