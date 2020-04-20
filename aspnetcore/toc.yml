@@ -357,7 +357,7 @@
           uid: blazor/handle-errors
         - name: WebAssembly 디버그
           uid: blazor/debug
-        - name: 웹 API 호출
+        - name: WebAssembly에서 웹 API 호출
           uid: blazor/call-web-api
         - name: 프로그레시브 웹 애플리케이션
           uid: blazor/progressive-web-app
