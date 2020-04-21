@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/30/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 516132379ae20bd31c0f3b3261bb09b3f5b218f2
-ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
+ms.openlocfilehash: 314a7b54ab87295b8ca814f5e369942ae911407e
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80501120"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661590"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET 코어 블레이저 웹어셈블리 추가 보안 시나리오
 
@@ -142,7 +142,7 @@ IP가 사용자에 대해 보내는 토큰은 일반적으로 보통 약 1시간
         {
             httpClient.DefaultRequestHeaders.Add("Authorization", 
                 $"Bearer {token.Value}");
-            await httpClient.PostJsonAsync("Save", User);
+            await httpClient.PostAsJsonAsync("Save", User);
         }
         else
         {

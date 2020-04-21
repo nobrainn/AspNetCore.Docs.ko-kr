@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 8fec9f585f42469665cf29069674a199e1626629
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: a80be8d145b7c58be35e2c353a448db7e234e20b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977134"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661814"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Azure active Blazor 디렉터리로 ASP.NET 코어 웹어셈블리 호스팅 앱 보안
 
@@ -24,8 +24,6 @@ ms.locfileid: "80977134"
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-
 
 이 문서에서는 인증을 위해 [AAD(Azure Active Directory)를](https://azure.microsoft.com/services/active-directory/) 사용하는 [ Blazor 웹 Assembly 호스팅 앱을](xref:blazor/hosting-models#blazor-webassembly) 만드는 방법에 대해 설명합니다.
 
@@ -258,7 +256,7 @@ builder.Services.AddMsalAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>을 참조하세요.
+자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>를 참조하세요.
 
 ### <a name="imports-file"></a>파일 가져오기
 
@@ -298,7 +296,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [추가 액세스 토큰 요청](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
 * <xref:security/authentication/azure-active-directory/index>

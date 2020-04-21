@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2a8b189cc9f17529a962a1f9642c7bb199d5781b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440924"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661778"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET 코어에서 i권한 부여정책 공급자를 사용하는 사용자 지정 권한 부여 정책 공급자 
 
@@ -25,7 +25,7 @@ ms.locfileid: "81440924"
 * 다양한 정책(예: 객실 번호 또는 연령에 따라)을 사용하면 각 개별 권한 부여 정책을 `AuthorizationOptions.AddPolicy` 호출과 함께 추가하는 것은 의미가 없습니다.
 * 외부 데이터 원본(예: 데이터베이스)의 정보를 기반으로 런타임에 정책을 만들거나 다른 메커니즘을 통해 권한 부여 요구 사항을 동적으로 결정합니다.
 
-[AspNetCore GitHub 리포지토리에서](https://github.com/dotnet/AspNetCore) [샘플 코드를 보거나 다운로드합니다.](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider) 도트넷/AspNetCore 리포지토리 ZIP 파일을 다운로드합니다. 파일 의 압축을 해제합니다. *SRC/보안/샘플/사용자 지정정책공급자* 프로젝트 폴더로 이동합니다.
+[AspNetCore GitHub 리포지토리에서](https://github.com/dotnet/AspNetCore) [샘플 코드를 보거나 다운로드합니다.](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) 도트넷/AspNetCore 리포지토리 ZIP 파일을 다운로드합니다. 파일 의 압축을 해제합니다. *SRC/보안/샘플/사용자 지정정책공급자* 프로젝트 폴더로 이동합니다.
 
 ## <a name="customize-policy-retrieval"></a>정책 검색 사용자 지정
 
@@ -183,4 +183,4 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-전체 사용자 `IAuthorizationPolicyProvider` 지정 샘플은 [도트넷/aspnetcore GitHub 리포지토리에서](https://github.com/dotnet/aspnetcore/tree/ea555458dc61e04314598c25b3ab8c56362a5123/src/Security/samples/CustomPolicyProvider)사용할 수 있습니다.
+전체 사용자 `IAuthorizationPolicyProvider` 지정 샘플은 [도트넷/aspnetcore GitHub 리포지토리에서](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)사용할 수 있습니다.
