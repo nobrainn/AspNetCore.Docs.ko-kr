@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 832109530c4aac372fd75aa1a1d2edbe3768f55f
-ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
+ms.openlocfilehash: 4c51200159ced16132e15bb4a1f0915ca0cf5945
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80501277"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791613"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>ID 서버를 Blazor 통해 ASP.NET 코어 웹어셈블리 호스팅 앱 보안
 
@@ -27,7 +27,7 @@ ms.locfileid: "80501277"
 
 [IdServer를](https://identityserver.io/) Blazor 사용하여 사용자 및 API 호출을 인증하는 Visual Studio에서 새 호스팅 앱을 만들려면 다음을 수행합니다.
 
-1. Visual Studio를 사용하여 ** Blazor ** 새 웹 Assembly 앱을 만듭니다. 자세한 내용은 <xref:blazor/get-started>을 참조하세요.
+1. Visual Studio를 사용하여 ** Blazor ** 새 웹 Assembly 앱을 만듭니다. 자세한 내용은 <xref:blazor/get-started>를 참조하세요.
 1. **새 Blazor 앱 만들기** 대화 상자에서 **인증** 섹션에서 **변경을** 선택합니다.
 1. **개인 사용자 계정을** 선택한 다음 **확인을**선택합니다.
 1. **고급** 섹션에서 **ASP.NET 코어 호스팅** 확인란을 선택합니다.
@@ -49,16 +49,15 @@ dotnet new blazorwasm -au Individual -ho
 
 클래스에는 `Startup` 다음과 같은 추가 가 있습니다.
 
-* `Startup.ConfigureServices`의 경우:
+* `Startup.ConfigureServices`의 경우
 
-  * 기본 UI가 있는 ID:
+  * ID:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
     services.AddDefaultIdentity<ApplicationUser>()
-        .AddDefaultUI(UIFramework.Bootstrap4)
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
@@ -76,7 +75,7 @@ dotnet new blazorwasm -au Individual -ho
         .AddIdentityServerJwt();
     ```
 
-* `Startup.Configure`의 경우:
+* `Startup.Configure`의 경우
 
   * 요청 자격 증명의 유효성을 검사하고 요청 컨텍스트에서 사용자를 설정하는 인증 미들웨어:
 

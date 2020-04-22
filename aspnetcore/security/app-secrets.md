@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 uid: security/app-secrets
-ms.openlocfilehash: 9d4e59c003afc253971ee64fce523c7188d3582a
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: c62c5e59ad0a72506fb72bda82aa821a4f1719c8
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661794"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791601"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET 코어에서 개발 에 응용 프로그램 비밀의 안전한 저장
 
@@ -75,7 +75,7 @@ dotnet user-secrets init
 
 앞의 명령은 `UserSecretsId` *.csproj* 파일 `PropertyGroup` 내에 요소를 추가합니다. 기본적으로 내부 `UserSecretsId` 텍스트는 GUID입니다. 내부 텍스트는 임의이지만 프로젝트에 고유합니다.
 
-[!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
+[!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 Visual Studio에서 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 컨텍스트 메뉴에서 **사용자 암호 관리를** 선택합니다. 이 제스처는 `UserSecretsId` GUID로 채워진 요소를 *.csproj* 파일에 추가합니다.
 
@@ -89,7 +89,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 앞의 예제에서 콜론은 `Movies` `ServiceApiKey` 속성이 있는 개체 리터럴을 나타냅니다.
 
-비밀 관리자 도구도 다른 디렉토리에서 사용할 수 있습니다. `--project` 옵션을 사용하여 *.csproj* 파일이 있는 파일 시스템 경로를 제공합니다. 다음은 그 예입니다.
+비밀 관리자 도구도 다른 디렉토리에서 사용할 수 있습니다. `--project` 옵션을 사용하여 *.csproj* 파일이 있는 파일 시스템 경로를 제공합니다. 예를 들어:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -97,7 +97,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>비주얼 스튜디오에서 JSON 구조 평탄화
 
-Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 *secrets.json* 파일을 엽니다. *secrets.json의* 내용을 저장할 키 값 쌍으로 바꿉니다. 다음은 그 예입니다.
+Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 *secrets.json* 파일을 엽니다. *secrets.json의* 내용을 저장할 키 값 쌍으로 바꿉니다. 예를 들어:
 
 ```json
 {
@@ -142,18 +142,17 @@ JSON 구조를 통해 `dotnet user-secrets remove` 또는 `dotnet user-secrets s
 
 [ASP.NET 핵심 구성 API는](xref:fundamentals/configuration/index) 비밀 관리자 비밀에 대한 액세스를 제공합니다.
 
-ASP.NET Core 2.0 이상에서는 프로젝트가 미리 구성된 기본값으로 호스트의 새 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> 인스턴스를 초기화하기 위해 호출할 때 사용자 비밀 구성 소스가 개발 모드에 자동으로 추가됩니다. `CreateDefaultBuilder`있는 <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> 경우 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>호출 :
+프로젝트가 미리 구성된 기본값으로 호스트의 새 인스턴스를 초기화하기 위해 호출할 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> 때 사용자 암호 구성 소스가 개발 모드에 자동으로 추가됩니다. `CreateDefaultBuilder`있는 <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> 경우 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>호출 :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-`CreateDefaultBuilder` 호출되지 않으면 생성자를 호출하여 <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> 사용자 암호 구성 `Startup` 원본을 명시적으로 추가합니다. 다음 `AddUserSecrets` 예제와 같이 앱이 개발 환경에서 실행되는 경우에만 호출합니다.
+호출되지 않은 경우 `CreateDefaultBuilder` 을 호출하여 <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>사용자 암호 구성 소스를 명시적으로 추가합니다. 다음 `AddUserSecrets` 예제와 같이 앱이 개발 환경에서 실행되는 경우에만 호출합니다.
 
-[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
 사용자 암호는 API를 `Configuration` 통해 검색할 수 있습니다.
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
-
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
 ## <a name="map-secrets-to-a-poco"></a>POCO에 비밀 매핑
 
@@ -163,31 +162,31 @@ ASP.NET Core 2.0 이상에서는 프로젝트가 미리 구성된 기본값으�
 
 선행 비밀을 POCO에 매핑하려면 `Configuration` API의 개체 [그래프 바인딩](xref:fundamentals/configuration/index#bind-to-an-object-graph) 기능을 사용합니다. 다음 코드는 사용자 지정 `MovieSettings` POCO에 바인딩하고 속성 값에 `ServiceApiKey` 액세스합니다.
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
 `Movies:ConnectionString` 및 `Movies:ServiceApiKey` 비밀은 `MovieSettings`다음의 각 속성에 매핑됩니다.
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>비밀이 있는 문자열 교체
 
 암호를 일반 텍스트로 저장하는 것은 안전하지 않습니다. 예를 들어 *appsettings.json에* 저장된 데이터베이스 연결 문자열에는 지정된 사용자의 암호가 포함될 수 있습니다.
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-보다 안전한 방법은 암호를 암호로 저장하는 것입니다. 다음은 그 예입니다.
+보다 안전한 방법은 암호를 암호로 저장하는 것입니다. 예를 들어:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password` *appsettings.json의*연결 문자열에서 키-값 쌍을 제거합니다. 다음은 그 예입니다.
+`Password` *appsettings.json의*연결 문자열에서 키-값 쌍을 제거합니다. 예를 들어:
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
 secret의 값을 <xref:System.Data.SqlClient.SqlConnectionStringBuilder> 개체의 <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> 속성에 설정하여 연결 문자열을 완료할 수 있습니다.
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
 ## <a name="list-the-secrets"></a>비밀 목록
 
@@ -256,7 +255,7 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * IIS에서 비밀 관리자에 액세스하는 방법에 대한 자세한 내용은 [이 문제를](https://github.com/dotnet/AspNetCore.Docs/issues/16328) 참조하십시오.
 * <xref:fundamentals/configuration/index>
@@ -333,7 +332,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 앞의 예제에서 콜론은 `Movies` `ServiceApiKey` 속성이 있는 개체 리터럴을 나타냅니다.
 
-비밀 관리자 도구도 다른 디렉토리에서 사용할 수 있습니다. `--project` 옵션을 사용하여 *.csproj* 파일이 있는 파일 시스템 경로를 제공합니다. 다음은 그 예입니다.
+비밀 관리자 도구도 다른 디렉토리에서 사용할 수 있습니다. `--project` 옵션을 사용하여 *.csproj* 파일이 있는 파일 시스템 경로를 제공합니다. 예를 들어:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -341,7 +340,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>비주얼 스튜디오에서 JSON 구조 평탄화
 
-Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 *secrets.json* 파일을 엽니다. *secrets.json의* 내용을 저장할 키 값 쌍으로 바꿉니다. 다음은 그 예입니다.
+Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 *secrets.json* 파일을 엽니다. *secrets.json의* 내용을 저장할 키 값 쌍으로 바꿉니다. 예를 들어:
 
 ```json
 {
@@ -388,15 +387,13 @@ JSON 구조를 통해 `dotnet user-secrets remove` 또는 `dotnet user-secrets s
 
 프로젝트가 .NET 프레임워크를 대상으로 하는 경우 [Microsoft.Extensions.Configuration.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet 패키지를 설치합니다.
 
-
 ASP.NET Core 2.0 이상에서는 프로젝트가 미리 구성된 기본값으로 호스트의 새 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> 인스턴스를 초기화하기 위해 호출할 때 사용자 비밀 구성 소스가 개발 모드에 자동으로 추가됩니다. `CreateDefaultBuilder`있는 <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> 경우 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>호출 :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-
 `CreateDefaultBuilder` 호출되지 않으면 생성자를 호출하여 <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> 사용자 암호 구성 `Startup` 원본을 명시적으로 추가합니다. 다음 `AddUserSecrets` 예제와 같이 앱이 개발 환경에서 실행되는 경우에만 호출합니다.
 
-[!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
 사용자 암호는 API를 `Configuration` 통해 검색할 수 있습니다.
 
@@ -422,13 +419,13 @@ ASP.NET Core 2.0 이상에서는 프로젝트가 미리 구성된 기본값으�
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-보다 안전한 방법은 암호를 암호로 저장하는 것입니다. 다음은 그 예입니다.
+보다 안전한 방법은 암호를 암호로 저장하는 것입니다. 예를 들어:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password` *appsettings.json의*연결 문자열에서 키-값 쌍을 제거합니다. 다음은 그 예입니다.
+`Password` *appsettings.json의*연결 문자열에서 키-값 쌍을 제거합니다. 예를 들어:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -503,7 +500,7 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * IIS에서 비밀 관리자에 액세스하는 방법에 대한 자세한 내용은 [이 문제를](https://github.com/dotnet/AspNetCore.Docs/issues/16328) 참조하십시오.
 * <xref:fundamentals/configuration/index>
