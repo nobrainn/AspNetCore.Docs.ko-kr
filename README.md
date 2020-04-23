@@ -5,8 +5,3 @@
 API 문서에 대한 변경 내용은 [AspNetApiDocs 리포지토리](https://github.com/dotnet/AspNetApiDocs)에서 슬래시 세 개(`///`) 주석으로 작성됩니다.
 
 ASP.NET 4.x 문서의 변경 내용은 [dotnet/AspNetDocs 리포지토리](https://github.com/dotnet/AspNetDocs)에서 작성합니다.
-
-## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft 오픈 소스 사용 규정
-
-이 프로젝트는 [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/)(Microsoft 오픈 소스 사용 규정)를 채택했습니다.
-자세한 내용은 [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)(사용 규정 FAQ)를 참조하고 추가 질문이나 의견이 있을 경우 [opencode@microsoft.com](mailto:opencode@microsoft.com)으로 문의하세요.

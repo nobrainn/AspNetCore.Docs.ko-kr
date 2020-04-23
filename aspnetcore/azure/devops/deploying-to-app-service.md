@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
+ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646557"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81228129"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service에 앱 배포
 
@@ -85,7 +85,7 @@ ms.locfileid: "78646557"
 
     b. 리소스 그룹을 만듭니다. 리소스 그룹은 그룹으로 관리할 Azure 리소스를 집계하는 수단을 제공합니다.
 
-    ```azure-cli
+    ```azurecli
     az group create --location centralus --name AzureTutorial
     ```
 
@@ -93,25 +93,25 @@ ms.locfileid: "78646557"
 
     c. S1 계층에서 App Service 계획을 만듭니다. App Service 계획은 동일한 가격 책정 계층을 공유하는 웹앱 그룹화입니다. S1 계층은 무료가 아니지만 스테이징 슬롯 기능에 필요합니다.
 
-    ```azure-cli
+    ```azurecli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
     d. 동일한 리소스 그룹의 App Service 계획을 사용하여 웹앱 리소스를 만듭니다.
 
-    ```azure-cli
+    ```azurecli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
     e. 배포 자격 증명을 설정합니다. 해당 배포 자격 증명은 구독의 모든 웹앱에 적용됩니다. 사용자 이름에 특수 문자를 사용하면 안 됩니다.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
     f. 로컬 Git에서의 배포를 허용하고 ‘Git 배포 URL’을 표시하도록 웹앱을 구성합니다.  **이 URL은 나중에 참조하는 데 사용합니다**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
@@ -170,13 +170,13 @@ Visual Studio에서 앱을 빌드하고 Azure에 배포합니다. 웹앱 URL로 
 
     a. 이름을 *staging*으로 지정하여 배포 슬롯을 만듭니다.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
     b. 로컬 Git의 배포를 사용하고 **staging** 배포 URL을 가져오도록 스테이징 슬롯을 구성합니다. **이 URL은 나중에 참조하는 데 사용합니다**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
@@ -216,7 +216,7 @@ Visual Studio에서 앱을 빌드하고 Azure에 배포합니다. 웹앱 URL로 
 
 7. Cloud Shell에서 확인/준비된 스테이징 슬롯을 프로덕션으로 교환합니다.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 

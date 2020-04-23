@@ -5,17 +5,17 @@ description: 여러 문화권과 언어의 사용자가 Razor 구성 요소에 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: aba62fa7b6285c8ba884652694f1ea3e3a66ed18
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
+ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644895"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81539663"
 ---
 # <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
 
@@ -60,6 +60,18 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 표시하기
 
 ## <a name="localization"></a>지역화
 
+### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+
+Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)를 사용하여 문화권을 설정합니다.
+
+문화권을 명시적으로 구성하려면 `Program.Main`에서 `CultureInfo.DefaultThreadCurrentCulture`와 `CultureInfo.DefaultThreadCurrentUICulture`를 설정하세요.
+
+기본적으로 Blazor WebAssembly 앱에 대한 Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 링커 동작을 제어하는 방법에 대한 자세한 내용과 지침은 <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>을 참조하세요.
+
+Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요. 문화권 선택기가 포함된 Blazor WebAssembly 샘플 앱을 살펴보려면 [LocSample](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.
+
+### <a name="opno-locblazor-server"></a>Blazor 서버
+
 Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용하여 지역화됩니다. 미들웨어는 앱에서 리소스를 요청하는 사용자에게 적절한 문화권을 선택합니다.
 
 문화권은 다음 방법 중 하나를 사용하여 설정할 수 있습니다.
@@ -69,11 +81,7 @@ Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#loc
 
 자세한 내용과 예제를 보려면 <xref:fundamentals/localization>을 참조하십시오.
 
-### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>국제화를 위한 링커 구성(Blazor WebAssembly)
-
-기본적으로 Blazor WebAssembly 앱에 대한 Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 링커 동작을 제어하는 방법에 대한 자세한 내용과 지침은 <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>을 참조하세요.
-
-### <a name="cookies"></a>쿠키
+#### <a name="cookies"></a>쿠키
 
 지역화 문화권 쿠키는 사용자의 문화권을 유지할 수 있습니다. 쿠키는 앱의 호스트 페이지(*Pages/Host.cshtml.cs*)의 `OnGet` 메서드에서 생성됩니다. 지역화 미들웨어는 후속 요청에서 쿠키를 읽어 사용자의 문화권을 설정합니다. 
 
@@ -81,7 +89,7 @@ Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#loc
 
 문화권이 지역화 쿠키에 유지되는 경우 임의 기술을 사용하여 문화권을 할당할 수 있습니다. 앱에 서버 쪽 ASP.NET Core에 대해 설정된 지역화 체계가 이미 있는 경우 앱의 기존 지역화 인프라를 계속 사용하고 앱의 체계 내에서 지역화 문화권 쿠키를 설정합니다.
 
-다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다. Blazor 서버 앱에 다음 내용이 포함된 *Pages/Host.cshtml.cs* 파일을 만듭니다.
+다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다. Blazor 서버 앱에 다음 내용이 포함된 *Pages/_Host.cshtml.cs* 파일을 만듭니다.
 
 ```csharp
 public class HostModel : PageModel
@@ -107,7 +115,7 @@ public class HostModel : PageModel
 1. 지역화 미들웨어는 쿠키를 읽고 문화권을 할당합니다.
 1. Blazor 서버 세션이 올바른 문화권으로 시작합니다.
 
-### <a name="provide-ui-to-choose-the-culture"></a>문화권을 선택하기 위한 UI 제공
+#### <a name="provide-ui-to-choose-the-culture"></a>문화권을 선택하기 위한 UI 제공
 
 사용자가 문화권을 선택하기 위한 UI를 제공하려면 *리디렉션 기반 접근 방식*이 권장됩니다. 이 프로세스는 사용자가 보안 리소스에 액세스하려고 할 때 웹앱에서 발생하는 작업과 비슷합니다. 즉, 사용자는 로그인 페이지로 리디렉션되고 다시 원래 리소스로 리디렉션됩니다. 
 
@@ -154,7 +162,7 @@ public class CultureController : Controller
     private void OnSelected(ChangeEventArgs e)
     {
         var culture = (string)e.Value;
-        var uri = new Uri(NavigationManager.Uri())
+        var uri = new Uri(NavigationManager.Uri)
             .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
         var query = $"?culture={Uri.EscapeDataString(culture)}&" +
             $"redirectUri={Uri.EscapeDataString(uri)}";

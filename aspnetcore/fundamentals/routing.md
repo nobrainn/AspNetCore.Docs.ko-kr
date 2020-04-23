@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751153"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277225"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -454,6 +454,8 @@ URL 생성은 다음과 같습니다.
 
 복잡한 세그먼트는 [non-greedy](#greedy) 방식으로 오른쪽에서 왼쪽으로 리터럴 구분 기호를 매칭하여 처리됩니다. 예를 들어 `[Route("/a{b}c{d}")]`는 복잡한 세그먼트입니다.
 복잡한 세그먼트는 특정 방식으로 작동하므로 제대로 사용하려면 이 방식을 이해해야 합니다. 이 단원의 예제에서는 매개 변수 내에 구분 기호 텍스트가 표시되지 않는 경우에만 복잡한 세그먼트가 실제로 잘 작동하는 이유를 보여 줍니다. 더욱 복잡한 경우에는 [regex](/dotnet/standard/base-types/regular-expressions)를 사용한 다음 값을 수동으로 추출해야 합니다.
+
+[!INCLUDE[](~/includes/regex.md)]
 
 다음은 라우팅에서 `/a{b}c{d}` 템플릿 및 URL 경로 `/abcd`를 사용하여 수행하는 단계를 요약한 것입니다. `|`는 알고리즘의 작동 방식을 시각화하는 데 사용됩니다.
 
