@@ -1,79 +1,82 @@
 ---
-title: Azure Active Blazor Directory B2C를 통해 ASP.NET 핵심 웹어셈블리 독립 실행형 앱 보안
+title: Azure Active Directory B2C를 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/09/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 96e39a4c975a65fd11776f774fb1799acab525b9
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: 7d1031d3eac0e1d6790ca946809038127eb59a73
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123440"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111164"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Blazor Directory B2C를 통해 ASP.NET 핵심 웹어셈블리 독립 실행형 앱 보안
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
-[하비에르 칼바로 넬슨과](https://github.com/javiercn) [루크 라담](https://github.com/guardrex)
+[Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-인증을 위해 Blazor [AAD(Azure Active Directory) B2C를](/azure/active-directory-b2c/overview) 사용하는 웹 Assembly 독립 실행형 앱을 만들려면 다음을 수행합니다.
+> [!NOTE]
+> 이 문서의 지침은 ASP.NET Core 3.2 Preview 4에 적용 됩니다. 이 항목은 5 월 24 일 금요일에 Preview 5를 포함 하도록 업데이트 됩니다.
 
-1. 다음 항목의 지침을 따라 테넌트를 만들고 Azure Portal에서 웹 앱을 등록합니다.
+인증을 위해 Blazor [AAD (Azure Active Directory) B2C](/azure/active-directory-b2c/overview) 를 사용 하는 weasembom독립형 앱을 만들려면 다음을 수행 합니다.
 
-   * [AAD B2C 테넌트](/azure/active-directory-b2c/tutorial-create-tenant) &ndash; 만들기 다음 정보를 기록합니다.
+1. 다음 항목의 지침에 따라 테 넌 트를 만들고 Azure Portal에서 웹 앱을 등록 합니다.
 
-     1\. AAD B2C 인스턴스(예: `https://contoso.b2clogin.com/`후행 슬래시포함)<br>
-     2\. AAD B2C 테넌트 `contoso.onmicrosoft.com`도메인(예: )
+   * 다음 정보를 [AAD B2C 테 넌 트](/azure/active-directory-b2c/tutorial-create-tenant) &ndash; 레코드를 만듭니다.
 
-   * [웹 응용 프로그램](/azure/active-directory-b2c/tutorial-register-applications) &ndash; 등록 앱 등록 중에 다음 을 선택합니다.
+     1 \. AAD B2C 인스턴스 (예: `https://contoso.b2clogin.com/`후행 슬래시를 포함 하는)<br>
+     2 \. AAD B2C 테 넌 트 도메인 (예 `contoso.onmicrosoft.com`:)
 
-     1\. **웹 앱 / 웹 API를** **예로**설정합니다.<br>
-     2\. 설정 **암시적 흐름을** 예로 **허용합니다.**<br>
-     3\. 의 `https://localhost:5001/authentication/login-callback` **회신 URL을** 추가합니다.
+   * 앱 등록 중 &ndash; [에 웹 응용 프로그램을 등록 하](/azure/active-directory-b2c/tutorial-register-applications) 여 다음 항목을 선택 합니다.
 
-     응용 프로그램 ID(클라이언트 ID)를 `11111111-1111-1111-1111-111111111111`기록합니다(예: ).
+     1 \. **웹 앱/웹 API** 를 **예**로 설정 합니다.<br>
+     2 \. **암시적 흐름 허용** 을 **예**로 설정 합니다.<br>
+     3. **회신 URL** 을 추가 `https://localhost:5001/authentication/login-callback`합니다.
+
+     응용 프로그램 ID (클라이언트 ID)를 기록 합니다 (예 `11111111-1111-1111-1111-111111111111`:).
 
    * [사용자 흐름](/azure/active-directory-b2c/tutorial-create-user-flows) &ndash; 만들기 등록 및 로그인 사용자 흐름을 만듭니다.
 
-     최소한 `LoginDisplay` 응용 프로그램 **클레임** > **표시 이름** 사용자 속성을 `context.User.Identity.Name` 선택하여 구성 요소(공유/LoginDisplay.razor)에 채워집니다.*Shared/LoginDisplay.razor*
+     최소한 **응용 프로그램 클레임** > **표시 이름** 사용자 특성을 선택 하 여 `context.User.Identity.Name` `LoginDisplay` 구성 요소 (*Shared/LoginDisplay*)에를 채웁니다.
 
-     앱에 대해 생성된 등록 및 로그인 사용자 흐름 이름을 기록합니다(예: `B2C_1_signupsignin`).
+     앱에 대해 만든 등록 및 로그인 사용자 흐름 이름을 기록 합니다 (예: `B2C_1_signupsignin`).
 
-1. 다음 명령의 자리 표시자를 앞에서 기록한 정보로 바꾸고 명령 셸에서 명령을 실행합니다.
+1. 다음 명령에서 자리 표시자를 앞에서 기록한 정보로 바꾸고 명령 셸에서 명령을 실행 합니다.
 
    ```dotnetcli
    dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --client-id "{CLIENT ID}" --domain "{DOMAIN}" -ssp "{SIGN UP OR SIGN IN POLICY}"
    ```
 
-   프로젝트 폴더가 없는 경우 만드는 출력 위치를 지정하려면 경로가 있는 명령에 출력 옵션을 포함합니다(예: `-o BlazorSample`). 폴더 이름도 프로젝트 이름의 일부가 됩니다.
+   출력 위치를 지정 하려면 프로젝트 폴더 (없는 경우 `-o BlazorSample`)를 지정 하 고 명령에 출력 옵션을 포함 합니다 (예:). 또한 폴더 이름은 프로젝트 이름의 일부가 됩니다.
 
 ## <a name="authentication-package"></a>인증 패키지
 
-개별 B2C 계정()을`IndividualB2C`사용하도록 앱을 만들면 앱은 Microsoft 인증 [라이브러리()에](/azure/active-directory/develop/msal-overview) `Microsoft.Authentication.WebAssembly.Msal`대한 패키지 참조를 자동으로 받습니다. 이 패키지는 앱이 사용자를 인증하고 보호된 API를 호출하는 토큰을 얻는 데 도움이 되는 기본 요소 집합을 제공합니다.
+개별 B2C 계정 (`IndividualB2C`)을 사용 하도록 앱을 만들면 앱은 [Microsoft 인증 라이브러리](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`)에 대 한 패키지 참조를 자동으로 받습니다. 패키지는 앱이 사용자를 인증 하 고 토큰을 가져와서 보호 된 Api를 호출할 수 있도록 지 원하는 기본 형식 집합을 제공 합니다.
 
-앱에 인증을 추가하는 경우 앱의 프로젝트 파일에 패키지를 수동으로 추가합니다.
+앱에 인증을 추가 하는 경우 앱의 프로젝트 파일에 패키지를 수동으로 추가 합니다.
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-앞의 패키지 참조에서 문서에 표시된 `{VERSION}` `Microsoft.AspNetCore.Blazor.Templates` 패키지 버전으로 <xref:blazor/get-started> 바꿉습니다.
+위의 `{VERSION}` 패키지 참조에서를 `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> 문서에 표시 된 패키지의 버전으로 바꿉니다.
 
-패키지는 `Microsoft.Authentication.WebAssembly.Msal` 앱에 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 패키지를 전이적으로 추가합니다.
+`Microsoft.Authentication.WebAssembly.Msal` 패키지는 앱에 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 패키지를 전이적으로 추가 합니다.
 
 ## <a name="authentication-service-support"></a>인증 서비스 지원
 
-사용자 인증에 대한 지원은 패키지에서 제공하는 `AddMsalAuthentication` 확장 방법으로 `Microsoft.Authentication.WebAssembly.Msal` 서비스 컨테이너에 등록됩니다. 이 메서드는 앱이 IP(ID 공급자)와 상호 작용하는 데 필요한 모든 서비스를 설정합니다.
+사용자 인증에 대 한 지원은 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 IP (Id 공급자)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
 
 *Program.cs*:
 
@@ -88,11 +91,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-메서드는 `AddMsalAuthentication` 응용 프로그램을 인증 하는 데 필요한 매개 변수를 구성 하는 콜백을 허용 합니다. 앱을 구성하는 데 필요한 값은 앱을 등록할 때 Azure Portal AAD 구성에서 얻을 수 있습니다.
+메서드 `AddMsalAuthentication` 는 콜백을 허용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 합니다. 앱을 구성 하는 데 필요한 값은 앱을 등록할 때 Azure Portal AAD 구성에서 가져올 수 있습니다.
 
-## <a name="access-token-scopes"></a>토큰 범위에 액세스
+## <a name="access-token-scopes"></a>액세스 토큰 범위
 
-WebAssembly 템플릿은 Blazor 보안 API에 대한 액세스 토큰을 요청하도록 앱을 자동으로 구성하지 않습니다. 로그인 흐름의 일부로 토큰을 프로비전하려면 `MsalProviderOptions`다음의 기본 액세스 토큰 범위에 범위를 추가합니다.
+Weasembomtemplate은 Blazor 보안 API에 대 한 액세스 토큰을 요청 하도록 앱을 자동으로 구성 하지 않습니다. 토큰을 로그인 흐름의 일부로 프로 비전 하려면의 기본 액세스 토큰 범위에 범위를 추가 합니다 `MsalProviderOptions`.
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -103,19 +106,23 @@ builder.Services.AddMsalAuthentication(options =>
 ```
 
 > [!NOTE]
-> Azure 포털이 범위 URI를 제공하고 API에서 *401 무단* 응답을 받을 때 **앱이 처리되지 않은 예외를 throw하는** 경우 구성표 및 호스트를 포함하지 않는 범위 URI를 사용해 보십시오. 예를 들어 Azure 포털은 다음 범위 URI 형식 중 하나를 제공할 수 있습니다.
+> Azure Portal에서 범위 URI를 제공 하 고 앱이 API에서 *401 권한 없음* 응답을 받을 때 **처리 되지 않은 예외를 throw** 하는 경우 스키마와 호스트를 포함 하지 않는 범위 uri를 사용해 보세요. 예를 들어 Azure Portal는 다음 범위 URI 형식 중 하나를 제공할 수 있습니다.
 >
 > * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 > * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 >
-> 스키마 및 호스트 없이 범위 URI를 제공합니다.
+> 스키마 및 호스트 없이 범위 URI를 제공 합니다.
 >
 > ```csharp
 > options.ProviderOptions.DefaultAccessTokenScopes.Add(
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>을 참조하세요.
+자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>를 참조하세요.
+
+<!--
+    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
+-->
 
 ## <a name="imports-file"></a>파일 가져오기
 
@@ -129,11 +136,11 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-## <a name="redirecttologin-component"></a>리디렉션토로그인 구성 요소
+## <a name="redirecttologin-component"></a>RedirectToLogin 구성 요소
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-## <a name="logindisplay-component"></a>로그인표시 구성 요소
+## <a name="logindisplay-component"></a>LoginDisplay 구성 요소
 
 [!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
 
@@ -147,7 +154,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="additional-resources"></a>추가 리소스
 
-* [추가 액세스 토큰 요청](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-ad-b2c>
 * [자습서: Azure Active Directory B2C 테넌트 만들기](/azure/active-directory-b2c/tutorial-create-tenant)
 * [Microsoft ID 플랫폼 설명서](/azure/active-directory/develop/)
