@@ -5,16 +5,27 @@ description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2020
+ms.date: 04/17/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: e4da57001ad369a8df87c7e0887772e3d75c032d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511225"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642741"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
+
+<!-- 
+
+    NOTE FOR 5.0
+    
+    When making the 5.0 version of this topic, remove the Hosting Bundle
+    direct download section from the (new) <5.0 & >2.2 version and modify 
+    the text and heading for the *Earlier versions of the installer* 
+    section. See the 2.2 version for an example.
+    
+-->
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -124,7 +135,7 @@ services.Configure<IISServerOptions>(options =>
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true`인 경우 IIS 서버는 [Windows 인증](xref:security/authentication/windowsauth)에 의해 인증된 `HttpContext.User`를 설정합니다. `false`인 경우 서버는 `HttpContext.User`에 대한 ID만 제공하고, `AuthenticationScheme`에서 명시적으로 요청될 때 챌린지에 응답합니다. IIS에서 Windows 인증은 `AutomaticAuthentication`이 작동하기 위해 사용하도록 설정되어야 합니다. 자세한 내용은 [Windows 인증](xref:security/authentication/windowsauth)을 참조하세요. |
 | `AuthenticationDisplayName`    | `null`  | 로그인 페이지에서 사용자에게 나타나는 표시 이름을 설정합니다. |
-| `AllowSynchronousIO`           | `false` | `HttpContext.Request` 및 `HttpContext.Response`에 대해 동기 IO가 허용되는지 여부를 나타냅니다. |
+| `AllowSynchronousIO`           | `false` | `HttpContext.Request` 및 `HttpContext.Response`에 대해 동기 I/O가 허용되는지 여부를 나타냅니다. |
 | `MaxRequestBodySize`           | `30000000`  | `HttpRequest`의 최대 요청 본문 크기를 가져오거나 설정합니다. IIS 자체에는 `IISServerOptions`에 설정된 `MaxRequestBodySize` 앞에 처리되는 `maxAllowedContentLength` 한도가 있습니다. `MaxRequestBodySize`를 변경해도 `maxAllowedContentLength`에 영향을 주지 않습니다. `maxAllowedContentLength`를 늘리려면 *web.config*에 항목을 추가하여 `maxAllowedContentLength`를 더 높은 값으로 설정합니다. 자세한 내용은 [구성](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration)을 참조하세요. |
 
 **Out-of-process 호스팅 모델**
@@ -250,9 +261,9 @@ services.Configure<IISOptions>(options =>
 이전 버전의 설치 관리자를 가져오려면:
 
 1. [.NET Core 다운로드](https://dotnet.microsoft.com/download/dotnet-core) 페이지로 이동합니다.
-1. 원하는 .NET Core 버전을 클릭합니다.
+1. 원하는 .NET Core 버전을 선택합니다.
 1. **앱 실행 - 런타임** 열에서 원하는 .NET Core 런타임 버전의 행을 찾습니다.
-1. **런타임 및 호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
+1. **호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
 
 > [!WARNING]
 > 일부 설치 관리자는 EOL(수명 종료)에 도달한 릴리스 버전을 포함하고 Microsoft에서 더 이상 지원되지 않습니다. 자세한 내용은 [지원 정책](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)을 참조하세요.
@@ -846,20 +857,12 @@ services.Configure<IISOptions>(options =>
 >
 > .NET Core의 64비트(x64) 버전을 설치한 후 호스팅 번들이 설치된 경우 SDK가 누락된 것처럼 보일 수 있습니다([ .NET Core SDK가 검색되지 않음](xref:test/troubleshoot#no-net-core-sdks-were-detected)). 이 문제를 해결 하려면 <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>을 참조합니다.
 
-### <a name="direct-download-current-version"></a>직접 다운로드(현재 버전)
-
-다음 링크를 사용하여 설치 관리자를 다운로드합니다.
-
-[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>이전 버전의 설치 관리자
-
-이전 버전의 설치 관리자를 가져오려면:
+### <a name="download"></a>다운로드
 
 1. [.NET Core 다운로드](https://dotnet.microsoft.com/download/dotnet-core) 페이지로 이동합니다.
-1. 원하는 .NET Core 버전을 클릭합니다.
+1. 원하는 .NET Core 버전을 선택합니다.
 1. **앱 실행 - 런타임** 열에서 원하는 .NET Core 런타임 버전의 행을 찾습니다.
-1. **런타임 및 호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
+1. **호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
 
 > [!WARNING]
 > 일부 설치 관리자는 EOL(수명 종료)에 도달한 릴리스 버전을 포함하고 Microsoft에서 더 이상 지원되지 않습니다. 자세한 내용은 [지원 정책](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)을 참조하세요.
@@ -1422,20 +1425,12 @@ services.Configure<IISOptions>(options =>
 >
 > .NET Core의 64비트(x64) 버전을 설치한 후 호스팅 번들이 설치된 경우 SDK가 누락된 것처럼 보일 수 있습니다([ .NET Core SDK가 검색되지 않음](xref:test/troubleshoot#no-net-core-sdks-were-detected)). 이 문제를 해결 하려면 <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>을 참조합니다.
 
-### <a name="direct-download-current-version"></a>직접 다운로드(현재 버전)
-
-다음 링크를 사용하여 설치 관리자를 다운로드합니다.
-
-[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>이전 버전의 설치 관리자
-
-이전 버전의 설치 관리자를 가져오려면:
+### <a name="download"></a>다운로드
 
 1. [.NET Core 다운로드](https://dotnet.microsoft.com/download/dotnet-core) 페이지로 이동합니다.
-1. 원하는 .NET Core 버전을 클릭합니다.
+1. 원하는 .NET Core 버전을 선택합니다.
 1. **앱 실행 - 런타임** 열에서 원하는 .NET Core 런타임 버전의 행을 찾습니다.
-1. **런타임 및 호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
+1. **호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
 
 > [!WARNING]
 > 일부 설치 관리자는 EOL(수명 종료)에 도달한 릴리스 버전을 포함하고 Microsoft에서 더 이상 지원되지 않습니다. 자세한 내용은 [지원 정책](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)을 참조하세요.
