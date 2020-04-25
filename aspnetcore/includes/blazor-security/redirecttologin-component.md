@@ -1,7 +1,7 @@
-<span data-ttu-id="f54fb-101">`RedirectToLogin` 구성 요소 (*Shared/redirecttologin. razor*):</span><span class="sxs-lookup"><span data-stu-id="f54fb-101">The `RedirectToLogin` component (*Shared/RedirectToLogin.razor*):</span></span>
+<span data-ttu-id="17fde-101">`RedirectToLogin` 구성 요소 (*Shared/redirecttologin. razor*):</span><span class="sxs-lookup"><span data-stu-id="17fde-101">The `RedirectToLogin` component (*Shared/RedirectToLogin.razor*):</span></span>
 
-* <span data-ttu-id="f54fb-102">로그인 페이지에 대 한 권한 없는 사용자의 리디렉션을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="f54fb-102">Manages redirecting unauthorized users to the login page.</span></span>
-* <span data-ttu-id="f54fb-103">인증이 성공 하는 경우 해당 페이지로 반환 될 수 있도록 사용자가 액세스 하려고 하는 현재 URL을 유지 합니다.</span><span class="sxs-lookup"><span data-stu-id="f54fb-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
+* <span data-ttu-id="17fde-102">로그인 페이지에 대 한 권한 없는 사용자의 리디렉션을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="17fde-102">Manages redirecting unauthorized users to the login page.</span></span>
+* <span data-ttu-id="17fde-103">인증이 성공 하는 경우 해당 페이지로 반환 될 수 있도록 사용자가 액세스 하려고 하는 현재 URL을 유지 합니다.</span><span class="sxs-lookup"><span data-stu-id="17fde-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
 
 ```razor
 @inject NavigationManager Navigation
@@ -9,8 +9,8 @@
 @code {
     protected override void OnInitialized()
     {
-        Navigation.NavigateTo(
-            $"authentication/login?returnUrl={Uri.EscapeDataString(Navigation.Uri)}");
+        Navigation.NavigateTo($"authentication/login?returnUrl=" +
+            Uri.EscapeDataString(Navigation.Uri));
     }
 }
 ```
