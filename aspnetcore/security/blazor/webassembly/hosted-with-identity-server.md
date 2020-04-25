@@ -5,17 +5,17 @@ description: IdentityServer 백 엔드를 Blazor 사용 하는 Visual Studio 내
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/22/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: f8de07e2e21ca19b5c4e95839e7b7e621c335ad0
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: ffdcd30ae9ce5350113569a500e99cf8db82ad65
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110951"
+ms.locfileid: "82138610"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Id 서버를 Blazor 사용 하 여 ASP.NET Core weasemboman 호스팅된 앱 보호
 
@@ -24,9 +24,6 @@ ms.locfileid: "82110951"
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> 이 문서의 지침은 ASP.NET Core 3.2 Preview 4에 적용 됩니다. 이 항목은 5 월 24 일 금요일에 Preview 5를 포함 하도록 업데이트 됩니다.
 
 IdentityServer를 사용 하 Blazor 여 사용자 및 API 호출을 인증 [IdentityServer](https://identityserver.io/) 하는 Visual Studio에서 새로 호스팅된 앱을 만들려면 다음을 수행 합니다.
 
@@ -58,9 +55,11 @@ dotnet new blazorwasm -au Individual -ho
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlite(
+            Configuration.GetConnectionString("DefaultConnection")));
 
-    services.AddDefaultIdentity<ApplicationUser>()
+    services.AddDefaultIdentity<ApplicationUser>(options => 
+            options.SignIn.RequireConfirmedAccount = true)
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
@@ -90,6 +89,13 @@ dotnet new blazorwasm -au Individual -ho
 
     ```csharp
     app.UseIdentityServer();
+    ```
+
+  * 인증 및 권한 부여 미들웨어:
+
+    ```csharp
+    app.UseAuthentication();
+    app.UseAuthorization();
     ```
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
@@ -124,19 +130,9 @@ dotnet new blazorwasm -au Individual -ho
 ```json
 "IdentityServer": {
   "Clients": {
-    "BlazorApplicationWithAuthentication.Client": {
+    "{APP ASSEMBLY}.Client": {
       "Profile": "IdentityServerSPA"
     }
-  }
-}
-```
-
-개발 환경 앱 설정 파일 (*appsettings. Development. json*) `IdentityServer` 섹션에서는 토큰에 서명 하는 데 사용 되는 키에 대해 설명 합니다. <!-- When deploying to production, a key needs to be provisioned and deployed alongside the app, as explained in the [Deploy to production](#deploy-to-production) section. -->
-
-```json
-"IdentityServer": {
-  "Key": {
-    "Type": "Development"
   }
 }
 ```

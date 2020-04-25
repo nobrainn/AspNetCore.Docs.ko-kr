@@ -2,7 +2,7 @@
 
 `RemoteAuthenticatorView` 구성 요소:
 
-* 는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 패키지에서 제공 됩니다.
+* 은 (는) [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에서 제공 됩니다.
 * 각 인증 단계에서 적절 한 작업을 수행 하는 작업을 관리 합니다.
 
 ```razor

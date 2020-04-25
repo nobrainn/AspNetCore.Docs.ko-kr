@@ -1,18 +1,18 @@
-## <a name="usermanager-and-signinmanager"></a>사용자 관리자 및 사인 관리자
+## <a name="usermanager-and-signinmanager"></a>UserManager 및 SignInManager
 
-서버 앱에 다음이 필요한 경우 사용자 식별자 클레임 유형을 설정합니다.
+서버 앱에 필요한 경우 사용자 id 클레임 유형 설정:
 
-* <xref:Microsoft.AspNetCore.Identity.UserManager%601>또는 <xref:Microsoft.AspNetCore.Identity.SignInManager%601> API 끝점에 있습니다.
-* <xref:Microsoft.AspNetCore.Identity.IdentityUser>사용자 이름, 이메일 주소 또는 잠금 종료 시간과 같은 세부 정보입니다.
+* <xref:Microsoft.AspNetCore.Identity.UserManager%601>API <xref:Microsoft.AspNetCore.Identity.SignInManager%601> 끝점에서 또는입니다.
+* <xref:Microsoft.AspNetCore.Identity.IdentityUser>세부 정보 (예: 사용자 이름, 전자 메일 주소 또는 잠금 종료 시간)입니다.
 
-`Startup.ConfigureServices`의 경우:
+`Startup.ConfigureServices`의 경우
 
 ```csharp
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-다음은 `WeatherForecastController` 메서드가 <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> 호출될 `Get` 때를 기록합니다.
+다음 `WeatherForecastController` 은 `Get` 메서드가 호출 <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> 될 때를 로깅합니다.
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]

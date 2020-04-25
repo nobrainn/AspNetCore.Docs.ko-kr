@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: a12cc8f94a97882e4a0ac3a6553628df4da2e82c
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 95c16bcd8da22792b27b3aaaf8632b2206372270
+ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111190"
+ms.locfileid: "82150066"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft 계정을 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
@@ -24,9 +24,6 @@ ms.locfileid: "82111190"
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> 이 문서의 지침은 ASP.NET Core 3.2 Preview 4에 적용 됩니다. 이 항목은 5 월 24 일 금요일에 Preview 5를 포함 하도록 업데이트 됩니다.
 
 인증을 위해 Blazor [AAD (Azure Active Directory)를](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal) 사용 하는 Microsoft 계정을 사용 하는 weasembom독립형 앱을 만들려면:
 
@@ -86,17 +83,37 @@ ms.locfileid: "82111190"
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
 {
-    var authentication = options.ProviderOptions.Authentication;
-    authentication.Authority = "{AUTHORITY}";
-    authentication.ClientId = "{CLIENT ID}";
+    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
 });
 ```
 
 메서드 `AddMsalAuthentication` 는 콜백을 허용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 합니다. 앱을 구성 하는 데 필요한 값은 앱을 등록할 때 Microsoft 계정 구성에서 가져올 수 있습니다.
 
+구성은 *wwwroot/appsettings. json* 파일에 의해 제공 됩니다.
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common",
+    "ClientId": "{CLIENT ID}"
+  }
+}
+```
+
+예제:
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common",
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
+  }
+}
+```
+
 ## <a name="access-token-scopes"></a>액세스 토큰 범위
 
-Weasembomtemplate은 Blazor 보안 API에 대 한 액세스 토큰을 요청 하도록 앱을 자동으로 구성 하지 않습니다. 토큰을 로그인 흐름의 일부로 프로 비전 하려면의 기본 액세스 토큰 범위에 범위를 추가 합니다 `MsalProviderOptions`.
+Weasembomtemplate은 Blazor 보안 API에 대 한 액세스 토큰을 요청 하도록 앱을 자동으로 구성 하지 않습니다. 액세스 토큰을 로그인 흐름의 일부로 프로 비전 하려면의 기본 액세스 토큰 범위에 범위를 추가 합니다 `MsalProviderOptions`.
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -119,11 +136,10 @@ builder.Services.AddMsalAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>를 참조하세요.
+자세한 내용은 *추가 시나리오* 문서의 다음 섹션을 참조 하십시오.
 
-<!--
-    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
--->
+* [추가 액세스 토큰 요청](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [나가는 요청에 토큰 연결](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>파일 가져오기
 

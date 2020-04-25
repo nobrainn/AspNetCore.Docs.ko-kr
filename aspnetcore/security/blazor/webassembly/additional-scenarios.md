@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 2dbb2bbd07c427c594a12b8037f35cfff2228191
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: cd1433d5716b9b595270209fa874a8cb93fdf699
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111177"
+ms.locfileid: "82138432"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Weasembmbambambambamba 추가 보안 시나리오
 
@@ -24,9 +24,6 @@ ms.locfileid: "82111177"
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> 이 문서의 지침은 ASP.NET Core 3.2 Preview 4에 적용 됩니다. 이 항목은 5 월 24 일 금요일에 Preview 5를 포함 하도록 업데이트 됩니다.
 
 ## <a name="request-additional-access-tokens"></a>추가 액세스 토큰 요청
 
@@ -46,7 +43,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-메서드 `IAccessTokenProvider.RequestToken` 는 다음 예제와 같이 응용 프로그램에서 지정 된 범위 집합을 사용 하 여 토큰을 프로 비전 할 수 있도록 하는 오버 로드를 제공 합니다.
+메서드 `IAccessTokenProvider.RequestToken` 는 다음 예제와 같이 응용 프로그램에서 지정 된 범위 집합을 사용 하 여 액세스 토큰을 프로 비전 할 수 있도록 하는 오버 로드를 제공 합니다.
 
 ```csharp
 var tokenResult = await AuthenticationService.RequestAccessToken(
@@ -93,7 +90,8 @@ builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI",
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWithIdentityApp1.ServerAPI"));
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
 ```
 
 앞의 예제 `CreateClient` 에서 클라이언트를 만든 경우 서버 프로젝트에 요청 `HttpClient` 을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
@@ -403,6 +401,71 @@ builder.Services.AddApiAuthorization(options => {
 | `authentication/profile`         | `<UserProfile>`         |
 | `authentication/register`        | `<Registering>`         |
 
+## <a name="customize-the-user"></a>사용자 사용자 지정
+
+앱에 바인딩된 사용자를 사용자 지정할 수 있습니다. 다음 예에서는 인증 된 모든 사용자가 각 사용자 `amr` 의 인증 방법에 대 한 클레임을 받습니다.
+
+`RemoteUserAccount` 클래스를 확장 하는 클래스를 만듭니다.
+
+```csharp
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class OidcAccount : RemoteUserAccount
+{
+    [JsonPropertyName("amr")]
+    public string[] AuthenticationMethod { get; set; }
+}
+```
+
+다음을 확장 `AccountClaimsPrincipalFactory<TAccount>`하는 팩터리를 만듭니다.
+
+```csharp
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+
+public class CustomAccountFactory 
+    : AccountClaimsPrincipalFactory<OidcAccount>
+{
+    public AccountClaimsPrincipalFactory(NavigationManager navigationManager, 
+        IAccessTokenProviderAccessor accessor) : base(accessor)
+    {
+    }
+  
+    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
+        OidcAccount account, RemoteAuthenticationUserOptions options)
+    {
+        var initialUser = await base.CreateUserAsync(account, options);
+        
+        if (initialUser.Identity.IsAuthenticated)
+        {
+            foreach (var value in account.AuthenticationMethod)
+            {
+                ((ClaimsIdentity)initialUser.Identity)
+                    .AddClaim(new Claim("amr", value));
+            }
+        }
+           
+        return initialUser;
+    }
+}
+```
+
+다음을 사용 하도록 서비스 `CustomAccountFactory`를 등록 합니다.
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
+builder.Services.AddApiAuthorization<RemoteAuthenticationState, OidcAccount>()
+    .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, OidcAccount, 
+        CustomAccountFactory>();
+```
+
 ## <a name="support-prerendering-with-authentication"></a>인증을 사용한 미리 렌더링 지원
 
 호스트된 Blazor WebAssembly 앱 토픽 중 하나의 지침을 따른 후에는 다음 지침에 따라 다음과 같은 동작을 수행하는 앱을 만듭니다.
@@ -451,7 +514,8 @@ public void ConfigureServices(IServiceCollection services)
     ...
 
     services.AddRazorPages();
-    services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+    services.AddScoped<AuthenticationStateProvider, 
+        ServerAuthenticationStateProvider>();
     services.AddScoped<SignOutSessionStateManager>();
 
     Client.Program.ConfigureCommonServices(services);
@@ -477,7 +541,8 @@ app.UseEndpoints(endpoints =>
   <app>
       @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
       {
-          <component type="typeof(Wasm.Authentication.Client.App)" render-mode="Static" />
+          <component type="typeof(Wasm.Authentication.Client.App)" 
+              render-mode="Static" />
       }
       else
       {

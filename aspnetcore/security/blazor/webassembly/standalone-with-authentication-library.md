@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 043e4548ad6f40fdf1e6c27cd51946c7bf59a66e
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 25aa7761b9c1acc72081653422e80cb004500573
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110952"
+ms.locfileid: "82138524"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>인증 라이브러리를 Blazor 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
@@ -24,9 +24,6 @@ ms.locfileid: "82110952"
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> 이 문서의 지침은 ASP.NET Core 3.2 Preview 4에 적용 됩니다. 이 항목은 5 월 24 일 금요일에 Preview 5를 포함 하도록 업데이트 됩니다.
 
 *AAD (Azure Active Directory) 및 Azure Active Directory B2C (AAD B2C)의 경우이 항목의 지침을 따르세요. 이 목차 노드의 AAD 및 AAD B2C 항목을 참조 하세요.*
 
@@ -63,16 +60,26 @@ Visual Studio에서 [ Blazor weasembomapp을 만듭니다](xref:blazor/get-start
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
 {
-    options.ProviderOptions.Authority = "{AUTHORITY}";
-    options.ProviderOptions.ClientId = "{CLIENT ID}";
+    builder.Configuration.Bind("Local", options.ProviderOptions);
 });
+```
+
+구성은 *wwwroot/appsettings. json* 파일에 의해 제공 됩니다.
+
+```json
+{
+    "Local": {
+        "Authority": "{AUTHORITY}",
+        "ClientId": "{CLIENT ID}"
+    }
+}
 ```
 
 독립형 앱에 대 한 인증 지원은 OIDC (Open ID Connect)를 사용 하 여 제공 됩니다. 메서드 `AddOidcAuthentication` 는 oidc를 사용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 하는 콜백을 허용 합니다. 앱을 구성 하는 데 필요한 값은 OIDC 규격 IP에서 가져올 수 있습니다. 앱을 등록 하면 일반적으로 온라인 포털에서 발생 하는 값을 가져옵니다.
 
 ## <a name="access-token-scopes"></a>액세스 토큰 범위
 
-Weasembomtemplate은 Blazor 보안 API에 대 한 액세스 토큰을 요청 하도록 앱을 자동으로 구성 하지 않습니다. 토큰을 로그인 흐름의 일부로 프로 비전 하려면의 기본 토큰 범위에 범위를 추가 합니다 `OidcProviderOptions`.
+Weasembomtemplate은 Blazor 보안 API에 대 한 액세스 토큰을 요청 하도록 앱을 자동으로 구성 하지 않습니다. 액세스 토큰을 로그인 흐름의 일부로 프로 비전 하려면의 기본 토큰 범위에 범위를 추가 합니다 `OidcProviderOptions`.
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -95,11 +102,10 @@ builder.Services.AddOidcAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>를 참조하세요.
+자세한 내용은 *추가 시나리오* 문서의 다음 섹션을 참조 하십시오.
 
-<!--
-    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
--->
+* [추가 액세스 토큰 요청](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [나가는 요청에 토큰 연결](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>파일 가져오기
 
@@ -130,4 +136,3 @@ builder.Services.AddOidcAuthentication(options =>
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/blazor/webassembly/additional-scenarios>
- 
