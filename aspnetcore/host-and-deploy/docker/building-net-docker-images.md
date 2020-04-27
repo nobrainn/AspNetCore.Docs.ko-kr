@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 31161d6841986cb0bd8080468e5d523d59400490
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ced0cb7cbeed1b8811813a70035c2e0b42c3e35a
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405932"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440781"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core의 Docker 이미지
 
 이 자습서에서는 Docker 컨테이너에서 ASP.NET Core 앱을 실행하는 방법을 보여 줍니다.
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 > [!div class="checklist"]
 > * Microsoft .NET Core Docker 이미지에 대해 알아보기
 > * ASP.NET Core 샘플 앱 다운로드
@@ -40,7 +40,7 @@ ms.locfileid: "80405932"
 
    샘플에서는 앱을 실행하는 데 이 이미지를 사용합니다. 이 이미지는 ASP.NET Core 런타임 및 라이브러리를 포함하며 프로덕션에서 실행 중인 앱에 최적화되어 있습니다. 배포 및 앱 시작 속도를 위해 디자인된 이 이미지는 비교적 작기 때문에 Docker 레지스트리에서 Docker 호스트까지 네트워크 성능이 최적화됩니다. 앱을 실행하는 데 필요한 이진 파일 및 콘텐츠만 컨테이너에 복사됩니다. 콘텐츠를 실행할 준비가 되면 `Docker run`부터 앱 시작까지 가장 빠른 시간에 수행할 수 있습니다. 동적 코드 컴파일은 Docker 모델에 필요하지 않습니다.
 
-## <a name="prerequisites"></a>필수 구성 요소
+## <a name="prerequisites"></a>사전 요구 사항
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core)
@@ -187,7 +187,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Dockerfile
 
-이전에 실행한 *명령에서 사용되는*Dockerfile`docker build`은 다음과 같습니다.  이 섹션에서 빌드 및 배포하기 위해 사용한 것과 동일한 방식으로 `dotnet publish`를 사용합니다.  
+이전에 실행한 `docker build` 명령에서 사용되는 *Dockerfile*은 다음과 같습니다.  이 섹션에서 빌드 및 배포하기 위해 사용한 것과 동일한 방식으로 `dotnet publish`를 사용합니다.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -223,7 +223,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Dockerfile
 
-이전에 실행한 *명령에서 사용되는*Dockerfile`docker build`은 다음과 같습니다.  이 섹션에서 빌드 및 배포하기 위해 사용한 것과 동일한 방식으로 `dotnet publish`를 사용합니다.  
+이전에 실행한 `docker build` 명령에서 사용되는 *Dockerfile*은 다음과 같습니다.  이 섹션에서 빌드 및 배포하기 위해 사용한 것과 동일한 방식으로 `dotnet publish`를 사용합니다.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -262,7 +262,8 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [ASP.NET Core Docker 샘플](https://github.com/dotnet/dotnet-docker)(이 자습서에서 사용되는 샘플)
 * [프록시 서버 및 부하 분산 장치를 사용하도록 ASP.NET Core 구성](/aspnet/core/host-and-deploy/proxy-load-balancer)
 * [Visual Studio Docker 도구로 작업](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
-* [Debugging with Visual Studio Code](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)(Visual Studio Code를 사용한 디버깅) 
+* [Debugging with Visual Studio Code](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)(Visual Studio Code를 사용한 디버깅)
+* [GC using Docker and small containers](xref:performance/memory#sc)(Docker 및 소형 컨테이너를 사용하는 GC)
 
 ## <a name="next-steps"></a>다음 단계
 

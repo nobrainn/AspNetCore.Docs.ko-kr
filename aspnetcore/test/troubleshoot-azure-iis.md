@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 671f68da2ea261cb8ae32a9d5ef875217859054d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f994cd1274bda9082a7cd8b637968b2769db1671
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644883"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661705"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에서 ASP.NET Core 문제 해결
 
@@ -86,7 +86,7 @@ The Web server is configured to not list the contents of this directory.
 
 작업자 프로세스가 실패합니다. 앱이 시작되지 않습니다.
 
-[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)이 .NET Core CLR in-process를 시작하려고 하지만 시작할 수 없습니다. 프로세스 시작 실패의 원인은 일반적으로 애플리케이션 이벤트 로그 및 ASP.NET Core 모듈 stdout 로그의 항목에서 확인할 수 있습니다.
+[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)이 .NET Core CLR In-process를 시작하려고 하지만 시작할 수 없습니다. 프로세스 시작 실패의 원인은 일반적으로 애플리케이션 이벤트 로그 및 ASP.NET Core 모듈 stdout 로그의 항목에서 확인할 수 있습니다.
 
 일반적인 오류 조건:
 
@@ -144,7 +144,7 @@ The specified framework 'Microsoft.NETCore.App', version '3.0.0' was not found.
 
 ### <a name="50035-ancm-multiple-in-process-applications-in-same-process"></a>500.35 ANCM 동일한 프로세스의 여러 In-Process 애플리케이션
 
-작업자 프로세스는 동일한 프로세스에서 여러 in-process 앱을 실행할 수 없습니다.
+작업자 프로세스는 동일한 프로세스에서 여러 In-process 앱을 실행할 수 없습니다.
 
 이 오류를 해결하려면 별도의 IIS 애플리케이션 풀에서 앱을 실행합니다.
 
@@ -159,6 +159,15 @@ Out-of-process 요청 처리기, *aspnetcorev2_outofprocess.dll*이 *aspnetcorev
 ANCM은 제공된 시작 시간 제한 내에 시작하지 못했습니다. 기본적으로 제한 시간은 120초입니다.
 
 이 오류는 동일한 머신에서 많은 수의 앱을 시작할 때 발생할 수 있습니다. 시작하는 동안 서버에서 CPU/메모리 사용량이 급증하는지 확인합니다. 여러 앱의 시작 프로세스를 분산해야 합니다.
+
+### <a name="50038-ancm-application-dll-not-found"></a>500.38 ANCM 애플리케이션 DLL을 찾을 수 없음
+
+ANCM에서 실행 파일 옆에 있어야 하는 애플리케이션 DLL을 찾지 못했습니다.
+
+이 오류는 [단일 파일 실행 파일](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables)로 패키지된 앱을 In-process 호스팅 모델을 사용하여 호스트할 때 발생합니다. In-process 모델을 사용하려면 ANCM에서 .NET Core 앱을 기존 IIS 프로세스로 로드해야 합니다. 단일 파일 배포 모델에서는 이 시나리오가 지원되지 않습니다. 앱의 프로젝트 파일에서 다음 방법 중 **하나**를 사용하여 이 오류를 해결합니다.
+
+1. `PublishSingleFile` MSBuild 속성을 `false`로 설정하여 단일 파일 게시를 사용하지 않도록 설정합니다.
+1. `AspNetCoreHostingModel` MSBuild 속성을 `OutOfProcess`로 설정하여 out-of-process 호스팅 모델로 전환합니다.
 
 ### <a name="5025-process-failure"></a>502.5 프로세스 실패
 
@@ -515,7 +524,7 @@ stdout 로그를 사용하고 보려면:
 
 1. 충돌이 발생하는 조건에서 앱을 실행합니다.
 1. 충돌이 발생한 후 [DisableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/DisableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\DisableDumps w3wp.exe
@@ -994,7 +1003,7 @@ stdout 로그를 사용하고 보려면:
 
 1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다. 앱 풀에는 폴더에 대한 쓰기 액세스 권한이 있어야 합니다.
 1. [EnableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
@@ -1008,7 +1017,7 @@ stdout 로그를 사용하고 보려면:
 
 1. 충돌이 발생하는 조건에서 앱을 실행합니다.
 1. 충돌이 발생한 후 [DisableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/DisableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\DisableDumps w3wp.exe
@@ -1425,7 +1434,7 @@ stdout 로그를 사용하고 보려면:
 
 1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다. 앱 풀에는 폴더에 대한 쓰기 액세스 권한이 있어야 합니다.
 1. [EnableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
@@ -1439,7 +1448,7 @@ stdout 로그를 사용하고 보려면:
 
 1. 충돌이 발생하는 조건에서 앱을 실행합니다.
 1. 충돌이 발생한 후 [DisableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/DisableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\DisableDumps w3wp.exe

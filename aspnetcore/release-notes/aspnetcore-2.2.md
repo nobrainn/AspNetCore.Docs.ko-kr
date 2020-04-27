@@ -8,12 +8,12 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 97deafd520926476f7653fc3de40d577b394734b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 54d3f1e7b0c94d69781c052694305a389a675019
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648201"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977173"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2의 새로운 기능
 
@@ -70,16 +70,16 @@ HTTP/2는 HTTP의 의미 체계(예: HTTP 헤더 및 메서드)를 유지하지�
 
 ## <a name="kestrel-configuration"></a>Kestrel 구성
 
-이전 버전의 ASP.NET Core에서는 Kestrel 옵션이 `UseKestrel`을 호출하여 구성되었습니다. 2\.2에서 Kestrel 옵션은 호스트 빌더에서 `ConfigureKestrel`을 호출하여 구성됩니다. 이 변경으로 인해 In Process 호스팅의 `IServer` 등록 순서 문제가 해결됩니다. 자세한 내용은 다음 자료를 참조하세요.
+이전 버전의 ASP.NET Core에서는 Kestrel 옵션이 `UseKestrel`을 호출하여 구성되었습니다. 2\.2에서 Kestrel 옵션은 호스트 빌더에서 `ConfigureKestrel`을 호출하여 구성됩니다. 이 변경으로 인해 In-process 호스팅의 `IServer` 등록 순서 문제가 해결됩니다. 자세한 내용은 다음 자료를 참조하세요.
 
 * [UseIIS 충돌 완료](https://github.com/aspnet/KestrelHttpServer/issues/2760)
 * [ConfigureKestrel을 사용하여 Kestrel 서버 옵션 구성](xref:fundamentals/servers/kestrel?view=aspnetcore-2.2#how-to-use-kestrel-in-aspnet-core-apps)
 
-## <a name="iis-in-process-hosting"></a>IIS In Process 호스팅
+## <a name="iis-in-process-hosting"></a>IIS In-process 호스팅
 
-이전 버전의 ASP.NET Core에서 IIS는 역방향 프록시 역할을 합니다. 2\.2에서 ASP.NET Core 모듈은 CoreCLR을 부팅하고 IIS 작업자 프로세스(*w3wp.exe*) 내부에서 앱을 호스팅할 수 있습니다. In Process 호스팅은 IIS로 실행할 때 성능 및 진단 이득을 제공합니다.
+이전 버전의 ASP.NET Core에서 IIS는 역방향 프록시 역할을 합니다. 2\.2에서 ASP.NET Core 모듈은 CoreCLR을 부팅하고 IIS 작업자 프로세스(*w3wp.exe*) 내부에서 앱을 호스팅할 수 있습니다. In-process 호스팅은 IIS로 실행할 때 성능 및 진단 이득을 제공합니다.
 
-자세한 내용은 [IIS에 대한 In Process 호스팅](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)을 참조하세요.
+자세한 내용은 [IIS에 대한 In-process 호스팅](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)을 참조하세요.
 
 ## <a name="opno-locsignalr-java-client"></a>SignalR Java 클라이언트
 

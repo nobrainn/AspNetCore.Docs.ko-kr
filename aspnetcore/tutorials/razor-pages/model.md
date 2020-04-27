@@ -5,12 +5,12 @@ description: Entity Framework Core(EF Core)를 사용하여 데이터베이스�
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: f6dbac81b4efceb30c379ab06dd715005d879228
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647175"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488873"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지 앱에 모델 추가
 
@@ -20,7 +20,7 @@ ms.locfileid: "78647175"
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-이 섹션에서는 플랫폼 간 [SQLite 데이터베이스](https://www.sqlite.org/index.html)에서 동영상을 관리하기 위한 클래스를 추가합니다. ASP.NET Core 템플릿으로 만든 앱이 SQLite 데이터베이스를 사용합니다. 앱의 모델 클래스를 [EF Core(Entity Framework Core)](/ef/core)([SQLite EF Core 데이터베이스 공급자](/ef/core/providers/sqlite))와 함께 사용하여 데이터베이스를 작업합니다. EF Core는 데이터 액세스를 간소화하는 ORM(개체-관계형 매핑) 프레임워크입니다.
+이 섹션에서는 동영상을 관리하기 위한 클래스를 추가합니다. 이 앱의 모델 클래스는 [EF Core(Entity Framework Core)](/ef/core)를 사용하여 데이터베이스 작업을 수행합니다. EF Core는 데이터 액세스를 간소화하는 O/RM(개체-관계형 매퍼)입니다.
 
 모델 클래스는 EF Core에 대한 종속성이 없으므로 POCO(Plain Old CLR Object) 클래스로 알려져 있습니다. 이 클래스는 데이터베이스에 저장되는 데이터의 속성을 정의합니다.
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: d244ce1527486466bcbc6557ec35869aa206bc4f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0835dbf6b5434e4224d9f56ea3335df4b5d9e119
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645591"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277329"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 읽기 - 6/8
 
@@ -137,7 +137,9 @@ ms.locfileid: "78645591"
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
 
-`CourseViewModel`:
+위의 코드는 엔터티 형식을 반환하지 않으므로 추적이 수행되지 않습니다. EF 추적에 대한 자세한 내용은 [추적 및 비 추적 쿼리](/ef/core/querying/tracking)를 참조하세요.
+
+`CourseViewModel`는:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 

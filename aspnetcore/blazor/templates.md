@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor 앱 템플릿 및 Blazor 프로젝트 구조에
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80320976"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661723"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Core Blazor 템플릿
 
@@ -31,6 +31,13 @@ Blazor 프레임워크는 각 Blazor 호스팅 모델용 앱을 개발하기 위
 Blazor의 호스팅 모델에 대한 자세한 내용은 <xref:blazor/hosting-models>를 참조하세요.
 
 템플릿에서 Blazor 앱을 만드는 방법에 대한 단계별 지침은 <xref:blazor/get-started>를 참조하세요.
+
+템플릿 옵션은 `--help` 옵션을 [dotnet new](/dotnet/core/tools/dotnet-new) CLI 명령에 전달하여 사용할 수 있습니다.
+
+```dotnetcli
+dotnet new blazorwasm --help
+dotnet new blazorserver --help
+```
 
 ## <a name="opno-locblazor-project-structure"></a>Blazor 프로젝트 구조
 

@@ -5,14 +5,14 @@ description: CentOS에서 Apache를 역방향 프록시 서버로 설정하여 K
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
-ms.date: 02/05/2020
+ms.date: 04/10/2020
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 3a3edd961b08c1952e6ded8038ed7ada381c54b0
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1256f6d21f94ef6c4baad7aae4bd0e751af5c675
+ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646641"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81224039"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Apache를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -64,7 +64,7 @@ dotnet publish --configuration Release
 
 전달된 헤더 미들웨어를 호출한 후에 인증, 링크 생성, 리디렉션 및 지리적 위치 등 체계에 따라 달라지는 구성 요소를 배치해야 합니다. 일반 규칙으로 전달된 헤더 미들웨어는 진단 및 오류 처리 미들웨어를 제외한 다른 미들웨어 전에 실행해야 합니다. 이 순서를 지정하면 전달된 헤더 정보에 따라 달라지는 미들웨어는 처리하기 위해 헤더 값을 사용할 수 있습니다.
 
-`Startup.Configure`에서 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> 메서드를 호출한 후 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 또는 비슷한 인증 체계 미들웨어를 호출합니다. `X-Forwarded-For` 및 `X-Forwarded-Proto` 헤더를 전달하도록 미들웨어를 구성합니다.
+다른 미들웨어를 호출하기 전에 `Startup.Configure`의 맨 위에 있는 <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> 메서드를 호출합니다. `X-Forwarded-For` 및 `X-Forwarded-Proto` 헤더를 전달하도록 미들웨어를 구성합니다.
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;

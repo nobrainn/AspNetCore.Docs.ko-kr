@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 1a4efcd4e9e3296e9c208f1419bc86734951b0c1
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4886673a9b16b8be8d9a0b0d5c7002a91760544e
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511524"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976978"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -428,7 +428,7 @@ ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해
 * 연결 어댑터는 Kestrel에서 제거되었고 연결 미들웨어로 대체되었습니다. 이는 ASP.NET Core 파이프라인의 HTTP 미들웨어와 비슷하며, 하위 수준 연결을 위한 것입니다.
 * Kestrel 전송 계층이 `Connections.Abstractions`에서 공용 인터페이스로 공개되었습니다.
 * 후행 헤더를 새 컬렉션으로 이동하여 헤더와 트레일러 사이의 모호성을 해결했습니다.
-* `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
+* `HttpRequest.Body.Read`와 같은 동기 I/O API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
 
 자세한 내용은 <xref:migration/22-to-30#kestrel>를 참조하세요.
 

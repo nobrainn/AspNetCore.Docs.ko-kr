@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 943ea30c2e4887638f69b6dcdb7e323bcee40240
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4e990329b7ebcfc9cbbff8a3c9895604a22461d3
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405973"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661692"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -115,7 +115,7 @@ public class MyDependency : IMyDependency
 }
 ```
 
-서비스의 인스턴스는 서비스가 사용되는 클래스의 생성자를 통해 요청되고 전용 필드에 할당됩니다. 이 필드는 클래스 전체에서 필요에 따라 서비스에 액세스하는 데 사용됩니다.
+서비스의 인스턴스는 서비스가 사용되는 클래스의 생성자를 통해 요청되고 private 필드에 할당됩니다. 이 필드는 클래스 전체에서 필요에 따라 서비스에 액세스하는 데 사용됩니다.
 
 샘플 앱에서는 `IMyDependency` 인스턴스가 요청되며 이 인스턴스는 서비스의 `WriteMessage` 메서드를 호출하는 데 사용됩니다.
 
@@ -196,14 +196,14 @@ Transient 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.Servic
 Scoped 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>)는 클라이언트 요청(연결)당 한 번 생성됩니다.
 
 > [!WARNING]
-> 미들웨어에서 범위가 지정된 서비스를 사용하는 경우 `Invoke` 또는 `InvokeAsync` 메서드에 서비스를 삽입합니다. 생성자 삽입은 서비스가 싱글톤처럼 작동하게 하므로 이러한 방법으로 삽입하지 마세요. 자세한 내용은 <xref:fundamentals/middleware/write#per-request-middleware-dependencies>를 참조하세요.
+> 미들웨어에서 범위가 지정된 서비스를 사용하는 경우 `Invoke` 또는 `InvokeAsync` 메서드에 서비스를 삽입합니다. [생성자 삽입](xref:mvc/controllers/dependency-injection#constructor-injection)은 서비스가 singleton처럼 작동하게 하므로 이러한 방법으로 삽입하지 마세요. 자세한 내용은 <xref:fundamentals/middleware/write#per-request-middleware-dependencies>를 참조하세요.
 
 ### <a name="singleton"></a>Singleton
 
-싱글톤 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>)는 처음 요청할 때(또는 `Startup.ConfigureServices`를 실행하고 서비스 등록에서 인스턴스를 지정하는 경우) 생성됩니다. 모든 후속 요청에서는 같은 인스턴스를 사용합니다. 앱에 싱글톤 동작이 필요한 경우 서비스 컨테이너가 서비스 수명을 관리하도록 허용하는 것이 좋습니다. 싱글톤 디자인 패턴을 구현하거나 클래스의 개체 수명을 관리하는 사용자 코드를 제공하지 마세요.
+singleton 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>)는 처음 요청할 때(또는 `Startup.ConfigureServices`를 실행하고 서비스 등록에서 인스턴스를 지정하는 경우) 생성됩니다. 모든 후속 요청에서는 같은 인스턴스를 사용합니다. 앱에 singleton 동작이 필요한 경우 서비스 컨테이너가 서비스 수명을 관리하도록 허용하는 것이 좋습니다. singleton 디자인 패턴을 구현하거나 클래스의 개체 수명을 관리하는 사용자 코드를 제공하지 마세요.
 
 > [!WARNING]
-> 범위가 지정된 서비스를 싱글톤에서 해결하면 위험합니다. 이 경우 후속 요청을 처리할 때 서비스가 잘못된 상태일 수 있습니다.
+> 범위가 지정된 서비스를 singleton에서 해결하면 위험합니다. 이 경우 후속 요청을 처리할 때 서비스가 잘못된 상태일 수 있습니다.
 
 ## <a name="service-registration-methods"></a>서비스 등록 메서드
 
@@ -261,9 +261,9 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 생성자에는 종속성 주입으로 제공되지 않는 인수를 사용할 수 있지만, 인수에 기본값을 할당해야 합니다.
 
-`IServiceProvider` 또는 `ActivatorUtilities`로 서비스를 해결하는 경우 생성자 주입에 *public* 생성자가 필요합니다.
+`IServiceProvider` 또는 `ActivatorUtilities`로 서비스를 해결하는 경우 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection)에 *public* 생성자가 필요합니다.
 
-`ActivatorUtilities`로 서비스를 해결하는 경우 생성자 주입을 위해서는 적합한 생성자가 하나만 있어야 합니다. 생성자 오버로드가 지원되지만, 해당 인수가 모두 종속성 주입으로 처리될 수 있는 하나의 오버로드만 존재할 수 있습니다.
+`ActivatorUtilities`로 서비스를 해결하는 경우 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection)을 위해서는 적합한 생성자가 하나만 있어야 합니다. 생성자 오버로드가 지원되지만, 해당 인수가 모두 종속성 주입으로 처리될 수 있는 하나의 오버로드만 존재할 수 있습니다.
 
 ## <a name="entity-framework-contexts"></a>Entity Framework 컨텍스트
 
@@ -283,7 +283,7 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 * 컨테이너에서 요청할 때 임시 서비스가 생성되면 `IOperationTransient` 서비스의 `OperationId`는 `OperationService`의 `OperationId`와 다릅니다. `OperationService`는 `IOperationTransient` 클래스의 새 인스턴스를 받습니다. 새 인스턴스는 다른 `OperationId`를 생성합니다.
 * 클라이언트 요청에 따라 범위가 지정된 서비스가 생성되면 `IOperationScoped` 서비스의 `OperationId`는 클라이언트 요청 내의 `OperationService`와 같습니다. 전체 클라이언트 요청에서 두 서비스는 다른 `OperationId` 값을 공유합니다.
-* 싱글톤 및 싱글톤 인스턴스 서비스가 한 번 생성되어 모든 클라이언트 요청 및 모든 서비스에서 사용될 경우 `OperationId`는 모든 서비스 요청에서 동일합니다.
+* singleton 및 singleton 인스턴스 서비스가 한 번 생성되어 모든 클라이언트 요청 및 모든 서비스에서 사용될 경우 `OperationId`는 모든 서비스 요청에서 동일합니다.
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
 
@@ -387,11 +387,11 @@ public class Program
 앱이 개발 환경에서 실행 중이고 호스트를 빌드하기 위해 [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings)를 호출하는 경우 기본 서비스 공급자가 다음을 확인하는 검사를 수행합니다.
 
 * '직접으로' in current translation is awkward/inappropriate in terms of grammar.
-* 범위가 지정된 서비스는 직접 또는 간접적으로 싱글톤에 삽입되지 않습니다.
+* 범위가 지정된 서비스는 직접 또는 간접적으로 singleton에 삽입되지 않습니다.
 
 루트 서비스 공급자는 <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*>를 호출할 때 만들어집니다. 루트 서비스 공급자의 수명은 공급자가 앱과 함께 시작되고 앱이 종료될 때 삭제되는 앱/서버의 수명에 해당합니다.
 
-범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
+범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 singleton으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
 
 자세한 내용은 <xref:fundamentals/host/web-host#scope-validation>를 참조하세요.
 
@@ -481,7 +481,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="thread-safety"></a>스레드로부터의 안전성
 
-스레드로부터 안전한 싱글톤 서비스를 만듭니다. 싱글톤 서비스가 Transient 서비스에 대한 종속성을 갖는 경우 Transient 서비스는 싱글톤에서 사용되는 방식에 따라 스레드로부터 안전성이 필요할 수 있습니다.
+스레드로부터 안전한 singleton 서비스를 만듭니다. singleton 서비스가 Transient 서비스에 대한 종속성을 갖는 경우 Transient 서비스는 singleton에서 사용되는 방식에 따라 스레드로부터 안전성이 필요할 수 있습니다.
 
 [AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*)에 대한 두 번째 인수와 같은 단일 서비스의 팩터리 메서드는 스레드로부터 안전할 필요가 없습니다. 형식(`static`) 생성자와 같이 이 메서드는 단일 스레드에서 한 번만 호출됩니다.
 
@@ -652,7 +652,7 @@ public class MyDependency : IMyDependency
 }
 ```
 
-서비스의 인스턴스는 서비스가 사용되는 클래스의 생성자를 통해 요청되고 전용 필드에 할당됩니다. 이 필드는 클래스 전체에서 필요에 따라 서비스에 액세스하는 데 사용됩니다.
+서비스의 인스턴스는 서비스가 사용되는 클래스의 생성자를 통해 요청되고 private 필드에 할당됩니다. 이 필드는 클래스 전체에서 필요에 따라 서비스에 액세스하는 데 사용됩니다.
 
 샘플 앱에서는 `IMyDependency` 인스턴스가 요청되며 이 인스턴스는 서비스의 `WriteMessage` 메서드를 호출하는 데 사용됩니다.
 
@@ -733,14 +733,14 @@ Transient 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.Servic
 Scoped 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>)는 클라이언트 요청(연결)당 한 번 생성됩니다.
 
 > [!WARNING]
-> 미들웨어에서 범위가 지정된 서비스를 사용하는 경우 `Invoke` 또는 `InvokeAsync` 메서드에 서비스를 삽입합니다. 생성자 삽입은 서비스가 싱글톤처럼 작동하게 하므로 이러한 방법으로 삽입하지 마세요. 자세한 내용은 <xref:fundamentals/middleware/write#per-request-middleware-dependencies>를 참조하세요.
+> 미들웨어에서 범위가 지정된 서비스를 사용하는 경우 `Invoke` 또는 `InvokeAsync` 메서드에 서비스를 삽입합니다. [생성자 삽입](xref:mvc/controllers/dependency-injection#constructor-injection)은 서비스가 singleton처럼 작동하게 하므로 이러한 방법으로 삽입하지 마세요. 자세한 내용은 <xref:fundamentals/middleware/write#per-request-middleware-dependencies>를 참조하세요.
 
 ### <a name="singleton"></a>Singleton
 
-싱글톤 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>)는 처음 요청할 때(또는 `Startup.ConfigureServices`를 실행하고 서비스 등록에서 인스턴스를 지정하는 경우) 생성됩니다. 모든 후속 요청에서는 같은 인스턴스를 사용합니다. 앱에 싱글톤 동작이 필요한 경우 서비스 컨테이너가 서비스 수명을 관리하도록 허용하는 것이 좋습니다. 싱글톤 디자인 패턴을 구현하거나 클래스의 개체 수명을 관리하는 사용자 코드를 제공하지 마세요.
+singleton 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>)는 처음 요청할 때(또는 `Startup.ConfigureServices`를 실행하고 서비스 등록에서 인스턴스를 지정하는 경우) 생성됩니다. 모든 후속 요청에서는 같은 인스턴스를 사용합니다. 앱에 singleton 동작이 필요한 경우 서비스 컨테이너가 서비스 수명을 관리하도록 허용하는 것이 좋습니다. singleton 디자인 패턴을 구현하거나 클래스의 개체 수명을 관리하는 사용자 코드를 제공하지 마세요.
 
 > [!WARNING]
-> 범위가 지정된 서비스를 싱글톤에서 해결하면 위험합니다. 이 경우 후속 요청을 처리할 때 서비스가 잘못된 상태일 수 있습니다.
+> 범위가 지정된 서비스를 singleton에서 해결하면 위험합니다. 이 경우 후속 요청을 처리할 때 서비스가 잘못된 상태일 수 있습니다.
 
 ## <a name="service-registration-methods"></a>서비스 등록 메서드
 
@@ -798,9 +798,9 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 생성자에는 종속성 주입으로 제공되지 않는 인수를 사용할 수 있지만, 인수에 기본값을 할당해야 합니다.
 
-`IServiceProvider` 또는 `ActivatorUtilities`로 서비스를 해결하는 경우 생성자 주입에 *public* 생성자가 필요합니다.
+`IServiceProvider` 또는 `ActivatorUtilities`로 서비스를 해결하는 경우 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection)에 *public* 생성자가 필요합니다.
 
-`ActivatorUtilities`로 서비스를 해결하는 경우 생성자 주입을 위해서는 적합한 생성자가 하나만 있어야 합니다. 생성자 오버로드가 지원되지만, 해당 인수가 모두 종속성 주입으로 처리될 수 있는 하나의 오버로드만 존재할 수 있습니다.
+`ActivatorUtilities`로 서비스를 해결하는 경우 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection)을 위해서는 적합한 생성자가 하나만 있어야 합니다. 생성자 오버로드가 지원되지만, 해당 인수가 모두 종속성 주입으로 처리될 수 있는 하나의 오버로드만 존재할 수 있습니다.
 
 ## <a name="entity-framework-contexts"></a>Entity Framework 컨텍스트
 
@@ -820,7 +820,7 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 * 컨테이너에서 요청할 때 임시 서비스가 생성되면 `IOperationTransient` 서비스의 `OperationId`는 `OperationService`의 `OperationId`와 다릅니다. `OperationService`는 `IOperationTransient` 클래스의 새 인스턴스를 받습니다. 새 인스턴스는 다른 `OperationId`를 생성합니다.
 * 클라이언트 요청에 따라 범위가 지정된 서비스가 생성되면 `IOperationScoped` 서비스의 `OperationId`는 클라이언트 요청 내의 `OperationService`와 같습니다. 전체 클라이언트 요청에서 두 서비스는 다른 `OperationId` 값을 공유합니다.
-* 싱글톤 및 싱글톤 인스턴스 서비스가 한 번 생성되어 모든 클라이언트 요청 및 모든 서비스에서 사용될 경우 `OperationId`는 모든 서비스 요청에서 동일합니다.
+* singleton 및 singleton 인스턴스 서비스가 한 번 생성되어 모든 클라이언트 요청 및 모든 서비스에서 사용될 경우 `OperationId`는 모든 서비스 요청에서 동일합니다.
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
 
@@ -922,11 +922,11 @@ public class Program
 앱이 개발 환경에서 실행 중인 경우 기본 서비스 공급자가 다음을 확인하는 검사를 수행합니다.
 
 * '직접으로' in current translation is awkward/inappropriate in terms of grammar.
-* 범위가 지정된 서비스는 직접 또는 간접적으로 싱글톤에 삽입되지 않습니다.
+* 범위가 지정된 서비스는 직접 또는 간접적으로 singleton에 삽입되지 않습니다.
 
 루트 서비스 공급자는 <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*>를 호출할 때 만들어집니다. 루트 서비스 공급자의 수명은 공급자가 앱과 함께 시작되고 앱이 종료될 때 삭제되는 앱/서버의 수명에 해당합니다.
 
-범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
+범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 singleton으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
 
 자세한 내용은 <xref:fundamentals/host/web-host#scope-validation>를 참조하세요.
 
@@ -1014,7 +1014,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="thread-safety"></a>스레드로부터의 안전성
 
-스레드로부터 안전한 싱글톤 서비스를 만듭니다. 싱글톤 서비스가 Transient 서비스에 대한 종속성을 갖는 경우 Transient 서비스는 싱글톤에서 사용되는 방식에 따라 스레드로부터 안전성이 필요할 수 있습니다.
+스레드로부터 안전한 singleton 서비스를 만듭니다. singleton 서비스가 Transient 서비스에 대한 종속성을 갖는 경우 Transient 서비스는 singleton에서 사용되는 방식에 따라 스레드로부터 안전성이 필요할 수 있습니다.
 
 [AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*)에 대한 두 번째 인수와 같은 단일 서비스의 팩터리 메서드는 스레드로부터 안전할 필요가 없습니다. 형식(`static`) 생성자와 같이 이 메서드는 단일 스레드에서 한 번만 호출됩니다.
 

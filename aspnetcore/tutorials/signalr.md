@@ -8,12 +8,12 @@ ms.date: 11/21/2019
 no-loc:
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 55ebdbfa4556deca74a6cdf0638307425cd1a01a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 869eb325ee95a78e4b16c61c5b0573bb094292e3
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650613"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994613"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>자습서: ASP.NET Core SignalR 시작
 
@@ -89,7 +89,7 @@ ms.locfileid: "78650613"
 
 ## <a name="add-the-signalr-client-library"></a>SignalR 클라이언트 라이브러리 추가
 
-SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 콘텐츠 배달 네트워크(CDN, Content Delivery Network)입니다.
+SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 CDN(콘텐츠 배달 네트워크)입니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -320,7 +320,7 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
 
 ## <a name="add-the-signalr-client-library"></a>SignalR 클라이언트 라이브러리 추가   
 
-SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 콘텐츠 배달 네트워크(CDN, Content Delivery Network)입니다.    
+SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 CDN(콘텐츠 배달 네트워크)입니다. 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 

@@ -5,17 +5,17 @@ description: Blazor 앱의 .NET 메서드에서 JavaScript 함수를 호출하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/19/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 7a27b6f1be2ef296d5b2b2a4f566e0cdedbe6480
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0c6b6a0a8f88fa912523e7772fcd84ef4ce3b4ff
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647523"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977017"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor의 .NET 메서드에서 JavaScript 함수 호출
 
@@ -461,6 +461,18 @@ JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 �
 리소스 소모에 대한 자세한 내용은 <xref:security/blazor/server>를 참조하세요.
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="avoid-circular-object-references"></a>순환 개체 참조 방지
+
+순환 참조를 포함하는 개체는 다음 중 하나에 대해 클라이언트에서 직렬화될 수 없습니다.
+
+* .NET 메서드 호출
+* 반환 형식에 순환 참조가 있는 경우 C#에서 JavaScript 메서드 호출
+
+자세한 내용은 다음 문제를 참조하세요.
+
+* [순환 참조가 지원되지 않음, 두 가지 사용(dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [제안: 직렬화할 때 순환 참조를 처리하는 메커니즘 추가(dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>추가 자료
 

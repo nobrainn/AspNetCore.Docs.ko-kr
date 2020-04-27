@@ -5,17 +5,17 @@ description: Blazor 앱의 JavaScript 함수에서 .NET 메서드를 호출하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/24/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: dbf44fe7923998c65119e42d97c304890fa95523
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e2344dd15efd243a405373b6cf0362f28b48173a
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218793"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976952"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor의 JavaScript 함수에서 .NET 메서드 호출
 
@@ -66,7 +66,7 @@ JavaScript에서 정적 .NET 메서드를 호출하려면 `DotNet.invokeMethod` 
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-네 번째 배열 값은 `data.push(4);`에서 반환된 배열(`ReturnArrayAsync`)로 푸시됩니다.
+네 번째 배열 값은 `ReturnArrayAsync`에서 반환된 배열(`data.push(4);`)로 푸시됩니다.
 
 기본적으로 메서드 식별자는 메서드 이름이지만 `JSInvokableAttribute` 생성자를 사용하여 다른 식별자를 지정할 수 있습니다.
 
@@ -98,7 +98,7 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 
 * JavaScript에 대한 참조로 .NET 인스턴스를 전달합니다.
   * `DotNetObjectReference.Create`에 대한 정적 호출을 수행합니다.
-  * 인스턴스를 `DotNetObjectReference` 인스턴스로 래핑하고 `Create` 인스턴스에서 `DotNetObjectReference`를 호출합니다. `DotNetObjectReference` 개체를 삭제합니다. 이 섹션의 뒷부분을 참조하세요.
+  * 인스턴스를 `DotNetObjectReference` 인스턴스로 래핑하고 `DotNetObjectReference` 인스턴스에서 `Create`를 호출합니다. `DotNetObjectReference` 개체를 삭제합니다. 이 섹션의 뒷부분을 참조하세요.
 * `invokeMethod` 또는 `invokeMethodAsync` 함수를 사용하여 인스턴스에서 .NET 인스턴스 메서드를 호출합니다. JavaScript에서 다른 .NET 메서드를 호출할 때 .NET 인스턴스를 인수로 전달할 수도 있습니다.
 
 > [!NOTE]
@@ -122,7 +122,7 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 }
 ```
 
-`CallHelloHelperSayHello`는 `sayHello`의 새 인스턴스를 사용하여 JavaScript 함수 `HelloHelper`를 호출합니다.
+`CallHelloHelperSayHello`는 `HelloHelper`의 새 인스턴스를 사용하여 JavaScript 함수 `sayHello`를 호출합니다.
 
 *JsInteropClasses/ExampleJsInterop.cs*:
 
@@ -132,7 +132,7 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
-이 이름은 `HelloHelper` 속성을 설정하는 `HelloHelper.Name`의 생성자에 전달됩니다. JavaScript 함수 `sayHello`가 실행되면 `HelloHelper.SayHello`는 JavaScript 함수를 통해 콘솔에 기록되는 `Hello, {Name}!` 메시지를 반환합니다.
+이 이름은 `HelloHelper.Name` 속성을 설정하는 `HelloHelper`의 생성자에 전달됩니다. JavaScript 함수 `sayHello`가 실행되면 `HelloHelper.SayHello`는 JavaScript 함수를 통해 콘솔에 기록되는 `Hello, {Name}!` 메시지를 반환합니다.
 
 *JsInteropClasses/HelloHelper.cs*:
 
@@ -359,6 +359,18 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 ```
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="avoid-circular-object-references"></a>순환 개체 참조 방지
+
+순환 참조를 포함하는 개체는 다음 중 하나에 대해 클라이언트에서 직렬화될 수 없습니다.
+
+* .NET 메서드 호출
+* 반환 형식에 순환 참조가 있는 경우 C#에서 JavaScript 메서드 호출
+
+자세한 내용은 다음 문제를 참조하세요.
+
+* [순환 참조가 지원되지 않음, 두 가지 사용(dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [제안: 직렬화할 때 순환 참조를 처리하는 메커니즘 추가(dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>추가 자료
 

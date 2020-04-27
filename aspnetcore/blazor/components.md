@@ -5,21 +5,21 @@ description: 데이터에 바인딩하고, 이벤트를 처리하고, 구성 요
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/25/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4434636992cb2506ef6525996690946f97c43764
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306505"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791484"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
-작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
+작성자: [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27) 및 [Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -141,6 +141,9 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 *Pages/ParentComponent.razor*:
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+> [!WARNING]
+> 자체 *구성 요소 매개 변수*에 쓰는 구성 요소를 만들지 말고 대신 private 필드를 사용합니다. 자세한 내용은 [자체 매개 변수 속성에 쓰는 구성 요소 만들지 않음](#dont-create-components-that-write-to-their-own-parameter-properties) 섹션을 참조하세요.
 
 ## <a name="child-content"></a>자식 콘텐츠
 
@@ -331,7 +334,7 @@ public class NotifierService
 }
 ```
 
-`NotifierService`를 싱글톤으로 등록합니다.
+`NotifierService`를 singleton으로 등록합니다.
 
 * Blazor WebAssembly에서 `Program.Main`에 서비스를 등록합니다.
 
@@ -400,7 +403,7 @@ public class NotifierService
 
 `People` 컬렉션의 콘텐츠는 삽입, 삭제 또는 다시 정렬된 항목으로 변경될 수 있습니다. 구성 요소가 다시 렌더링되면 `<DetailsEditor>` 구성 요소가 다른 `Details` 매개 변수 값을 수신하도록 변경될 수 있습니다. 이로 인해 다시 렌더링이 예상보다 더 복잡해질 수 있습니다. 경우에 따라 다시 렌더링을 수행하면 요소 포커스 손실과 같은 동작 차이가 표시될 수 있습니다.
 
-매핑 프로세스는 `@key` 지시어 특성을 사용하여 제어할 수 있습니다. `@key`를 사용하면 diff 알고리즘은 키의 값에 따라 요소 또는 구성 요소가 유지되도록 합니다.
+매핑 프로세스는 [`@key`](xref:mvc/views/razor#key) 지시문 특성을 사용하여 제어할 수 있습니다. `@key`를 사용하면 diff 알고리즘은 키의 값에 따라 요소 또는 구성 요소가 유지되도록 합니다.
 
 ```csharp
 @foreach (var person in People)
@@ -453,6 +456,99 @@ public class NotifierService
 * 고유 식별자(예: `int`, `string` 또는 `Guid` 형식의 기본 키 값)
 
 `@key`에 사용되는 값이 충돌하지 않는지 확인합니다. 동일한 부모 요소 내에서 충돌하는 값이 감지되면 이전 요소나 구성 요소를 새 요소나 구성 요소에 확정적으로 매핑할 수 없으므로 Blazor는 예외를 throw합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용합니다.
+
+## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>자체 매개 변수 속성에 쓰는 구성 요소를 만들지 않음
+
+다음 조건에서는 매개 변수를 덮어씁니다.
+
+* 자식 구성 요소 콘텐츠가 `RenderFragment`로 렌더링되는 경우
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 부모 구성 요소에서 호출되는 경우
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 호출될 때 부모 구성 요소가 렌더링되고 자식 구성 요소에 새 매개 변수 값이 제공되므로 매개 변수가 재설정됩니다.
+
+다음을 수행하는 `Expander` 구성 요소를 고려해 보세요.
+
+* 자식 콘텐츠를 렌더링합니다.
+* 구성 요소 매개 변수로 자식 콘텐츠 표시를 설정/해제합니다.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @Expanded)
+
+    @if (Expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private void Toggle()
+    {
+        Expanded = !Expanded;
+    }
+}
+```
+
+`Expander` 구성 요소는 `StateHasChanged`를 호출할 수 있는 부모 구성 요소에 추가됩니다.
+
+```razor
+<Expander Expanded="true">
+    <h1>Hello, world!</h1>
+</Expander>
+
+<Expander Expanded="true" />
+
+<button @onclick="@(() => StateHasChanged())">
+    Call StateHasChanged
+</button>
+```
+
+처음에 `Expander` 구성 요소는 `Expanded` 속성이 전환될 때 독립적으로 동작합니다. 자식 구성 요소는 상태를 예상대로 유지합니다. 부모에서 `StateHasChanged`가 호출되면 첫 번째 자식 구성 요소의 `Expanded` 매개 변수가 초기 값(`true`)으로 다시 설정됩니다. 두 번째 `Expander` 구성 요소에서는 렌더링디는 자식 콘텐츠가 없으므로 구성 요소의 `Expanded` 값이 다시 설정되지 않습니다.
+
+앞의 시나리오에서 상태를 유지하려면 `Expander` 구성 요소에서 ‘private 필드’를 사용하여 전환된 상태를 유지합니다 *.*
+
+다음 `Expander` 구성 요소는
+
+* 부모의 `Expanded` 구성 요소 매개 변수 값을 허용합니다.
+* [OnInitialized 이벤트](xref:blazor/lifecycle#component-initialization-methods)에서 구성 요소 매개 변수 값을 ‘private 필드’(`_expanded`)에 할당합니다 *.*
+* Private 필드를 사용하여 내부 설정/해제 상태를 유지합니다.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @_expanded)
+
+    @if (_expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool _expanded;
+
+    protected override void OnInitialized()
+    {
+        _expanded = Expanded;
+    }
+
+    private void Toggle()
+    {
+        _expanded = !_expanded;
+    }
+}
+```
 
 ## <a name="partial-class-support"></a>Partial 클래스 지원
 

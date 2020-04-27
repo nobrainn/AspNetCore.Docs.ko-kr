@@ -4,14 +4,14 @@ author: jamesnk
 description: .NET gRPC 클라이언트를 사용하여 gRPC 서비스를 호출하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/21/2019
+ms.date: 04/21/2020
 uid: grpc/client
-ms.openlocfilehash: 6a6a649f7194354b16f3d67160be02428cc01170
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: aefa52a5c4c66178c5978aebd4cd9b00559c7f54
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650805"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791558"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET 클라이언트를 사용하여 gRPC 서비스 호출
 
@@ -62,7 +62,7 @@ var counterClient = new Count.CounterClient(channel);
 
 클라이언트에서 메서드를 호출하여 gRPC 호출을 시작합니다. gRPC 클라이언트는 메시지 직렬화 및 gRPC 호출에 올바른 서비스 주소를 지정하는 작업을 처리합니다.
 
-gRPC에는 다양한 형식의 메서드가 있습니다. 클라이언트를 사용하여 gRPC 호출을 수행하는 방법은 호출하는 메서드 형식에 따라 다릅니다. gRPC 메서드 형식은 다음과 같습니다.
+gRPC에는 다양한 형식의 메서드가 있습니다. 클라이언트를 사용하여 gRPC 호출을 수행하는 방법은 호출되는 메서드 형식에 따라 다릅니다. gRPC 메서드 형식은 다음과 같습니다.
 
 * 단항
 * 서버 스트리밍
@@ -81,7 +81,7 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 ```
 
-*\*.proto* 파일에 있는 각 단항 서비스 메서드는 구체적인 gRPC 클라이언트 형식에 해당 메서드를 호출하기 위한 두 가지 .NET 메서드인 비동기 메서드와 차단 메서드를 생성합니다. 예를 들어 `GreeterClient`에서 `SayHello`를 호출하는 방법에는 다음 두 가지가 있습니다.
+\* *.proto* 파일에 있는 각 단항 서비스 메서드는 구체적인 gRPC 클라이언트 형식에 해당 메서드를 호출하기 위한 두 가지 .NET 메서드인 비동기 메서드와 차단 메서드를 생성합니다. 예를 들어 `GreeterClient`에서 `SayHello`를 호출하는 방법에는 다음 두 가지가 있습니다.
 
 * `GreeterClient.SayHelloAsync` - `Greeter.SayHello` 서비스를 비동기적으로 호출합니다. 대기할 수 있습니다.
 * `GreeterClient.SayHello` - `Greeter.SayHello` 서비스를 호출하고 완료될 때까지 차단합니다. 비동기 코드에서는 사용하면 안 됩니다.
@@ -92,27 +92,25 @@ Console.WriteLine("Greeting: " + response.Message);
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
-using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+while (await call.ResponseStream.MoveNext())
 {
-    while (await call.ResponseStream.MoveNext())
-    {
-        Console.WriteLine("Greeting: " + call.ResponseStream.Current.Message);
-        // "Greeting: Hello World" is written multiple times
-    }
+    Console.WriteLine("Greeting: " + call.ResponseStream.Current.Message);
+    // "Greeting: Hello World" is written multiple times
 }
 ```
 
-C# 8 이상을 사용하는 경우, `await foreach` 구문을 사용하여 메시지를 읽을 수 있습니다. `IAsyncStreamReader<T>.ReadAllAsync()` 확장 메서드는 응답 스트림에서 모든 메시지를 읽습니다.
+C# 8 이상을 사용하는 경우 `await foreach` 구문을 사용하여 메시지를 읽을 수 있습니다. `IAsyncStreamReader<T>.ReadAllAsync()` 확장 메서드는 응답 스트림에서 모든 메시지를 읽습니다.
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
-using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+await foreach (var response in call.ResponseStream.ReadAllAsync())
 {
-    await foreach (var response in call.ResponseStream.ReadAllAsync())
-    {
-        Console.WriteLine("Greeting: " + response.Message);
-        // "Greeting: Hello World" is written multiple times
-    }
+    Console.WriteLine("Greeting: " + response.Message);
+    // "Greeting: Hello World" is written multiple times
 }
 ```
 
@@ -122,18 +120,17 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 
 ```csharp
 var client = new Counter.CounterClient(channel);
-using (var call = client.AccumulateCount())
-{
-    for (var i = 0; i < 3; i++)
-    {
-        await call.RequestStream.WriteAsync(new CounterRequest { Count = 1 });
-    }
-    await call.RequestStream.CompleteAsync();
+using var call = client.AccumulateCount();
 
-    var response = await call;
-    Console.WriteLine($"Count: {response.Count}");
-    // Count: 3
+for (var i = 0; i < 3; i++)
+{
+    await call.RequestStream.WriteAsync(new CounterRequest { Count = 1 });
 }
+await call.RequestStream.CompleteAsync();
+
+var response = await call;
+Console.WriteLine($"Count: {response.Count}");
+// Count: 3
 ```
 
 ### <a name="bi-directional-streaming-call"></a>양방향 스트리밍 호출
@@ -141,38 +138,98 @@ using (var call = client.AccumulateCount())
 양방향 스트리밍 호출은 클라이언트에서 메시지를 보내지 ‘않고’ 시작됩니다.  클라이언트는 `RequestStream.WriteAsync`를 사용하여 메시지를 보내도록 선택할 수 있습니다. 서비스에서 스트리밍된 메시지는 `ResponseStream.MoveNext()` 또는 `ResponseStream.ReadAllAsync()`를 사용하여 액세스할 수 있습니다. `ResponseStream`에 더는 메시지가 없으면 양방향 스트리밍 호출이 완료됩니다.
 
 ```csharp
-using (var call = client.Echo())
+var client = new Echo.EchoClient(channel);
+using var call = client.Echo();
+
+Console.WriteLine("Starting background task to receive messages");
+var readTask = Task.Run(async () =>
 {
-    Console.WriteLine("Starting background task to receive messages");
-    var readTask = Task.Run(async () =>
+    await foreach (var response in call.ResponseStream.ReadAllAsync())
     {
-        await foreach (var response in call.ResponseStream.ReadAllAsync())
-        {
-            Console.WriteLine(response.Message);
-            // Echo messages sent to the service
-        }
-    });
+        Console.WriteLine(response.Message);
+        // Echo messages sent to the service
+    }
+});
 
-    Console.WriteLine("Starting to send messages");
-    Console.WriteLine("Type a message to echo then press enter.");
-    while (true)
+Console.WriteLine("Starting to send messages");
+Console.WriteLine("Type a message to echo then press enter.");
+while (true)
+{
+    var result = Console.ReadLine();
+    if (string.IsNullOrEmpty(result))
     {
-        var result = Console.ReadLine();
-        if (string.IsNullOrEmpty(result))
-        {
-            break;
-        }
-
-        await call.RequestStream.WriteAsync(new EchoMessage { Message = result });
+        break;
     }
 
-    Console.WriteLine("Disconnecting");
-    await call.RequestStream.CompleteAsync();
-    await readTask;
+    await call.RequestStream.WriteAsync(new EchoMessage { Message = result });
 }
+
+Console.WriteLine("Disconnecting");
+await call.RequestStream.CompleteAsync();
+await readTask;
 ```
 
 양방향 스트리밍 호출 중에 클라이언트와 서비스는 언제든지 서로에게 메시지를 보낼 수 있습니다. 양방향 호출과 상호 작용하는 데 가장 적합한 클라이언트 논리는 서비스 논리에 따라 다릅니다.
+
+## <a name="access-grpc-trailers"></a>gRPC 트레일러 액세스
+
+gRPC 호출은 gRPC 트레일러를 반환할 수 있습니다. gRPC 트레일러는 호출에 대한 이름/값 메타데이터를 제공하는 데 사용됩니다. 트레일러는 HTTP 헤더와 유사한 기능을 제공하지만 호출이 끝날 때 수신됩니다.
+
+gRPC 트레일러는 메타데이터의 컬렉션을 반환하는 `GetTrailers()`를 사용하여 액세스할 수 있습니다. 응답이 완료된 후 트레일러가 반환되므로 모든 응답 메시지를 대기한 이후에 트레일러에 액세스해야 합니다.
+
+단항 및 클라이언트 스트리밍 호출은 `GetTrailers()`를 호출하기 전에 `ResponseAsync`를 대기해야 합니다.
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+var response = await call.ResponseAsync;
+
+Console.WriteLine("Greeting: " + response.Message);
+// Greeting: Hello World
+
+var trailers = call.GetTrailers();
+var myValue = trailers.First(e => e.Key == "my-trailer-name");
+```
+
+서버 및 양방향 스트리밍 호출은 `GetTrailers()`를 호출하기 전에 응답 스트림 대기를 완료해야 합니다.
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+await foreach (var response in call.ResponseStream.ReadAllAsync())
+{
+    Console.WriteLine("Greeting: " + response.Message);
+    // "Greeting: Hello World" is written multiple times
+}
+
+var trailers = call.GetTrailers();
+var myValue = trailers.First(e => e.Key == "my-trailer-name");
+```
+
+`RpcException`에서도 gRPC 트레일러에 액세스할 수 있습니다. 서비스에서 비정상 gRPC 상태와 함께 트레일러를 반환할 수 있습니다. 이 경우에는 gRPC 클라이언트에서 throw된 예외에서 트레일러가 검색됩니다.
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+string myValue = null;
+
+try
+{
+    using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+    var response = await call.ResponseAsync;
+
+    Console.WriteLine("Greeting: " + response.Message);
+    // Greeting: Hello World
+
+    var trailers = call.GetTrailers();
+    myValue = trailers.First(e => e.Key == "my-trailer-name");
+}
+catch (RpcException ex)
+{
+    var trailers = ex.Trailers;
+    myValue = trailers.First(e => e.Key == "my-trailer-name");
+}
+```
 
 ## <a name="additional-resources"></a>추가 자료
 

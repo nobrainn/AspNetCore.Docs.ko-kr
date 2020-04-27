@@ -5,17 +5,17 @@ description: Blazor 앱을 디버그하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7273ae3d240de0b59a58069fdcc1880247379751
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80381877"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661603"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
@@ -55,7 +55,7 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio 및 Visual Studio Code의 디버깅 사용 설정
 
-ASP.NET Core 3.2 미리 보기 3 이상 Blazor WebAssembly 프로젝트 템플릿을 사용하여 만든 새 프로젝트에서는 자동으로 디버깅을 사용하도록 설정됩니다.
+ASP.NET Core 3.2 미리 보기 3 이상 Blazor WebAssembly 프로젝트 템플릿([최신 릴리스는 3.2 미리 보기 4](xref:blazor/get-started))을 사용하여 만든 새 프로젝트에서는 자동으로 디버깅을 사용하도록 설정됩니다.
 
 기존 Blazor WebAssembly 앱에서 디버깅을 사용하도록 설정하려면 각 시작 프로필이 다음 `inspectUri` 속성을 포함하도록 프로젝트의 *launchSettings.json* 파일을 업데이트합니다.
 
@@ -103,6 +103,8 @@ Blazor WebAssembly 앱을 디버그하는 동안 서버 코드도 디버그할 �
    ![서버 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
 1. <kbd>F5</kbd> 키를 다시 눌러 실행이 계속되도록 하고 날씨 예측 테이블이 렌더링되는지 확인합니다.
+
+<a id="vscode"></a>
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 

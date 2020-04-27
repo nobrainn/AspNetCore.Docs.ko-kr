@@ -4,14 +4,14 @@ author: jamesnk
 description: gRPC-Web을 사용하여 브라우저 앱에서 호출할 수 있도록 gRPC 서비스를 ASP.NET Core에서 구성하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 02/16/2020
+ms.date: 04/15/2020
 uid: grpc/browser
-ms.openlocfilehash: 3beeffc26ffd3c2dc85bfc22a46d97d5fd78d3d0
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: a20e604488b1fb919f18932599ba690bfa308f0c
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649419"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440768"
 ---
 # <a name="use-grpc-in-browser-apps"></a>브라우저 앱에서 gRPC 사용
 
@@ -28,6 +28,15 @@ ms.locfileid: "78649419"
 > 개발자가 좋아하고 생산성을 높일 수 있는 제품을 빌드할 수 있도록 [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet)에서 피드백을 남겨 주시기 바랍니다.
 
 브라우저 기반 앱에서 HTTP/2 gRPC 서비스를 호출할 수는 없습니다. [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)은 브라우저 JavaScript 및 Blazor 앱에서 gRPC 서비스를 호출할 수 있게 해주는 프로토콜입니다. 이 문서에서는 .NET Core에서 gRPC-Web을 사용하는 방법을 설명합니다.
+
+## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>ASP.NET Core의 gRPC-Web 및 Envoy
+
+ASP.NET Core 앱에 gRPC-Web을 추가하는 방법은 두 가지입니다.
+
+* ASP.NET Core에서 gRPC HTTP/2와 함께 gRPC-Web을 지원합니다. 이 옵션은 `Grpc.AspNetCore.Web` 패키지에서 제공하는 미들웨어를 사용합니다.
+* [Envoy 프록시의](https://www.envoyproxy.io/) gRPC-Web 지원을 사용하여 gRPC-Web을 gRPC HTTP/2로 변환합니다. 그러면 변환된 호출이 ASP.NET Core 앱으로 전달됩니다.
+
+각 접근 방식에는 장/단점이 있습니다. 앱 환경에서 Envoy를 프록시로 이미 사용하고 있는 경우 이를 사용하여 gRPC-Web 지원을 제공하는 것이 적합할 수 있습니다. ASP.NET Core만 필요한 gRPC-Web을 위한 단순한 솔루션을 원하는 경우 `Grpc.AspNetCore.Web`을 선택하는 것이 좋습니다.
 
 ## <a name="configure-grpc-web-in-aspnet-core"></a>ASP.NET Core에서 gRPC-Web 구성
 
@@ -48,6 +57,11 @@ ASP.NET Core gRPC 서비스에서 gRPC-Web을 사용하도록 설정하려면 �
 또는 ConfigureServices에 `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);`를 추가하여 모든 서비스에서 gRPC-Web을 지원하도록 구성합니다.
 
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=6,13)]
+
+> [!NOTE]
+> .NET Core 3.x에서 [Http.sys로 호스트](xref:fundamentals/servers/httpsys)될 때 gRPC-Web이 실패하는 알려진 문제가 있습니다.
+>
+> gRPC-Web이 Http.sys에서 작동하도록 하는 해결 방법은 [여기](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)에서 확인할 수 있습니다.
 
 ### <a name="grpc-web-and-cors"></a>gRPC-Web 및 CORS
 

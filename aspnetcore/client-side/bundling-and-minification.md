@@ -4,14 +4,14 @@ author: scottaddie
 description: 번들링 및 축소 기술을 적용하여 ASP.NET Core 웹 애플리케이션에서 정적 리소스를 최적화하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 06/17/2019
+ms.date: 04/15/2020
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: a7a5c40d6c31c4416212c02c1b491dd794f2a1d3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 670ac6a96c3affd2b2ac699836f536aea7d85ff3
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646785"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488691"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core에서 정적 자산 번들링 및 축소하기
 
@@ -63,7 +63,7 @@ ms.locfileid: "78646785"
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>번들링 및 축소 전략 선택하기
 
-MVC 및 Razor Pages 프로젝트 템플릿은 JSON 구성 파일로 구성된 묶음 및 축소용 기본 제공 솔루션을 제공합니다. [Grunt](xref:client-side/using-grunt) 작업 실행기와 같은 타사 도구는 동일한 작업을 약간 더 복잡하게 수행합니다. 타사 도구는 개발 워크플로에 lint 및 이미지 최적화와 같은 묶음 및 축소 이외의 처리가 필요한 경우에 적합합니다. 디자인 타임 묶음 및 축소를 사용하여 앱 배포 전에 축소된 파일이 생성됩니다. 배포 전 묶음 및 축소는 서버 부하 감소라는 이점을 제공합니다. 그러나 디자인 타임 묶음 및 축소는 빌드 복잡성을 높이고 정적 파일에만 작동한다는 것을 인식하는 것이 중요합니다.
+MVC 및 Razor Pages 프로젝트 템플릿은 JSON 구성 파일로 구성된 묶음 및 축소용 솔루션을 제공합니다. [Grunt](xref:client-side/using-grunt) 작업 실행기와 같은 타사 도구는 동일한 작업을 약간 더 복잡하게 수행합니다. 타사 도구는 개발 워크플로에 lint 및 이미지 최적화와 같은 묶음 및 축소 이외의 처리가 필요한 경우에 적합합니다. 디자인 타임 묶음 및 축소를 사용하여 앱 배포 전에 축소된 파일이 생성됩니다. 배포 전 묶음 및 축소는 서버 부하 감소라는 이점을 제공합니다. 그러나 디자인 타임 묶음 및 축소는 빌드 복잡성을 높이고 정적 파일에만 작동한다는 것을 인식하는 것이 중요합니다.
 
 ## <a name="configure-bundling-and-minification"></a>번들링 및 축소 구성하기
 
@@ -95,109 +95,6 @@ ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트�
 * `includeInProject`: 생성된 파일을 프로젝트 파일에 추가할지 여부를 나타내는 플래그입니다. **선택적**, *기본값 - false*
 * `sourceMap`: 묶은 파일에 대해 소스 맵을 생성할지 여부를 나타내는 플래그입니다. **선택적**, *기본값 - false*
 * `sourceMapRootPath`: 생성된 소스 맵 파일을 저장하기 위한 루트 경로입니다.
-
-## <a name="build-time-execution-of-bundling-and-minification"></a>빌드 시 번들링 및 축소 실행하기
-
-[BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier/) NuGet 패키지를 사용하면 빌드 시 번들링 및 축소를 수행할 수 있습니다. 이 패키지는 빌드 및 정리 시에 실행되는 [MSBuild 대상](/visualstudio/msbuild/msbuild-targets)을 주입합니다. 빌드 프로세스는 *bundleconfig.json* 파일을 분석하여 정의된 구성을 기반으로 출력 파일을 생성합니다.
-
-> [!NOTE]
-> BuildBundlerMinifier는 Microsoft에서 지원을 제공하지 않는 GitHub의 커뮤니티 주도 프로젝트에 속해 있습니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
-
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-프로젝트에 *BuildBundlerMinifier* 패키지를 추가합니다.
-
-프로젝트를 빌드합니다. 출력 창에 다음 내용이 나타납니다.
-
-```console
-1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>
-1>Bundler: Begin processing bundleconfig.json
-1>  Minified wwwroot/css/site.min.css
-1>  Minified wwwroot/js/site.min.js
-1>Bundler: Done processing bundleconfig.json
-1>BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
-```
-
-프로젝트를 정리합니다. 출력 창에 다음 내용이 나타납니다.
-
-```console
-1>------ Clean started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>
-1>Bundler: Cleaning output from bundleconfig.json
-1>Bundler: Done cleaning output file from bundleconfig.json
-========== Clean: 1 succeeded, 0 failed, 0 skipped ==========
-```
-
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
-
-프로젝트에 *BuildBundlerMinifier* 패키지를 추가합니다.
-
-```dotnetcli
-dotnet add package BuildBundlerMinifier
-```
-
-ASP.NET Core 1.x를 사용하는 경우 새로 추가된 패키지를 복원합니다.
-
-```dotnetcli
-dotnet restore
-```
-
-프로젝트를 빌드합니다.
-
-```dotnetcli
-dotnet build
-```
-
-다음이 표시됩니다.
-
-```console
-Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-
-    Bundler: Begin processing bundleconfig.json
-    Bundler: Done processing bundleconfig.json
-    BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-```
-
-프로젝트를 정리합니다.
-
-```dotnetcli
-dotnet clean
-```
-
-다음 출력이 표시됩니다.
-
-```console
-Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-
-  Bundler: Cleaning output from bundleconfig.json
-  Bundler: Done cleaning output file from bundleconfig.json
-```
-
----
-
-## <a name="ad-hoc-execution-of-bundling-and-minification"></a>번들링 및 축소의 애드혹 실행
-
-프로젝트를 빌드하지 않고도 필요할 때마다 번들링 및 축소 작업을 실행할 수 있습니다. [BundlerMinifier.Core](https://www.nuget.org/packages/BundlerMinifier.Core/) NuGet 패키지를 프로젝트에 추가합니다.
-
-[!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=10)]
-
-> [!NOTE]
-> BundlerMinifier.Core는 Microsoft에서 지원을 제공하지 않는 GitHub의 커뮤니티 주도 프로젝트에 속해 있습니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
-
-이 패키지는 .NET Core CLI가 *dotnet-bundle* 도구를 포함하도록 확장합니다. 다음 명령을 패키지 관리자 콘솔(PMC) 창 또는 명령 셸에서 실행할 수 있습니다.
-
-```dotnetcli
-dotnet bundle
-```
-
-> [!IMPORTANT]
-> NuGet 패키지 관리자는 *.csproj 파일에 `<PackageReference />` 노드로 종속성을 추가합니다. `dotnet bundle` 명령은 `<DotNetCliToolReference />` 노드가 사용되는 경우에만 .NET Core CLI에 등록됩니다. 그에 맞춰 *.Csproj 파일을 수정해야 합니다.
 
 ## <a name="add-files-to-workflow"></a>워크플로에 파일 추가하기
 
@@ -258,32 +155,7 @@ dotnet bundle
 
 앱의 번들링 및 축소 워크플로에서 추가적인 처리를 필요로 하는 경우가 있습니다. 그 예로 이미지 최적화, 캐시 무효화 및 CDN 자산 처리를 들 수 있습니다. 이러한 요구 사항을 충족하려면 Gulp를 사용하도록 번들링 및 축소 워크플로를 변환할 수 있습니다.
 
-### <a name="use-the-bundler--minifier-extension"></a>Bundler & Minifier 확장 사용
-
-Visual Studio [Bundler & Minifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) 확장은 Gulp로의 변환을 처리합니다.
-
-> [!NOTE]
-> Bundler & Minifier 확장은 Microsoft에서 지원을 제공하지 않는 GitHub의 커뮤니티 주도 프로젝트에 속해 있습니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
-
-솔루션 탐색기에서 *bundleconfig.json* 파일을 마우스 오른쪽 버튼으로 클릭하고 **Bundler & Minifier** > **Convert To Gulp...** 를 선택합니다.
-
-![Convert To Gulp 컨텍스트 메뉴](../client-side/bundling-and-minification/_static/convert-to-gulp.png)
-
-그러면 프로젝트에 *gulpfile.js* 및 *package.json* 파일이 추가됩니다. 그리고 *package.json* 파일의 `devDependencies` 섹션에 나열된 지원 [npm](https://www.npmjs.com/) 패키지들이 설치됩니다.
-
-PMC 창에서 다음 명령을 실행하여 Gulp CLI를 전역 종속성으로 설치합니다.
-
-```console
-npm i -g gulp-cli
-```
-
-입력, 출력 및 설정을 위해 *gulpfile.js* 파일에서 *bundleconfig.json* 파일을 읽습니다.
-
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-12&highlight=10)]
-
-### <a name="convert-manually"></a>직접 변환하기
-
-Visual Studio나 Bundler & Minifier 확장을 사용할 수 없는 경우 직접 수작업으로 변환합니다.
+### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>Gulp를 사용하도록 묶음 및 축소 워크플로를 수동으로 변환
 
 프로젝트 루트에 다음 `devDependencies`가 지정된 *package.json* 파일을 추가합니다.
 
