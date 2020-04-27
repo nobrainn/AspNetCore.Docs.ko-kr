@@ -299,14 +299,14 @@
           uid: blazor/data-binding
         - name: 이벤트 처리
           uid: blazor/event-handling
+        - name: 수명 주기
+          uid: blazor/lifecycle
         - name: 템플릿 기반 구성 요소
           uid: blazor/templated-components
         - name: 구성 요소 통합
           uid: blazor/integrate-components
         - name: 전역화 및 지역화
           uid: blazor/globalization-localization
-        - name: 수명 주기
-          uid: blazor/lifecycle
         - name: 레이아웃
           uid: blazor/layouts
         - name: 양식 및 유효성 검사
