@@ -1,21 +1,21 @@
 ---
 title: 추가 Blazor 보안 시나리오 ASP.NET Core
 author: guardrex
-description: ''
+description: 추가 보안 시나리오에 Blazor 대해 weasembmbom를 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 04/27/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: cd1433d5716b9b595270209fa874a8cb93fdf699
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: 093498c3e0d42430c66c66a0998bcc44f62d1e0d
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138432"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206153"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Weasembmbambambambamba 추가 보안 시나리오
 
@@ -309,7 +309,7 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 
 기본적으로 라이브러리는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 다음 표에 나와 있는 경로를 사용 하 여 서로 다른 인증 상태를 나타냅니다.
 
-| 라우팅                            | 용도 |
+| 라우팅                            | 목적 |
 | -------------------------------- | ------- |
 | `authentication/login`           | 로그인 작업을 트리거합니다. |
 | `authentication/login-callback`  | 로그인 작업의 결과를 처리 합니다. |
@@ -430,7 +430,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 public class CustomAccountFactory 
     : AccountClaimsPrincipalFactory<OidcAccount>
 {
-    public AccountClaimsPrincipalFactory(NavigationManager navigationManager, 
+    public CustomAccountFactory(NavigationManager navigationManager, 
         IAccessTokenProviderAccessor accessor) : base(accessor)
     {
     }

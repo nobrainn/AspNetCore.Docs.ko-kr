@@ -1,18 +1,18 @@
 ---
-title: ASP.NET Core Identity 소개
+title: ASP.NET Core의 Id 소개
 author: rick-anderson
 description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항 (RequireDigit, RequiredLength, RequiredUniqueChars 등)을 설정 하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.date: 01/15/2020
 uid: security/authentication/identity
-ms.openlocfilehash: 2e0723d34a09109a034f3375c4e94aedab2a5427
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4bc5f206b3aee7c2d34055703acc5b6c5218f964
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653157"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205945"
 ---
-# <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core Identity 소개
+# <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core의 Id 소개
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -29,7 +29,7 @@ ASP.NET Core Id:
 
 Id는 일반적으로 사용자 이름, 암호 및 프로필 데이터를 저장 하기 위해 SQL Server 데이터베이스를 사용 하 여 구성 됩니다. 또는 Azure Table Storage와 같은 또 다른 영구 저장소를 사용할 수 있습니다.
 
-이 항목에서는 Id를 사용 하 여 사용자를 등록 하 고 로그인 하 고 로그 아웃 하는 방법에 대해 알아봅니다. Id를 사용 하는 앱을 만드는 방법에 대 한 자세한 내용은이 문서의 끝에 있는 다음 단계 섹션을 참조 하세요.
+이 항목에서는 Id를 사용 하 여 사용자를 등록 하 고 로그인 하 고 로그 아웃 하는 방법에 대해 알아봅니다. 참고: 템플릿은 사용자에 대해 사용자 이름 및 전자 메일을 동일 하 게 처리 합니다. Id를 사용 하는 앱을 만드는 방법에 대 한 자세한 내용은이 문서의 끝에 있는 다음 단계 섹션을 참조 하세요.
 
 [Microsoft id 플랫폼](/azure/active-directory/develop/) 은 다음과 같습니다.
 
@@ -44,12 +44,12 @@ Id는 일반적으로 사용자 이름, 암호 및 프로필 데이터를 저장
 
 ## <a name="create-a-web-app-with-authentication"></a>인증을 사용 하 여 웹 앱 만들기
 
-개별 사용자 계정으로 새로운 ASP.NET Core 웹 응용 프로그램 생성하기.
+개별 사용자 계정을 사용 하 여 ASP.NET Core 웹 응용 프로그램 프로젝트를 만듭니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **파일** > **새** > **프로젝트**를 선택 합니다.
-* **ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
+* **파일** > **새로 만들기** > **프로젝트**를 선택 합니다.
+* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
 * ASP.NET Core **웹 응용 프로그램**을 선택한 다음 **인증 변경**을 선택 합니다.
 * **개별 사용자 계정을** 선택 하 고 **확인**을 클릭 합니다.
 
@@ -67,7 +67,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 다음은 그 예입니다.
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 다음은 그 예입니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -103,19 +103,19 @@ dotnet ef database update
 
 ### <a name="configure-identity-services"></a>Id 서비스 구성
 
-서비스는 `ConfigureServices`에 추가 됩니다. 일반적인 패턴은 모든 `Add{Service}` 메서드를 호출한 후 모든 `services.Configure{Service}` 메서드를 호출하는 것입니다.
+서비스는에 `ConfigureServices`추가 됩니다. 일반적인 패턴은 모든 `Add{Service}` 메서드를 호출한 후 모든 `services.Configure{Service}` 메서드를 호출하는 것입니다.
 
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configureservices&highlight=10-99)]
 
 위의 강조 표시 된 코드는 기본 옵션 값을 사용 하 여 Id를 구성 합니다. 서비스는 [종속성 주입](xref:fundamentals/dependency-injection)을 통해 앱에서 사용할 수 있게 됩니다.
 
-<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>를 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`는 인증 [미들웨어](xref:fundamentals/middleware/index) 를 요청 파이프라인에 추가 합니다.
+Id는를 호출 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>하 여 사용 하도록 설정 됩니다. `UseAuthentication`인증 [미들웨어](xref:fundamentals/middleware/index) 를 요청 파이프라인에 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configure&highlight=19)]
 
-템플릿에서 생성 된 앱은 [권한 부여](xref:security/authorization/secure-data)를 사용 하지 않습니다. 앱이 권한 부여를 추가 하는 것이 올바른 순서로 추가 되도록 `app.UseAuthorization` 포함 됩니다. `UseRouting`, `UseAuthentication`, `UseAuthorization`및 `UseEndpoints`는 앞의 코드에 표시 된 순서 대로 호출 해야 합니다.
+템플릿에서 생성 된 앱은 [권한 부여](xref:security/authorization/secure-data)를 사용 하지 않습니다. `app.UseAuthorization`는 앱이 권한 부여를 추가 하는 올바른 순서로 추가 되었는지 확인 하기 위해 포함 됩니다. `UseRouting``UseAuthorization` `UseEndpoints` , `UseAuthentication`, 및는 앞의 코드에 표시 된 순서 대로 호출 해야 합니다.
 
-`IdentityOptions` 및 `Startup`에 대 한 자세한 내용은 <xref:Microsoft.AspNetCore.Identity.IdentityOptions> 및 [응용 프로그램 시작](xref:fundamentals/startup)을 참조 하세요.
+및 `IdentityOptions` `Startup`에 대 한 자세한 내용은 및 <xref:Microsoft.AspNetCore.Identity.IdentityOptions> [응용 프로그램 시작](xref:fundamentals/startup)을 참조 하세요.
 
 ## <a name="scaffold-register-login-and-logout"></a>스 캐 폴드 Register, Login 및 LogOut
 
@@ -125,14 +125,14 @@ Register, Login 및 LogOut 파일을 추가 합니다. 이 섹션에 표시 된 
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-**WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면 `ApplicationDbContext`에 대해 올바른 네임 스페이스를 사용 합니다.
+**WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면에 대해 올바른 네임 스페이스를 `ApplicationDbContext`사용 합니다.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
+PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
 
 스 캐 폴딩 Id에 대 한 자세한 내용은 [스 캐 폴드 identity to a Razor project to authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization)항목을 참조 하세요.
 
@@ -140,11 +140,11 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShel
 
 ### <a name="examine-register"></a>등록 검사
 
-사용자가 **등록** 링크를 클릭 하면 `RegisterModel.OnPostAsync` 작업이 호출 됩니다. 사용자는 `_userManager` 개체의 [Createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) 에 의해 만들어집니다. `_userManager`는 종속성 주입에 의해 제공 됩니다.
+사용자가 **등록** 링크를 클릭 하면 `RegisterModel.OnPostAsync` 작업이 호출 됩니다. 사용자는 `_userManager` 개체에 대해 [createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) 를 사용 하 여 만들어집니다. `_userManager`는 종속성 주입에 의해 제공 됩니다.
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=9)]
 
-사용자가 성공적으로 만들어진 경우 `_signInManager.SignInAsync`에 대 한 호출을 통해 사용자가 로그인 됩니다.
+사용자가 성공적으로 만들어진 경우에는에 대 `_signInManager.SignInAsync`한 호출을 통해 사용자가 로그인 됩니다.
 
 등록 시 즉각적인 로그인을 방지 하는 단계는 [계정 확인](xref:security/authentication/accconfirm#prevent-login-at-registration) 을 참조 하세요.
 
@@ -155,19 +155,19 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShel
 * **로그인** 링크가 선택 됩니다.
 * 사용자가 액세스 권한이 없는 제한 된 페이지에 액세스 **하거나** 시스템이 인증 되지 않은 경우에 액세스 하려고 합니다.
 
-로그인 페이지의 양식이 제출 되 면 `OnPostAsync` 작업이 호출 됩니다. `PasswordSignInAsync`는 종속성 주입에 의해 제공 되는 `_signInManager` 개체에서 호출 됩니다.
+로그인 페이지의 폼이 제출 되 면 `OnPostAsync` 동작이 호출 됩니다. `PasswordSignInAsync`는 종속성 주입에 `_signInManager` 의해 제공 되는 개체에서 호출 됩니다.
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
-기본 `Controller` 클래스는 컨트롤러 메서드에서 액세스할 수 있는 `User` 속성을 노출 합니다. 예를 들어 `User.Claims`를 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>을 참조하세요.
+기본 `Controller` 클래스는 컨트롤러 메서드에서 `User` 액세스할 수 있는 속성을 노출 합니다. 예를 들어를 열거 `User.Claims` 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>를 참조하세요.
 
 ### <a name="log-out"></a>로그아웃
 
-**로그 아웃** 링크는 `LogoutModel.OnPost` 동작을 호출 합니다. 
+**로그 아웃** 링크는 작업을 `LogoutModel.OnPost` 호출 합니다. 
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Logout.cshtml.cs?highlight=36)]
 
-위의 코드에서는 브라우저가 새 요청을 수행 하 고 사용자에 대 한 id가 업데이트 되도록 코드 `return RedirectToPage();` 리디렉션이 되어야 합니다.
+위의 코드에서는 브라우저가 새 요청을 `return RedirectToPage();` 수행 하 고 사용자에 대 한 id가 업데이트 되도록 코드를 리디렉션 해야 합니다.
 
 [SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) 쿠키에 저장 된 사용자의 클레임을 지웁니다.
 
@@ -177,7 +177,7 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 
 ## <a name="test-identity"></a>테스트 Id
 
-기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)를 추가 합니다.
+기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 다음 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)을 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp3/Pages/Privacy.cshtml.cs?highlight=7)]
 
@@ -194,9 +194,9 @@ Id를 자세히 살펴보려면:
 
 모든 Id 종속 NuGet 패키지는 [ASP.NET Core 공유 프레임 워크](xref:aspnetcore-3.0#use-the-aspnet-core-shared-framework)에 포함 되어 있습니다.
 
-Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`에 포함 되어 있습니다.
+Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며에 포함 되어 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`있습니다.
 
-## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Identity로 마이그레이션하기
+## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core Id로 마이그레이션
 
 기존 Id 저장소를 마이그레이션하는 방법에 대 한 자세한 내용 및 지침은 [인증 및 Id 마이그레이션](xref:migration/identity)을 참조 하세요.
 
@@ -206,7 +206,7 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity 및 AddIdentity
 
-<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*> ASP.NET Core 2.1에서 도입 되었습니다. `AddDefaultIdentity`를 호출 하는 것은 다음을 호출 하는 것과 비슷합니다.
+<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>는 ASP.NET Core 2.1에서 도입 되었습니다. 호출은 `AddDefaultIdentity` 다음을 호출 하는 것과 비슷합니다.
 
 * <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentity*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
@@ -216,7 +216,7 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>정적 Id 자산 게시 방지
 
-정적 Id 자산 (Id UI에 대 한 스타일 시트 및 JavaScript 파일)을 웹 루트에 게시 하지 않으려면 다음 `ResolveStaticWebAssetsInputsDependsOn` 속성을 추가 하 고 `RemoveIdentityAssets` 대상을 앱의 프로젝트 파일에 추가 합니다.
+정적 Id 자산 (Id UI에 대 한 스타일 시트 및 JavaScript 파일)을 웹 루트에 게시 하지 않으려면 다음 `ResolveStaticWebAssetsInputsDependsOn` 속성 및 `RemoveIdentityAssets` 대상을 응용 프로그램의 프로젝트 파일에 추가 합니다.
 
 ```xml
 <PropertyGroup>
@@ -260,7 +260,7 @@ SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 �
 
 ## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity 및 AddIdentity
 
-<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*> ASP.NET Core 2.1에서 도입 되었습니다. `AddDefaultIdentity`를 호출 하는 것은 다음을 호출 하는 것과 비슷합니다.
+<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>는 ASP.NET Core 2.1에서 도입 되었습니다. 호출은 `AddDefaultIdentity` 다음을 호출 하는 것과 비슷합니다.
 
 * <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentity*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
@@ -270,12 +270,12 @@ SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 �
 
 ## <a name="create-a-web-app-with-authentication"></a>인증을 사용 하 여 웹 앱 만들기
 
-개별 사용자 계정으로 새로운 ASP.NET Core 웹 응용 프로그램 생성하기.
+개별 사용자 계정을 사용 하 여 ASP.NET Core 웹 응용 프로그램 프로젝트를 만듭니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **파일** > **새** > **프로젝트**를 선택 합니다.
-* **ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
+* **파일** > **새로 만들기** > **프로젝트**를 선택 합니다.
+* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
 * ASP.NET Core **웹 응용 프로그램**을 선택한 다음 **인증 변경**을 선택 합니다.
 * **개별 사용자 계정을** 선택 하 고 **확인**을 클릭 합니다.
 
@@ -287,7 +287,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 다음은 그 예입니다.
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 다음은 그 예입니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -323,13 +323,13 @@ dotnet ef database update
 
 ### <a name="configure-identity-services"></a>Id 서비스 구성
 
-서비스는 `ConfigureServices`에 추가 됩니다. 일반적인 패턴은 모든 `Add{Service}` 메서드를 호출한 후 모든 `services.Configure{Service}` 메서드를 호출하는 것입니다.
+서비스는에 `ConfigureServices`추가 됩니다. 일반적인 패턴은 모든 `Add{Service}` 메서드를 호출한 후 모든 `services.Configure{Service}` 메서드를 호출하는 것입니다.
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configureservices)]
 
 위의 코드는 기본 옵션 값을 사용 하 여 Id를 구성 합니다. 서비스는 [종속성 주입](xref:fundamentals/dependency-injection)을 통해 앱에서 사용할 수 있게 됩니다.
 
-[Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)을 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`는 인증 [미들웨어](xref:fundamentals/middleware/index) 를 요청 파이프라인에 추가 합니다.
+[Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)을 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`인증 [미들웨어](xref:fundamentals/middleware/index) 를 요청 파이프라인에 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
@@ -345,24 +345,24 @@ Register, Login 및 LogOut 파일을 추가 합니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-**WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면 `ApplicationDbContext`에 대해 올바른 네임 스페이스를 사용 합니다.
+**WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면에 대해 올바른 네임 스페이스를 `ApplicationDbContext`사용 합니다.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
+PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
 
 ---
 
 ### <a name="examine-register"></a>등록 검사
 
-사용자가 **등록** 링크를 클릭 하면 `RegisterModel.OnPostAsync` 작업이 호출 됩니다. 사용자는 `_userManager` 개체의 [Createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) 에 의해 만들어집니다. `_userManager`는 종속성 주입에 의해 제공 됩니다.
+사용자가 **등록** 링크를 클릭 하면 `RegisterModel.OnPostAsync` 작업이 호출 됩니다. 사용자는 `_userManager` 개체에 대해 [createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) 를 사용 하 여 만들어집니다. `_userManager`는 종속성 주입에 의해 제공 됩니다.
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=7)]
 
-사용자가 성공적으로 만들어진 경우 `_signInManager.SignInAsync`에 대 한 호출을 통해 사용자가 로그인 됩니다.
+사용자가 성공적으로 만들어진 경우에는에 대 `_signInManager.SignInAsync`한 호출을 통해 사용자가 로그인 됩니다.
 
 **참고:** 등록 시 즉각적인 로그인을 방지 하는 단계는 [계정 확인](xref:security/authentication/accconfirm#prevent-login-at-registration) 을 참조 하세요.
 
@@ -373,15 +373,15 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShel
 * **로그인** 링크가 선택 됩니다.
 * 사용자가 액세스 권한이 없는 제한 된 페이지에 액세스 **하거나** 시스템이 인증 되지 않은 경우에 액세스 하려고 합니다.
 
-로그인 페이지의 양식이 제출 되 면 `OnPostAsync` 작업이 호출 됩니다. `PasswordSignInAsync`는 종속성 주입에 의해 제공 되는 `_signInManager` 개체에서 호출 됩니다.
+로그인 페이지의 폼이 제출 되 면 `OnPostAsync` 동작이 호출 됩니다. `PasswordSignInAsync`는 종속성 주입에 `_signInManager` 의해 제공 되는 개체에서 호출 됩니다.
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
-기본 `Controller` 클래스는 컨트롤러 메서드에서 액세스할 수 있는 `User` 속성을 노출 합니다. 예를 들어 `User.Claims`를 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>을 참조하세요.
+기본 `Controller` 클래스는 컨트롤러 메서드에서 `User` 액세스할 수 있는 속성을 노출 합니다. 예를 들어를 열거 `User.Claims` 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>를 참조하세요.
 
 ### <a name="log-out"></a>로그아웃
 
-**로그 아웃** 링크는 `LogoutModel.OnPost` 동작을 호출 합니다. 
+**로그 아웃** 링크는 작업을 `LogoutModel.OnPost` 호출 합니다. 
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Logout.cshtml.cs)]
 
@@ -393,7 +393,7 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 
 ## <a name="test-identity"></a>테스트 Id
 
-기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 개인 정보 페이지에 [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) 를 추가 합니다.
+기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 개인 [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) 정보 페이지에를 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=7)]
 
@@ -410,9 +410,9 @@ Id를 자세히 살펴보려면:
 
 모든 Id 종속 NuGet 패키지는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)에 포함 되어 있습니다.
 
-Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`에 포함 되어 있습니다.
+Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며에 포함 되어 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`있습니다.
 
-## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Identity로 마이그레이션하기
+## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core Id로 마이그레이션
 
 기존 Id 저장소를 마이그레이션하는 방법에 대 한 자세한 내용 및 지침은 [인증 및 Id 마이그레이션](xref:migration/identity)을 참조 하세요.
 
