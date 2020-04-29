@@ -5,13 +5,13 @@ metadata:
   title: ASP.NET Core 설명서 - 새로운 기능
   description: ASP.NET Core 문서의 새로운 내용과 업데이트된 내용에 대해 알아보세요.
   ms.topic: landing-page
-  ms.date: 04/01/2020
-  ms.openlocfilehash: 4d1e63bafe1a40110c0b514fcaf0f1eb2f180722
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+  ms.date: 04/26/2020
+  ms.openlocfilehash: 1650541ec9a6c6160f65ce1a3e83caf4b5cd092e
+  ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
   ms.translationtype: HT
   ms.contentlocale: ko-KR
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80538984"
+  ms.lasthandoff: 04/28/2020
+  ms.locfileid: "82206088"
 landingContent:
 - title: ASP.NET Core 문서 업데이트 찾기
   linkLists:
@@ -45,6 +45,12 @@ landingContent:
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
     - text: ASP.NET Core API 참조 문서 기여자 가이드
       url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md
+- title: 커뮤니티
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: 커뮤니티
+      url: https://dotnet.microsoft.com/platform/community
 - title: 관련된 새로운 기능 페이지
   linkLists:
   - linkListType: whats-new

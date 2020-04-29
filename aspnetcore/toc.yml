@@ -348,7 +348,13 @@
                 - name: 추가 시나리오
                   uid: security/blazor/webassembly/additional-scenarios
             - name: Blazor 서버
-              uid: security/blazor/server
+              items:
+                - name: 개요
+                  uid: security/blazor/server/index
+                - name: 위협 해결 방법
+                  uid: security/blazor/server/threat-mitigation
+                - name: 추가 시나리오
+                  uid: security/blazor/server/additional-scenarios
             - name: 콘텐츠 보안 정책
               uid: security/blazor/content-security-policy
         - name: 상태 관리
@@ -1135,7 +1141,13 @@
             - name: 추가 시나리오
               uid: security/blazor/webassembly/additional-scenarios
         - name: Blazor 서버
-          uid: security/blazor/server
+          items:
+            - name: 개요
+              uid: security/blazor/server/index
+            - name: 위협 해결 방법
+              uid: security/blazor/server/threat-mitigation
+            - name: 추가 시나리오
+              uid: security/blazor/server/additional-scenarios
         - name: 콘텐츠 보안 정책
           uid: security/blazor/content-security-policy
 - name: 성능
