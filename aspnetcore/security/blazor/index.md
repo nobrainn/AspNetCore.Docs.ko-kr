@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: 04bbf20d1d848edfa98e719f316b790c812bfd95
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501319"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206101"
 ---
-# <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
+# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS) 및 [Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +44,7 @@ Blazor WebAssembly 앱은 클라이언트에서 실행됩니다. 권한 부여�
 
 Blazor는 기존 ASP.NET Core 인증 메커니즘을 사용하여 사용자 ID를 설정합니다. 정확한 메커니즘은 Blazor 앱이 호스트된 방식이 Blazor WebAssembly와 Blazor 서버 중 무엇인지에 따라 달라집니다.
 
-### <a name="opno-locblazor-webassembly-authentication"></a>Blazor WebAssembly 인증
+### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly 인증
 
 Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 인증 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
@@ -57,11 +57,11 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 
 앱 및 구성을 만드는 방법에 대한 자세한 내용은 <xref:security/blazor/webassembly/index> 문서를 참조하세요.
 
-### <a name="opno-locblazor-server-authentication"></a>Blazor 서버 인증
+### <a name="blazor-server-authentication"></a>Blazor 서버 인증
 
 Blazor 서버 앱은 SignalR를 사용하여 생성된 실시간 연결을 통해 작동합니다. [SignalR 기반 앱](xref:signalr/authn-and-authz)의 인증은 연결 시 처리됩니다. 인증은 쿠키 또는 다른 전달자 토큰을 기반으로 할 수 있습니다.
 
-앱 및 구성을 만드는 방법에 대한 자세한 내용은 <xref:security/blazor/server> 문서를 참조하세요.
+앱 및 구성을 만드는 방법에 대한 자세한 내용은 <xref:security/blazor/server/index> 문서를 참조하세요.
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider 서비스
 
@@ -468,7 +468,7 @@ Not authorized.
 >
 > 이러한 네임스페이스는 앱의 *_Imports.razor* 파일에 추가하여 전역적으로 제공할 수 있습니다.
 
-## <a name="authorization-in-opno-locblazor-webassembly-apps"></a>Blazor WebAssembly 앱의 권한 부여
+## <a name="authorization-in-blazor-webassembly-apps"></a>Blazor WebAssembly 앱의 권한 부여
 
 Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
@@ -499,6 +499,5 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/index>
-* <xref:security/blazor/server>
 * <xref:security/authentication/windowsauth>
 * [Awesome Blazor: 인증](https://github.com/AdrienTorris/awesome-blazor#authentication) 커뮤니티 샘플 링크
