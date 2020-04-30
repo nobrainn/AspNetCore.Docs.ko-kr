@@ -18,5 +18,5 @@ ASP.NET Core는 다음과 같은 이점을 제공합니다.
   * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
   * [Docker](xref:host-and-deploy/docker/index)
-* [Side-by-side 버전 관리](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level).
+* [Side-by-side 버전 관리](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level).
 * 최신 웹 개발을 간소화하는 도구를 포함합니다.

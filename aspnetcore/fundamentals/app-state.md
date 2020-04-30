@@ -8,12 +8,12 @@ ms.date: 03/06/2020
 no-loc:
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 85d2a418c3aaae40bbcdc040095c2c98d4b7242c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80640038"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558899"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core의 세션 및 상태 관리
 
@@ -96,7 +96,7 @@ ASP.NET Core는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하
 
 다음 코드에서는 `IDistributedCache`의 기본 메모리 내 구현을 사용하여 메모리 내 세션 공급자를 설정하는 방법을 보여 줍니다.
 
-[!code-csharp[](app-state/samples/3.x/SessionSample/Startup4.cs?name=snippet1&highlight=12-19,39)]
+[!code-csharp[](app-state/samples/3.x/SessionSample/Startup4.cs?name=snippet1&highlight=12-19,45)]
 
 위의 코드는 테스트를 간소화하기 위해 짧은 시간 제한을 설정합니다.
 
@@ -589,7 +589,7 @@ app.Run(async (context) =>
 
   권장되는 오류 확인 방법은 앱이 세션에 작성을 완료하면 앱 코드에서 `await feature.Session.CommitAsync();`를 호출하는 것입니다. 백업 저장소를 사용할 수 없는 경우 `CommitAsync`에서 예외를 throw합니다. `CommitAsync`가 실패하면 앱에서 예외를 처리할 수 있습니다. `LoadAsync`는 같은 조건에서 데이터 저장소를 사용할 수 없는 경우 throw됩니다.
   
-## <a name="opno-locsignalr-and-session-state"></a>SignalR과 세션 상태
+## <a name="signalr-and-session-state"></a>SignalR과 세션 상태
 
 SignalR 앱은 세션 상태를 사용하여 정보를 저장해서는 안 됩니다. SignalR 앱은 허브에서 `Context.Items`의 연결 상태별로 저장할 수 있습니다. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
