@@ -5,17 +5,17 @@ description: Blazor WebAssembly를 활용해 ASP.NET Core SignalR을 사용하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 78c5fbb8b91b934bcb34525672e9e26b6a95290e
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306569"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111151"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
 
@@ -61,7 +61,7 @@ ms.locfileid: "80306569"
 Visual Studio 버전 16.6 미리 보기 2 이상을 사용하지 않는 경우에는 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치하세요. [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다. 명령 셸에서 다음 명령을 실행합니다.
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
 ```
 
 선택한 도구의 지침을 따르세요.
@@ -168,7 +168,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>SignalR 서비스 및 SignalR 허브에 대한 엔드포인트 추가
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>서비스 및 SignalR 허브에 대한 엔드포인트 추가
 
 1. **BlazorSignalRApp.Server** 프로젝트에서 *Startup.cs* 파일을 엽니다.
 
@@ -178,15 +178,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. `Startup.ConfigureServices`에 SignalR 서비스를 추가합니다.
+1. `Startup.ConfigureServices`에 SignalR 및 응답 압축 미들웨어 서비스를 추가합니다.
 
-   ```csharp
-   services.AddSignalR();
-   ```
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. 기본 컨트롤러 경로와 클라이언트 쪽 대체에 대한 엔드포인트 간의 `Startup.Configure`에서 허브에 대한 엔드포인트를 추가합니다.
+1. 컨트롤러와 클라이언트 쪽 대체에 대한 엔드포인트 간의 `Startup.Configure`에서 허브에 대한 엔드포인트를 추가합니다.
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet&highlight=4)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
 
 ## <a name="add-razor-component-code-for-chat"></a>채팅을 위한 Razor 구성 요소 코드 추가
 
@@ -202,7 +200,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **솔루션 탐색기**에서 **BlazorSignalRApp.Server** 프로젝트를 선택합니다. **CTRL+F5** 키를 눌러 디버깅 없이 앱을 실행합니다.
+1. **솔루션 탐색기**에서 **BlazorSignalRApp.Server** 프로젝트를 선택합니다. <kbd>F5</kbd> 키를 눌러 디버깅이 설정된 상태로 앱을 실행하거나 <kbd>Ctrl</kbd>+<kbd>F5</kbd>를 눌러 디버깅 없이 실행합니다.
 
 1. 주소 표시줄에서 URL을 복사하고, 다른 브라우저 인스턴스 또는 탭을 열고, 주소 표시줄에 URL을 붙여넣습니다.
 
@@ -214,7 +212,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. 도구 모음에서 **디버그** > **디버그깅하지 않고 실행**을 선택합니다.
+1. 서버 앱의 시작 프로필을 만들기 위한 VS Code가 제공되는 경우( *.vscode/launch.json*), `program` 항목은 다음과 유사하게 표시되어 앱의 어셈블리(`{APPLICATION NAME}.Server.dll`)를 가리킵니다.
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
+   ```
+
+1. <kbd>F5</kbd> 키를 눌러 디버깅이 설정된 상태로 앱을 실행하거나 <kbd>Ctrl</kbd>+<kbd>F5</kbd>를 눌러 디버깅 없이 실행합니다.
 
 1. 주소 표시줄에서 URL을 복사하고, 다른 브라우저 인스턴스 또는 탭을 열고, 주소 표시줄에 URL을 붙여넣습니다.
 
@@ -226,7 +230,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-1. **솔루션** 사이드바에서 **BlazorSignalRApp.Server** 프로젝트를 선택합니다. 메뉴에서 **실행** > **디버깅하지 않고 시작**을 선택합니다.
+1. **솔루션** 사이드바에서 **BlazorSignalRApp.Server** 프로젝트를 선택합니다. <kbd>⌘</kbd>+<kbd>↩</kbd>**를 눌러 디버깅이 설정된 상태로 앱을 실행하거나 <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd>를 눌러 디버깅 없이 실행합니다.
 
 1. 주소 표시줄에서 URL을 복사하고, 다른 브라우저 인스턴스 또는 탭을 열고, 주소 표시줄에 URL을 붙여넣습니다.
 

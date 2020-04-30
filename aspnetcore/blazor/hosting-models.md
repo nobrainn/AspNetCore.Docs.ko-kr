@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0dfc991f76acb227ce9ea27a07fbae50571f0117
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80471835"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205971"
 ---
-# <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
+# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
 작성자: [Daniel Roth](https://github.com/danroth27)
 
@@ -29,7 +29,7 @@ Blazor는 [WebAssembly](https://webassembly.org/) 기반 .NET 런타임( *Blazor
 
 고급 구성의 경우 <xref:blazor/hosting-model-configuration>을 참조하세요.
 
-## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Blazor의 주요 호스팅 모델은 WebAssembly의 브라우저에서 클라이언트 쪽을 실행하는 것입니다. Blazor 앱, 해당 앱의 종속성 및 .NET 런타임이 브라우저에 다운로드됩니다. 해당 앱은 브라우저 UI 스레드에서 직접 실행됩니다. UI 업데이트 및 이벤트 처리는 동일한 프로세스 내에서 발생합니다. 앱 자산은 클라이언트에 정적 콘텐츠를 제공할 수 있는 웹 서버 또는 서비스에 정적 파일로 배포됩니다.
 
@@ -60,7 +60,7 @@ Blazor WebAssembly 호스팅에는 다음과 같은 단점이 있습니다.
 
 Blazor가 호스트하는 앱 모델은 [Docker 컨테이너](/dotnet/standard/microservices-architecture/container-docker-introduction/index)를 지원합니다. Visual Studio에서 서버 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **Docker 지원**을 선택합니다.
 
-## <a name="opno-locblazor-server"></a>Blazor 서버
+## <a name="blazor-server"></a>Blazor 서버
 
 Blazor 서버 호스팅 모델을 사용하는 경우, 서버의 ASP.NET Core 앱 내에서 앱이 실행됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
 
@@ -115,7 +115,7 @@ Blazor의 UI 업데이트는 다음을 통해 트리거됩니다.
 
 그래프가 다시 렌더링되고, UI *diff*(차이)가 계산됩니다. 이 diff는 클라이언트에서 UI를 업데이트하는 데 필요한 최소한의 DOM 편집 집합입니다. diff는 클라이언트에 이진 형식으로 전송되고 브라우저에서 적용됩니다.
 
-사용자가 클라이언트에서 구성 요소를 벗어나면 구성 요소가 삭제됩니다. 사용자가 구성 요소를 조작하는 동안에는 구성 요소 상태(서비스, 리소스)가 서버 메모리에 유지되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있으므로 메모리 소모는 해결해야 하는 문제입니다. 서버 메모리 사용을 최적화하도록 Blazor 서버 앱을 작성하는 방법에 대한 자세한 내용은 <xref:security/blazor/server>를 참조하세요.
+사용자가 클라이언트에서 구성 요소를 벗어나면 구성 요소가 삭제됩니다. 사용자가 구성 요소를 조작하는 동안에는 구성 요소 상태(서비스, 리소스)가 서버 메모리에 유지되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있으므로 메모리 소모는 해결해야 하는 문제입니다. 서버 메모리 사용을 최적화하도록 Blazor 서버 앱을 작성하는 방법에 대한 자세한 내용은 <xref:security/blazor/server/threat-mitigation>를 참조하세요.
 
 ### <a name="circuits"></a>회로
 
@@ -133,12 +133,12 @@ UI 대기 시간은 작업 시작부터 UI가 업데이트되는 시간까지 �
 
 프라이빗 회사 네트워크로 제한된 LOB(기간 업무) 앱의 경우, 일반적으로 네트워크 대기 시간이 사용자의 대기 시간 인식에 미치는 영향이 거의 없습니다. 인터넷을 통해 배포된 앱의 경우, 특히 사용자가 지리적으로 광범위하게 분산되어 있으면 대기 시간이 감지될 수 있습니다.
 
-메모리 사용량도 앱 대기 시간에 영향을 줄 수 있습니다. 메모리 사용량이 증가하면 가비지 수집 또는 디스크로 메모리 페이징이 자주 발생하므로 앱 성능이 저하되고 UI 대기 시간이 증가합니다. 자세한 내용은 <xref:security/blazor/server>를 참조하세요.
+메모리 사용량도 앱 대기 시간에 영향을 줄 수 있습니다. 메모리 사용량이 증가하면 가비지 수집 또는 디스크로 메모리 페이징이 자주 발생하므로 앱 성능이 저하되고 UI 대기 시간이 증가합니다.
 
 네트워크 대기 시간과 메모리 사용량을 줄여 UI 대기 시간을 최소화하기 위해 Blazor 서버 앱을 최적화해야 합니다. 네트워크 대기 시간을 측정하는 방법에 대한 자세한 내용은 <xref:host-and-deploy/blazor/server#measure-network-latency>를 참조하세요. SignalR 및 Blazor에 대한 자세한 내용은 다음을 참조하세요.
 
 * <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server>
+* <xref:security/blazor/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>서버에 연결
 
