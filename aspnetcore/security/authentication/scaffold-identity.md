@@ -5,14 +5,14 @@ description: ASP.NET Core 프로젝트에서 Id를 스 캐 폴드 하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 5/1/2020
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: b3e077aeac11e62d9e992884100476f7be35b59a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ac95035b114274ddaa6ccb0b5b6e3da98885e39e
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653715"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604729"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core 프로젝트의 스 캐 폴드 Id
 
@@ -30,13 +30,25 @@ ASP.NET Core는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) 
 
 서비스는 [두 가지 요소 인증](xref:security/authentication/identity-enable-qrcodes), [계정 확인 및 암호 복구](xref:security/authentication/accconfirm)및 id를 사용 하는 기타 보안 기능을 사용 하는 경우에 필요 합니다. Id를 스 캐 폴딩을 사용할 때 서비스 또는 서비스 스텁이 생성 되지 않습니다. 이러한 기능을 사용 하도록 설정 하는 서비스는 수동으로 추가 해야 합니다. 예를 들어 [전자 메일 확인 필요](xref:security/authentication/accconfirm#require-email-confirmation)를 참조 하세요.
 
-이 문서에는 스 캐 폴더를 실행할 때 생성 되는 *ScaffoldingReadme* 파일 보다 전체 지침이 포함 되어 있습니다.
+새 데이터 컨텍스트를 사용 하 여 Id를 기존 개별 계정이 있는 프로젝트로 스 캐 폴딩 할 때:
+
+* 에서 `Startup.ConfigureServices`에 대 한 호출을 제거 합니다.
+  * `AddDbContext`
+  * `AddDefaultIdentity`
+
+예를 들어 `AddDbContext` 및 `AddDefaultIdentity` 는 다음 코드에서 주석 처리 됩니다.
+
+[!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
+
+앞 코드는 *Areas/Identity/IdentityHostingStartup* 에 중복 된 코드를 주석으로 처리 합니다.
+
+일반적으로 개별 계정을 사용 하 여 만든 앱은 새 데이터 컨텍스트 ***를 만들지 않아야 합니다.***
 
 ## <a name="scaffold-identity-into-an-empty-project"></a>빈 프로젝트에 id 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-다음과 유사한 코드를 사용 하 여 `Startup` 클래스를 업데이트 합니다.
+다음과 유사한 `Startup` 코드를 사용 하 여 클래스를 업데이트 합니다.
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupMVC.cs?name=snippet)]
 
@@ -85,7 +97,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 ### <a name="enable-authentication"></a>인증 사용
 
-다음과 유사한 코드를 사용 하 여 `Startup` 클래스를 업데이트 합니다.
+다음과 유사한 `Startup` 코드를 사용 하 여 클래스를 업데이트 합니다.
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRP.cs?name=snippet)]
 
@@ -131,7 +143,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-선택 사항: *Views/Shared/_Layout* 파일에 로그인 부분 (`_LoginPartial`)을 추가 합니다.
+선택 사항:`_LoginPartial` *Views/Shared/_Layout cshtml* 파일에 로그인 부분 ()을 추가 합니다.
 
 [!code-html[Main](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
@@ -141,7 +153,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-다음과 유사한 코드를 사용 하 여 `Startup` 클래스를 업데이트 합니다.
+다음과 유사한 `Startup` 코드를 사용 하 여 클래스를 업데이트 합니다.
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupMVC.cs?name=snippet)]
 
@@ -195,7 +207,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
+* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다. 
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -222,7 +234,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 * *영역/i d/페이지/계정/* a p 확인 페이지를 업데이트 합니다.
 
   * Cshtml 파일에서 코드 및 링크를 제거 합니다.
-  * `PageModel`에서 확인 코드를 제거 합니다.
+  * 에서 확인 코드를 제거 합니다 `PageModel`.
 
   ```csharp
    [AllowAnonymous]
@@ -327,7 +339,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 ### <a name="enable-authentication"></a>인증 사용
 
-`Startup` 클래스의 `Configure` 메서드에서 `UseStaticFiles`후에 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다.
+클래스의 `Configure` 메서드에서 다음 `UseStaticFiles`이후에 [useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다. `Startup`
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -373,7 +385,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-선택 사항: *Views/Shared/_Layout* 파일에 로그인 부분 (`_LoginPartial`)을 추가 합니다.
+선택 사항:`_LoginPartial` *Views/Shared/_Layout cshtml* 파일에 로그인 부분 ()을 추가 합니다.
 
 [!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
@@ -383,7 +395,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-`UseStaticFiles`후에 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다.
+다음 이후에 `UseStaticFiles` [useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 호출:
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
@@ -439,7 +451,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
+* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다. 
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -466,7 +478,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 * *영역/i d/페이지/계정/* a p 확인 페이지를 업데이트 합니다.
 
   * Cshtml 파일에서 코드 및 링크를 제거 합니다.
-  * `PageModel`에서 확인 코드를 제거 합니다.
+  * 에서 확인 코드를 제거 합니다 `PageModel`.
 
   ```csharp
    [AllowAnonymous]
