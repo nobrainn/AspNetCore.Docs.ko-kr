@@ -1,31 +1,31 @@
 ---
-title: ASP.NET Core Blazor에서 웹 API 호출
+title: ASP.NET Core Blazor WebAssembly에서 웹 API 호출
 author: guardrex
-description: CORS(원본 간 리소스 공유) 요청 만들기를 포함하여 JSON 도우미를 사용하여 Blazor 앱에서 웹 API를 호출하는 방법을 알아봅니다.
+description: CORS(원본 간 리소스 공유) 요청 만들기를 포함하여 JSON 도우미를 사용하여 Blazor WebAssembly 앱에서 웹 API를 호출하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/22/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: e6996f0e6731b05038d0a9329152b8afd5f6796d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: abc546cc0079a01e3999b2c7c083235d3fff9b06
+ms.sourcegitcommit: e94ecfae6a3ef568fa197da791c8bc595917d17a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647733"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82122226"
 ---
-# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor에서 웹 API 호출
+# <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 웹 API 호출
 
 작성자: [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27) 및 [Juan De la Cruz](https://github.com/juandelacruz23)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 앱은 미리 구성된 `HttpClient` 서비스를 사용하여 웹 API를 호출합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성합니다. Blazor WebAssembly 앱의 `HttpClient` 서비스는 원본 서버에 대해 다시 요청을 수행하는 데 중점을 둡니다. 이 항목의 지침은 Blazor WebAssembly 앱과만 관련이 있습니다.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 앱은 미리 구성된 `HttpClient` 서비스를 사용하여 웹 API를 호출합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성합니다. Blazor WebAssembly 앱의 `HttpClient` 서비스는 원본 서버에 다시 요청하는 데 중점을 둡니다. 이 항목의 지침은 Blazor WebAssembly 앱에만 관련됩니다.
 
-[Blazor 서버](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용하여 만드는 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 웹 API를 호출합니다. 이 항목의 지침은 Blazor 서버 앱과는 관련이 없습니다. Blazor 서버 앱을 개발하는 경우 <xref:fundamentals/http-requests>의 지침을 따르세요.
+[Blazor Server](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용하여 만든 <xref:System.Net.Http.HttpClient> 인스턴스를 통해 웹 API를 호출합니다. 이 항목의 지침은 Blazor Server 앱과는 관련이 없습니다. Blazor Server 앱을 개발하는 경우 <xref:fundamentals/http-requests>의 지침을 따르세요.
 
 [샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample)) &ndash; *BlazorWebAssemblySample* 앱을 선택합니다.
 
@@ -36,15 +36,25 @@ ms.locfileid: "78647733"
 
 ## <a name="packages"></a>패키지
 
-프로젝트 파일의 *실험적*[Microsoft.AspNetCore.Blazor.HttpClient](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) NuGet 패키지를 참조합니다. `Microsoft.AspNetCore.Blazor.HttpClient`는 `HttpClient` 및 [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/)을 기준으로 합니다.
+프로젝트 파일에서 [System.Net.Http.Json](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet 패키지를 참조합니다.
 
-안정적인 API를 사용하려면 [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)/[Json.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)을 사용하는 [Microsoft.AspNet.WebApi.Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/) 패키지를 사용합니다. `Microsoft.AspNet.WebApi.Client`에서 안정적인 API를 사용하는 경우 이 항목에서 설명하는 JSON 도우미가 제공되지 않습니다. 이 도우미는 실험적 `Microsoft.AspNetCore.Blazor.HttpClient` 패키지에만 국한됩니다.
+## <a name="add-the-httpclient-service"></a>HttpClient 서비스 추가
+
+`Program.Main`에서 아직 없는 경우 `HttpClient` 서비스를 추가합니다.
+
+```csharp
+builder.Services.AddSingleton(
+    new HttpClient
+    {
+        BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+    });
+```
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient 및 JSON 도우미
 
-Blazor WebAssembly 앱에서 [HttpClient](xref:fundamentals/http-requests)는 원본 서버에 대해 다시 요청을 수행하기 위해 미리 구성된 서비스로 사용할 수 있습니다.
+Blazor WebAssembly 앱에서 [HttpClient](xref:fundamentals/http-requests)는 원본 서버에 다시 요청하기 위한 미리 구성된 서비스로 사용할 수 있습니다.
 
-Blazor 서버 앱은 기본적으로 `HttpClient` 서비스를 포함하지 않습니다. [HttpClient 팩터리 인프라](xref:fundamentals/http-requests)를 사용하여 앱에 `HttpClient`를 제공합니다.
+Blazor Server 앱은 기본적으로 `HttpClient` 서비스를 포함하지 않습니다. [HttpClient 팩터리 인프라](xref:fundamentals/http-requests)를 사용하여 앱에 `HttpClient`를 제공합니다.
 
 `HttpClient` 및 JSON 도우미는 타사 웹 API 엔드포인트를 호출하는 데에도 사용됩니다. `HttpClient`는 브라우저 [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)를 사용하여 구현되며 동일한 원본 정책 적용을 비롯한 제한 사항이 적용됩니다.
 
@@ -72,7 +82,7 @@ private class TodoItem
 
 JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고 응답을 처리합니다.
 
-* `GetJsonAsync` &ndash; HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.
+* `GetFromJsonAsync` &ndash; HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.
 
   다음 코드에서 `_todoItems`는 구성 요소에 의해 표시됩니다. `GetTodoItems` 메서드는 구성 요소가 렌더링을 완료할 때 트리거됩니다([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). 전체 예제는 샘플 앱을 참조하세요.
 
@@ -84,11 +94,11 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
       private TodoItem[] _todoItems;
 
       protected override async Task OnInitializedAsync() => 
-          _todoItems = await Http.GetJsonAsync<TodoItem[]>("api/TodoItems");
+          _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
   }
   ```
 
-* `PostJsonAsync` &ndash; JSON 인코딩 콘텐츠를 포함하여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.
+* `PostAsJsonAsync` &ndash; JSON 인코딩 콘텐츠를 포함하여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.
 
   다음 코드에서 구성 요소의 바인딩된 요소는 `_newItemName`을 제공합니다. `AddItem` 메서드는 `<button>` 요소를 선택하여 트리거됩니다. 전체 예제는 샘플 앱을 참조하세요.
 
@@ -105,12 +115,18 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
       private async Task AddItem()
       {
           var addItem = new TodoItem { Name = _newItemName, IsComplete = false };
-          await Http.PostJsonAsync("api/TodoItems", addItem);
+          await Http.PostAsJsonAsync("api/TodoItems", addItem);
       }
   }
   ```
+  
+  `PostAsJsonAsync`를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다. 응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 `ReadFromJsonAsync<T>` 확장 메서드를 사용합니다.
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
-* `PutJsonAsync` &ndash; JSON 인코딩 콘텐츠를 포함하여 HTTP PUT 요청을 보냅니다.
+* `PutAsJsonAsync` &ndash; JSON 인코딩 콘텐츠를 포함하여 HTTP PUT 요청을 보냅니다.
 
   다음 코드에서 구성 요소의 바인딩된 요소는 `Name` 및 `IsCompleted`에 대한 `_editItem` 값을 제공합니다. 항목의 `Id`는 UI의 다른 부분에서 해당 항목을 선택하고 `EditItem`을 호출하면 설정됩니다. `SaveItem` 메서드는 Save `<button>` 요소를 선택하여 트리거됩니다. 전체 예제는 샘플 앱을 참조하세요.
 
@@ -133,8 +149,14 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
       }
 
       private async Task SaveItem() =>
-          await Http.PutJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
+          await Http.PutAsJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
   }
+  ```
+  
+  `PutAsJsonAsync`를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다. 응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 `ReadFromJsonAsync<T>` 확장 메서드를 사용합니다.
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 <xref:System.Net.Http>는 HTTP 요청을 보내고 HTTP 응답을 받기 위한 추가 확장 메서드를 포함합니다. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*)는 웹 API에 HTTP DELETE 요청을 보내는 데 사용됩니다.
@@ -160,37 +182,37 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
 
 브라우저 보안 때문에 웹 페이지에서 해당 웹 페이지를 제공한 도메인이 아닌 다른 도메인에 요청을 수행할 수는 없습니다. 이러한 제한 사항을 *동일 원본 정책*이라고 합니다. 동일 원본 정책은 악성 사이트에서 다른 사이트의 중요한 데이터를 읽지 못하도록 차단합니다. 브라우저에서 원본이 다른 엔드포인트로의 요청을 만들려면 *엔드포인트*가 [CORS(원본 간 리소스 공유)](https://www.w3.org/TR/cors/)를 사용하도록 설정해야 합니다.
 
-[Blazor WebAssembly 샘플 앱(BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)은 웹 API 호출 구성 요소(*Pages/CallWebAPI.razor*)에서 CORS를 사용하는 방법을 보여 줍니다.
+[Blazor WebAssembly 샘플 앱(BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)은 Web API 호출 구성 요소(*Pages/CallWebAPI.razor*)에서 CORS를 사용하는 방법을 보여 줍니다.
 
 다른 사이트에서 앱에 대해 CORS(원본 간 리소스 공유) 요청을 수행하도록 허용하려면 <xref:security/cors>를 참조하세요.
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage
 
-Blazor WebAssembly 앱의 WebAssembly에서 실행될 경우 [HttpClient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 요청을 사용자 지정합니다. 예를 들어, 요청 URI, HTTP 메서드 및 원하는 요청 헤더를 지정할 수 있습니다.
+Blazor WebAssembly 앱의 WebAssembly에서 실행되는 경우 [HttpClient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 요청을 사용자 지정합니다. 예를 들어, 요청 URI, HTTP 메서드 및 원하는 요청 헤더를 지정할 수 있습니다.
 
 ```razor
 @using System.Net.Http
 @using System.Net.Http.Headers
+@using System.Net.Http.Json
 @inject HttpClient Http
 
 @code {
     private async Task PostRequest()
     {
-        Http.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", "{OAUTH TOKEN}");
-
         var requestMessage = new HttpRequestMessage()
         {
             Method = new HttpMethod("POST"),
             RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
             Content = 
-                new StringContent(
-                    @"{""name"":""A New Todo Item"",""isComplete"":false}")
+                JsonContent.Create(new TodoItem
+                { 
+                    Name: "A New Todo Item",
+                    IsComplete: false
+                })
         };
-
-        requestMessage.Content.Headers.ContentType = 
-            new System.Net.Http.Headers.MediaTypeHeaderValue(
-                "application/json");
+        
+        requestMessage.Headers.Authorization = 
+           new AuthenticationHeaderValue("Bearer", "{OAUTH TOKEN}");
 
         requestMessage.Content.Headers.TryAddWithoutValidation(
             "x-custom-header", "value");
@@ -200,6 +222,27 @@ Blazor WebAssembly 앱의 WebAssembly에서 실행될 경우 [HttpClient](xref:f
         var responseBody = await response.Content.ReadAsStringAsync();
     }
 }
+```
+
+.NET WebAssembly의 `HttpClient` 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다. Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다. 
+
+HTTP 페치 요청 옵션은 다음 표에 표시된 `HttpRequestMessage` 확장 메서드로 구성할 수 있습니다.
+
+| `HttpRequestMessage` 확장 메서드 | Fetch 요청 속성 |
+| ------------------------------------- | ---------------------- |
+| `SetBrowserRequestCredentials`        | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| `SetBrowserRequestCache`              | [캐시](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| `SetBrowserRequestMode`               | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| `SetBrowserRequestIntegrity`          | [무결성](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+
+보다 일반적인 `SetBrowserRequestOption` 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.
+ 
+HTTP 응답은 일반적으로 응답 콘텐츠에서 동기화 읽기를 지원할 수 있도록 Blazor WebAssembly 앱에서 버퍼링됩니다. 응답 스트리밍을 지원하도록 설정하려면 요청에서 `SetBrowserResponseStreamingEnabled` 확장 메서드를 사용합니다.
+
+원본 간 요청에 자격 증명을 포함하려면 `SetBrowserRequestCredentials` 확장 메서드를 사용합니다.
+
+```csharp
+requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 ```
 
 Fetch API 옵션에 대한 자세한 내용은 [MDN 웹 설명서: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조하세요.
@@ -225,6 +268,8 @@ app.UseCors(policy =>
 
 ## <a name="additional-resources"></a>추가 자료
 
+* [추가 액세스 토큰 요청](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [나가는 요청에 토큰 연결](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS 엔드포인트 구성](xref:fundamentals/servers/kestrel#endpoint-configuration)
