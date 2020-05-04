@@ -5,17 +5,17 @@ description: Blazor 서버 앱을 ASP.NET Core 애플리케이션으로 보호�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/02/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: 0021911b731e57bc6eabf857c27a13462e7400ae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 324b3e8ed2d931c81bb41381caa469b0ec2f2fda
+ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206331"
+ms.lasthandoff: 05/02/2020
+ms.locfileid: "82727806"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor 서버 앱 보호
 
@@ -101,3 +101,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 자세한 내용은 .NET Core 가이드의 [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.
 
 ---
+
+## <a name="secure-an-existing-app"></a>기존 앱 보호
+
+Blazor 서버 앱은 ASP.NET Core 앱과 동일한 방식으로 보안을 위해 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요.
