@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 1a3e5a215daedbb9b97c1924275701915806983e
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206349"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772806"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor 서버 추가 보안 시나리오
 
@@ -25,7 +28,7 @@ ms.locfileid: "82206349"
 
 Blazor 서버 앱의 Razor 구성 요소 외부에서 사용할 수 있는 토큰은이 섹션에 설명 된 방법으로 구성 요소에 전달 될 수 있습니다. 전체 `Startup.ConfigureServices` 예제를 비롯 한 샘플 코드는 [서버 쪽 Blazor 응용 프로그램에 토큰 전달](https://github.com/javiercn/blazor-server-aad-sample)을 참조 하세요.
 
-일반 Razor Pages Blazor 또는 MVC 앱에서와 같이 서버 앱을 인증 합니다. 토큰을 프로 비전 하 여 인증 쿠키에 저장 합니다. 다음은 그 예입니다.
+일반 Razor 페이지 Blazor 또는 MVC 앱에서와 같이 서버 앱을 인증 합니다. 토큰을 프로 비전 하 여 인증 쿠키에 저장 합니다. 예를 들어:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
