@@ -1,42 +1,48 @@
 ---
-title: ASP.NET Core에서 교차 사이트 스크립팅(XSS) 방지하기
+title: ASP.NET Core에서 XSS (교차 사이트 스크립팅) 방지
 author: rick-anderson
-description: 사이트 간 스크립팅 (XSS) 및 ASP.NET Core 앱에서이 취약성을 해결 하는 방법에 알아봅니다.
+description: ASP.NET Core 앱에서이 취약점을 해결 하는 데 필요한 XSS (사이트 간 스크립팅) 및 기술에 대해 알아봅니다.
 ms.author: riande
 ms.date: 10/02/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 1d6f605dc336d8768b8a47e4995f119d198a61af
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5a14042db6250d5f7a47acaf4083b44272c606ab
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655077"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777490"
 ---
-# <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a><span data-ttu-id="77c98-103">ASP.NET Core에서 교차 사이트 스크립팅(XSS) 방지하기</span><span class="sxs-lookup"><span data-stu-id="77c98-103">Prevent Cross-Site Scripting (XSS) in ASP.NET Core</span></span>
+# <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a><span data-ttu-id="9355f-103">ASP.NET Core에서 XSS (교차 사이트 스크립팅) 방지</span><span class="sxs-lookup"><span data-stu-id="9355f-103">Prevent Cross-Site Scripting (XSS) in ASP.NET Core</span></span>
 
-<span data-ttu-id="77c98-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="77c98-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="9355f-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="9355f-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="77c98-105">교차 사이트 스크립팅(XSS)은 공격자가 웹페이지에 Javascript와 같은 클라이언트측 스크립트를 웹페이지에 배치하도록 하는 보안상 취약점을 일컫습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-105">Cross-Site Scripting (XSS) is a security vulnerability which enables an attacker to place client side scripts (usually JavaScript) into web pages.</span></span> <span data-ttu-id="77c98-106">다른 사용자가 공격당한 페이지를 로드할 경우 쿠키 및 세션 토큰을 탈취하고 DOM을 조작하여 웹 페이지 내용을 변경하거나 다른 페이지로 이동시킬 수 있는 공격자의 스크립트가 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-106">When other users load affected pages the attacker's scripts will run, enabling the attacker to steal cookies and session tokens, change the contents of the web page through DOM manipulation or redirect the browser to another page.</span></span> <span data-ttu-id="77c98-107">XSS 취약성으로 인 한 응용 프로그램은 사용자 입력 하 고 유효성 검사, 인코딩 또는 해 서 이스케이프 하지 않고 페이지를 출력 하는 경우에 일반적으로 발생 합니다. XSS 취약점은 응용 프로그램에서 사용자 입력을 받아 유효성 검사, 인코딩, 이스케이프 과정을 거치지 않고 페이지에 출력할 때 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-107">XSS vulnerabilities generally occur when an application takes user input and outputs it to a page without validating, encoding or escaping it.</span></span>
+<span data-ttu-id="9355f-105">XSS (교차 사이트 스크립팅)는 공격자가 클라이언트 쪽 스크립트 (일반적으로 JavaScript)를 웹 페이지에 넣을 수 있도록 하는 보안 취약점입니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-105">Cross-Site Scripting (XSS) is a security vulnerability which enables an attacker to place client side scripts (usually JavaScript) into web pages.</span></span> <span data-ttu-id="9355f-106">다른 사용자가 영향을 받는 페이지를 로드 하면 공격자의 스크립트가 실행 되어 공격자가 쿠키 및 세션 토큰을 도용 하거나 DOM 조작을 통해 웹 페이지의 내용을 변경 하거나 브라우저를 다른 페이지로 리디렉션할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-106">When other users load affected pages the attacker's scripts will run, enabling the attacker to steal cookies and session tokens, change the contents of the web page through DOM manipulation or redirect the browser to another page.</span></span> <span data-ttu-id="9355f-107">XSS 취약점은 일반적으로 응용 프로그램에서 사용자 입력을 가져와 유효성 검사, 인코딩 또는 이스케이프 하지 않고 페이지에 출력할 때 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-107">XSS vulnerabilities generally occur when an application takes user input and outputs it to a page without validating, encoding or escaping it.</span></span>
 
-## <a name="protecting-your-application-against-xss"></a><span data-ttu-id="77c98-108">응용 프로그램을 XSS로부터 보호하기</span><span class="sxs-lookup"><span data-stu-id="77c98-108">Protecting your application against XSS</span></span>
+## <a name="protecting-your-application-against-xss"></a><span data-ttu-id="9355f-108">XSS 로부터 응용 프로그램 보호</span><span class="sxs-lookup"><span data-stu-id="9355f-108">Protecting your application against XSS</span></span>
 
-<span data-ttu-id="77c98-109">기본 수준의 XSS는 응용 프로그램을 속여에 삽입 하 여 렌더링 된 페이지에 `<script>` 태그를 삽입 하거나 요소에 `On*` 이벤트를 삽입 하는 방식으로 작동 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-109">At a basic level XSS works by tricking your application into inserting a `<script>` tag into your rendered page, or by inserting an `On*` event into an element.</span></span> <span data-ttu-id="77c98-110">개발자는 이러한 XSS 공격으로부터 응용 프로그램을 보호하기 위해 다음과 같은 조치를 취해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-110">Developers should use the following prevention steps to avoid introducing XSS into their application.</span></span>
+<span data-ttu-id="9355f-109">기본 수준의 XSS는 응용 프로그램을 속여 하 여 렌더링 된 페이지 `<script>` 에 태그를 삽입 하거나 요소에 `On*` 이벤트를 삽입 하는 방식으로 작동 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-109">At a basic level XSS works by tricking your application into inserting a `<script>` tag into your rendered page, or by inserting an `On*` event into an element.</span></span> <span data-ttu-id="9355f-110">개발자는 응용 프로그램에 XSS를 도입 하지 않도록 다음 방지 단계를 사용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-110">Developers should use the following prevention steps to avoid introducing XSS into their application.</span></span>
 
-1. <span data-ttu-id="77c98-111">아래의 단계를 거치지 않는 한, 신뢰할 수 없는 데이터를 HTML 입력에 추가하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-111">Never put untrusted data into your HTML input, unless you follow the rest of the steps below.</span></span> <span data-ttu-id="77c98-112">신뢰할 수 없는 데이터란 공격자가 제어할 수 있는 모든 데이터를 의미하며, HTML 폼 입력, 쿼리 문자열, HTTP 헤더, 공격자가 응용 프로그램은 손상시키지 않은 경우라도 데이터는 손상되었을 수 있는 데이터베이스에서 가져온 데이터도 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-112">Untrusted data is any data that may be controlled by an attacker, HTML form inputs, query strings, HTTP headers, even data sourced from a database as an attacker may be able to breach your database even if they cannot breach your application.</span></span>
+1. <span data-ttu-id="9355f-111">아래 나머지 단계를 수행 하지 않으면 HTML 입력에 신뢰할 수 없는 데이터를 넣지 마세요.</span><span class="sxs-lookup"><span data-stu-id="9355f-111">Never put untrusted data into your HTML input, unless you follow the rest of the steps below.</span></span> <span data-ttu-id="9355f-112">신뢰할 수 없는 데이터는 공격자가 제어 하는 데이터 (HTML 양식 입력, 쿼리 문자열, HTTP 헤더)가 응용 프로그램을 위반할 수 없는 경우에도 데이터베이스를 위반할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-112">Untrusted data is any data that may be controlled by an attacker, HTML form inputs, query strings, HTTP headers, even data sourced from a database as an attacker may be able to breach your database even if they cannot breach your application.</span></span>
 
-2. <span data-ttu-id="77c98-113">신뢰할 수 없는 데이터를 HTML 요소에 삽입하기 전에 HTML로 인코딩되었는지 확인하십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-113">Before putting untrusted data inside an HTML element ensure it's HTML encoded.</span></span> <span data-ttu-id="77c98-114">HTML 인코딩은 &lt;와 같은 문자를 사용 하 여 &amp;lt와 같은 안전한 형식으로 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-114">HTML encoding takes characters such as &lt; and changes them into a safe form like &amp;lt;</span></span>
+2. <span data-ttu-id="9355f-113">HTML 요소 내에 신뢰할 수 없는 데이터를 넣기 전에 HTML로 인코딩해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-113">Before putting untrusted data inside an HTML element ensure it's HTML encoded.</span></span> <span data-ttu-id="9355f-114">HTML 인코딩은와 &lt; 같은 문자를 사용 하 여,와 같은 안전한 형식 &amp;으로 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-114">HTML encoding takes characters such as &lt; and changes them into a safe form like &amp;lt;</span></span>
 
-3. <span data-ttu-id="77c98-115">신뢰할 수 없는 데이터를 HTML 특성에 삽입하기 전에 HTML로 인코딩되었는지 확인하십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-115">Before putting untrusted data into an HTML attribute ensure it's HTML encoded.</span></span> <span data-ttu-id="77c98-116">HTML 특성 인코딩은 HTML 인코딩의 상위 집합으로, `"` 또는 `'`와 같은 추가 문자를 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-116">HTML attribute encoding is a superset of HTML encoding and encodes additional characters such as " and '.</span></span>
+3. <span data-ttu-id="9355f-115">신뢰할 수 없는 데이터를 HTML 특성에 배치 하기 전에 HTML로 인코딩해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-115">Before putting untrusted data into an HTML attribute ensure it's HTML encoded.</span></span> <span data-ttu-id="9355f-116">HTML 특성 인코딩은 HTML 인코딩의 상위 집합이 며 "and"와 같은 추가 문자를 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-116">HTML attribute encoding is a superset of HTML encoding and encodes additional characters such as " and '.</span></span>
 
-4. <span data-ttu-id="77c98-117">신뢰할 수 없는 데이터를 Javascript에 삽입하기 전에, 런타임에 콘텐츠를 가져오는 HTML 요소에 데이터를 배치하십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-117">Before putting untrusted data into JavaScript place the data in an HTML element whose contents you retrieve at runtime.</span></span> <span data-ttu-id="77c98-118">배치할 수 없는 경우, 데이터가 JavaScript로 인코딩되었는지 확인하십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-118">If this isn't possible, then ensure the data is JavaScript encoded.</span></span> <span data-ttu-id="77c98-119">Javascript 인코딩은 JavaScript에 대 한 위험한 문자를 사용 하 여 16 진수로 바꿉니다. 예를 들어 &lt; `\u003C`로 인코딩됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-119">JavaScript encoding takes dangerous characters for JavaScript and replaces them with their hex, for example &lt; would be encoded as `\u003C`.</span></span>
+4. <span data-ttu-id="9355f-117">신뢰할 수 없는 데이터를 JavaScript에 배치 하기 전에 런타임에 검색 하는 콘텐츠를 포함 하는 HTML 요소에 데이터를 배치 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-117">Before putting untrusted data into JavaScript place the data in an HTML element whose contents you retrieve at runtime.</span></span> <span data-ttu-id="9355f-118">가능 하지 않은 경우 데이터가 JavaScript로 인코딩 되었는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-118">If this isn't possible, then ensure the data is JavaScript encoded.</span></span> <span data-ttu-id="9355f-119">JavaScript 인코딩은 JavaScript에 대 한 위험한 문자를 사용 하 여 16 진수로 바꿉니다. &lt; 예를 들어는 `\u003C`로 인코딩됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-119">JavaScript encoding takes dangerous characters for JavaScript and replaces them with their hex, for example &lt; would be encoded as `\u003C`.</span></span>
 
-5. <span data-ttu-id="77c98-120">신뢰할 수 없는 데이터를 URL 쿼리 문자열에 삽입하기 전에 URL로 인코딩되었는지 확인하십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-120">Before putting untrusted data into a URL query string ensure it's URL encoded.</span></span>
+5. <span data-ttu-id="9355f-120">신뢰할 수 없는 데이터를 URL 쿼리 문자열에 배치 하기 전에 URL이 인코딩 되는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-120">Before putting untrusted data into a URL query string ensure it's URL encoded.</span></span>
 
-## <a name="html-encoding-using-razor"></a><span data-ttu-id="77c98-121">Razor를 사용하여 HTML로 인코딩하기</span><span class="sxs-lookup"><span data-stu-id="77c98-121">HTML Encoding using Razor</span></span>
+## <a name="html-encoding-using-razor"></a><span data-ttu-id="9355f-121">HTML 인코딩 사용Razor</span><span class="sxs-lookup"><span data-stu-id="9355f-121">HTML Encoding using Razor</span></span>
 
-<span data-ttu-id="77c98-122">MVC에서 사용되는 Razor 엔진은 변수를 통해 제공된 모든 출력을 자동으로 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-122">The Razor engine used in MVC automatically encodes all output sourced from variables, unless you work really hard to prevent it doing so.</span></span> <span data-ttu-id="77c98-123">*@* 지시어를 사용할 때마다 HTML 특성 인코딩 규칙을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-123">It uses HTML attribute encoding rules whenever you use the *@* directive.</span></span> <span data-ttu-id="77c98-124">HTML 특성 인코딩은 HTML 인코딩의 상위 집합이므로 둘 중에 어떤 것을 사용해야 할 지 고민할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-124">As HTML attribute encoding is a superset of HTML encoding this means you don't have to concern yourself with whether you should use HTML encoding or HTML attribute encoding.</span></span> <span data-ttu-id="77c98-125">신뢰할 수 없는 데이터를 JavaScript에 직접 삽입하지 말고 HTML 컨텍스트 내에서만 @ 지시문을 사용하십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-125">You must ensure that you only use @ in an HTML context, not when attempting to insert untrusted input directly into JavaScript.</span></span> <span data-ttu-id="77c98-126">태그 도우미는 또한 태그 매개 변수에 사용하는 입력값을 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-126">Tag helpers will also encode input you use in tag parameters.</span></span>
+<span data-ttu-id="9355f-122">MVC Razor 에서 사용 하는 엔진은이를 방지 하기 위해 정말로 작업 하지 않는 한 변수에서 모든 출력을 자동으로 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-122">The Razor engine used in MVC automatically encodes all output sourced from variables, unless you work really hard to prevent it doing so.</span></span> <span data-ttu-id="9355f-123">지시문을 사용할 때마다 HTML 특성 인코딩 규칙을 *@* 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-123">It uses HTML attribute encoding rules whenever you use the *@* directive.</span></span> <span data-ttu-id="9355f-124">Html 특성 인코딩은 HTML 인코딩의 상위 집합 이기 때문에 HTML 인코딩 또는 HTML 특성 인코딩을 사용 해야 하는지 여부를 걱정 하지 않아도 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-124">As HTML attribute encoding is a superset of HTML encoding this means you don't have to concern yourself with whether you should use HTML encoding or HTML attribute encoding.</span></span> <span data-ttu-id="9355f-125">신뢰할 수 없는 입력을 JavaScript에 직접 삽입 하려고 할 때가 아니라 HTML 컨텍스트에서만 @를 사용 하도록 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-125">You must ensure that you only use @ in an HTML context, not when attempting to insert untrusted input directly into JavaScript.</span></span> <span data-ttu-id="9355f-126">태그 도우미는 태그 매개 변수에서 사용 하는 입력도 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-126">Tag helpers will also encode input you use in tag parameters.</span></span>
 
-<span data-ttu-id="77c98-127">다음의 Razor 뷰를 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-127">Take the following Razor view:</span></span>
+<span data-ttu-id="9355f-127">다음 Razor 뷰를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-127">Take the following Razor view:</span></span>
 
 ```cshtml
 @{
@@ -46,18 +52,18 @@ ms.locfileid: "78655077"
    @untrustedInput
    ```
 
-<span data-ttu-id="77c98-128">이 보기는 *Untrustedinput* 변수의 내용을 출력 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-128">This view outputs the contents of the *untrustedInput* variable.</span></span> <span data-ttu-id="77c98-129">이 변수는 XSS 공격에 사용 되는 일부 문자 (&lt;"및 &gt;를 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-129">This variable includes some characters which are used in XSS attacks, namely &lt;, " and &gt;.</span></span> <span data-ttu-id="77c98-130">이 소스의 렌더링 결과는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-130">Examining the source shows the rendered output encoded as:</span></span>
+<span data-ttu-id="9355f-128">이 보기는 *Untrustedinput* 변수의 내용을 출력 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-128">This view outputs the contents of the *untrustedInput* variable.</span></span> <span data-ttu-id="9355f-129">이 변수에는 XSS 공격에 사용 되는 일부 문자 (즉 &lt;, "및 &gt;")가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-129">This variable includes some characters which are used in XSS attacks, namely &lt;, " and &gt;.</span></span> <span data-ttu-id="9355f-130">소스를 검사 하면 렌더링 된 출력이 다음과 같이 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-130">Examining the source shows the rendered output encoded as:</span></span>
 
 ```html
 &lt;&quot;123&quot;&gt;
    ```
 
 >[!WARNING]
-> <span data-ttu-id="77c98-131">ASP.NET Core MVC는 출력 시 자동으로 인코딩되지 않는 `HtmlString` 클래스를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-131">ASP.NET Core MVC provides an `HtmlString` class which isn't automatically encoded upon output.</span></span> <span data-ttu-id="77c98-132">XSS 취약점이 노출될 수 있으므로 절대로 신뢰할 수 없는 입력값과 함께 사용하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-132">This should never be used in combination with untrusted input as this will expose an XSS vulnerability.</span></span>
+> <span data-ttu-id="9355f-131">ASP.NET Core MVC는 출력 `HtmlString` 시 자동으로 인코딩되지 않는 클래스를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-131">ASP.NET Core MVC provides an `HtmlString` class which isn't automatically encoded upon output.</span></span> <span data-ttu-id="9355f-132">이는 XSS 취약성을 노출 하므로 신뢰할 수 없는 입력과 함께 사용 하면 안 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-132">This should never be used in combination with untrusted input as this will expose an XSS vulnerability.</span></span>
 
-## <a name="javascript-encoding-using-razor"></a><span data-ttu-id="77c98-133">Razor를 사용하여 JavaScript로 인코딩하기</span><span class="sxs-lookup"><span data-stu-id="77c98-133">JavaScript Encoding using Razor</span></span>
+## <a name="javascript-encoding-using-razor"></a><span data-ttu-id="9355f-133">JavaScript Encoding 사용Razor</span><span class="sxs-lookup"><span data-stu-id="9355f-133">JavaScript Encoding using Razor</span></span>
 
-<span data-ttu-id="77c98-134">간혹 뷰 처리 과정에서 JavaScript에 값을 삽입하고 싶을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-134">There may be times you want to insert a value into JavaScript to process in your view.</span></span> <span data-ttu-id="77c98-135">두 가지 방법으로 이 작업을 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-135">There are two ways to do this.</span></span> <span data-ttu-id="77c98-136">값을 삽입하는 가장 안전한 방법으로는 태그의 데이터 특성에 값을 삽입하고 JavaScript에서 가져오는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-136">The safest way to insert values is to place the value in a data attribute of a tag and retrieve it in your JavaScript.</span></span> <span data-ttu-id="77c98-137">다음은 그 예입니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-137">For example:</span></span>
+<span data-ttu-id="9355f-134">JavaScript에 값을 삽입 하 여 보기에서 처리할 수 있는 경우가 있을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-134">There may be times you want to insert a value into JavaScript to process in your view.</span></span> <span data-ttu-id="9355f-135">두 가지 방법으로 이 작업을 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-135">There are two ways to do this.</span></span> <span data-ttu-id="9355f-136">값을 삽입 하는 가장 안전한 방법은 태그의 데이터 특성에 값을 추가 하 고 JavaScript에서 검색 하는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-136">The safest way to insert values is to place the value in a data attribute of a tag and retrieve it in your JavaScript.</span></span> <span data-ttu-id="9355f-137">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="9355f-137">For example:</span></span>
 
 ```cshtml
 @{
@@ -85,7 +91,7 @@ ms.locfileid: "78655077"
    </script>
    ```
 
-<span data-ttu-id="77c98-138">인코딩 결과로 다음과 같은 HTML이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-138">This will produce the following HTML</span></span>
+<span data-ttu-id="9355f-138">그러면 다음 HTML이 생성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-138">This will produce the following HTML</span></span>
 
 ```html
 <div
@@ -107,14 +113,14 @@ ms.locfileid: "78655077"
    </script>
    ```
 
-<span data-ttu-id="77c98-139">실행하면 다음과 같은 렌더링 결과를 얻을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-139">Which, when it runs, will render the following:</span></span>
+<span data-ttu-id="9355f-139">실행 될 때 다음을 렌더링 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-139">Which, when it runs, will render the following:</span></span>
 
 ```
 <"123">
    <"123">
 ```
 
-<span data-ttu-id="77c98-140">또한 JavaScript 인코더를 직접 호출할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-140">You can also call the JavaScript encoder directly:</span></span>
+<span data-ttu-id="9355f-140">JavaScript 인코더를 직접 호출할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-140">You can also call the JavaScript encoder directly:</span></span>
 
 ```cshtml
 @using System.Text.Encodings.Web;
@@ -129,7 +135,7 @@ ms.locfileid: "78655077"
    </script>
 ```
 
-<span data-ttu-id="77c98-141">그러면 브라우저에서 다음과 같이 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-141">This will render in the browser as follows:</span></span>
+<span data-ttu-id="9355f-141">이렇게 하면 브라우저에서 다음과 같이 렌더링 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-141">This will render in the browser as follows:</span></span>
 
 ```html
 <script>
@@ -138,13 +144,13 @@ ms.locfileid: "78655077"
 ```
 
 >[!WARNING]
-> <span data-ttu-id="77c98-142">DOM 요소를 생성하기 위해 신뢰할 수 없는 입력값을 JavaScript와 연결하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-142">Don't concatenate untrusted input in JavaScript to create DOM elements.</span></span> <span data-ttu-id="77c98-143">`createElement()`를 사용 하 고 `node.TextContent=`와 같은 속성 값을 적절 하 게 할당 해야 합니다. 그렇지 않으면 DOM 기반 XSS에 직접 노출 하는 `element.SetAttribute()`/`element[attribute]=` 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-143">You should use `createElement()` and assign property values appropriately such as `node.TextContent=`, or use `element.SetAttribute()`/`element[attribute]=` otherwise you expose yourself to DOM-based XSS.</span></span>
+> <span data-ttu-id="9355f-142">JavaScript에서 신뢰할 수 없는 입력을 연결 하 여 DOM 요소를 만들지 마세요.</span><span class="sxs-lookup"><span data-stu-id="9355f-142">Don't concatenate untrusted input in JavaScript to create DOM elements.</span></span> <span data-ttu-id="9355f-143">과 같이 속성 `createElement()` 값 `node.TextContent=`을 적절 하 게 사용 및 할당 하거나 `element.SetAttribute()` / `element[attribute]=` , 그렇지 않으면 DOM 기반 XSS에 직접 노출 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-143">You should use `createElement()` and assign property values appropriately such as `node.TextContent=`, or use `element.SetAttribute()`/`element[attribute]=` otherwise you expose yourself to DOM-based XSS.</span></span>
 
-## <a name="accessing-encoders-in-code"></a><span data-ttu-id="77c98-144">코드에서 인코더에 액세스하기</span><span class="sxs-lookup"><span data-stu-id="77c98-144">Accessing encoders in code</span></span>
+## <a name="accessing-encoders-in-code"></a><span data-ttu-id="9355f-144">코드에서 인코더 액세스</span><span class="sxs-lookup"><span data-stu-id="9355f-144">Accessing encoders in code</span></span>
 
-<span data-ttu-id="77c98-145">HTML, JavaScript 및 URL 인코더를 두 가지 방법으로 사용할 수 있습니다. [종속성 주입](xref:fundamentals/dependency-injection) 을 통해 코드를 삽입 하거나 `System.Text.Encodings.Web` 네임 스페이스에 포함 된 기본 인코더를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-145">The HTML, JavaScript and URL encoders are available to your code in two ways, you can inject them via [dependency injection](xref:fundamentals/dependency-injection) or you can use the default encoders contained in the `System.Text.Encodings.Web` namespace.</span></span> <span data-ttu-id="77c98-146">기본 인코더를 사용하는 경우 가장 안전한 인코딩 규칙을 사용하므로 개발자가 직접 정의한 안전 문자 범위는 적용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-146">If you use the default encoders then any  you applied to character ranges to be treated as safe won't take effect - the default encoders use the safest encoding rules possible.</span></span>
+<span data-ttu-id="9355f-145">HTML, JavaScript 및 URL 인코더를 두 가지 방법으로 사용할 수 있습니다. [종속성 주입](xref:fundamentals/dependency-injection) 을 통해 코드를 삽입 하거나 `System.Text.Encodings.Web` 네임 스페이스에 포함 된 기본 인코더를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-145">The HTML, JavaScript and URL encoders are available to your code in two ways, you can inject them via [dependency injection](xref:fundamentals/dependency-injection) or you can use the default encoders contained in the `System.Text.Encodings.Web` namespace.</span></span> <span data-ttu-id="9355f-146">기본 인코더를 사용 하는 경우 안전 하지 않은 것으로 간주 되는 문자 범위에 적용 된 모든 것이 적용 되지 않습니다. 기본 인코더는 가능한 가장 안전한 인코딩 규칙을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-146">If you use the default encoders then any  you applied to character ranges to be treated as safe won't take effect - the default encoders use the safest encoding rules possible.</span></span>
 
-<span data-ttu-id="77c98-147">DI를 통해 구성 가능한 인코더를 사용 하려면 생성자는 *htmlencoder*, *JavaScriptEncoder* 및 *urlencoder* 매개 변수를 적절 하 게 사용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-147">To use the configurable encoders via DI your constructors should take an *HtmlEncoder*, *JavaScriptEncoder* and *UrlEncoder* parameter as appropriate.</span></span> <span data-ttu-id="77c98-148">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-148">For example;</span></span>
+<span data-ttu-id="9355f-147">DI를 통해 구성 가능한 인코더를 사용 하려면 생성자는 *htmlencoder*, *JavaScriptEncoder* 및 *urlencoder* 매개 변수를 적절 하 게 사용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-147">To use the configurable encoders via DI your constructors should take an *HtmlEncoder*, *JavaScriptEncoder* and *UrlEncoder* parameter as appropriate.</span></span> <span data-ttu-id="9355f-148">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-148">For example;</span></span>
 
 ```csharp
 public class HomeController : Controller
@@ -164,43 +170,43 @@ public class HomeController : Controller
    }
    ```
 
-## <a name="encoding-url-parameters"></a><span data-ttu-id="77c98-149">URL 매개 변수 인코딩하기</span><span class="sxs-lookup"><span data-stu-id="77c98-149">Encoding URL Parameters</span></span>
+## <a name="encoding-url-parameters"></a><span data-ttu-id="9355f-149">인코딩 URL 매개 변수</span><span class="sxs-lookup"><span data-stu-id="9355f-149">Encoding URL Parameters</span></span>
 
-<span data-ttu-id="77c98-150">신뢰할 수 없는 입력을 값으로 사용 하 여 URL 쿼리 문자열을 작성 하려는 경우 `UrlEncoder`를 사용 하 여 값을 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-150">If you want to build a URL query string with untrusted input as a value use the `UrlEncoder` to encode the value.</span></span> <span data-ttu-id="77c98-151">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-151">For example,</span></span>
+<span data-ttu-id="9355f-150">신뢰할 수 없는 입력을 값으로 사용 하 여 URL 쿼리 문자열을 작성 하려는 경우 `UrlEncoder` 를 사용 하 여 값을 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-150">If you want to build a URL query string with untrusted input as a value use the `UrlEncoder` to encode the value.</span></span> <span data-ttu-id="9355f-151">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-151">For example,</span></span>
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";
    var encodedValue = _urlEncoder.Encode(example);
    ```
 
-<span data-ttu-id="77c98-152">인코딩 후 Url-encodedvalue 변수는 `%22Quoted%20Value%20with%20spaces%20and%20%26%22`을 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-152">After encoding the encodedValue variable will contain `%22Quoted%20Value%20with%20spaces%20and%20%26%22`.</span></span> <span data-ttu-id="77c98-153">공백, 따옴표, 마침표 및 기타 안전하지 않은 문자는 16진수 값으로 퍼센트 인코딩(즉, URL로 인코딩)됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-153">Spaces, quotes, punctuation and other unsafe characters will be percent encoded to their hexadecimal value, for example a space character will become %20.</span></span>
+<span data-ttu-id="9355f-152">인코딩 후 Url-encodedvalue 변수에는가 포함 `%22Quoted%20Value%20with%20spaces%20and%20%26%22`됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-152">After encoding the encodedValue variable will contain `%22Quoted%20Value%20with%20spaces%20and%20%26%22`.</span></span> <span data-ttu-id="9355f-153">공백, 따옴표, 문장 부호 및 기타 안전 하지 않은 문자는 16 진수 값으로 인코딩됩니다. 예를 들어 공백 문자는 %20이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-153">Spaces, quotes, punctuation and other unsafe characters will be percent encoded to their hexadecimal value, for example a space character will become %20.</span></span>
 
 >[!WARNING]
-> <span data-ttu-id="77c98-154">예를 들어, 공백 문자는 `%20`으로 인코딩됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-154">Don't use untrusted input as part of a URL path.</span></span> <span data-ttu-id="77c98-155">신뢰할 수 없는 입력값은 항상 쿼리 문자열의 값으로 전달해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-155">Always pass untrusted input as a query string value.</span></span>
+> <span data-ttu-id="9355f-154">URL 경로의 일부로는 신뢰할 수 없는 입력을 사용 하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="9355f-154">Don't use untrusted input as part of a URL path.</span></span> <span data-ttu-id="9355f-155">항상 신뢰할 수 없는 입력을 쿼리 문자열 값으로 전달 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-155">Always pass untrusted input as a query string value.</span></span>
 
 <a name="security-cross-site-scripting-customization"></a>
 
-## <a name="customizing-the-encoders"></a><span data-ttu-id="77c98-156">사용자 지정 인코더 만들기</span><span class="sxs-lookup"><span data-stu-id="77c98-156">Customizing the Encoders</span></span>
+## <a name="customizing-the-encoders"></a><span data-ttu-id="9355f-156">인코더 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="9355f-156">Customizing the Encoders</span></span>
 
-<span data-ttu-id="77c98-157">기본적으로 인코더에서 사용하는 안전 목록은 기본 라틴 유니코드 범위에 한정되어 있으며, 이 외의 모든 문자는 해당 문자 코드로 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-157">By default encoders use a safe list limited to the Basic Latin Unicode range and encode all characters outside of that range as their character code equivalents.</span></span> <span data-ttu-id="77c98-158">이러한 동작은 인코딩을 사용하여 문자열을 출력하는 Razor TagHelper와 HtmlHelper 렌더링에도 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-158">This behavior also affects Razor TagHelper and HtmlHelper rendering as it will use the encoders to output your strings.</span></span>
+<span data-ttu-id="9355f-157">기본적으로 인코더는 기본 라틴어 유니코드 범위로 제한 된 안전 목록을 사용 하 고 해당 범위 밖의 모든 문자를 해당 문자 코드로 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-157">By default encoders use a safe list limited to the Basic Latin Unicode range and encode all characters outside of that range as their character code equivalents.</span></span> <span data-ttu-id="9355f-158">이 동작은 인코더를 Razor 사용 하 여 문자열을 출력 하는 TagHelper 및 htmlhelper 렌더링에도 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-158">This behavior also affects Razor TagHelper and HtmlHelper rendering as it will use the encoders to output your strings.</span></span>
 
-<span data-ttu-id="77c98-159">이는 알 수 없는 문제의 발생을 막거나 이전의 브라우저 버그는 영어 이외의 문자 처리를 기반으로 한 구문 분석에 방해가 되었기에 향후 발생할 수 있는 브라우저 버그를 막기 위한 조치입니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-159">The reasoning behind this is to protect against unknown or future browser bugs (previous browser bugs have tripped up parsing based on the processing of non-English characters).</span></span> <span data-ttu-id="77c98-160">한자, 키릴 문자와 같은 비 라틴계 문자를 자주 사용하는 웹사이트의 경우에는 불편할 수 있는 조치일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-160">If your web site makes heavy use of non-Latin characters, such as Chinese, Cyrillic or others this is probably not the behavior you want.</span></span>
+<span data-ttu-id="9355f-159">이를 바탕으로 하는 이유는 알려지지 않은 또는 향후 브라우저 버그를 방지 하는 것입니다 (이전 브라우저 버그는 영어가 아닌 문자 처리를 기반으로 구문 분석을 수행 함).</span><span class="sxs-lookup"><span data-stu-id="9355f-159">The reasoning behind this is to protect against unknown or future browser bugs (previous browser bugs have tripped up parsing based on the processing of non-English characters).</span></span> <span data-ttu-id="9355f-160">웹 사이트에서 중국어, 키릴 자모 또는 다른 사용자와 같은 라틴 문자가 아닌 문자를 많이 사용 하는 경우이는 원하는 동작이 아닐 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-160">If your web site makes heavy use of non-Latin characters, such as Chinese, Cyrillic or others this is probably not the behavior you want.</span></span>
 
-<span data-ttu-id="77c98-161">`ConfigureServices()`시작 하는 동안 응용 프로그램에 적합 한 유니코드 범위를 포함 하도록 인코더 안전 목록을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-161">You can customize the encoder safe lists to include Unicode ranges appropriate to your application during startup, in `ConfigureServices()`.</span></span>
+<span data-ttu-id="9355f-161">에서 `ConfigureServices()`시작 하는 동안 응용 프로그램에 적합 한 유니코드 범위를 포함 하도록 인코더 안전 목록을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-161">You can customize the encoder safe lists to include Unicode ranges appropriate to your application during startup, in `ConfigureServices()`.</span></span>
 
-<span data-ttu-id="77c98-162">예를 들어 다음과 같은 기본 구성에서 Razor HtmlHelper를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-162">For example, using the default configuration you might use a Razor HtmlHelper like so;</span></span>
+<span data-ttu-id="9355f-162">예를 들어 기본 구성을 사용 하는 경우와 같은 Razor htmlhelper를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-162">For example, using the default configuration you might use a Razor HtmlHelper like so;</span></span>
 
 ```html
 <p>This link text is in Chinese: @Html.ActionLink("汉语/漢語", "Index")</p>
    ```
 
-<span data-ttu-id="77c98-163">웹페이지에서 소스를 확인하면 중국어 텍스트가 다음과 같이 렌더링된 것을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-163">When you view the source of the web page you will see it has been rendered as follows, with the Chinese text encoded;</span></span>
+<span data-ttu-id="9355f-163">웹 페이지의 소스를 볼 때 중국어 텍스트가 인코딩된 상태로 다음과 같이 렌더링 된 것을 볼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-163">When you view the source of the web page you will see it has been rendered as follows, with the Chinese text encoded;</span></span>
 
 ```html
 <p>This link text is in Chinese: <a href="/">&#x6C49;&#x8BED;/&#x6F22;&#x8A9E;</a></p>
    ```
 
-<span data-ttu-id="77c98-164">인코더가 안전 하 게 처리 하는 문자를 확장 하려면 `startup.cs`의 `ConfigureServices()` 메서드에 다음 줄을 삽입 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-164">To widen the characters treated as safe by the encoder you would insert the following line into the `ConfigureServices()` method in `startup.cs`;</span></span>
+<span data-ttu-id="9355f-164">인코더가 안전 하 게 처리 하는 문자를 확대 하려면의 `ConfigureServices()` `startup.cs`메서드에 다음 줄을 삽입 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-164">To widen the characters treated as safe by the encoder you would insert the following line into the `ConfigureServices()` method in `startup.cs`;</span></span>
 
 ```csharp
 services.AddSingleton<HtmlEncoder>(
@@ -208,21 +214,21 @@ services.AddSingleton<HtmlEncoder>(
                                                UnicodeRanges.CjkUnifiedIdeographs }));
    ```
 
-<span data-ttu-id="77c98-165">이 예제에서는 `CjkUnifiedIdeographs`의 유니코드 범위를 포함하도록 안전 목록을 확장했습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-165">This example widens the safe list to include the Unicode Range CjkUnifiedIdeographs.</span></span> <span data-ttu-id="77c98-166">렌더링된 결과는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-166">The rendered output would now become</span></span>
+<span data-ttu-id="9355f-165">이 예에서는 CjkUnifiedIdeographs 유니코드 범위를 포함 하도록 안전 목록을 확대 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-165">This example widens the safe list to include the Unicode Range CjkUnifiedIdeographs.</span></span> <span data-ttu-id="9355f-166">이제 렌더링 된 출력이 다음과 같은 상태가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-166">The rendered output would now become</span></span>
 
 ```html
 <p>This link text is in Chinese: <a href="/">汉语/漢語</a></p>
    ```
 
-<span data-ttu-id="77c98-167">안전 목록 범위는 언어가 아닌 유니코드 차트로서 명시되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-167">Safe list ranges are specified as Unicode code charts, not languages.</span></span> <span data-ttu-id="77c98-168">[유니코드 표준](https://unicode.org/) 에는 문자를 포함 하는 차트를 찾는 데 사용할 수 있는 [코드 차트](https://www.unicode.org/charts/index.html) 목록이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-168">The [Unicode standard](https://unicode.org/) has a list of [code charts](https://www.unicode.org/charts/index.html) you can use to find the chart containing your characters.</span></span> <span data-ttu-id="77c98-169">각 인코더(예: Html, JavaScript, Url)는 개별적으로 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-169">Each encoder, Html, JavaScript and Url, must be configured separately.</span></span>
+<span data-ttu-id="9355f-167">안전 목록 범위는 언어가 아닌 유니코드 코드 차트로 지정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-167">Safe list ranges are specified as Unicode code charts, not languages.</span></span> <span data-ttu-id="9355f-168">[유니코드 표준](https://unicode.org/) 에는 문자를 포함 하는 차트를 찾는 데 사용할 수 있는 [코드 차트](https://www.unicode.org/charts/index.html) 목록이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-168">The [Unicode standard](https://unicode.org/) has a list of [code charts](https://www.unicode.org/charts/index.html) you can use to find the chart containing your characters.</span></span> <span data-ttu-id="9355f-169">각 인코더, Html, JavaScript 및 Url은 별도로 구성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-169">Each encoder, Html, JavaScript and Url, must be configured separately.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="77c98-170">사용자 지정 안전 목록은 종속성 주입을 통해 생성된 인코더에만 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-170">Customization of the safe list only affects encoders sourced via DI.</span></span> <span data-ttu-id="77c98-171">`System.Text.Encodings.Web.*Encoder.Default`를 통해 인코더에 직접 액세스 하는 경우 기본 라틴어 전용 safelist가 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-171">If you directly access an encoder via `System.Text.Encodings.Web.*Encoder.Default` then the default, Basic Latin only safelist will be used.</span></span>
+> <span data-ttu-id="9355f-170">Safe 목록의 사용자 지정은 DI를 통해 원본 인코더에만 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-170">Customization of the safe list only affects encoders sourced via DI.</span></span> <span data-ttu-id="9355f-171">기본값을 통해 `System.Text.Encodings.Web.*Encoder.Default` 인코더에 직접 액세스 하는 경우 기본 라틴어 전용 safelist 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-171">If you directly access an encoder via `System.Text.Encodings.Web.*Encoder.Default` then the default, Basic Latin only safelist will be used.</span></span>
 
-## <a name="where-should-encoding-take-place"></a><span data-ttu-id="77c98-172">인코딩이 이뤄져야 할 시점</span><span class="sxs-lookup"><span data-stu-id="77c98-172">Where should encoding take place?</span></span>
+## <a name="where-should-encoding-take-place"></a><span data-ttu-id="9355f-172">인코딩 수행 위치</span><span class="sxs-lookup"><span data-stu-id="9355f-172">Where should encoding take place?</span></span>
 
-<span data-ttu-id="77c98-173">일반적으로 인코딩은 출력 시점에 이루어져야 하며 인코딩한 값을 데이터베이스에 저장해서는 안 됩니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-173">The general accepted practice is that encoding takes place at the point of output and encoded values should never be stored in a database.</span></span> <span data-ttu-id="77c98-174">출력 시점에서 인코딩하면 데이터의 용도를 변경(예: HTML에서 쿼리 문자열 값으로 변경)할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-174">Encoding at the point of output allows you to change the use of data, for example, from HTML to a query string value.</span></span> <span data-ttu-id="77c98-175">또한 검색 전 값을 인코딩 하지 않고도 데이터를 쉽게 검색할 수 있으며 인코더의 변경이나 버그 수정 시 활용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-175">It also enables you to easily search your data without having to encode values before searching and allows you to take advantage of any changes or bug fixes made to encoders.</span></span>
+<span data-ttu-id="9355f-173">일반적으로 허용 되는 방법은 인코딩이 출력 지점에서 발생 하 고 인코딩된 값이 데이터베이스에 저장 되지 않아야 한다는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-173">The general accepted practice is that encoding takes place at the point of output and encoded values should never be stored in a database.</span></span> <span data-ttu-id="9355f-174">출력 지점에서 인코딩을 사용 하면 HTML에서 쿼리 문자열 값과 같은 데이터 사용을 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-174">Encoding at the point of output allows you to change the use of data, for example, from HTML to a query string value.</span></span> <span data-ttu-id="9355f-175">또한 검색 전에 값을 인코딩하지 않고 인코더에 대 한 변경 내용 또는 버그 수정을 활용할 수 있도록 하 여 데이터를 쉽게 검색할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-175">It also enables you to easily search your data without having to encode values before searching and allows you to take advantage of any changes or bug fixes made to encoders.</span></span>
 
-## <a name="validation-as-an-xss-prevention-technique"></a><span data-ttu-id="77c98-176">XSS 방지 기술로서의 유효성 검사</span><span class="sxs-lookup"><span data-stu-id="77c98-176">Validation as an XSS prevention technique</span></span>
+## <a name="validation-as-an-xss-prevention-technique"></a><span data-ttu-id="9355f-176">XSS 방지 기술로 유효성 검사</span><span class="sxs-lookup"><span data-stu-id="9355f-176">Validation as an XSS prevention technique</span></span>
 
-<span data-ttu-id="77c98-177">유효성 검사는 XSS 공격을 제한하는 유용한 도구가 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-177">Validation can be a useful tool in limiting XSS attacks.</span></span> <span data-ttu-id="77c98-178">예를 들어 0~9 사이의 문자만 포함된 숫자 문자열은 XSS 공격을 일으키지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-178">For example, a numeric string containing only the characters 0-9 won't trigger an XSS attack.</span></span> <span data-ttu-id="77c98-179">이러한 검사 과정은 HTML을 통한 사용자 입력을 허용할 때 더욱 복잡해집니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-179">Validation becomes more complicated when accepting HTML in user input.</span></span> <span data-ttu-id="77c98-180">HTML 입력값을 구문 분석하는 것은 불가능하지는 않으나 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-180">Parsing HTML input is difficult, if not impossible.</span></span> <span data-ttu-id="77c98-181">Markdown과 같이 파서가 삽입된 HTML을 제거하는 기능은 다양한 값이 입력될 때 보다 안전한 방법입니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-181">Markdown, coupled with a parser that strips embedded HTML, is a safer option for accepting rich input.</span></span> <span data-ttu-id="77c98-182">유효성 검사에만 의존하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="77c98-182">Never rely on validation alone.</span></span> <span data-ttu-id="77c98-183">어떠한 검증 과정이나 처리가 이루어졌다 하더라도 항상 출력 전에 신뢰할 수 없는 입력값을 인코딩하시기 바랍니다.</span><span class="sxs-lookup"><span data-stu-id="77c98-183">Always encode untrusted input before output, no matter what validation or sanitization has been performed.</span></span>
+<span data-ttu-id="9355f-177">유효성 검사는 XSS 공격을 제한 하는 데 유용한 도구 일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-177">Validation can be a useful tool in limiting XSS attacks.</span></span> <span data-ttu-id="9355f-178">예를 들어 0-9 문자만 포함 하는 숫자 문자열은 XSS 공격을 트리거하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-178">For example, a numeric string containing only the characters 0-9 won't trigger an XSS attack.</span></span> <span data-ttu-id="9355f-179">사용자 입력에서 HTML을 허용할 때 유효성 검사가 더 복잡해 집니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-179">Validation becomes more complicated when accepting HTML in user input.</span></span> <span data-ttu-id="9355f-180">HTML 입력을 구문 분석 하기가 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-180">Parsing HTML input is difficult, if not impossible.</span></span> <span data-ttu-id="9355f-181">포함 된 HTML을 제거 하는 Markdown와 결합 된는 다양 한 입력을 허용 하는 안전한 옵션입니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-181">Markdown, coupled with a parser that strips embedded HTML, is a safer option for accepting rich input.</span></span> <span data-ttu-id="9355f-182">유효성 검사만 사용 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-182">Never rely on validation alone.</span></span> <span data-ttu-id="9355f-183">유효성 검사 또는 삭제가 수행 되었는지 여부에 관계 없이 항상 신뢰할 수 없는 입력을 출력 전에 인코딩합니다.</span><span class="sxs-lookup"><span data-stu-id="9355f-183">Always encode untrusted input before output, no matter what validation or sanitization has been performed.</span></span>
