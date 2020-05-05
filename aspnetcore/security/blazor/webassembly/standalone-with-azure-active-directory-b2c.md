@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 4ccf86550a520f1d001088859ef5909041178781
-ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
+ms.openlocfilehash: 0fb4f4176f214d6bf0c005838a0ccbe4487243f2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82149992"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767976"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
 [Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)
 
@@ -31,13 +34,13 @@ ms.locfileid: "82149992"
 
    * 다음 정보를 [AAD B2C 테 넌 트](/azure/active-directory-b2c/tutorial-create-tenant) &ndash; 레코드를 만듭니다.
 
-     1 \. AAD B2C 인스턴스 (예: `https://contoso.b2clogin.com/`후행 슬래시를 포함 하는)<br>
-     2 \. AAD B2C 테 넌 트 도메인 (예 `contoso.onmicrosoft.com`:)
+     1\. AAD B2C 인스턴스 (예: `https://contoso.b2clogin.com/`후행 슬래시를 포함 하는)<br>
+     2\. AAD B2C 테 넌 트 도메인 (예 `contoso.onmicrosoft.com`:)
 
    * 앱 등록 중 &ndash; [에 웹 응용 프로그램을 등록 하](/azure/active-directory-b2c/tutorial-register-applications) 여 다음 항목을 선택 합니다.
 
-     1 \. **웹 앱/웹 API** 를 **예**로 설정 합니다.<br>
-     2 \. **암시적 흐름 허용** 을 **예**로 설정 합니다.<br>
+     1\. **웹 앱/웹 API** 를 **예**로 설정 합니다.<br>
+     2\. **암시적 흐름 허용** 을 **예**로 설정 합니다.<br>
      3. **회신 URL** 을 추가 `https://localhost:5001/authentication/login-callback`합니다.
 
      응용 프로그램 ID (클라이언트 ID)를 기록 합니다 (예 `11111111-1111-1111-1111-111111111111`:).
@@ -73,7 +76,7 @@ ms.locfileid: "82149992"
 
 ## <a name="authentication-service-support"></a>인증 서비스 지원
 
-사용자 인증에 대 한 지원은 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 IP (Id 공급자)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
+사용자 인증에 대 한 지원은 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 Identity 공급자 (IP)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
 
 *Program.cs*:
 
@@ -97,7 +100,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예제:
+예:
 
 ```json
 {
@@ -166,7 +169,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-ad-b2c>

@@ -4,13 +4,19 @@ author: rick-anderson
 description: 권한 부여의 기본 사항과 ASP.NET Core apps에서 권한 부여가 작동 하는 방식에 대해 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: b5e60b3c256941fff5e54e1a02e077c34c535902
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652335"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777529"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>ASP.NET Core 권한 부여 소개
 
@@ -20,7 +26,7 @@ ms.locfileid: "78652335"
 
 권한 부여는 직교 하 고 인증과 독립적입니다. 그러나 권한 부여에는 인증 메커니즘이 필요 합니다. 인증은 사용자를 확인 하는 프로세스입니다. 인증으로 현재 사용자에 대해 하나 이상의 ID가 만들어질 수 있습니다.
 
-ASP.NET Core의 인증에 대 한 자세한 내용은 <xref:security/authentication/index>을 참조 하세요.
+ASP.NET Core의 인증에 대 한 자세한 내용은을 <xref:security/authentication/index>참조 하십시오.
 
 ## <a name="authorization-types"></a>권한 부여 유형
 
@@ -28,6 +34,6 @@ ASP.NET Core 권한 부여는 간단한 선언적 [역할과](xref:security/auth
 
 ## <a name="namespaces"></a>네임스페이스
 
-`AuthorizeAttribute` 및 `AllowAnonymousAttribute` 특성을 비롯 한 권한 부여 구성 요소는 `Microsoft.AspNetCore.Authorization` 네임 스페이스에 있습니다.
+및 특성을 비롯 한 권한 부여 구성 요소는 `Microsoft.AspNetCore.Authorization` 네임 스페이스에 있습니다. `AllowAnonymousAttribute` `AuthorizeAttribute`
 
 [간단한 권한 부여](xref:security/authorization/simple)에 대 한 설명서를 참조 하세요.

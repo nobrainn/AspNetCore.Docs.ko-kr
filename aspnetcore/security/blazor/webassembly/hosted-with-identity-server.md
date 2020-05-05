@@ -1,5 +1,5 @@
 ---
-title: Id 서버를 Blazor 사용 하 여 ASP.NET Core weasemboman 호스팅된 앱 보호
+title: 서버를 사용 Blazor 하 여 Identity ASP.NET Core weasemboman 호스팅된 앱 보안
 author: guardrex
 description: IdentityServer 백 엔드를 Blazor 사용 하는 Visual Studio 내에서 인증을 사용 하 [IdentityServer](https://identityserver.io/) 여 새 호스트 된 앱을 만들려면
 monikerRange: '>= aspnetcore-3.1'
@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ffdcd30ae9ce5350113569a500e99cf8db82ad65
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: bf2298618e922df412e0742177afd390c4116388
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138610"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768127"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Id 서버를 Blazor 사용 하 여 ASP.NET Core weasemboman 호스팅된 앱 보호
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>서버를 사용 Blazor 하 여 Identity ASP.NET Core weasemboman 호스팅된 앱 보안
 
 [Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)
 
@@ -51,7 +54,7 @@ dotnet new blazorwasm -au Individual -ho
 
 * `Startup.ConfigureServices`의 경우
 
-  * ID:
+  * Identity:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -104,7 +107,7 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
-도우미 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. Id는 id URL 공간의 `/Identity`하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 정책이 구성 됩니다. 는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 다른 모든 요청을 처리 합니다. 또한이 메서드는 다음과 같습니다.
+도우미 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. 정책은 Identity URL 공간의 `/Identity`모든 하위 경로로 Identity 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다. 는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 다른 모든 요청을 처리 합니다. 또한이 메서드는 다음과 같습니다.
 
 * 기본 범위인 `{APPLICATION NAME}API` IdentityServer를 사용 하 여 API 리소스를 등록 `{APPLICATION NAME}API`합니다.
 * 앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 하도록 JWT 전달자 토큰 미들웨어를 구성 합니다.
@@ -115,9 +118,9 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-`ApplicationDbContext` (*Data/ApplicationDbContext*)에서 IdentityServer에 대 한 스키마를 <xref:Microsoft.EntityFrameworkCore.DbContext> 포함 하도록 확장 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> 하는 예외와 함께 id에서 동일한가 사용 됩니다. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>에서 파생됩니다.
+`ApplicationDbContext` (*Data/ApplicationDbContext*)에서 IdentityServer에 대 한 스키마를 <xref:Microsoft.EntityFrameworkCore.DbContext> 포함 하도록 확장 Identity <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> 하는 예외와 함께에서 사용 됩니다. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>에서 파생됩니다.
 
-데이터베이스 스키마에 대 한 모든 권한을 얻으려면 사용 가능한 Id <xref:Microsoft.EntityFrameworkCore.DbContext> 클래스 중 하나에서 상속 하 고 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` 메서드를 호출 하 여 id 스키마를 포함 하도록 컨텍스트를 구성 합니다.
+데이터베이스 스키마에 대 한 모든 권한을 얻으려면 사용 가능한 Identity <xref:Microsoft.EntityFrameworkCore.DbContext> 클래스 중 하나에서 상속 하 고 Identity `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` 메서드를 호출 하 여 스키마를 포함 하도록 컨텍스트를 구성 합니다.
 
 ### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
 
@@ -185,7 +188,7 @@ builder.Services.AddApiAuthorization();
 
 * 인증 된 사용자의 경우:
   * 현재 사용자 이름을 표시 합니다.
-  * ASP.NET Core Id의 사용자 프로필 페이지에 대 한 링크를 제공 합니다.
+  * ASP.NET Core Identity의 사용자 프로필 페이지에 대 한 링크를 제공 합니다.
   * 앱에서 로그 아웃할 수 있는 단추를 제공 합니다.
 * 익명 사용자의 경우:
   * 등록할 수 있는 옵션을 제공 합니다.

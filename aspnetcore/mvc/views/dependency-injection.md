@@ -4,17 +4,23 @@ author: ardalis
 description: ASP.NET Core가 MVC 보기에 종속성 주입을 지원하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 6241bb8e262f64e2e30721bc5fe6f8f1be84b60d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: aee4152bed50576f087862142e7ce9f261c7da19
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651477"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775455"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core의 보기에 종속성 주입
 
-작성자 [Steve Smith](https://ardalis.com/)
+작성자: [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core는 보기에 대한 [종속성 주입](xref:fundamentals/dependency-injection)을 지원합니다. 이는 보기 요소를 채우는 데만 필요한 지역화 또는 데이터 같은 보기 관련 서비스에 유용합니다. 컨트롤러와 보기 간에 [문제를 분리](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)해야 합니다. 보기에서 표시하는 대부분의 데이터는 컨트롤러에서 전달되어야 합니다.
 
@@ -55,7 +61,7 @@ ASP.NET Core는 보기에 대한 [종속성 주입](xref:fundamentals/dependency
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 
-이 보기는 전반적인 통계를 보여주는 요약 정보와 함께 `ToDoItem` 인스턴스 목록을 표시합니다. 요약 정보는 주입된 `StatisticsService`에서 채워집니다. 이 서비스는 `ConfigureServices`Startup.cs*의* 에서 종속성 주입을 위해 등록됩니다.
+이 보기는 전체 통계를 보여주는 요약 정보와 함께 `ToDoItem` 인스턴스 목록을 표시합니다. 요약 정보는 주입된 `StatisticsService`에서 채워집니다. 이 서비스는 *Startup.cs*의 `ConfigureServices`에서 종속성 주입을 위해 등록됩니다.
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Startup.cs?highlight=6,7&range=15-22)]
 
@@ -90,7 +96,7 @@ ASP.NET Core는 보기에 대한 [종속성 주입](xref:fundamentals/dependency
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Model/Services/ProfileOptionsService.cs?highlight=7,13,24)]
 
 > [!IMPORTANT]
-> `Startup.ConfigureServices`에서 종속성 주입을 통해 요청할 형식을 등록하는 것을 잊지 마세요. 서비스 공급자가 [GetRequiredService](/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions.getrequiredservice)를 통해 내부적으로 쿼리되기 때문에 등록되지 않은 형식은 런타임 시 예외를 던집니다.
+> `Startup.ConfigureServices`에서 종속성 주입을 통해 요청할 형식을 등록하는 것을 잊지 마세요. 서비스 공급자가 [GetRequiredService](/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions.getrequiredservice)를 통해 내부적으로 쿼리되기 때문에 등록되지 않은 형식은 런타임 시 예외를 throw합니다.
 
 ## <a name="overriding-services"></a>서비스 재정의
 
@@ -102,7 +108,7 @@ ASP.NET Core는 보기에 대한 [종속성 주입](xref:fundamentals/dependency
 
 [!code-cshtml[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/Helper/Index.cshtml?highlight=3,11)]
 
-기존 서비스를 확장하려는 경우 간단하게 이 기술을 사용하여 기존 구현을 상속하거나 기존 구현을 개발자 고유의 구현으로 래핑하면 됩니다.
+기존 서비스를 확장하려는 경우 간단하게 이 기술을 사용하여 기존 구현에서 상속하거나 기존 구현을 개발자 고유의 구현으로 래핑하면 됩니다.
 
 ## <a name="see-also"></a>참고 항목
 
