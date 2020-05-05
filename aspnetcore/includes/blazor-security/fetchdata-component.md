@@ -5,7 +5,7 @@
 
 지시문 `@attribute [Authorize]` 은이 구성 요소를 방문 하기 위해 사용자에 게 권한이 부여 되어야 한다는 Blazor Weasembomauthorization 시스템을 나타냅니다. *클라이언트* 앱에 특성이 있으면 서버에 있는 API가 적절 한 자격 증명 없이 호출 되는 것을 방지할 수 없습니다. 또한 *서버* 앱은 적절 한 `[Authorize]` 끝점에서를 사용 하 여 해당 끝점을 제대로 보호 해야 합니다.
 
-`AuthenticationService.RequestAccessToken();`API를 호출 하기 위해 요청에 추가할 수 있는 액세스 토큰 요청을 처리 합니다. 토큰이 캐시 되거나 서비스에서 사용자 상호 작용 없이 새 액세스 토큰을 프로 비전 할 수 있으면 토큰 요청이 성공 합니다. 그렇지 않으면 토큰 요청이 실패 합니다.
+`IAccessTokenProvider.RequestAccessToken();`API를 호출 하기 위해 요청에 추가할 수 있는 액세스 토큰 요청을 처리 합니다. 토큰이 캐시 되거나 서비스에서 사용자 상호 작용 없이 새 액세스 토큰을 프로 비전 할 수 있으면 토큰 요청이 성공 합니다. 그렇지 않으면 토큰 요청은 `AccessTokenNotAvailableException` `try-catch` 문에서 catch 된 오류와 함께 실패 합니다.
 
 요청에 포함할 실제 토큰을 가져오기 위해 앱은를 호출 `tokenResult.TryGetToken(out var token)`하 여 요청이 성공 했는지 확인 해야 합니다. 
 

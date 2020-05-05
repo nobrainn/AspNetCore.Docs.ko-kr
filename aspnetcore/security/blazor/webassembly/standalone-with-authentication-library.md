@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 25aa7761b9c1acc72081653422e80cb004500573
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: 6907a1213a6a9089e2aed885093c2fd38f972ad0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138524"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768054"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>인증 라이브러리를 Blazor 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>인증 라이브러리를 Blazor 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
 [Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)
 
@@ -53,7 +56,7 @@ Visual Studio에서 [ Blazor weasembomapp을 만듭니다](xref:blazor/get-start
 
 ## <a name="authentication-service-support"></a>인증 서비스 지원
 
-사용자 인증에 대 한 지원은 `AddOidcAuthentication` `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 IP (Id 공급자)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
+사용자 인증에 대 한 지원은 `AddOidcAuthentication` `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 Identity 공급자 (IP)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
 
 *Program.cs*:
 
