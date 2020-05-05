@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 6e01fa37e3b7b24b95bc86ea2a1dd53dbdd9c672
-ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
+ms.openlocfilehash: 77584c7102fd2b288227877a052addb9f2296fa6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82149967"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776658"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>Azure Active Directory를 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory"></a>Azure Active Directory를 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
 [Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)
 
@@ -74,7 +77,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "{TENA
 
 ## <a name="authentication-service-support"></a>인증 서비스 지원
 
-사용자 인증에 대 한 지원은 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 IP (Id 공급자)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
+사용자 인증에 대 한 지원은 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal` 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 Identity 공급자 (IP)와 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.
 
 *Program.cs*:
 
@@ -98,7 +101,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예제:
+예:
 
 ```json
 {
@@ -165,7 +168,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-active-directory/index>

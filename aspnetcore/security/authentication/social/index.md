@@ -5,13 +5,19 @@ description: 이 자습서에는 외부 인증 공급자에 OAuth 2.0을 사용�
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: c698edbd85d665509366287b1dcad08e276e71cc
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644817"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777152"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core에서 Facebook, Google 및 외부 공급자 인증
 
@@ -39,7 +45,7 @@ ms.locfileid: "78644817"
 * **인증**에서 **변경**을 선택하고 인증을 **개별 사용자 계정**으로 설정합니다. **확인**을 선택합니다.
 * **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **만들기**를 선택합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * 터미널을 엽니다.  Visual Studio Code에서 [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 열 수 있습니다.
 
@@ -114,4 +120,4 @@ ms.locfileid: "78644817"
 * 로그인 단추를 사용자 지정하는 방법에 대한 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/10563)를 참조하세요.
 * 이 문서는 외부 인증을 고새하고 ASP.NET Core 앱에 외부 로그인을 추가하는 데 필요한 필수 구성 요소를 설명합니다.
 * 앱에 필요한 공급자에 대한 로그인을 구성하기 위해 공급자 관련 페이지를 참조합니다.
-* 사용자와 해당 액세스 및 새로 고침 토큰에 대한 추가 데이터를 유지할 수 있습니다. 자세한 내용은 <xref:security/authentication/social/additional-claims>을 참조하세요.
+* 사용자와 해당 액세스 및 새로 고침 토큰에 대한 추가 데이터를 유지할 수 있습니다. 자세한 내용은 <xref:security/authentication/social/additional-claims>를 참조하세요.

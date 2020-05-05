@@ -4,20 +4,26 @@ author: rick-anderson
 description: IAuthenticatedEncryptor, IAuthenticatedEncryptorDescriptor, IAuthenticatedEncryptorDescriptorDeserializer 및 최상위 팩터리에 대해 알아보세요.
 ms.author: riande
 ms.date: 08/11/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: a5f651e3313cc579b995b45905826a5bffcc241c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653547"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776424"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core의 핵심 암호화 확장성
 
 <a name="data-protection-extensibility-core-crypto"></a>
 
 >[!WARNING]
-> 다음 인터페이스 중 하나를 구현 하는 형식은 스레드로부터 안전 해야 합니다. 여러 호출자에 대 한 합니다.
+> 다음 인터페이스 중 하나를 구현 하는 형식은 여러 호출자에 대해 스레드로부터 안전 해야 합니다.
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptor"></a>
 
@@ -112,7 +118,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 ---
 
-## <a name="xml-serialization"></a>XML 직렬화
+## <a name="xml-serialization"></a>XML Serialization
 
 IAuthenticatedEncryptor와 IAuthenticatedEncryptorDescriptor 간의 주요 차이점은 설명자가 암호기를 만들고 유효한 인수를 제공 하는 방법을 알고 있다는 것입니다. 구현에서 System.security.cryptography.symmetricalgorithm 및 KeyedHashAlgorithm를 사용 하는 IAuthenticatedEncryptor을 고려 합니다. 암호기의 작업은 이러한 형식을 사용 하는 것 이지만, 이러한 형식이 제공 된 위치를 반드시 알 필요는 없으므로 응용 프로그램을 다시 시작 하는 경우 자체를 다시 만드는 방법에 대 한 적절 한 설명을 작성할 수 없습니다. 설명자는이를 기반으로 상위 수준으로 작동 합니다. 설명자는 암호기 인스턴스를 만드는 방법을 알고 있습니다. 예를 들어 필요한 알고리즘을 만드는 방법을 알고 있으므로 응용 프로그램을 다시 설정한 후 암호기 인스턴스를 다시 만들 수 있도록 XML 형식으로 해당 정보를 serialize 할 수 있습니다.
 
@@ -139,9 +145,9 @@ ImportFromXml 메서드는 [IAuthenticatedEncryptorDescriptor](xref:security/dat
 
 IAuthenticatedEncryptorDescriptorDeserializer을 구현 하는 형식에는 다음 두 개의 공용 생성자 중 하나가 있어야 합니다.
 
-* .ctor(IServiceProvider)
+* .ctor (IServiceProvider)
 
-* .ctor()
+* .ctor ()
 
 > [!NOTE]
 > 생성자에 전달 된 IServiceProvider는 null 일 수 있습니다.

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 8fc68f2303bfcf16d279b829ab9441a80119f1bb
-ms.sourcegitcommit: 755952496316fdb0923689109b536b609ce525ee
+ms.openlocfilehash: 12a39ccfefdcaec6251a9804011aefde3bbae7b2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82643075"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776671"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 응답 압축
 
@@ -80,7 +86,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 응답 압축 미들웨어는 ASP.NET Core 앱에 암시적으로 포함 되는 [ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 패키지에서 제공 됩니다.
 
-## <a name="configuration"></a>Configuration
+## <a name="configuration"></a>구성
 
 다음 코드에서는 기본 MIME 형식 및 압축 공급자 ([Brotli](#brotli-compression-provider) 및 [Gzip](#gzip-compression-provider))에 대 한 응답 압축 미들웨어를 사용 하도록 설정 하는 방법을 보여 줍니다.
 
@@ -251,7 +257,7 @@ Nginx에서 요청을 프록시 하는 경우 `Accept-Encoding` 헤더가 제거
 * 요청은 헤더를 `Content-Range` 포함 하지 않아야 합니다.
 * 응답 압축 미들웨어 옵션에 보안 프로토콜 (https)이 구성 되지 않은 경우 요청은 안전 하지 않은 프로토콜 (http)을 사용 해야 합니다. *보안 콘텐츠 압축을 사용 하도록 설정할 때 [위에서 설명한](#compression-with-secure-protocol) 위험에 유의 하십시오.*
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -326,7 +332,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 프로젝트에 미들웨어를 포함 하려면 [ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 패키지를 포함 하는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)에 대 한 참조를 추가 합니다.
 
-## <a name="configuration"></a>Configuration
+## <a name="configuration"></a>구성
 
 다음 코드에서는 기본 MIME 형식 및 압축 공급자 ([Brotli](#brotli-compression-provider) 및 [Gzip](#gzip-compression-provider))에 대 한 응답 압축 미들웨어를 사용 하도록 설정 하는 방법을 보여 줍니다.
 
@@ -496,7 +502,7 @@ Nginx에서 요청을 프록시 하는 경우 `Accept-Encoding` 헤더가 제거
 * 요청은 헤더를 `Content-Range` 포함 하지 않아야 합니다.
 * 응답 압축 미들웨어 옵션에 보안 프로토콜 (https)이 구성 되지 않은 경우 요청은 안전 하지 않은 프로토콜 (http)을 사용 해야 합니다. *보안 콘텐츠 압축을 사용 하도록 설정할 때 [위에서 설명한](#compression-with-secure-protocol) 위험에 유의 하십시오.*
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -571,7 +577,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 프로젝트에 미들웨어를 포함 하려면 [ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) 패키지를 포함 하는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)에 대 한 참조를 추가 합니다.
 
-## <a name="configuration"></a>Configuration
+## <a name="configuration"></a>구성
 
 다음 코드에서는 기본 MIME 형식 및 [Gzip 압축 공급자](#gzip-compression-provider)에 대해 응답 압축 미들웨어를 사용 하도록 설정 하는 방법을 보여 줍니다.
 
@@ -701,7 +707,7 @@ Nginx에서 요청을 프록시 하는 경우 `Accept-Encoding` 헤더가 제거
 * 요청은 헤더를 `Content-Range` 포함 하지 않아야 합니다.
 * 응답 압축 미들웨어 옵션에 보안 프로토콜 (https)이 구성 되지 않은 경우 요청은 안전 하지 않은 프로토콜 (http)을 사용 해야 합니다. *보안 콘텐츠 압축을 사용 하도록 설정할 때 [위에서 설명한](#compression-with-secure-protocol) 위험에 유의 하십시오.*
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
