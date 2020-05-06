@@ -5,13 +5,19 @@ description: 필터 작동 방법 및 ASP.NET Core에서 사용하는 방법을 
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 03335811766ea3a1455901199863c6da0e35f7e4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653343"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776788"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -23,10 +29,10 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 기본 제공 필터는 다음과 같은 작업을 처리합니다.
 
-* 권한 부여(사용자가 권한이 없는 리소스에 액세스하는 것을 방지).
-* 응답 캐싱(요청 파이프라인을 단락하여 캐시된 응답 반환).
+* 권한 부여(사용자가 권한이 없는 리소스에 액세스 방지).
+* 응답 캐싱(요청 파이프라인을 단락하면 캐시된 응답을 반환합니다).
 
-사용자 지정 필터를 만들어 횡단 관심사를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
+사용자 지정 필터를 만들어 교차 편집 문제를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
 이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다. 필터는 작동 시 [Razor 구성 요소](xref:blazor/components)에 직접적인 영향을 주지 않습니다. 필터는 다음과 같은 경우에만 간접적으로 구성 요소에 영향을 줄 수 있습니다.
 
@@ -37,9 +43,9 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다. 필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.**** 필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
-![다른 미들웨어, 라우팅 미들웨어, 작업 선택 영역 및 작업 호출 파이프라인을 통해 요청이 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
+![다른 미들웨어, 라우팅 미들웨어, 작업 선택 영역 및 작업 호출 파이프라인을 통해 요청이 처리됩니다. 응답이 클라이언트에 전송되기 전에 작업 선택 영역, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해 요청 처리가 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
 ### <a name="filter-types"></a>필터 형식
 
@@ -70,13 +76,13 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ## <a name="implementation"></a>구현
 
-필터는 서로 다른 인터페이스 정의를 통해 동기 및 비동기 구현을 모두 지원합니다.
+필터는 다른 인터페이스 정의를 통해 동기 및 비동기 구현을 모두 지원합니다.
 
 동기 필터는 해당 파이프라인 단계 전후에 코드를 실행합니다. 예를 들어 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*>는 작업 메서드가 호출되기 전에 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*>는 작업 메서드가 반환된 후 호출됩니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-비동기 필터는 `On-Stage-ExecutionAsync` 메서드를 정의합니다. 예 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
+비동기 필터는 `On-Stage-ExecutionAsync` 메서드를 정의합니다. 예: <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
@@ -90,7 +96,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 * 비동기: <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-필터 인터페이스의 동기 또는 비동기 버전을 모두 구현하지 **말고** 그 중 **한 가지**만 구현하세요. 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
+필터 인터페이스의 동기 또는 비동기 버전 **중 하나만** 구현 합니다. **not** 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
 
 ### <a name="built-in-filter-attributes"></a>기본 제공 필터 특성
 
@@ -104,7 +110,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-[브라우저 개발자 도구](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools)와 같은 도구를 사용하여 헤더를 검사합니다. **응답 헤더**에 `author: Rick Anderson`이 표시됩니다.
+[브라우저 개발자 도구](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools)와 같은 도구를 사용하여 헤더를 검사합니다. **응답 헤더**아래에 `author: Rick Anderson` 가 표시 됩니다.
 
 다음 코드는 다음과 같은 작업을 수행하는 `ActionFilterAttribute`를 구현합니다.
 
@@ -113,11 +119,11 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-구성 옵션은 [옵션 패턴](xref:fundamentals/configuration/index)을 사용하여 [구성 시스템](xref:fundamentals/configuration/options)에서 제공됩니다. 예를 들어 *appsettings.json* 파일에서 다음을 수행합니다.
+구성 옵션은 [옵션 패턴](xref:fundamentals/configuration/options)을 사용하여 [구성 시스템](xref:fundamentals/configuration/index)에서 제공됩니다. 예를 들어 *appsettings.json* 파일에서 다음을 수행합니다.
 
 [!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
 
-`StartUp.ConfigureServices`에서 다음 단계를 수행합니다.
+`StartUp.ConfigureServices`에서
 
 * `PositionOptions` 클래스는 `"Position"` 구성 영역을 사용하여 서비스 컨테이너에 추가됩니다.
 * `MyActionFilterAttribute`는 서비스 컨테이너에 추가됩니다.
@@ -132,7 +138,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**엔드포인트가 호출될 때**응답 헤더`author: Rick Anderson`에 `Editor: Joe Smith` 및 `Sample/Index2`가 표시됩니다.
+**응답 헤더** `author: Rick Anderson`아래에는 `Sample/Index2` 끝점이 `Editor: Joe Smith` 호출 될 때 및가 표시 됩니다.
 
 다음 코드는 `MyActionFilterAttribute` 및 `AddHeaderAttribute`를 Razor 페이지에 적용합니다.
 
@@ -140,7 +146,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 이러한 메서드는 Razor 페이지 모델 또는 전역적으로 적용할 수 있습니다.
 
-여러 필터 인터페이스는 사용자 지정 구현을 위한 기본 클래스로 사용할 수 있는 상응하는 특성을 갖고 있습니다.
+여러 필터 인터페이스에는 사용자 지정 구현에 대한 기본 클래스로 사용할 수 있는 해당 특성이 있습니다.
 
 필터 특성:
 
@@ -153,7 +159,7 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 
 ## <a name="filter-scopes-and-order-of-execution"></a>필터 범위 및 실행 순서
 
-세 가지 *범위* 중 하나에서 필터를 파이프라인에 추가할 수 있습니다.
+다음 세 가지 *범위*중 하나에서 파이프라인에 필터를 추가할 수 있습니다.
 
 * 컨트롤러 작업에서 특성 사용. 필터 특성은 Razor Pages 처리기 메서드에 적용할 수 없습니다.
 * 컨트롤러 또는 Razor 페이지에서 특성 사용.
@@ -163,7 +169,7 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 
 ### <a name="default-order-of-execution"></a>기본 실행 순서
 
-파이프라인의 특정 단계에 여러 개의 필터가 있는 경우 범위가 기본 필터 실행 순서를 결정합니다.  전역 필터는 클래스 필터를 둘러싸고 클래스 필터는 다시 메서드 필터를 둘러쌉니다.
+파이프라인의 특정 단계에 여러 개의 필터가 있는 경우 범위가 기본 필터 실행 순서를 결정합니다.  전역 필터는 메서드 필터를 둘러싼 클래스 필터를 둘러쌉니다.
 
 필터 중첩의 결과로 필터의 *after* 코드는 *before* 코드의 역순으로 실행됩니다. 필터의 순서는 다음과 같습니다.
 
@@ -176,12 +182,12 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 시퀀스 | 필터 범위 | Filter 메서드 |
+| 시퀀스 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
 | 1 | Global | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
-| 3 | 방법 | `OnActionExecuting` |
-| 4 | 방법 | `OnActionExecuted` |
+| 3 | 메서드 | `OnActionExecuting` |
+| 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
 | 6 | Global | `OnActionExecuted` |
 
@@ -224,8 +230,8 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>를 구현하여 실행의 기본 순서를 재정의할 수 있습니다. `IOrderedFilter`은 실행 순서를 결정하는 데 범위보다 우선 순위가 높은 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> 속성을 노출합니다. 낮은 `Order` 값을 가진 필터는:
 
-* 더 높은 *값을 가진 필터 이전에*before`Order` 코드를 실행합니다.
-* 더 높은 *값을 가진 필터 이후에*after`Order` 코드를 실행합니다.
+* 더 높은 `Order` 값을 가진 필터 이전에 *before* 코드를 실행합니다.
+* 더 높은 `Order` 값을 가진 필터 이후에 *after* 코드를 실행합니다.
 
 `Order` 속성은 생성자 매개 변수를 사용하여 설정됩니다.
 
@@ -249,7 +255,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
   * `MyAction2FilterAttribute.OnResultExecuting`
 * `Test2Controller.OnActionExecuted`
 
-`Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터는 먼저 순서에 따라 정렬된 다음, 순서가 동일할 경우 범위가 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 앞서 언급했듯이 컨트롤러 수준 필터는 [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) 속성을 `int.MinValue`로 설정합니다. 기본 제공 필터의 경우 `Order`가 0이 아닌 값으로 설정되지 않은 한 범위가 순서를 결정합니다.
+`Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터가 순서에 따라 먼저 정렬된 다음, 범위는 연결을 끊는 데 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 앞서 언급했듯이 컨트롤러 수준 필터는 [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) 속성을 `int.MinValue`로 설정합니다. 기본 제공 필터의 경우 `Order`가 0이 아닌 값으로 설정되지 않은 한 범위가 순서를 결정합니다.
 
 이전 코드에서 `MySampleActionFilter`는 전역 범위를 가지므로 컨트롤러 범위를 포함하는 `MyAction2FilterAttribute` 전에 실행됩니다. `MyAction2FilterAttribute`를 먼저 실행하려면 순서를 `int.MinValue`로 설정합니다.
 
@@ -261,29 +267,29 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 ## <a name="cancellation-and-short-circuiting"></a>취소 및 단락
 
-필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
+필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
 
 <a name="short-circuiting-resource-filter"></a>
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 합니다. `ShortCircuitingResourceFilter`:
+다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 지정합니다. `ShortCircuitingResourceFilter`:
 
-* 리소스 필터이고 `AddHeader`는 작업 필터이기 때문에 먼저 실행됩니다.
+* 리소스 필터이고 `AddHeader`이 작업 필터이기 때문에 먼저 실행합니다.
 * 나머지 파이프라인을 단락시킵니다.
 
-따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `ShortCircuitingResourceFilter` 속성의 명시적 사용으로 인해 `Order`가 먼저 실행됩니다.
+따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `Order` 속성의 명시적 사용으로 인해 `ShortCircuitingResourceFilter`이 실행됩니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
 ## <a name="dependency-injection"></a>종속성 주입
 
-형식별 또는 인스턴스별 필터를 추가될 수 있습니다. 인스턴스가 추가되면 모든 요청에 해당 인스턴스가 사용됩니다. 형식이 추가되면 해당 필터는 형식으로 활성화됩니다. 형식으로 활성화된 필터는 다음을 의미합니다.
+형식 또는 인스턴스별로 필터를 추가할 수 있습니다. 인스턴스가 추가되면 모든 요청에 해당 인스턴스가 사용됩니다. 형식이 추가되면 해당 필터는 형식으로 활성화됩니다. 형식으로 활성화된 필터는 다음을 의미합니다.
 
 * 각 요청에 대해 인스턴스가 만들어집니다.
 * 모든 생성자 종속성이 DI([종속성 주입](xref:fundamentals/dependency-injection))를 통해서 채워집니다.
 
-특성으로 구현되고 컨트롤러 클래스 또는 작업 메서드에 직접 추가된 필터는 DI([종속성 주입](xref:fundamentals/dependency-injection))에서 제공하는 생성자 종속성을 가질 수 없습니다. DI는 다음과 같은 이유로 생성자 종속성을 제공할 수 없습니다.
+특성으로 구현되고 컨트롤러 클래스 또는 작업 메서드에 직접 추가되는 필터에는 DI([종속성 주입](xref:fundamentals/dependency-injection))에서 제공하는 생성자 종속성이 없을 것입니다. DI는 다음과 같은 이유로 생성자 종속성을 제공할 수 없습니다.
 
 * 특성이 적용될 때 해당 생성자 매개 변수가 제공되어야 하기 때문입니다. 
 * 특성이 작동하는 방법의 제한 사항입니다.
@@ -313,7 +319,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Startup.cs?name=snippet&highlight=4)]
 
-다음 코드에서 `ServiceFilter` 특성은 DI에서 `AddHeaderResultServiceFilter` 필터의 인스턴스를 검색합니다.
+다음 코드에서 `ServiceFilter` 특성은 DI에서 `AddHeaderResultServiceFilter` 필터의 인스턴스를 수신합니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet_ServiceFilter&highlight=1)]
 
@@ -326,23 +332,23 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`은 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>와 비슷하지만 해당 형식은 DI 컨테이너에서 직접 해결되지 않습니다. <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>를 사용하여 형식을 인스턴스화합니다.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>와 비슷하지만 해당 형식은 DI 컨테이너에서 직접 확인되지 않습니다. <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>를 사용하여 형식을 인스턴스화합니다.
 
 `TypeFilterAttribute` 형식은 DI 컨테이너에서 직접 해결되지 않기 때문입니다.
 
 * `TypeFilterAttribute`을 사용하여 참조되는 형식은 DI 컨테이너를 사용하여 등록할 필요가 없습니다.  DI 컨테이너에서 충족하는 종속성을 갖고 있습니다.
-* `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 받을 수 있습니다.
+* `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 허용할 수 있습니다.
 
 `TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)을 설정하면:
 * 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다.
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
-다음 예제는 `TypeFilterAttribute`를 사용하여 형식에 인수를 전달하는 방법을 보여줍니다.
+다음 예제에서는 `TypeFilterAttribute`를 사용하여 인수를 형식에 전달하는 방법을 보여줍니다.
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet_TypeFilter&highlight=1,2)]
 
@@ -357,7 +363,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 권한 부여 필터는:
 
 * 필터 파이프라인에서 첫 번째로 실행되는 필터입니다.
-* 작업 메서드에 대한 액세스를 제어합니다.
+* 동작 메서드에 대한 액세스를 제어합니다.
 * before 메서드는 있지만 after 메서드는 없습니다.
 
 사용자 지정 권한 부여 필터는 사용자 지정 권한 부여 프레임워크를 필요로 합니다. 사용자 지정 필터를 작성하는 대신 권한 부여 정책을 구성하거나 사용자 지정 권한 부여 정책을 작성하는 것이 좋습니다. 기본 제공 권한 부여 필터는:
@@ -380,7 +386,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResourceFilter> 인터페이스 중 하나를 구현합니다.
 * 실행이 필터 파이프라인 대부분을 래핑합니다.
-* [권한 부여 필터](#authorization-filters)만 리소스 필터 이전에 실행됩니다.
+* [권한 부여 필터](#authorization-filters) 는 리소스 필터 이전에만 실행 됩니다.
 
 리소스 필터는 파이프라인의 대부분을 단락시켜야 하는 경우에 유용합니다. 예를 들어 캐싱 필터는 캐시 적중 시 파이프라인의 나머지 부분을 막을 수 있습니다.
 
@@ -399,7 +405,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 작업 필터는:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> 인터페이스 중 하나를 구현합니다.
-* 실행이 작업 메서드의 실행을 둘러쌉니다.
+* 해당 실행은 작업 메서드의 실행을 둘러쌉니다.
 
 다음 코드는 예제 작업 필터를 보여 줍니다.
 
@@ -416,7 +422,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 후속 필터의 실행을 막습니다.
 * `Result` 설정과 달리 성공적인 결과 대신 실패로 처리됩니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext>는 `Controller` 및 `Result`에 더하여 다음과 같은 속성을 제공합니다.
+<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext>는 다음과 같은 속성과 함께 `Controller` 및 `Result`를 제공합니다.
 
 * <xref:System.Web.Mvc.ActionExecutedContext.Canceled> - 작업 실행이 다른 필터에 의해 단락된 경우 true입니다.
 * <xref:System.Web.Mvc.ActionExecutedContext.Exception> - 작업 또는 이전에 실행된 작업 필터에서 예외가 던져진 경우 null이 아닙니다. 이 속성을 null로 설정하면:
@@ -424,9 +430,9 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
   * 예외를 효과적으로 처리합니다.
   * `Result`는 작업 메서드에서 반환되는 것처럼 실행됩니다.
 
-`IAsyncActionFilter`의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>에 대한 호출은:
+`IAsyncActionFilter`의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>에 대한 호출:
 
-* 모든 후속 작업 필터 및 작업 메서드를 실행합니다.
+* 후속 작업 필터 및 작업 메서드를 실행합니다.
 * `ActionExecutedContext`를 반환합니다.
 
 단락시키려면 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName>을 결과 인스턴스에 할당하고 `next`(`ActionExecutionDelegate`)를 호출하지 않아야 합니다.
@@ -444,16 +450,16 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * 그리고 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Result> 속성을 통해 작업 결과를 확인하고 조작할 수 있습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Canceled>는 작업 실행이 다른 필터에 의해 단락된 경우 true로 설정됩니다.
-* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception>은 작업 또는 후속 작업 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 null로 설정하면:
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception>은 작업 또는 후속 작업 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 Null로 설정:
 
   * 예외를 효과적으로 처리합니다.
-  * `ActionExecutedContext.Result`는 작업 메서드에서 정상적으로 반환되는 것처럼 실행됩니다.
+  * `ActionExecutedContext.Result`은 작업 메서드에서 정상적으로 반환되는 것처럼 실행됩니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet2&higlight=12-99)]
 
 ## <a name="exception-filters"></a>예외 필터
 
-예외 필터는:
+예외 필터:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>를 구현합니다.
 * 공통 오류 처리 정책을 구현하는 데 사용할 수 있습니다.
@@ -466,30 +472,30 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Controllers/FailingController.cs?name=snippet)]
 
-예외 필터는:
+예외 필터:
 
 * before 및 after 이벤트가 없습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>를 구현합니다.
 * Razor Page 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생하는 처리되지 않은 예외를 처리합니다.
-* 리소스 필터, 결과 필터 또는 MVC 결과 실행에서 발생하는 예외를 잡지 **않습니다**.
+* 리소스 필터, 결과 필터 또는 MVC 결과 실행에서 발생 하는 예외를 catch **하지** 마세요.
 
 예외를 처리하려면 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 속성을 `true`로 설정하거나 응답을 작성합니다. 그러면 예외가 전파되지 않습니다. 예외 필터는 예외를 “성공”으로 변환할 수 없습니다. 이는 작업 필터에서만 가능합니다.
 
-예외 필터는:
+예외 필터:
 
 * 작업 내에서 발생하는 예외를 잡는 데 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.** 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
 결과 필터는:
 
-* 다음 인터페이스를 구현합니다.
+* 인터페이스 구현:
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter>
-* 실행이 작업 결과의 실행을 둘러쌉니다.
+* 해당 실행은 작업 결과의 실행을 둘러쌉니다.
 
 ### <a name="iresultfilter-and-iasyncresultfilter"></a>IResultFilter 및 IAsyncResultFilter
 
@@ -497,25 +503,25 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행 중인 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부로 모든 Razor 프로세스가 포함됩니다. API 메서드는 결과 실행의 일부로 어떤 직렬화를 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아보세요.
+실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행 중인 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부로 모든 Razor 프로세스가 포함됩니다. API 메서드는 실행 결과의 일부로 일부 serialization을 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아보세요.
 
 결과 필터는 작업 또는 작업 필터가 작업 결과를 생성하는 경우에만 실행됩니다. 다음 경우에는 결과 필터가 실행되지 않습니다.
 
 * 권한 부여 필터 또는 리소스 필터가 파이프라인을 단락시킬 경우.
-* 예외 필터가 작업 결과를 생성하여 예외를 처리하는 경우.
+* 예외 필터는 작업 결과를 생성하여 예외를 처리합니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> 메서드는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName>을 `true`로 설정하여 작업 결과 및 후속 결과 필터를 단락시킬 수 있습니다. 단락시킬 경우 빈 응답을 생성하지 않도록 응답 개체에 작성하세요. `IResultFilter.OnResultExecuting`에서 예외 throw:
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> 메서드는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName>를 `true`로 설정하여 작업 결과 및 후속 결과 필터를 단락(short-circuit) 처리할 수 있습니다. 단락시킬 경우 빈 응답을 생성하지 않도록 응답 개체에 작성하세요. `IResultFilter.OnResultExecuting`에서 예외 throw:
 
 * 작업 결과 및 후속 필터의 실행을 막습니다.
 * 성공적인 결과 대신 실패로 처리됩니다.
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> 메서드가 실행될 때에는 응답이 이미 클라이언트에 전송되었을 수 있습니다. 이미 클라이언트에 전송된 응답은 변경할 수 없습니다.
 
-`ResultExecutedContext.Canceled`는 작업 결과 실행이 다른 필터에 의해 단락된 경우 `true`로 설정됩니다.
+`ResultExecutedContext.Canceled`는 작업 결과 실행이 다른 필터에 의해 단락(short-circuit) 처리된 경우 `true`로 설정됩니다.
 
 `ResultExecutedContext.Exception`은 작업 결과 또는 후속 결과 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 효과적으로 null로 설정하면 예외를 '처리'하고 예외가 파이프라인의 뒷부분에서 다시 throw되지 않습니다. 결과 필터에서 예외를 처리하는 경우 데이터를 응답에 쓸 수 있는 신뢰할 수 있는 방법이 없습니다. 작업 결과가 예외를 던질 때 헤더가 클라이언트에 플러시된 경우 오류 코드를 전송하기 위한 신뢰할 수 있는 메커니즘이 없습니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 `await next`의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate>의 `await next` 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
@@ -526,15 +532,15 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> 인터페이스는 모든 작업 결과에 대해 실행되는 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 구현을 선언합니다. 여기에는 다음에 의해 생성되는 작업 결과가 포함됩니다.
 
 * 단락하는 권한 부여 필터 및 리소스 필터
-* 예외 필터.
+* 예외 필터
 
-예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 *422 Unprocessable Entity* 상태 코드로 설정합니다.
+예를 들어 다음 필터는 항상 작업 결과(콘텐츠 협상이 실패할 경우 *422 Unprocessable Entity* 상태 코드가 포함된 <xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 실행 및 설정합니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>를 구현합니다. 따라서 필터 파이프라인 어디에서나 `IFilterFactory` 인스턴스를 `IFilterMetadata` 인스턴스로 사용할 수 있습니다. 런타임이 필터를 호출하려고 준비할 때 `IFilterFactory`로 캐스팅을 시도합니다. 해당 캐스팅에 성공하면 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 호출하여 호출되는 `IFilterMetadata` 인스턴스를 만듭니다. 앱이 시작될 때 정확한 필터 파이프라인을 명시적으로 설정할 필요가 없으므로 유연한 디자인을 제공합니다.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>를 구현합니다. 따라서 `IFilterFactory` 인스턴스를 필터 파이프라인에서 `IFilterMetadata` 인스턴스로 사용할 수 있습니다. 런타임이 필터를 호출하려고 준비할 때 `IFilterFactory`로 캐스팅을 시도합니다. 해당 캐스팅에 성공하면 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 호출하여 호출되는 `IFilterMetadata` 인스턴스를 만듭니다. 앱이 시작될 때 정확한 필터 파이프라인을 명시적으로 설정할 필요가 없으므로 유연한 디자인을 제공합니다.
 
 필터를 만드는 다른 방법으로 사용자 지정 특성 구현을 사용하여 `IFilterFactory`를 구현할 수 있습니다.
 
@@ -549,11 +555,11 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * F12 개발자 도구를 호출합니다.
 * `https://localhost:5001/Sample/HeaderWithFactory`로 이동합니다.
 
-F12 개발자 도구는 예제 코드에 의해 추가된 다음 응답 헤더를 표시합니다.
+F12 개발자 도구는 샘플 코드에 의해 추가된 다음 응답 헤더를 표시합니다.
 
-* **author:** `Rick Anderson`
+* **작성자:**`Rick Anderson`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **internal:** `My header`
+* **내부:**`My header`
 
 이전 코드에서는 **internal:** `My header` 응답 헤더를 만듭니다.
 
@@ -569,7 +575,7 @@ What's a non-named attribute?
 * 매개 변수 전달을 필요로 하지 않는 필터.
 * DI에 의해 채워져야 할 생성자 종속성이 있는 필터.
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`은 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
@@ -596,7 +602,7 @@ What's a non-named attribute?
 ## <a name="next-actions"></a>다음 작업
 
 * [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
-* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)합니다.
+* 필터를 실험하려면 [GitHub 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)합니다.
 
 ::: moniker-end
 
@@ -608,10 +614,10 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 기본 제공 필터는 다음과 같은 작업을 처리합니다.
 
-* 권한 부여(사용자가 권한이 없는 리소스에 액세스하는 것을 방지).
-* 응답 캐싱(요청 파이프라인을 단락하여 캐시된 응답 반환).
+* 권한 부여(사용자가 권한이 없는 리소스에 액세스 방지).
+* 응답 캐싱(요청 파이프라인을 단락하면 캐시된 응답을 반환합니다).
 
-사용자 지정 필터를 만들어 횡단 관심사를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
+사용자 지정 필터를 만들어 교차 편집 문제를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
 이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다.
 
@@ -619,9 +625,9 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.  필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.****  필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
-![요청은 기타 미들웨어, 라우팅 미들웨어, 작업 선택 및 ASP.NET Core 작업 호출 파이프라인을 통해서 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
+![요청은 기타 미들웨어, 라우팅 미들웨어, 작업 선택 및 ASP.NET Core 작업 호출 파이프라인을 통해서 처리됩니다. 응답이 클라이언트에 전송되기 전에 작업 선택 영역, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해 요청 처리가 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
 ### <a name="filter-types"></a>필터 형식
 
@@ -635,11 +641,11 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>는 나머지 필터 파이프라인보다 먼저 코드를 실행할 수 있습니다. 예를 들어 `OnResourceExecuting`는 모델 바인딩 전에 코드를 실행할 수 있습니다.
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>는 파이프라인의 나머지 부분이 완료된 후에 코드를 실행할 수 있습니다.
 
-* [작업 필터](#action-filters)는 개별 작업 메서드가 호출되는 전후에 즉시 코드를 실행할 수 있습니다. 작업에 전달된 인수 및 작업에서 반환된 결과를 조작하는 데 사용할 수 있습니다. Razor Pages에서는 작업 필터가 지원되지 **않습니다**.
+* [작업 필터](#action-filters)는 개별 작업 메서드가 호출된 전후에 즉시 코드를 실행할 수 있습니다. 작업에 전달된 인수 및 작업에서 반환된 결과를 조작하는 데 사용할 수 있습니다. Razor Pages에서는 작업 필터가 지원되지 **않습니다**.
 
-* [예외 필터](#exception-filters)는 응답 본문에 무언가 쓰여지기 전에 발생한 처리되지 않은 예외에 대한 전역 정책을 적용하는 데 사용됩니다.
+* [예외 필터](#exception-filters)는 응답 본문에 무언가 쓰여지기 전에 발생한 처리되지 않은 예외에 전역 정책을 적용하는 데 사용됩니다.
 
-* [결과 필터](#result-filters)는 개별 작업 결과의 실행 전후에 즉시 코드를 실행할 수 있습니다. 작업 메서드가 성공적으로 실행되는 경우에만 실행됩니다. 보기 또는 포맷터 실행을 둘러싸야 하는 논리에 유용합니다.
+* [결과 필터](#result-filters)는 개별 작업이 실행된 전후에 즉시 코드를 실행할 수 있습니다. 작업 메서드가 성공적으로 실행되는 경우에만 실행됩니다. 보기 또는 포맷터 실행을 둘러싸야 하는 논리에 유용합니다.
 
 다음 다이어그램은 필터 형식이 필터 파이프라인에서 상호 작용하는 방법을 보여줍니다.
 
@@ -647,7 +653,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ## <a name="implementation"></a>구현
 
-필터는 서로 다른 인터페이스 정의를 통해 동기 및 비동기 구현을 모두 지원합니다.
+필터는 다른 인터페이스 정의를 통해 동기 및 비동기 구현을 모두 지원합니다.
 
 동기 필터는 해당 파이프라인 단계 전(`On-Stage-Executing`)과 후(`On-Stage-Executed`)에 코드를 실행할 수 있습니다. 예를 들어 `OnActionExecuting`는 작업 메서드가 호출되기 전에 호출됩니다. `OnActionExecuted`는 작업 메서드가 반환된 후 호출됩니다.
 
@@ -661,9 +667,9 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ### <a name="multiple-filter-stages"></a>여러 필터 단계
 
-단일 클래스에서 여러 필터 단계에 대한 인터페이스를 구현할 수 있습니다. 예를 들어 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 클래스는 `IActionFilter`, `IResultFilter` 및 해당 비동기 항목을 구현합니다.
+단일 클래스에서 여러 필터 단계에 대한 인터페이스를 구현할 수 있습니다. 예를 들어 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 클래스는 `IActionFilter`, `IResultFilter` 및 해당 비동기 값을 구현합니다.
 
-필터 인터페이스의 동기 또는 비동기 버전을 모두 구현하지 **말고** 그 중 **한 가지**만 구현하세요. 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
+필터 인터페이스의 동기 또는 비동기 버전 **중 하나만** 구현 합니다. **not** 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
 
 ### <a name="built-in-filter-attributes"></a>기본 제공 필터 특성
 
@@ -679,7 +685,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 <!-- `https://localhost:5001/Sample` -->
 
-여러 필터 인터페이스는 사용자 지정 구현을 위한 기본 클래스로 사용할 수 있는 상응하는 특성을 갖고 있습니다.
+여러 필터 인터페이스에는 사용자 지정 구현에 대한 기본 클래스로 사용할 수 있는 해당 특성이 있습니다.
 
 필터 특성:
 
@@ -692,7 +698,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 ## <a name="filter-scopes-and-order-of-execution"></a>필터 범위 및 실행 순서
 
-세 가지 *범위* 중 하나에서 필터를 파이프라인에 추가할 수 있습니다.
+다음 세 가지 *범위*중 하나에서 파이프라인에 필터를 추가할 수 있습니다.
 
 * 작업에서 특성 사용.
 * 컨트롤러에서 특성 사용.
@@ -717,16 +723,16 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 시퀀스 | 필터 범위 | Filter 메서드 |
+| 시퀀스 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
 | 1 | Global | `OnActionExecuting` |
 | 2 | 컨트롤러 | `OnActionExecuting` |
-| 3 | 방법 | `OnActionExecuting` |
-| 4 | 방법 | `OnActionExecuted` |
+| 3 | 메서드 | `OnActionExecuting` |
+| 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 | `OnActionExecuted` |
 | 6 | Global | `OnActionExecuted` |
 
-이 순서는 다음을 보여 줍니다.
+이 시퀀스는 다음을 보여 줍니다.
 
 * 메서드 필터는 컨트롤러 필터 내에서 중첩됩니다.
 * 컨트롤러 필터는 전역 필터 내에서 중첩됩니다.
@@ -766,8 +772,8 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>를 구현하여 실행의 기본 순서를 재정의할 수 있습니다. `IOrderedFilter`은 실행 순서를 결정하는 데 범위보다 우선 순위가 높은 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> 속성을 노출합니다. 낮은 `Order` 값을 가진 필터는:
 
-* 더 높은 *값을 가진 필터 이전에*before`Order` 코드를 실행합니다.
-* 더 높은 *값을 가진 필터 이후에*after`Order` 코드를 실행합니다.
+* 더 높은 `Order` 값을 가진 필터 이전에 *before* 코드를 실행합니다.
+* 더 높은 `Order` 값을 가진 필터 이후에 *after* 코드를 실행합니다.
 
 생성자 매개 변수로 `Order` 속성을 설정할 수 있습니다.
 
@@ -777,42 +783,42 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 이전 예제와 동일한 3개의 작업 필터를 가정해보세요. 컨트롤러와 전역 필터의 `Order` 속성을 각각 1과 2로 설정하면 실행 순서가 반대가 됩니다.
 
-| 시퀀스 | 필터 범위 | `Order` 속성 | Filter 메서드 |
+| 시퀀스 | 필터 범위 | `Order` 속성 | 필터 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 방법 | 0 | `OnActionExecuting` |
+| 1 | 메서드 | 0 | `OnActionExecuting` |
 | 2 | 컨트롤러 | 1  | `OnActionExecuting` |
 | 3 | Global | 2  | `OnActionExecuting` |
 | 4 | Global | 2  | `OnActionExecuted` |
 | 5 | 컨트롤러 | 1  | `OnActionExecuted` |
-| 6 | 방법 | 0  | `OnActionExecuted` |
+| 6 | 메서드 | 0  | `OnActionExecuted` |
 
-`Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터는 먼저 순서에 따라 정렬된 다음, 순서가 동일할 경우 범위가 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
+`Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터가 순서에 따라 먼저 정렬된 다음, 범위는 연결을 끊는 데 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
 
 ## <a name="cancellation-and-short-circuiting"></a>취소 및 단락
 
-필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
+필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
 
 <a name="short-circuiting-resource-filter"></a>
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 합니다. `ShortCircuitingResourceFilter`:
+다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 지정합니다. `ShortCircuitingResourceFilter`:
 
-* 리소스 필터이고 `AddHeader`는 작업 필터이기 때문에 먼저 실행됩니다.
+* 리소스 필터이고 `AddHeader`이 작업 필터이기 때문에 먼저 실행합니다.
 * 나머지 파이프라인을 단락시킵니다.
 
-따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `ShortCircuitingResourceFilter` 속성의 명시적 사용으로 인해 `Order`가 먼저 실행됩니다.
+따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `Order` 속성의 명시적 사용으로 인해 `ShortCircuitingResourceFilter`이 실행됩니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1,9)]
 
 ## <a name="dependency-injection"></a>종속성 주입
 
-형식별 또는 인스턴스별 필터를 추가될 수 있습니다. 인스턴스가 추가되면 모든 요청에 해당 인스턴스가 사용됩니다. 형식이 추가되면 해당 필터는 형식으로 활성화됩니다. 형식으로 활성화된 필터는 다음을 의미합니다.
+형식 또는 인스턴스별로 필터를 추가할 수 있습니다. 인스턴스가 추가되면 모든 요청에 해당 인스턴스가 사용됩니다. 형식이 추가되면 해당 필터는 형식으로 활성화됩니다. 형식으로 활성화된 필터는 다음을 의미합니다.
 
 * 각 요청에 대해 인스턴스가 만들어집니다.
 * 모든 생성자 종속성이 DI([종속성 주입](xref:fundamentals/dependency-injection))를 통해서 채워집니다.
 
-특성으로 구현되고 컨트롤러 클래스 또는 작업 메서드에 직접 추가된 필터는 DI([종속성 주입](xref:fundamentals/dependency-injection))에서 제공하는 생성자 종속성을 가질 수 없습니다. DI는 다음과 같은 이유로 생성자 종속성을 제공할 수 없습니다.
+특성으로 구현되고 컨트롤러 클래스 또는 작업 메서드에 직접 추가되는 필터에는 DI([종속성 주입](xref:fundamentals/dependency-injection))에서 제공하는 생성자 종속성이 없을 것입니다. DI는 다음과 같은 이유로 생성자 종속성을 제공할 수 없습니다.
 
 * 특성이 적용될 때 해당 생성자 매개 변수가 제공되어야 하기 때문입니다. 
 * 특성이 작동하는 방법의 제한 사항입니다.
@@ -842,7 +848,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 [!code-csharp[](./filters/sample/FiltersSample/Startup.cs?name=snippet_ConfigureServices&highlight=4)]
 
-다음 코드에서 `ServiceFilter` 특성은 DI에서 `AddHeaderResultServiceFilter` 필터의 인스턴스를 검색합니다.
+다음 코드에서 `ServiceFilter` 특성은 DI에서 `AddHeaderResultServiceFilter` 필터의 인스턴스를 수신합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_ServiceFilter&highlight=1)]
 
@@ -855,23 +861,23 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`은 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>와 비슷하지만 해당 형식은 DI 컨테이너에서 직접 해결되지 않습니다. <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>를 사용하여 형식을 인스턴스화합니다.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>와 비슷하지만 해당 형식은 DI 컨테이너에서 직접 확인되지 않습니다. <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>를 사용하여 형식을 인스턴스화합니다.
 
 `TypeFilterAttribute` 형식은 DI 컨테이너에서 직접 해결되지 않기 때문입니다.
 
 * `TypeFilterAttribute`을 사용하여 참조되는 형식은 DI 컨테이너를 사용하여 등록할 필요가 없습니다.  DI 컨테이너에서 충족하는 종속성을 갖고 있습니다.
-* `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 받을 수 있습니다.
+* `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 허용할 수 있습니다.
 
 `TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)을 설정하면:
 * 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다.
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
-다음 예제는 `TypeFilterAttribute`를 사용하여 형식에 인수를 전달하는 방법을 보여줍니다.
+다음 예제에서는 `TypeFilterAttribute`를 사용하여 인수를 형식에 전달하는 방법을 보여줍니다.
 
 [!code-csharp[](../../mvc/controllers/filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_TypeFilter&highlight=1,2)]
 [!code-csharp[](../../mvc/controllers/filters/sample/FiltersSample/Filters/LogConstantFilter.cs?name=snippet_TypeFilter_Implementation&highlight=6)]
@@ -887,7 +893,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 권한 부여 필터는:
 
 * 필터 파이프라인에서 첫 번째로 실행되는 필터입니다.
-* 작업 메서드에 대한 액세스를 제어합니다.
+* 동작 메서드에 대한 액세스를 제어합니다.
 * before 메서드는 있지만 after 메서드는 없습니다.
 
 사용자 지정 권한 부여 필터는 사용자 지정 권한 부여 프레임워크를 필요로 합니다. 사용자 지정 필터를 작성하는 대신 권한 부여 정책을 구성하거나 사용자 지정 권한 부여 정책을 작성하는 것이 좋습니다. 기본 제공 권한 부여 필터는:
@@ -910,7 +916,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResourceFilter> 인터페이스 중 하나를 구현합니다.
 * 실행이 필터 파이프라인 대부분을 래핑합니다.
-* [권한 부여 필터](#authorization-filters)만 리소스 필터 이전에 실행됩니다.
+* [권한 부여 필터](#authorization-filters) 는 리소스 필터 이전에만 실행 됩니다.
 
 리소스 필터는 파이프라인의 대부분을 단락시켜야 하는 경우에 유용합니다. 예를 들어 캐싱 필터는 캐시 적중 시 파이프라인의 나머지 부분을 막을 수 있습니다.
 
@@ -925,12 +931,12 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 ## <a name="action-filters"></a>작업 필터
 
 > [!IMPORTANT]
-> 작업 필터는 Razor Pages에 **적용되지 않습니다**. Razor Pages는 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>를 지원합니다. 자세한 내용은 [Razor 페이지에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
+> 작업 필터는 **not** 페이지에 Razor 적용 되지 않습니다. Razor페이지는 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 를 지원 합니다. 자세한 내용은 [페이지의 Razor 필터 메서드](xref:razor-pages/filter)를 참조 하세요.
 
 작업 필터는:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> 인터페이스 중 하나를 구현합니다.
-* 실행이 작업 메서드의 실행을 둘러쌉니다.
+* 해당 실행은 작업 메서드의 실행을 둘러쌉니다.
 
 다음 코드는 예제 작업 필터를 보여 줍니다.
 
@@ -947,7 +953,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 후속 필터의 실행을 막습니다.
 * `Result` 설정과 달리 성공적인 결과 대신 실패로 처리됩니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext>는 `Controller` 및 `Result`에 더하여 다음과 같은 속성을 제공합니다.
+<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext>는 다음과 같은 속성과 함께 `Controller` 및 `Result`를 제공합니다.
 
 * <xref:System.Web.Mvc.ActionExecutedContext.Canceled> - 작업 실행이 다른 필터에 의해 단락된 경우 true입니다.
 * <xref:System.Web.Mvc.ActionExecutedContext.Exception> - 작업 또는 이전에 실행된 작업 필터에서 예외가 던져진 경우 null이 아닙니다. 이 속성을 null로 설정하면:
@@ -955,9 +961,9 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
   * 예외를 효과적으로 처리합니다.
   * `Result`는 작업 메서드에서 반환되는 것처럼 실행됩니다.
 
-`IAsyncActionFilter`의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>에 대한 호출은:
+`IAsyncActionFilter`의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>에 대한 호출:
 
-* 모든 후속 작업 필터 및 작업 메서드를 실행합니다.
+* 후속 작업 필터 및 작업 메서드를 실행합니다.
 * `ActionExecutedContext`를 반환합니다.
 
 단락시키려면 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName>을 결과 인스턴스에 할당하고 `next`(`ActionExecutionDelegate`)를 호출하지 않아야 합니다.
@@ -975,16 +981,16 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * 그리고 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Result> 속성을 통해 작업 결과를 확인하고 조작할 수 있습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Canceled>는 작업 실행이 다른 필터에 의해 단락된 경우 true로 설정됩니다.
-* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception>은 작업 또는 후속 작업 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 null로 설정하면:
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception>은 작업 또는 후속 작업 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 Null로 설정:
 
   * 예외를 효과적으로 처리합니다.
-  * `ActionExecutedContext.Result`는 작업 메서드에서 정상적으로 반환되는 것처럼 실행됩니다.
+  * `ActionExecutedContext.Result`은 작업 메서드에서 정상적으로 반환되는 것처럼 실행됩니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet2&higlight=12-99)]
 
 ## <a name="exception-filters"></a>예외 필터
 
-예외 필터는:
+예외 필터:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>를 구현합니다. 
 * 공통 오류 처리 정책을 구현하는 데 사용할 수 있습니다.
@@ -993,30 +999,30 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/CustomExceptionFilter.cs?name=snippet_ExceptionFilter&highlight=16-19)]
 
-예외 필터는:
+예외 필터:
 
 * before 및 after 이벤트가 없습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>를 구현합니다.
-* Razor Page 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생하는 처리되지 않은 예외를 처리합니다.
-* 리소스 필터, 결과 필터 또는 MVC 결과 실행에서 발생하는 예외를 잡지 **않습니다**.
+* Razor 페이지 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생 하는 처리 되지 않은 예외를 처리 합니다.
+* 리소스 필터, 결과 필터 또는 MVC 결과 실행에서 발생 하는 예외를 catch **하지** 마세요.
 
 예외를 처리하려면 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 속성을 `true`로 설정하거나 응답을 작성합니다. 그러면 예외가 전파되지 않습니다. 예외 필터는 예외를 “성공”으로 변환할 수 없습니다. 이는 작업 필터에서만 가능합니다.
 
-예외 필터는:
+예외 필터:
 
 * 작업 내에서 발생하는 예외를 잡는 데 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.** 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
 결과 필터는:
 
-* 다음 인터페이스를 구현합니다.
+* 인터페이스 구현:
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter>
-* 실행이 작업 결과의 실행을 둘러쌉니다.
+* 해당 실행은 작업 결과의 실행을 둘러쌉니다.
 
 ### <a name="iresultfilter-and-iasyncresultfilter"></a>IResultFilter 및 IAsyncResultFilter
 
@@ -1024,25 +1030,25 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행 중인 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부로 모든 Razor 프로세스가 포함됩니다. API 메서드는 결과 실행의 일부로 어떤 직렬화를 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아보세요.
+실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행 중인 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부로 모든 Razor 프로세스가 포함됩니다. API 메서드는 실행 결과의 일부로 일부 serialization을 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아보세요.
 
 결과 필터는 작업 또는 작업 필터가 작업 결과를 생성하는 경우에만 실행됩니다. 다음 경우에는 결과 필터가 실행되지 않습니다.
 
 * 권한 부여 필터 또는 리소스 필터가 파이프라인을 단락시킬 경우.
-* 예외 필터가 작업 결과를 생성하여 예외를 처리하는 경우.
+* 예외 필터는 작업 결과를 생성하여 예외를 처리합니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> 메서드는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName>을 `true`로 설정하여 작업 결과 및 후속 결과 필터를 단락시킬 수 있습니다. 단락시킬 경우 빈 응답을 생성하지 않도록 응답 개체에 작성하세요. `IResultFilter.OnResultExecuting`에서 예외를 던지면:
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> 메서드는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName>를 `true`로 설정하여 작업 결과 및 후속 결과 필터를 단락(short-circuit) 처리할 수 있습니다. 단락시킬 경우 빈 응답을 생성하지 않도록 응답 개체에 작성하세요. `IResultFilter.OnResultExecuting`에서 예외를 던지면:
 
-* 작업 결과 및 후속 필터의 실행을 막습니다.
+* 작업 결과 및 후속 필터의 실행을 방지합니다.
 * 성공적인 결과 대신 실패로 처리됩니다.
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> 메서드가 실행될 때에는 응답이 이미 클라이언트에 전송되었을 수 있습니다. 이미 클라이언트에 전송된 응답은 더이상 변경할 수 없습니다.
 
-`ResultExecutedContext.Canceled`는 작업 결과 실행이 다른 필터에 의해 단락된 경우 `true`로 설정됩니다.
+`ResultExecutedContext.Canceled`는 작업 결과 실행이 다른 필터에 의해 단락(short-circuit) 처리된 경우 `true`로 설정됩니다.
 
 `ResultExecutedContext.Exception`은 작업 결과 또는 후속 결과 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 null로 설정하면 효과적으로 예외를 처리하고 이후의 파이프라인에서 ASP.NET Core에 의해 예외가 다시 던져지지 않습니다. 결과 필터에서 예외를 처리하는 경우 데이터를 응답에 쓸 수 있는 신뢰할 수 있는 방법이 없습니다. 작업 결과가 예외를 던질 때 헤더가 클라이언트에 플러시된 경우 오류 코드를 전송하기 위한 신뢰할 수 있는 메커니즘이 없습니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 `await next`의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate>의 `await next` 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
@@ -1053,15 +1059,15 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> 인터페이스는 모든 작업 결과에 대해 실행되는 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 구현을 선언합니다. 여기에는 다음에 의해 생성되는 작업 결과가 포함됩니다.
 
 * 단락하는 권한 부여 필터 및 리소스 필터
-* 예외 필터.
+* 예외 필터
 
-예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 *422 Unprocessable Entity* 상태 코드로 설정합니다.
+예를 들어 다음 필터는 항상 작업 결과(콘텐츠 협상이 실패할 경우 *422 Unprocessable Entity* 상태 코드가 포함된 <xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 실행 및 설정합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>를 구현합니다. 따라서 필터 파이프라인 어디에서나 `IFilterFactory` 인스턴스를 `IFilterMetadata` 인스턴스로 사용할 수 있습니다. 런타임이 필터를 호출하려고 준비할 때 `IFilterFactory`로 캐스팅을 시도합니다. 해당 캐스팅에 성공하면 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 호출하여 호출되는 `IFilterMetadata` 인스턴스를 만듭니다. 앱이 시작될 때 정확한 필터 파이프라인을 명시적으로 설정할 필요가 없으므로 유연한 디자인을 제공합니다.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>를 구현합니다. 따라서 `IFilterFactory` 인스턴스를 필터 파이프라인에서 `IFilterMetadata` 인스턴스로 사용할 수 있습니다. 런타임이 필터를 호출하려고 준비할 때 `IFilterFactory`로 캐스팅을 시도합니다. 해당 캐스팅에 성공하면 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 호출하여 호출되는 `IFilterMetadata` 인스턴스를 만듭니다. 앱이 시작될 때 정확한 필터 파이프라인을 명시적으로 설정할 필요가 없으므로 유연한 디자인을 제공합니다.
 
 필터를 만드는 다른 방법으로 사용자 지정 특성 구현을 사용하여 `IFilterFactory`를 구현할 수 있습니다.
 
@@ -1072,11 +1078,11 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * F12 개발자 도구를 호출합니다.
 * `https://localhost:5001/Sample/HeaderWithFactory`로 이동합니다.
 
-F12 개발자 도구는 예제 코드에 의해 추가된 다음 응답 헤더를 표시합니다.
+F12 개발자 도구는 샘플 코드에 의해 추가된 다음 응답 헤더를 표시합니다.
 
-* **author:** `Joe Smith`
+* **작성자:**`Joe Smith`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **internal:** `My header`
+* **내부:**`My header`
 
 이전 코드에서는 **internal:** `My header` 응답 헤더를 만듭니다.
 
@@ -1092,7 +1098,7 @@ What's a non-named attribute?
 * 매개 변수 전달을 필요로 하지 않는 필터.
 * DI에 의해 채워져야 할 생성자 종속성이 있는 필터.
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`은 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
@@ -1118,7 +1124,7 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a>다음 작업
 
-* [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
-* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
+* [페이지에 대 한 Razor 필터 메서드를](xref:razor-pages/filter)참조 하세요.
+* 필터를 실험하려면 [GitHub 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
 
 ::: moniker-end

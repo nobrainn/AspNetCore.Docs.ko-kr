@@ -1,25 +1,31 @@
 ---
 title: ASP.NET Core MVC의 모델 유효성 검사
 author: rick-anderson
-description: ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사에 대해 알아봅니다.
+description: MVC 및 Razor 페이지 ASP.NET Core의 모델 유효성 검사에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205893"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777178"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC 및 Razor 페이지 ASP.NET Core의 모델 유효성 검사
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [Kirk Larkin](https://github.com/serpent5)
 
-이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사하는 방법에 대해 설명합니다.
+이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사 하는 방법을 설명 합니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 
@@ -27,7 +33,7 @@ ms.locfileid: "82205893"
 
 모델 상태는 모델 바인딩 및 모델 유효성 검사 두 하위 시스템에서 발생하는 오류를 나타냅니다. [모델 바인딩](model-binding.md)에서 발생하는 오류는 일반적으로 데이터 변환 오류입니다. 예를 들어 정수 필드에 “x”가 입력됩니다. 모델 유효성 검사는 모델 바인딩 후에 발생하며 데이터가 비즈니스 규칙에 맞지 않으면 오류를 보고합니다. 예를 들어 1에서 5 사이의 등급을 필요한 필드에 0이 입력됩니다.
 
-모델 바인딩과 모델 유효성 검사 모두 컨트롤러 작업 또는 Razor Pages 처리기 메서드를 실행하기 전에 실행됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
+모델 바인딩 및 모델 유효성 검사는 모두 컨트롤러 작업 또는 Razor 페이지 처리기 메서드를 실행 하기 전에 수행 됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -64,13 +70,13 @@ ms.locfileid: "82205893"
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 다음은 그 예입니다.
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 다음은 그 예입니다.
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -367,7 +373,7 @@ $.get({
 
 ## <a name="disable-client-side-validation"></a>클라이언트 쪽 유효성 검사를 사용하지 않도록 설정
 
-다음 코드는 Razor Pages에 클라이언트 유효성 검사를 사용하지 않도록 설정합니다.
+다음 코드에서는 페이지에서 Razor 클라이언트 유효성 검사를 사용 하지 않도록 설정 합니다.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -376,7 +382,7 @@ $.get({
 * 모든 *.cshtml* 파일의 `_ValidationScriptsPartial`에 대한 참조를 주석으로 처리합니다.
 * *Pages\Shared\_ValidationScriptsPartial* 파일의 콘텐츠를 제거합니다.
 
-위의 방법으로는 ASP.NET Core ID Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 방지할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>를 참조하세요.
+위의 방법으로는 ASP.NET Core Identity Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 수행할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -387,7 +393,7 @@ $.get({
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사하는 방법에 대해 설명합니다.
+이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사 하는 방법을 설명 합니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 
@@ -395,7 +401,7 @@ $.get({
 
 모델 상태는 모델 바인딩 및 모델 유효성 검사 두 하위 시스템에서 발생하는 오류를 나타냅니다. [모델 바인딩](model-binding.md)에서 발생하는 오류는 일반적으로 데이터 변환 오류입니다(예를 들어 정수를 입력해야 하는 필드에 "x"를 입력하는 오류). 모델 유효성 검사는 모델 바인딩 후에 실행되며 데이터가 비즈니스 규칙을 준수하지 않는 경우(예를 들어 1에서 5 사이의등급을 입력해야 하는 필드에 0을 입력) 오류를 보고합니다.
 
-모델 바인딩과 유효성 검사 모두 컨트롤러 작업 또는 Razor Pages 처리기 메서드를 실행하기 전에 실행됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
+모델 바인딩 및 유효성 검사는 모두 컨트롤러 작업 또는 Razor 페이지 처리기 메서드를 실행 하기 전에 수행 됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -418,7 +424,7 @@ $.get({
 기본 제공 유효성 검사 특성은 다음과 같습니다.
 
 * `[CreditCard]`: 속성에 신용 카드 형식이 있는지 유효성을 검사 합니다.
-* `[Compare]`: 모델의 두 속성이 일치 하는지 확인 합니다. 예를 들어 *Register.cshtml.cs* 파일은 `[Compare]`를 사용하여 입력된 두 암호가 일치하는지 유효성을 검사합니다. [스캐폴드 ID](xref:security/authentication/scaffold-identity)는 등록 코드를 확인합니다.
+* `[Compare]`: 모델의 두 속성이 일치 하는지 확인 합니다. 예를 들어 *Register.cshtml.cs* 파일은 `[Compare]`를 사용하여 입력된 두 암호가 일치하는지 유효성을 검사합니다. [스 캐 폴드 Identity ](xref:security/authentication/scaffold-identity) 등록 코드를 확인 합니다.
 * `[EmailAddress]`: 속성에 전자 메일 형식이 있는지 확인 합니다.
 * `[Phone]`: 속성에 전화 번호 형식이 있는지 확인 합니다.
 * `[Range]`: 속성 값이 지정 된 범위 내에 속하는지 확인 합니다.
@@ -434,13 +440,13 @@ $.get({
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 다음은 그 예입니다.
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 다음은 그 예입니다.
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -742,13 +748,13 @@ $.get({
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-또한 Razor Pages에서:
+및 Razor 페이지:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 
 클라이언트 유효성 검사를 사용하지 않도록 설정하는 또 다른 방법은 사용자의 *.cshtml* 파일에서 `_ValidationScriptsPartial` 참조를 주석으로 처리하는 것입니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [System.ComponentModel.DataAnnotations 네임스페이스](xref:System.ComponentModel.DataAnnotations)
 * [모델 바인딩](model-binding.md)

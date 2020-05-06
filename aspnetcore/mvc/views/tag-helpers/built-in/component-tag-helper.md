@@ -1,34 +1,37 @@
 ---
-title: ASP.NET 코어의 구성 요소 태그 도우미
+title: ASP.NET Core의 구성 요소 태그 도우미
 author: guardrex
 ms.author: riande
-description: ASP.NET 핵심 구성 요소 태그 도우미를 사용하여 페이지 및 보기에서 Razor 구성 요소를 렌더링하는 방법을 알아봅니다.
+description: ASP.NET Core 구성 요소 태그 도우미를 사용 하 여 페이지 및 Razor 뷰에서 구성 요소를 렌더링 하는 방법을 알아봅니다.
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: aaa4b92a8912b4f52d861ed07432aa7cf3ca5240
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 4e003e5ed5e7863d8a218c0f02bb37e214e31910
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440963"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773931"
 ---
-# <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET 코어의 구성 요소 태그 도우미
+# <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core의 구성 요소 태그 도우미
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
-페이지 또는 뷰에서 구성요소를 렌더링하려면 [구성 요소 태그 도우미를](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)사용합니다.
+페이지 또는 뷰에서 구성 요소를 렌더링하려면 [구성 요소 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)를 사용합니다.
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-문서의 페이지 및 보기 섹션에서 구성 요소를 사용할 앱 <xref:blazor/integrate-components#prepare-the-app> *준비의* 지침을 따릅니다.
+<xref:blazor/integrate-components#prepare-the-app> 문서의 *페이지 및 뷰에서 구성 요소를 사용 하도록 앱 준비* 섹션의 지침을 따르세요.
 
 ## <a name="component-tag-helper"></a>구성 요소 태그 도우미
 
-다음 구성 요소 태그 도우미는 페이지 또는 보기에서 `Counter` 구성 요소를 렌더링합니다.
+다음 구성 요소 태그 도우미는 페이지 `Counter` 또는 뷰에서 구성 요소를 렌더링 합니다.
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -39,9 +42,9 @@ ms.locfileid: "81440963"
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-앞의 예제에서는 `Counter` 구성 요소가 앱의 페이지 폴더에 있다고 *가정합니다.*
+위의 예제에서는 `Counter` 구성 요소가 앱의 *Pages* 폴더에 있다고 가정 합니다.
 
-구성 요소 태그 도우미는 매개 변수를 구성 요소에 전달할 수도 있습니다. 확인란 `ColorfulCheckbox` 레이블의 색상과 크기를 설정하는 다음 구성 요소를 고려하십시오.
+구성 요소 태그 도우미는 구성 요소에 매개 변수를 전달할 수도 있습니다. 확인란 레이블의 색 `ColorfulCheckbox` 및 크기를 설정 하는 다음 구성 요소를 고려 합니다.
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -69,7 +72,7 @@ ms.locfileid: "81440963"
 }
 ```
 
-`Size` (`int`) `Color` 및`string`() [구성 요소 매개 변수는](xref:blazor/components#component-parameters) 구성 요소 태그 도우미에 의해 설정할 수 있습니다.
+( `Size` `int`) 및 `Color` (`string`) [구성 요소 매개 변수](xref:blazor/components#component-parameters) 는 구성 요소 태그 도우미를 통해 설정할 수 있습니다.
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -81,9 +84,9 @@ ms.locfileid: "81440963"
     param-Size="14" param-Color="@("blue")" />
 ```
 
-앞의 예제에서는 `ColorfulCheckbox` 구성 요소가 앱의 *공유* 폴더에 있다고 가정합니다.
+위의 예제에서는 `ColorfulCheckbox` 구성 요소가 앱의 *공유* 폴더에 있는 것으로 가정 합니다.
 
-다음 HTML은 페이지 또는 보기에서 렌더링됩니다.
+페이지 또는 뷰에서 렌더링 되는 HTML은 다음과 같습니다.
 
 ```html
 <label style="font-size:24px;color:blue">
@@ -92,11 +95,11 @@ ms.locfileid: "81440963"
 </label>
 ```
 
-인용된 문자열을 전달하려면 앞의 예제와 같이 `param-Color` [명시적 Razor 식이](xref:mvc/views/razor#explicit-razor-expressions)필요합니다. 형식 값에 대 한 `string` Razor 구문 분석 `param-*` 동작 특성 형식 `object` 이기 때문에 특성에 적용 되지 않습니다.
+앞의 예제 `param-Color` 에서와 같이 따옴표 붙은 문자열을 전달 하려면 [명시적 Razor 식이](xref:mvc/views/razor#explicit-razor-expressions)필요 합니다. `string` 형식 값에 대 한 Razor 구문 분석 동작은 특성이 `object` 형식 이므로 `param-*` 특성에 적용 되지 않습니다.
 
-매개 변수 형식은 JSON serializable이어야 하며, 일반적으로 형식에 기본 생성자 및 settable 속성이 있어야 함을 의미합니다. `Size` 예를 들어 JSON `Color` serializer에서 지원하는 기본 형식(및)의 `Color` `int` `string` `Size` 형식과 형식이기 때문에 앞의 예제에서 값을 지정할 수 있습니다.
+매개 변수 형식은 JSON serializable 이어야 합니다 .이는 일반적으로 형식에 기본 생성자와 설정 가능한 속성이 있어야 함을 의미 합니다. `Size` 예를 들어 및 `Color` `Size` `Color` 의 형식이 JSON serializer에서 지원 되는 기본 형식 (`int` 및 `string`) 이기 때문에 앞의 예제에서 및에 대 한 값을 지정할 수 있습니다.
 
-다음 예제에서는 클래스 개체가 구성 요소에 전달됩니다.
+다음 예제에서는 클래스 개체가 구성 요소에 전달 됩니다.
 
 *MyClass.cs*:
 
@@ -112,9 +115,9 @@ public class MyClass
 }
 ```
 
-**클래스에는 공용 매개 변수 없는 생성자가 있어야 합니다.**
+**클래스에는 매개 변수가 없는 public 생성자가 있어야 합니다.**
 
-*공유/마이컴포넌트.면도기*:
+*Shared/MyComponent*:
 
 ```razor
 <h2>MyComponent</h2>
@@ -129,7 +132,7 @@ public class MyClass
 }
 ```
 
-*페이지/마이페이지.cshtml*:
+*Pages/m*:
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -148,22 +151,22 @@ public class MyClass
     param-MyObject="@myObject" />
 ```
 
-앞의 예제에서는 `MyComponent` 구성 요소가 앱의 *공유* 폴더에 있다고 가정합니다. `MyClass`앱의 네임스페이스()에`{APP ASSEMBLY}`있습니다.
+위의 예제에서는 `MyComponent` 구성 요소가 앱의 *공유* 폴더에 있는 것으로 가정 합니다. `MyClass`는 응용 프로그램의 네임 스페이스 (`{APP ASSEMBLY}`)에 있습니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>구성 요소:
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 구성 요소에 대해 다음을 구성합니다.
 
-* 페이지로 미리 렌더링됩니다.
-* 페이지에서 정적 HTML로 렌더링되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보가 포함되어 있는 경우.
+* 페이지에 미리 렌더링할지 여부
+* 페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부
 
-| 렌더 모드 | 설명 |
+| 렌더링 모드 | 설명 |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 구성 요소를 정적 HTML로 렌더링하고 서버 Blazor 앱에 대한 마커를 포함합니다. 사용자 에이전트가 시작되면 이 마커가 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | 서버 앱에 대한 Blazor 마커를 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트가 시작되면 이 마커가 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | 구성 요소를 정적 HTML로 렌더링합니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | 구성 요소를 정적 HTML에 렌더링합니다. |
 
-페이지와 뷰는 구성 요소를 사용할 수 있지만 반대는 사실이 아닙니다. 구성 요소는 부분 뷰 및 섹션과 같은 보기 및 페이지별 피쳐를 사용할 수 없습니다. 구성 요소의 부분 뷰에서 논리를 사용하려면 부분 뷰 논리를 구성 요소로 팩터링합니다.
+페이지 및 뷰에서 구성 요소를 사용할 수 있지만 반대의 경우는 그렇지 않습니다. 구성 요소는 부분 보기 및 섹션과 같은 보기 및 페이지 관련 기능을 사용할 수 없습니다. 구성 요소의 부분 뷰에서 논리를 사용 하려면 부분 뷰 논리를 구성 요소로 구분 합니다.
 
-정적 HTML 페이지에서 서버 구성 요소를 렌더링하는 것은 지원되지 않습니다.
+정적 HTML 페이지에서 서버 구성 요소를 렌더링할 수는 없습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
