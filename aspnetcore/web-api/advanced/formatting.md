@@ -5,13 +5,19 @@ description: ASP.NET Core Web API에서 응답 데이터의 서식을 지정하�
 ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 392e4905126ffb6801cc55055f1d511f5fa99dd1
-ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
+ms.openlocfilehash: 22787b20879c3739ee8a8d74c7a39e7cf8f4d5b0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81642704"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774238"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -135,7 +141,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 다음은 그 예입니다.
+`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예를 들어:
 
 ```csharp
 public IActionResult Get()
@@ -174,7 +180,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 다음은 그 예입니다.
+`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예를 들어:
 
 ```csharp
 public IActionResult Get()
@@ -206,11 +212,11 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 ### <a name="specify-a-format"></a>형식 지정
 
-응답 형식을 제한하려면 필터를 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 적용합니다. 대부분의 [필터와](xref:mvc/controllers/filters) `[Produces]` 마찬가지로 작업, 컨트롤러 또는 전역 범위에 적용할 수 있습니다.
+응답 형식을 제한 하려면 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터를 적용 합니다. 대부분의 [필터](xref:mvc/controllers/filters)와 `[Produces]` 마찬가지로, 작업, 컨트롤러 또는 전역 범위에서 적용할 수 있습니다.
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
-앞의 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터는 다음과 같은 것입니다.
+이전 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터:
 
 * 컨트롤러 내의 모든 작업이 JSON 형식 응답을 반환하도록 강제합니다.
 * 다른 포맷터가 구성되고 클라이언트에서 다른 형식을 지정하는 경우 JSON이 반환됩니다.
@@ -230,7 +236,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 `StringOutputFormatter`가 없으면 기본 제공 JSON 포맷터가 `string` 반환 형식의 형식을 지정합니다. 기본 제공 JSON 포맷터가 제거되고 XML 포맷터를 사용할 수 있는 경우, XML 포맷터가 `string` 반환 형식의 형식을 지정합니다. 그렇지 않으면 `string` 반환 형식이 `406 Not Acceptable`을 반환합니다.
 
-`HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 다음은 그 예입니다.
+`HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 예를 들어:
 
 * JSON 포맷터는 `null`의 본문이 포함된 응답을 반환합니다.
 * XML 포맷터는 `xsi:nil="true"`로 설정된 특성을 사용하여 빈 XML 요소를 반환합니다.
@@ -242,13 +248,13 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 * 쿼리 문자열 또는 경로의 부분에서.
 * .Xml 또는 .json과 같은 서식 지정 파일 확장명을 사용하여.
 
-요청 경로의 매핑은 API가 사용하는 경로에 지정해야 합니다. 다음은 그 예입니다.
+요청 경로의 매핑은 API가 사용하는 경로에 지정해야 합니다. 예를 들어:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. 특성은 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 에 `RouteData` 형식 값이 있는지 확인하고 응답이 생성될 때 응답 형식을 적절한 formatter에 매핑합니다.
+위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. 특성 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 은에 형식 값이 있는지 확인 `RouteData` 하 고 응답이 생성 될 때 응답 형식을 적절 한 포맷터에 매핑합니다.
 
-|           라우팅        |             포맷터              |
+|           경로        |             포맷터              |
 |------------------------|------------------------------------|
 |   `/api/products/5`    |    기본 출력 포맷터    |
 | `/api/products/5.json` | JSON 포맷터(구성된 경우) |

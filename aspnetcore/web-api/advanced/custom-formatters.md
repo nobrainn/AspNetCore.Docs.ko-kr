@@ -4,19 +4,25 @@ author: rick-anderson
 description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들고 사용하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 02/08/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: dd25cda460ba758cd07de094eaadd1f2d8c28657
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0836fc288a015adb9a6223c5a2b681b1b03bded4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654957"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777321"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
 작성자: [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 데이터 교환을 지원합니다. 입력 포맷터는 [모델 바인딩](xref:mvc/models/model-binding)에서 사용됩니다. 출력 포맷터는 [응답 형식](xref:web-api/advanced/formatting)을 지정하는 데 사용됩니다.
+ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 데이터 교환을 지원합니다. 입력 포맷터는 [모델 바인딩](xref:mvc/models/model-binding)에서 사용됩니다. 출력 포맷터는 [응답 형식을 지정](xref:web-api/advanced/formatting)하는 데 사용 됩니다.
 
 프레임워크는 JSON 및 XML에 대한 기본 제공 입력 및 출력 포맷터를 제공합니다. 일반 텍스트에 대한 기본 제공 출력 포맷터는 제공하지만 일반 텍스트에 대한 입력 포맷터는 제공하지 않습니다.
 
@@ -36,7 +42,7 @@ ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 �
 
 * 클라이언트에 보낼 데이터를 직렬화하려는 경우 출력 포맷터 클래스를 만듭니다.
 * 클라이언트에서 받을 데이터를 역직렬화하려는 경우 입력 포맷터 클래스를 만듭니다.
-* 포맷터의 인스턴스를 `InputFormatters`MvcOptions`OutputFormatters`의 [ 및 ](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions) 컬렉션에 추가합니다.
+* 포맷터의 인스턴스를 [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions)의 `InputFormatters` 및 `OutputFormatters` 컬렉션에 추가합니다.
 
 다음 섹션에서는 이러한 각 단계에 대한 지침 및 코드 예제를 제공합니다.
 
@@ -80,13 +86,13 @@ ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 �
 
 #### <a name="the-canwriteresult-method"></a>CanWriteResult 메서드
 
-일부 시나리오에서는 `CanWriteResult` 대신 `CanWriteType`를 재정의해야 합니다. 다음 조건이 true인 경우 `CanWriteResult`를 사용합니다.
+일부 시나리오에서는 `CanWriteType` 대신 `CanWriteResult`를 재정의해야 합니다. 다음 조건이 true인 경우 `CanWriteResult`를 사용합니다.
 
 * 작업 메서드에서는 모델 클래스를 반환합니다.
 * 런타임 시 반환될 수 있는 파생 클래스가 있습니다.
 * 런타임 시 작업에서 반환하는 파생 클래스를 알아야 합니다.
 
-예를 들어 작업 메서드 서명이 `Person` 형식을 반환한다고 가정하지만 `Student`에서 파생된 `Instructor` 또는 `Person` 형식을 반환할 수 있습니다. 포맷터에서 `Student` 개체만을 처리하려는 경우 [ 메서드에 제공된 컨텍스트 개체에서 ](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object)개체`CanWriteResult` 형식을 확인합니다. 작업 메서드가 `CanWriteResult`를 반환할 때 반드시 `IActionResult`를 사용해야 하는 것은 아닙니다. 이 경우에 `CanWriteType` 메서드는 런타임 형식을 수신합니다.
+예를 들어 작업 메서드 서명이 `Person` 형식을 반환한다고 가정하지만 `Person`에서 파생된 `Student` 또는 `Instructor` 형식을 반환할 수 있습니다. 포맷터에서 `Student` 개체만을 처리하려는 경우 `CanWriteResult` 메서드에 제공된 컨텍스트 개체에서 [개체](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) 형식을 확인합니다. 작업 메서드가 `IActionResult`를 반환할 때 반드시 `CanWriteResult`를 사용해야 하는 것은 아닙니다. 이 경우에 `CanWriteType` 메서드는 런타임 형식을 수신합니다.
 
 <a id="read-write"></a>
 
@@ -115,7 +121,8 @@ BEGIN:VCARD
 VERSION:2.1
 N:Davolio;Nancy
 FN:Nancy Davolio
-UID:20293482-9240-4d68-b475-325df4a83728
+no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR]
+uid:20293482-9240-4d68-b475-325df4a83728
 END:VCARD
 ```
 

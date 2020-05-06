@@ -4,13 +4,19 @@ author: ardalis
 description: ASP.NET Core MVC에서 보기가 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리하는 방식에 대해 알아봅니다.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 70b8c2c01a28f99dd384351041a3b77d23f46a48
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: bda00a416ac34883e0a70a265156fa3ddcde3c6f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384077"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777139"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 보기
 
@@ -199,16 +205,16 @@ Viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 | 다음 사이에 데이터 전달 ...                        | 예제                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | 컨트롤러 및 뷰                             | 드롭다운 목록을 데이터로 채웁니다.                                          |
-| 보기 및 [레이아웃 보기](xref:mvc/views/layout)   | ** \<뷰** 파일에서 레이아웃 뷰에서 제목>요소 콘텐츠를 설정합니다.  |
+| 보기 및 [레이아웃 보기](xref:mvc/views/layout)   | 뷰 파일의 레이아웃 뷰에서 ** \<제목>** 요소 내용 설정  |
 | [부분 보기](xref:mvc/views/partial) 및 보기 | 사용자가 요청한 웹 페이지에 따라 데이터를 표시하는 위젯입니다.      |
 
-이 컬렉션은 컨트롤러 및 뷰의 `ViewData` 또는 `ViewBag` 속성을 통해 참조할 수 있습니다. `ViewData` 속성은 약한 형식 개체의 사전입니다. `ViewBag` 속성은 기본 `ViewData` 컬렉션에 대해 동적 속성을 제공하는 `ViewData` 주변의 래퍼입니다. 참고: 키 조회는 대/소문자를 `ViewData` 구분하지 않습니다. `ViewBag`
+이 컬렉션은 컨트롤러 및 뷰의 `ViewData` 또는 `ViewBag` 속성을 통해 참조할 수 있습니다. `ViewData` 속성은 약한 형식 개체의 사전입니다. `ViewBag` 속성은 기본 `ViewData` 컬렉션에 대해 동적 속성을 제공하는 `ViewData` 주변의 래퍼입니다. 참고: 키 조회는 `ViewData` 및 `ViewBag`에 대 한 대/소문자를 구분 하지 않습니다.
 
 `ViewData` 및 `ViewBag`은 런타임에 동적으로 확인됩니다. 컴파일 시간 형식 검사를 제공하지 않으므로 일반적으로 둘 다 viewmodel을 사용하는 것보다 오류가 발생하기 더 쉽습니다. 이러한 이유로, 일부 개발자는 `ViewData` 및 `ViewBag`을 최소한으로 사용하거나 아예 사용하지 않습니다.
 
 <a name="VD"></a>
 
-**Viewdata**
+**ViewData**
 
 `ViewData`는 `string` 키를 통해 액세스하는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 개체입니다. 문자열 데이터는 캐스트할 필요 없이 직접 저장 및 사용할 수 있지만 다른 `ViewData` 개체 값을 추출할 때는 특정 형식으로 캐스트해야 합니다. `ViewData`를 사용하여 컨트롤러에서 보기로, [부분 보기](xref:mvc/views/partial) 및 [레이아웃](xref:mvc/views/layout)을 포함한 보기 내에서 데이터를 전달할 수 있습니다.
 
@@ -252,7 +258,7 @@ public IActionResult SomeAction()
 
 **ViewData 특성**
 
-[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 사용하는 또 다른 방법은 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)입니다. `[ViewData]` 특성으로 표시된 컨트롤러 또는 Razor 페이지 모델의 속성은 사전에서 값이 저장되고 로드됩니다.
+[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 사용하는 또 다른 방법은 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)입니다. 특성으로 표시 된 Razor 컨트롤러나 페이지 모델의 속성에는 해당 값이 사전에 저장 되 고 로드 됩니다. `[ViewData]`
 
 다음 예제에서 홈 컨트롤러에는 `[ViewData]`로 표시된 `Title` 속성이 있습니다. `About` 메서드는 정보 보기에 대한 제목을 설정합니다.
 
@@ -286,7 +292,7 @@ public class HomeController : Controller
 
 **ViewBag**
 
-`ViewBag` *은 Razor 페이지에서 사용할 수 없습니다.*
+`ViewBag`*페이지에서 Razor 사용할 수 없습니다.*
 
 `ViewBag`은 `ViewData`에 저장된 개체에 대한 동적 액세스를 제공하는 [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) 개체입니다. 캐스팅이 필요하지 않으므로 `ViewBag`이 작업하기 더 편리할 수 있습니다. 다음 예제에서는 `ViewData`를 사용할 때와 동일한 결과를 보여주는 `ViewBag`을 사용하는 방법을 보여 줍니다.
 
@@ -319,7 +325,7 @@ public IActionResult SomeAction()
 
 **ViewData 및 ViewBag을 동시에 사용**
 
-`ViewBag` *은 Razor 페이지에서 사용할 수 없습니다.*
+`ViewBag`*페이지에서 Razor 사용할 수 없습니다.*
 
 `ViewData` 및 `ViewBag`은 동일한 기본 `ViewData` 컬렉션을 사용하므로 `ViewData` 및 `ViewBag`을 모두 사용하고 값을 읽고 쓸 때 이들을 혼합 및 일치시킬 수 있습니다.
 
@@ -359,10 +365,10 @@ public IActionResult SomeAction()
 
 **ViewData 및 ViewBag 간의 차이점 요약**
 
- `ViewBag`은 Razor 페이지에서 사용할 수 없습니다.
+ `ViewBag`Razor 페이지에서 사용할 수 없습니다.
 
 * `ViewData`
-  * [ViewDataDictionary에서](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)파생되므로 `ContainsKey`에서 `Add` `Remove` `Clear`와 같은 유용할 수 있는 사전 속성이 있습니다.
+  * 는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) `ContainsKey`에서 파생 되므로 `Add`, `Remove`, 및 `Clear`와 같이 유용할 수 있는 사전 속성이 있습니다.
   * 사전의 키는 문자열이므로 공백을 사용할 수 있습니다. 예: `ViewData["Some Key With Whitespace"]`
   * `string` 이외의 모든 형식을 뷰에서 `ViewData`를 사용하도록 캐스트해야 합니다.
 * `ViewBag`

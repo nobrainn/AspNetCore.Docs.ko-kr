@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
+title: ASP.NET Core의 응용 프로그램 부분과 Razor 컨트롤러, 뷰, 페이지 등을 공유 합니다.
 author: rick-anderson
-description: ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
+description: ASP.NET Core의 응용 프로그램 부분 Razor 을 사용 하 여 컨트롤러, 뷰, 페이지 등 공유
 ms.author: riande
 ms.date: 11/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 0156c94bc6d0b83d0e14b8ef49468cfdf106d7e6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 68991a3df5e09b63dc52bdadae55f055a721ad3c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654813"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774407"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>응용 프로그램 파트를 사용 Razor 하 여 컨트롤러, 뷰, 페이지 등 공유
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -20,9 +26,9 @@ ms.locfileid: "78654813"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 애플리케이션 파트를 사용하면 ASP.NET Core 컨트롤러, 보기 구성 요소, 태그 도우미, Razor Pages, Razor 컴파일 소스 등을 검색할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
+*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 응용 프로그램 파트를 사용 하 여 컨트롤러 검색, 구성 요소 보기, Razor 태그 도우미, 페이지, razor 컴파일 소스 등을 ASP.NET Core 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
 
-[기능 공급자](#fp)는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다. 예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다. 애플리케이션 파트를 사용하여 여러 앱에서 컨트롤러, 보기, Razor Pages, Razor 컴파일 소스, 태그 도우미 등을 포함하는 어셈블리(DLL)를 공유할 수 있습니다. 여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.
+[기능 공급자](#fp)는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다. 예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다. 응용 프로그램 파트를 사용 하 여 여러 앱에서 컨트롤러, 뷰, Razor 페이지, razor 컴파일 소스, 태그 도우미 등을 포함 하는 어셈블리 (DLL)를 공유할 수 있습니다. 여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.
 
 ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능을 로드합니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 클래스는 어셈블리에서 지원하는 애플리케이션 파트를 나타냅니다.
 
@@ -32,7 +38,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup.cs?name=snippet)]
 
-다음 코드는 `ApplicationPartManager`를 사용하여 `AssemblyPart` 구성에 대한 대체 방법을 제공합니다.
+다음 코드는 `AssemblyPart`를 사용하여 `ApplicationPartManager` 구성에 대한 대체 방법을 제공합니다.
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup2.cs?name=snippet)]
 
@@ -40,19 +46,19 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="include-views"></a>보기 포함
 
-[Razor 클래스 라이브러리](xref:razor-pages/ui-class)를 사용하여 어셈블리에 보기를 포함합니다.
+클래스 라이브러리를 사용 하 여 어셈블리에 뷰를 포함 합니다. [ Razor ](xref:razor-pages/ui-class)
 
 ### <a name="prevent-loading-resources"></a>리소스 로드 방지
 
-애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `ApplicationPartManager`를 호출하기 전에 `AddControllersAsServices`를 구성합니다. `Remove` 컬렉션에서 `ApplicationParts`를 호출하여 리소스를 제거합니다.
+애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션에 있는 항목의 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 구성합니다. `ApplicationParts` 컬렉션에서 `Remove`를 호출하여 리소스를 제거합니다.
 
 `ApplicationPartManager`에는 다음을 위한 파트가 포함됩니다.
 
 * 앱의 어셈블리 및 종속 어셈블리.
 * `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
 * `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
-* `Microsoft.AspNetCore.Mvc.TagHelpers`입니다.
-* `Microsoft.AspNetCore.Mvc.Razor`입니다.
+* `Microsoft.AspNetCore.Mvc.TagHelpers`.
+* `Microsoft.AspNetCore.Mvc.Razor`.
 
 <a name="fp"></a>
 
@@ -66,11 +72,11 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
 * `internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
-기능 공급자는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>에서 상속되며, 여기서 `T`는 기능의 형식입니다. 기능 공급자는 이전에 나열된 모든 기능 형식에 대해 구현할 수 있습니다. `ApplicationPartManager.FeatureProviders`의 기능 공급자 순서는 런타임 동작에 영향을 줄 수 있습니다. 나중에 추가된 공급자는 이전에 추가된 공급자가 수행한 작업에 반응할 수 있습니다.
+기능 공급자는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>에서 상속됩니다. 여기서 `T`는 기능의 형식입니다. 기능 공급자는 이전에 나열된 모든 기능 형식에 대해 구현할 수 있습니다. `ApplicationPartManager.FeatureProviders`의 기능 공급자 순서는 런타임 동작에 영향을 줄 수 있습니다. 나중에 추가된 공급자는 이전에 추가된 공급자가 수행한 작업에 반응할 수 있습니다.
 
-### <a name="display-available-features"></a>사용 가능한 기능 표시
+### <a name="display-available-features"></a>사용 가능 기능 표시
 
-앱에 사용 가능한 기능은 `ApplicationPartManager`종속성 주입[을 통해 ](../../fundamentals/dependency-injection.md)를 요청하여 열거할 수 있습니다.
+앱에 사용 가능한 기능은 [종속성 주입](../../fundamentals/dependency-injection.md)을 통해 `ApplicationPartManager`를 요청하여 열거할 수 있습니다.
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
@@ -110,9 +116,9 @@ HTTP 404 오류는 애플리케이션 파트를 사용하여 개발할 때 일�
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 애플리케이션 파트를 사용하면 ASP.NET Core 컨트롤러, 보기 구성 요소, 태그 도우미, Razor Pages, Razor 컴파일 소스 등을 검색할 수 있습니다. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
+*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 응용 프로그램 파트를 사용 하 여 컨트롤러 검색, 구성 요소 보기, Razor 태그 도우미, 페이지, razor 컴파일 소스 등을 ASP.NET Core 수 있습니다. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
 
-*기능 공급자*는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다. 예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다. 애플리케이션 파트를 사용하여 여러 앱에서 컨트롤러, 보기, Razor Pages, Razor 컴파일 소스, 태그 도우미 등을 포함하는 어셈블리(DLL)를 공유할 수 있습니다. 여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.
+*기능 공급자*는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다. 예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다. 응용 프로그램 파트를 사용 하 여 여러 앱에서 컨트롤러, 뷰, Razor 페이지, razor 컴파일 소스, 태그 도우미 등을 포함 하는 어셈블리 (DLL)를 공유할 수 있습니다. 여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.
 
 ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능을 로드합니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 클래스는 어셈블리에서 지원하는 애플리케이션 파트를 나타냅니다.
 
@@ -122,7 +128,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup.cs?name=snippet)]
 
-다음 코드는 `ApplicationPartManager`를 사용하여 `AssemblyPart` 구성에 대한 대체 방법을 제공합니다.
+다음 코드는 `AssemblyPart`를 사용하여 `ApplicationPartManager` 구성에 대한 대체 방법을 제공합니다.
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup2.cs?name=snippet)]
 
@@ -130,33 +136,33 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="include-views"></a>보기 포함
 
-[Razor 클래스 라이브러리](xref:razor-pages/ui-class)를 사용하여 어셈블리에 보기를 포함합니다.
+클래스 라이브러리를 사용 하 여 어셈블리에 뷰를 포함 합니다. [ Razor ](xref:razor-pages/ui-class)
 
 ### <a name="prevent-loading-resources"></a>리소스 로드 방지
 
-애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `ApplicationPartManager`를 호출하기 전에 `AddControllersAsServices`를 구성합니다. `Remove` 컬렉션에서 `ApplicationParts`를 호출하여 리소스를 제거합니다.
+애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션에 있는 항목의 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 구성합니다. `ApplicationParts` 컬렉션에서 `Remove`를 호출하여 리소스를 제거합니다.
 
 다음 코드는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>를 사용하여 앱에서 `MyDependentLibrary`를 제거합니다.[!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
 
 `ApplicationPartManager`에는 다음을 위한 파트가 포함됩니다.
 
 * 앱의 어셈블리 및 종속 어셈블리.
-* `Microsoft.AspNetCore.Mvc.TagHelpers`입니다.
-* `Microsoft.AspNetCore.Mvc.Razor`입니다.
+* `Microsoft.AspNetCore.Mvc.TagHelpers`.
+* `Microsoft.AspNetCore.Mvc.Razor`.
 
 ## <a name="application-feature-providers"></a>애플리케이션 기능 공급자
 
 애플리케이션 기능 공급자는 애플리케이션 파트를 검사하고 해당 파트에 대한 기능을 제공합니다. 다음 ASP.NET Core 기능에는 기본으로 제공되는 기능 공급자가 있습니다.
 
-* [컨트롤러](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
+* [Controllers](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
 * [태그 도우미](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
-* [보기 구성 요소](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
+* [구성 요소 보기](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 
-기능 공급자는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>에서 상속되며, 여기서 `T`는 기능의 형식입니다. 기능 공급자는 이전에 나열된 모든 기능 형식에 대해 구현할 수 있습니다. `ApplicationPartManager.FeatureProviders`의 기능 공급자 순서는 런타임 동작에 영향을 줄 수 있습니다. 나중에 추가된 공급자는 이전에 추가된 공급자가 수행한 작업에 반응할 수 있습니다.
+기능 공급자는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>에서 상속됩니다. 여기서 `T`는 기능의 형식입니다. 기능 공급자는 이전에 나열된 모든 기능 형식에 대해 구현할 수 있습니다. `ApplicationPartManager.FeatureProviders`의 기능 공급자 순서는 런타임 동작에 영향을 줄 수 있습니다. 나중에 추가된 공급자는 이전에 추가된 공급자가 수행한 작업에 반응할 수 있습니다.
 
-### <a name="display-available-features"></a>사용 가능한 기능 표시
+### <a name="display-available-features"></a>사용 가능 기능 표시
 
-앱에 사용 가능한 기능은 `ApplicationPartManager`종속성 주입[을 통해 ](../../fundamentals/dependency-injection.md)를 요청하여 열거할 수 있습니다.
+앱에 사용 가능한 기능은 [종속성 주입](../../fundamentals/dependency-injection.md)을 통해 `ApplicationPartManager`를 요청하여 열거할 수 있습니다.
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 

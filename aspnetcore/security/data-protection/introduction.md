@@ -5,39 +5,45 @@ description: 데이터 보호의 개념과 ASP.NET Core 데이터 보호 Api의 
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 37f170a3e8a46ef2215b0999358d46dd402636df
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: db2c22454fc6c7e663ca603e9d70b6c12ce31af4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653841"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775806"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호
 
 웹 응용 프로그램은 보안에 중요 한 데이터를 저장 해야 하는 경우가 많습니다. Windows에서는 데스크톱 응용 프로그램에 대해 DPAPI를 제공 하지만 웹 응용 프로그램에는 적합 하지 않습니다. ASP.NET Core 데이터 보호 스택은 개발자가 키 관리 및 순환을 포함 하 여 데이터를 보호 하는 데 사용할 수 있는 간단 하 고 사용 하기 쉬운 암호화 API를 제공 합니다.
 
-ASP.NET Core data protection stack은 ASP.NET 1.x-4.x에서 &lt;machineKey&gt; 요소에 대 한 장기 대체 역할을 하도록 디자인 되었습니다. 기존 암호화 스택의 많은 단점을 해결하는 한편, 현대적인 응용 프로그램에서 접할 수 있는 대부분의 사용 사례에 즉각적으로 대응할 수 있는 솔루션을 제공하도록 설계되었습니다.
+ASP.NET Core data protection stack은 ASP.NET 1.x-4.x. x에서 &lt;machineKey&gt; 요소에 대 한 장기 대체 역할을 하도록 디자인 되었습니다. 최신 응용 프로그램에서 발생할 수 있는 대부분의 사용 사례에 대 한 기본 제공 솔루션을 제공 하는 동시에 이전 암호화 스택의 많은 단점을 해결 하도록 설계 되었습니다.
 
 ## <a name="problem-statement"></a>문제 설명
 
-전체적인 문제를 다음 한 문장으로 간단 명료하게 정리할 수 있습니다: 나중에 검색에 대 한 신뢰할 수 있는 정보를 유지 해야 하지만 지 속성 메커니즘이 신뢰 하지 않습니다. 웹의 관점에서 다시 말하자면 "신뢰할 수 있는 상태를 신뢰할 수 없는 클라이언트를 통해서 왕복해야(Round-Trip) 한다"고 할 수 있습니다."
+전체 문제 설명은 한 문장으로 간략하게 될 수 있습니다. 나중에 검색할 수 있도록 신뢰할 수 있는 정보를 유지 해야 하지만 지 속성 메커니즘은 신뢰 하지 않습니다. 웹 용어로는 "신뢰할 수 없는 클라이언트를 통해 라운드트립 된 신뢰할 수 있는 상태 여야 합니다."로 작성 될 수 있습니다.
 
-대표적인 사례가 인증 쿠키나 전달자 토큰(Bearer Token)의 경우입니다. 서버가 "나는 Groot고 xyz 권한을 갖고 있다"라는 토큰을 생성해서 클라이언트로 전달합니다. 이후 특정 시점에 클라이언트가 다시 서버로 해당 토큰을 제출하지만 서버로서는 클라이언트가 해당 토큰을 변조하지 않았다는 어떤한 보장이 필요합니다. 따라서 필요한 첫 번째 요건은 신뢰성(Authenticity)입니다(무결성(Integrity) 또는 변조 방지(Tamper-Proofing)하고도 합니다).
+이에 대 한 정식 예는 인증 쿠키 또는 전달자 토큰입니다. 서버는 "I am Groot 및 xyz 권한 보유" 토큰을 생성 하 고 클라이언트에 전달 합니다. 이후에 클라이언트는 해당 토큰을 서버에 다시 제공 하지만 서버는 클라이언트가 토큰을 위조 하지 못했음을 나타내는 일종의 보증을 요구 합니다. 따라서 첫 번째 요구 사항: 신뢰성 ( 무결성, 변조 방지).
 
-그리고 저장된 상태(정보)를 신뢰하는 주체는 서버이므로, 이 상태에 운영 환경 고유의 정보가 포함되어 있을 수도 있음을 예상할 수 있습니다. 이 정보는 파일 경로, 권한, 핸들 혹은 그 밖의 간접 참조, 또는 서버 고유의 데이터 중 일부 같은 형태를 갖출 수도 있습니다. 일반적으로 이런 정보들은 신뢰할 수 없는 클라이언트에게는 공개되지 않습니다. 따라서 필요한 두 번째 요건은 기밀성(Confidentiality)입니다.
+서버에서 지속형 상태를 신뢰 하므로이 상태에는 운영 환경과 관련 된 정보가 포함 될 수 있습니다. 이는 파일 경로, 사용 권한, 핸들 또는 다른 간접 참조의 형식 이거나 서버 관련 데이터의 다른 부분에 있을 수 있습니다. 이러한 정보는 일반적으로 신뢰할 수 없는 클라이언트에 공개 되지 않습니다. 따라서 두 번째 요구 사항은 기밀입니다.
 
-마지막으로 현대적 응용 프로그램은 구성 요소를 기반으로 구축되므로 각 개별 구성 요소는 시스템의 다른 구성 요소들과 관계없이 이 시스템(데이터 보호 스택)을 활용할 수 있어야 합니다. 예를 들어, 전달자 토큰 구성 요소가 데이터 보호 스택을 사용한다면 역시 같은 스택을 사용하는 CSRF 방지 메커니즘의 간섭없이 동작할 수 있어야 합니다. 따라서 필요한 마지막 요건은 격리(Isolation)입니다.
+마지막으로, 최신 응용 프로그램은 구성 요소화 되었으므로 개별 구성 요소가 시스템의 다른 구성 요소와 상관 없이이 시스템을 활용 하려고 합니다. 예를 들어 전달자 토큰 구성 요소가이 스택을 사용 하는 경우 동일한 스택을 사용할 수도 있는 CSRF 메커니즘의 간섭 없이 작동 해야 합니다. 따라서 최종 요구 사항은 격리입니다.
 
-더 많은 제약 조건을 규정해서 필요 요건의 범위를 좁힐 수 있습니다. 암호화 시스템 내에서 동작하는 모든 서비스를 동등하게 신뢰할 수 있으며, 직접 제어하는 서비스 외부에서 데이터가 생성되거나 사용될 필요가 없다고 가정합니다. 또한, 웹 서비스에 대한 각 요청이 암호화 시스템을 여러 번 거칠 수도 있기 때문에 최대한 빠르게 작업을 처리해야 합니다. 결론적으로 이런 시나리오에는 대칭 암호화가 적합하며, 필요해질 때까지 비대칭 암호화에 대해서는 무시할 수 있습니다.
+요구 사항의 범위를 좁히기 위해 추가 제약 조건을 제공할 수 있습니다. Cryptosystem 내에서 작동 하는 모든 서비스는 동일한 신뢰를 받고 직접 제어 하는 서비스 외부에서 데이터를 생성 하거나 사용할 필요가 없는 것으로 가정 합니다. 또한 웹 서비스에 대 한 각 요청이 cryptosystem을 한 번 이상 통과할 수 있으므로 작업이 최대한 빠르게 수행 되어야 합니다. 이를 통해 시나리오에 적합 한 대칭 암호화를 사용할 수 있으며, 필요할 때까지 비대칭 암호화의 할인율을 사용할 수 있습니다.
 
 ## <a name="design-philosophy"></a>디자인 원칙
 
-먼저 우리는 기존 스택과 관련된 문제점을 확인하는 작업에 착수했습니다. 이 작업을 마치고 기존 솔루션의 현황을 조사해본 결과, 기존 솔루션에는 원하는 기능들이 전혀 존재하지 않는다는 결론을 내렸습니다. 이후, 다음과 같은 몇 가지 기본 원칙에 따라 솔루션을 설계했습니다.
+기존 스택의 문제를 식별 하 여 시작 했습니다. 이 작업이 완료 되 면 기존 솔루션의 가로를 조사 하 고 기존 솔루션이 아직 검색 한 기능을가지고 있지 않음을 결론 했습니다. 그런 다음 몇 가지 안내 원칙에 따라 솔루션을 설계 했습니다.
 
-* 시스템 구성 방식이 간단해야 합니다. 이상적으로는 특별히 시스템을 구성하지 않고도(Zero-Configuration) 개발자들이 작업하는 데 전혀 지장이 없어야 합니다. 개발자가 특정 측면(예: 키 저장소)을 구성해야 할 경우, 해당 특정 구성을 간단히 처리할 수 있는 방법이 제공되어야 합니다.
+* 시스템은 구성을 간단 하 게 제공 해야 합니다. 시스템이 구성 되지 않은 것이 가장 이상적입니다. 개발자가 특정 측면 (예: 키 리포지토리)을 구성 해야 하는 경우 이러한 특정 구성을 간단 하 게 하기 위해 고려해 야 합니다.
 
-* 간단한 소비자 지향적인 API를 제공해야 합니다. 이 API는 올바르게 사용하기는 쉽고 잘못 사용하기는 어려워야 합니다.
+* 간단한 소비자 지향 API를 제공 합니다. Api는 올바르게 사용 하기 쉽고 잘못 사용 하기 어렵습니다.
 
 * 개발자는 키 관리 원칙을 배울 필요가 없습니다. 시스템은 개발자를 대신해 알고리즘 선택 및 키 수명을 처리 해야 합니다. 개발자는 원시 키 자료에 대 한 액세스 권한이 없어도 됩니다.
 
@@ -67,16 +73,16 @@ ASP.NET Core 데이터 보호 Api는 주로 기밀 페이로드의 무한 지 �
 
 데이터 보호 스택은 5 개의 패키지로 구성 됩니다.
 
-* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) 에는 데이터 보호 서비스를 만들기 위한 <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> 및 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 인터페이스가 포함 되어 있습니다. 또한 이러한 형식 (예: [IDataProtector](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*))으로 작업 하는 데 유용한 확장 메서드가 포함 되어 있습니다. 데이터 보호 시스템이 다른 곳에서 인스턴스화되고 API를 사용 하는 경우 참조 `Microsoft.AspNetCore.DataProtection.Abstractions`.
+* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) 는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> 데이터 보호 서비스를 만들기 위한 및 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 인터페이스를 포함 합니다. 또한 이러한 형식 (예: [IDataProtector](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*))으로 작업 하는 데 유용한 확장 메서드가 포함 되어 있습니다. 데이터 보호 시스템이 다른 곳에서 인스턴스화되고 API를 사용 하는 경우 참조 `Microsoft.AspNetCore.DataProtection.Abstractions`합니다.
 
-* [AspNetCore 보호](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) 는 핵심 암호화 작업, 키 관리, 구성 및 확장성을 포함 하 여 데이터 보호 시스템의 핵심 구현을 포함 합니다. 데이터 보호 시스템 (예: <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>에 추가)을 인스턴스화하거나 해당 동작을 수정 하거나 확장 하려면 `Microsoft.AspNetCore.DataProtection`를 참조 하세요.
+* [AspNetCore 보호](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) 는 핵심 암호화 작업, 키 관리, 구성 및 확장성을 포함 하 여 데이터 보호 시스템의 핵심 구현을 포함 합니다. 데이터 보호 시스템을 (예:에 추가 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) 인스턴스화하거나 해당 동작을 수정 하거나 확장 하려면를 참조 `Microsoft.AspNetCore.DataProtection`합니다.
 
-* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 에는 개발자가 유용 하지만 핵심 패키지에 속하지 않는 추가 api가 포함 되어 있습니다. 예를 들어이 패키지에는 종속성 주입 없이 파일 시스템의 위치에 키를 저장 하기 위해 데이터 보호 시스템을 인스턴스화하는 팩터리 메서드가 포함 되어 있습니다 (<xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>참조). 또한 보호 된 페이로드의 수명을 제한 하는 확장 메서드도 포함 되어 있습니다 (<xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>참조).
+* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 에는 개발자가 유용 하지만 핵심 패키지에 속하지 않는 추가 api가 포함 되어 있습니다. 예를 들어이 패키지에는 데이터 보호 시스템을 인스턴스화하여 종속성 주입 없이 파일 시스템의 위치에 키를 저장 하는 팩터리 메서드가 포함 되어 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>있습니다 (참조). 또한 보호 된 페이로드의 수명을 제한 하는 확장 메서드도 포함 되어 있습니다 ( <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>참조).
 
-* [AspNetCore 웹](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) 은 기존 ASP.NET 4.x 앱에 설치 하 여 새 ASP.NET Core 데이터 보호 스택을 사용 하도록 `<machineKey>` 작업을 리디렉션할 수 있습니다. 자세한 내용은 <xref:security/data-protection/compatibility/replacing-machinekey>을 참조하세요.
+* [AspNetCore 웹](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) 은 기존 ASP.NET 4.x 앱에 설치 하 여 새 ASP.NET Core 데이터 보호 스택을 사용 하도록 `<machineKey>` 작업을 리디렉션할 수 있습니다. 자세한 내용은 <xref:security/data-protection/compatibility/replacing-machinekey>를 참조하세요.
 
-* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) 는 PBKDF2 암호 해시 루틴의 구현을 제공 하며, 사용자 암호를 안전 하 게 처리 해야 하는 시스템에서 사용할 수 있습니다. 자세한 내용은 <xref:security/data-protection/consumer-apis/password-hashing>을 참조하세요.
+* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) 는 PBKDF2 암호 해시 루틴의 구현을 제공 하며, 사용자 암호를 안전 하 게 처리 해야 하는 시스템에서 사용할 수 있습니다. 자세한 내용은 <xref:security/data-protection/consumer-apis/password-hashing>를 참조하세요.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 <xref:host-and-deploy/web-farm>

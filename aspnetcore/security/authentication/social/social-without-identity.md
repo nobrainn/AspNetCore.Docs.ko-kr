@@ -1,26 +1,32 @@
 ---
-title: ASP.NET Core Id가 없는 Facebook, Google 및 외부 공급자 인증
+title: ASP.NET Core 없는 Facebook, Google 및 외부 공급자 인증Identity
 author: rick-anderson
-description: ASP.NET Core Id 없이 Facebook, Google, Twitter 등의 계정 사용자 인증을 사용 하는 방법에 대 한 설명입니다.
+description: ASP.NET Core Identity하지 않고 Facebook, Google, Twitter 등의 계정 사용자 인증을 사용 하는 방법에 대 한 설명입니다.
 ms.author: riande
 ms.date: 12/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: b30ce7055b35b721c7fb83b61a328200d6a136b1
-ms.sourcegitcommit: 3ca4a2235a8129def9e480d0a6ad54cc856920ec
+ms.openlocfilehash: cc44eb83947540ca9a5a04ffad4fdb8522fab26a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/10/2020
-ms.locfileid: "79025403"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775741"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 소셜 로그인 공급자 인증 사용
+# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>ASP.NET Core 하지 않고 소셜 로그인 공급자 인증 사용Identity
 
 [Kirk Larkin](https://twitter.com/serpent5) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:security/authentication/social/index>는 사용자가 외부 인증 공급자의 자격 증명으로 OAuth 2.0을 사용 하 여 로그인 할 수 있게 하는 방법을 설명 합니다. 이 항목에서 설명 하는 접근 방식에는 인증 공급자로 Id ASP.NET Core 포함 되어 있습니다.
+<xref:security/authentication/social/index>사용자가 외부 인증 공급자의 자격 증명으로 OAuth 2.0를 사용 하 여 로그인 할 수 있게 하는 방법을 설명 합니다. 이 항목에서 설명 하는 접근 방식 Identity 에는 인증 공급자로 ASP.NET Core 포함 되어 있습니다.
 
-이 샘플에서는 ASP.NET Core Id **없이** 외부 인증 공급자를 사용 하는 방법을 보여 줍니다. 이는 ASP.NET Core Id의 모든 기능이 필요 하지는 않지만 여전히 신뢰할 수 있는 외부 인증 공급자와 통합 해야 하는 앱에 유용 합니다.
+이 샘플에서는 ASP.NET Core Identity **하지 않고** 외부 인증 공급자를 사용 하는 방법을 보여 줍니다. 이는 ASP.NET Core Identity의 모든 기능이 필요 하지는 않지만 여전히 신뢰할 수 있는 외부 인증 공급자와의 통합이 필요한 앱에 유용 합니다.
 
 이 샘플에서는 사용자를 인증 하는 데 [Google 인증](xref:security/authentication/google-logins) 을 사용 합니다. Google 인증을 사용 하면 로그인 프로세스를 관리 하는 복잡 한 여러 가지 복잡성이 Google으로 이동 됩니다. 다른 외부 인증 공급자와 통합 하려면 다음 항목을 참조 하십시오.
 
@@ -35,7 +41,7 @@ ms.locfileid: "79025403"
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Startup.cs?name=snippet1)]
 
-<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>에 대 한 호출은 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultScheme>를 설정 합니다. `DefaultScheme`는 다음과 같은 `HttpContext` 인증 확장 메서드에서 사용 하는 기본 체계입니다.
+에 대 한 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> 호출은 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultScheme>를 설정 합니다. 는 `DefaultScheme` 다음 `HttpContext` 인증 확장 프로그램 메서드에서 사용 하는 기본 체계입니다.
 
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync*>
@@ -43,13 +49,13 @@ ms.locfileid: "79025403"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
+앱 `DefaultScheme` 을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 이러한 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱을 GoogleDefaults ( <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> " [GoogleDefaults.AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) Google")로 설정 하면에 `ChallengeAsync`대 한 호출에 대 한 기본 체계로 Google을 사용 하도록 앱을 구성 합니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> 시를 재정의 `DefaultScheme` 하는 추가 속성은를 참조 하세요.
 
-`Startup.Configure`에서 `UseAuthentication`를 호출 하 고 `UseRouting` 및 `UseEndpoints`호출 사이에 `UseAuthorization` 합니다. 이는 `HttpContext.User` 속성을 설정 하 고 요청에 대 한 권한 부여 미들웨어를 실행 합니다.
+에서 `Startup.Configure`및 호출 `UseAuthentication` 사이 `UseAuthorization` `UseRouting` 에 및를 `UseEndpoints`호출 합니다. 이렇게 하면 `HttpContext.User` 속성을 설정 하 고 요청에 대 한 권한 부여 미들웨어를 실행 합니다.
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Startup.cs?name=snippet2&highlight=3-4)]
 
-인증 체계에 대 한 자세한 내용은 [인증 개념](xref:security/authentication/index#authentication-concepts)을 참조 하세요. 쿠키 인증에 대 한 자세한 내용은 <xref:security/authentication/cookie>를 참조 하세요.
+인증 체계에 대 한 자세한 내용은 [인증 개념](xref:security/authentication/index#authentication-concepts)을 참조 하세요. 쿠키 인증에 대 한 자세한 내용은을 <xref:security/authentication/cookie>참조 하십시오.
 
 ## <a name="apply-authorization"></a>권한 부여 적용
 
@@ -59,13 +65,13 @@ ms.locfileid: "79025403"
 
 ## <a name="sign-out"></a>로그아웃
 
-현재 사용자를 로그 아웃 하 고 쿠키를 삭제 하려면 [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)를 호출 합니다. 다음 코드는 *인덱스* 페이지에 `Logout` 페이지 처리기를 추가 합니다.
+현재 사용자를 로그 아웃 하 고 쿠키를 삭제 하려면 [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)를 호출 합니다. 다음 코드에서는 `Logout` 페이지 처리기를 *인덱스* 페이지에 추가 합니다.
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
-`SignOutAsync`에 대 한 호출은 인증 체계를 지정 하지 않습니다. 응용 프로그램의 `DefaultScheme` `CookieAuthenticationDefaults.AuthenticationScheme`는 대체로 사용 됩니다.
+에 대 `SignOutAsync` 한 호출은 인증 체계를 지정 하지 않습니다. `DefaultScheme` 의 `CookieAuthenticationDefaults.AuthenticationScheme` 응용 프로그램은 대체로 사용 됩니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -73,9 +79,9 @@ ms.locfileid: "79025403"
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:security/authentication/social/index>는 사용자가 외부 인증 공급자의 자격 증명으로 OAuth 2.0을 사용 하 여 로그인 할 수 있게 하는 방법을 설명 합니다. 이 항목에서 설명 하는 접근 방식에는 인증 공급자로 Id ASP.NET Core 포함 되어 있습니다.
+<xref:security/authentication/social/index>사용자가 외부 인증 공급자의 자격 증명으로 OAuth 2.0를 사용 하 여 로그인 할 수 있게 하는 방법을 설명 합니다. 이 항목에서 설명 하는 접근 방식 Identity 에는 인증 공급자로 ASP.NET Core 포함 되어 있습니다.
 
-이 샘플에서는 ASP.NET Core Id **없이** 외부 인증 공급자를 사용 하는 방법을 보여 줍니다. 이는 ASP.NET Core Id의 모든 기능이 필요 하지는 않지만 여전히 신뢰할 수 있는 외부 인증 공급자와 통합 해야 하는 앱에 유용 합니다.
+이 샘플에서는 ASP.NET Core Identity **하지 않고** 외부 인증 공급자를 사용 하는 방법을 보여 줍니다. 이는 ASP.NET Core Identity의 모든 기능이 필요 하지는 않지만 여전히 신뢰할 수 있는 외부 인증 공급자와의 통합이 필요한 앱에 유용 합니다.
 
 이 샘플에서는 사용자를 인증 하는 데 [Google 인증](xref:security/authentication/google-logins) 을 사용 합니다. Google 인증을 사용 하면 로그인 프로세스를 관리 하는 복잡 한 여러 가지 복잡성이 Google으로 이동 됩니다. 다른 외부 인증 공급자와 통합 하려면 다음 항목을 참조 하십시오.
 
@@ -90,7 +96,7 @@ ms.locfileid: "79025403"
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Startup.cs?name=snippet1)]
 
-[Addauthentication](/dotnet/api/microsoft.extensions.dependencyinjection.authenticationservicecollectionextensions.addauthentication#Microsoft_Extensions_DependencyInjection_AuthenticationServiceCollectionExtensions_AddAuthentication_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_AuthenticationOptions__) 에 대 한 호출은 앱의 [defaultscheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultScheme)을 설정 합니다. `DefaultScheme`는 다음과 같은 `HttpContext` 인증 확장 메서드에서 사용 하는 기본 체계입니다.
+[Addauthentication](/dotnet/api/microsoft.extensions.dependencyinjection.authenticationservicecollectionextensions.addauthentication#Microsoft_Extensions_DependencyInjection_AuthenticationServiceCollectionExtensions_AddAuthentication_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_AuthenticationOptions__) 에 대 한 호출은 앱의 [defaultscheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultScheme)을 설정 합니다. 는 `DefaultScheme` 다음 `HttpContext` 인증 확장 프로그램 메서드에서 사용 하는 기본 체계입니다.
 
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync*>
@@ -98,13 +104,13 @@ ms.locfileid: "79025403"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
+앱 `DefaultScheme` 을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 이러한 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱을 GoogleDefaults ( <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> " [GoogleDefaults.AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) Google")로 설정 하면에 `ChallengeAsync`대 한 호출에 대 한 기본 체계로 Google을 사용 하도록 앱을 구성 합니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> 시를 재정의 `DefaultScheme` 하는 추가 속성은를 참조 하세요.
 
-`Configure` 메서드에서 `UseAuthentication` 메서드를 호출 하 여 `HttpContext.User` 속성을 설정 하는 인증 미들웨어를 호출 합니다. `UseMvcWithDefaultRoute` 또는 `UseMvc`를 호출 하기 전에 `UseAuthentication` 메서드를 호출 합니다.
+`Configure` 메서드에서 `UseAuthentication` 메서드를 호출 하 여 `HttpContext.User` 속성을 설정 하는 인증 미들웨어를 호출 합니다. 또는 `UseMvc`를 `UseAuthentication` 호출 `UseMvcWithDefaultRoute` 하기 전에 메서드를 호출 합니다.
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Startup.cs?name=snippet2)]
 
-인증 체계에 대 한 자세한 내용은 [인증 개념](xref:security/authentication/index#authentication-concepts)을 참조 하세요. 쿠키 인증에 대 한 자세한 내용은 <xref:security/authentication/cookie>를 참조 하세요.
+인증 체계에 대 한 자세한 내용은 [인증 개념](xref:security/authentication/index#authentication-concepts)을 참조 하세요. 쿠키 인증에 대 한 자세한 내용은을 <xref:security/authentication/cookie>참조 하십시오.
 
 ## <a name="apply-authorization"></a>권한 부여 적용
 
@@ -114,13 +120,13 @@ ms.locfileid: "79025403"
 
 ## <a name="sign-out"></a>로그아웃
 
-현재 사용자를 로그 아웃 하 고 쿠키를 삭제 하려면 [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)를 호출 합니다. 다음 코드는 *인덱스* 페이지에 `Logout` 페이지 처리기를 추가 합니다.
+현재 사용자를 로그 아웃 하 고 쿠키를 삭제 하려면 [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)를 호출 합니다. 다음 코드에서는 `Logout` 페이지 처리기를 *인덱스* 페이지에 추가 합니다.
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
-`SignOutAsync`에 대 한 호출은 인증 체계를 지정 하지 않습니다. 응용 프로그램의 `DefaultScheme` `CookieAuthenticationDefaults.AuthenticationScheme`는 대체로 사용 됩니다.
+에 대 `SignOutAsync` 한 호출은 인증 체계를 지정 하지 않습니다. `DefaultScheme` 의 `CookieAuthenticationDefaults.AuthenticationScheme` 응용 프로그램은 대체로 사용 됩니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>

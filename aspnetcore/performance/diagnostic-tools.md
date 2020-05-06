@@ -5,13 +5,19 @@ description: ASP.NET Core 앱의 성능 문제를 진단 하는 데 유용한 �
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/diagnostic-tools
-ms.openlocfilehash: d273897b9ad26d57eb94b196b58f14019a96d07d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 82c724ec647dfe5547db775ebaf8c2479bb258bd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652473"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775858"
 ---
 # <a name="performance-diagnostic-tools"></a>성능 진단 도구
 
