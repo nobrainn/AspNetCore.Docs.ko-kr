@@ -5,13 +5,19 @@ description: ASP.NET Core 앱에서 작동 하는 외부 OAuth 인증 공급자�
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/otherlogins
-ms.openlocfilehash: 2bc9a11d0a46e54b4206f846d187b8c1cc954f89
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c61bbef26017f14df09f8ca6f494d29f79903b6b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654459"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776463"
 ---
 # <a name="external-oauth-authentication-providers"></a>외부 OAuth 인증 공급자
 
@@ -21,9 +27,9 @@ ms.locfileid: "78654459"
 
 * [LinkedIn](https://www.linkedin.com/developer/apps) ([명령](https://developer.linkedin.com/docs/oauth2))
 
-* [Instagram](https://www.instagram.com/developer/register/) ([명령 (명령](https://www.instagram.com/developer/authentication/))
+* [Instagram](https://www.instagram.com/developer/register/) [명령 (명령](https://www.instagram.com/developer/authentication/))
 
-* [Reddit](https://www.reddit.com/login?dest=https%3A%2F%2F www.reddit.com%2Fprefs%2Fapps) ([지침](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example))
+* [Reddit](https://www.reddit.com/login?dest=https%3A%2F%2Fwww.reddit.com%2Fprefs%2Fapps) ([지침](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example))
 
 * [Github](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fsettings%2Fapplications%2Fnew) ([지침](https://developer.github.com/v3/oauth/))
 

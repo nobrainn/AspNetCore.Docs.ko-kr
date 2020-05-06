@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core MVC가 라우팅 미들웨어를 사용하여 들어오는 요청의 URL을 일치시키고 이를 작업에 매핑하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 4208ef8fb7a9b10621f214f79679ff8d7fd83996
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206114"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775026"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 작업에 라우팅
 
@@ -137,9 +143,9 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 >
 > [특성 라우팅은](#ar) 사용자가 아닌 일부 작업에 필요한 ID를 설정 하는 세분화 된 제어를 제공 합니다. 규칙에 따라 설명서에는 올바른 사용에 `id` 표시 될 수 있는 것과 같은 선택적 매개 변수가 포함 됩니다.
 
-대부분의 앱은 URL이 읽을 수 있고 의미 있도록 기본적이고 설명적인 라우팅 체계를 선택해야 합니다. 기본 기존 경로 `{controller=Home}/{action=Index}/{id?}`:
+대부분의 앱은 URL을 읽을 수 있고 의미를 담고 있도록 기본적이고 서술적인 라우팅 체계를 선택해야 합니다. 기본 기존 경로인 `{controller=Home}/{action=Index}/{id?}`는:
 
-* 기본적이고 설명이 포함된 라우팅 체계를 지원합니다.
+* 기본적이고 서술적인 라우팅 체계를 지원합니다.
 * UI 기반 앱에 대한 유용한 시작점입니다.
 * 는 많은 웹 UI 앱에 필요한 유일한 경로 템플릿입니다. 더 큰 규모의 웹 UI 응용 프로그램의 경우에는 [영역](#areas) 을 사용 하는 다른 경로를 사용 해야 합니다.
 
@@ -147,12 +153,12 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 * 호출 된 순서에 따라 해당 끝점에 **순서** 값을 자동으로 할당 합니다.
 
-ASP.NET Core 3.0 이상에서 끝점 라우팅:
+ASP.NET Core 3.0 이상의 엔드포인트 라우팅은 다음과 같습니다.
 
-* 에는 경로 개념이 없습니다.
+* 경로 개념이 없습니다.
 * 는 확장성 실행을 위한 순서 보증을 제공 하지 않으며 모든 끝점이 한 번에 처리 됩니다.
 
-[로깅](xref:fundamentals/logging/index)을 사용하도록 설정하여 <xref:Microsoft.AspNetCore.Routing.Route>와 같은 기본 제공 라우팅 구현에서 요청과 일치시키는 방법을 확인하세요.
+[로깅](xref:fundamentals/logging/index)을 사용하도록 설정하여 <xref:Microsoft.AspNetCore.Routing.Route>와 같은 기본 제공 라우팅 구현이 요청과 일치하는 방법을 확인하세요.
 
 [특성 라우팅은](#ar) 이 문서의 뒷부분에서 설명 합니다.
 
@@ -185,7 +191,7 @@ ASP.NET Core 3.0 이상에서 끝점 라우팅:
 
 > [!WARNING]
 > ASP.NET Core 3.0 이상에서 라우팅은 다음과 같이 되지 않습니다.
-> * *경로*라는 개념을 정의 합니다. `UseRouting`미들웨어 파이프라인에 경로 일치를 추가 합니다. 미들웨어 `UseRouting` 는 앱에 정의 된 끝점 집합을 살펴보고 요청에 따라 가장 적합 한 끝점 일치를 선택 합니다.
+> * *경로*라는 개념을 정의 합니다. `UseRouting`은 경로 일치를 미들웨어 파이프라인에 추가합니다. 미들웨어 `UseRouting` 는 앱에 정의 된 끝점 집합을 살펴보고 요청에 따라 가장 적합 한 끝점 일치를 선택 합니다.
 > * 또는 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint>과 같은 확장성의 실행 순서에 대 한 보장을 제공 합니다.
 >
 >라우팅에 대 한 참조 자료에 대 한 [라우팅](xref:fundamentals/routing) 을 참조 하세요.
@@ -195,7 +201,9 @@ ASP.NET Core 3.0 이상에서 끝점 라우팅:
 ### <a name="conventional-routing-order"></a>기본 라우팅 순서
 
 기존 라우팅은 앱에서 정의 된 작업과 컨트롤러의 조합만 일치 합니다. 이는 기존 경로가 중복 되는 경우를 단순화 하기 위한 것입니다.
-, 및 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 를 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>사용 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>하 여 경로를 추가 하면 호출 되는 순서에 따라 해당 끝점에 순서 값이 자동으로 할당 됩니다. 이전에 표시 된 경로의 일치 항목은 우선 순위가 높습니다. 규칙 기반 라우팅은 순서에 영향을 받습니다. 일반적으로 영역이 있는 경로는 영역이 없는 경로 보다 더 구체적 이므로 앞에 배치 해야 합니다. 와 같은 `{*article}` 모든 경로 매개 변수를 catch 하는 [전용 기본 경로](#dcr) 를 사용 하면 경로 [를 너무 많이](xref:fundamentals/routing#greedy)지정할 수 있습니다. 즉, 다른 경로와 일치 시키려는 url과 일치 합니다. Greedy 일치를 방지 하려면 greedy 경로를 경로 테이블에 배치 합니다.
+, 및 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 를 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>사용 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>하 여 경로를 추가 하면 호출 되는 순서에 따라 해당 끝점에 순서 값이 자동으로 할당 됩니다. 이전에 표시 된 경로의 일치 항목은 우선 순위가 높습니다. 규칙 기반 라우팅은 순서에 영향을 받습니다. 일반적으로 영역이 있는 경로는 영역이 없는 경로 보다 더 구체적 이므로 앞에 배치 해야 합니다. 와 같은 `{*article}` 모든 경로 매개 변수를 사용 하는 [전용 기본 경로](#dcr) 를 사용 하면 경로 [를 너무 많이](xref:fundamentals/routing#greedy)사용할 수 있습니다. 즉, 다른 경로와 일치 시키려는 url과 일치 하 게 됩니다. Greedy 일치를 방지 하려면 greedy 경로를 경로 테이블에 배치 합니다.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 <a name="best"></a>
 
@@ -206,7 +214,7 @@ ASP.NET Core 3.0 이상에서 끝점 라우팅:
 * 가장 적합 한 후보를 선택 합니다.
 * 예외를 throw합니다.
 
-다음은 그 예입니다.
+예:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -363,7 +371,7 @@ URL 경로 `/products3`사용:
 
 REST API를 빌드할 때 작업에서 모든 HTTP 메서드를 허용 하므로 작업 메서드에서 `[Route(...)]` 를 사용 해야 하는 경우는 드뭅니다. API에서 지 원하는 항목을 정확 하 게 이해 하려면 보다 구체적인 [HTTP 동사 특성](#verb) 을 사용 하는 것이 좋습니다. REST API의 클라이언트는 특정 논리 작업에 어떤 경로 및 HTTP 동사가 매핑되는지 알아야 합니다.
 
-REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 작업을 HTTP 동사로 나타내는 리소스 집합으로 모델링 해야 합니다. 즉, 동일한 논리 리소스에 대 한 GET 및 POST와 같은 많은 작업은 동일한 URL을 사용 합니다. 특성 라우팅은 API의 공용 엔드포인트 레이아웃을 신중하게 설계하는 데 필요한 제어 수준을 제공합니다.
+REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 작업을 HTTP 동사로 나타내는 리소스 집합으로 모델링 해야 합니다. 즉, 동일한 논리 리소스에 대 한 GET 및 POST와 같은 많은 작업은 동일한 URL을 사용 합니다. 특성 라우팅은 API의 공개 엔드포인트 레이아웃을 신중하게 설계하는 데 필요한 제어 수준을 제공합니다.
 
 특성 경로는 특정 작업에 적용되므로 경로 템플릿 정의의 일환으로 필요한 매개 변수를 간단하게 만들 수 있습니다. 다음 예제에서 `id` 는 URL 경로의 일부로 필요 합니다.
 
@@ -463,7 +471,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 * 위의 코드는 예 이거나 낮은 라우팅 디자인입니다. `Order` 속성을 설명 하는 데 사용 되었습니다.
 * 속성 `Order` 은 모호성을 해결 하 고 해당 템플릿은 일치 시킬 수 없습니다. 템플릿을 제거 하는 `[Route("Home")]` 것이 좋습니다.
 
-Razor Pages를 사용 하 여 경로 순서에 대 한 자세한 내용은 경로 [및 앱 규칙 Razor Pages](xref:razor-pages/razor-pages-conventions#route-order) 를 참조 하세요.
+페이지 [ Razor 경로 및 앱 규칙:](xref:razor-pages/razor-pages-conventions#route-order) 경로 순서와 Razor 페이지의 경로 순서에 대 한 정보를 참조 하세요.
 
 일부 경우에는 모호한 경로를 사용 하 여 HTTP 500 오류가 반환 됩니다. [로깅을](xref:fundamentals/logging/index) 사용 하 여를 `AmbiguousMatchException`일으킨 끝점을 확인 합니다.
 
@@ -750,7 +758,7 @@ Url의 여러 오버 로드 [. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>HTML 및 Razor에서 Url 생성
+### <a name="generate-urls-in-html-and-razor"></a>HTML로 Url 생성Razor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>및 `<a>` 요소 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> 를 각각 `<form>` 생성 하는 [html.beginform](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) [및 html.actionlink 메서드](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) 를 제공 합니다. 이러한 메서드는 url을 생성 하는 데 [url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) 메서드를 사용 하 여 비슷한 인수를 허용 합니다. `HtmlHelper`에 대한 `Url.RouteUrl` 보조 도구는 `Html.BeginRouteForm` 및 `Html.RouteLink`이며 서로 기능이 비슷합니다.
 
@@ -1001,7 +1009,7 @@ app.UseMvc(routes =>
 
 ### <a name="disambiguating-actions"></a>명확한 작업 구분
 
-두 작업이 라우팅을 통해 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외가 throw됩니다. 다음은 그 예입니다.
+두 작업이 라우팅을 통해 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외가 throw됩니다. 예:
 
 ```csharp
 public class ProductsController : Controller
@@ -1212,7 +1220,7 @@ public class HomeController : Controller
 > [!TIP]
 > `Order`를 사용하지 마세요. URL 공간에 올바른 라우팅을 위한 명시적 순서 값이 필요한 경우 클라이언트에서도 혼란이 발생할 수 있습니다. 일반적으로 특성 라우팅은 URL이 일치하는 올바른 경로를 선택합니다. URL 생성에 사용되는 기본 순서가 작동하지 않는 경우 일반적으로 경로 이름을 재정의로 사용하는 것이 `Order` 속성을 적용하는 것보다 간단합니다.
 
-Razor Pages 라우팅과 MVC 컨트롤러 라우팅은 구현을 공유합니다. Razor Pages 항목의 경로 순서에 대한 정보는 [Razor Pages 라우팅 및 앱 규칙: 경로 순서](xref:razor-pages/razor-pages-conventions#route-order)를 참조할 수 있습니다.
+Razor페이지 라우팅 및 MVC 컨트롤러 라우팅은 구현을 공유 합니다. 페이지 항목의 경로 순서에 대 한 정보는 [ Razor 페이지 경로 및 앱 규칙: 경로 순서](xref:razor-pages/razor-pages-conventions#route-order)에서 사용할 수 있습니다. Razor
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

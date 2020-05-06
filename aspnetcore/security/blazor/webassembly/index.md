@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: c096419f4866ea2f1db135594c4b88c89c7c90d1
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138419"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768002"
 ---
-# <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
+# <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
 
 작성자: [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -29,14 +32,14 @@ Blazor WebAssembly 앱은 SPA(단일 페이지 애플리케이션)와 동일한 
 
 ## <a name="authentication-library"></a>인증 라이브러리
 
-Blazor WebAssembly는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 라이브러리를 통해 OIDC를 사용한 앱 인증 및 권한 부여를 지원합니다. 이 라이브러리는 ASP.NET Core 백 엔드에 대해 원활하게 인증하기 위한 기본 형식 집합을 제공합니다. 이 라이브러리는 [ID 서버](https://identityserver.io/) 위에 빌드된 API 권한 부여 지원과 ASP.NET Core ID를 통합합니다. 이 라이브러리는 OP(OpenID 공급자)라고 하는 OIDC를 지원하는 타사 IP(ID 공급자)에 대해 인증할 수 있습니다.
+Blazor WebAssembly는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 라이브러리를 통해 OIDC를 사용한 앱 인증 및 권한 부여를 지원합니다. 이 라이브러리는 ASP.NET Core 백 엔드에 대해 원활하게 인증하기 위한 기본 형식 집합을 제공합니다. 이 라이브러리는 [Identity 서버](https://identityserver.io/) 위에 빌드된 API 권한 부여 지원과 ASP.NET Core Identity를 통합합니다. 이 라이브러리는 OP(OpenID 공급자)라고 하는 OIDC를 지원하는 타사 Identity 공급자(IP)에 대해 인증할 수 있습니다.
 
 Blazor WebAssembly의 인증 지원은 기본 인증 프로토콜 세부 정보를 처리하는 데 사용되는 *oidc-client.js* 라이브러리 위에 빌드됩니다.
 
 SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 옵션이 있습니다. 그러나 Blazor WebAssembly의 엔지니어링 설계에서는 OAuth 및 OIDC가 Blazor WebAssembly 앱의 인증을 위한 최고의 옵션으로 자리 잡았습니다. [JWT(JSON Web Token)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) 기반의 [토큰 기반 인증](xref:security/anti-request-forgery#token-based-authentication)이 기능 및 보안상의 이유로 [쿠키 기반 인증](xref:security/anti-request-forgery#cookie-based-authentication) 대신 선택되었습니다.
 
 * 일부 요청에서는 토큰이 전송되지 않으므로 토큰 기반 프로토콜을 사용하면 공격 노출 영역이 적어집니다.
-* 토큰은 명시적으로 전송되므로 [CSRF(교차 사이트 요청 위조)](xref:security/anti-request-forgery)로부터 서버 엔드포인트를 보호할 필요가 없습니다. 따라서 Blazor WebAssembly 앱을 MVC 또는 Razor 페이지 앱과 함께 호스트할 수 있습니다.
+* 토큰은 명시적으로 전송되므로 [CSRF(교차 사이트 요청 위조)](xref:security/anti-request-forgery)로부터 서버 엔드포인트를 보호할 필요가 없습니다. 따라서 Blazor WebAssembly 앱을 MVC 또는 Razor Pages 앱과 함께 호스트할 수 있습니다.
 * 토큰은 쿠키보다 사용 권한이 더 좁습니다. 예를 들어 토큰을 사용하여 사용자 계정을 관리하거나 사용자 암호를 변경할 수 없습니다. 이러한 작업은 해당 기능이 명시적으로 구현된 경우에만 가능합니다.
 * 토큰은 수명이 짧아서 기본적으로 1시간이므로 공격 기간이 제한됩니다. 또한 토큰은 언제든지 해지할 수 있습니다.
 * 자체 포함 JWT는 클라이언트와 서버에 인증 프로세스를 보증합니다. 예를 들어 클라이언트에게는 수신한 토큰이 적합하고 주어진 인증 프로세스의 일부로 내보내 졌는지 검색하고 확인할 수단이 있습니다. 타사가 인증 프로세스 중에 토큰을 바꾸려고 하는 경우 클라이언트는 바뀐 토큰을 감지하고 사용하지 않을 수 있습니다.
@@ -49,7 +52,7 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 
 * 익명 사용자가 로그인 단추를 선택하거나 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성이 적용된 페이지를 요청하면 앱의 로그인 페이지(`/authentication/login`)로 리디렉션됩니다.
 * 로그인 페이지에서 인증 라이브러리는 권한 부여 엔드포인트로의 리디렉션을 준비합니다. 권한 부여 엔드포인트는 Blazor WebAssembly 앱 외부에 있으며 별도의 원본에 호스트될 수 있습니다. 엔드포인트는 사용자가 인증되었는지 여부를 확인하고 응답으로 하나 이상의 토큰을 발급합니다. 인증 라이브러리는 인증 응답을 받기 위한 로그인 콜백을 제공합니다.
-  * 사용자가 인증되지 않은 경우 사용자는 기본 인증 시스템, 일반적으로 ASP.NET Core ID로 리디렉션됩니다.
+  * 사용자가 인증되지 않은 경우 사용자는 기본 인증 시스템, 일반적으로 ASP.NET Core Identity로 리디렉션됩니다.
   * 사용자가 이미 인증된 경우에는 권한 부여 엔드포인트에서 적절한 토큰을 생성하고 브라우저를 다시 로그인 콜백 엔드포인트(`/authentication/login-callback`)로 리디렉션합니다.
 * Blazor WebAssembly 앱이 로그인 콜백 엔드포인트(`/authentication/login-callback`)를 로드하면 인증 응답이 처리됩니다.
   * 인증 프로세스가 완료되면 사용자는 인증되고 필요에 따라 사용자가 요청한 원래의 보호된 URL로 다시 돌아갑니다.

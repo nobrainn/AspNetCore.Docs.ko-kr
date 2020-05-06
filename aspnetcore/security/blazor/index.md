@@ -5,17 +5,20 @@ description: Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d55880265ed1ceedf8f115412e5ac47309521239
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206101"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772897"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -246,7 +249,7 @@ Blazor 서버 앱에는 옵션 및 인증 서비스가 이미 있으므로 추�
 * 사용자에게 ‘클레임’이 있는지 여부 
 * ‘정책’이 충족되었는지 여부 
 
-이러한 각 개념은 ASP.NET Core MVC 또는 Razor Pages 앱에서와 동일합니다. ASP.NET Core 보안에 대한 자세한 내용은 [ASP.NET Core 보안 및 ID](xref:security/index)의 문서를 참조하세요.
+이러한 각 개념은 ASP.NET Core MVC 또는 Razor Pages 앱에서와 동일합니다. ASP.NET Core 보안에 대한 자세한 내용은 [ASP.NET Core 보안 및 Identity](xref:security/index)의 문서를 참조하세요.
 
 ## <a name="authorizeview-component"></a>AuthorizeView 구성 요소
 
@@ -426,6 +429,7 @@ Not authorized.
 앱이 절차적 논리의 일부로 권한 부여 규칙을 확인해야 하는 경우, `Task<AuthenticationState>` 형식의 연계 매개 변수를 사용하여 사용자의 <xref:System.Security.Claims.ClaimsPrincipal>을 가져옵니다. `IAuthorizationService` 등의 다른 서비스와 `Task<AuthenticationState>`를 결합하여 정책을 평가할 수 있습니다.
 
 ```razor
+@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
 <button @onclick="@DoSomething">Do something important</button>

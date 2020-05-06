@@ -4,13 +4,19 @@ author: ardalis
 description: ASP.NET MVC 프로젝트를 ASP.NET Core MVC로 마이그레이션하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6c9449fb43960d05db8aa6dcba64d3d830834cdb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 59a10c002958e5f719dbd59686f21df69da5f43e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652551"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777048"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션
 
@@ -61,13 +67,13 @@ ms.locfileid: "78652551"
 
 ::: moniker-end
 
-`Microsoft.AspNetCore.Mvc`은 ASP.NET Core MVC 프레임 워크입니다. `Microsoft.AspNetCore.StaticFiles`은 정적 파일 처리기입니다. ASP.NET Core 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다 ( [정적 파일](xref:fundamentals/static-files)참조).
+`Microsoft.AspNetCore.Mvc`는 ASP.NET Core MVC 프레임 워크입니다. `Microsoft.AspNetCore.StaticFiles`는 정적 파일 처리기입니다. ASP.NET Core 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다 ( [정적 파일](xref:fundamentals/static-files)참조).
 
 * *Startup.cs* 파일을 열고 다음 코드와 일치 하도록 코드를 변경 합니다.
 
   [!code-csharp[](mvc/sample/Startup.cs?highlight=13,26-31)]
 
-`UseStaticFiles` 확장 메서드는 정적 파일 처리기를 추가 합니다. 앞서 언급 했 듯이 ASP.NET 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다. `UseMvc` 확장 메서드는 라우팅을 추가 합니다. 자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.
+확장 `UseStaticFiles` 메서드는 정적 파일 처리기를 추가 합니다. 앞서 언급 했 듯이 ASP.NET 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다. 확장 `UseMvc` 메서드는 라우팅을 추가 합니다. 자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.
 
 ## <a name="add-a-controller-and-view"></a>컨트롤러 및 뷰 추가
 
@@ -83,7 +89,7 @@ ms.locfileid: "78652551"
 
 * *보기/홈* 폴더를 추가 합니다.
 
-* *Index. cshtml* 이라는 **Razor 뷰** 를 *Views/Home* 폴더에 추가 합니다.
+* 뷰 */홈* 폴더에 *Index. cshtml* 이라는 ** Razor 뷰** 를 추가 합니다.
 
 ![새 항목 추가 대화 상자](mvc/_static/view.png)
 
@@ -117,15 +123,15 @@ ms.locfileid: "78652551"
 
 * filters
 
-* 로그인/로그 아웃, Id (다음 자습서에서 수행 됨)
+* 로그인/로그 아웃 합니다 Identity (다음 자습서에서 수행 됨).
 
 ## <a name="controllers-and-views"></a>컨트롤러 및 뷰
 
-* ASP.NET MVC `HomeController`의 각 메서드를 새 `HomeController`에 복사 합니다. ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);입니다. ASP.NET Core MVC에서 작업 메서드는 대신 `IActionResult`을 반환 합니다. `ActionResult`에서 `IActionResult`를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.
+* ASP.NET MVC `HomeController` 의 각 메서드를 새 `HomeController`로 복사 합니다. ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);입니다. ASP.NET Core MVC에서 작업 메서드는 대신을 `IActionResult` 반환 합니다. `ActionResult`는 `IActionResult`를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.
 
-* ASP.NET MVC 프로젝트에서 MVC ASP.NET Core 프로젝트에 *대 한* *파일을* *복사 합니다.*
+* ASP.NET MVC 프로젝트에서 MVC ASP.NET Core 프로젝트에 *대 한* Razor *파일을* *복사 합니다.*
 
-* ASP.NET Core 앱을 실행 하 고 각 메서드를 테스트 합니다. 레이아웃 파일이 나 스타일을 아직 마이그레이션하지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다. `About` 및 `Contact` 뷰에 대 한 레이아웃 파일 생성 링크가 없으므로 브라우저에서 호출 해야 합니다. **4492** 은 프로젝트에서 사용 되는 포트 번호로 바꿉니다.
+* ASP.NET Core 앱을 실행 하 고 각 메서드를 테스트 합니다. 레이아웃 파일이 나 스타일을 아직 마이그레이션하지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다. 및 뷰에 대 한 레이아웃 파일 생성 링크가 없으므로 브라우저에서 호출 해야 합니다 (4492을 프로젝트에서 사용 되는 포트 번호로 대체). **4492** `About` `Contact`
 
   * `http://localhost:4492/home/about`
 
@@ -155,15 +161,15 @@ ms.locfileid: "78652551"
 
 *_Layout cshtml* 파일을 열고 다음과 같이 변경 합니다 (완성 된 코드는 아래에 표시 됨).
 
-* `@Styles.Render("~/Content/css")`을 `<link>` 요소로 대체 하 여 *부트스트랩* 을 로드 합니다 (아래 참조).
+* 부트스트랩 `@Styles.Render("~/Content/css")` 을 로드할 `<link>` 요소로 대체 합니다 *bootstrap.css* (아래 참조).
 
 * `@Scripts.Render("~/bundles/modernizr")`를 제거합니다.
 
-* `@Html.Partial("_LoginPartial")` 줄을 주석으로 처리 합니다 (`@*...*@`로 줄 포함). 자세한 내용은 [ASP.NET Core 인증 및 Id 마이그레이션을](xref:migration/identity) 참조 하세요.
+* `@Html.Partial("_LoginPartial")` 줄을 주석으로 `@*...*@`처리 합니다. 자세한 내용은 [인증 및 Identity ASP.NET Core 마이그레이션을](xref:migration/identity) 참조 하세요.
 
-* `@Scripts.Render("~/bundles/jquery")`를 `<script>` 요소로 바꿉니다 (아래 참조).
+* `<script>` 요소로 대체 `@Scripts.Render("~/bundles/jquery")` 합니다 (아래 참조).
 
-* `@Scripts.Render("~/bundles/bootstrap")`를 `<script>` 요소로 바꿉니다 (아래 참조).
+* `<script>` 요소로 대체 `@Scripts.Render("~/bundles/bootstrap")` 합니다 (아래 참조).
 
 부트스트랩 CSS 포함에 대 한 대체 태그는 다음과 같습니다.
 
@@ -196,13 +202,13 @@ JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음�
 
 ## <a name="solve-http-500-errors"></a>HTTP 500 오류 해결
 
-문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다. 예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 발생 합니다. 기본적으로 ASP.NET Core apps에서는 `UseDeveloperExceptionPage` 확장이 `IApplicationBuilder`에 추가 되 고 구성이 *개발*될 때 실행 됩니다. 다음 코드에 자세히 설명 되어 있습니다.
+문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다. 예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 발생 합니다. 기본적으로 ASP.NET Core 앱에서는 `UseDeveloperExceptionPage` 확장이에 추가 되 `IApplicationBuilder` 고 구성이 *개발*될 때 실행 됩니다. 다음 코드에 자세히 설명 되어 있습니다.
 
 [!code-csharp[](mvc/sample/Startup.cs?highlight=19-22)]
 
 ASP.NET Core 웹 앱에서 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다. 일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다. 자세한 내용은 [오류 처리](../fundamentals/error-handling.md) 에서 **개발자 예외 페이지 사용** 을 참조 하세요.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

@@ -1,18 +1,24 @@
 ---
-title: '자습서: ASP.NET Core를 사용하여 Razor 페이지 웹앱 만들기'
+title: '자습서: ASP.NET Core를 사용하여 Razor Pages 웹앱 만들기'
 author: rick-anderson
-description: Windows에서 Visual Studio, ASP.NET Core 및 EF Core를 사용하여 Razor 페이지 웹앱을 만듭니다.
+description: Windows에서 Visual Studio, ASP.NET Core 및 EF Core를 사용하여 Razor Pages 웹앱을 만듭니다.
 ms.author: riande
 ms.date: 08/09/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: 03acfc381cf5dca2f8b834da75191cd8053e0da4
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 2a75c4c4133642d53349437ea83413e96c40baf5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644595"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774537"
 ---
-# <a name="tutorial-create-a-razor-pages-web-app-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 Razor 페이지 웹앱 만들기
+# <a name="tutorial-create-a-razor-pages-web-app-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 Razor Pages 웹앱 만들기
 
 이 시리즈의 자습서는 Razor Pages 웹앱을 빌드하는 작업의 기본 사항을 설명합니다. 
 
@@ -20,8 +26,8 @@ ms.locfileid: "78644595"
 
 이 시리즈에는 다음 자습서가 포함됩니다.
 
-1. [Razor 페이지 웹앱 만들기](xref:tutorials/razor-pages/razor-pages-start)
-1. [Razor 페이지 앱에 모델 추가](xref:tutorials/razor-pages/model)
+1. [Razor Pages 웹앱 만들기](xref:tutorials/razor-pages/razor-pages-start)
+1. [Razor Pages 앱에 모델 추가](xref:tutorials/razor-pages/model)
 1. [Razor Pages 스캐폴드(생성)](xref:tutorials/razor-pages/page)
 1. [데이터베이스 작업](xref:tutorials/razor-pages/sql)
 1. [Razor Pages 업데이트](xref:tutorials/razor-pages/da1)

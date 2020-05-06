@@ -5,30 +5,36 @@ description: 권한 부여 특성이 충분 하지 않을 경우 ASP.NET Core �
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 2be611c754583d996db7107f341b1be03cef73cf
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5af4dd6a33e43191dbb5e7a8431fd8468a5fa11b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654063"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774316"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 리소스 기반 권한 부여
 
 권한 부여 전략은 액세스 하는 리소스에 따라 달라 집니다. Author 속성이 있는 문서를 생각해 보세요. 작성자만 문서를 업데이트할 수 있습니다. 따라서 권한 부여 평가를 수행 하기 전에 데이터 저장소에서 문서를 검색 해야 합니다.
 
-특성 평가는 페이지 처리기 또는 문서를 로드 하는 작업을 실행 하기 전에 데이터 바인딩 전에 발생 합니다. 이러한 이유로 `[Authorize]` 특성을 사용한 선언적 권한 부여는 충분 하지 않습니다. 대신 사용자 지정 권한 부여 메서드를 호출 하 여 *명령적 권한 부여*라는 스타일을&mdash;수 있습니다.
+특성 평가는 페이지 처리기 또는 문서를 로드 하는 작업을 실행 하기 전에 데이터 바인딩 전에 발생 합니다. 이러한 이유로 `[Authorize]` 특성을 사용한 선언적 권한 부여는 충분 하지 않습니다. 대신 사용자 지정 권한 부여 메서드&mdash;를 *명령적 권한 부여*라는 스타일로 호출할 수 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
-[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 ::: moniker-end
 
  ::: moniker range=">= aspnetcore-2.0 < aspnetcore-3.0"
-[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
-[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 ::: moniker-end
 
 [권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기](xref:security/authorization/secure-data) 리소스 기반 권한 부여를 사용 하는 샘플 앱을 포함 합니다.
@@ -39,7 +45,7 @@ ms.locfileid: "78654063"
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
 
-`IAuthorizationService`에는 두 가지 `AuthorizeAsync` 메서드 오버 로드가 있습니다. 하나는 리소스와 정책 이름을 수락 하 고 다른 하나는 리소스를 수락 하 고 다른 하나는 평가할 요구 사항의 목록입니다.
+`IAuthorizationService`에는 `AuthorizeAsync` 두 개의 메서드 오버 로드가 있습니다. 하나는 리소스를 수락 하 고, 다른 하나는 리소스를 수락 하 고 다른 하나는 평가할 요구 사항의 목록입니다.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -69,10 +75,10 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 <a name="security-authorization-resource-based-imperative"></a>
 
-다음 예제에서는 보안을 설정할 리소스가 사용자 지정 `Document` 개체에 로드 됩니다. 현재 사용자가 제공 된 문서를 편집할 수 있는지 여부를 확인 하기 위해 `AuthorizeAsync` 오버 로드가 호출 됩니다. 사용자 지정 "EditPolicy" 권한 부여 정책이 결정 됩니다. 권한 부여 정책을 만드는 방법에 대 한 자세한 내용은 [사용자 지정 정책 기반 권한 부여](xref:security/authorization/policies) 를 참조 하세요.
+다음 예제에서는 보호할 리소스가 사용자 지정 `Document` 개체에 로드 됩니다. 현재 `AuthorizeAsync` 사용자가 제공 된 문서를 편집할 수 있는지 여부를 확인 하기 위해 오버 로드가 호출 됩니다. 사용자 지정 "EditPolicy" 권한 부여 정책이 결정 됩니다. 권한 부여 정책을 만드는 방법에 대 한 자세한 내용은 [사용자 지정 정책 기반 권한 부여](xref:security/authorization/policies) 를 참조 하세요.
 
 > [!NOTE]
-> 다음 코드 샘플에서는 인증을 실행 하 고 `User` 속성을 설정 했다고 가정 합니다.
+> 다음 코드 샘플에서는 인증을 실행 하 고 속성을 `User` 설정 했다고 가정 합니다.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -104,9 +110,9 @@ Handler 클래스는 요구 사항과 리소스 형식을 모두 지정 합니�
 
 ::: moniker-end
 
-앞의 예제에서 `SameAuthorRequirement`는 보다 일반적인 `SpecificAuthorRequirement` 클래스의 특별 한 경우를 가정 합니다. `SpecificAuthorRequirement` 클래스 (표시 되지 않음)에는 작성자의 이름을 나타내는 `Name` 속성이 포함 되어 있습니다. `Name` 속성을 현재 사용자로 설정할 수 있습니다.
+앞의 예제에서 `SameAuthorRequirement` 가 보다 일반적인 `SpecificAuthorRequirement` 클래스의 특별 한 경우를 가정 합니다. 클래스 `SpecificAuthorRequirement` (표시 되지 않음)에는 `Name` 작성자의 이름을 나타내는 속성이 포함 되어 있습니다. `Name` 속성을 현재 사용자로 설정할 수 있습니다.
 
-`Startup.ConfigureServices`에 요구 사항 및 처리기를 등록 합니다.
+에서 `Startup.ConfigureServices`요구 사항 및 처리기를 등록 합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=4-8,10)]
@@ -145,16 +151,16 @@ CRUD (만들기, 읽기, 업데이트, 삭제) 작업의 결과에 따라 결정
 
 이 섹션에서는 챌린지 및 금지 작업 결과를 처리 하는 방법과 시도 및 금지의 차이점을 보여 줍니다.
 
-작업 리소스 처리기를 호출 하려면 페이지 처리기 또는 작업에서 `AuthorizeAsync`를 호출할 때 작업을 지정 합니다. 다음 예에서는 인증 된 사용자가 제공 된 문서를 볼 수 있는지 여부를 확인 합니다.
+작업 리소스 처리기를 호출 하려면 페이지 처리기 또는 작업에서 호출할 `AuthorizeAsync` 때 작업을 지정 합니다. 다음 예에서는 인증 된 사용자가 제공 된 문서를 볼 수 있는지 여부를 확인 합니다.
 
 > [!NOTE]
-> 다음 코드 샘플에서는 인증을 실행 하 고 `User` 속성을 설정 했다고 가정 합니다.
+> 다음 코드 샘플에서는 인증을 실행 하 고 속성을 `User` 설정 했다고 가정 합니다.
 
 ::: moniker range=">= aspnetcore-2.0"
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Pages/Document/View.cshtml.cs?name=snippet_DocumentViewHandler&highlight=10-11)]
 
-권한 부여가 성공 하면 문서를 보는 페이지가 반환 됩니다. 권한 부여가 실패 하지만 사용자가 인증 되는 경우 `ForbidResult`를 반환 하면 권한 부여에 실패 했다는 인증 미들웨어에 게 알립니다. 인증을 수행 해야 하는 경우 `ChallengeResult` 반환 됩니다. 대화형 브라우저 클라이언트의 경우 사용자를 로그인 페이지로 리디렉션하는 것이 적합할 수 있습니다.
+권한 부여가 성공 하면 문서를 보는 페이지가 반환 됩니다. 권한 부여가 실패 하지만 사용자가 인증 되는 `ForbidResult` 경우를 반환 하면 권한 부여에 실패 했다는 인증 미들웨어에 게 알립니다. 인증 `ChallengeResult` 을 수행 해야 하는 경우이 반환 됩니다. 대화형 브라우저 클라이언트의 경우 사용자를 로그인 페이지로 리디렉션하는 것이 적합할 수 있습니다.
 
 ::: moniker-end
 
@@ -162,6 +168,6 @@ CRUD (만들기, 읽기, 업데이트, 삭제) 작업의 결과에 따라 결정
 
 [!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Controllers/DocumentController.cs?name=snippet_DocumentViewAction&highlight=11-12)]
 
-권한 부여가 성공 하면 문서에 대 한 뷰가 반환 됩니다. 권한 부여가 실패 한 경우 `ChallengeResult`를 반환 하면 권한 부여가 실패 했다는 인증 미들웨어에 게 알리고 미들웨어는 적절 한 응답을 받을 수 있습니다. 적절 한 응답에서 401 또는 403 상태 코드를 반환할 수 있습니다. 대화형 브라우저 클라이언트의 경우 사용자를 로그인 페이지로 리디렉션하는 것을 의미할 수 있습니다.
+권한 부여가 성공 하면 문서에 대 한 뷰가 반환 됩니다. 권한 부여가 실패 하 `ChallengeResult` 는 경우를 반환 하면 권한 부여에 실패 했다는 인증 미들웨어에 게 알리고 미들웨어는 적절 한 응답을 받을 수 있습니다. 적절 한 응답에서 401 또는 403 상태 코드를 반환할 수 있습니다. 대화형 브라우저 클라이언트의 경우 사용자를 로그인 페이지로 리디렉션하는 것을 의미할 수 있습니다.
 
 ::: moniker-end

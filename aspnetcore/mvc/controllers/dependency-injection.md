@@ -4,13 +4,19 @@ author: ardalis
 description: ASP.NET Core MVC 컨트롤러가 ASP.NET Core의 종속성 주입을 사용하여 해당 생성자를 통해 명시적으로 해당 종속성을 요청하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 02/24/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 202b62d4b30c5c61c407abdc8509a2a75e181cb6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a7df6a5fa2d49efc332c4684ea8192f143cdebf5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652155"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775702"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core의 컨트롤러에 종속성 주입
 
@@ -18,7 +24,7 @@ ms.locfileid: "78652155"
 
 작성자: [Shadi Namrouti](https://github.com/shadinamrouti), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Steve Smith](https://github.com/ardalis)
 
-ASP.NET Core MVC 컨트롤러는 생성자를 통해 명시적으로 종속성을 요청합니다. ASP.NET Core는 기본적으로 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 지원합니다. DI를 사용하면 앱의 테스트와 유지 관리가 쉬워집니다.
+ASP.NET Core MVC 컨트롤러는 생성자를 통해 명시적으로 종속성을 요청합니다. ASP.NET Core는 기본적으로 [DI(종속성 주입 )](xref:fundamentals/dependency-injection)를 지원합니다. DI를 사용하면 앱의 테스트와 유지 관리가 쉬워집니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -52,9 +58,9 @@ ASP.NET Core MVC 컨트롤러는 생성자를 통해 명시적으로 종속성�
 
 ## <a name="access-settings-from-a-controller"></a>컨트롤러에서 설정 액세스
 
-컨트롤러 내에서 앱 또는 구성 설정에 액세스하는 것은 일반적인 패턴입니다. *에 설명된* 옵션 패턴<xref:fundamentals/configuration/options>은 설정을 관리하기 위해 선호되는 방법입니다. 일반적으로 컨트롤러에 <xref:Microsoft.Extensions.Configuration.IConfiguration>을 직접 주입하지 마세요.
+컨트롤러 내에서 앱 또는 구성 설정에 액세스하는 것은 일반적인 패턴입니다. <xref:fundamentals/configuration/options>에 설명된 *옵션 패턴*은 설정을 관리하기 위해 선호되는 방법입니다. 일반적으로 컨트롤러에 <xref:Microsoft.Extensions.Configuration.IConfiguration>을 직접 주입하지 마세요.
 
-옵션을 나타내는 클래스를 만듭니다. 다음은 그 예입니다.
+옵션을 나타내는 클래스를 만듭니다. 예를 들어:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -70,7 +76,7 @@ JSON 형식 파일에서 설정을 읽도록 앱을 구성합니다.
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Controllers/SettingsController.cs?name=snippet)]
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * 컨트롤러에서 종속성을 명시적으로 요청하여 코드를 더 쉽게 테스트할 수 있는 방법을 알아보려면 <xref:mvc/controllers/testing>을 참조하세요.
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 86808e6bdd3bb669a62ad9e333b11df4c09a9cd3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: d62889ba6dba6748ce3d047f0d37b3a904199496
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774641"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850437"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core에서 Azure Active Directory B2C를 사용 하는 클라우드 인증
 
@@ -40,7 +40,7 @@ ms.locfileid: "82774641"
 
 이 연습을 수행 하려면 다음이 필요 합니다.
 
-* [Microsoft Azure 구독](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+* [Microsoft Azure 구독](https://azure.microsoft.com/free/dotnet/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Azure Active Directory B2C 테 넌 트 만들기
@@ -53,14 +53,14 @@ ms.locfileid: "82774641"
 
 다음 값을 사용합니다.
 
-| 설정                       | 값                     | 참고                                                                                                                                                                                              |
+| Setting                       | 값                     | 참고                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **이름**                      | *&lt;앱 이름&gt;*        | 소비자에 게 앱을 설명 하는 앱의 **이름을** 입력 합니다.                                                                                                                                 |
+| **Name**                      | *&lt;앱 이름&gt;*        | 소비자에 게 앱을 설명 하는 앱의 **이름을** 입력 합니다.                                                                                                                                 |
 | **웹앱/웹 API 포함** | 예                       |                                                                                                                                                                                                    |
 | **암시적 흐름 허용**       | 예                       |                                                                                                                                                                                                    |
 | **회신 URL**                 | `https://localhost:44300/signin-oidc` | 회신 URL은 Azure AD B2C에서 앱이 요청한 토큰을 반환하는 엔드포인트입니다. Visual Studio는 사용할 회신 URL을 제공 합니다. 이제를 입력 `https://localhost:44300/signin-oidc` 하 여 양식을 완성 합니다. |
 | **앱 ID URI**                | 비워 둠               | 이 자습서에서는 필요 하지 않습니다.                                                                                                                                                                    |
-| **네이티브 클라이언트 포함**     | 예                        |                                                                                                                                                                                                    |
+| **네이티브 클라이언트 포함**     | 아니요                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Localhost가 아닌 회신 URL을 설정 하는 경우 [회신 url 목록에서 허용 되는 항목에 대 한 제약 조건을](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)알고 있어야 합니다. 
@@ -87,7 +87,7 @@ Visual Studio에서
 
 5. 다음 값을 사용 하 여 양식을 작성 합니다.
     
-    | 설정                       | 값                                                 |
+    | Setting                       | 값                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **도메인 이름**               | *&lt;B2C 테 넌 트의 도메인 이름&gt;*          |
     | **응용 프로그램 ID**            | *&lt;클립보드에서 응용 프로그램 ID 붙여넣기&gt;* |
@@ -168,4 +168,4 @@ ASP.NET Core 앱이 인증을 위해 Azure AD B2C를 사용 하도록 구성 되
 * [Microsoft](/azure/active-directory-b2c/active-directory-b2c-setup-msa-app), [Facebook](/azure/active-directory-b2c/active-directory-b2c-setup-fb-app), [Google](/azure/active-directory-b2c/active-directory-b2c-setup-goog-app), [Amazon](/azure/active-directory-b2c/active-directory-b2c-setup-amzn-app), [Twitter](/azure/active-directory-b2c/active-directory-b2c-setup-twitter-app)등의 추가 id 공급자를 구성 합니다.
 * [AZURE AD Graph API를 사용](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-graph-dotnet) 하 여 Azure AD B2C 테 넌 트에서 그룹 멤버 자격과 같은 추가 사용자 정보를 검색 합니다.
 * [Azure AD B2C를 사용 하 여 ASP.NET Core WEB API를 보호](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/)합니다.
-* [Azure AD B2C를 사용 하 여 .net 웹 앱에서 .net WEB API를 호출](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-web-api-dotnet)합니다.
+* [자습서: Azure Active Directory B2C을 사용 하 여 ASP.NET WEB API에 대 한 액세스 권한 부여](/azure/active-directory-b2c/tutorial-web-api-dotnet)

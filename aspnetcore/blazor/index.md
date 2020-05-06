@@ -8,16 +8,19 @@ ms.custom: mvc, seoapril2019
 ms.date: 03/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 6d2e95cd2ec92f97a97cb558fb39e4540450c766
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405947"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771952"
 ---
-# <a name="introduction-to-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 소개
+# <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor 소개
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
@@ -50,7 +53,7 @@ Blazor 앱은 *구성 요소*를 기반으로 합니다. Blazor의 구성 요소
 * 중첩 및 재사용될 수 있습니다.
 * [Razor 클래스 라이브러리](xref:razor-pages/ui-class) 또는 [NuGet 패키지](/nuget/what-is-nuget)로 공유 및 배포될 수 있습니다.
 
-구성 요소 클래스는 일반적으로 *.razor* 파일 확장자를 가진 [Razor](xref:mvc/views/razor) 태그 페이지 형식으로 작성됩니다. Blazor의 구성 요소는 공식적으로 *Razor 구성 요소*라고 합니다. Razor는 개발자 생산성을 위해 설계된 HTML 태그와 C# 코드를 결합하는 구문입니다. Razor를 사용하여 [IntelliSense](/visualstudio/ide/using-intellisense) 지원으로 동일한 파일에서 HTML 태그와 C# 사이를 전환할 수 있습니다. Razor Pages 및 MVC에서도 Razor를 사용합니다. 요청/응답 모델을 중심으로 빌드된 Razor Pages 및 MVC와는 달리, 구성 요소는 특별히 클라이언트 쪽 UI 논리 및 컴퍼지션에 사용됩니다.
+구성 요소 클래스는 일반적으로 *.razor* 파일 확장자를 가진 [Razor](xref:mvc/views/razor) 태그 페이지 형식으로 작성됩니다. Blazor의 구성 요소는 공식적으로 *Razor 구성 요소*라고 합니다. Razor는 개발자 생산성을 위해 설계된 HTML 태그와 C# 코드를 결합하는 구문입니다. Razor를 사용하여 [IntelliSense](/visualstudio/ide/using-intellisense) 지원으로 동일한 파일에서 HTML 태그와 C# 사이를 전환할 수 있습니다. Razor Pages 및 MVC도 Razor를 사용합니다. 요청/응답 모델을 중심으로 빌드된 Razor Pages 및 MVC와는 달리, 구성 요소는 특별히 클라이언트 쪽 UI 논리 및 컴퍼지션에 사용됩니다.
 
 다음 Razor 태그는 다른 구성 요소 내에 중첩될 수 있는 구성 요소(*Dialog.razor*)를 보여 줍니다.
 
@@ -105,7 +108,7 @@ Welcome to your new app.
 
 구성 요소는 유연하고 효율적인 방법으로 UI를 업데이트하는 데 사용되는 *렌더링 크리*라는 브라우저 DOM(문서 개체 모델)의 메모리 내 표시로 렌더링됩니다.
 
-## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
@@ -129,7 +132,7 @@ Blazor WebAssembly 앱이 빌드되고 브라우저에서 실행되는 경우:
 * HTTP 응답이 압축됩니다.
 * .NET 런타임 및 어셈블리가 브라우저에 캐시됩니다.
 
-## <a name="opno-locblazor-server"></a>Blazor 서버
+## <a name="blazor-server"></a>Blazor 서버
 
 Blazor는 UI 업데이트 적용 방법에서 구성 요소 렌더링 논리를 분리합니다. Blazor 서버에서는 ASP.NET Core 앱의 서버에서 Razor 구성 요소를 호스팅할 수 있도록 지원합니다. UI 업데이트는 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
 

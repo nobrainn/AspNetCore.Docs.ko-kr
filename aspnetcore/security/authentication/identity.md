@@ -1,16 +1,22 @@
 ---
-title: ASP.NET Core의 Id 소개
+title: Identity ASP.NET Core 소개
 author: rick-anderson
-description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항 (RequireDigit, RequiredLength, RequiredUniqueChars 등)을 설정 하는 방법에 대해 알아봅니다.
+description: ASP.NET Core Identity 앱과 함께 사용 합니다. 암호 요구 사항 (RequireDigit, RequiredLength, RequiredUniqueChars 등)을 설정 하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 4bc5f206b3aee7c2d34055703acc5b6c5218f964
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d596a8357c5c812b94950809eedf35718328747c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205945"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777009"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core의 Id 소개
 
@@ -67,7 +73,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 다음은 그 예입니다.
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 예를 들어:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -287,7 +293,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 다음은 그 예입니다.
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 예를 들어:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -391,30 +397,30 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-identity"></a>테스트 Id
+## <a name="test-identity"></a>테스트할Identity
 
-기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 개인 [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) 정보 페이지에를 추가 합니다.
+기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. 테스트 Identity하려면 개인 정보 [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) 페이지에를 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=7)]
 
 로그인 한 경우 로그 아웃 합니다. 앱을 실행 하 고 **개인 정보** 링크를 선택 합니다. 로그인 페이지로 리디렉션됩니다.
 
-### <a name="explore-identity"></a>Id 탐색
+### <a name="explore-identity"></a>탐험Identity
 
-Id를 자세히 살펴보려면:
+자세히 살펴보기 Identity :
 
 * [전체 id UI 원본 만들기](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * 각 페이지의 소스를 검사 하 고 디버거를 단계별로 실행 합니다.
 
-## <a name="identity-components"></a>Id 구성 요소
+## <a name="identity-components"></a>Identity요소도
 
-모든 Id 종속 NuGet 패키지는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)에 포함 되어 있습니다.
+모든 Identity 종속 NuGet 패키지는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)에 포함 되어 있습니다.
 
-Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며에 포함 되어 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`있습니다.
+의 Identity 기본 패키지는 [AspNetCore입니다.Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/) 이 패키지에는 ASP.NET Core Identity에 대 한 핵심 인터페이스 집합이 포함 되어 있으며에 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`포함 되어 있습니다.
 
-## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core Id로 마이그레이션
+## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core로 마이그레이션Identity
 
-기존 Id 저장소를 마이그레이션하는 방법에 대 한 자세한 내용 및 지침은 [인증 및 Id 마이그레이션](xref:migration/identity)을 참조 하세요.
+기존 Identity 저장소 마이그레이션에 대 한 자세한 내용 및 지침은 [인증 및 Identity마이그레이션 ](xref:migration/identity)을 참조 하세요.
 
 ## <a name="setting-password-strength"></a>암호 강도 설정
 
@@ -422,8 +428,8 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="next-steps"></a>다음 단계
 
-* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
-* [ID 구성](xref:security/authentication/identity-configuration)
+* SQLite를 사용 하 여 구성 Identity 하는 방법에 대 한 자세한 내용은 [GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
+* [구성이Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

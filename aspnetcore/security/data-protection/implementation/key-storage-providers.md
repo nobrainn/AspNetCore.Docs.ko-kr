@@ -1,23 +1,29 @@
 ---
-title: ASP.NET Core에서 키 저장소 공급자
+title: ASP.NET Core의 키 저장소 공급자
 author: rick-anderson
-description: ASP.NET Core 및 키 저장소 위치를 구성 하는 방법에 대 한 키 저장소 공급자에 알아봅니다.
+description: ASP.NET Core의 키 저장소 공급자 및 키 저장소 위치를 구성 하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 19f64e816d88d2fc156915e31dc147645c5a630a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a8d38f17b066a0aa9a38b1bdfea3491f733cf1bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653385"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776879"
 ---
-# <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core에서 키 저장소 공급자
+# <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core의 키 저장소 공급자
 
-데이터 보호 시스템은 [기본적으로 검색 메커니즘을 채택](xref:security/data-protection/configuration/default-settings) 하 여 암호화 키가 유지 되어야 하는 위치를 결정 합니다. 개발자는 기본 검색 메커니즘을 무시 하 고 수동으로 위치를 지정할 수 있습니다.
+데이터 보호 시스템은 [기본적으로 검색 메커니즘을 채택](xref:security/data-protection/configuration/default-settings) 하 여 암호화 키가 유지 되어야 하는 위치를 결정 합니다. 개발자는 기본 검색 메커니즘을 재정의 하 고 위치를 수동으로 지정할 수 있습니다.
 
 > [!WARNING]
-> 명시적 키 지 속성 위치를 지정 하는 경우 데이터 보호 시스템 키는 더 이상 휴지 상태로 암호화 되므로 rest 메커니즘을 기본 키 암호화를 등록 취소 합니다. 프로덕션 배포를 위한 [명시적 키 암호화 메커니즘도 추가로 지정](xref:security/data-protection/implementation/key-encryption-at-rest) 하는 것이 좋습니다.
+> 명시적 키 지 속성 위치를 지정 하는 경우 데이터 보호 시스템은 미사용 기본 키 암호화 메커니즘을 등록 취소 더 이상 미사용에서 키가 암호화 되지 않습니다. 프로덕션 배포를 위한 [명시적 키 암호화 메커니즘도 추가로 지정](xref:security/data-protection/implementation/key-encryption-at-rest) 하는 것이 좋습니다.
 
 ## <a name="file-system"></a>파일 시스템
 
@@ -31,11 +37,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`DirectoryInfo`는 로컬 컴퓨터의 디렉터리를 가리키거나 네트워크 공유의 폴더를 가리킬 수 있습니다. 로컬 컴퓨터의 디렉터리를 가리키는 경우 (그리고 로컬 컴퓨터의 앱만이 리포지토리를 사용 하기 위해 액세스 해야 하는 경우) [WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (windows)를 사용 하 여 미사용 키를 암호화 하는 것이 좋습니다. 그렇지 않으면 [x.509 인증서](xref:security/data-protection/implementation/key-encryption-at-rest) 를 사용 하 여 미사용 키를 암호화 하는 것이 좋습니다.
+는 `DirectoryInfo` 로컬 컴퓨터의 디렉터리를 가리키거나 네트워크 공유의 폴더를 가리킬 수 있습니다. 로컬 컴퓨터의 디렉터리를 가리키는 경우 (그리고 로컬 컴퓨터의 앱만이 리포지토리를 사용 하기 위해 액세스 해야 하는 경우) [WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (windows)를 사용 하 여 미사용 키를 암호화 하는 것이 좋습니다. 그렇지 않으면 [x.509 인증서](xref:security/data-protection/implementation/key-encryption-at-rest) 를 사용 하 여 미사용 키를 암호화 하는 것이 좋습니다.
 
 ## <a name="azure-storage"></a>Azure Storage
 
-[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) 패키지를 사용 하 여 Azure Blob Storage에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
+[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) 패키지를 사용 하 여 Azure Blob Storage에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 간에 키를 공유할 수 있습니다. 앱은 여러 서버에서 인증 쿠키 또는 CSRF 보호를 공유할 수 있습니다.
 
 Azure Blob Storage 공급자를 구성 하려면 [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 오버 로드 중 하나를 호출 합니다.
 
@@ -70,13 +76,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-[AspNetCore StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) 패키지를 사용 하면 Redis cache에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
+[AspNetCore StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) 패키지를 사용 하면 Redis cache에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 간에 키를 공유할 수 있습니다. 앱은 여러 서버에서 인증 쿠키 또는 CSRF 보호를 공유할 수 있습니다.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-[AspNetCore Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) 패키지를 사용 하면 Redis cache에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
+[AspNetCore Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) 패키지를 사용 하면 Redis cache에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 간에 키를 공유할 수 있습니다. 앱은 여러 서버에서 인증 쿠키 또는 CSRF 보호를 공유할 수 있습니다.
 
 ::: moniker-end
 
@@ -110,17 +116,17 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-자세한 내용은 아래 항목을 참조하세요.
+자세한 내용은 다음 항목을 참조하세요.
 
 * [StackExchange. Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
-* [Azure Redis 캐시(영문)](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
+* [Azure Redis Cache](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
 * [ASP.NET Core DataProtection 샘플](https://github.com/dotnet/AspNetCore/tree/2.2.0/src/DataProtection/samples)
 
 ## <a name="registry"></a>레지스트리
 
 **Windows 배포에만 적용 됩니다.**
 
-경우에 따라 앱 파일 시스템에 쓰기 액세스 하지 못할 수 있습니다. 앱이 가상 서비스 계정 (예: w3wp.exe의 응용 프로그램 풀 id *)으로 실행*되는 시나리오를 고려해 보세요. 이러한 경우 관리자 서비스 계정 id에서 액세스할 수 있는 레지스트리 키를 프로 비전 할 수 있습니다. 아래와 같이 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) 확장 메서드를 호출 합니다. 암호화 키를 저장 해야 하는 위치를 가리키는 [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) 를 제공 합니다.
+응용 프로그램에 파일 시스템에 대 한 쓰기 권한이 없을 수도 있습니다. 앱이 가상 서비스 계정 (예: w3wp.exe의 응용 프로그램 풀 id *)으로 실행*되는 시나리오를 고려해 보세요. 이러한 경우 관리자는 서비스 계정 id로 액세스할 수 있는 레지스트리 키를 프로 비전 할 수 있습니다. 아래와 같이 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) 확장 메서드를 호출 합니다. 암호화 키를 저장 해야 하는 위치를 가리키는 [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) 를 제공 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -137,21 +143,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="entity-framework-core"></a>Entity Framework Core
 
-[AspNetCore microsoft.entityframeworkcore.tools.dotnet](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) 패키지는 Entity Framework Core을 사용 하 여 데이터베이스에 데이터 보호 키를 저장 하기 위한 메커니즘을 제공 합니다. `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` NuGet 패키지를 프로젝트 파일에 추가 해야 합니다. [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)의 일부가 아닙니다.
+[AspNetCore microsoft.entityframeworkcore.tools.dotnet](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) 패키지는 Entity Framework Core을 사용 하 여 데이터베이스에 데이터 보호 키를 저장 하기 위한 메커니즘을 제공 합니다. NuGet `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` 패키지는 프로젝트 파일에 추가 해야 하며, [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)의 일부가 아닙니다.
 
-이 패키지를 사용 하 여 키를 웹 앱의 여러 인스턴스에서 공유할 수 있습니다.
+이 패키지를 사용 하면 웹 앱의 여러 인스턴스 간에 키를 공유할 수 있습니다.
 
-EF Core 공급자를 구성 하려면 [PersistKeysToDbContext\<TContext >](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) 메서드를 호출 합니다.
+EF Core 공급자를 구성 하려면 [PersistKeysToDbContext\<tcontext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) 메서드를 호출 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-제네릭 매개 변수 `TContext`는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 하 고 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)를 구현 해야 합니다.
+제네릭 매개 변수 `TContext`는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 해야 하며 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)를 구현 해야 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-`DataProtectionKeys` 테이블을 만듭니다.
+테이블을 `DataProtectionKeys` 만듭니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -173,9 +179,9 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext`는 위의 코드 샘플에 정의 된 `DbContext`입니다. 다른 이름을 사용 하 여 `DbContext`를 사용 하는 경우 `MyKeysContext`의 `DbContext` 이름으로 대체 합니다.
+`MyKeysContext`는 앞 `DbContext` 의 코드 샘플에 정의 되어 있습니다. 다른 이름을 사용 하는 `DbContext` 을 사용 하는 경우에는 `DbContext` 사용자의 `MyKeysContext`이름을로 바꿉니다.
 
-`DataProtectionKeys` 클래스/엔터티는 다음 표에 나와 있는 구조를 가집니다.
+클래스 `DataProtectionKeys` /엔터티는 다음 표에 나와 있는 구조를 가집니다.
 
 | 속성/필드 | CLR 형식 | SQL 형식              |
 | -------------- | -------- | --------------------- |
@@ -185,6 +191,6 @@ dotnet ef database update --context MyKeysContext
 
 ::: moniker-end
 
-## <a name="custom-key-repository"></a>사용자 지정 키 저장소
+## <a name="custom-key-repository"></a>사용자 지정 키 리포지토리
 
 기본 제공 메커니즘이 적절 하지 않은 경우 개발자는 사용자 지정 [IXmlRepository](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.ixmlrepository)을 제공 하 여 고유한 키 지 속성 메커니즘을 지정할 수 있습니다.

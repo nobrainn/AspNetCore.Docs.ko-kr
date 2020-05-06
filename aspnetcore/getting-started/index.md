@@ -5,13 +5,19 @@ description: ASP.NET Core를 사용하여 기본 Hello World 앱을 만들고 �
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: getting-started
-ms.openlocfilehash: 86a0c8d017138a949fddc0356f3de548d368a4c0
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 565cde233d6fc5f085ae1709e167e73980d5c3c2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417606"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776235"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -44,7 +50,7 @@ dotnet new webapp -o aspnetcoreapp
 이전 명령은
 
 * 새 웹앱을 만듭니다.  
-* `-o aspnetcoreapp` 매개 변수는 앱의 소스 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
+* `-o aspnetcoreapp` 매개 변수는 앱의 원본 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
 
 ### <a name="trust-the-development-certificate"></a>개발 인증서 신뢰
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core 데이터 보호 인증 된 암호화에 대 한 구현 세부 정보를 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3066cd505781ed2ddad46626dda9d9ce35307877
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655005"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776970"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>ASP.NET Core의 인증 된 암호화 세부 정보
 
@@ -55,4 +61,4 @@ AA FF EE 57 57 2F 40 4C 3F 7F CC 9D CC D9 32 3E
 나머지는 페이로드를 포함 하며 사용 되는 형식에만 적용 됩니다.
 
 > [!WARNING]
-> 지정 된 키로 보호 되는 모든 페이로드는 동일한 20 바이트 (매직 value, key id) 헤더로 시작 합니다. 관리자는이 팩트를 사용 하 여 페이로드가 생성 된 시간을 대략적으로 진단할 수 있습니다. 예를 들어 위의 페이로드는 키 {0c819c80-6619-4019-9536-53f8aaffee57}에 해당 합니다. 키 리포지토리를 확인 한 후이 특정 키의 정품 인증 날짜가 2015-01-01이 고 만료 날짜가 2015-03-01 인 경우 해당 창 내에서 페이로드 (변조 되지 않은 경우)가 생성 된 것으로 가정 하 여 해당 창 내에서 페이로드를 생성 하거나 크기를 지정 하는 것이 합리적입니다. 한쪽의 fudge 요소입니다.
+> 지정 된 키로 보호 되는 모든 페이로드는 동일한 20 바이트 (매직 value, key id) 헤더로 시작 합니다. 관리자는이 팩트를 사용 하 여 페이로드가 생성 된 시간을 대략적으로 진단할 수 있습니다. 예를 들어 위의 페이로드는 키 {0c819c80-6619-4019-9536-53f8aaffee57}에 해당 합니다. 키 리포지토리를 확인 한 후에이 특정 키의 정품 인증 날짜가 2015-01-01이 고 만료 날짜가 2015-03-01 인 경우 해당 창 내에서 페이로드 (변조 되지 않은 경우)가 생성 된 것으로 가정 하 여 어느 쪽에서 나 fudge 비율을 지정 하는 것이 합리적입니다.

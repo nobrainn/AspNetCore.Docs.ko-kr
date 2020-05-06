@@ -5,13 +5,19 @@ description: ASP.NET Core의 인증, 권한 부여 및 보안 기본 사항에 �
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/index
-ms.openlocfilehash: 0f8e96fb7d5246e746b95f8907745f849de60e24
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644031"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776515"
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core 보안 개요
 
@@ -19,7 +25,7 @@ ms.locfileid: "78644031"
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core 보안 기능
 
-ASP.NET Core는 기본 제공 ID 공급자를 포함하여 앱을 보호하는 여러 도구와 라이브러리를 제공하지만 Facebook, Twitter, LinkedIn 등의 타사 ID 서비스를 사용할 수도 있습니다. ASP.NET Core를 사용하면 기밀 정보를 코드에 노출할 필요 없이 저장하고 사용할 수 있는 방법인 앱 비밀을 간편하게 관리할 수 있습니다.
+ASP.NET Core는 기본 제공 Identity 공급자를 포함하여 앱을 보호하는 여러 도구와 라이브러리를 제공하지만 Facebook, Twitter, LinkedIn 등의 타사 ID 서비스를 사용할 수 있습니다. ASP.NET Core를 사용하면 기밀 정보를 코드에 노출할 필요 없이 저장하고 사용할 수 있는 방법인 앱 비밀을 간편하게 관리할 수 있습니다.
 
 ## <a name="authentication-vs-authorization"></a>인증 vs. 권한 부여
 
@@ -36,4 +42,4 @@ ASP.NET Core 및 EF는 앱을 보호하고 보안 위반을 방지하는 기능�
 * [CSRF(사이트 간 요청 위조)](xref:security/anti-request-forgery)
 * [오픈 리디렉션 공격](xref:security/preventing-open-redirects)
 
-그 외에도 알고 계셔야 하는 취약점이 더 있습니다. 자세한 내용은 목차의 **보안 및 ID** 섹션에 있는 다른 문서를 참조하세요.
+그 외에도 알고 계셔야 하는 취약점이 더 있습니다. 자세한 내용은 목차의 **보안 및 Identity** 섹션에 있는 다른 문서를 참조하세요.

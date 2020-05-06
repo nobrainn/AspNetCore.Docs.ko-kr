@@ -12,18 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: ce0c484e84bc2ddb4a1d287246c63663f3875924
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: fede3887ad7dacd40cf3bb5d1b785392a9bc1480
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768431"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850463"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core에서 WS-FEDERATION을 사용 하 여 사용자 인증
 
-이 자습서에서는 사용자가 Active Directory Federation Services (ADFS) 또는 [Azure Active Directory](/azure/active-directory/) (AAD)와 같은 ws-federation 인증 공급자를 사용 하 여 로그인 할 수 있도록 하는 방법을 보여 줍니다. [Facebook, Google 및 외부 공급자 인증](xref:security/authentication/social/index)에 설명 된 ASP.NET Core 2.0 샘플 앱을 사용 합니다.
+이 자습서에서는 사용자가 Active Directory Federation Services (ADFS) 또는 [Azure Active Directory](/azure/active-directory/) (AAD)와 같은 ws-federation 인증 공급자를 사용 하 여 로그인 할 수 있도록 하는 방법을 보여 줍니다. [Facebook, Google 및 외부 공급자 인증](xref:security/authentication/social/index)에 설명 된 ASP.NET Core 샘플 앱을 사용 합니다.
 
-ASP.NET Core 2.0 앱의 경우 [WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)에서 ws-federation 지원을 제공 합니다. 이 구성 요소는 [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) 에서 이식 되며이 구성 요소의 여러 가지 메커니즘을 공유 합니다. 그러나 구성 요소에는 몇 가지 중요 한 차이점이 있습니다.
+ASP.NET Core 앱의 경우 [WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)에서 ws-federation 지원을 제공 합니다. 이 구성 요소는 [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) 에서 이식 되며이 구성 요소의 여러 가지 메커니즘을 공유 합니다. 그러나 구성 요소에는 몇 가지 중요 한 차이점이 있습니다.
 
 기본적으로 새 미들웨어는 다음과 같습니다.
 

@@ -5,17 +5,20 @@ description: 서버 앱에 대 한 Blazor 보안 위협을 완화 하는 방법�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/05/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 9a5e313153e5c5c17fc723cc9768c49ffd828007
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
-ms.translationtype: MT
+ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206343"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850502"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor 서버에 대 한 위협 완화 지침
 
@@ -94,7 +97,7 @@ Blazor 클라이언트는 세션당 단일 연결을 설정 하 고 브라우저
 
 DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 소모 하 여 앱을 사용할 수 없게 만드는 클라이언트가 포함 됩니다. Blazor Server 앱은 몇 가지 기본 제한을 포함 하 고 다른 ASP.NET Core 및 SignalR 제한을 사용 하 여 DoS 공격 으로부터 보호 합니다.
 
-| Blazor 서버 앱 제한                            | Description | 기본값 |
+| Blazor 서버 앱 제한                            | 설명 | 기본값 |
 | ------------------------------------------------------- | ----------- | ------- |
 | `CircuitOptions.DisconnectedCircuitMaxRetained`         | 지정 된 서버에서 한 번에 메모리에 보유 하는 연결 되지 않은 최대 회로 수입니다. | 100 |
 | `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | 연결이 끊어지기 전에 연결이 끊어진 회로가 메모리에 보관 되는 최대 시간입니다. | 3분 |
@@ -102,7 +105,7 @@ DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 �
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | 승인 되지 않은 최대 렌더링 일괄 처리 수 서버는 지정 된 시간에 회로 당 메모리에 유지 하 여 강력한 다시 연결을 지원 합니다. 한도에 도달 하면 클라이언트에서 하나 이상의 일괄 처리를 승인할 때까지 서버가 새 렌더링 일괄 처리 생성을 중지 합니다. | 10 |
 
 
-| SignalR 및 ASP.NET Core 제한             | Description | 기본값 |
+| SignalR 및 ASP.NET Core 제한             | 설명 | 기본값 |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | 개별 메시지의 메시지 크기입니다. | 32KB |
 
@@ -148,7 +151,7 @@ JavaScript에서 .NET 메서드로의 호출을 신뢰 하지 않습니다. .NET
 
 이벤트는 Blazor 서버 앱에 대 한 진입점을 제공 합니다. 웹 앱에서 끝점을 보호 하는 동일한 규칙이 서버 앱에서 Blazor 이벤트 처리에 적용 됩니다. 악의적인 클라이언트는 이벤트에 대 한 페이로드로 전송 하려는 모든 데이터를 보낼 수 있습니다.
 
-다음은 그 예입니다.
+예를 들어:
 
 * 에 대 한 변경 이벤트 `<select>` 는 앱이 클라이언트에 제공 하는 옵션에 포함 되지 않은 값을 보낼 수 있습니다.
 * 는 `<input>` 클라이언트 쪽 유효성 검사를 무시 하 고 모든 텍스트 데이터를 서버에 보낼 수 있습니다.
@@ -278,7 +281,7 @@ ASP.NET Core apps를 보호 하기 위한 지침은 서버 Blazor 앱에 적용 
 
 * [로깅 및 중요 한 데이터](#logging-and-sensitive-data)
 * [HTTPS를 사용 하 여 전송 중인 정보 보호](#protect-information-in-transit-with-https)
-* [XSS (사이트 간 스크립팅](#cross-site-scripting-xss))
+* [사이트 간 스크립팅 (XSS)](#cross-site-scripting-xss)
 * [원본 간 보호](#cross-origin-protection)
 * [클릭-킹](#click-jacking)
 * [열려 있는 리디렉션](#open-redirects)
@@ -342,9 +345,9 @@ XSS (교차 사이트 스크립팅)를 사용 하면 권한이 없는 파티가 
 
 XSS 취약성이 있는 경우 앱은 렌더링 된 페이지에 사용자 입력을 포함 해야 합니다. Blazor서버 구성 요소는 *razor* 파일의 태그가 절차적 c # 논리로 변환 되는 컴파일 시간 단계를 실행 합니다. 런타임에 c # 논리는 요소, 텍스트 및 자식 구성 요소를 설명 하는 *렌더링 트리* 를 작성 합니다. 이는 JavaScript 명령 시퀀스를 통해 브라우저의 DOM에 적용 됩니다. 또는 렌더링 되지 않는 경우 HTML로 serialize 됩니다.
 
-* 일반 Razor 구문 (예: `@someStringValue`)를 통해 렌더링 된 사용자 입력은 텍스트를 쓸 수 있는 명령을 통해 DOM에 Razor 구문 추가 되기 때문에 XSS 취약점을 노출 하지 않습니다. 값에 HTML 태그가 포함 된 경우에도이 값은 정적 텍스트로 표시 됩니다. 렌더링을 렌더링 하면 출력이 HTML로 인코딩됩니다. 또한 콘텐츠가 정적 텍스트로 표시 됩니다.
+* 일반 Razor 구문 (예:)을 `@someStringValue`통해 렌더링 된 사용자 입력은 텍스트를 쓸 수 있는 Razor 명령을 통해 DOM에 추가 되기 때문에 XSS 취약성을 노출 하지 않습니다. 값에 HTML 태그가 포함 된 경우에도이 값은 정적 텍스트로 표시 됩니다. 렌더링을 렌더링 하면 출력이 HTML로 인코딩됩니다. 또한 콘텐츠가 정적 텍스트로 표시 됩니다.
 * 스크립트 태그는 허용 되지 않으며 앱의 구성 요소 렌더링 트리에 포함 되어서는 안 됩니다. 스크립트 태그가 구성 요소의 태그에 포함 되 면 컴파일 타임 오류가 발생 합니다.
-* 구성 요소 작성자는 Razor를 사용 하지 않고 c #으로 구성 요소를 작성할 수 있습니다. 구성 요소 작성자는 출력을 내보낼 때 올바른 Api를 사용 해야 합니다. 예를 들어, `builder.AddContent(0, someUserSuppliedString)` 를 사용 하는 경우에는 XSS 취약점을 만들 수 있으므로를 사용 *하지 마십시오* `builder.AddMarkupContent(0, someUserSuppliedString)`.
+* 구성 요소 작성자는를 사용 Razor하지 않고 c #으로 구성 요소를 작성할 수 있습니다. 구성 요소 작성자는 출력을 내보낼 때 올바른 Api를 사용 해야 합니다. 예를 들어, `builder.AddContent(0, someUserSuppliedString)` 를 사용 하는 경우에는 XSS 취약점을 만들 수 있으므로를 사용 *하지 마십시오* `builder.AddMarkupContent(0, someUserSuppliedString)`.
 
 XSS 공격 으로부터 보호 하는 과정에서 [CSP (콘텐츠 보안 정책)](https://developer.mozilla.org/docs/Web/HTTP/CSP)와 같은 xss 완화를 구현 하는 것이 좋습니다.
 

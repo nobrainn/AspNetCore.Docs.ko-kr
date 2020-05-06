@@ -5,13 +5,19 @@ description: Kestrel 서버 및 ASP.NET Core 스택을 사용하는 gRPC 서비�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/index
-ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 2d7d683051fd1eb97f3f57d75bd582109166a6cd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644721"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768850"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core에서 gRPC 소개
 
@@ -54,7 +60,7 @@ message HelloReply {
 프로젝트에 *\*.proto* 파일을 포함하면 서비스, 클라이언트 및 메시지에 대한 .NET 형식이 자동으로 생성됩니다.
 
 * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 패키지에 대한 패키지 참조를 추가합니다.
-* *항목 그룹에 \** .proto`<Protobuf>` 파일을 추가합니다.
+* `<Protobuf>` 항목 그룹에 *\*.proto* 파일을 추가합니다.
 
 ```xml
 <ItemGroup>
@@ -92,7 +98,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService`는 `GreeterBase``Greeter`.proto*파일의 \* 서비스에서 생성되는* 형식에서 상속됩니다. 이 서비스는 *Startup.cs*에서 클라이언트가 액세스할 수 있게 구성됩니다.
+`GreeterService`는 *\*.proto* 파일의 `Greeter` 서비스에서 생성되는 `GreeterBase` 형식에서 상속됩니다. 이 서비스는 *Startup.cs*에서 클라이언트가 액세스할 수 있게 구성됩니다.
 
 ```csharp
 app.UseEndpoints(endpoints =>

@@ -6,19 +6,25 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
 ms.date: 12/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: e445fb3d50973643c9cea60395d1ed02c2f5f675
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7c641fb12e0d06ebd7bb3ce9f878f0469b4a3d8e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652395"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775065"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core 웹 API에서 오류 처리
 
 이 문서에서는 ASP.NET Core 웹 API를 사용하여 오류를 처리하고 사용자 지정하는 방법을 설명합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/handle-errors/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/handle-errors/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="developer-exception-page"></a>개발자 예외 페이지
 
@@ -68,7 +74,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-HTML 형식의 응답을 대신 표시하려면 `Accept` HTTP 요청 헤더를 `text/html` 미디어 유형으로 설정합니다. 다음은 그 예입니다.
+HTML 형식의 응답을 대신 표시하려면 `Accept` HTTP 요청 헤더를 `text/html` 미디어 유형으로 설정합니다. 예를 들어:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -115,7 +121,7 @@ HTML 형식 응답은 Postman과 같은 도구를 사용하여 테스트하는 �
 ::: moniker-end
 
 > [!WARNING]
-> **앱이 개발 환경에서 실행 중인 경우에만** 개발자 예외 페이지를 사용하도록 설정하세요. 프로덕션 환경에서 앱을 실행할 때 자세한 예외 정보를 공개적으로 공유하기를 원하지는 않을 것입니다. 환경 구성 방법에 대한 자세한 내용은 <xref:fundamentals/environments>를 참조하세요.
+> **개발 환경에서 앱이 실행 되는 경우에만**개발자 예외 페이지를 사용 하도록 설정 합니다. 프로덕션 환경에서 앱을 실행할 때 자세한 예외 정보를 공개적으로 공유하지 않을 수도 있습니다. 환경 구성 방법에 대한 자세한 내용은 <xref:fundamentals/environments>를 참조하세요.
 
 ## <a name="exception-handler"></a>예외 처리기
 
@@ -244,7 +250,7 @@ HTML 형식 응답은 Postman과 같은 도구를 사용하여 테스트하는 �
 
 ## <a name="validation-failure-error-response"></a>유효성 검사 실패 오류 응답
 
-Web API 컨트롤러의 경우, 모델 유효성 검사에 실패하면 MVC는 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 응답 형식으로 응답합니다. MVC는 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory>의 결과를 사용하여 유효성 검사 실패에 대한 오류 응답을 생성합니다. 다음 예제에서는 팩터리를 사용하여 <xref:Microsoft.AspNetCore.Mvc.SerializableError>에서 기본 응답 형식을 `Startup.ConfigureServices`로 변경합니다.
+Web API 컨트롤러의 경우, 모델 유효성 검사에 실패하면 MVC는 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 응답 형식으로 응답합니다. MVC는 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory>의 결과를 사용하여 유효성 검사 실패에 대한 오류 응답을 생성합니다. 다음 예제에서는 팩터리를 사용하여 `Startup.ConfigureServices`에서 기본 응답 형식을 <xref:Microsoft.AspNetCore.Mvc.SerializableError>로 변경합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -286,7 +292,7 @@ Web API 컨트롤러의 경우, 모델 유효성 검사에 실패하면 MVC는 <
 
 MVC는 `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory`를 사용하여 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> 및 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>의 모든 인스턴스를 생성합니다. 여기에는 클라이언트 오류 응답, 유효성 검사 실패 오류 응답, `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` 및 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> 도우미 메서드가 포함됩니다.
 
-문제 세부 정보 응답을 사용자 지정하려면 `ProblemDetailsFactory`에서 `Startup.ConfigureServices`의 사용자 지정 구현을 등록합니다.
+문제 세부 정보 응답을 사용자 지정하려면 `Startup.ConfigureServices`에서 `ProblemDetailsFactory`의 사용자 지정 구현을 등록합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)

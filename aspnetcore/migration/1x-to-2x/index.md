@@ -5,13 +5,19 @@ description: 이 문서에서는 ASP.NET Core 1.x 프로젝트에서 ASP.NET Cor
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: c46f50a418cf630980ac2ba94407e4370d36e7d5
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 1b7b89b130f66c851bf01d0eb6d643e4b3676a1e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644769"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774225"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x에서 2.0으로 마이그레이션
 
@@ -23,7 +29,7 @@ ms.locfileid: "78644769"
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>필수 구성 요소
+## <a name="prerequisites"></a>사전 요구 사항
 
 [ASP.NET Core 시작](xref:getting-started)을 참조하세요.
 
@@ -31,11 +37,11 @@ ms.locfileid: "78644769"
 
 ## <a name="update-target-framework-moniker-tfm"></a>TFM(대상 프레임워크 모니커) 업데이트
 
-.NET Core를 대상으로 하는 프로젝트는 .NET Core 2.0보다 크거나 같은 버전의 [TFM](/dotnet/standard/frameworks)을 사용해야 합니다. `<TargetFramework>`.csproj*파일에서* 노드를 검색하고 해당 내부 텍스트를 `netcoreapp2.0`로 바꿉니다.
+.NET Core를 대상으로 하는 프로젝트는 .NET Core 2.0보다 크거나 같은 버전의 [TFM](/dotnet/standard/frameworks)을 사용해야 합니다. *.csproj* 파일에서 `<TargetFramework>` 노드를 검색하고 해당 내부 텍스트를 `netcoreapp2.0`으로 바꿉니다.
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=3)]
 
-.NET Framework를 대상으로 하는 프로젝트는 .NET Framework 4.6.1보다 크거나 같은 버전의 TFM을 사용해야 합니다. `<TargetFramework>`.csproj*파일에서* 노드를 검색하고 해당 내부 텍스트를 `net461`로 바꿉니다.
+.NET Framework를 대상으로 하는 프로젝트는 .NET Framework 4.6.1보다 크거나 같은 버전의 TFM을 사용해야 합니다. *.csproj* 파일에서 `<TargetFramework>` 노드를 검색하고 해당 내부 텍스트를 `net461`로 바꿉니다.
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=4)]
 
@@ -58,13 +64,13 @@ ms.locfileid: "78644769"
 
 1\.x 프로젝트에서 *.csproj* 파일은 프로젝트에서 사용하는 각 NuGet 패키지를 나열합니다.
 
-.NET Core 2.0을 대상으로 하는 ASP.NET Core 2.0 프로젝트에서 [.csproj](xref:fundamentals/metapackage) 파일의 단일 *metapackage* 참조는 패키지의 컬렉션을 대체합니다.
+.NET Core 2.0을 대상으로 하는 ASP.NET Core 2.0 프로젝트에서 *.csproj* 파일의 단일 [metapackage](xref:fundamentals/metapackage) 참조는 패키지의 컬렉션을 대체합니다.
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=8-10)]
 
 ASP.NET Core 2.0 및 Entity Framework Core 2.0의 모든 기능은 metapackage에 포함됩니다.
 
-.NET Framework를 대상으로 하는 ASP.NET Core 2.0 프로젝트는 계속해서 개별 NuGet 패키지를 참조해야 합니다. 각 `Version` 노드의 `<PackageReference />` 특성을 2.0.0으로 업데이트합니다.
+.NET Framework를 대상으로 하는 ASP.NET Core 2.0 프로젝트는 계속해서 개별 NuGet 패키지를 참조해야 합니다. 각 `<PackageReference />` 노드의 `Version` 특성을 2.0.0으로 업데이트합니다.
 
 예를 들어 다음은 .NET Framework를 대상으로 하는 일반적인 ASP.NET Core 2.0 프로젝트에 사용되는 `<PackageReference />` 노드의 목록입니다.
 
@@ -74,7 +80,7 @@ ASP.NET Core 2.0 및 Entity Framework Core 2.0의 모든 기능은 metapackage�
 
 ## <a name="update-net-core-cli-tools"></a>.NET Core CLI 도구 업데이트
 
-*.csproj* 파일에서 각 `Version` 노드의 `<DotNetCliToolReference />` 특성을 2.0.0으로 업데이트합니다.
+*.csproj* 파일에서 각 `<DotNetCliToolReference />` 노드의 `Version` 특성을 2.0.0으로 업데이트합니다.
 
 예를 들어 다음은 .NET Core 2.0을 대상으로 하는 일반적인 ASP.NET Core 2.0 프로젝트에 사용되는 CLI 도구의 목록입니다.
 
@@ -84,7 +90,7 @@ ASP.NET Core 2.0 및 Entity Framework Core 2.0의 모든 기능은 metapackage�
 
 ## <a name="rename-package-target-fallback-property"></a>패키지 대상 대체 속성의 이름 바꾸기
 
-*노드 및 변수에서 사용되는 1.x 프로젝트의*.csproj`PackageTargetFallback` 파일:
+`PackageTargetFallback` 노드 및 변수에서 사용되는 1.x 프로젝트의 *.csproj* 파일:
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=5)]
 
@@ -96,11 +102,11 @@ ASP.NET Core 2.0 및 Entity Framework Core 2.0의 모든 기능은 metapackage�
 
 ## <a name="update-main-method-in-programcs"></a>Program.cs의 Main 메서드 업데이트
 
-1\.x 프로젝트에서 `Main`Program.cs*의*  메서드는 다음과 같았습니다.
+1\.x 프로젝트에서 *Program.cs*의 `Main` 메서드는 다음과 같았습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-2\.0 프로젝트에서 `Main`Program.cs*의*  메서드는 간소화되었습니다.
+2\.0 프로젝트에서 *Program.cs*의 `Main` 메서드는 간소화되었습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
@@ -118,13 +124,13 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-위의 예제에서는 `Configuration` 속성과 일치하는 *appsettings.* EnvironmentName *.json\< 파일뿐만 아니라 \>appsettings.json*의 구성 설정을 사용하여 `IHostingEnvironment.EnvironmentName` 멤버를 로드합니다. 이러한 파일의 위치는 *Startup.cs*와 동일한 경로에 있습니다.
+위의 예제에서는 `IHostingEnvironment.EnvironmentName` 속성과 일치하는 *appsettings.\<EnvironmentName\>.json* 파일뿐만 아니라 *appsettings.json*의 구성 설정을 사용하여 `Configuration` 멤버를 로드합니다. 이러한 파일의 위치는 *Startup.cs*와 동일한 경로에 있습니다.
 
 2\.0 프로젝트에서 1.x 프로젝트에 포함된 기본 구성 코드는 백그라운드에서 실행됩니다. 예를 들어 환경 변수 및 앱 설정은 시작 시 로드됩니다. 동일한 *Startup.cs* 코드는 삽입된 인스턴스를 사용하여 `IConfiguration` 초기화로 축소됩니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-`WebHostBuilder.CreateDefaultBuilder`를 추가하여 기본 공급자를 제거하려면 `Clear` 내부의 `IConfigurationBuilder.Sources` 속성에서 `ConfigureAppConfiguration` 메서드를 호출합니다. 다시 공급자를 추가하려면 `ConfigureAppConfiguration`Program.cs*에서*  메서드를 활용합니다.
+`WebHostBuilder.CreateDefaultBuilder`를 추가하여 기본 공급자를 제거하려면 `ConfigureAppConfiguration` 내부의 `IConfigurationBuilder.Sources` 속성에서 `Clear` 메서드를 호출합니다. 다시 공급자를 추가하려면 *Program.cs*에서 `ConfigureAppConfiguration` 메서드를 활용합니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
@@ -144,15 +150,15 @@ EF Core 1.x를 사용하는 1.x 프로젝트에서 `dotnet ef migrations add`와
 
 EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비스를 가져오기 위해 `Program.BuildWebHost`가 호출됩니다. 1\.x와 달리 2.0 프로젝트에서는 `Startup.Configure`를 호출하는 데 부작용이 추가로 발생합니다. 1\.x 앱이 `Configure` 메서드에서 데이터베이스 초기화 코드를 호출한 경우 예기치 않은 문제가 발생할 수 있습니다. 예를 들어 데이터베이스가 아직 없는 경우 EF Core 마이그레이션 명령 실행 전에 시드 코드가 실행됩니다. 아직 데이터베이스가 없는 경우 이 문제가 `dotnet ef migrations list` 명령 실패의 원인이 됩니다.
 
-`Configure`Startup.cs*의*  메서드에서 다음 1.x 시드 초기화 코드를 고려하세요.
+*Startup.cs*의 `Configure` 메서드에서 다음 1.x 시드 초기화 코드를 고려하세요.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
-2\.0 프로젝트에서 `SeedData.Initialize` 호출을 `Main`Program.cs*의*  메서드로 이동합니다.
+2\.0 프로젝트에서 `SeedData.Initialize` 호출을 *Program.cs*의 `Main` 메서드로 이동합니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-2\.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost` &mdash; 외부(보통 `Main`Program.cs*의*  메서드)에서 처리해야 합니다.
+2\.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost` &mdash; 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
 
 <a name="view-compilation"></a>
 
@@ -162,7 +168,7 @@ EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비�
 
 `MvcRazorCompileOnPublish` 속성을 true로 설정하는 것은 더 이상 필요하지 않습니다. 보기 컴파일을 비활성화하는 경우가 아니면 *.csproj* 파일에서 속성을 제거할 수 있습니다.
 
-.NET Framework를 대상으로 하는 경우 여전히 명시적으로 [.csproj](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) 파일에서 *Microsoft.AspNetCore.Mvc.Razor.ViewCompilation* NuGet 패키지를 참조해야 합니다.
+.NET Framework를 대상으로 하는 경우 여전히 명시적으로 *.csproj* 파일에서 [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) NuGet 패키지를 참조해야 합니다.
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -174,11 +180,11 @@ EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비�
 
 Visual Studio 2017에서 만든 ASP.NET Core 1.1 프로젝트는 기본적으로 Application Insights를 추가했습니다. *Program.cs* 및 *Startup.cs* 외부에서 Application Insights SDK를 직접 사용하지 않을 경우 다음 단계를 수행합니다.
 
-1. .NET Core를 대상으로 하는 경우 `<PackageReference />`.csproj*파일에서 다음* 노드를 제거합니다.
+1. .NET Core를 대상으로 하는 경우 *.csproj* 파일에서 다음 `<PackageReference />` 노드를 제거합니다.
 
     [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=10)]
 
-2. .NET Core를 대상으로 하는 경우 `UseApplicationInsights`Program.cs*에서*  확장 메서드 호출을 제거합니다.
+2. .NET Core를 대상으로 하는 경우 *Program.cs*에서 `UseApplicationInsights` 확장 메서드 호출을 제거합니다.
 
     [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCsMain&highlight=8)]
 
@@ -190,9 +196,9 @@ Application Insights SDK를 직접 사용하는 경우 계속 진행합니다. 2
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>인증/ID 기능 향상 도입
+## <a name="adopt-authenticationidentity-improvements"></a>인증/Identity 향상 도입
 
-ASP.NET Core 2.0에는 새 인증 모델 및 ASP.NET Core ID에 대한 몇 가지 주요 변경 사항이 있습니다. 개별 사용자 계정을 활성화하여 프로젝트를 만들거나 인증 또는 ID를 수동으로 추가한 경우 [ASP.NET Core 2.0으로 인증 및 ID 마이그레이션](xref:migration/1x-to-2x/identity-2x)을 참조하세요.
+ASP.NET Core 2.0에는 새 인증 모델 및 ASP.NET Core Identity에 대한 몇 가지 주요 변경 사항이 있습니다. 개별 사용자 계정을 활성화하여 프로젝트를 만들거나 인증 또는 Identity를 수동으로 추가한 경우 [ASP.NET Core 2.0으로 인증 및 Identity 마이그레이션](xref:migration/1x-to-2x/identity-2x)을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

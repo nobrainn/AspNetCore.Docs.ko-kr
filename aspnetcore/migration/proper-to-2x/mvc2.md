@@ -5,13 +5,19 @@ description: 기존 ASP.NET MVC 또는 Web API 응용 프로그램을 ASP.NET Co
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/mvc2
-ms.openlocfilehash: 5a2437f8dddee49d402bf7df67cb15aa895367b2
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: 98b93731d40b47be8d7d5050afc7c74d25a7e1dc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511089"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776274"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 
@@ -42,7 +48,7 @@ ASP.NET Core 2.0 프로젝트를 사용하면 개발자가 유연하게 .NET Cor
 </ItemGroup>
 ```
 
-메타패키지를 사용하면 메타패키지에서 참조되는 패키지가 앱과 함께 배포되지 않습니다. .NET Core 런타임 저장소에는 이러한 자산이 포함되고 해당 자산은 성능을 개선하도록 미리 컴파일되어 있습니다. 자세한 내용은 <xref:fundamentals/metapackage>를 참조 하세요.
+메타패키지를 사용하면 메타패키지에서 참조되는 패키지가 앱과 함께 배포되지 않습니다. .NET Core 런타임 저장소에는 이러한 자산이 포함되고 해당 자산은 성능을 개선하도록 미리 컴파일되어 있습니다. 자세한 <xref:fundamentals/metapackage> 내용은을 참조 하세요.
 
 ## <a name="project-structure-differences"></a>프로젝트 구조 차이점
 
@@ -76,21 +82,21 @@ ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 O
 * 오류 페이지
 * 정적 파일
 * ASP.NET Core MVC
-* ID
+* Identity
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
 호스트와 애플리케이션이 분리되었으므로 나중에 유연하게 다른 플랫폼으로 이동할 수 있습니다.
 
-시작 및 미들웨어 ASP.NET Core에 대 한 자세한 내용은 <xref:fundamentals/startup>을 참조 하세요.
+시작 및 미들웨어 ASP.NET Core에 대 한 자세한 내용은를 참조 <xref:fundamentals/startup>하십시오.
 
 ## <a name="storing-configurations"></a>구성 저장
 
-ASP.NET은 정렬 설정을 지원합니다. 예를 들어 이러한 설정은 애플리케이션이 배포된 환경을 지원하는 데 사용됩니다. 일반적으로 모든 사용자 지정 키 값 쌍은 `<appSettings>`Web.config*파일의* 섹션에 저장됩니다.
+ASP.NET은 정렬 설정을 지원합니다. 예를 들어 이러한 설정은 애플리케이션이 배포된 환경을 지원하는 데 사용됩니다. 일반적으로 모든 사용자 지정 키 값 쌍은 *Web.config* 파일의 `<appSettings>` 섹션에 저장됩니다.
 
 [!code-xml[](samples/webconfig-sample.xml)]
 
-애플리케이션은 `ConfigurationManager.AppSettings` 네임스페이스의 `System.Configuration` 컬렉션을 사용하여 이러한 설정을 읽습니다.
+애플리케이션은 `System.Configuration` 네임스페이스의 `ConfigurationManager.AppSettings` 컬렉션을 사용하여 이러한 설정을 읽습니다.
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
@@ -113,7 +119,7 @@ DI([종속성 주입](xref:fundamentals/dependency-injection))를 사용하여 �
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
 ```
 
-**참고:** ASP.NET Core 구성에 대 한 자세한 참조는 <xref:fundamentals/configuration/index>를 참조 하세요.
+**참고:** ASP.NET Core 구성에 대 한 자세한 내용은을 참조 <xref:fundamentals/configuration/index>하십시오.
 
 ## <a name="native-dependency-injection"></a>네이티브 종속성 주입
 
@@ -121,7 +127,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 ASP.NET 응용 프로그램에서 개발자는 타사 라이브러리를 사용 하 여 종속성 주입을 구현 합니다. 이러한 라이브러리 중 하나는 Microsoft Patterns & Practices에서 제공하는 [Unity](https://github.com/unitycontainer/unity)입니다.
 
-Unity를 사용 하 여 종속성 주입을 설정 하는 예는 `UnityContainer`를 래핑하는 `IDependencyResolver`을 구현 하는 것입니다.
+Unity를 사용 하 여 종속성 주입을 설정 하는 `IDependencyResolver` 예제는를 `UnityContainer`래핑하는 구현입니다.
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -133,13 +139,13 @@ Unity를 사용 하 여 종속성 주입을 설정 하는 예는 `UnityContainer
 
 [!code-csharp[](samples/sample5.cs)]
 
-종속성 주입은 ASP.NET Core의 일부 이므로 `Startup.ConfigureServices`에서 서비스를 추가할 수 있습니다.
+종속성 주입은 ASP.NET Core의 일부 이므로에서 서비스를 추가할 수 있습니다 `Startup.ConfigureServices`.
 
 [!code-csharp[](samples/configure-services.cs)]
 
 Unity에서 삽입한 것처럼 리포지토리는 어디든지 삽입될 수 있습니다.
 
-ASP.NET Core의 종속성 주입에 대 한 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조 하세요.
+ASP.NET Core의 종속성 주입에 대 한 자세한 내용은을 <xref:fundamentals/dependency-injection>참조 하십시오.
 
 ## <a name="serving-static-files"></a>정적 파일 지원
 
@@ -147,7 +153,7 @@ ASP.NET Core의 종속성 주입에 대 한 자세한 내용은 <xref:fundamenta
 
 ASP.NET에서 정적 파일은 다양한 디렉터리에 저장되고 뷰에서 참조됩니다.
 
-ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `UseStaticFiles`에서 `Startup.Configure` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
+ASP.NET Core에서 정적 파일은 달리 구성 되지 않은 경우 "웹 루트" (*&lt;content&gt;root/wwwroot*)에 저장 됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -155,8 +161,8 @@ ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루
 
 예를 들어 *wwwroot/images* 폴더의 이미지 자산은 `http://<app>/images/<imageFileName>`과 같은 위치의 브라우저에 액세스할 수 있습니다.
 
-**참고:** ASP.NET Core에서 정적 파일을 제공 하는 방법에 대 한 자세한 참조는 <xref:fundamentals/static-files>를 참조 하세요.
+**참고:** ASP.NET Core에서 정적 파일을 제공 하는 방법에 대 한 자세한 내용은을 <xref:fundamentals/static-files>참조 하십시오.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [.NET Core로 라이브러리 이식](/dotnet/core/porting/libraries)

@@ -4,13 +4,19 @@ author: rick-anderson
 description: 종속성 주입을 사용 하 여 ASP.NET Core 앱에 권한 부여 요구 사항 처리기를 삽입 하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: 71d563e11d308a95c08e6d012d3a071f4697d2de
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 16285f6f731455d6e45a04f82437793891a77668
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654363"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775122"
 ---
 # <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a>ASP.NET Core 요구 사항 처리기의 종속성 주입
 
@@ -18,9 +24,9 @@ ms.locfileid: "78654363"
 
 [권한 부여 처리기](xref:security/authorization/policies#handler-registration) 는 구성 중에 ( [종속성 주입](xref:fundamentals/dependency-injection)사용) 서비스 컬렉션에 등록 되어야 합니다.
 
-권한 부여 처리기 내부에서 평가해야 하는 규칙의 리포지토리가 존재하며, 해당 리포지토리가 서비스 컬렉션에 등록되어 있다고 가정해보겠습니다. 그러면 권한 부여가 이 종속성을 해결해서 생성자에 주입하게 됩니다.
+권한 부여 처리기 내에서 평가 하려는 규칙의 리포지토리가 있고 해당 리포지토리가 서비스 컬렉션에 등록 되어 있다고 가정 합니다. 권한 부여는이를 확인 하 고 생성자에 삽입 합니다.
 
-예를 들어 ASP를 사용 하려는 경우입니다. `ILoggerFactory`를 처리기에 삽입 하려는 NET의 로깅 인프라입니다. 이 경우, 처리기의 코드는 다음과 같을 수 있습니다.
+예를 들어 ASP를 사용 하려는 경우입니다. 처리기에 삽입 `ILoggerFactory` 하려는 NET의 로깅 인프라입니다. 이러한 처리기는 다음과 같을 수 있습니다.
 
 ```csharp
 public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
@@ -41,13 +47,13 @@ public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
    }
    ```
 
-`services.AddSingleton()`를 사용 하 여 처리기를 등록 합니다.
+다음을 사용 `services.AddSingleton()`하 여 처리기를 등록 합니다.
 
 ```csharp
 services.AddSingleton<IAuthorizationHandler, LoggingAuthorizationHandler>();
 ```
 
-처리기의 인스턴스는 응용 프로그램이 시작 될 때 생성 되 고, DI는 등록 된 `ILoggerFactory`를 생성자에 삽입 합니다.
+처리기의 인스턴스는 응용 프로그램이 시작 될 때 만들어지며, DI는 등록 `ILoggerFactory` 된을 생성자에 삽입 합니다.
 
 > [!NOTE]
-> Entity Framework를 사용하는 처리기는 싱글톤(singleton)으로 등록하면 안됩니다.
+> Entity Framework를 사용 하는 처리기는 단일 항목로 등록 하면 안 됩니다.

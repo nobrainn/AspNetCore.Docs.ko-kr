@@ -7,14 +7,18 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 23ac2b1c80b9d73d6e9ac57f0ef774ac2ea54be4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655161"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775078"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
 
@@ -32,7 +36,7 @@ SignalR에서는 특정 연결에 대 한 모든 HTTP 요청을 동일한 서버
 
 다른 모든 상황 (Redis 후면판을 사용 하는 경우 포함)에서는 고정 세션에 대해 서버 환경을 구성 해야 합니다.
 
-SignalR에 대 한 Azure App Service를 구성 하는 방법에 대 한 지침은 <xref:signalr/publish-to-azure-web-app>를 참조 하세요.
+SignalR에 대 한 Azure App Service를 구성 하는 <xref:signalr/publish-to-azure-web-app>방법에 대 한 지침은을 참조 하세요.
 
 ## <a name="tcp-connection-resources"></a>TCP 연결 리소스
 
@@ -42,7 +46,7 @@ SignalR에 대 한 Azure App Service를 구성 하는 방법에 대 한 지침�
 
 SignalR에서 연결 관련 리소스를 많이 사용 하는 것은 동일한 서버에서 호스트 되는 다른 웹 앱에 영향을 줄 수 있습니다. SignalR가 열려 있고 마지막으로 사용 가능한 TCP 연결을 보유 하 고 있는 경우 같은 서버의 다른 웹 앱에도 더 이상 사용할 수 있는 연결이 없습니다.
 
-서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 다음은 그 예입니다.
+서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 예를 들어:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -94,8 +98,8 @@ Redis 후면판은 사용자의 인프라에서 호스트 되는 앱에 대해 �
   * 모든 클라이언트는 Websocket **만** 사용 하도록 구성 됩니다.
   * [Skipnegotiation 설정은](xref:signalr/configuration#configure-additional-options) 클라이언트 구성에서 사용 하도록 설정 됩니다. 
    서버에서 연결을 시작한 후에는 해당 서버에서 연결을 유지 해야 합니다.
-* SignalR 앱은 전송 되는 메시지가 적은 경우에도 클라이언트 수에 따라 규모를 확장 해야 합니다.
-* SignalR 앱은 SignalR없이 웹 앱 보다 훨씬 더 많은 연결 리소스를 사용 합니다.
+* 앱 SignalR 은 전송 되는 메시지가 적은 경우에도 클라이언트 수를 기준으로 규모를 확장 해야 합니다.
+* 앱 SignalR 은를 사용 하지 않고 SignalR웹 앱 보다 훨씬 더 많은 연결 리소스를 사용 합니다.
 
 ## <a name="iis-limitations-on-windows-client-os"></a>Windows 클라이언트 OS에 대 한 IIS 제한 사항
 
@@ -111,7 +115,7 @@ Windows 10 및 Windows 8.x은 클라이언트 운영 체제입니다. 클라이�
 
 ## <a name="linux-with-nginx"></a>Nginx를 사용하는 Linux
 
-SignalR Websocket에 대해 프록시의 `Connection` 및 `Upgrade` 헤더를 다음으로 설정 합니다.
+Websocket에 대해 `Connection` SignalR 프록시의 및 `Upgrade` 헤더를 다음으로 설정 합니다.
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
@@ -120,14 +124,14 @@ proxy_set_header Connection $connection_upgrade;
 
 자세한 내용은 [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)(NGINX를 WebSocket 프록시로 사용)를 참조하세요.
 
-## <a name="third-party-opno-locsignalr-backplane-providers"></a>타사 SignalR 백플레인 공급자
+## <a name="third-party-signalr-backplane-providers"></a>타사 SignalR 후면판 공급자
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
 
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 리소스를 참조하세요.
+자세한 내용은 다음 자료를 참조하세요.
 
 * [Azure SignalR 서비스 설명서](/azure/azure-signalr/signalr-overview)
 * [Redis 후면판 설정](xref:signalr/redis-backplane)

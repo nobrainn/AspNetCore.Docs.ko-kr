@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 6bf8ed823386ca4e1cf78982f7fba41fba429db8
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: f78358907d79ae71e8168cc381dce86b0a869e57
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751060"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776014"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 미들웨어
 
@@ -50,7 +56,7 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 대리자가 다음 대리자에 요청을 전달하지 않을 때 이를 *요청 파이프라인을 단락(short-circuiting)* 한다고 합니다. 단락(short-circuiting)은 불필요한 작업을 방지하기 때문에 종종 바람직합니다. 예를 들어 [정적 파일 미들웨어](xref:fundamentals/static-files)는 정적 파일에 대한 요청을 처리하고 나머지 파이프라인을 단락(short-circuit)하여 *터미널 미들웨어*로 작동할 수 있습니다. 추가 처리를 종료하는 미들웨어 전에 파이프라인에 추가된 미들웨어는 `next.Invoke` 문 이후의 코드를 계속 처리합니다. 그러나 이미 전송된 응답에 쓰려고 시도하는 것에 대한 다음 경고를 참조하세요.
 
 > [!WARNING]
-> 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 throw합니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 throw합니다. `next`를 호출한 후 응답 본문에 작성할 경우:
+> 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 던집니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 던집니다. `next`를 호출한 후 응답 본문에 작성할 경우:
 >
 > * 프로토콜 위반이 발생할 수 있습니다. 예를 들어, 명시된 `Content-Length`보다 긴 내용이 작성될 수 있습니다.
 > * 본문 형식을 손상시킬 수 있습니다. 예를 들어, CSS 파일에 HTML 바닥글을 작성할 수 있습니다.
@@ -94,7 +100,7 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
      * 개발자 예외 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>)가 앱 런타임 오류를 보고합니다.
      * 데이터베이스 오류 페이지 미들웨어가 데이터베이스 런타임 오류를 보고합니다.
    * 프로덕션 환경에서 앱을 실행하는 경우:
-     * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 throw된 예외를 잡습니다.
+     * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 던져진 예외를 잡습니다.
      * HTTP HSTS(엄격한 전송 보안 프로토콜) 미들웨어(<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>)가 `Strict-Transport-Security` 헤더를 추가합니다.
 1. HTTPS 리디렉션 미들웨어(<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>)가 HTTP 요청을 HTTPS로 리디렉션합니다.
 1. 정적 파일 미들웨어(<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>)가 정적 파일을 반환하고 추가 요청 처리를 단락합니다.
@@ -305,7 +311,7 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 대리자가 다음 대리자에 요청을 전달하지 않을 때 이를 *요청 파이프라인을 단락(short-circuiting)* 한다고 합니다. 단락(short-circuiting)은 불필요한 작업을 방지하기 때문에 종종 바람직합니다. 예를 들어 [정적 파일 미들웨어](xref:fundamentals/static-files)는 정적 파일에 대한 요청을 처리하고 나머지 파이프라인을 단락(short-circuit)하여 *터미널 미들웨어*로 작동할 수 있습니다. 추가 처리를 종료하는 미들웨어 전에 파이프라인에 추가된 미들웨어는 `next.Invoke` 문 이후의 코드를 계속 처리합니다. 그러나 이미 전송된 응답에 쓰려고 시도하는 것에 대한 다음 경고를 참조하세요.
 
 > [!WARNING]
-> 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 throw합니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 throw합니다. `next`를 호출한 후 응답 본문에 작성할 경우:
+> 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 던집니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 던집니다. `next`를 호출한 후 응답 본문에 작성할 경우:
 >
 > * 프로토콜 위반이 발생할 수 있습니다. 예를 들어, 명시된 `Content-Length`보다 긴 내용이 작성될 수 있습니다.
 > * 본문 형식을 손상시킬 수 있습니다. 예를 들어, CSS 파일에 HTML 바닥글을 작성할 수 있습니다.
@@ -334,7 +340,7 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
      * 개발자 예외 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>)가 앱 런타임 오류를 보고합니다.
      * 데이터베이스 오류 페이지 미들웨어(`Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage`)가 데이터베이스 런타임 오류를 보고합니다.
    * 프로덕션 환경에서 앱을 실행하는 경우:
-     * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 throw된 예외를 잡습니다.
+     * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 던져진 예외를 잡습니다.
      * HTTP HSTS(엄격한 전송 보안 프로토콜) 미들웨어(<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>)가 `Strict-Transport-Security` 헤더를 추가합니다.
 1. HTTPS 리디렉션 미들웨어(<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>)가 HTTP 요청을 HTTPS로 리디렉션합니다.
 1. 정적 파일 미들웨어(<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>)가 정적 파일을 반환하고 추가 요청 처리를 단락합니다.

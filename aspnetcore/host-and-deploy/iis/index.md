@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
-ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
+ms.openlocfilehash: 72f433ffdc7d08e23fb68fc6ed9903a39959363b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81642741"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775988"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -1492,7 +1498,7 @@ ASP.NET Core에서는 공유 프레임워크 패키지의 패치 릴리스에 �
 
 1. 프로세스 모델 ID에 적절한 권한이 있는지 확인합니다.
 
-   애플리케이션 풀의 기본 ID(**프로세스 모델** > **ID**)가 **ApplicationPoolIdentity**에서 다른 ID로 변경되면, 새 ID에 앱의 폴더, 데이터베이스 및 기타 필요한 리소스에 액세스하는 데 필요한 권한이 있는지 확인합니다. 예를 들어 앱 풀에는 앱이 파일을 읽고 쓰는 폴더에 대한 읽기 및 쓰기 권한이 필요합니다.
+   애플리케이션 풀의 기본 ID(**프로세스 모델** >  **Identity** )가 **ApplicationPoolIdentity**에서 다른 ID로 변경되면, 새 ID에 앱의 폴더, 데이터베이스 및 기타 필요한 리소스에 액세스하는 데 필요한 권한이 있는지 확인합니다. 예를 들어 앱 풀에는 앱이 파일을 읽고 쓰는 폴더에 대한 읽기 및 쓰기 권한이 필요합니다.
 
 **Windows 인증 구성(선택 사항)**  
 자세한 내용은 [Windows 인증 구성](xref:security/authentication/windowsauth)을 참조하세요.
@@ -1676,9 +1682,9 @@ ASP.NET Core 앱은 다른 구성 공급자를 사용하여 구성됩니다. 자
 
 서버에서 여러 웹 사이트를 호스트하는 경우 각 앱을 해당 앱 풀에서 실행하여 서로 격리하는 것이 좋습니다. 이 구성은 IIS **웹 사이트 추가** 대화 상자의 기본값입니다. **사이트 이름**을 제공하면 텍스트가 자동으로 **애플리케이션 풀** 텍스트 상자로 전송됩니다. 사이트를 추가할 때 이 사이트 이름을 사용하여 새로운 앱 풀이 생성됩니다.
 
-## <a name="application-pool-identity"></a>애플리케이션 풀 ID
+## <a name="application-pool-identity"></a>애플리케이션 풀 Identity
 
-응용 프로그램 풀 ID 계정을 사용하면 도메인 또는 로컬 계정을 만들고 관리할 필요 없이 고유한 계정으로 앱을 실행할 수 있습니다. IIS 8.0 이상에서 IIS WAS(관리 작업자 프로세스)는 새로운 앱 풀의 이름으로 가상 계정을 만들고, 기본적으로 이 계정으로 앱 풀의 작업자 프로세스를 실행합니다. IIS 관리 콘솔의 애플리케이션 풀에 대한 **고급 설정** 아래에서 **ID**가 **ApplicationPoolIdentity**를 사용하도록 설정되어 있는지 확인합니다.
+응용 프로그램 풀 ID 계정을 사용하면 도메인 또는 로컬 계정을 만들고 관리할 필요 없이 고유한 계정으로 앱을 실행할 수 있습니다. IIS 8.0 이상에서 IIS WAS(관리 작업자 프로세스)는 새로운 앱 풀의 이름으로 가상 계정을 만들고, 기본적으로 이 계정으로 앱 풀의 작업자 프로세스를 실행합니다. IIS 관리 콘솔의 애플리케이션 풀에 대한 **고급 설정** 아래에서 **Identity** 가 **ApplicationPoolIdentity**를 사용하도록 설정되어 있는지 확인합니다.
 
 ![애플리케이션 풀 고급 설정 대화 상자](index/_static/apppool-identity.png)
 

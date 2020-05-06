@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/index
-ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 0f0e97246b6e1381b85866bd831ee9b4b150650d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384052"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774329"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -415,7 +421,7 @@ DI에서 `ILogger` 개체를 가져오고 로그 메서드를 호출하여 앱 �
 
 ## <a name="routing"></a>라우팅
 
-*경로*는 처리기에 매핑되는 URL 패턴입니다. 처리기는 일반적으로 Razor 페이지, MVC 컨트롤러의 작업 메서드 또는 미들웨어와 같습니다. ASP.NET Core 라우팅을 사용하면 앱에서 사용되는 URL을 제어할 수 있습니다.
+*경로*는 처리기에 매핑되는 URL 패턴입니다. 처리기는 일반적으로 Razor Page, MVC 컨트롤러의 작업 메서드 또는 미들웨어와 같습니다. ASP.NET Core 라우팅을 사용하면 앱에서 사용되는 URL을 제어할 수 있습니다.
 
 자세한 내용은 <xref:fundamentals/routing>를 참조하세요.
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core MVC 소개의 목차를 참조하세요.
 ms.author: riande
 ms.date: 10/26/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/index
-ms.openlocfilehash: 04ab19644d68428246c29a5dac980e8bb91867d0
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 3dce7b14bfbf73edcdab035af869054faaa31a8d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644781"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777568"
 ---
 # <a name="create-a-web-app-with-aspnet-core-mvc"></a>ASP.NET Core MVC를 사용하여 웹앱 만들기
 
@@ -23,7 +29,7 @@ ms.locfileid: "78644781"
 1. [보기 추가](adding-view.md)
 1. [모델 추가](adding-model.md)
 1. [SQL Server LocalDB 사용](working-with-sql.md)
-1. [컨트롤러 메서드 및 뷰](controller-methods-views.md)
+1. [컨트롤러 메서드 및 보기](controller-methods-views.md)
 1. [검색 추가](search.md)
 1. [새 필드 추가](new-field.md)
 1. [유효성 검사 추가](validation.md)

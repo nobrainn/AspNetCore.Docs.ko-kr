@@ -5,13 +5,19 @@ description: 형식과 함께 사용되는 기본 제공 태그 도우미를 설
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 5af532db35b858d157f61a6aca30f55d15e9ff1e
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: ba523fba60153e2ae804f5a875cfaa1aa8fffedd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/16/2020
-ms.locfileid: "79416199"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769104"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
 
@@ -25,13 +31,13 @@ ms.locfileid: "79416199"
 
 ## <a name="the-form-tag-helper"></a>형식 태그 도우미
 
-[형식](https://www.w3.org/TR/html401/interact/forms.html) 태그 도우미:
+[Form](https://www.w3.org/TR/html401/interact/forms.html) 태그 도우미는 다음과 같습니다.
 
-* MVC 컨트롤러 동작 또는 명명된 경로에 대한 HTML [\<FORM>](https://www.w3.org/TR/html401/interact/forms.html) `action` 특성 값을 생성합니다.
+* MVC 컨트롤러 작업 또는 명명 된 경로에 대 한 특성 값 [ \<>](https://www.w3.org/TR/html401/interact/forms.html) `action` HTML 폼을 생성 합니다.
 
 * 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 만듭니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성과 함께 사용할 경우).
 
-* `asp-route-<Parameter Name>` 특성을 제공합니다. 여기서 `<Parameter Name>`을 경로 값에 추가합니다. `routeValues` 및 `Html.BeginForm`에 대한 `Html.BeginRouteForm` 매개 변수는 유사한 기능을 제공합니다.
+* `asp-route-<Parameter Name>` 특성을 제공합니다. 여기서 `<Parameter Name>`을 경로 값에 추가합니다. `Html.BeginForm` 및 `Html.BeginRouteForm`에 대한 `routeValues` 매개 변수는 유사한 기능을 제공합니다.
 
 * HTML 도우미 대안 `Html.BeginForm` 및 `Html.BeginRouteForm`가 있습니다.
 
@@ -48,11 +54,11 @@ ms.locfileid: "79416199"
 </form>
 ```
 
-MVC 런타임은 형식 태그 도우미 특성 `action` 및 `asp-controller`에서 `asp-action` 특성 값을 만듭니다. 형식 태그 도우미도 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 만듭니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성과 함께 사용할 경우). 사이트 간 요청 위조로부터 순수한 HTML 형식을 보호하기는 어렵습니다. 형식 태그 도우미는 이러한 서비스를 제공합니다.
+MVC 런타임은 형식 태그 도우미 특성 `asp-controller` 및 `asp-action`에서 `action` 특성 값을 만듭니다. 형식 태그 도우미도 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 만듭니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성과 함께 사용할 경우). 사이트 간 요청 위조로부터 순수한 HTML 형식을 보호하기는 어렵습니다. 형식 태그 도우미는 이러한 서비스를 제공합니다.
 
 ### <a name="using-a-named-route"></a>명명된 경로 사용
 
-`asp-route` 태그 도우미 특성은 HTML `action` 특성에 대한 태그를 만들 수도 있습니다. [라는 ](../../fundamentals/routing.md)경로`register`를 사용하는 앱은 등록 페이지에 다음 태그를 사용할 수 있습니다.
+`asp-route` 태그 도우미 특성은 HTML `action` 특성에 대한 태그를 만들 수도 있습니다. `register`라는 [경로](../../fundamentals/routing.md)를 사용하는 앱은 등록 페이지에 다음 태그를 사용할 수 있습니다.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
@@ -69,11 +75,11 @@ MVC 런타임은 형식 태그 도우미 특성 `action` 및 `asp-controller`에
 
 ## <a name="the-form-action-tag-helper"></a>양식 작업 태그 도우미
 
-양식 작업 태그 도우미는 생성된 `formaction` 또는 `<button ...>` 태그의 `<input type="image" ...>` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. [ 형식의 \<](https://www.w3.org/wiki/HTML/Elements/input)input>`image` 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button) 에 바인딩됩니다. 양식 작업 태그 도우미를 통해 여러 개의 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
+양식 작업 태그 도우미는 생성된 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. 형식 `image` [및 \<단추>](https://www.w3.org/wiki/HTML/Elements/button) 요소의 [ \<입력>](https://www.w3.org/wiki/HTML/Elements/input) 요소에 바인딩됩니다. 양식 작업 태그 도우미를 통해 여러 개의 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
 
-[의 값을 제어하기 위해 지원되는 ](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)AnchorTagHelper`formaction` 특성:
+`formaction`의 값을 제어하기 위해 지원되는 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 특성:
 
-|attribute|Description|
+|특성|설명|
 |---|---|
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|컨트롤러의 이름입니다.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|작업 메서드의 이름입니다.|
@@ -87,7 +93,7 @@ MVC 런타임은 형식 태그 도우미 특성 `action` 및 `asp-controller`에
 
 ### <a name="submit-to-controller-example"></a>컨트롤러에 제출 예제
 
-다음 태그는 입력 또는 단추가 선택될 때 `Index`의 `HomeController` 작업에 양식을 제출합니다.
+다음 태그는 입력 또는 단추가 선택될 때 `HomeController`의 `Index` 작업에 양식을 제출합니다.
 
 ```cshtml
 <form method="post">
@@ -161,9 +167,9 @@ public class HomeController : Controller
 
 ## <a name="the-input-tag-helper"></a>입력 태그 도우미
 
-입력 태그 도우미는 HTML [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소를 Razor 보기의 모델 식에 바인딩합니다.
+입력 태그 도우미는 razor 뷰의 모델 식에 HTML [ \<입력>](https://www.w3.org/wiki/HTML/Elements/input) 요소를 바인딩합니다.
 
-구문
+구문:
 
 ```cshtml
 <input asp-for="<Expression Name>">
@@ -171,13 +177,13 @@ public class HomeController : Controller
 
 입력 태그 도우미:
 
-* `id` 특성에 지정된 식 이름에 대해 `name` 및 `asp-for` HTML 특성을 만듭니다. `asp-for="Property1.Property2"`은 `m => m.Property1.Property2`와 동등합니다. 식의 이름은 `asp-for` 특성 값에 사용됩니다. 추가 정보는 [식 이름](#expression-names) 섹션을 참조하세요.
+* `asp-for` 특성에 지정된 식 이름에 대해 `id` 및 `name` HTML 특성을 만듭니다. `asp-for="Property1.Property2"`은 `m => m.Property1.Property2`와 동등합니다. 식의 이름은 `asp-for` 특성 값에 사용됩니다. 추가 정보는 [식 이름](#expression-names) 섹션을 참조하세요.
 
-* 모델 속성에 적용된 모델 형식 및 `type`데이터 주석[ 특성에 따라 HTML ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성 값을 설정합니다.
+* 모델 속성에 적용된 모델 형식 및 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성에 따라 HTML `type` 특성 값을 설정합니다.
 
 * HTML `type` 특성 값이 지정 된 경우 덮어쓰지 않습니다.
 
-* 모델 속성에 적용되는 [데이터 주석](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) 특성에서 [HTML5](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 유효성 검사 특성을 만듭니다.
+* 모델 속성에 적용되는 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성에서 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) 유효성 검사 특성을 만듭니다.
 
 * `Html.TextBoxFor` 및 `Html.EditorFor`와 HTML 도우미 기능이 겹칩니다. 자세한 내용은 **입력 태그 도우미에 대한 HTML 도우미 대안** 섹션을 참조하세요.
 
@@ -207,7 +213,7 @@ Type expected
 
 다음 표에서는 입력 태그 도우미가 특정 입력 형식에 매핑되는 몇 가지 일반적인 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성을 보여줍니다(유효성 검사 특성의 일부만 나열됨).
 
-|attribute|입력 형식|
+|특성|입력 형식|
 |---|---|
 |[EmailAddress]|type="email"|
 |[Url]|type="url"|
@@ -241,7 +247,7 @@ Type expected
    </form>
 ```
 
-`Email` 및 `Password` 속성에 적용할 데이터 주석은 모델에서 메타데이터를 생성합니다. 입력 태그 도우미는 모델 메타데이터를 사용하고 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` 특성을 생성합니다([모델 유효성 검사](../models/validation.md) 참조). 이러한 특성에서는 입력 필드에 연결할 유효성 검사기를 설명합니다. 이 기능은 비간섭 HTML5 및 [jQuery](https://jquery.com/) 유효성 검사를 제공합니다. 가 중이 아닌 특성에는 `data-val-rule="Error Message"`형식이 있습니다. 여기서 rule은 유효성 검사 규칙의 이름 (예: `data-val-required`, `data-val-email`, `data-val-maxlength`등)입니다. 특성에 오류 메시지가 제공 되 면 `data-val-rule` 특성에 대 한 값으로 표시 됩니다. 또한 규칙에 대한 추가 세부 정보를 제공하는 `data-val-ruleName-argumentName="argumentValue"` 형식의 특성이 있습니다(예: `data-val-maxlength-max="1024"`).
+`Email` 및 `Password` 속성에 적용할 데이터 주석은 모델에서 메타데이터를 생성합니다. 입력 태그 도우미는 모델 메타데이터를 사용하고 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` 특성을 생성합니다([모델 유효성 검사](../models/validation.md) 참조). 이러한 특성에서는 입력 필드에 연결할 유효성 검사기를 설명합니다. 이 기능은 비간섭 HTML5 및 [jQuery](https://jquery.com/) 유효성 검사를 제공합니다. 가 중이 아닌 특성에 `data-val-rule="Error Message"`는 형식이 있습니다. 여기서 rule은 유효성 검사 규칙의 이름 ( `data-val-required`예 `data-val-email`: `data-val-maxlength`,, 등)입니다. 특성에 오류 메시지가 제공 되 면 `data-val-rule` 특성에 대 한 값으로 표시 됩니다. 또한 규칙에 대한 추가 세부 정보를 제공하는 `data-val-ruleName-argumentName="argumentValue"` 형식의 특성이 있습니다(예: `data-val-maxlength-max="1024"`).
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>입력 태그 도우미에 대한 HTML 도우미 대안
 
@@ -249,7 +255,7 @@ Type expected
 
 ### <a name="htmlattributes"></a>HtmlAttributes
 
-`@Html.Editor()` 및 `@Html.EditorFor()`는 해당 기본 템플릿을 실행할 때 `ViewDataDictionary`라는 특수한 `htmlAttributes` 항목을 사용합니다. 이 동작은 필요에 따라 `additionalViewData` 매개 변수를 사용하여 확대됩니다. "htmlAttributes" 키는 대/소문자를 구분합니다. "htmlAttributes" 키는 `htmlAttributes`와 같은 입력 도우미에 전달된 `@Html.TextBox()` 개체와 유사하게 처리됩니다.
+`@Html.Editor()` 및 `@Html.EditorFor()`는 해당 기본 템플릿을 실행할 때 `htmlAttributes`라는 특수한 `ViewDataDictionary` 항목을 사용합니다. 이 동작은 필요에 따라 `additionalViewData` 매개 변수를 사용하여 확대됩니다. "htmlAttributes" 키는 대/소문자를 구분합니다. "htmlAttributes" 키는 `@Html.TextBox()`와 같은 입력 도우미에 전달된 `htmlAttributes` 개체와 유사하게 처리됩니다.
 
 ```cshtml
 @Html.EditorFor(model => model.YourProperty, 
@@ -274,7 +280,7 @@ Type expected
 <input type="text" id="joe" name="joe" value="Joe">
 ```
 
-컬렉션 속성을 가진 `asp-for="CollectionProperty[23].Member"`은 `asp-for="CollectionProperty[i].Member"`에 `i` 값이 포함될 경우 `23`와 동일한 이름을 생성합니다.
+컬렉션 속성을 가진 `asp-for="CollectionProperty[23].Member"`은 `i`에 `23` 값이 포함될 경우 `asp-for="CollectionProperty[i].Member"`와 동일한 이름을 생성합니다.
 
 ASP.NET Core MVC가 `ModelExpression`의 값을 계산하는 경우 `ModelState`를 비롯한 여러 원본을 검사합니다. `<input type="text" asp-for="@Name">`을 고려합니다. 계산된 `value` 특성은 첫 번째 null이 아닌 값입니다.
 
@@ -335,7 +341,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-값이 `foreach` 또는 `asp-for` 해당 컨텍스트에서 사용될 때 가능한 경우 `Html.DisplayFor`를 사용해야 합니다. 일반적으로, `for`는 열거자를 할당할 필요가 없으므로 `foreach`보다 좋습니다(시나리오에서 허용하는 경우). 그러나 LINQ 식에서 인덱서를 평가하는 작업은 비용이 많이 들기 때문에 최소화해야 합니다.
+값이 `asp-for` 또는 `Html.DisplayFor` 해당 컨텍스트에서 사용될 때 가능한 경우 `foreach`를 사용해야 합니다. 일반적으로, `for`는 열거자를 할당할 필요가 없으므로 `foreach`보다 좋습니다(시나리오에서 허용하는 경우). 그러나 LINQ 식에서 인덱서를 평가하는 작업은 비용이 많이 들기 때문에 최소화해야 합니다.
 
 &nbsp;
 
@@ -346,7 +352,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 `Textarea Tag Helper` 태그 도우미는 입력 태그 도우미와 비슷합니다.
 
-* `id``name`textarea>[ 요소의 모델에서 \< 및 ](https://www.w3.org/wiki/HTML/Elements/textarea) 특성과 데이터 유효성 검사 특성을 생성합니다.
+* Textarea>`id` 요소 `name` 에 대 한 모델에서 및 특성과 데이터 유효성 검사 특성을 생성 합니다. [ \<](https://www.w3.org/wiki/HTML/Elements/textarea)
 
 * 강력한 형식 지정을 제공합니다.
 
@@ -376,7 +382,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 ## <a name="the-label-tag-helper"></a>레이블 태그 도우미
 
-* 식 이름의 `for`[label>\< 요소에서 레이블 캡션 및 ](https://www.w3.org/wiki/HTML/Elements/label) 특성을 생성합니다.
+* 식 이름에 대해 `for` [ \<label>](https://www.w3.org/wiki/HTML/Elements/label) 요소에 레이블 캡션 및 특성을 생성 합니다.
 
 * HTML 도우미 대안: `Html.LabelFor`
 
@@ -408,13 +414,13 @@ public IActionResult Edit(int id, int colorIndex)
 
 ### <a name="the-validation-message-tag-helper"></a>유효성 검사 메시지 태그 도우미
 
-* [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-valmsg-for="property"` 특성을 [범위](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에 추가합니다. 그러면 지정된 모델 속성의 입력 필드에서 유효성 검사 오류 메시지를 표시합니다. 클라이언트 쪽 유효성 검사 오류가 발생할 때 [jQuery](https://jquery.com/)는 `<span>` 요소에서 오류 메시지를 표시합니다.
+* [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5)  `data-valmsg-for="property"` 특성을 [범위](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에 추가합니다. 그러면 지정된 모델 속성의 입력 필드에서 유효성 검사 오류 메시지를 표시합니다. 클라이언트 쪽 유효성 검사 오류가 발생할 때 [jQuery](https://jquery.com/)는 `<span>` 요소에서 오류 메시지를 표시합니다.
 
 * 유효성 검사도 서버에서 수행됩니다. 클라이언트는 JavaScript를 사용하지 않도록 설정할 수 있고 일부 유효성 검사는 서버 쪽에서만 수행될 수 있습니다.
 
 * HTML 도우미 대안: `Html.ValidationMessageFor`
 
-`Validation Message Tag Helper`는 HTML `asp-validation-for`범위[ 요소에서 ](https://developer.mozilla.org/docs/Web/HTML/Element/span) 특성과 함께 사용됩니다.
+`Validation Message Tag Helper`는 HTML [범위](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에서 `asp-validation-for` 특성과 함께 사용됩니다.
 
 ```cshtml
 <span asp-validation-for="Email"></span>
@@ -428,10 +434,10 @@ public IActionResult Edit(int id, int colorIndex)
   data-valmsg-replace="true"></span>
 ```
 
-일반적으로 동일한 속성에서 `Validation Message Tag Helper` 태그 도우미 이후에 `Input`를 사용합니다. 이렇게 하면 오류가 발생하는 입력 주변에서 유효성 검사 오류 메시지가 표시됩니다.
+일반적으로 동일한 속성에서 `Input` 태그 도우미 이후에 `Validation Message Tag Helper`를 사용합니다. 이렇게 하면 오류가 발생하는 입력 주변에서 유효성 검사 오류 메시지가 표시됩니다.
 
 > [!NOTE]
-> 클라이언트 쪽 유효성 검사 대신 올바른 JavaScript 및 [jQuery](https://jquery.com/) 스크립트 참조를 사용하는 보기가 있어야 합니다. 자세한 내용은 [모델 유효성 검사](../models/validation.md)를 참조하세요.
+> 클라이언트 쪽 유효성 검사 대신 올바른 JavaScript 및 [jQuery](https://jquery.com/) 스크립트 참조를 사용하는 보기가 있어야 합니다. 자세한 내용은 [모델 유효성 검사](../models/validation.md) 를 참조 하세요.
 
 서버 쪽 유효성 검사 오류가 발생하는 경우(예: 사용자 지정 서버 쪽 유효성 검사 또는 클라이언트 쪽 유효성 검사를 사용하지 않는 경우) MVC는 해당 오류 메시지를 `<span>` 요소의 본문으로 배치합니다.
 
@@ -444,7 +450,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 ### <a name="the-validation-summary-tag-helper"></a>유효성 검사 요약 태그 도우미
 
-* `<div>` 특성이 있는 `asp-validation-summary` 요소를 대상으로 지정합니다.
+* `asp-validation-summary` 특성이 있는 `<div>` 요소를 대상으로 지정합니다.
 
 * HTML 도우미 대안: `@Html.ValidationSummary`
 
@@ -491,7 +497,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 * HTML 도우미 대안 `Html.DropDownListFor` 및 `Html.ListBoxFor`가 있습니다.
 
-`Select Tag Helper``asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  다음은 그 예입니다.
+`Select Tag Helper` `asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예를 들어:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -528,13 +534,13 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 > [!NOTE]
 > 선택 태그 도우미와 함께 `ViewBag` 또는 `ViewData`를 사용하는 것이 좋습니다. 보기 모델은 일반적으로 더 강력하고 문제가 적은 방식으로 MVC 메타데이터를 제공합니다.
 
-`asp-for` 특성 값은 특별한 경우이며 다른 태그 도우미 특성(예: `Model`)과 달리 `asp-items` 접두사를 필요로 하지 않습니다.
+`asp-for` 특성 값은 특별한 경우이며 다른 태그 도우미 특성(예: `asp-items`)과 달리 `Model` 접두사를 필요로 하지 않습니다.
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
 ### <a name="enum-binding"></a>열거형 바인딩
 
-`<select>` 속성과 함께 `enum`를 사용하고 `SelectListItem` 값에서 `enum` 요소를 생성하는 것이 편리합니다.
+`enum` 속성과 함께 `<select>`를 사용하고 `enum` 값에서 `SelectListItem` 요소를 생성하는 것이 편리합니다.
 
 샘플:
 
@@ -570,7 +576,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ### <a name="option-group"></a>옵션 그룹
 
-보기 모델에 하나 이상의 [ 개체가 포함되는 경우 HTML \<](https://www.w3.org/wiki/HTML/Elements/optgroup)optgroup>`SelectListGroup` 요소가 생성됩니다.
+HTML [ \<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) 요소는 뷰 모델에 하나 이상의 `SelectListGroup` 개체가 포함 된 경우에 생성 됩니다.
 
 `CountryViewModelGroup`은 `SelectListItem` 요소를 "북아메리카" 및 "유럽" 그룹으로 그룹화합니다.
 
@@ -580,7 +586,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ![옵션 그룹 예제](working-with-forms/_static/grp.png)
 
-생성된 코드:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
  <form method="post" action="/Home/IndexGroup">
@@ -603,7 +609,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ### <a name="multiple-select"></a>다중 선택
 
-[ 특성에 지정된 속성이 ](https://w3c.github.io/html-reference/select.html)인 경우 태그 선택 도우미는 `asp-for`multiple = "multiple"`IEnumerable` 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 가정합니다.
+`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](https://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 가정합니다.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 
@@ -611,7 +617,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
 
-다음 HTML을 생성합니다.
+다음과 같은 HTML을 생성합니다.
 
 ```html
 <form method="post" action="/Home/IndexMultiSelect">
@@ -639,13 +645,13 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
-HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가하는 작업은 *선택 영역 없음* 사례로 제한되지 않습니다. 예를 들어 다음과 같은 보기 및 작업 메서드는 위의 코드와 유사한 HTML을 생성합니다.
+HTML [ \<옵션>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가 하는 경우는 *선택 하지 않는* 것으로 제한 되지 않습니다. 예를 들어 다음과 같은 보기 및 작업 메서드는 위의 코드와 유사한 HTML을 생성합니다.
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
 
-현재 `<option>` 값에 따라 올바른 `selected="selected"` 요소가 선택됩니다(`Country` 특성 포함).
+현재 `Country` 값에 따라 올바른 `<option>` 요소가 선택됩니다(`selected="selected"` 특성 포함).
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=114-119)]
 
@@ -662,10 +668,10 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가�
  </form>
  ```
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/views/tag-helpers/intro>
-* [HTML 형식 요소](https://www.w3.org/TR/html401/interact/forms.html)
+* [HTML 양식 요소](https://www.w3.org/TR/html401/interact/forms.html)
 * [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>
