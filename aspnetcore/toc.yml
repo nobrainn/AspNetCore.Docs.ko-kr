@@ -665,6 +665,8 @@
       uid: test/razor-pages-tests
     - name: 테스트 컨트롤러
       uid: mvc/controllers/testing
+    - name: 테스트 미들웨어
+      uid: test/middleware
     - name: 원격 디버깅
       href: /visualstudio/debugger/remote-debugging-azure
     - name: 스냅샷 디버깅
