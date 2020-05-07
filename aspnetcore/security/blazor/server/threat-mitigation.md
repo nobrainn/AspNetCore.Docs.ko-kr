@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
-ms.translationtype: HT
+ms.openlocfilehash: 7c71da690efc0a515b289fd575173f2d3093d1c1
+ms.sourcegitcommit: d4527df91f2c15bbe1cbf5a541adbea5747897aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850502"
+ms.locfileid: "82852395"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor 서버에 대 한 위협 완화 지침
 
@@ -34,6 +34,10 @@ JS interop는 인터넷을 통해 발생 하 고 클라이언트는 원격 브�
 
 * 제약 조건 환경에는 적용 되지 않습니다.
 * 제한 된 환경에서는 보안 위험이 낮으므로 구현 비용이 들지 않습니다.
+
+## <a name="blazor-and-shared-state"></a>Blazor 및 공유 상태
+
+[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
 
 ## <a name="resource-exhaustion"></a>리소스 소모
 

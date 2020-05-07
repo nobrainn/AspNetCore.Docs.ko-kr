@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: e8a1959a8fc05ea59362bb5824181a9d2e418811
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 75d9a66eb25201c2993b8f922754b8aa7ab84615
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218871"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771170"
 ---
-# <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
+# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -34,7 +37,7 @@ Blazor 서버는 상태 저장 앱 프레임워크입니다. 대체로 앱은 �
 > [!NOTE]
 > 이 문서에서는 Blazor 서버 앱의 상태 지속성을 설명합니다. Blazor WebAssembly 앱은 [브라우저의 클라이언트 쪽 상태 지속성](#client-side-in-the-browser)을 활용할 수 있지만, 이 문서의 범위를 벗어난 사용자 지정 솔루션 또는 타사 패키지를 요구합니다.
 
-## <a name="opno-locblazor-circuits"></a>Blazor 회로
+## <a name="blazor-circuits"></a>Blazor 회로
 
 사용자에게 임시 네트워크 연결 손실이 발생하는 경우, Blazor는 사용자가 앱을 계속 사용할 수 있도록 사용자를 원래 회로에 다시 연결합니다. 그러나 사용자를 서버 메모리의 원래 회로에 다시 연결할 수 없는 경우도 있습니다.
 

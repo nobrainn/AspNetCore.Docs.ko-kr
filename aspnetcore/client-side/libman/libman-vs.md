@@ -5,13 +5,19 @@ description: ASP.NET Core 프로젝트에서 Visual Studio와 함께 LibMan을 �
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: e92e6bc28ec58b26785dd6c79e71512368202a26
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 45f81cbc713e7e7c1f335aef49360992d2297a81
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646797"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82770095"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio에서 ASP.NET Core와 함께 LibMan 사용
 

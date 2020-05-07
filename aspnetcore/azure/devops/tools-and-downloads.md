@@ -5,13 +5,19 @@ description: ASP.NET Core 및 Azure를 사용하는 DevOps에 필요한 도구 �
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 9c1042dd48b9167209b46e97a09e011b80e2609c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1917a329a5dcbe60542541cfcdc746799307e3d5
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511147"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850411"
 ---
 # <a name="tools-and-downloads"></a>도구 및 다운로드
 
@@ -21,7 +27,7 @@ Azure에는 [Azure Portal](https://portal.azure.com), [Azure CLI](/cli/azure/), 
 
 다음 구독이 필요합니다.
 
-* Azure - 계정이 없는 경우 [평가판을 다운로드](https://azure.microsoft.com/free/)합니다.
+* Azure - 계정이 없는 경우 [평가판을 다운로드](https://azure.microsoft.com/free/dotnet/)합니다.
 * Azure DevOps Services - 4장에서 Azure DevOps 구독과 조직을 만듭니다.
 * GitHub - 계정이 없는 경우 [체험 등록](https://github.com/join)합니다.
 

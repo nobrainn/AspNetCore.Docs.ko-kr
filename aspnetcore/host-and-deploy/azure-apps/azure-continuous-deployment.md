@@ -5,13 +5,19 @@ description: Visual Studio를 사용하여 ASP.NET Core 웹앱을 만들고 연�
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648111"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850567"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core와 함께 Visual Studio 및 Git을 사용하여 Azure에 지속적인 배포
 
@@ -24,7 +30,7 @@ ms.locfileid: "78648111"
 Azure DevOps Services를 사용하여 [Azure App Service](/azure/devops/pipelines/get-started-yaml)에 대한 CD(지속적인 업데이트) 워크플로를 구성하는 방법을 보여 주는 [Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기](/azure/app-service/app-service-web-overview)를 참조하세요. Azure Pipelines는 Azure DevOps Services의 서비스 중 하나로, Azure App Service에서 호스트되는 앱의 업데이트를 게시하는 강력한 배포 파이프라인을 간단하게 설정합니다. 파이프라인을 빌드하고, 테스트를 실행하고, 스테이징 슬롯에 배포하고, 프로덕션에 배포하도록 Azure Portal에서 구성할 수 있습니다.
 
 > [!NOTE]
-> 이 자습서를 완료하려면 Microsoft Azure 계정이 필요합니다. 계정을 얻으려면 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)하거나 [평가판에 등록](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)합니다.
+> 이 자습서를 완료하려면 Microsoft Azure 계정이 필요합니다. 계정을 얻으려면 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)하거나 [평가판에 등록](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F)합니다.
 
 ## <a name="prerequisites"></a>필수 구성 요소
 
