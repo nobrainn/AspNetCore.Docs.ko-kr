@@ -5,13 +5,19 @@ description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알�
 ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ddc14aba14e31c5530cda14b4792736da001246a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417655"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767241"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -38,11 +44,11 @@ ms.locfileid: "80417655"
 
 |API | 설명 | 요청 본문 | 응답 본문 |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | 할 일 항목 모두 가져오기 | 없음 | 할 일 항목의 배열|
-|GET /api/TodoItems/{id} | ID로 항목 가져오기 | 없음 | 할 일 항목|
-|POST /api/TodoItems | 새 항목 추가 | 할 일 항목 | 할 일 항목 |
-|PUT /api/TodoItems/{id} | 기존 항목 업데이트 &nbsp; | 할 일 항목 | 없음 |
-|DELETE /api/TodoItems/{id} &nbsp; &nbsp; | 항목 삭제 &nbsp; &nbsp; | 없음 | 없음|
+|`GET /api/TodoItems` | 할 일 항목 모두 가져오기 | 없음 | 할 일 항목의 배열|
+|`GET /api/TodoItems/{id}` | ID로 항목 가져오기 | 없음 | 할 일 항목|
+|`POST /api/TodoItems` | 새 항목 추가 | 할 일 항목 | 할 일 항목 |
+|`PUT /api/TodoItems/{id}` | 기존 항목 업데이트 &nbsp; | 할 일 항목 | 없음 |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | 항목 삭제 &nbsp; &nbsp; | 없음 | 없음|
 
 다음 다이어그램에서는 앱의 디자인을 보여줍니다.
 

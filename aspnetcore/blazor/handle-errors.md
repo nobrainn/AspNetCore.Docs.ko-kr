@@ -5,19 +5,22 @@ description: 이 문서에서는 ASP.NET Core Blazor가 처리되지 않은 예�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/29/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 4fdaf7fb90d126b8f7f029aac3af49eec3b69e74
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7eefc988da275c0efccd97958d04e76f04e7cad4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80382277"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772115"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱에서 오류 처리
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor 앱에서 오류 처리
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -80,7 +83,7 @@ Blazor 서버 앱에서 *Pages/_Host.cshtml* 파일의 환경을 사용자 지�
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor 서버 앱이 처리되지 않은 예외에 반응하는 방법
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor 서버 앱이 처리되지 않은 예외에 반응하는 방법
 
 Blazor 서버는 상태 저장 프레임워크입니다. 사용자가 앱과 상호 작용하는 동안 *회로*라는 서버에 대한 연결이 유지됩니다. 회로는 활성 구성 요소 인스턴스와 다음과 같은 상태의 여러 다양한 측면을 포함합니다.
 
@@ -113,6 +116,8 @@ Blazor는 발생하는 대부분의 처리되지 않은 예외를 회로에 치�
 개발하는 동안 Blazor는 일반적으로 디버깅에 도움을 주기 위해 브라우저 콘솔에 예외의 전체 세부 정보를 보냅니다. 프로덕션에서 브라우저 콘솔의 자세한 오류는 기본적으로 사용하지 않도록 설정되어 있습니다. 즉, 오류가 클라이언트로 전송되지 않지만 예외의 전체 세부 정보는 여전히 서버 쪽에 기록됩니다. 자세한 내용은 <xref:fundamentals/error-handling>를 참조하세요.
 
 로깅할 인시던트 및 로깅된 인시던트의 심각도 수준을 결정해야 합니다. 악의적인 사용자가 의도적으로 오류를 트리거할 수 있습니다. 예를 들어, 제품 정보를 표시하는 구성 요소의 URL에서 알 수 없는 `ProductId`가 제공되는 오류의 경우 인시던트를 로깅하지 않도록 합니다. 일부 오류는 로깅에 대한 심각도가 높은 인시던트로 처리되지 않습니다.
+
+자세한 내용은 <xref:fundamentals/logging/index#create-logs-in-blazor>를 참조하세요.
 
 ## <a name="places-where-errors-may-occur"></a>오류가 발생할 수 있는 위치
 
@@ -214,7 +219,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>Blazor 서버 렌더링
+### <a name="blazor-server-prerendering"></a>Blazor 서버 렌더링
 
 렌더링된 HTML 태그가 사용자의 초기 HTTP 요청 일부로 반환되도록 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)를 사용하여 Blazor 구성 요소를 미리 렌더링할 수 있습니다. 이 작업은 다음을 통해 진행됩니다.
 

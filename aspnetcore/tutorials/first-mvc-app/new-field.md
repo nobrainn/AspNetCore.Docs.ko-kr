@@ -5,13 +5,19 @@ description: Entity Framework Code First 마이그레이션을 사용하여 모�
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: a5ea9b75cf8bb1f31cb07a2b32f361bdbfd4efa3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0cc708734726e5779951d63ac10d1b750b1cc2ac
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648861"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777074"
 ---
 # <a name="add-a-new-field-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 새 필드 추가
 
@@ -29,7 +35,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 ## <a name="add-a-rating-property-to-the-movie-model"></a>영화 모델에 Rating 속성 추가
 
-`Rating`Models/Movie.cs*에*  속성을 추가합니다.
+*Models/Movie.cs*에 `Rating` 속성을 추가합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
@@ -45,13 +51,13 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 dotnet build
 ```
 
-### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 명령 ⌘ + B
 
 ------
 
-`Movie` 클래스에 새 필드를 추가했으므로 이 새 속성이 포함되도록 바인딩 허용 목록을 수정해야 합니다. *MoviesController.cs*에서 `[Bind]` 속성을 포함하도록 `Create` 및 `Edit` 작업 메서드에 대한 `Rating` 특성을 수정합니다.
+`Movie` 클래스에 새 필드를 추가했으므로 이 새 속성이 포함되도록 바인딩 허용 목록을 수정해야 합니다. *MoviesController.cs*에서 `Rating` 속성을 포함하도록 `Create` 및 `Edit` 작업 메서드에 대한 `[Bind]` 특성을 수정합니다.
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
@@ -63,7 +69,7 @@ dotnet build
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-64)]
 
-*필드를 사용하여*/Views/Movies/Create.cshtml`Rating`을 수정합니다.
+`Rating` 필드를 사용하여 */Views/Movies/Create.cshtml*을 수정합니다.
 
 # <a name="visual-studio--visual-studio-for-mac"></a>[Visual Studio / Visual Studio for Mac](#tab/visual-studio+visual-studio-mac)
 
@@ -118,7 +124,7 @@ Update-Database
 
 DB의 모든 레코드가 삭제되면 이니셜라이즈 메서드가 DB를 시드하고 `Rating` 필드를 포함합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
@@ -133,7 +139,7 @@ dotnet ef database update
 
 앱을 실행하고 `Rating` 필드를 사용하여 영화를 생성, 편집, 표시할 수 있는지 확인합니다. 앱을 업데이트합니다.
 
-* `Rating`, `Edit` 및 `Details` 뷰 템플릿에 `Delete` 필드를 추가합니다.
+* `Edit`, `Details` 및 `Delete` 뷰 템플릿에 `Rating` 필드를 추가합니다.
 * `MoviesController`의 편집 작업 메서드에서 바인딩을 업데이트합니다.
 
 > [!div class="step-by-step"]

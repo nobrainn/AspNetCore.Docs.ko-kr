@@ -5,13 +5,19 @@ description: ASP.NET Core 및 Azure를 사용하는 DevOps의 추가 학습 경�
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: a775dc42551a43bcce72b5f9ca364ed00b1dc4e6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 92401d45d36dd3b93d175e08a8fa8697217ca7c7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647433"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766526"
 ---
 # <a name="next-steps"></a>다음 단계
 
@@ -29,7 +35,7 @@ ms.locfileid: "78647433"
 
 [Cosmos DB](/azure/cosmos-db/)는 전 세계에 분산된 다중 모델 NoSQL 데이터베이스 서비스입니다. SQL API(이전의 DocumentDB), Cassandra, MongoDB 등을 포함하여 여러 API를 사용할 수 있습니다.
 
-## <a name="identity"></a>ID
+## Identity
 
 [Azure Active Directory](/azure/active-directory/) 및 [Azure Active Directory B2C](/azure/active-directory-b2c/)는 모두 ID 서비스입니다. Azure Active Directory는 엔터프라이즈 시나리오용으로 설계되었으며 Azure AD B2B 협업을 지원하며 Azure Active Directory B2C는 소셜 네트워크 로그인을 비롯한 B2C 시나리오에 적합합니다.
 

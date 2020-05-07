@@ -5,13 +5,19 @@ description: ASP.NET Core 스택을 토대로 실행되도록 기존 C Core 기�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/25/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/migration
-ms.openlocfilehash: 451171a041f7bbb3711babd73d2fa2e245aadd28
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1846195cc43aec703333e69f66380ddcabcf2ad4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649371"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768824"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>C Core에서 ASP.NET Core로 gRPC 서비스 마이그레이션
 
@@ -47,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="configure-grpc-services-options"></a>gRPC 서비스 옵션 구성
 
-C Core 기반 앱에서 `grpc.max_receive_message_length`, `grpc.max_send_message_length` 등의 설정은 `ChannelOption`서버 인스턴스를 생성[할 때 ](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)을 사용하여 구성합니다.
+C Core 기반 앱에서 `grpc.max_receive_message_length`, `grpc.max_send_message_length` 등의 설정은 [서버 인스턴스를 생성](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)할 때 `ChannelOption`을 사용하여 구성합니다.
 
 ASP.NET Core에서 gRPC는 `GrpcServiceOptions` 형식을 통해 구성을 제공합니다. 예를 들어 gRPC 서비스에서 들어오는 메시지의 최대 크기는 `AddGrpc`를 통해 구성할 수 있습니다. 다음 예제에서는 기본 `MaxReceiveMessageSize`인 4MB를 16MB로 변경합니다.
 
@@ -88,7 +94,7 @@ ASP.NET Core [미들웨어](xref:fundamentals/middleware/index)는 C Core 기반
 * 파이프라인의 다음 구성 요소 이전이나 이후에 작업을 수행할 수 있습니다.
 * `HttpContext`에 대한 액세스를 제공합니다.
   * 미들웨어에서 `HttpContext`는 매개 변수입니다.
-  * 인터셉터에서는 `HttpContext` 확장 메서드와 함께 `ServerCallContext` 매개 변수를 사용하여 `ServerCallContext.GetHttpContext`에 액세스할 수 있습니다. 이 기능은 ASP.NET Core에서 실행되는 인터셉터와 관련이 있습니다.
+  * 인터셉터에서는 `ServerCallContext.GetHttpContext` 확장 메서드와 함께 `ServerCallContext` 매개 변수를 사용하여 `HttpContext`에 액세스할 수 있습니다. 이 기능은 ASP.NET Core에서 실행되는 인터셉터와 관련이 있습니다.
 
 ASP.NET Core 미들웨어와 gRPC 인터셉터의 차이점:
 
