@@ -1,4 +1,4 @@
-`LoginDisplay` 구성 요소 (*shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*Shared/mainlayout. razor*)에서 렌더링 되며 다음 동작을 관리 합니다.
+구성 `LoginDisplay` 요소 (*shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.
 
 * 인증 된 사용자의 경우:
   * 현재 사용자 이름을 표시 합니다.

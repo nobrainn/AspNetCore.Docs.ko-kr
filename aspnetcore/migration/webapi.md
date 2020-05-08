@@ -75,7 +75,7 @@ ASP.NET Core MVC에서는가에서 <xref:Microsoft.AspNetCore.Builder.MvcApplica
 
 ## <a name="migrate-models-and-controllers"></a>모델 및 컨트롤러 마이그레이션
 
-*제품 앱* 프로젝트의 컨트롤러 및이 컨트롤러에서 사용 하는 모델을 복사 합니다. 다음 단계를 수행하세요.
+*제품 앱* 프로젝트의 컨트롤러 및이 컨트롤러에서 사용 하는 모델을 복사 합니다. 아래 단계를 수행합니다.
 
 1. 원본 프로젝트의 *Controllers/ProductsController* 를 새 프로젝트에 복사 합니다.
 1. 원본 프로젝트의 전체 *모델* 폴더를 새 프로젝트에 복사 합니다.

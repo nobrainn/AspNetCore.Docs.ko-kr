@@ -62,7 +62,7 @@ ms.locfileid: "82776502"
 
 ## <a name="action-filter"></a>작업 필터
 
-특정 MVC 컨트롤러나 작업 메서드에 대 한 safelist 기반 액세스 제어를 원하는 경우 작업 필터를 사용 합니다. 예를 들어:
+특정 MVC 컨트롤러나 작업 메서드에 대 한 safelist 기반 액세스 제어를 원하는 경우 작업 필터를 사용 합니다. 다음은 그 예입니다. 
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
@@ -99,7 +99,7 @@ ms.locfileid: "82776502"
 
 ## <a name="razor-pages-filter"></a>Razor페이지 필터
 
-Razor 페이지 앱에 대 한 safelist 기반 access control을 사용 하려면 Razor 페이지 필터를 사용 합니다. 예를 들어:
+Razor 페이지 앱에 대 한 safelist 기반 access control을 사용 하려면 Razor 페이지 필터를 사용 합니다. 다음은 그 예입니다. 
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 

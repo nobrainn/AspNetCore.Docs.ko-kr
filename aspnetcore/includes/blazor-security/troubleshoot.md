@@ -17,10 +17,10 @@
   * Visual Studio의 **실행** 단추에서 **찾아보기** 대화 상자를 엽니다.
   * **추가** 단추를 선택합니다.
   * **프로그램** 필드에서 브라우저의 경로를 제공 합니다.
-  * **인수** 필드에 브라우저에서 incognito 또는 private 모드와 앱의 URL을 여는 데 사용 하는 명령줄 옵션을 제공 합니다. 예를 들어:
+  * **인수** 필드에 브라우저에서 incognito 또는 private 모드와 앱의 URL을 여는 데 사용 하는 명령줄 옵션을 제공 합니다. 다음은 그 예입니다. 
     * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
-  * **이름 필드에** 이름을 입력 합니다. 정의합니다(예: `Firefox Auth Testing`).
+  * **이름 필드에** 이름을 입력 합니다. `Firefox Auth Testing`)을 입력합니다.
   * **확인** 단추를 선택합니다.
   * 앱을 사용 하 여 테스트를 반복할 때마다 브라우저 프로필을 선택 하지 않으려면 **기본 단추로 설정** 단추를 사용 하 여 프로필을 기본값으로 설정 합니다.
   * 응용 프로그램, 테스트 사용자 또는 공급자 구성에 대 한 변경 사항 사이에서 IDE가 브라우저를 닫았는지 확인 합니다.

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: e69b598431027aa540227b87dedfd091057a1af4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e804c43ebea8f6a79443e24047a7be47587cbd8a
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768171"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967548"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Weasembmbambambambamba 추가 보안 시나리오
 
@@ -35,6 +35,11 @@ ms.locfileid: "82768171"
 다음 예제 `AuthorizationMessageHandler` 에서는 (*Program.cs*) `HttpClient` 에서 `Program.Main` 를 구성 합니다.
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
@@ -47,9 +52,14 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-편의상 앱 기준 주소 `BaseAddressAuthorizationMessageHandler` 를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다. 이제 인증 사용 Blazor Weasembomtemplate 템플릿이 [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests) 를 사용 하 여를 설정 `HttpClient` 합니다 `BaseAddressAuthorizationMessageHandler`.
+편의상 앱 기준 주소 `BaseAddressAuthorizationMessageHandler` 를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다. 이제 인증 사용 Blazor Weasembomtemplate이 서버 API <xref:System.Net.Http.IHttpClientFactory> 프로젝트에서를 사용 하 여를 설정 <xref:System.Net.Http.HttpClient> 합니다. `BaseAddressAuthorizationMessageHandler`
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
@@ -58,11 +68,16 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
 ```
 
-앞의 예제 `CreateClient` 에서 클라이언트를 만든 경우 서버 프로젝트에 요청 `HttpClient` 을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
+앞의 예제 `CreateClient` 에서 클라이언트를 만든 경우 서버 프로젝트에 요청 <xref:System.Net.Http.HttpClient> 을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
 
-그런 다음 `HttpClient` 구성 된를 사용 하 여 간단한 `try-catch` 패턴을 통해 권한 있는 요청을 수행할 수 있습니다. 다음 `FetchData` 구성 요소는 날씨 예보 데이터를 요청 합니다.
+그런 다음 <xref:System.Net.Http.HttpClient> 구성 된를 사용 하 여 간단한 `try-catch` 패턴을 통해 권한 있는 요청을 수행할 수 있습니다. 다음 `FetchData` 구성 요소는 날씨 예보 데이터를 요청 합니다.
 
 ```csharp
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Http
+
+...
+
 protected override async Task OnInitializedAsync()
 {
     try
@@ -82,6 +97,13 @@ protected override async Task OnInitializedAsync()
 *WeatherClient.cs*:
 
 ```csharp
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using static {APP ASSEMBLY}.Data;
+
 public class WeatherClient
 {
     private readonly HttpClient httpClient;
@@ -99,6 +121,8 @@ public class WeatherClient
         {
             forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
+
+            ...
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -113,6 +137,11 @@ public class WeatherClient
 *Program.cs*:
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddHttpClient<WeatherClient>(
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();

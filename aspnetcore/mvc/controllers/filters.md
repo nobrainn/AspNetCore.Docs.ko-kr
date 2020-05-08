@@ -184,12 +184,12 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 
 | 시퀀스 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
 | 3 | 메서드 | `OnActionExecuting` |
 | 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | 전역 | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>컨트롤러 수준 필터
 
@@ -725,12 +725,12 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 | 시퀀스 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 | `OnActionExecuting` |
 | 3 | 메서드 | `OnActionExecuting` |
 | 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | 전역 | `OnActionExecuted` |
 
 이 시퀀스는 다음을 보여 줍니다.
 
@@ -787,8 +787,8 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | 메서드 | 0 | `OnActionExecuting` |
 | 2 | 컨트롤러 | 1  | `OnActionExecuting` |
-| 3 | Global | 2  | `OnActionExecuting` |
-| 4 | Global | 2  | `OnActionExecuted` |
+| 3 | 전역 | 2  | `OnActionExecuting` |
+| 4 | 전역 | 2  | `OnActionExecuted` |
 | 5 | 컨트롤러 | 1  | `OnActionExecuted` |
 | 6 | 메서드 | 0  | `OnActionExecuted` |
 
