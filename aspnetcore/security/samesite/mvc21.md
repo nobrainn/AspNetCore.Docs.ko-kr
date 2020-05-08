@@ -83,7 +83,7 @@ services.AddSession(options =>
 
 쿠키를 가로채 고 사용자의 브라우저 에이전트에서 지원에 따라 없음 값을 조정 하려면 `CookiePolicy` 미들웨어를 사용 해야 합니다. 쿠키를 작성 하 고 내에서 `ConfigureServices()`구성 된 구성 요소 **보다 먼저** http 요청 파이프라인에 배치 해야 합니다.
 
-`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)의 메서드에서 파이프라인 사용에 삽입 합니다. 예:
+`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)의 메서드에서 파이프라인 사용에 삽입 합니다. 다음은 그 예입니다. 
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -113,7 +113,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-그런 다음 쿠키가 `ConfigureServices(IServiceCollection services)` 추가 되거나 삭제 될 때 도우미 클래스를 호출 하도록 쿠키 정책을 구성 합니다. 예:
+그런 다음 쿠키가 `ConfigureServices(IServiceCollection services)` 추가 되거나 삭제 될 때 도우미 클래스를 호출 하도록 쿠키 정책을 구성 합니다. 다음은 그 예입니다. 
 
 ```c#
 public void ConfigureServices(IServiceCollection services)

@@ -24,7 +24,7 @@ ms.locfileid: "82775871"
 
 작성자: [Scott Addie](https://github.com/scottaddie)
 
-태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>을 참조하세요.
+태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -49,7 +49,7 @@ ms.locfileid: "82775871"
 
 부분 태그 도우미 특성의 인벤토리는 다음과 같습니다.
 
-## <a name="name"></a>name
+## <a name="name"></a>이름
 
 `name` 특성은 필수입니다. 이 특성은 렌더링할 부분 보기의 이름 또는 경로를 나타냅니다. 부분 보기의 이름을 지정할 경우 [보기 검색](xref:mvc/views/overview#view-discovery) 과정이 시작됩니다. 명시적인 경로가 지정되면 이 과정이 생략됩니다. 허용되는 모든 `name` 값은 [부분 보기 검색](xref:mvc/views/partial#partial-view-discovery)을 참조하세요.
 
