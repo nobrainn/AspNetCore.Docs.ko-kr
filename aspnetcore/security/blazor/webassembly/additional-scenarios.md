@@ -5,7 +5,7 @@ description: 추가 보안 시나리오에 Blazor 대해 weasembmbom를 구성 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/04/2020
+ms.date: 05/08/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: e804c43ebea8f6a79443e24047a7be47587cbd8a
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: e8a088b3f1a4e0eb7d5d1c5c09ef53c4a2bd3628
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967548"
+ms.locfileid: "82976794"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Weasembmbambambambamba 추가 보안 시나리오
 
@@ -554,7 +554,7 @@ builder.Services.AddApiAuthorization(options => {
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-public class OidcAccount : RemoteUserAccount
+public class CustomUserAccount : RemoteUserAccount
 {
     [JsonPropertyName("amr")]
     public string[] AuthenticationMethod { get; set; }
@@ -571,7 +571,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 
 public class CustomAccountFactory 
-    : AccountClaimsPrincipalFactory<OidcAccount>
+    : AccountClaimsPrincipalFactory<CustomUserAccount>
 {
     public CustomAccountFactory(NavigationManager navigationManager, 
         IAccessTokenProviderAccessor accessor) : base(accessor)
@@ -579,7 +579,7 @@ public class CustomAccountFactory
     }
   
     public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
-        OidcAccount account, RemoteAuthenticationUserOptions options)
+        CustomUserAccount account, RemoteAuthenticationUserOptions options)
     {
         var initialUser = await base.CreateUserAsync(account, options);
         
@@ -597,17 +597,55 @@ public class CustomAccountFactory
 }
 ```
 
-다음을 사용 하도록 서비스 `CustomAccountFactory`를 등록 합니다.
+사용 중인 `CustomAccountFactory` 인증 공급자에 대 한를 등록 합니다. 유효한 등록은 다음과 같습니다. 
 
-```csharp
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+* `AddOidcAuthentication`:
 
-...
+  ```csharp
+  using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-builder.Services.AddApiAuthorization<RemoteAuthenticationState, OidcAccount>()
-    .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, OidcAccount, 
-        CustomAccountFactory>();
-```
+  ...
+
+  builder.Services.AddOidcAuthentication<RemoteAuthenticationState, 
+      CustomUserAccount>(options =>
+  {
+      ...
+  })
+  .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, 
+      CustomUserAccount, CustomAccountFactory>();
+  ```
+
+* `AddMsalAuthentication`:
+
+  ```csharp
+  using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+  ...
+
+  builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
+      CustomUserAccount>(options =>
+  {
+      ...
+  })
+  .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, 
+      CustomUserAccount, CustomAccountFactory>();
+  ```
+  
+* `AddApiAuthorization`:
+
+  ```csharp
+  using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+  ...
+
+  builder.Services.AddApiAuthorization<RemoteAuthenticationState, 
+      CustomUserAccount>(options =>
+  {
+      ...
+  })
+  .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, 
+      CustomUserAccount, CustomAccountFactory>();
+  ```
 
 ## <a name="support-prerendering-with-authentication"></a>인증을 사용한 미리 렌더링 지원
 

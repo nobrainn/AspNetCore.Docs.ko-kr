@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/06/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 3a2f3bdd194b9153c5d59af7adfad3a3c8c56b23
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: aaae2b755d6d6e74db0cb7676820d01964c2add4
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776040"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976807"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Azure Active Directory를 사용 Blazor 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
 
@@ -171,7 +171,7 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-예:
+예제:
 
 ```json
 {
@@ -265,7 +265,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예:
+예제:
 
 ```json
 {
@@ -351,8 +351,9 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/blazor/webassembly/additional-scenarios>
+* <xref:security/blazor/webassembly/aad-groups-roles>
 * <xref:security/authentication/azure-active-directory/index>
 * [Microsoft ID 플랫폼 설명서](/azure/active-directory/develop/)

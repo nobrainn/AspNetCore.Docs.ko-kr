@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/06/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 3ea2b7632fc41e1c8ad72292e45a93e081b6edbe
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6f884cbfc9ac50f38c415af522d3d09a3ef38712
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776157"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976846"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft 계정을 사용 Blazor 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
@@ -103,7 +103,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예:
+예제:
 
 ```json
 {
@@ -170,8 +170,9 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/blazor/webassembly/additional-scenarios>
+* <xref:security/blazor/webassembly/aad-groups-roles>
 * [빠른 시작: Microsoft ID 플랫폼에 애플리케이션 등록](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
 * [빠른 시작: 웹 API를 공개하는 애플리케이션 구성](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)

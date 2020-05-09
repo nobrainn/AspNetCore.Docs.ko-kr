@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774134"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976755"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
@@ -454,7 +454,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 >
 > **이러한 요구 사항을 해결하지 않고 앱에서 보안 코드를 무분별하게 구현해서는 안 됩니다.**
 
-### <a name="content-validation"></a>내용 유효성 검사
+### <a name="content-validation"></a>콘텐츠 유효성 검사
 
 **업로드된 콘텐츠에 타사 바이러스/맬웨어 검사 API를 사용합니다.**
 
@@ -1183,7 +1183,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 >
 > **이러한 요구 사항을 해결하지 않고 앱에서 보안 코드를 무분별하게 구현해서는 안 됩니다.**
 
-### <a name="content-validation"></a>내용 유효성 검사
+### <a name="content-validation"></a>콘텐츠 유효성 검사
 
 **업로드된 콘텐츠에 타사 바이러스/맬웨어 검사 API를 사용합니다.**
 
@@ -1476,9 +1476,9 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
-* [HTTP 연결 요청 드레이닝](xref:fundamentals/servers/kestrel#http-connection-request-draining)
+* [HTTP 연결 요청 드레이닝](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [무제한 파일 업로드](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 * [Azure 보안: 보안 프레임: 입력 유효성 검사 | 조치](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Azure 클라우드 디자인 패턴: Valet 키 패턴](/azure/architecture/patterns/valet-key)
