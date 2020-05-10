@@ -1,20 +1,26 @@
 ---
-title: ASP.NET Core에 대한 Razor 구문 참조
+title: ASP.NET Core에 대 한 razor 구문 참조
 author: rick-anderson
-description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
+description: 웹 페이지 Razor 에 서버 기반 코드를 포함 하는 태그 구문에 대해 알아봅니다.
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: dd5c73be56ed0dafb759df2f5ff2eac1a3b5b09e
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381766"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003196"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
-[릭 앤더슨,](https://twitter.com/RickAndMSFT) [테일러 멀렌,](https://twitter.com/ntaylormullen) [댄 비카렐](https://github.com/Rabadash8820)
+[Rick Anderson](https://twitter.com/RickAndMSFT), [Mullen](https://twitter.com/ntaylormullen)및 [Dan Vicarel](https://github.com/Rabadash8820)
 
 Razor는 웹 페이지에 서버 기반 코드를 포함하는 태그 구문입니다. Razor 구문은 Razor 태그, C# 및 HTML로 구성됩니다. Razor를 포함하는 파일의 확장명은 일반적으로 *.cshtml*입니다. Razor는 [Razor 구성 요소](xref:blazor/components) 파일(*.razor*)에도 있습니다.
 
@@ -467,7 +473,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Razor 구성 `@code` 요소의 [`@functions`](#functions) 경우 에 대한 `@functions`별칭이며 을 권장합니다. 두 개 이상의 `@code` 블록이 허용됩니다.
+Razor 구성 요소의 경우 `@code` 는의 [`@functions`](#functions) 별칭이 며 권장 됩니다 `@functions`. 두 개 이상의 `@code` 블록이 허용됩니다.
 
 ::: moniker-end
 
@@ -487,7 +493,7 @@ Razor 구성 `@code` 요소의 [`@functions`](#functions) 경우 에 대한 `@fu
 
 ::: moniker-end
 
-다음은 그 예입니다.
+다음은 그 예입니다. 
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -601,7 +607,7 @@ Razor 구성 `@code` 요소의 [`@functions`](#functions) 경우 에 대한 `@fu
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@layout` 지시문에서는 Razor 구성 요소의 레이아웃을 지정합니다. 레이아웃 구성 요소는 코드 중복 및 불일치를 방지하는 데 사용됩니다. 자세한 내용은 <xref:blazor/layouts>을 참조하세요.
+`@layout` 지시문에서는 Razor 구성 요소의 레이아웃을 지정합니다. 레이아웃 구성 요소는 코드 중복 및 불일치를 방지하는 데 사용됩니다. 자세한 내용은 <xref:blazor/layouts>를 참조하세요.
 
 ::: moniker-end
 
@@ -633,7 +639,7 @@ Razor는 보기에 전달된 모델에 액세스할 수 있는 `Model` 속성을
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` 지시문은 `Model` 속성의 형식을 지정합니다. 이 지시문은 보기가 파생되는 클래스를 생성한 `RazorPage<T>`의 `T`를 지정합니다. `@model` 지시문이 지정되지 않을 경우 `Model` 속성은 `dynamic` 형식입니다. 자세한 내용은 [강하게 입력한 모델 @model 및 키워드를](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)참조하십시오.
+`@model` 지시문은 `Model` 속성의 형식을 지정합니다. 이 지시문은 보기가 파생되는 클래스를 생성한 `RazorPage<T>`의 `T`를 지정합니다. `@model` 지시문이 지정되지 않을 경우 `Model` 속성은 `dynamic` 형식입니다. 자세한 내용은 [강력한 형식의 모델 @model 및 키워드](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)를 참조 하세요.
 
 ### <a name="namespace"></a>\@namespace
 
@@ -652,9 +658,9 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 * *Pages/_ViewImports.cshtml*에는 `@namespace Hello.World`가 포함되어 있습니다.
 * 각 페이지에는 `Hello.World`가 네임스페이스의 루트로 포함되어 있습니다.
 
-| 호출                                        | 네임스페이스                             |
+| 페이지                                        | 네임스페이스                             |
 | ------------------------------------------- | ------------------------------------- |
-| *Pages/Index.cshtml*                        | `Hello.World`                         |
+| *Pages/Index. cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Hello.World.MorePages.EvenMorePages` |
 
@@ -664,9 +670,9 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 이전 예제의 *EvenMorePages* 폴더에 `@namespace Another.Planet`이 포함된 가져오기 파일이 있으면(또는 *Pages/MorePages/EvenMorePages/Page.cshtml* 파일에 `@namespace Another.Planet` 포함), 다음 표에 결과가 표시됩니다.
 
-| 호출                                        | 네임스페이스               |
+| 페이지                                        | 네임스페이스               |
 | ------------------------------------------- | ----------------------- |
-| *Pages/Index.cshtml*                        | `Hello.World`           |
+| *Pages/Index. cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Another.Planet`        |
 
@@ -677,13 +683,13 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 `@page` 지시문은 표시되는 파일 형식에 따라 서로 다른 효과를 냅니다. 지시문:
 
 * *.cshtml* 파일에서 파일은 Razor 페이지를 나타냅니다. 자세한 내용은 [사용자 지정 경로](xref:razor-pages/index#custom-routes) 및 <xref:razor-pages/index>를 참조하세요.
-* Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>을 참조하세요.
+* Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>를 참조하세요.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-*.cshtml* 파일의 첫 번째 줄에 있는 `@page` 지시문은 파일이 Razor 페이지임을 나타냅니다. 자세한 내용은 <xref:razor-pages/index>을 참조하세요.
+*.cshtml* 파일의 첫 번째 줄에 있는 `@page` 지시문은 파일이 Razor 페이지임을 나타냅니다. 자세한 내용은 <xref:razor-pages/index>를 참조하세요.
 
 ::: moniker-end
 
@@ -691,7 +697,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 *이 시나리오는 MVC 보기와 Razor Pages(cshtml)에만 적용됩니다.*
 
-`@section` 지시문은 [MVC 및 Razor Pages 레이아웃](xref:mvc/views/layout)과 함께 사용되어 보기나 페이지에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
+`@section` 지시문은 [MVC 및 Razor Pages 레이아웃](xref:mvc/views/layout)과 함께 사용되어 보기나 페이지에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 <xref:mvc/views/layout>를 참조하세요.
 
 ### <a name="using"></a>\@using
 
@@ -701,7 +707,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razor 구성 `@using` [요소에서도](xref:blazor/components)범위에 있는 구성 요소를 제어합니다.
+[Razor 구성 요소](xref:blazor/components) `@using` 에서는 범위 내에 있는 구성 요소를 제어 합니다.
 
 ::: moniker-end
 
@@ -713,19 +719,19 @@ Razor 구성 `@using` [요소에서도](xref:blazor/components)범위에 있는 
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@attributes`를 사용하면 구성 요소가 선언되지 않은 특성을 렌더링할 수 있습니다. 자세한 내용은 <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>을 참조하세요.
+`@attributes`를 사용하면 구성 요소가 선언되지 않은 특성을 렌더링할 수 있습니다. 자세한 내용은 <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>를 참조하세요.
 
 ### <a name="bind"></a>\@bind
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/data-binding>을 참조하세요.
+구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/data-binding>를 참조하세요.
 
 ### <a name="onevent"></a>\@on{EVENT}
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/event-handling>을 참조하세요.
+Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/event-handling>를 참조하세요.
 
 ::: moniker-end
 
@@ -751,19 +757,19 @@ Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니�
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@key` 지시어 특성을 사용하면 구성 요소 diff 알고리즘이 키의 값에 따라 요소 또는 구성 요소를 유지할 수 있습니다. 자세한 내용은 <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>을 참조하세요.
+`@key` 지시어 특성을 사용하면 구성 요소 diff 알고리즘이 키의 값에 따라 요소 또는 구성 요소를 유지할 수 있습니다. 자세한 내용은 <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>를 참조하세요.
 
 ### <a name="ref"></a>\@ref
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>을 참조하세요.
+구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>를 참조하세요.
 
 ### <a name="typeparam"></a>\@typeparam
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/templated-components#generic-typed-components>을 참조하세요.
+`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/templated-components#generic-typed-components>를 참조하세요.
 
 ::: moniker-end
 
@@ -872,15 +878,15 @@ public class Pet
 
 [태그 도우미](xref:mvc/views/tag-helpers/intro)와 관련된 세 가지 지시문이 있습니다.
 
-| 지시문 | 함수 |
+| 지시문 | 기능 |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | 보기에 태그 도우미를 제공합니다. |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 보기에서 이전에 추가된 태그 도우미를 제거합니다. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | 태그 도우미를 지원하고 태그 도우미 사용을 명시적으로 만들어주는 태그 접두사를 지정합니다. |
 
-## <a name="razor-reserved-keywords"></a>Razor 예약 키워드
+## <a name="razor-reserved-keywords"></a>Razor예약 된 키워드
 
-### <a name="razor-keywords"></a>Razor 키워드
+### <a name="razor-keywords"></a>Razor어
 
 * 페이지(ASP.NET Core 2.1 이상 필요)
 * namespace
@@ -890,9 +896,9 @@ public class Pet
 * section
 * 도우미(현재 ASP.NET Core에서 지원되지 않음)
 
-Razor 키워드는 `@(Razor Keyword)`으로 이스케이프됩니다(예: `@(functions)`).
+Razor키워드는로 `@(Razor Keyword)` 이스케이프 됩니다 (예: `@(functions)`).
 
-### <a name="c-razor-keywords"></a>C# Razor 키워드
+### <a name="c-razor-keywords"></a>C Razor # 키워드
 
 * case
 * do
@@ -909,51 +915,51 @@ Razor 키워드는 `@(Razor Keyword)`으로 이스케이프됩니다(예: `@(fun
 * using
 * while
 
-C# Razor 키워드는 `@(@C# Razor Keyword)`으로 이중 이스케이프되어야 합니다(예: `@(@case)`). 첫 번째 `@`은 Razor 파서를 이스케이프합니다. 두 번째 `@`은 C# 파서를 이스케이프합니다.
+C Razor # 키워드는를 `@(@C# Razor Keyword)` `@(@case)`사용 하 여 이중 이스케이프 되어야 합니다 (예:). 첫 번째 `@` 는 파서 Razor 를 이스케이프 합니다. 두 번째 `@`은 C# 파서를 이스케이프합니다.
 
-### <a name="reserved-keywords-not-used-by-razor"></a>Razor에서 사용하지 않는 예약된 키워드
+### <a name="reserved-keywords-not-used-by-razor"></a>에서 사용 되지 않는 예약 된 키워드Razor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>보기용으로 생성된 Razor C# 클래스 검사
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>뷰에 대해 Razor 생성 된 c # 클래스를 검사 합니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2.1 이상에서는 [Razor SDK](xref:razor-pages/sdk)가 Razor 파일의 컴파일을 처리합니다. 프로젝트를 빌드할 때 Razor SDK는 프로젝트 루트에 *obj/<build_configuration>/<target_framework_moniker>/Razor* 디렉터리를 생성합니다. *Razor* 디렉터리 내의 디렉터리 구조는 프로젝트의 디렉터리 구조를 반영합니다.
+.NET Core SDK 2.1 이상에서 [ Razor SDK](xref:razor-pages/sdk) 는 파일의 Razor 컴파일을 처리 합니다. 프로젝트를 빌드할 때 SDK는 Razor 프로젝트 루트에서 *>/<target_framework_moniker>/Razor 디렉터리 build_configuration obj/<* 를 생성 합니다. 디렉터리 내의 *Razor* 디렉터리 구조는 프로젝트의 디렉터리 구조를 미러링합니다.
 
-.NET Core 2.1을 대상으로 하는 ASP.NET Core 2.1 Razor Pages 프로젝트에서 다음 디렉터리 구조를 고려합니다.
+.NET Core 2.1를 대상으로 하는 ASP.NET Core Razor 2.1 페이지 프로젝트에서 다음 디렉터리 구조를 고려 합니다.
 
-* **지역/**
-  * **관리자/**
-    * **페이지/**
+* **영역인**
+  * **지점**
+    * **마주보**
       * *Index.cshtml*
       * *Index.cshtml.cs*
-* **페이지/**
-  * **공유/**
-    * *_Layout.cshtml*
+* **마주보**
+  * **공유할**
+    * *_Layout. cshtml*
   * *_ViewImports.cshtml*
-  * *_ViewStart.cshtml*
+  * *_ViewStart. cshtml*
   * *Index.cshtml*
   * *Index.cshtml.cs*
 
 *Debug* 구성에 프로젝트를 빌드하면 다음 *obj* 디렉터리가 생성됩니다.
 
-* **obj /**
-  * **디버그/**
-    * **넷코어앱2.1/**
-      * **면도기/**
-        * **지역/**
-          * **관리자/**
-            * **페이지/**
+* **인스턴스인**
+  * **디버그**
+    * **netcoreapp1.0 2.1/**
+      * **Razor/**
+        * **영역인**
+          * **지점**
+            * **마주보**
               * *Index.g.cshtml.cs*
-        * **페이지/**
-          * **공유/**
+        * **마주보**
+          * **공유할**
             * *_Layout.g.cshtml.cs*
           * *_ViewImports.g.cshtml.cs*
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-*pages/Index.cshtml*에 대해 생성된 클래스를 보려면 *obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs*를 엽니다.
+*Pages/Index. cshtml*에 대해 생성 된 클래스를 보려면 *obj/Debug/Netcoreapp1.0 2.1/Razor/Pages/Index.g.cshtml.cs*를 엽니다.
 
 ::: moniker-end
 
@@ -975,7 +981,7 @@ ASP.NET Core MVC 프로젝트에 다음 클래스를 추가합니다.
 
 ## <a name="view-lookups-and-case-sensitivity"></a>보기 조회 및 대/소문자 구분
 
-Razor 보기 엔진은 보기에 대한 대/소문자 구분 조회를 수행합니다. 그러나 실제 조회는 기본 파일 시스템에 의해 결정됩니다.
+뷰 Razor 엔진은 뷰에 대해 대/소문자를 구분 하는 조회를 수행 합니다. 그러나 실제 조회는 기본 파일 시스템에 의해 결정됩니다.
 
 * 파일 기반 원본:
   * 파일 시스템이 대/소문자를 구문하지 않은 운영 체제(예: Windows)에서는 실제 파일 공급자 조회에서 대/소문자를 구분하지 않습니다. 예를 들어 `return View("Test")`는 */Views/Home/Test.cshtml*, */Views/home/test.cshtml* 및 기타 대/소문자 구분 변형과 일치하는 항목을 반환합니다.
@@ -985,10 +991,10 @@ Razor 보기 엔진은 보기에 대한 대/소문자 구분 조회를 수행합
 개발자는 파일 및 디렉터리 이름의 대/소문자를 다음의 대/소문자와 매칭하는 것이 좋습니다.
 
 * 영역, 컨트롤러 및 작업 이름.
-* Razor 페이지.
+* Razor마주보.
 
 대/소문자를 일치시키면 배포 시 기본 파일 시스템에 관계 없이 해당 보기를 잘 찾습니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
-[Razor 구문을 사용하는 ASP.NET 웹 프로그래밍 소개는](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) Razor 구문을 사용하여 프로그래밍의 많은 샘플을 제공합니다.
+[구문을 Razor 사용한 ASP.NET 웹 프로그래밍에 대 한 소개](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) 는 구문을 사용한 Razor 프로그래밍의 많은 샘플을 제공 합니다.

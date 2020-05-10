@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: 06a5cf77e47d9fc618fddf3a096001a4f31688be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8b1eee7ff088fb1229ec1d2dd538ea4f01e094c3
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776996"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003103"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core의 Google 외부 로그인 설정
 
@@ -28,7 +28,7 @@ ms.locfileid: "82776996"
 ## <a name="create-a-google-api-console-project-and-client-id"></a>Google API 콘솔 프로젝트 및 클라이언트 ID 만들기
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)를 설치 합니다.
-* [Google 로그인을 웹 앱에 통합](https://developers.google.com/identity/sign-in/web/devconsole-project) 으로 이동 하 여 **프로젝트 구성**을 선택 합니다.
+* [Google 로그인을 웹 앱에 통합](https://developers.google.com/identity/sign-in/web/sign-in) 으로 이동 하 여 **프로젝트 구성**을 선택 합니다.
 * **OAuth 클라이언트 구성** 대화 상자에서 **웹 서버**를 선택 합니다.
 * **권한 있는 리디렉션 uri** 텍스트 항목 상자에서 리디렉션 uri를 설정 합니다. 예를 들어 `https://localhost:44312/signin-google`
 * **클라이언트 ID** 및 **클라이언트 암호**를 저장 합니다.

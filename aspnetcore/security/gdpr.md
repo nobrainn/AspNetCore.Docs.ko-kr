@@ -12,18 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 68f8ebaafd1aaa725ef1ff41f2ffa9f605e49f7f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2e21f54ebfcb55be2b97da217b92a39843b5d702
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776326"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003205"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core의 GDPR (EU 일반 데이터 보호 규정) 지원
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core은 [GDPR (EU 일반 데이터 보호 규정)](https://www.eugdpr.org/) 요구 사항을 충족 하는 데 도움이 되는 api 및 템플릿을 제공 합니다.
+ASP.NET Core은 [GDPR (EU 일반 데이터 보호 규정)](https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-does-general-data-protection-regulation-gdpr-govern_en) 요구 사항을 충족 하는 데 도움이 되는 api 및 템플릿을 제공 합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -138,20 +138,20 @@ CookieConsentPartial 부분 보기: * \_*
 * 는 가장 쉽고 안전한 옵션입니다.
 * 데이터베이스에서 키와 암호화를 관리할 수 있습니다.
 
-예를 들어:
+다음은 그 예입니다. 
 
 * Microsoft SQL 및 Azure SQL은 tde ( [투명한 데이터 암호화](/sql/relational-databases/security/encryption/transparent-data-encryption) )를 제공 합니다.
 * [SQL Azure는 기본적으로 데이터베이스를 암호화 합니다.](https://azure.microsoft.com/updates/newly-created-azure-sql-databases-encrypted-by-default/)
 * [Azure blob, 파일, 테이블 및 Queue Storage는 기본적으로 암호화 됩니다](https://azure.microsoft.com/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/).
 
-미사용 기본 암호화를 제공 하지 않는 데이터베이스의 경우 디스크 암호화를 사용 하 여 동일한 보호를 제공할 수 있습니다. 예를 들어:
+미사용 기본 암호화를 제공 하지 않는 데이터베이스의 경우 디스크 암호화를 사용 하 여 동일한 보호를 제공할 수 있습니다. 다음은 그 예입니다. 
 
 * [Windows Server 용 BitLocker](/windows/security/information-protection/bitlocker/bitlocker-how-to-deploy-on-windows-server)
 * Linux:
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [Encfs](https://github.com/vgough/encfs).
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [GDPR-ASP.NET Core에서 해지 동의 단추를 추가 하는 중](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)
