@@ -5,17 +5,20 @@ description: Blazor 앱을 빌드할 때 IL(중간 언어) 링커를 제어하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 109da5ef400c3b9d64ccf3ceb33a5387ea6b5618
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b274752b375f68cca0c0a9adf9c146bc525d9eba
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218663"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775182"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
 
@@ -86,7 +89,7 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 </linker>
 ```
 
-자세한 내용은 [연결 xml 파일 예제(mono/링커 GitHub 리포지토리)](https://github.com/mono/linker#link-xml-file-examples)를 참조하세요.
+자세한 내용 및 예제는 [데이터 형식](https://github.com/mono/linker/blob/master/docs/data-formats.md)(mono/linker GitHub 리포지토리)을 참조하세요.
 
 ## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>라이브러리에 XML 링커 구성 파일 추가
 
@@ -106,11 +109,11 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 
 기본적으로 Blazor WebAssembly 앱에 대한 Blazor 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 이 어셈블리를 제거하면 앱 크기를 최소화합니다.
 
-유지되는 I18N 어셈블리 종류를 제어하려면 프로젝트 파일에서 `<MonoLinkerI18NAssemblies>` MSBuild 속성을 설정합니다.
+유지되는 I18N 어셈블리 종류를 제어하려면 프로젝트 파일에서 `<BlazorWebAssemblyI18NAssemblies>` MSBuild 속성을 설정합니다.
 
 ```xml
 <PropertyGroup>
-  <MonoLinkerI18NAssemblies>{all|none|REGION1,REGION2,...}</MonoLinkerI18NAssemblies>
+  <BlazorWebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</BlazorWebAssemblyI18NAssemblies>
 </PropertyGroup>
 ```
 

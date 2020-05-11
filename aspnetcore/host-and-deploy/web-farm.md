@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647343"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776359"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>웹 팜에 ASP.NET Core 호스트
 
@@ -77,7 +83,7 @@ ms.locfileid: "78647343"
 다음 증상 중 하나라도 **간헐적**으로 발생할 경우 일반적으로 웹 팜 환경에 대한 부적절한 데이터 보호 또는 캐싱 구성 문제로 추적됩니다.
 
 * 인증 중단 &ndash; 인증 쿠키가 잘못 구성되었거나 암호 해독할 수 없습니다. OAuth(Facebook, Microsoft, Twitter) 또는 OpenIdConnect 로그인이 “상관 관계 실패” 오류로 인해 실패합니다.
-* 권한 부여 중단 &ndash; ID가 손실되었습니다.
+* 권한 부여 중단 &ndash; Identity가 손실되었습니다.
 * 세션 상태에서 데이터가 손실됩니다.
 * 캐시된 항목이 사라집니다.
 * TempData가 실패합니다.

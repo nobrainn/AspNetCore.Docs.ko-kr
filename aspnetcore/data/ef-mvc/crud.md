@@ -6,13 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2aa4ef48509b9a34f3b25eb657b1ecac51c1374b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 51334370b07709a773f6acd18d302f8b3ea88290
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416163"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773590"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -64,7 +70,7 @@ URL의 마지막 부분("?courseID=2021")은 쿼리 문자열 값입니다. 또�
 http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 ```
 
-인덱스 페이지에서 하이퍼링크 URL은 Razor 보기의 태그 도우미 문에 의해 생성됩니다. 다음 Razor 코드에서 `id` 매개 변수는 기본 경로와 일치하므로 `id`는 경로 데이터에 추가됩니다.
+인덱스 페이지에서 하이퍼링크 URL은 Razor 뷰의 태그 도우미 문에 의해 생성됩니다. 다음 Razor 코드에서 `id` 매개 변수는 기본 경로와 일치하므로 `id`는 경로 데이터에 추가됩니다.
 
 ```html
 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
@@ -181,7 +187,7 @@ HttpPost 편집 작업 메서드를 다음 코드로 바꿉니다.
 
 초과 게시를 방지하는 가장 좋은 방법으로 **편집** 페이지에서 업데이트 가능하도록 원하는 필드가 `TryUpdateModel` 매개 변수에서 허용 목록에 추가됩니다. (매개 변수 목록에서 필드 목록 앞의 빈 문자열은 양식 필드 이름으로 사용하는 접두사에 대한 것입니다.) 현재 보호하는 추가 필드가 없지만 모델 바인더에서 바인딩하길 원하는 필드를 나열하는 것은 향후에 데이터 모델에 필드를 추가하는지 확인하며, 여기에서 명시적으로 추가할 때까지 자동으로 보호됩니다.
 
-이러한 변경 내용의 결과로 HttpPost `Edit` 메서드의 메서드 서명은 HttpGet `Edit` 메서드와 동일하므로 메서드 `EditPost`의 이름을 변경했습니다.
+이러한 변경 내용의 결과로 HttpPost `Edit` 메서드의 메서드 시그니처는 HttpGet `Edit` 메서드와 동일하므로 메서드 `EditPost`의 이름을 변경했습니다.
 
 ### <a name="alternative-httppost-edit-code-create-and-attach"></a>대체 HttpPost 편집 코드: 만들기 및 연결
 

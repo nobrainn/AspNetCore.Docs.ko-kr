@@ -7,14 +7,17 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 4886673a9b16b8be8d9a0b0d5c7002a91760544e
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: aa0b2b51632cff729449018f9823c38cc26ce612
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976978"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774095"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -40,11 +43,11 @@ Blazor 프레임워크 지원 시나리오:
 
 자세한 내용은 <xref:blazor/index>를 참조하세요.
 
-### <a name="opno-locblazor-server"></a>Blazor 서버
+### <a name="blazor-server"></a>Blazor 서버
 
 Blazor는 UI 업데이트 적용 방법에서 구성 요소 렌더링 논리를 분리합니다. Blazor 서버에서는 ASP.NET Core 앱의 서버에서 Razor 구성 요소를 호스팅할 수 있도록 지원합니다. UI 업데이트는 SignalR 연결을 통해 처리됩니다. Blazor 서버는 ASP.NET Core 3.0에서 지원됩니다.
 
-### <a name="opno-locblazor-webassembly-preview"></a>Blazor WebAssembly(미리 보기)
+### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly(미리 보기)
 
 Blazor 앱은 WebAssembly 기반 .NET 런타임을 사용하여 브라우저에서 직접 실행할 수도 있습니다. Blazor WebAssembly는 미리 보기로 제공되며, ASP.NET Core 3.0에서 지원되지 *않습니다*. Blazor WebAssembly는 ASP.NET Core의 이후 릴리스에서 지원될 예정입니다.
 
@@ -52,7 +55,7 @@ Blazor 앱은 WebAssembly 기반 .NET 런타임을 사용하여 브라우저에�
 
 Blazor 앱은 구성 요소에서 빌드됩니다. 구성 요소는 페이지, 대화 상자 또는 양식과 같은 UI(사용자 인터페이스)의 자체 포함 청크입니다. 구성 요소는 UI 렌더링 논리 및 클라이언트 쪽 이벤트 처리기를 정의하는 일반적인 .NET 클래스입니다. JavaScript 없이 풍부한 대화형 웹앱을 만들 수 있습니다.
 
-Blazor의 구성 요소는 일반적으로 HTML과 C#의 자연 혼합인 Razor 구문를 사용하여 작성됩니다. Razor 구성 요소는 둘 다 Razor를 사용한다는 점에서 Razor Pages 및 MVC 보기와 비슷합니다. 요청-응답 모델 기반의 페이지와 보기와는 달리, 구성 요소는 특별히 UI 컴퍼지션을 처리하는 데 사용됩니다.
+Blazor의 구성 요소는 일반적으로 HTML과 C#의 자연 혼합인 Razor 구문을 사용하여 작성됩니다. Razor 구성 요소는 둘 다 Razor를 사용한다는 점에서 Razor Pages 및 MVC 뷰와 비슷합니다. 요청-응답 모델 기반의 페이지와 보기와는 달리, 구성 요소는 특별히 UI 컴퍼지션을 처리하는 데 사용됩니다.
 
 ## <a name="grpc"></a>gRPC
 
@@ -234,7 +237,7 @@ app.UseSignalR(routes =>
 });
 ```
 
-이전 버전에서는 개발자가 다양한 위치에서 컨트롤러, Razor 페이지 및 허브를 연결해야 했습니다. 명시적 연결로 인해 다음과 같이 거의 동일한 일련의 라우팅 세그먼트가 생성됩니다.
+이전 버전에서는 개발자가 다양한 위치에서 컨트롤러, Razor Pages 및 허브를 연결해야 했습니다. 명시적 연결로 인해 다음과 같이 거의 동일한 일련의 라우팅 세그먼트가 생성됩니다.
 
 ```csharp
 app.UseSignalR(routes =>
@@ -324,7 +327,7 @@ Json.NET을 ASP.NET Core 3.0에 추가하려면 [Newtonsoft.Json 기반 JSON 형
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4는 웹 API 및 SPA에 대한 인증 및 권한 부여를 지원합니다.
 
-ASP.NET Core 3.0에서는 웹 API 권한 부여에 대한 지원을 사용하여 SPA(단일 페이지 앱)의 인증을 제공합니다. 사용자를 인증하고 저장하기 위한 ASP.NET Core ID는 Open ID Connect 구현하기 위해 [IdentityServer4](https://identityserver.io/)와 통합됩니다.
+ASP.NET Core 3.0에서는 웹 API 권한 부여에 대한 지원을 사용하여 SPA(단일 페이지 앱)의 인증을 제공합니다. 사용자를 인증하고 저장하기 위한 ASP.NET Core Identity는 Open ID Connect 구현하기 위해 [IdentityServer4](https://identityserver.io/)와 통합됩니다.
 
 IdentityServer4는 ASP.NET Core 3.0용 OpenID Connect 및 OAuth 2.0 프레임워크입니다. 다음과 같은 보안 기능을 제공합니다.
 
@@ -395,7 +398,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="template-changes"></a>템플릿 변경 사항
 
-웹 UI 템플릿(컨트롤러 및 보기를 사용하는 Razor Pages, MVC)에서 다음이 제거되었습니다.
+웹 UI 템플릿(컨트롤러 및 뷰를 사용하는 Razor Pages, MVC)에서 다음이 제거되었습니다.
 
 * 쿠키 동의 UI가 더 이상 포함되지 않습니다. ASP.NET Core 3.0 템플릿에서 생성한 앱에서 쿠키 동의 기능을 사용하려면 <xref:security/gdpr>을 참조하세요.
 * 스크립트 및 관련 정적 자산은 이제 CDN을 사용하는 대신 로컬 파일로 참조됩니다. 자세한 내용은 [스크립트 및 관련 정적 자산은 현재 환경을 기반으로 CDN을 사용하는 대신 로컬 파일로 참조됩니다(aspnet/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350)를 참조하세요.

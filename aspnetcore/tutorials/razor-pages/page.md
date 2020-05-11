@@ -1,16 +1,22 @@
 ---
-title: ASP.NET Core의 스캐폴드된 Razor 페이지
+title: ASP.NET Core의 스캐폴드된 Razor Pages
 author: rick-anderson
-description: 스캐폴딩을 통해 생성된 Razor 페이지를 설명합니다.
+description: 스캐폴딩을 통해 생성된 Razor Pages를 설명합니다.
 ms.author: riande
 ms.date: 08/17/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: cec4295a2c08c89db0975808583f41c7d09bfc88
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 22afbc729cc73427b3d04bee379534cda38b39bd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648645"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774849"
 ---
 # <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core의 스캐폴드된 Razor 페이지
 
@@ -129,7 +135,7 @@ changing in in the next step.
 
 ### <a name="the-create-page-model"></a>Create 페이지 모델
 
-*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다.
+*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다. 
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
@@ -315,7 +321,7 @@ changing in in the next step.
 
 ### <a name="the-create-page-model"></a>Create 페이지 모델
 
-*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다.
+*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다. 
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 

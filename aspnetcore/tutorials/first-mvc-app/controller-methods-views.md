@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core에서 컨트롤러 메서드, 보기 및 DataAnnotations를 사용하는 방법을 배웁니다.
 ms.author: riande
 ms.date: 12/13/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 87b3cb2f4429157123d30274d1f12cd589c1cc99
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 444c870fcf9e866f0c382e32af174442d11d3af5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80242512"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777581"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 메서드 및 보기
 
@@ -36,7 +42,7 @@ Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 사용하여 Razor 파일에서 HTML 요소를 만들고 렌더링 할 수 있습니다. 위의 코드에서는 `AnchorTagHelper`가 컨트롤러 작업 메서드 및 경로 ID로부터 HTML `href` 특성 값을 동적으로 생성합니다. 선호하는 브라우저에서 **소스 보기**나 개발자 도구를 사용하여 생성된 태그를 확인합니다. 생성된 HTML의 일부는 다음과 같습니다.
+[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다. 위의 코드에서는 `AnchorTagHelper`가 컨트롤러 작업 메서드 및 경로 ID로부터 HTML `href` 특성 값을 동적으로 생성합니다. 선호하는 브라우저에서 **소스 보기**나 개발자 도구를 사용하여 생성된 태그를 확인합니다. 생성된 HTML의 일부는 다음과 같습니다.
 
 ```html
  <td>
@@ -118,7 +124,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
-`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소의 내부에 위치합니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [Form 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다.
+`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소의 내부에 위치합니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [Form 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다. 
 
 ## <a name="processing-the-post-request"></a>POST 요청 처리
 

@@ -8,15 +8,19 @@ ms.custom: mvc
 ms.date: 03/20/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 138057c2ceb9ed01bdf958c01f5cf2275387df23
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989426"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776606"
 ---
-# <a name="build-your-first-opno-locblazor-app"></a>첫 번째 Blazor 앱 빌드
+# <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
@@ -38,7 +42,7 @@ ms.locfileid: "79989426"
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter1.razor)]
 
-   `Counter` 구성 요소의 UI는 HTML을 사용하여 정의됩니다. 동적 렌더링 논리(예: 루프, 조건, 식)는 [Razor](xref:mvc/views/razor)라는 포함된 C# 구문을 사용하여 추가됩니다. HTML 태그 및 C# 렌더링 논리는 빌드 시 구성 요소 클래스로 변환됩니다. 생성되는 .NET 클래스의 이름은 파일 이름과 일치합니다.
+   `Counter` 구성 요소의 UI는 HTML을 사용하여 정의됩니다. 동적 렌더링 논리(예: 루프, 조건, 식)는 [Razor](xref:mvc/views/razor)라고 하는 포함된 C# 구문을 사용하여 추가됩니다. HTML 태그 및 C# 렌더링 논리는 빌드 시 구성 요소 클래스로 변환됩니다. 생성되는 .NET 클래스의 이름은 파일 이름과 일치합니다.
 
    구성 요소 클래스의 멤버는 `@code` 블록에서 정의됩니다. `@code` 블록에서 구성 요소 상태(속성, 필드) 및 메서드가 이벤트 처리 또는 다른 구성 요소 논리 정의를 위해 지정됩니다. 그런 다음, 이러한 멤버를 구성 요소 렌더링 논리의 일부 및 이벤트 처리에 사용합니다.
 
@@ -101,7 +105,7 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 ## <a name="dependency-injection"></a>종속성 주입
 
-### <a name="opno-locblazor-server-experience"></a>Blazor 서버 환경
+### <a name="blazor-server-experience"></a>Blazor 서버 환경
 
 Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Startup.ConfigureServices`에서 [싱글톤](xref:fundamentals/dependency-injection#service-lifetimes)으로 등록됩니다. 해당 서비스의 인스턴스는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)을 통해서 앱 전체에서 사용할 수 있습니다.
 
@@ -117,7 +121,7 @@ Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Sta
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="opno-locblazor-webassembly-experience"></a>Blazor WebAssembly 환경
+### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly 환경
 
 Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져오기 위해서 `HttpClient`가 주입됩니다.
 
@@ -133,7 +137,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 앱에 간단한 할 일 목록을 구현하는 새 구성 요소를 추가합니다.
 
-1. *Pages* 폴더에서 새 `Todo` Razor 구성 요소를 앱에 추가합니다. Visual Studio에서 **Pages** 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 항목** > **Razor 구성 요소**를 선택합니다. 구성 요소의 파일 이름을 *Todo.razor*로 지정합니다. 다른 개발 환경에서는 *Todo.razor*라는 **Pages** 폴더에 빈 파일을 추가합니다.
+1. *Pages* 폴더에서 새 `Todo` Razor 구성 요소를 앱에 추가합니다. Visual Studio에서 **Pages** 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 항목** >  **Razor 구성 요소**를 선택합니다. 구성 요소의 파일 이름을 *Todo.razor*로 지정합니다. 다른 개발 환경에서는 *Todo.razor*라는 **Pages** 폴더에 빈 파일을 추가합니다.
 
 1. 구성 요소에 대한 초기 태그를 제공합니다.
 

@@ -5,13 +5,19 @@ description: Visual Studio를 사용하여 Azure App Service에 ASP.NET Core 앱
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 7fc3644df3dcb957f2537538aaa9506c6b38a480
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 634fb821ef0478dbcf57fdbb991a2e8bbb9402f1
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648495"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777087"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio를 사용하여 Azure에 ASP.NET Core 앱 게시
 

@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: f2cc57638922bd1f6ab036adb2ed37209d14c5b0
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 57f3494fd825b6549c40f56962da2c8076e8fd51
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218768"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767098"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -58,7 +61,7 @@ ms.locfileid: "80218768"
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. 명령 셸에서 **dotnet new** 명령을 통해 `razorclasslib`Razor 클래스 라이브러리[ 템플릿(](/dotnet/core/tools/dotnet-new))을 사용합니다. 다음 예제에서는 이름이 `MyComponentLib1`인 RCL을 만듭니다. 명령을 실행하면 `MyComponentLib1`을 포함하는 폴더가 자동으로 생성됩니다.
+1. 명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 통해 **Razor 클래스 라이브러리** 템플릿(`razorclasslib`)을 사용합니다. 다음 예제에서는 이름이 `MyComponentLib1`인 RCL을 만듭니다. 명령을 실행하면 `MyComponentLib1`을 포함하는 폴더가 자동으로 생성됩니다.
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
@@ -86,7 +89,7 @@ ms.locfileid: "80218768"
 다른 프로젝트의 라이브러리에서 정의된 구성 요소를 사용하려면 다음 방법의 하나를 사용합니다.
 
 * 네임스페이스를 포함하는 전체 형식 이름을 사용합니다.
-* Razor [\@using](xref:mvc/views/razor#using) 지시문을 사용합니다. 개별 구성 요소는 이름으로 추가할 수 있습니다.
+* Razor의 [\@using](xref:mvc/views/razor#using) 지시문을 사용합니다. 개별 구성 요소는 이름으로 추가할 수 있습니다.
 
 다음 예제에서 `MyComponentLib1`은 `SalesReport` 구성 요소가 포함된 구성 요소 라이브러리입니다.
 
@@ -112,11 +115,11 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-최상위 `@using MyComponentLib1`_Import.razor*파일에* 지시문을 포함하여 전체 프로젝트에서 라이브러리 구성 요소를 사용할 수 있게 합니다. 임의 수준의 *_Import.razor* 파일에 지시문을 추가하여 폴더 내의 단일 페이지 또는 페이지 집합에 네임스페이스를 적용합니다.
+최상위 *_Import.razor* 파일에 `@using MyComponentLib1` 지시문을 포함하여 전체 프로젝트에서 라이브러리 구성 요소를 사용할 수 있게 합니다. 임의 수준의 *_Import.razor* 파일에 지시문을 추가하여 폴더 내의 단일 페이지 또는 페이지 집합에 네임스페이스를 적용합니다.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>정적 자산을 사용하여 Razor 구성 요소 클래스 라이브러리 만들기
 
-RCL에는 정적 자산이 포함될 수 있습니다. 정적 자산은 라이브러리를 사용하는 모든 앱에서 제공됩니다. 자세한 내용은 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>을 참조하세요.
+RCL에는 정적 자산이 포함될 수 있습니다. 정적 자산은 라이브러리를 사용하는 모든 앱에서 제공됩니다. 자세한 내용은 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>를 참조하세요.
 
 ## <a name="build-pack-and-ship-to-nuget"></a>빌드, 패키지 및 NuGet에 제공
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core에서 다른 언어와 문화권으로의 콘텐츠 지역화를 위한 서비스 및 미들웨어를 제공하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 11/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 91db83eb8685c7bee5e976f386c2a12c4090b734
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 1111c0c57baf5bfd52b26b553179338100b9ba79
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440820"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776567"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core에서 세계화 및 지역화
 
@@ -154,7 +160,7 @@ ASP.NET Core를 사용하면 두 문화권 값 `SupportedCultures` 및 `Supporte
 | Resources/Controllers/HomeController.fr.resx  | 경로 |
 |    |     |
 
-Razor 보기에서 `@inject IViewLocalizer`를 사용하는 리소스 파일은 유사한 패턴을 따릅니다. 보기에 대한 리소스 파일은 점 이름 지정 또는 경로 이름 지정을 사용하여 이름이 지정될 수 있습니다. Razor 보기 리소스 파일은 연결된 보기 파일의 경로를 모방합니다. `ResourcesPath`를 "리소스"로 설정했다고 가정하면, *Views/Home/About.cshtml* 보기와 연결된 프랑스어 리소스 파일은 다음 중 하나가 될 수 있습니다.
+Razor 뷰에서 `@inject IViewLocalizer`를 사용하는 리소스 파일은 유사한 패턴을 따릅니다. 보기에 대한 리소스 파일은 점 이름 지정 또는 경로 이름 지정을 사용하여 이름이 지정될 수 있습니다. Razor 뷰 리소스 파일은 연결된 보기 파일의 경로를 모방합니다. `ResourcesPath`를 "리소스"로 설정했다고 가정하면, *Views/Home/About.cshtml* 보기와 연결된 프랑스어 리소스 파일은 다음 중 하나가 될 수 있습니다.
 
 * Resources/Views/Home/About.fr.resx
 

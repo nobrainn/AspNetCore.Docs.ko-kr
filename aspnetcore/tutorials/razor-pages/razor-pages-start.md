@@ -1,16 +1,22 @@
 ---
-title: '자습서: ASP.NET Core에서 Razor 페이지 시작'
+title: '자습서: ASP.NET Core에서 Razor Pages 시작'
 author: rick-anderson
 description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용하는 방법을 보여 줍니다. 모델을 만들고, Razor Pages에 대한 코드를 생성하고, Entity Framework Core 및 SQL Server를 데이터 액세스에 사용하고, 검색 기능을 추가하고, 입력 유효성 검사를 추가하고, 마이그레이션을 사용하여 모델을 업데이트하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 6e1d58ccd83f7d7c1083dc2bf9ce7476650812a1
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 8ed12b1778673962fe0b174e005bd6d8a7f54168
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646905"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774875"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
 
@@ -323,7 +329,7 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 
 ### <a name="pages-folder"></a>페이지 폴더
 
-Razor 페이지 및 지원 파일이 들어 있습니다. 각 Razor 페이지는 파일 쌍입니다.
+Razor Pages 및 지원 파일이 들어 있습니다. 각 Razor 페이지는 파일 쌍입니다.
 
 * Razor 구문을 사용하는 C# 코드로 HTML 태그를 포함하는 *.cshtml* 파일.
 * 페이지 이벤트를 처리하는 C# 코드가 포함된 *.cshtml.cs* 파일.

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206127"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850515"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -348,7 +354,7 @@ URL 일치는 구성 가능한 일련의 단계로 작동합니다. 각 단계�
 * 리터럴 텍스트가 있는 세그먼트가 매개 변수 세그먼트보다 더 구체적인 것으로 간주됩니다.
 * 제약 조건이 있는 매개 변수 세그먼트가 제약 조건이 없는 매개 변수 세그먼트보다 더 구체적인 것으로 간주됩니다.
 * 복잡한 세그먼트는 제약 조건이 있는 매개 변수 세그먼트만큼 구체적인 것으로 간주됩니다.
-* 범용 매개 변수가 가장 덜 구체적입니다.
+* Catch-all 매개 변수가 가장 덜 구체적입니다. Catch-all 경로에 관한 중요한 내용은 [경로 템플릿 참조](#rtr)에서 **catch-all**을 참조하세요.
 
 정확한 값 참조는 [source code on GitHub](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189)(GitHub의 소스 코드)을 참조하세요.
 
@@ -415,6 +421,8 @@ URL 생성은 다음과 같습니다.
 * **범용** 매개 변수라고 합니다. 예: `blog/{**slug}`
   * `/blog`로 시작하고 그 다음에 임의의 값이 오는 모든 URI를 찾습니다.
   * `/blog` 다음의 값은 [동적 필드](https://developer.mozilla.org/docs/Glossary/Slug) 경로 값에 할당됩니다.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 범용 매개 변수는 빈 문자열과 일치시킬 수도 있습니다.
 
@@ -573,6 +581,8 @@ ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase 
 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 인터페이스를 구현하여 사용자 지정 경로 제약 조건을 만들 수 있습니다. `IRouteConstraint` 인터페이스에는 제약 조건이 충족되는 경우 `true`를 반환하고 그렇지 않은 경우 `false`를 반환하는 <xref:System.Web.Routing.IRouteConstraint.Match*>가 포함됩니다.
 
 사용자 지정 경로 제약 조건은 거의 필요하지 않습니다. 사용자 지정 경로 제약 조건을 구현하기 전에 모델 바인딩과 같은 다른 방식을 고려해 보세요.
+
+ASP.NET Core [Constraints](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) 폴더는 제약 조건을 만드는 좋은 예제를 제공합니다. 예를 들어 [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18)입니다.
 
 사용자 지정 `IRouteConstraint`를 사용하려면 서비스 컨테이너에 있는 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>에 경로 제약 조건 형식을 등록해야 합니다. `ConstraintMap`은 경로 제약 조건 키를 해당 제약 조건의 유효성을 검사하는 `IRouteConstraint` 구현과 매핑하는 사전입니다. `Startup.ConfigureServices`에서 [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 호출의 일부로 또는 `services.Configure<RouteOptions>`를 사용하여 직접 <xref:Microsoft.AspNetCore.Routing.RouteOptions>를 구성하여 앱의 `ConstraintMap`을 수정할 수 있습니다. 예를 들어:
 

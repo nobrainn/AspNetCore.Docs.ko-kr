@@ -5,13 +5,19 @@ description: ASP.NET Core 및 Azure를 사용하는 DevOps의 첫 번째 단계�
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
-ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
+ms.openlocfilehash: 811b6d047e344fa98ce14f436d3cd8f03c786aff
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81228129"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767033"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service에 앱 배포
 

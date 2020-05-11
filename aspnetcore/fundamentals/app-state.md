@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558899"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774810"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core의 세션 및 상태 관리
 
@@ -229,7 +233,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 ## <a name="query-strings"></a>쿼리 문자열
 
-제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 이메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
+제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 전자 메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
 
 의도하지 않은 공유 외에도, 쿼리 문자열에 데이터를 포함하면 앱이 [CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))(교차 사이트 요청 위조) 공격에 노출될 수 있습니다. 유지된 모든 세션 상태를 CSRF 공격으로부터 보호해야 합니다. 자세한 내용은 [교차 사이트 요청 위조(XSRF/CSRF) 공격 방지](xref:security/anti-request-forgery)를 참조하세요.
 
@@ -436,7 +440,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core는 Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 또는 컨트롤러 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>를 표시합니다. 이 속성은 다른 요청에서 읽혀질 때까지만 데이터를 저장합니다. [Keep(문자열)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 및 [Peek(문자열)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) 메서드를 사용하면 요청 끝에서 삭제하지 않고 데이터를 검사할 수 있습니다. [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)은 사전의 모든 항목을 보존하도록 표시합니다. `TempData`는 두 개 이상의 요청에 데이터가 필요한 리디렉션에 특히 유용합니다. `TempData`는 `TempData` 공급자가 쿠키 또는 세션 상태를 사용하여 구현합니다.
+ASP.NET Core는 Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 또는 컨트롤러 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>를 공개합니다. 이 속성은 다른 요청에서 읽혀질 때까지만 데이터를 저장합니다. [Keep(문자열)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) 및 [Peek(문자열)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) 메서드를 사용하면 요청 끝에서 삭제하지 않고 데이터를 검사할 수 있습니다. [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)은 사전의 모든 항목을 보존하도록 표시합니다. `TempData`는 두 개 이상의 요청에 데이터가 필요한 리디렉션에 특히 유용합니다. `TempData`는 `TempData` 공급자가 쿠키 또는 세션 상태를 사용하여 구현합니다.
 
 ## <a name="tempdata-samples"></a>TempData 샘플
 
@@ -492,7 +496,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 ## <a name="query-strings"></a>쿼리 문자열
 
-제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 이메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
+제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 전자 메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
 
 의도하지 않은 공유 외에도 쿼리 문자열에 데이터를 포함하면 사용자가 인증되는 동안 악성 사이트를 방문하도록 유도할 수 있는 [CSRF(교차 사이트 요청 위조)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 공격에 대한 기회를 만들 수 있습니다. 공격자는 앱에서 사용자 데이터를 도용하거나 사용자를 대신하여 악의적인 작업을 수행할 수 있습니다. 유지된 모든 앱 또는 세션 상태를 CSRF 공격으로부터 보호해야 합니다. 자세한 내용은 [교차 사이트 요청 위조(XSRF/CSRF) 공격 방지](xref:security/anti-request-forgery)를 참조하세요.
 

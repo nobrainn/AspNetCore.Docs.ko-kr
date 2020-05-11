@@ -5,26 +5,32 @@ description: ASP.NET Core 2.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b1fc486633ab7c7d7bee4f8981a978747b2890da
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650859"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775819"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
 이 문서에서는 ASP.NET Core 2.0의 가장 큰 변경 내용을 중점적으로 설명하고 관련 문서의 링크를 제공합니다.
 
-## <a name="razor-pages"></a>Razor 페이지
+## <a name="razor-pages"></a>Razor Pages
 
-Razor 페이지는 더 쉽고 더 생산적으로 코딩 페이지에 초점을 맞춘 시나리오를 만드는 ASP.NET Core MVC의 새로운 기능입니다.
+Razor Pages는 더 쉽고 더 생산적으로 코딩 페이지에 초점을 맞춘 시나리오를 만드는 ASP.NET Core MVC의 새로운 기능입니다.
 
 자세한 내용은 소개 및 자습서를 참조하세요.
 
-* [Razor 페이지 소개](xref:razor-pages/index)
-* [Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start)
+* [Razor Pages 소개](xref:razor-pages/index)
+* [Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start)
 
 ## <a name="aspnet-core-metapackage"></a>ASP.NET Core 메타패키지
 
@@ -64,15 +70,15 @@ ASP.NET Core 2.0에서 로깅은 기본적으로 DI(종속성 주입) 시스템�
 
 계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/3054)(GitHub 문제)를 참조하세요.
 
-## <a name="identity-update"></a>ID 업데이트
+## <a name="identity-update"></a>Identity 업데이트
 
-ASP.NET Core 2.0에서는 ID를 사용하여 보안 Web API를 더 쉽게 빌드할 수 있습니다. [MSAL(Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client)을 사용하여 Web API에 액세스하기 위해 액세스 토큰을 얻을 수 있습니다.
+ASP.NET Core 2.0에서는 Identity를 사용하여 보안 Web API를 더 쉽게 빌드할 수 있습니다. [MSAL(Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client)을 사용하여 Web API에 액세스하기 위해 액세스 토큰을 얻을 수 있습니다.
 
 2\.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
 * [ASP.NET Core의 계정 확인 및 암호 복구](xref:security/authentication/accconfirm)
 * [ASP.NET Core에서 인증자 앱에 QR 코드 생성 사용](xref:security/authentication/identity-enable-qrcodes)
-* [ASP.NET Core 2.0으로 인증 및 ID 마이그레이션](xref:migration/1x-to-2x/identity-2x)
+* [ASP.NET Core 2.0으로 인증 및 Identity 마이그레이션](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="spa-templates"></a>SPA 템플릿
 
@@ -128,7 +134,7 @@ Razor 뷰 미리 컴파일이 기본적으로 게시 중에 사용하도록 설�
 
 자세한 내용은 [ASP.NET Core에서 Razor 뷰 컴파일 및 미리 컴파일](xref:mvc/views/view-compilation)을 참조하세요.
 
-## <a name="razor-support-for-c-71"></a>C# 7.1에 대한 Razor 지원
+## <a name="razor-support-for-c-71"></a>C# 7.1의 Razor 지원
 
 Razor 뷰 엔진이 새 Roslyn 컴파일러를 사용하도록 업데이트되었습니다. 여기에는 기본 식, 유추된 튜플 이름 및 제네릭 패턴 일치 같은 C# 7.1 기능에 대한 지원이 포함됩니다. 프로젝트에서 C# 7.1을 사용하려면 프로젝트 파일에 다음 속성을 추가하고 나서 솔루션을 다시 로드합니다.
 
@@ -152,7 +158,7 @@ C# 7.1 기능 상태에 대한 자세한 내용은 [the Roslyn GitHub repository
 ASP.NET Core 1.x 애플리케이션을 ASP.NET Core 2.0으로 마이그레이션하는 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
 * [ASP.NET Core 1.x에서 ASP.NET Core 2.0으로 마이그레이션](xref:migration/1x-to-2x/index)
-* [ASP.NET Core 2.0으로 인증 및 ID 마이그레이션](xref:migration/1x-to-2x/identity-2x)
+* [ASP.NET Core 2.0으로 인증 및 Identity 마이그레이션](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="additional-information"></a>추가 정보
 

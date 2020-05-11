@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
-ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
+ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81539663"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772493"
 ---
-# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
+# <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
@@ -60,7 +63,7 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 표시하기
 
 ## <a name="localization"></a>지역화
 
-### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)를 사용하여 문화권을 설정합니다.
 
@@ -70,7 +73,7 @@ Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla
 
 Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요. 문화권 선택기가 포함된 Blazor WebAssembly 샘플 앱을 살펴보려면 [LocSample](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.
 
-### <a name="opno-locblazor-server"></a>Blazor 서버
+### <a name="blazor-server"></a>Blazor 서버
 
 Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용하여 지역화됩니다. 미들웨어는 앱에서 리소스를 요청하는 사용자에게 적절한 문화권을 선택합니다.
 

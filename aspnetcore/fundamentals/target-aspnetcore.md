@@ -7,13 +7,17 @@ ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 5374d7eec4334223a4bba7ee26cb6e2f208ed20b
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977199"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776489"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>클래스 라이브러리에서 ASP.NET Core API 사용
 

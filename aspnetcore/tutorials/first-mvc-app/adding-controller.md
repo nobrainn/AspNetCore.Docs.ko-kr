@@ -4,13 +4,19 @@ author: rick-anderson
 description: 간단한 ASP.NET Core MVC 앱에 컨트롤러를 추가하는 방법을 배웁니다.
 ms.author: riande
 ms.date: 08/05/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: fb670902b0dafa7dce2b3372e550095387844936
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ce6248854c738733f75c40ed8ec6100f35ab4971
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650775"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776313"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -241,7 +247,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-이러한 예제에서 컨트롤러는 MVC의 "VC" 부분을 사용했습니다. 즉, 보기 및 컨트롤러 작업입니다. 컨트롤러가 HTML을 직접 반환하고 있습니다. 코드 및 유지 관리가 매우 복잡해지므로 일반적으로 컨트롤러에서 직접 HTML을 반환하지 않습니다. 대신 일반적으로 별도의 Razor 보기 템플릿 파일을 사용하여 HTML 응답을 생성합니다. 다음 자습서에서는 해당 작업을 수행합니다.
+이러한 예제에서 컨트롤러는 MVC의 "VC" 부분을 사용했습니다. 즉, 보기 및 컨트롤러 작업입니다. 컨트롤러가 HTML을 직접 반환하고 있습니다. 코드 및 유지 관리가 매우 복잡해지므로 일반적으로 컨트롤러에서 직접 HTML을 반환하지 않습니다. 대신 일반적으로 별도의 Razor 뷰 템플릿 파일을 사용하여 HTML 응답을 생성합니다. 다음 자습서에서는 해당 작업을 수행합니다.
 
 > [!div class="step-by-step"]
 > [이전](start-mvc.md)

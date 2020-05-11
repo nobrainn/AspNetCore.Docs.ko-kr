@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1f68bd5347ba1f67e56b7a2fe8914ffdaef8010c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650973"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774082"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1의 새로운 기능
 
@@ -37,17 +41,17 @@ SignalR은 ASP.NET Core 2.1에 대해 다시 작성되었습니다. ASP.NET Core
 ASP.NET Core 2.1을 통해 Razor 기반 UI를 빌드하고 라이브러리에 포함하고 여러 프로젝트 간에 공유합니다. 새로운 Razor SDK를 사용하면 NuGet 패키지에 포함될 수 있는 클래스 라이브러리 프로젝트에 Razor 파일을 빌드할 수 있습니다. 라이브러리의 보기 및 페이지는 자동으로 검색되고 앱에서 재정의할 수 있습니다. Razor 컴파일을 빌드에 통합하여 다음을 수행합니다.
 
 * 앱 시작 시간이 훨씬 더 빠릅니다.
-* 런타임 시 Razor 뷰 및 페이지에 대한 빠른 업데이트는 반복적인 개발 워크플로의 일부분으로 사용할 수 있습니다.
+* 런타임 시 Razor 뷰 및 Pages에 대한 빠른 업데이트는 반복 개발 워크플로의 일부로 사용할 수 있습니다.
 
 자세한 내용은 [Razor 클래스 라이브러리 프로젝트를 사용하여 재사용 가능한 UI 만들기](xref:razor-pages/ui-class)를 참조하세요.
 
-## <a name="identity-ui-library--scaffolding"></a>ID UI 라이브러리 및 스캐폴드
+## <a name="identity-ui-library--scaffolding"></a>Identity UI 라이브러리 및 스캐폴딩
 
-ASP.NET Core 2.1에서는 [ASP.NET Core ID](xref:security/authentication/identity)를 [Razor 클래스 라이브러리](xref:razor-pages/ui-class)로 제공합니다. ID가 포함되는 앱은 선택적으로 ID RCL(Razor 클래스 라이브러리)에 포함된 소스 코드를 추가하기 위헤 새 ID 스캐폴더를 적용할 수 있습니다. 코드를 수정하고 동작을 변경할 수 있도록 소스 코드를 생성할 수 있습니다. 예를 들어 등록에 사용된 코드를 생성하도록 스캐폴더를 지정할 수 있습니다. 생성된 코드는 ID RCL의 동일한 코드보다 우선합니다.
+ASP.NET Core 2.1에서는 [ASP.NET Core Identity](xref:security/authentication/identity)[를 Razor 클래스 라이브러리](xref:razor-pages/ui-class)로 제공합니다. Identity가 포함되는 앱은 선택적으로 Identity RCL(Razor 클래스 라이브러리)에 포함된 소스 코드를 추가하기 위해 새 Identity 스캐폴더를 적용할 수 있습니다. 코드를 수정하고 동작을 변경할 수 있도록 소스 코드를 생성할 수 있습니다. 예를 들어 등록에 사용된 코드를 생성하도록 스캐폴더를 지정할 수 있습니다. 생성된 코드는 Identity RCL의 동일한 코드보다 우선합니다.
 
-인증을 포함하지 **않는** 앱은 RCL ID 패키지를 추가하기 위해 ID 스캐폴더를 적용할 수 있습니다. 선택한 ID 코드의 옵션이 생성되어야 합니다.
+인증을 포함하지 **않는** 앱은 RCL Identity 패키지를 추가하기 위해 Identity 스캐폴더를 적용할 수 있습니다. 선택한 Identity 코드의 옵션이 생성되어야 합니다.
 
-자세한 내용은 [ASP.NET Core 프로젝트에서 ID 스캐폴드](xref:security/authentication/scaffold-identity)를 참조하세요.
+자세한 내용은 [ASP.NET Core 프로젝트에서 Identity 스캐폴드](xref:security/authentication/scaffold-identity)를 참조하세요.
 
 ## <a name="https"></a>HTTPS
 
@@ -84,8 +88,8 @@ ASP.NET Core에서는 [EU GDPR(일반 데이터 보호 규정)](https://www.eugd
 테스트 생성 및 실행을 간소화하는 새 패키지가 도입되었습니다. [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) 패키지는 다음과 같은 작업을 처리합니다.
 
 * 종속성 파일( *\*.deps*)을 테스트된 앱에서 테스트 프로젝트의 *bin* 폴더로 복사합니다.
-* 테스트를 실행하면 고정 파일 및 페이지/뷰를 찾을 수 있도록 루트 콘텐츠를 테스트된 앱의 프로젝트 루트로 설정합니다.
-* [TestServer](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)를 사용하여 테스트된 앱의 부트스트랩을 간소화하기 위해 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 클래스를 제공합니다.
+* 테스트를 실행하면 고정 파일 및 페이지/보기를 찾을 수 있도록 루트 콘텐츠를 테스트된 앱의 프로젝트 루트로 설정합니다.
+* [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver)를 사용하여 테스트된 앱의 부트스트랩을 간소화하기 위해 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 제공합니다.
 
 다음 테스트는 [xUnit](https://xunit.github.io/)를 사용하여 성공 상태 코드 및 올바른 콘텐츠 형식 헤더의 인덱스 페이지가 로드되는지 확인합니다.
 
@@ -124,7 +128,7 @@ ASP.NET Core 2.1은 쉽게 명확하고 설명이 포함된 웹 API를 빌드할
 
 ## <a name="ihttpclientfactory"></a>IHttpClientFactory
 
-ASP.NET Core 2.1에는 앱에서 `IHttpClientFactory`의 인스턴스를 쉽게 구성하고 사용할 수 있는 새로운 `HttpClient` 서비스가 포함됩니다. `HttpClient`에는 나가는 HTTP 요청을 위해 함께 연결될 수 있는 처리기 위임이라는 개념이 이미 있습니다. 팩터리는 다음과 같습니다.
+ASP.NET Core 2.1에는 앱에서 `HttpClient`의 인스턴스를 쉽게 구성하고 사용할 수 있는 새로운 `IHttpClientFactory` 서비스가 포함됩니다. `HttpClient`에는 나가는 HTTP 요청을 위해 함께 연결될 수 있는 처리기 위임이라는 개념이 이미 있습니다. 팩터리는 다음과 같습니다.
 
 * 보다 직관적인 명명 클라이언트별 `HttpClient` 인스턴스를 등록합니다.
 * Polly 정책을 다시 시도, CircuitBreakers 등에 사용할 수 있는 Polly 처리기를 구현합니다.
@@ -147,7 +151,7 @@ ASP.NET Core 2.1 릴리스에서 Kestrel의 기본 전송은 더 이상 Libuv에
 
 Angular 템플릿은 Angular CLI에 기반하고 React 템플릿은 create-react-app에 기반합니다.
 
-자세한 내용은 다음을 참조하십시오.
+자세한 내용은 다음을 참조하세요.
 
 * <xref:spa/angular>
 * <xref:spa/react>
@@ -169,7 +173,7 @@ Angular 템플릿은 Angular CLI에 기반하고 React 템플릿은 create-react
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 메서드를 사용하면 ASP.NET Core MVC 2.1 이상에서 도입된 주요 동작 변경 내용을 앱이 옵트인(opt-in) 또는 옵트아웃(opt-out)할 수 있습니다.
 
-자세한 내용은 <xref:mvc/compatibility-version>을 참조하세요.
+자세한 내용은 <xref:mvc/compatibility-version>를 참조하세요.
 
 ## <a name="migrate-from-20-to-21"></a>2\.0에서 2.1로 마이그레이션
 

@@ -5,17 +5,20 @@ description: Blazor WebAssembly를 활용해 ASP.NET Core SignalR을 사용하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 78c5fbb8b91b934bcb34525672e9e26b6a95290e
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111151"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773790"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
 
@@ -61,7 +64,7 @@ ms.locfileid: "82111151"
 Visual Studio 버전 16.6 미리 보기 2 이상을 사용하지 않는 경우에는 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치하세요. [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다. 명령 셸에서 다음 명령을 실행합니다.
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
 ```
 
 선택한 도구의 지침을 따르세요.

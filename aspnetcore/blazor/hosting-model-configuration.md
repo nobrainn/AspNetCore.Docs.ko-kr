@@ -5,17 +5,20 @@ description: Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/25/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159621"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772076"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor 호스팅 모델 구성
 
@@ -100,12 +103,12 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 ### <a name="configuration"></a>Configuration
 
-Blazor WebAssembly는 다음 구성을 지원합니다.
+Blazor WebAssembly는 다음에서 구성을 로드합니다.
 
-* 기본적으로 앱 설정 파일의 [파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider):
+* 기본적인 앱 설정 파일:
   * *wwwroot/appsettings.json*
   * *wwwroot/appsettings.{ENVIRONMENT}.json*
-* 앱에 등록된 다른 [구성 공급자](xref:fundamentals/configuration/index).
+* 앱에 등록된 다른 [구성 공급자](xref:fundamentals/configuration/index). 일부 공급자는 Blazor WebAssembly 앱에 적합하지 않습니다. Blazor WebAssembly를 지원하는 공급자에 관한 설명은 [Blazor WASM의 구성 공급자 설명](https://github.com/dotnet/AspNetCore.Docs/issues/18134)(dotnet/AspNetCore.Docs #18134)에서 추적됩니다.
 
 > [!WARNING]
 > Blazor WebAssembly 앱의 구성은 사용자에게 표시됩니다. **구성에 앱 비밀이나 자격 증명을 저장하지 마세요.**
@@ -136,12 +139,12 @@ Blazor WebAssembly는 다음 구성을 지원합니다.
 
 #### <a name="provider-configuration"></a>공급자 구성
 
-다음 예제에서는 <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> 및 [파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider)를 사용하여 추가 구성을 제공합니다.
+다음 예제에서는 <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource>를 사용하여 추가 구성을 제공합니다.
 
 `Program.Main`:
 
 ```csharp
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 
 ...
 
@@ -159,9 +162,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 
 ...
 
-builder.Configuration
-    .Add(memoryConfig)
-    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+builder.Configuration.Add(memoryConfig);
 ```
 
 <xref:Microsoft.Extensions.Configuration.IConfiguration> 인스턴스를 구성 요소에 삽입하여 구성 데이터에 액세스합니다.
@@ -176,10 +177,10 @@ builder.Configuration
 <h2>Wheels</h2>
 
 <ul>
-    <li>Count: @Configuration["wheels:count"]</p>
-    <li>Brand: @Configuration["wheels:brand"]</p>
-    <li>Type: @Configuration["wheels:brand:type"]</p>
-    <li>Year: @Configuration["wheels:year"]</p>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
 </ul>
 
 @code {
@@ -187,6 +188,36 @@ builder.Configuration
     
     ...
 }
+```
+
+*wwwroot* 폴더에서 구성으로 다른 구성 파일을 읽으려면 `HttpClient`를 사용하여 파일 콘텐츠를 가져옵니다. 이 방법을 사용하는 경우 다음 예제와 같이 기존 `HttpClient` 서비스 등록은 생성된 로컬 클라이언트를 사용하여 파일을 읽을 수 있습니다.
+
+*wwwroot/cars.json*:
+
+```json
+{
+    "size": "tiny"
+}
+```
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var client = new HttpClient()
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+};
+
+builder.Services.AddTransient(sp => client);
+
+using var response = await client.GetAsync("cars.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+
+builder.Configuration.AddJsonStream(stream);
 ```
 
 #### <a name="authentication-configuration"></a>인증 구성
