@@ -5,19 +5,25 @@ description: dotnet aspnet codegenerator 명령은 ASP.NET Core 프로젝트를 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649857"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766474"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`dotnet aspnet-codegenerator` - ASP.NET Core 스캐폴딩 엔진을 실행합니다. `dotnet aspnet-codegenerator`는 명령줄에서 스캐폴딩하는 경우에만 필요하며, Visual Studio에서 스캐폴딩을 사용하는 경우에는 필요하지 않습니다.
+`dotnet aspnet-codegenerator`는 ASP.NET Core 스캐폴딩 엔진을 실행합니다. `dotnet aspnet-codegenerator`는 명령줄에서 스캐폴딩하는 경우에만 필요하며, Visual Studio에서 스캐폴딩을 사용하는 경우에는 필요하지 않습니다.
 
 이 문서는 [.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) 이상에 적용됩니다.
 
@@ -52,13 +58,13 @@ dotnet aspnet-codegenerator [-h|--help]
 
 실행할 코드 생성기입니다. 다음 생성기를 사용할 수 있습니다.
 
-| Generator | 작업 |
+| 생성기 | 연산 |
 | ----------------- | ------------ | 
 | area      | [영역 스캐폴딩](/aspnet/core/mvc/controllers/areas) |
-  컨트롤러| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  ID  | [Identity 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
+  Controller| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
+  identity  | [Identity 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Razor 페이지 스캐폴딩](/aspnet/core/tutorials/razor-pages/model) |
-  보기      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
+  view      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>옵션
 
@@ -72,7 +78,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 `-tfm|--target-framework`
 
-사용할 대상 [프레임워크](/dotnet/standard/frameworks)입니다. 예를 들어 `net46`과 같은 형식입니다.
+사용할 대상 [프레임워크](/dotnet/standard/frameworks)입니다. 예: `net46`.
 
 `-b|--build-base-path`
 
@@ -84,7 +90,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 `--no-build`
 
-실행하기 전에 프로젝트를 빌드하지 않습니다. 또한 `--no-restore` 플래그를 암시적으로 설정합니다.
+실행하기 전에 프로젝트를 빌드하지 않습니다. 또한 암시적으로 `--no-restore` 플래그를 설정합니다.
 
 `-p|--project <PATH>`
 
@@ -94,11 +100,11 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 다음 섹션에서는 지원되는 생성기에 사용 가능한 옵션에서 설명합니다.
 
-* 영역
-* 컨트롤러
-* ID  
+* Area
+* Controller
+* Identity  
 * Razorpage
-* 보기
+* View
 
 <a name="area"></a>
 
@@ -110,12 +116,12 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 앞의 명령은 다음 폴더를 생성합니다.
 
-* *영역*
+* *Areas*
   * *AreaNameToGenerate*
     * *컨트롤러*
     * *Data*
     * *Models*
-    * *뷰*
+    * *Views*
 
 <a name="ctl"></a>
 
@@ -141,7 +147,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 dotnet aspnet-codegenerator controller -h
 ```
 
-[의 예제는 ](/aspnet/core/tutorials/razor-pages/model)동영상 모델 스캐폴드`dotnet aspnet-codegenerator controller`를 참조하세요.
+`dotnet aspnet-codegenerator controller`의 예제는 [동영상 모델 스캐폴드](/aspnet/core/tutorials/razor-pages/model)를 참조하세요.
 
 ### <a name="razorpage"></a>Razorpage
 
@@ -188,8 +194,8 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-[의 예제는 ](/aspnet/core/tutorials/razor-pages/model)동영상 모델 스캐폴드`dotnet aspnet-codegenerator razorpage`를 참조하세요.
+`dotnet aspnet-codegenerator razorpage`의 예제는 [동영상 모델 스캐폴드](/aspnet/core/tutorials/razor-pages/model)를 참조하세요.
 
-### <a name="identity"></a>ID
+### Identity
 
-[Identity 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) 참조
+[스캐폴드Identity](/aspnet/core/security/authentication/scaffold-identity)를 참조하세요.

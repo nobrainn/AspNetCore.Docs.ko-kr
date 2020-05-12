@@ -6,20 +6,24 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 2dff64f1f2d67b8a1e676acf6cf131b684099750
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ab103adc20c5332f71d5f6e3348d0b14c69fce34
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405879"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774706"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
 작성자: [James Newton-King](https://twitter.com/jamesnk)
 
-이 문서에서는 [gRPC 서비스](https://grpc.io/docs/guides/)와 HTTP API (ASP.NET Core [web API](xref:web-api/index)포함)를 비교하는 방법을 설명합니다. 앱에 대한 API를 제공하는 데 사용되는 기술은 중요한 선택 이며 gRPC는 HTTP API와 비교해서 고유한 이점을 제공합니다. 이 문서에서는 gRPC의 장점과 단점을 설명하 고 다른 기술에서 gRPC를 사용하는 시나리오를 권장합니다.
+이 문서에서는 [gRPC 서비스](https://grpc.io/docs/guides/)와 JSON을 사용한 HTTP API(ASP.NET Core [Web API](xref:web-api/index) 포함)를 비교하는 방법을 설명합니다. 앱에 대한 API를 제공하는 데 사용되는 기술은 중요한 선택 이며 gRPC는 HTTP API와 비교해서 고유한 이점을 제공합니다. 이 문서에서는 gRPC의 장점과 단점을 설명하 고 다른 기술에서 gRPC를 사용하는 시나리오를 권장합니다.
 
 ## <a name="high-level-comparison"></a>개괄적인 비교
 
@@ -46,6 +50,8 @@ gRPC는 HTTP 1.x에 비해 상당한 성능 이점을 제공하는, HTTP의 주�
 
 * 이진 프레이밍 및 압축. HTTP/2 프로토콜은 간단하며, 보내고 받을 때 모두 효율적입니다.
 * 단일 TCP 연결보다 여러 HTTP/2 호출의 멀티플렉싱. 멀티플렉싱은 [HOL(Head of Line) 차단](https://en.wikipedia.org/wiki/Head-of-line_blocking)을 제거합니다.
+
+HTTP/2는 gRPC에만 국한되지 않습니다. JSON을 사용한 HTTP API를 포함하여 다양한 요청 형식에서 HTTP/2를 사용하고 성능 개선을 활용할 수 있습니다.
 
 ### <a name="code-generation"></a>코드 생성
 

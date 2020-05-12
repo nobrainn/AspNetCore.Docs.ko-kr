@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: a7280b59578ee1d96edeeccf9c9df0b0e4eb4eb8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1fb81d5a54cf332ca473af8fbe1841813a127be7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649905"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775884"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>ASP.NET 4.x와 ASP.NET Core 중에서 선택
 
@@ -36,7 +40,7 @@ ASP.NET 4.x는 Windows에서 엔터프라이즈급 서버 기반 웹앱을 빌�
 | ASP.NET Core | ASP.NET 4.x |
 |---|---|
 |Windows, macOS 또는 Linux용 빌드|Windows용 빌드|
-|[Razor 페이지](xref:razor-pages/index)는 ASP.NET Core 2.x에서 웹 UI를 만드는 좋은 방법입니다. [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api) 및 [SignalR](xref:signalr/introduction)도 참조하세요.|[Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [웹후크](/aspnet/webhooks/) 또는 [웹 페이지](/aspnet/web-pages) 사용|
+|[Razor Pages](xref:razor-pages/index)는 ASP.NET Core 2.x에서 웹 UI를 만드는 좋은 방법입니다. [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api) 및 [SignalR](xref:signalr/introduction)도 참조하세요.|[Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [웹후크](/aspnet/webhooks/) 또는 [웹 페이지](/aspnet/web-pages) 사용|
 |컴퓨터당 여러 버전|컴퓨터당 하나의 버전|
 |C# 또는 F#을 사용하여 [Visual Studio](https://visualstudio.microsoft.com/vs/), [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/), 또는 [Visual Studio Code](https://code.visualstudio.com/)에서 개방|C#, VB 또는 F#을 사용하여 [Visual Studio](https://visualstudio.microsoft.com/vs/)에서 개발|
 |ASP.NET 4.x보다 고성능|성능 양호|

@@ -5,17 +5,20 @@ description: 선택한 도구로 Blazor 앱을 빌드하여 Blazor를 시작합�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 2f10b00adce31c020d46d107c087159c17341beb
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 052a787fbe6411dbaa953f10fcd982dfbd41f1af
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111073"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769457"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작
 
@@ -33,10 +36,10 @@ Blazor를 시작하려면 아래에서 원하는 도구의 지침을 따르세�
 
    두 가지 Blazor 호스팅 모델인 ‘Blazor WebAssembly’와 ‘Blazor 서버’에 대한 자세한 내용은 <xref:blazor/hosting-models> 문서를 참조하세요.  
 
-1. 다음 명령을 실행하여 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 미리 보기 템플릿을 설치합니다.
+1. 다음 명령을 실행하여 Blazor WebAssembly 미리 보기 템플릿을 설치합니다.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
 1. 새 프로젝트를 만듭니다.
@@ -56,11 +59,13 @@ Blazor를 시작하려면 아래에서 원하는 도구의 지침을 따르세�
 1. 필요에 따라 다음 명령을 실행하여 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 미리 보기 템플릿을 설치합니다.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
+   
+   두 가지 Blazor 호스팅 모델인 ‘Blazor WebAssembly’와 ‘Blazor 서버’에 대한 자세한 내용은 <xref:blazor/hosting-models> 문서를 참조하세요.  
 
    > [!NOTE]
-   > 3\.2 미리 보기 4 Blazor WebAssembly 템플릿을 사용하려면 [.NET Core SDK 버전 3.1.201 이상](https://dotnet.microsoft.com/download/dotnet-core/3.1)이 **필요**합니다. 명령 셸에서 `dotnet --version`을 실행하여 설치된 .NET Core SDK 버전을 확인합니다.
+   > 3\.2 미리 보기 Blazor WebAssembly 템플릿을 사용하려면 [.NET Core SDK 버전 3.1.201 이상](https://dotnet.microsoft.com/download/dotnet-core/3.1)이 **필요**합니다. 명령 셸에서 `dotnet --version`을 실행하여 설치된 .NET Core SDK 버전을 확인합니다.
 
 1. [Visual Studio Code](https://code.visualstudio.com/)를 설치합니다.
 
@@ -78,8 +83,6 @@ Blazor를 시작하려면 아래에서 원하는 도구의 지침을 따르세�
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   두 가지 Blazor 호스팅 모델인 ‘Blazor 서버’와 *Blazor WebAssembly*에 대한 자세한 내용은 <xref:blazor/hosting-models>를 참조하세요. 
-
 1. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
 1. IDE에서 프로젝트를 빌드 및 디버그하기 위한 자산을 추가하도록 요청합니다. **Yes**를 선택합니다.
@@ -92,38 +95,66 @@ Blazor를 시작하려면 아래에서 원하는 도구의 지침을 따르세�
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-Mac용 Visual Studio에서는 Blazor 서버가 지원됩니다. 현재 Blazor WebAssembly는 지원되지 않습니다. macOS에서 Blazor WebAssembly 앱을 빌드하려면 **.NET Core CLI** 탭의 지침을 따르세요.
+Mac용 Visual Studio에서는 Blazor 서버가 지원됩니다. 현재 Blazor WebAssembly는 지원되지 않습니다. macOS에서 Blazor WebAssembly 앱을 만들려면 **.NET Core CLI** 탭의 지침을 따르세요. 두 가지 Blazor 호스팅 모델인 ‘Blazor WebAssembly’와 ‘Blazor 서버’에 대한 자세한 내용은 <xref:blazor/hosting-models> 문서를 참조하세요.  
 
 1. [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/)를 설치합니다.
 
-1. **파일** > **새 솔루션**을 선택하거나 **새 프로젝트**를 만듭니다.
+1. **파일** > **새 솔루션**을 선택하거나 **시작 창**에서 **새** 프로젝트를 만듭니다.
 
 1. 사이드바에서 **.NET Core** > **앱**을 선택합니다.
 
-1. **Blazor 서버 앱** 템플릿을 선택합니다. **만들기**를 선택합니다.
+1. **Blazor 서버 앱** 템플릿을 선택합니다. **새로 만들기**를 선택합니다.
 
-   Blazor 서버 호스팅 모델에 대한 자세한 내용은 <xref:blazor/hosting-models> 문서를 참조하세요.
+1. 다음 구성을 확인합니다.
 
-1. **대상 프레임워크**를 **.NET Core 3.1**로 설정하고 **다음**을 선택합니다.
+   * **대상 프레임워크**가 **.NET Core 3.1**로 설정되어 있는지
+   * **인증**이 **인증 안 함**으로 설정되어 있는지
+   
+   **새로 만들기**를 선택합니다.
 
 1. **프로젝트 이름** 필드에서 앱 이름을 `WebApplication1`로 지정합니다. **만들기**를 선택합니다.
 
-1. **실행** > **디버깅하지 않고 실행**을 선택하여 ‘디버거 없이’ 앱을 실행합니다.  ‘디버거로’ 앱을 실행하려면 **디버깅 시작**을 사용하여 앱을 실행합니다. 
+1. **실행** > **디버깅하지 않고 시작**을 선택하여 ‘디버거 없이’ 앱을 실행합니다.  지금은 디버깅이 지원되지 않습니다.
 
-개발 인증서를 신뢰하라는 메시지가 표시되면 인증서를 신뢰하고 계속합니다.
+<!-- HOLD FOR 8.6 GA
+
+1. Select **File** > **New Solution** or create a **New** project from the **Start Window**.
+
+1. In the sidebar, select **Web and Console** > **App**.
+
+1. For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template. For a Blazor Server experience, choose the **Blazor Server App** template. Select **Next**.
+
+   For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server*, see <xref:blazor/hosting-models>.
+
+1. Confirm the following configurations:
+
+   * **Target Framework** set to **.NET Core 3.1**.
+   * **Authentication** set to **No Authentication**.
+   
+   Select **Next**.
+
+1. In the **Project Name** field, name the app `WebApplication1`. Select **Create**.
+
+1. Select **Run** > **Start Without Debugging** to run the app *without the debugger*. Run the app with **Run** > **Start Debugging** or the Run (&#9654;) button to run the app *with the debugger*.
+
+-->
+
+개발 인증서를 신뢰하라는 메시지가 표시되면 인증서를 신뢰하고 계속합니다. 인증서를 신뢰하려면 사용자 및 키 집합 암호가 필요합니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
 1. [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)를 설치합니다.
 
-1. 필요에 따라 다음 명령을 실행하여 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 미리 보기 템플릿을 설치합니다.
+1. 필요에 따라 다음 명령을 실행하여 Blazor WebAssembly 미리 보기 템플릿을 설치합니다.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
+   
+   두 가지 Blazor 호스팅 모델인 ‘Blazor WebAssembly’와 ‘Blazor 서버’에 대한 자세한 내용은 <xref:blazor/hosting-models> 문서를 참조하세요.  
 
    > [!NOTE]
-   > 3\.2 미리 보기 4 Blazor WebAssembly 템플릿을 사용하려면 [.NET Core SDK 버전 3.1.201 이상](https://dotnet.microsoft.com/download/dotnet-core/3.1)이 **필요**합니다. 명령 셸에서 `dotnet --version`을 실행하여 설치된 .NET Core SDK 버전을 확인합니다.
+   > 3\.2 미리 보기 Blazor WebAssembly 템플릿을 사용하려면 [.NET Core SDK 버전 3.1.201 이상](https://dotnet.microsoft.com/download/dotnet-core/3.1)이 **필요**합니다. 명령 셸에서 `dotnet --version`을 실행하여 설치된 .NET Core SDK 버전을 확인합니다.
 
 1. Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행합니다.
 
@@ -140,8 +171,6 @@ Mac용 Visual Studio에서는 Blazor 서버가 지원됩니다. 현재 Blazor We
    cd WebApplication1
    dotnet run
    ```
-
-   두 가지 Blazor 호스팅 모델인 ‘Blazor 서버’와 *Blazor WebAssembly*에 대한 자세한 내용은 <xref:blazor/hosting-models>를 참조하세요. 
 
 1. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
