@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core에서 휴지 상태의 키 암호화
+title: ASP.NET Core를 사용 하 여 Windows 및 Azure에서 휴지 상태의 키 암호화
 author: rick-anderson
 description: 미사용 데이터 보호 키 암호화 ASP.NET Core의 구현 세부 정보에 대해 알아봅니다.
 ms.author: riande
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c927c926212aeb1263d15fd3fdc753c377b2e305
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776931"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153565"
 ---
-# <a name="key-encryption-at-rest-in-aspnet-core"></a>ASP.NET Core에서 휴지 상태의 키 암호화
+# <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>ASP.NET Core를 사용 하 여 Windows 및 Azure에서 휴지 상태의 키 암호화
 
 데이터 보호 시스템은 [기본적으로 검색 메커니즘을 채택](xref:security/data-protection/configuration/default-settings) 하 여 암호화 키를 암호화 하는 방법을 결정 합니다. 개발자는 검색 메커니즘을 재정의 하 고 미사용 키를 암호화 하는 방법을 수동으로 지정할 수 있습니다.
 
@@ -29,7 +29,7 @@ ms.locfileid: "82776931"
 
 ## <a name="azure-key-vault"></a>Azure Key Vault
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)에 키를 저장 하려면 `Startup` 클래스에서 [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) 를 사용 하 여 시스템을 구성 합니다.
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)에 키를 저장 하려면 클래스에서 [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) 를 사용 하 여 시스템을 구성 합니다 `Startup` .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -59,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-매개 `ProtectKeysWithDpapi` 변수 없이를 호출 하면 현재 Windows 사용자 계정만 지속형 키 링을 해독할 수 있습니다. 필요에 따라 현재 사용자 계정 뿐만 아니라 컴퓨터의 모든 사용자 계정이 키 링을 해독할 수 있도록 지정할 수 있습니다.
+`ProtectKeysWithDpapi`매개 변수 없이를 호출 하면 현재 Windows 사용자 계정만 지속형 키 링을 해독할 수 있습니다. 필요에 따라 현재 사용자 계정 뿐만 아니라 컴퓨터의 모든 사용자 계정이 키 링을 해독할 수 있도록 지정할 수 있습니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -106,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-매개 변수가 없는 오버 로드도 있습니다 `ProtectKeysWithDpapiNG`. 이 편리한 방법을 사용 하 여 "SID = {CURRENT_ACCOUNT_SID}" 규칙을 지정 합니다. 여기서 *CURRENT_ACCOUNT_SID* 은 현재 Windows 사용자 계정의 SID입니다.
+매개 변수가 없는 오버 로드도 있습니다 `ProtectKeysWithDpapiNG` . 이 편리한 방법을 사용 하 여 "SID = {CURRENT_ACCOUNT_SID}" 규칙을 지정 합니다. 여기서 *CURRENT_ACCOUNT_SID* 은 현재 Windows 사용자 계정의 SID입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

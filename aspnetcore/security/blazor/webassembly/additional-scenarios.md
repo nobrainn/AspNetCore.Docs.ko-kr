@@ -1,11 +1,11 @@
 ---
-title: 추가 Blazor 보안 시나리오 ASP.NET Core
+title: Blazor추가 보안 시나리오 ASP.NET Core
 author: guardrex
-description: 추가 보안 시나리오에 Blazor 대해 weasembmbom를 구성 하는 방법에 대해 알아봅니다.
+description: Blazor추가 보안 시나리오에 대해 weasembmbom를 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: e8a088b3f1a4e0eb7d5d1c5c09ef53c4a2bd3628
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: d460f65e996f1f77136a426b03d6eb548d9e309e
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976794"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153470"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Weasembmbambambambamba 추가 보안 시나리오
 
@@ -30,9 +30,9 @@ ms.locfileid: "82976794"
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>나가는 요청에 토큰 연결
 
-서비스 `AuthorizationMessageHandler` 를와 함께 `HttpClient` 사용 하 여 액세스 토큰을 보내는 요청에 연결할 수 있습니다. 토큰은 기존 `IAccessTokenProvider` 서비스를 사용 하 여 획득 됩니다. 토큰을 가져올 수 없는 경우 `AccessTokenNotAvailableException` 이 throw 됩니다. `AccessTokenNotAvailableException`에는 `Redirect` 사용자가 id 공급자로 이동 하 여 새 토큰을 획득 하는 데 사용할 수 있는 메서드가 있습니다. 는 `AuthorizationMessageHandler` `ConfigureHandler` 메서드를 사용 하 여 권한 있는 url, 범위 및 반환 URL을 사용 하 여 구성할 수 있습니다.
+`AuthorizationMessageHandler`서비스를와 함께 사용 `HttpClient` 하 여 액세스 토큰을 보내는 요청에 연결할 수 있습니다. 토큰은 기존 서비스를 사용 하 여 획득 됩니다 `IAccessTokenProvider` . 토큰을 가져올 수 없는 경우 `AccessTokenNotAvailableException` 이 throw 됩니다. `AccessTokenNotAvailableException`에는 `Redirect` 사용자가 id 공급자로 이동 하 여 새 토큰을 획득 하는 데 사용할 수 있는 메서드가 있습니다. 는 `AuthorizationMessageHandler` 메서드를 사용 하 여 권한 있는 url, 범위 및 반환 URL을 사용 하 여 구성할 수 있습니다 `ConfigureHandler` .
 
-다음 예제 `AuthorizationMessageHandler` 에서는 (*Program.cs*) `HttpClient` 에서 `Program.Main` 를 구성 합니다.
+다음 예제에서는 `AuthorizationMessageHandler` `HttpClient` `Program.Main` (*Program.cs*)에서를 구성 합니다.
 
 ```csharp
 using System.Net.Http;
@@ -52,7 +52,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-편의상 앱 기준 주소 `BaseAddressAuthorizationMessageHandler` 를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다. 이제 인증 사용 Blazor Weasembomtemplate이 서버 API <xref:System.Net.Http.IHttpClientFactory> 프로젝트에서를 사용 하 여를 설정 <xref:System.Net.Http.HttpClient> 합니다. `BaseAddressAuthorizationMessageHandler`
+편의상 `BaseAddressAuthorizationMessageHandler` 앱 기준 주소를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다. 이제 인증 사용 Blazor Weasembomtemplate이 <xref:System.Net.Http.IHttpClientFactory> 서버 API 프로젝트에서를 사용 하 여를 설정 합니다 <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` .
 
 ```csharp
 using System.Net.Http;
@@ -60,21 +60,23 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 ...
 
-builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
+builder.Services.AddHttpClient("BlazorWithIdentity.ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
+    .CreateClient("BlazorWithIdentity.ServerAPI"));
 ```
 
-앞의 예제 `CreateClient` 에서 클라이언트를 만든 경우 서버 프로젝트에 요청 <xref:System.Net.Http.HttpClient> 을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
+앞의 예제에서 클라이언트를 만든 경우 `CreateClient` <xref:System.Net.Http.HttpClient> 서버 프로젝트에 요청을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
 
-그런 다음 <xref:System.Net.Http.HttpClient> 구성 된를 사용 하 여 간단한 `try-catch` 패턴을 통해 권한 있는 요청을 수행할 수 있습니다. 다음 `FetchData` 구성 요소는 날씨 예보 데이터를 요청 합니다.
+그런 다음 구성 된를 사용 하 여 <xref:System.Net.Http.HttpClient> 간단한 패턴을 통해 권한 있는 요청을 수행할 수 `try-catch` 있습니다.
+
+`FetchData`구성 요소 (*Pages/FetchData. razor*):
 
 ```csharp
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Http
+@inject HttpClient Client
 
 ...
 
@@ -83,7 +85,7 @@ protected override async Task OnInitializedAsync()
     try
     {
         forecasts = 
-            await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            await Client.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
     }
     catch (AccessTokenNotAvailableException exception)
     {
@@ -92,37 +94,36 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-또는 단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리 하는 형식화 된 클라이언트를 정의할 수 있습니다.
+## <a name="typed-httpclient"></a>형식화 된 HttpClient
 
-*WeatherClient.cs*:
+단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리 하는 형식화 된 클라이언트를 정의할 수 있습니다.
+
+*WeatherForecastClient.cs*:
 
 ```csharp
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using static {APP ASSEMBLY}.Data;
 
-public class WeatherClient
+public class WeatherForecastClient
 {
-    private readonly HttpClient httpClient;
+    private readonly HttpClient client;
  
-    public WeatherClient(HttpClient httpClient)
+    public WeatherForecastClient(HttpClient client)
     {
-        this.httpClient = httpClient;
+        this.client = client;
     }
  
-    public async Task<IEnumerable<WeatherForecast>> GetWeatherForeacasts()
+    public async Task<WeatherForecast[]> GetForecastAsync()
     {
-        IEnumerable<WeatherForecast> forecasts = new WeatherForecast[0];
+        var forecasts = new WeatherForecast[0];
 
         try
         {
-            forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
+            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
-
-            ...
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -134,7 +135,7 @@ public class WeatherClient
 }
 ```
 
-*Program.cs*:
+`Program.Main`(*Program.cs*):
 
 ```csharp
 using System.Net.Http;
@@ -142,29 +143,80 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 ...
 
-builder.Services.AddHttpClient<WeatherClient>(
+builder.Services.AddHttpClient<WeatherForecastClient>(
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-*Fetchdata. razor*:
+`FetchData`구성 요소 (*Pages/FetchData. razor*):
 
 ```razor
-@inject WeatherClient WeatherClient
+@inject WeatherForecastClient Client
 
 ...
 
 protected override async Task OnInitializedAsync()
 {
-    forecasts = await WeatherClient.GetWeatherForeacasts();
+    forecasts = await Client.GetForecastAsync();
 }
 ```
 
+## <a name="configure-the-httpclient-handler"></a>HttpClient 처리기 구성
+
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>아웃 바운드 HTTP 요청에 대해를 사용 하 여 처리기를 추가로 구성할 수 있습니다.
+
+`Program.Main`(*Program.cs*):
+
+```csharp
+builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
+    .AddHttpMessageHandler(sp => sp.GetRequiredService<AuthorizationMessageHandler>()
+    .ConfigureHandler(new [] { "https://www.example.com/base" },
+        scopes: new[] { "example.read", "example.write" }));
+```
+
+## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청
+
+Blazor Weasembomapp이 일반적으로 보안 기본값을 사용 하는 경우 <xref:System.Net.Http.HttpClient> 앱은 명명 된를 구성 하 여 인증 되지 않거나 권한이 없는 웹 API 요청을 수행할 수도 있습니다 <xref:System.Net.Http.HttpClient> .
+
+`Program.Main`(*Program.cs*):
+
+```csharp
+builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+```
+
+위의 등록은 기존 보안 기본 등록에 추가 됩니다 <xref:System.Net.Http.HttpClient> .
+
+구성 요소는 <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory> 인증 되지 않거나 권한이 없는 요청을 만들기 위해에서를 만듭니다.
+
+```razor
+@inject IHttpClientFactory ClientFactory
+
+...
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = ClientFactory.CreateClient("ServerAPI.NoAuthenticationClient");
+
+        forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+            "WeatherForecastNoAuthentication");
+    }
+}
+```
+
+> [!NOTE]
+> `WeatherForecastNoAuthenticationController`이전 예제에 대 한 서버 API의 컨트롤러는 특성으로 표시 되지 않습니다 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) .
+
 ## <a name="request-additional-access-tokens"></a>추가 액세스 토큰 요청
 
-액세스 토큰은를 호출 `IAccessTokenProvider.RequestAccessToken`하 여 수동으로 가져올 수 있습니다.
+액세스 토큰은를 호출 하 여 수동으로 가져올 수 있습니다 `IAccessTokenProvider.RequestAccessToken` .
 
-다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 AAD (추가 Azure Active Directory) Microsoft Graph API 범위가 필요 합니다. Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후 클라이언트 앱 (`Program.Main`, *Program.cs*)에서 추가 범위가 구성 됩니다.
+다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 AAD (추가 Azure Active Directory) Microsoft Graph API 범위가 필요 합니다. Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후 클라이언트 앱에서 추가 범위가 구성 됩니다.
+
+`Program.Main`(*Program.cs*):
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -178,9 +230,11 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-메서드 `IAccessTokenProvider.RequestToken` 는 다음 예제와 같이 응용 프로그램에서 지정 된 범위 집합을 사용 하 여 액세스 토큰을 프로 비전 할 수 있도록 하는 오버 로드를 제공 합니다.
+`IAccessTokenProvider.RequestToken`메서드는 앱이 지정 된 범위 집합을 사용 하 여 액세스 토큰을 프로 비전 할 수 있도록 하는 오버 로드를 제공 합니다.
 
-```csharp
+Razor 구성 요소에서 다음을 수행 합니다.
+
+```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject IAccessTokenProvider TokenProvider
 
@@ -201,12 +255,12 @@ if (tokenResult.TryGetToken(out var token))
 
 `TryGetToken`전용인
 
-* `true``token` 사용할를 사용 합니다.
+* `true`사용할를 `token` 사용 합니다.
 * `false`토큰이 검색 되지 않으면입니다.
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage
 
-Blazor weambmbomapp에서 사용 되는 경우 [Httpclient](xref:fundamentals/http-requests) 를 사용 하 여 요청을 사용자 <xref:System.Net.Http.HttpRequestMessage> 지정할 수 있습니다. 예를 들어 HTTP 메서드 및 요청 헤더를 지정할 수 있습니다. 다음 예에서는 서버에서 `POST` To DO List API 끝점에 대 한 요청을 수행 하 고 응답 본문을 표시 합니다.
+Blazor weambmbomapp에서 사용 되는 경우 [Httpclient](xref:fundamentals/http-requests) 를 사용 하 여 <xref:System.Net.Http.HttpRequestMessage> 요청을 사용자 지정할 수 있습니다. 예를 들어 HTTP 메서드 및 요청 헤더를 지정할 수 있습니다. 다음 구성 요소는 `POST` 서버에서 To Do LIST API 끝점에 대 한 요청을 수행 하 고 응답 본문을 표시 합니다.
 
 ```razor
 @page "/todorequest"
@@ -316,7 +370,7 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 
 일반적으로 사용자에 대 한 IP가 내보내는 토큰은 짧은 시간 동안 일반적으로 1 시간 동안 유효 하므로 클라이언트 앱이 정기적으로 새 토큰을 가져와야 합니다. 그렇지 않으면 부여 된 토큰이 만료 된 후 사용자가 로그 아웃 됩니다. 대부분의 경우 OIDC 클라이언트는 사용자가 IP 내에 유지 되는 인증 상태 또는 "세션"으로 인해 다시 인증 하도록 요구 하지 않고 새 토큰을 프로 비전 할 수 있습니다.
 
-사용자가 사용자 개입 없이 토큰을 가져올 수 없는 경우도 있습니다. 예를 들어 사용자가 IP에서 명시적으로 로그 아웃 하는 이유가 있습니다. 이 시나리오는 사용자가 방문 `https://login.microsoftonline.com` 하 여 로그 아웃 하는 경우에 발생 합니다. 이러한 시나리오에서 앱은 사용자가 로그 아웃 한 즉시 인식 하지 못합니다. 클라이언트에서 보유 하는 모든 토큰은 더 이상 유효 하지 않을 수 있습니다. 또한 클라이언트는 현재 토큰이 만료 된 후 사용자 상호 작용 없이 새 토큰을 프로 비전 할 수 없습니다.
+사용자가 사용자 개입 없이 토큰을 가져올 수 없는 경우도 있습니다. 예를 들어 사용자가 IP에서 명시적으로 로그 아웃 하는 이유가 있습니다. 이 시나리오는 사용자가 방문 하 여 로그 아웃 하는 경우에 발생 `https://login.microsoftonline.com` 합니다. 이러한 시나리오에서 앱은 사용자가 로그 아웃 한 즉시 인식 하지 못합니다. 클라이언트에서 보유 하는 모든 토큰은 더 이상 유효 하지 않을 수 있습니다. 또한 클라이언트는 현재 토큰이 만료 된 후 사용자 상호 작용 없이 새 토큰을 프로 비전 할 수 없습니다.
 
 이러한 시나리오는 토큰 기반 인증에 국한 되지 않습니다. 이러한 특성은 SPAs 특성의 일부입니다. 쿠키를 사용 하는 SPA는 인증 쿠키를 제거 하는 경우에도 서버 API를 호출 하지 못합니다.
 
@@ -464,9 +518,9 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 | `authentication/profile`         | 사용자 프로필을 편집 하는 작업을 트리거합니다. |
 | `authentication/register`        | 새 사용자를 등록 하는 작업을 트리거합니다. |
 
-위의 표에 표시 된 경로는를 통해 `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`구성할 수 있습니다. 사용자 지정 경로를 제공 하는 옵션을 설정 하는 경우 앱에 각 경로를 처리 하는 경로가 있는지 확인 합니다.
+위의 표에 표시 된 경로는를 통해 구성할 수 있습니다 `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` . 사용자 지정 경로를 제공 하는 옵션을 설정 하는 경우 앱에 각 경로를 처리 하는 경로가 있는지 확인 합니다.
 
-다음 예제에서 모든 경로에는 접두사가 붙습니다 `/security`.
+다음 예제에서 모든 경로에는 접두사가 붙습니다 `/security` .
 
 `Authentication`구성 요소 (*페이지/인증. razor*):
 
@@ -498,7 +552,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-요구 사항이 완전히 다른 경로에 대해를 호출 하는 경우 앞에서 설명한 대로 경로를 `RemoteAuthenticatorView` 설정 하 고 명시적인 동작 매개 변수를 사용 하 여을 렌더링 합니다.
+요구 사항이 완전히 다른 경로에 대해를 호출 하는 경우 앞에서 설명한 대로 경로를 설정 하 고 `RemoteAuthenticatorView` 명시적인 동작 매개 변수를 사용 하 여을 렌더링 합니다.
 
 ```razor
 @page "/register"
@@ -510,7 +564,7 @@ builder.Services.AddApiAuthorization(options => {
 
 ## <a name="customize-the-authentication-user-interface"></a>인증 사용자 인터페이스 사용자 지정
 
-`RemoteAuthenticatorView`에는 각 인증 상태에 대 한 기본 UI 조각 집합이 포함 되어 있습니다. 사용자 지정 `RenderFragment`를 전달 하 여 각 상태를 사용자 지정할 수 있습니다. 초기 로그인 프로세스 중에 표시 되는 텍스트를 사용자 지정 하려면에서 `RemoteAuthenticatorView` 다음과 같이 변경할 수 있습니다.
+`RemoteAuthenticatorView`에는 각 인증 상태에 대 한 기본 UI 조각 집합이 포함 되어 있습니다. 사용자 지정를 전달 하 여 각 상태를 사용자 지정할 수 있습니다 `RenderFragment` . 초기 로그인 프로세스 중에 표시 되는 텍스트를 사용자 지정 하려면에서 `RemoteAuthenticatorView` 다음과 같이 변경할 수 있습니다.
 
 `Authentication`구성 요소 (*페이지/인증. razor*):
 
@@ -530,7 +584,7 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-에 `RemoteAuthenticatorView` 는 다음 표에 표시 된 인증 경로 별로 사용할 수 있는 하나의 조각이 있습니다.
+에는 `RemoteAuthenticatorView` 다음 표에 표시 된 인증 경로 별로 사용할 수 있는 하나의 조각이 있습니다.
 
 | 경로                            | 조각                |
 | -------------------------------- | ----------------------- |
@@ -546,9 +600,9 @@ builder.Services.AddApiAuthorization(options => {
 
 ## <a name="customize-the-user"></a>사용자 사용자 지정
 
-앱에 바인딩된 사용자를 사용자 지정할 수 있습니다. 다음 예에서는 인증 된 모든 사용자가 각 사용자 `amr` 의 인증 방법에 대 한 클레임을 받습니다.
+앱에 바인딩된 사용자를 사용자 지정할 수 있습니다. 다음 예에서는 인증 된 모든 사용자가 `amr` 각 사용자의 인증 방법에 대 한 클레임을 받습니다.
 
-`RemoteUserAccount` 클래스를 확장 하는 클래스를 만듭니다.
+클래스를 확장 하는 클래스를 만듭니다 `RemoteUserAccount` .
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -561,7 +615,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-다음을 확장 `AccountClaimsPrincipalFactory<TAccount>`하는 팩터리를 만듭니다.
+다음을 확장 하는 팩터리를 만듭니다 `AccountClaimsPrincipalFactory<TAccount>` .
 
 ```csharp
 using System.Security.Claims;
@@ -597,7 +651,7 @@ public class CustomAccountFactory
 }
 ```
 
-사용 중인 `CustomAccountFactory` 인증 공급자에 대 한를 등록 합니다. 유효한 등록은 다음과 같습니다. 
+`CustomAccountFactory`사용 중인 인증 공급자에 대 한를 등록 합니다. 유효한 등록은 다음과 같습니다. 
 
 * `AddOidcAuthentication`:
 
@@ -754,13 +808,13 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a>타사 공급자를 사용하여 사용자를 인증하고 호스트 서버 및 타사에서 보호된 API 호출
 
-타사 Identity 로그인 공급자를 사용 하 여를 구성 합니다. 타사 API 액세스에 필요한 토큰을 가져와 저장합니다.
+Identity타사 로그인 공급자를 사용 하 여를 구성 합니다. 타사 API 액세스에 필요한 토큰을 가져와 저장합니다.
 
 사용자가 로그인 할 때는 Identity 인증 프로세스의 일부로 액세스 및 새로 고침 토큰을 수집 합니다. 이때 타사 API에 대한 API 호출을 수행하는 데 사용할 수 있는 몇 가지 방법이 있습니다.
 
 #### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a>서버 액세스 토큰을 사용하여 타사 액세스 토큰 검색
 
-서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다. 여기에서 타사 액세스 토큰을 사용 하 여 클라이언트 Identity 에서 직접 타사 API 리소스를 호출 합니다.
+서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다. 여기에서 타사 액세스 토큰을 사용 하 여 클라이언트에서 직접 타사 API 리소스를 호출 Identity 합니다.
 
 이 방법은 사용하지 않는 것이 좋습니다. 이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다. OAuth 맥락에서, 퍼블릭 앱은 암호를 안전하게 저장하는 데 신뢰할 수 없으므로 클라이언트 암호를 갖지 않으며, 액세스 토큰은 기밀 클라이언트에 대해 생성됩니다. 기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.
 

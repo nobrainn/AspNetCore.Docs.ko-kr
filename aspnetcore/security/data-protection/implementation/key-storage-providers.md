@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: a8d38f17b066a0aa9a38b1bdfea3491f733cf1bc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cdf10cd26f3eb9af386f782475eeabbda50f0df9
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776879"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153343"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core의 키 저장소 공급자
 
@@ -143,21 +143,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="entity-framework-core"></a>Entity Framework Core
 
-[AspNetCore microsoft.entityframeworkcore.tools.dotnet](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) 패키지는 Entity Framework Core을 사용 하 여 데이터베이스에 데이터 보호 키를 저장 하기 위한 메커니즘을 제공 합니다. NuGet `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` 패키지는 프로젝트 파일에 추가 해야 하며, [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)의 일부가 아닙니다.
+[AspNetCore microsoft.entityframeworkcore.tools.dotnet](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) 패키지는 Entity Framework Core을 사용 하 여 데이터베이스에 데이터 보호 키를 저장 하기 위한 메커니즘을 제공 합니다. `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore`NuGet 패키지는 프로젝트 파일에 추가 해야 하며, [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)의 일부가 아닙니다.
 
 이 패키지를 사용 하면 웹 앱의 여러 인스턴스 간에 키를 공유할 수 있습니다.
 
-EF Core 공급자를 구성 하려면 [PersistKeysToDbContext\<tcontext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) 메서드를 호출 합니다.
+EF Core 공급자를 구성 하려면 [PersistKeysToDbContext \< tcontext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) 메서드를 호출 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-제네릭 매개 변수 `TContext`는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 해야 하며 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)를 구현 해야 합니다.
+제네릭 매개 변수는 `TContext` [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 해야 하며 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)를 구현 해야 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-테이블을 `DataProtectionKeys` 만듭니다.
+테이블을 만듭니다 `DataProtectionKeys` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -179,13 +179,13 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext`는 앞 `DbContext` 의 코드 샘플에 정의 되어 있습니다. 다른 이름을 사용 하는 `DbContext` 을 사용 하는 경우에는 `DbContext` 사용자의 `MyKeysContext`이름을로 바꿉니다.
+`MyKeysContext`는 `DbContext` 앞의 코드 샘플에 정의 되어 있습니다. 다른 이름을 사용 하는을 사용 하는 경우 `DbContext` 에는 사용자 `DbContext` 의 이름을로 바꿉니다 `MyKeysContext` .
 
-클래스 `DataProtectionKeys` /엔터티는 다음 표에 나와 있는 구조를 가집니다.
+`DataProtectionKeys`클래스/엔터티는 다음 표에 나와 있는 구조를 가집니다.
 
 | 속성/필드 | CLR 형식 | SQL 형식              |
 | -------------- | -------- | --------------------- |
-| `Id`           | `int`    | `int`, PK, not null   |
+| `Id`           | `int`    | `int`, PK, `IDENTITY(1,1)` not null   |
 | `FriendlyName` | `string` | `nvarchar(MAX)`, null |
 | `Xml`          | `string` | `nvarchar(MAX)`, null |
 
