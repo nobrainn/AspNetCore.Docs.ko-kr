@@ -5,17 +5,20 @@ description: Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/20/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: 4cdde9ee8c9fd9adf00894a067d32965b180e5ec
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e96698bd0bd8f3f3b290ba24bc8169efb16f1d03
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646695"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967534"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -36,8 +39,8 @@ DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입�
 
 | 서비스 | 수명 | 설명 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별되는 리소스에서 HTTP 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공합니다.<br><br>Blazor WebAssembly 앱의 `HttpClient` 인스턴스는 브라우저를 사용하여 백그라운드에서 HTTP 트래픽을 처리합니다.<br><br>Blazor 서버 앱에는 기본적으로 서비스로 구성된 `HttpClient`는 포함되지 않습니다. Blazor 서버 앱에 대한 `HttpClient`를 제공합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>을 참조하세요. |
-| `IJSRuntime` | Singleton(Blazor WebAssembly)<br>범위 지정(Blazor 서버) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/call-javascript-from-dotnet>을 참조하세요. |
+| <xref:System.Net.Http.HttpClient> | Transient | URI로 식별되는 리소스에서 HTTP 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공합니다.<br><br>Blazor WebAssembly 앱의 `HttpClient` 인스턴스는 브라우저를 사용하여 백그라운드에서 HTTP 트래픽을 처리합니다.<br><br>Blazor 서버 앱에는 기본적으로 서비스로 구성된 `HttpClient`는 포함되지 않습니다. Blazor 서버 앱에 대한 `HttpClient`를 제공합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
+| `IJSRuntime` | Singleton(Blazor WebAssembly)<br>범위 지정(Blazor 서버) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/call-javascript-from-dotnet>를 참조하세요. |
 | `NavigationManager` | Singleton(Blazor WebAssembly)<br>범위 지정(Blazor 서버) | URI 및 탐색 상태를 사용하기 위한 도우미를 포함합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조하세요. |
 
 사용자 지정 서비스 공급자는 테이블에 나열된 기본 서비스를 자동으로 제공하지 않습니다. 사용자 지정 서비스 공급자를 사용하고 표에 표시된 서비스가 필요한 경우 새 서비스 공급자에 필요한 서비스를 추가합니다.
@@ -46,7 +49,7 @@ DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입�
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-`Main`Program.cs*의*  메서드에서 앱의 서비스 컬렉션용 서비스를 구성합니다. 다음 예제에서는 `MyDependency` 구현을 `IMyDependency`에 등록합니다.
+*Program.cs*의 `Main` 메서드에서 앱의 서비스 컬렉션용 서비스를 구성합니다. 다음 예제에서는 `MyDependency` 구현을 `IMyDependency`에 등록합니다.
 
 ```csharp
 public class Program
@@ -116,7 +119,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`ConfigureServices` 메서드는 서비스 설명자 개체(<xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) 목록에 해당하는 <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>에 전달됩니다. 서비스 설명자를 서비스 컬렉션에 제공하여 서비스를 추가합니다. 다음 예제에서는 `IDataAccess` 인터페이스와 해당 구체적 구현 `DataAccess`를 통해 이러한 개념을 보여 줍니다.
+`ConfigureServices` 메서드는 서비스 설명자 개체(<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>) 목록에 해당하는 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>에 전달됩니다. 서비스 설명자를 서비스 컬렉션에 제공하여 서비스를 추가합니다. 다음 예제에서는 `IDataAccess` 인터페이스와 해당 구체적 구현 `DataAccess`를 통해 이러한 개념을 보여 줍니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -131,20 +134,20 @@ public void ConfigureServices(IServiceCollection services)
 
 | 수명 | 설명 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor WebAssembly 앱에는 현재, DI 범위에 대한 개념이 없습니다. `Scoped` 등록 서비스는 `Singleton` 서비스처럼 동작합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원합니다. Blazor 서버 앱에서 범위가 지정된 서비스 등록은 *연결*로 범위가 지정됩니다. 따라서 현재, 브라우저에서 클라이언트 쪽을 실행하려는 의도가 있더라도 현재 사용자로 범위를 지정해야 하는 서비스에 대해서는 범위 지정 서비스를 사용하는 것이 좋습니다. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI는 서비스의 *단일 인스턴스*를 만듭니다. `Singleton` 서비스가 필요한 모든 구성 요소는 동일한 서비스의 인스턴스를 수신합니다. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | 구성 요소는 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스*을 받습니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly 앱에는 현재, DI 범위에 대한 개념이 없습니다. `Scoped` 등록 서비스는 `Singleton` 서비스처럼 동작합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원합니다. Blazor 서버 앱에서 범위가 지정된 서비스 등록은 *연결*로 범위가 지정됩니다. 따라서 현재, 브라우저에서 클라이언트 쪽을 실행하려는 의도가 있더라도 현재 사용자로 범위를 지정해야 하는 서비스에 대해서는 범위 지정 서비스를 사용하는 것이 좋습니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI는 서비스의 *단일 인스턴스*를 만듭니다. `Singleton` 서비스가 필요한 모든 구성 요소는 동일한 서비스의 인스턴스를 수신합니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 구성 요소는 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스*을 받습니다. |
 
-DI 시스템은 ASP.NET Core에서 DI 시스템을 기준으로 합니다. 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조하세요.
+DI 시스템은 ASP.NET Core에서 DI 시스템을 기준으로 합니다. 자세한 내용은 <xref:fundamentals/dependency-injection>를 참조하세요.
 
 ## <a name="request-a-service-in-a-component"></a>구성 요소에서 서비스 요청
 
-서비스 컬렉션에 서비스를 추가한 후에는 [\@inject](xref:mvc/views/razor#inject) Razor 지시어를 사용하여 서비스를 구성 요소에 주입합니다. `@inject`에는 다음 두 개의 매개 변수가 사용됩니다.
+서비스 컬렉션에 서비스를 추가한 후에는 [\@inject](xref:mvc/views/razor#inject) Razor 지시문을 사용하여 서비스를 구성 요소에 주입합니다. `@inject`에는 다음 두 개의 매개 변수가 사용됩니다.
 
 * Type &ndash; 주입할 서비스의 형식입니다.
 * Property &ndash; 주입된 App Service를 받는 속성의 이름입니다. 이 속성은 수동으로 만들 필요가 없습니다. 컴파일러에서 속성을 만들기 때문입니다.
 
-자세한 내용은 <xref:mvc/views/dependency-injection>을 참조하세요.
+자세한 내용은 <xref:mvc/views/dependency-injection>를 참조하세요.
 
 여러 `@inject` 문을 사용하여 여러 서비스를 주입합니다.
 
@@ -206,7 +209,7 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
 
 두 가지 버전의 `OwningComponentBase` 형식을 사용할 수 있습니다.
 
-* `OwningComponentBase`는 `ComponentBase` 형식의 보호된 `ScopedServices` 속성을 사용하여 `IServiceProvider` 형식의 삭제 가능한 추상 자식입니다. 이 공급자는 구성 요소의 수명으로 범위가 지정된 서비스를 확인하는 데 사용할 수 있습니다.
+* `OwningComponentBase`는 `IServiceProvider` 형식의 보호된 `ScopedServices` 속성을 사용하여 `ComponentBase` 형식의 삭제 가능한 추상 자식입니다. 이 공급자는 구성 요소의 수명으로 범위가 지정된 서비스를 확인하는 데 사용할 수 있습니다.
 
   `@inject` 또는 `InjectAttribute`(`[Inject]`)를 사용하여 구성 요소에 주입된 DI 서비스는 구성 요소의 범위에서 만들어지지 않습니다. 구성 요소의 범위를 사용하려면 `ScopedServices.GetRequiredService` 또는 `ScopedServices.GetService`를 사용하여 서비스를 확인해야 합니다. `ScopedServices` 공급자를 사용하여 확인된 모든 서비스에는 동일한 범위에서 종속성이 제공됩니다.
 
@@ -236,7 +239,7 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
   }
   ```
 
-* `OwningComponentBase<T>`는 `OwningComponentBase`에서 파생되고 범위가 지정된 DI 공급자에서 `Service`의 인스턴스를 반환하는 `T` 속성을 추가합니다. 이 형식은 구성 요소의 범위를 사용하여 DI 컨테이너에서 앱에 필요한 기본 서비스가 하나 있는 경우 `IServiceProvider` 인스턴스를 사용하지 않고 범위 지정 서비스에 액세스할 수 있는 편리한 방법입니다. `ScopedServices` 속성을 사용할 수 있으므로 필요한 경우 앱에서 다른 형식의 서비스를 가져올 수 있습니다.
+* `OwningComponentBase<T>`는 `OwningComponentBase`에서 파생되고 범위가 지정된 DI 공급자에서 `T`의 인스턴스를 반환하는 `Service` 속성을 추가합니다. 이 형식은 구성 요소의 범위를 사용하여 DI 컨테이너에서 앱에 필요한 기본 서비스가 하나 있는 경우 `IServiceProvider` 인스턴스를 사용하지 않고 범위 지정 서비스에 액세스할 수 있는 편리한 방법입니다. `ScopedServices` 속성을 사용할 수 있으므로 필요한 경우 앱에서 다른 형식의 서비스를 가져올 수 있습니다.
 
   ```razor
   @page "/users"
@@ -255,23 +258,23 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
 
 ## <a name="use-of-entity-framework-dbcontext-from-di"></a>DI의 Entity Framework DbContext 사용
 
-웹앱의 DI에서 검색할 하나의 공통 서비스 형식은 EF(Entity Framework)`DbContext` 개체입니다. `IServiceCollection.AddDbContext`를 사용하여 EF 서비스를 등록하면 기본적으로 `DbContext`를 범위가 지정된 서비스로 추가합니다. 범위가 지정된 서비스로 등록하면 Blazor 인스턴스가 수명이 길며 앱 전체에서 공유되기 때문에 `DbContext` 앱에서 문제가 발생할 수 있습니다. `DbContext`는 스레드로부터 안전하지 않으며 동시에 사용하지 않아야 합니다.
+웹앱의 DI에서 검색할 하나의 공통 서비스 형식은 EF(Entity Framework)`DbContext` 개체입니다. `IServiceCollection.AddDbContext`를 사용하여 EF 서비스를 등록하면 기본적으로 `DbContext`를 범위가 지정된 서비스로 추가합니다. 범위가 지정된 서비스로 등록하면 `DbContext` 인스턴스가 수명이 길며 앱 전체에서 공유되기 때문에 Blazor 앱에서 문제가 발생할 수 있습니다. `DbContext`는 스레드로부터 안전하지 않으며 동시에 사용하지 않아야 합니다.
 
-앱에 따라 `OwningComponentBase`를 사용하여 `DbContext`의 범위를 단일 구성 요소로 제한하면 이 문제를 해결*할 수 있습니다*. 구성 요소가 동시에 `DbContext`를 사용하지 않는 경우 `OwningComponentBase`에서 구성 요소를 파생시키고 `DbContext`에서 `ScopedServices`를 검색하는 것는 것만으로 다음이 보장되므로 충분합니다.
+앱에 따라 `OwningComponentBase`를 사용하여 `DbContext`의 범위를 단일 구성 요소로 제한하면 이 문제를 해결*할 수 있습니다*. 구성 요소가 동시에 `DbContext`를 사용하지 않는 경우 `OwningComponentBase`에서 구성 요소를 파생시키고 `ScopedServices`에서 `DbContext`를 검색하는 것는 것만으로 다음이 보장되므로 충분합니다.
 
 * 개별 구성 요소는 `DbContext`를 공유하지 않습니다.
 * `DbContext`는 종속되는 구성 요소가 있는 경우에만 존재합니다.
 
 단일 구성 요소에서 `DbContext`를 동시에 사용할 수 있는 경우(예: 사용자가 단추를 선택할 때마다) `OwningComponentBase`를 사용하더라도 동시 EF 작업과 관련된 문제를 피할 수 있습니다. 이 경우 각 논리적 EF 작업에 대해 다른 `DbContext`를 사용합니다. 다음 방식 중 하나를 사용합니다.
 
-* `DbContext`를 인수로 사용하여 `DbContextOptions<TContext>`를 직접 만듭니다. 이 항목은 DI에서 검색할 수 있으며 스레드로부터 안전합니다.
+* `DbContextOptions<TContext>`를 인수로 사용하여 `DbContext`를 직접 만듭니다. 이 항목은 DI에서 검색할 수 있으며 스레드로부터 안전합니다.
 
     ```razor
     @page "/example"
     @inject DbContextOptions<AppDbContext> DbContextOptions
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -280,11 +283,11 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 
@@ -307,7 +310,7 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
          ServiceLifetime.Transient);
     ```  
 
-  * 임시 `DbContext`는 여러 EF 작업을 동시에 실행하지 않는 구성 요소에 일반(`@inject`사용)으로 주입될 수 있습니다. 여러 EF 작업을 동시에 수행할 수 있는 항목은 `DbContext`를 사용하여 각 병렬 작업에 대해 별도의 `IServiceProvider.GetRequiredService` 개체를 요청할 수 있습니다.
+  * 임시 `DbContext`는 여러 EF 작업을 동시에 실행하지 않는 구성 요소에 일반(`@inject`사용)으로 주입될 수 있습니다. 여러 EF 작업을 동시에 수행할 수 있는 항목은 `IServiceProvider.GetRequiredService`를 사용하여 각 병렬 작업에 대해 별도의 `DbContext` 개체를 요청할 수 있습니다.
 
     ```razor
     @page "/example"
@@ -315,7 +318,7 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
     @inject IServiceProvider ServiceProvider
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -324,11 +327,11 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 `OwningComponentBase
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 

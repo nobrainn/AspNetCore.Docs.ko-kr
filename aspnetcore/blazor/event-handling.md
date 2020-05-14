@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: a9b0d0efd4afd4941bd4d93f33adecdf3288992f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: aa338bbe61eec14bc1e1b3606e11e26bfb0e6a09
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767072"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967469"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor 이벤트 처리
 
@@ -108,7 +108,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공합니다. 대리자 형
 요소 집합을 반복하는 경우와 같이 추가 값을 둘러싸는 것이 편리한 경우가 많습니다. 다음 예제에서는 UI에서 선택할 경우 각각 이벤트 인수(`MouseEventArgs`)와 해당 단추 번호(`buttonNumber`)를 전달하여 `UpdateHeading`을 호출하는 세 개의 단추를 만듭니다.
 
 ```razor
-<h2>@_message</h2>
+<h2>@message</h2>
 
 @for (var i = 1; i < 4; i++)
 {
@@ -121,11 +121,11 @@ Razor 구성 요소는 이벤트 처리 기능을 제공합니다. 대리자 형
 }
 
 @code {
-    private string _message = "Select a button to learn its position.";
+    private string message = "Select a button to learn its position.";
 
     private void UpdateHeading(MouseEventArgs e, int buttonNumber)
     {
-        _message = $"You selected Button #{buttonNumber} at " +
+        message = $"You selected Button #{buttonNumber} at " +
             $"mouse position: {e.ClientX} X {e.ClientY}.";
     }
 }
@@ -157,28 +157,28 @@ Razor 구성 요소는 이벤트 처리 기능을 제공합니다. 대리자 형
     by the parent component.
 </ChildComponent>
 
-<p><b>@_messageText</b></p>
+<p><b>@messageText</b></p>
 
 @code {
-    private string _messageText;
+    private string messageText;
 
     private void ShowMessage(MouseEventArgs e)
     {
-        _messageText = $"Blaze a new trail with Blazor! ({e.ScreenX}, {e.ScreenY})";
+        messageText = $"Blaze a new trail with Blazor! ({e.ScreenX}, {e.ScreenY})";
     }
 }
 ```
 
 `ChildComponent`에서 단추를 선택한 경우
 
-* `ParentComponent`의 `ShowMessage` 메서드가 호출됩니다. `_messageText`가 업데이트되고 `ParentComponent`에 표시됩니다.
+* `ParentComponent`의 `ShowMessage` 메서드가 호출됩니다. `messageText`가 업데이트되고 `ParentComponent`에 표시됩니다.
 * [StateHasChanged](xref:blazor/lifecycle#state-changes) 호출은 콜백의 메서드(`ShowMessage`)에 필요하지 않습니다. 자식 이벤트가 자식 내에서 실행되는 이벤트 처리기에서 다시 렌더링되는 구성 요소를 트리거하는 것처럼 `ParentComponent`를 다시 렌더링하기 위해 `StateHasChanged`가 자동으로 호출됩니다.
 
 `EventCallback` 및 `EventCallback<T>`는 비동기 대리자를 허용합니다. `EventCallback<T>`는 강력한 형식으로, 특정 인수 형식이 필요합니다. `EventCallback`은 약한 형식으로, 모든 인수 형식을 허용합니다.
 
 ```razor
 <ChildComponent 
-    OnClickCallback="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
+    OnClickCallback="@(async () => { await Task.Yield(); messageText = "Blaze It!"; })" />
 ```
 
 `InvokeAsync`를 사용하여 `EventCallback` 또는 `EventCallback<T>`를 호출하고 <xref:System.Threading.Tasks.Task>를 기다립니다.
@@ -198,16 +198,16 @@ await callback.InvokeAsync(arg);
 입력 디바이스에서 키를 선택하고 요소 포커스가 텍스트 상자에 놓이면 일반적으로 브라우저의 텍스트 상자에 키 문자가 표시됩니다. 다음 예제에서는 `@onkeypress:preventDefault` 지시문 특성을 지정하여 기본 동작을 방지합니다. 카운터가 증가하고 **+** 키가 `<input>` 요소의 값에 캡처되지 않습니다.
 
 ```razor
-<input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
+<input value="@count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 
 @code {
-    private int _count = 0;
+    private int count = 0;
 
     private void KeyHandler(KeyboardEventArgs e)
     {
         if (e.Key == "+")
         {
-            _count++;
+            count++;
         }
     }
 }
@@ -215,10 +215,10 @@ await callback.InvokeAsync(arg);
 
 값 없이 `@on{EVENT}:preventDefault` 특성을 지정하는 것은 `@on{EVENT}:preventDefault="true"`와 동일합니다.
 
-특성 값으로 식을 사용할 수도 있습니다. 다음 예제에서 `_shouldPreventDefault`는 `true` 또는 `false`로 설정되는 `bool` 필드입니다.
+특성 값으로 식을 사용할 수도 있습니다. 다음 예제에서 `shouldPreventDefault`는 `true` 또는 `false`로 설정되는 `bool` 필드입니다.
 
 ```razor
-<input @onkeypress:preventDefault="_shouldPreventDefault" />
+<input @onkeypress:preventDefault="shouldPreventDefault" />
 ```
 
 기본 작업을 방지하기 위해 이벤트 처리기가 필요하지는 않습니다. 이벤트 처리기와 기본 작업 시나리오를 독립적으로 사용할 수 있습니다.
@@ -231,7 +231,7 @@ await callback.InvokeAsync(arg);
 
 ```razor
 <label>
-    <input @bind="_stopPropagation" type="checkbox" />
+    <input @bind="stopPropagation" type="checkbox" />
     Stop Propagation
 </label>
 
@@ -242,13 +242,13 @@ await callback.InvokeAsync(arg);
         Child div that doesn't stop propagation when selected.
     </div>
 
-    <div @onclick="OnSelectChildDiv" @onclick:stopPropagation="_stopPropagation">
+    <div @onclick="OnSelectChildDiv" @onclick:stopPropagation="stopPropagation">
         Child div that stops propagation when selected.
     </div>
 </div>
 
 @code {
-    private bool _stopPropagation = false;
+    private bool stopPropagation = false;
 
     private void OnSelectParentDiv() => 
         Console.WriteLine($"The parent div was selected. {DateTime.Now}");
