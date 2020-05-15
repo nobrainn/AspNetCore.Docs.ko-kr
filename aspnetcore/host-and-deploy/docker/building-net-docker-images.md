@@ -4,7 +4,7 @@ author: rick-anderson
 description: Docker 레지스트리에서 게시된 .NET Core Docker 이미지를 사용하는 방법을 알아봅니다. 이미지를 끌어오고 고유한 이미지를 빌드합니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 05/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: bce04caf20dcf23ab7160066d55a279b29dca1ae
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7394cba07109fce5a8718998b4e2a3b5bf752b0b
+ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774108"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382519"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core의 Docker 이미지
 
@@ -209,7 +209,6 @@ COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
 
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
@@ -245,21 +244,15 @@ COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
 
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-::: moniker-end
+위의 Dockerfile에 설명된 것처럼 `*.csproj` 파일은 개별 ‘계층’으로서 복사 및 복원됩니다.  `docker build` 명령은 이미지를 빌드할 때 기본 제공 캐시를 사용합니다. `docker build` 명령을 마지막으로 실행한 후 `*.csproj` 파일이 변경되지 않았다면 `dotnet restore` 명령을 다시 실행할 필요가 없습니다. 대신 해당 `dotnet restore` 계층에 대한 기본 제공 캐시가 다시 사용됩니다. 자세한 내용은 [Dockerfiles 작성에 대한 모범 사례](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)를 참조하세요.
 
-```dockerfile
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
-WORKDIR /app
-COPY published/aspnetapp.dll ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-```
+::: moniker-end
 
 ## <a name="additional-resources"></a>추가 자료
 

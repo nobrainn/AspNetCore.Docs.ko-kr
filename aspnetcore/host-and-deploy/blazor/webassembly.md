@@ -5,27 +5,30 @@ description: ASP.NET Core, CDN(콘텐츠 배달 네트워크), 파일 서버 및
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: e136a401beffe9cc7e29906b3631ab3f068b30fd
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751126"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967599"
 ---
-# <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
+# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
 
-작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)
+작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams) 및 [Safia Abdalla](https://safia.rocks)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor WebAssembly 호스팅 모델 사용](xref:blazor/hosting-models#blazor-webassembly):
+[Blazor WebAssembly 호스팅 모델](xref:blazor/hosting-models#blazor-webassembly) 사용:
 
-* Blazor 앱, 해당 앱의 종속성 및 .NET 런타임이 브라우저에 다운로드됩니다.
+* Blazor 앱, 해당 앱의 종속성 및 .NET 런타임이 병렬로 브라우저에 다운로드됩니다.
 * 해당 앱은 브라우저 UI 스레드에서 직접 실행됩니다.
 
 다음 배포 전략이 지원됩니다.
@@ -33,9 +36,15 @@ ms.locfileid: "80751126"
 * Blazor 앱은 ASP.NET Core 앱에서 제공됩니다. 이 전략은 [ASP.NET Core를 사용하여 호스트된 배포](#hosted-deployment-with-aspnet-core) 섹션에서 설명합니다.
 * Blazor 앱은 정적 호스팅 웹 서버 또는 서비스에 배치되며, 이 경우 Blazor 앱을 처리하기 위해 .NET을 사용하지 않습니다. 이 전략은 Blazor WebAssembly 앱을 IIS 하위 앱으로 호스트하는 방법에 대한 정보를 포함하는 [독립 실행형 배포](#standalone-deployment) 섹션에서 설명합니다.
 
+## <a name="brotli-precompression"></a>Brotli 사전 압축
+
+Blazor WebAssembly 앱이 게시될 때 [Brotli 압축 알고리즘](https://tools.ietf.org/html/rfc7932)을 사용해 출력을 사전 압축하여 앱 크기를 줄이고 런타임 압축이 필요 없게 합니다.
+
+IIS *web.config* 압축 구성에 대해서는 [IIS: Brotli 및 Gzip 압축](#brotli-and-gzip-compression) 섹션을 참조하세요.
+
 ## <a name="rewrite-urls-for-correct-routing"></a>올바른 라우팅을 위해 URL 다시 생성
 
-Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 Blazor 서버에서 호스트한 앱의 요청을 라우팅하는 것처럼 간단하지 않습니다. 다음 두 가지 구성 요소가 있는 Blazor WebAssembly 앱을 생각해 보겠습니다.
+Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 Blazor 서버에서 호스트한 앱의 요청을 라우팅하는 것처럼 간단하지 않습니다. 다음 두 가지 구성 요소가 있는 Blazor WebAssembly를 생각해 보겠습니다.
 
 * *Main.razor* &ndash; 앱의 루트에 로드되며 `About` 구성 요소에 대한 링크(`href="About"`)를 포함합니다.
 * *About.razor* &ndash; `About` 구성 요소입니다.
@@ -47,7 +56,7 @@ Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 
 1. *index.html* 앱을 부트스트랩으로 처리합니다.
 1. Blazor의 라우터가 로드되고 Razor `Main` 구성 요소가 렌더링됩니다.
 
-Blazor 라우터는 브라우저가 인터넷에서 `www.contoso.com`으로 `About`을 요청하는 것을 중단하고 렌더링된 `About` 구성 요소를 직접 제공하므로 기본 페이지에서 `About` 구성 요소에 대한 링크 선택은 클라이언트에서 작동합니다. *Blazor WebAssembly 앱 내*의 내부 엔드포인트에 대한 모든 요청도 같은 방법으로 작동합니다. 요청은 인터넷상에서 서버가 호스트하는 리소스에 대한 브라우저 기반 요청을 트리거하지 않습니다. 라우터가 내부적으로 요청을 처리합니다.
+Blazor 라우터는 브라우저가 인터넷 상에서 `About`에 대해 `www.contoso.com`을 요청하는 것을 중단하고 렌더링된 `About` 구성 요소를 직접 제공하므로 `About` 페이지에 대한 링크 선택은 클라이언트에서 작동합니다. *Blazor WebAssembly 앱 내의* 내부 엔드포인트에 대한 모든 요청도 같은 방법으로 작동합니다. 요청은 인터넷상에서 서버가 호스트하는 리소스에 대한 브라우저 기반 요청을 트리거하지 않습니다. 라우터가 내부적으로 요청을 처리합니다.
 
 브라우저의 주소 표시줄을 사용하여 `www.contoso.com/About`을 요청하면 해당 요청이 실패합니다. 앱의 인터넷 호스트에 해당 리소스가 없으므로 *404 - 찾을 수 없음* 응답이 반환됩니다.
 
@@ -57,7 +66,7 @@ IIS 서버에 배포하는 경우 앱의 게시된 *web.config* 파일과 함께
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>ASP.NET Core를 사용하여 호스트된 배포
 
-*호스트된 배포*는 웹 서버에서 실행되는 [ASP.NET Core 앱](xref:index)에서 Blazor WebAssembly 앱을 브라우저에 제공하지 않습니다.
+*호스트된 배포*는 웹 서버상에서 실행되는 [ASP.NET Core 앱](xref:index)에서 Blazor WebAssembly 앱을 브라우저에 제공하지 않습니다.
 
 클라이언트 Blazor WebAssembly 앱이 서버 앱의 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 서버 앱의 다른 정적 웹 자산과 함께 게시됩니다. 두 앱이 함께 배포됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 호스트된 배포의 경우 Visual Studio에는 **Hosted**(`dotnet new` 명령을 사용하는 경우 `-ho|--hosted`) 옵션이 선택된 **Blazor WebAssembly 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorwasm` 템플릿)이 포함됩니다.
 
@@ -70,6 +79,12 @@ Azure App Service 배포에 대한 자세한 내용은 <xref:tutorials/publish-t
 *독립 실행형 배포*는 Blazor WebAssembly 앱을 클라이언트가 직접 요청하는 정적 파일 세트로 제공합니다. 모든 정적 파일 서버는 Blazor 앱을 사용할 수 있습니다.
 
 독립 실행형 배포 자산은 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 게시됩니다.
+
+### <a name="azure-app-service"></a>Azure App Service
+
+Blazor WebAssembly 앱은 [IIS](#iis)에서 앱을 호스트하는 Windows의 Azure App Services에 배포할 수 있습니다.
+
+Linux용 Azure App Service에 독립 실행형 Blazor WebAssembly 앱 배포는 현재 지원되지 않습니다. 지금은 앱을 호스트하는 Linux 서버 이미지를 사용할 수 없습니다. 이 시나리오를 사용할 수 있도록 하는 작업이 진행 중입니다.
 
 ### <a name="iis"></a>IIS
 
@@ -96,19 +111,7 @@ Blazor 프로젝트가 게시되면 다음 IIS 구성을 사용하여 *web.confi
   
 #### <a name="use-a-custom-webconfig"></a>사용자 지정 web.config 사용
 
-사용자 지정 *web .config* 파일을 사용하려면
-
-1. 프로젝트 폴더의 루트에 사용자 지정 *web.config* 파일을 저장합니다.
-1. 프로젝트 파일( *.csproj*)에 다음 대상을 추가합니다.
-
-   ```xml
-   <Target Name="CopyWebConfigOnPublish" AfterTargets="Publish">
-     <Copy SourceFiles="web.config" DestinationFolder="$(PublishDir)" />
-   </Target>
-   ```
-   
-> [!NOTE]
-> MSBuild 속성 `<IsWebConfigTransformDisabled>`를 `true`로 설정하여 사용하는 것은 [IIS에 배포된 ASP.NET Core 앱용이므로](xref:host-and-deploy/iis/index#webconfig-file) Blazor WebAssembly 앱에서는 지원되지 않습니다. 자세한 내용은 [Copy target required to provide custom Blazor WASM web.config(dotnet/aspnetcore #20569)](https://github.com/dotnet/aspnetcore/issues/20569)(사용자 지정 Blazor WASM web.config를 제공하는 데 필요한 대상 복사)를 참조하세요.
+사용자 지정 *web.config* 파일을 사용하려면 사용자 지정 *web.config* 파일을 프로젝트 폴더의 루트에 배치하고 프로젝트를 게시합니다.
 
 #### <a name="install-the-url-rewrite-module"></a>URL 재작성 모듈 설치
 
@@ -130,7 +133,7 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 
 * 상속된 ASP.NET Core 모듈 처리기를 사용하지 않도록 설정합니다.
 
-  Blazor 앱의 게시된 *web.config* 파일에 `<handlers>` 섹션을 추가하여 파일에서 핸들러를 제거합니다.
+  파일에 `<handlers>` 섹션을 추가하여 Blazor 앱의 게시된 *web.config* 파일에서 처리기를 제거합니다.
 
   ```xml
   <handlers>
@@ -156,6 +159,10 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 
 처리기 제거 또는 상속을 사용하지 않도록 하는 설정은 [앱의 기본 경로 구성](xref:host-and-deploy/blazor/index#app-base-path)에 더하여 수행됩니다. IIS에서 하위 앱을 구성할 때
 앱의 *index.html* 파일에서 앱 기본 경로를 사용한 IIS 별칭으로 설정합니다.
+
+#### <a name="brotli-and-gzip-compression"></a>Brotli 및 Gzip 압축
+
+*web.config*를 통해 IIS를 구성하여 Brotli 또는 Gzip 압축 Blazor 자산을 제공할 수 있습니다. 예제 구성은 [web.config](webassembly/_samples/web.config?raw=true)를 참조합니다.
 
 #### <a name="troubleshooting"></a>문제 해결
 
@@ -336,3 +343,122 @@ URL 다시 생성을 처리하려면 *index.html* 페이지로 요청 리디렉�
 ## <a name="configure-the-linker"></a>링커 구성
 
 Blazor는 각 릴리스 빌드에 대해 IL(중간 언어) 연결을 수행하여 출력 어셈블리에서 불필요한 IL을 제거합니다. 자세한 내용은 <xref:host-and-deploy/blazor/configure-linker>를 참조하세요.
+
+## <a name="custom-boot-resource-loading"></a>사용자 지정 부팅 리소스 로드
+
+`loadBootResource` 함수로 Blazor WebAssembly 앱을 초기화하여 기본 제공 부팅 리소스 로드 메커니즘을 재정의할 수 있습니다. 다음 시나리오에 `loadBootResource`를 사용합니다.
+
+* 사용자가 CDN에서 표준 시간대 데이터 또는 *dotnet.wasm* 같은 정적 리소스를 로드하도록 합니다.
+* HTTP 요청을 사용하여 압축된 어셈블리를 로드하고 서버에서 압축된 콘텐츠 페치를 지원하지 않는 호스트의 경우 클라이언트에서 압축을 풉니다.
+* 각 `fetch` 요청을 새 이름으로 리디렉션하여 리소스 별칭을 다른 이름으로 지정합니다.
+
+`loadBootResource` 매개 변수는 다음 표에 나와 있습니다.
+
+| 매개 변수    | 설명 |
+| ------------ | ----------- |
+| `type`       | 리소스 형식입니다. 허용되는 형식: `assembly`, `pdb`, `dotnetjs`, `dotnetwasm`, `timezonedata` |
+| `name`       | 리소스의 이름입니다. |
+| `defaultUri` | 리소스의 상대 또는 절대 URI입니다. |
+| `integrity`  | 응답에서 예상되는 콘텐츠를 나타내는 무결성 문자열입니다. |
+
+`loadBootResource`는 로드 프로세스를 재정의하기 위해 다음 항목을 반환합니다.
+
+* URI 문자열. 다음 예제(*wwwroot/index.html*)에서 다음 파일은 `https://my-awesome-cdn.com/`의 CDN에서 제공됩니다.
+
+  * *dotnet.\*.js*
+  * *dotnet.wasm*
+  * 표준 시간대 데이터
+
+  ```html
+  ...
+
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
+        switch (type) {
+          case 'dotnetjs':
+          case 'dotnetwasm':
+          case 'timezonedata':
+            return `https://my-awesome-cdn.com/blazorwebassembly/3.2.0/${name}`;
+        }
+      }
+    });
+  </script>
+  ```
+
+* `Promise<Response>`. 헤더에서 `integrity` 매개 변수를 전달하여 기본 무결성 검사 동작을 유지합니다.
+
+  다음 예제(*wwwroot/index.html*)에서는 사용자 지정 HTTP 헤더를 아웃바운드 요청에 추가하고 `integrity` 매개 변수를 `fetch` 호출에 전달합니다.
+  
+  ```html
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        return fetch(defaultUri, { 
+          cache: 'no-cache',
+          integrity: integrity,
+          headers: { 'MyCustomHeader': 'My custom value' }
+        });
+      }
+    });
+  </script>
+  ```
+
+* `null`/`undefined`, 기본 로드 동작이 발생합니다.
+
+외부 소스는 브라우저에서 원본 간 리소스 로드를 허용하는 데 필요한 CORS 헤더를 반환해야 합니다. 일반적으로 CDN은 필요한 헤더를 기본적으로 제공합니다.
+
+사용자 지정 동작의 경우에만 형식을 지정해야 합니다. `loadBootResource`에 지정되지 않은 형식은 기본 로드 동작에 따라 프레임워크에서 로드됩니다.
+
+## <a name="change-the-filename-extension-of-dll-files"></a>DLL 파일의 파일 이름 확장명 변경
+
+앱 게시 *.dll* 파일의 파일 이름 확장명을 변경해야 하는 경우 이 섹션의 지침을 따르세요.
+
+앱을 게시한 후 셸 스크립트 또는 DevOps 빌드 파이프라인을 사용하여 다른 파일 확장명을 사용하도록 *.dll* 파일의 이름을 바꿉니다. 앱 게시 출력(예: *{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot*)의 *wwwroot* 디렉터리에 있는 *.dll* 파일을 대상으로 지정합니다.
+
+다음 예제에서는 *.bin* 파일 확장명을 사용하도록 *.dll* 파일의 이름이 바뀝니다.
+
+Windows에서:
+
+```powershell
+dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content .\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content .\_framework\blazor.boot.json
+```
+
+Linux 또는 macOS에서:
+
+```console
+for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
+sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
+```
+   
+*.bin* 이외의 다른 파일 확장명을 사용하려면 이전 명령에서 *.bin*을 바꿉니다.
+
+압축된 *blazor.boot.json.gz* 및 *blazor.boot.json.br* 파일을 처리하려면 다음 접근 방법 중 하나를 적용합니다.
+
+* 압축된 *blazor.boot.json.gz* 및 *blazor.boot.json.br* 파일을 제거합니다. 압축은 이 접근 방법으로 사용하지 않도록 설정됩니다.
+* 업데이트된 *blazor.boot.json* 파일을 다시 압축합니다.
+
+다음 Windows 예제에서는 프로젝트의 루트에 배치된 PowerShell 스크립트를 사용합니다.
+
+*ChangeDLLExtensions.ps1:* :
+
+```powershell
+param([string]$filepath,[string]$tfm)
+dir $filepath\bin\Release\$tfm\wwwroot\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json
+Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
+```
+
+프로젝트 파일에서 스크립트는 앱을 게시한 후에 실행됩니다.
+
+```xml
+<Target Name="ChangeDLLFileExtensions" AfterTargets="Publish" Condition="'$(Configuration)'=='Release'">
+  <Exec Command="powershell.exe -command &quot;&amp; { .\ChangeDLLExtensions.ps1 '$(SolutionDir)' '$(TargetFramework)'}&quot;" />
+</Target>
+```
+
+피드백을 제공하려면 [aspnetcore/issues #5477](https://github.com/dotnet/aspnetcore/issues/5477)을 방문하세요.

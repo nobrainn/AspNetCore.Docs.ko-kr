@@ -5,13 +5,19 @@ description: Visual Studio 도구 및 Windows용 Docker를 사용하여 ASP.NET 
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: ba79f0af8192ad9e8b263d4304ccc0df36c50f00
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440755"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967573"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
 
@@ -84,7 +90,11 @@ Visual Studio 컨테이너 도구는 .NET Framework를 대상으로 하는 기�
 
 Visual Studio 2017 버전 15.7 또는 이전 버전에서는 [Docker Compose](https://docs.docker.com/compose/overview/)를 단독 컨테이너 오케스트레이션 솔루션으로 지원합니다. Docker Compose 아티팩트는 **추가** > **Docker 지원**을 통해 추가됩니다.
 
-Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우에만 오케스트레이션이 추가됩니다. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **컨테이너 오케스트레이터 지원**을 선택합니다. 두 가지 다른 옵션인 [Docker Compose](#docker-compose) 및 [Service Fabric](#service-fabric)이 제공됩니다.
+Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우에만 오케스트레이션이 추가됩니다. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **컨테이너 오케스트레이터 지원**을 선택합니다. 다음 중에서 선택할 수 있습니다. 
+
+* [Docker Compose](#docker-compose)
+* [Service Fabric](#service-fabric)
+* [Kubernetes/Helm ](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 
@@ -185,7 +195,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>편집하며 계속하기
 
-정적 파일 및 Razor 뷰에 대한 변경 사항은 자동으로 업데이트되므로 컴파일 단계가 필요하지 않습니다. 내용을 변경 및 저장하고 브라우저를 새로 고쳐 업데이트를 확인합니다.
+정적 파일 및 Razor 뷰에 대한 변경 사항은 자동 업데이트되므로 컴파일 단계가 필요하지 않습니다. 내용을 변경 및 저장하고 브라우저를 새로 고쳐 업데이트를 확인합니다.
 
 코드 파일을 수정하려면 컨테이너 내에서 컴파일하고 Kestrel을 다시 시작해야 합니다. 변경 후 컨테이너 내에서 `CTRL+F5`를 사용하여 프로세스를 수행하고 앱을 시작합니다. Docker 컨테이너는 다시 빌드되거나 중지되지 않습니다. PMC에서 `docker ps` 명령을 실행합니다. 원래 컨테이너는 10분 이전을 기준으로 여전히 실행됩니다.
 

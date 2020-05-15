@@ -5,17 +5,20 @@ description: 데이터에 바인딩하고, 이벤트를 처리하고, 구성 요
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/21/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: a9ae84c36716bfc07ae3cf86214e48ad24770401
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205958"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153512"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -27,25 +30,25 @@ Blazor 앱은 *구성 요소*를 사용하여 빌드됩니다. 구성 요소는 
 
 ## <a name="component-classes"></a>구성 요소 클래스
 
-구성 요소는 C# 및 HTML 태그 조합을 사용하여 [Razor](xref:mvc/views/razor) 구성 요소 파일( *.razor*)에서 구현됩니다. Blazor의 구성 요소는 공식적으로 *Razor 구성 요소*라고 합니다.
+구성 요소는 C# 및 HTML 태그 조합을 사용하여 [Razor](xref:mvc/views/razor) 구성 요소 파일( *.razor*)에서 구현됩니다. Blazor의 구성 요소는 공식적으로 ‘Razor 구성 요소’라고 합니다. 
 
 구성 요소의 이름은 대문자로 시작해야 합니다. 예를 들어, *MyCoolComponent.razor*는 유효하고 *myCoolComponent*는 유효하지 않습니다.
 
-구성 요소의 UI는 HTML을 사용하여 정의됩니다. 동적 렌더링 논리(예: 루프, 조건, 식)는 [Razor](xref:mvc/views/razor)라는 포함된 C# 구문을 사용하여 추가됩니다. 앱이 컴파일되면 HTML 태그 및 C# 렌더링 논리는 구성 요소 클래스로 변환됩니다. 생성된 클래스의 이름은 파일 이름과 일치합니다.
+구성 요소의 UI는 HTML을 사용하여 정의됩니다. 동적 렌더링 논리(예: 루프, 조건, 식)는 [Razor](xref:mvc/views/razor)라고 하는 포함된 C# 구문을 사용하여 추가됩니다. 앱이 컴파일되면 HTML 태그 및 C# 렌더링 논리는 구성 요소 클래스로 변환됩니다. 생성된 클래스의 이름은 파일 이름과 일치합니다.
 
 구성 요소 클래스의 멤버는 `@code` 블록에서 정의됩니다. `@code` 블록에서 구성 요소 상태(속성, 필드)는 이벤트 처리 또는 다른 구성 요소 논리 정의를 위한 메서드로 지정됩니다. 두 개 이상의 `@code` 블록이 허용됩니다.
 
 구성 요소 멤버는 `@`으로 시작되는 C# 식을 사용하는 구성 요소 렌더링 논리의 일부로 사용할 수 있습니다. 예를 들어, C# 필드는 필드 이름에 앞에 `@`을 붙여 렌더링됩니다. 다음 예제는 다음 작업을 수행합니다.
 
-* `_headingFontStyle`을 평가하고 `font-style`에 대한 CSS 속성 값으로 렌더링합니다.
-* `_headingText`를 평가하고 `<h1>` 요소의 내용으로 렌더링합니다.
+* `headingFontStyle`을 평가하고 `font-style`에 대한 CSS 속성 값으로 렌더링합니다.
+* `headingText`를 평가하고 `<h1>` 요소의 내용으로 렌더링합니다.
 
 ```razor
-<h1 style="font-style:@_headingFontStyle">@_headingText</h1>
+<h1 style="font-style:@headingFontStyle">@headingText</h1>
 
 @code {
-    private string _headingFontStyle = "italic";
-    private string _headingText = "Put on your new Blazor!";
+    private string headingFontStyle = "italic";
+    private string headingText = "Put on your new Blazor!";
 }
 ```
 
@@ -58,13 +61,19 @@ Blazor 앱은 *구성 요소*를 사용하여 빌드됩니다. 구성 요소는 
 * `Counter` 구성 요소의 네임스페이스는 `BlazorApp.Pages`입니다.
 * 구성 요소의 정규화된 형식 이름은 `BlazorApp.Pages.Counter`입니다.
 
-자세한 내용은 [구성 요소 가져오기](#import-components) 섹션을 참조하세요.
-
-사용자 지정 폴더를 사용하려면 사용자 지정 폴더의 네임스페이스를 부모 구성 요소나 앱의 *_Imports.razor* 파일에 추가합니다. 예를 들어, 다음 네임스페이스는 앱의 루트 네임스페이스가 `BlazorApp`일 때 *Components* 폴더의 구성 요소를 사용할 수 있도록 합니다.
+구성 요소를 포함하는 사용자 지정 폴더의 경우 부모 구성 요소 또는 앱의 *_Imports.razor* 파일에 `using` 문을 추가합니다. 다음 예에서는 ‘구성 요소’ 폴더의 구성 요소를 사용할 수 있도록 만듭니다. 
 
 ```razor
 @using BlazorApp.Components
 ```
+
+또는 구성 요소를 직접 참조할 수 있습니다.
+
+```razor
+<BlazorApp.Components.MyCoolComponent />
+```
+
+자세한 내용은 [구성 요소 가져오기](#import-components) 섹션을 참조하세요.
 
 ## <a name="static-assets"></a>정적 자산
 
@@ -104,7 +113,7 @@ Razor 구성 요소는 물결표-슬래시 표기법(`~/`)을 지원하지 **않
 
 Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 템플릿을 제공하여 수행됩니다.
 
-`@page` 지시어를 포함하는 Razor 파일이 컴파일되면 생성된 클래스에 경로 템플릿을 지정하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute>가 제공됩니다. 런타임에 라우터는 `RouteAttribute`를 사용하여 구성 요소 클래스를 검색하고, 요청된 URL과 일치하는 경로 템플릿을 포함하는 구성 요소를 렌더링합니다.
+`@page` 지시문을 포함하는 Razor 파일이 컴파일되면 생성된 클래스에 경로 템플릿을 지정하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute>가 제공됩니다. 런타임에 라우터는 `RouteAttribute`를 사용하여 구성 요소 클래스를 검색하고, 요청된 URL과 일치하는 경로 템플릿을 포함하는 구성 요소를 렌더링합니다.
 
 ```razor
 @page "/ParentComponent"
@@ -166,7 +175,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>특성 스플래팅 및 임의 매개 변수
 
-구성 요소는 구성 요소의 선언된 매개 변수 외에, 추가 특성도 캡처하고 렌더링할 수 있습니다. 추가 특성을 사전에 캡처한 다음, [`@attributes`](xref:mvc/views/razor#attributes) Razor 지시어를 사용하여 구성 요소를 렌더링할 때 요소에 *스플래팅*할 수 있습니다. 이 시나리오는 다양한 사용자 지정을 지원하는 태그 요소를 생성하는 구성 요소를 정의할 때 유용합니다. 예를 들어, 많은 매개 변수를 지원하는 `<input>`에 대해 개별적으로 특성을 정의하는 것이 번거로울 수 있습니다.
+구성 요소는 구성 요소의 선언된 매개 변수 외에, 추가 특성도 캡처하고 렌더링할 수 있습니다. 추가 특성을 사전에 캡처한 다음, [`@attributes`](xref:mvc/views/razor#attributes) Razor 지시문을 사용하여 구성 요소를 렌더링할 때 요소에 ‘스플래팅’할 수 있습니다.  이 시나리오는 다양한 사용자 지정을 지원하는 태그 요소를 생성하는 구성 요소를 정의할 때 유용합니다. 예를 들어, 많은 매개 변수를 지원하는 `<input>`에 대해 개별적으로 특성을 정의하는 것이 번거로울 수 있습니다.
 
 다음 예제에서 첫 번째 `<input>` 요소(`id="useIndividualParams"`)는 개별 구성 요소 매개 변수를 사용하지만 두 번째 `<input>` 요소(`id="useAttributesDict"`)는 특성 스플래팅을 사용합니다.
 
@@ -288,22 +297,22 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 * 자식 구성 요소와 동일한 유형으로 필드를 정의합니다.
 
 ```razor
-<MyLoginDialog @ref="_loginDialog" ... />
+<MyLoginDialog @ref="loginDialog" ... />
 
 @code {
-    private MyLoginDialog _loginDialog;
+    private MyLoginDialog loginDialog;
 
     private void OnSomething()
     {
-        _loginDialog.Show();
+        loginDialog.Show();
     }
 }
 ```
 
-구성 요소가 렌더링되면 `_loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음, 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
+구성 요소가 렌더링되면 `loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음, 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
 
 > [!IMPORTANT]
-> `_loginDialog` 변수는 구성 요소가 렌더링된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료한 후에 구성 요소 참조를 조작하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](xref:blazor/lifecycle#after-component-render)를 사용합니다.
+> `loginDialog` 변수는 구성 요소가 렌더링된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료한 후에 구성 요소 참조를 조작하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](xref:blazor/lifecycle#after-component-render)를 사용합니다.
 
 루프의 구성 요소를 참조하려면 [Capture references to multiple similar child-components(dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358)(여러 비슷한 자식 구성 요소에 대한 참조 캡처)를 참조하세요.
 
@@ -314,9 +323,11 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출하여 상태 업데이트
 
-Blazor는 `SynchronizationContext`를 사용하여 단일 논리적 실행 스레드를 적용합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에서 발생하는 모든 이벤트 콜백은 이 `SynchronizationContext`에서 실행됩니다. 외부 이벤트(예: 타이머 또는 다른 알림)를 기준으로 구성 요소를 업데이트해야 하는 경우 Blazor의 `SynchronizationContext`에 디스패치되는 `InvokeAsync` 메서드를 사용합니다.
+Blazor는 동기화 컨텍스트(`SynchronizationContext`)를 사용하여 단일 논리적 실행 스레드를 적용합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에서 발생하는 모든 이벤트 콜백은 이 동기화 컨텍스트에서 실행됩니다.
 
-예를 들어, 업데이트된 상태를 수신 구성 요소에 알릴 수 있는 *알림 서비스*을 고려해 보세요.
+Blazor 서버의 동기화 컨텍스트는 단일 스레드인 브라우저의 WebAssembly 모델과 거의 일치하도록 단일 스레드 환경 에뮬레이션을 시도합니다. 지정된 시점에서 작업이 정확히 하나의 스레드에서만 수행되어 단일 논리적 스레드의 느낌을 제공합니다. 두 작업이 동시에 실행되지는 않습니다.
+
+외부 이벤트(예: 타이머 또는 다른 알림)를 기준으로 구성 요소를 업데이트해야 하는 경우 Blazor의 동기화 컨텍스트에 디스패치되는 `InvokeAsync` 메서드를 사용합니다. 예를 들어, 업데이트된 상태를 수신 구성 요소에 알릴 수 있는 *알림 서비스*을 고려해 보세요.
 
 ```csharp
 public class NotifierService
@@ -334,7 +345,7 @@ public class NotifierService
 }
 ```
 
-`NotifierService`를 singleton으로 등록합니다.
+`NotifierService`를 싱글톤으로 등록합니다.
 
 * Blazor WebAssembly에서 `Program.Main`에 서비스를 등록합니다.
 
@@ -355,10 +366,10 @@ public class NotifierService
 @inject NotifierService Notifier
 @implements IDisposable
 
-<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
+<p>Last update: @lastNotification.key = @lastNotification.value</p>
 
 @code {
-    private (string key, int value) _lastNotification;
+    private (string key, int value) lastNotification;
 
     protected override void OnInitialized()
     {
@@ -369,7 +380,7 @@ public class NotifierService
     {
         await InvokeAsync(() =>
         {
-            _lastNotification = (key, value);
+            lastNotification = (key, value);
             StateHasChanged();
         });
     }
@@ -381,7 +392,7 @@ public class NotifierService
 }
 ```
 
-위의 예제에서 `NotifierService`는 Blazor의 `SynchronizationContext` 외부에서 구성 요소의 `OnNotify` 메서드를 호출합니다. `InvokeAsync`는 올바른 컨텍스트로 전환하고 렌더링을 큐에 대기하는 데 사용됩니다.
+위의 예제에서 `NotifierService`는 Blazor의 동기화 컨텍스트 외부에서 구성 요소의 `OnNotify` 메서드를 호출합니다. `InvokeAsync`는 올바른 컨텍스트로 전환하고 렌더링을 큐에 대기하는 데 사용됩니다.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>\@ 키를 사용하여 요소 및 구성 요소 유지
 
@@ -516,14 +527,14 @@ public class NotifierService
 다음 `Expander` 구성 요소는
 
 * 부모의 `Expanded` 구성 요소 매개 변수 값을 허용합니다.
-* [OnInitialized 이벤트](xref:blazor/lifecycle#component-initialization-methods)에서 구성 요소 매개 변수 값을 ‘private 필드’(`_expanded`)에 할당합니다 *.*
+* [OnInitialized 이벤트](xref:blazor/lifecycle#component-initialization-methods)에서 구성 요소 매개 변수 값을 ‘private 필드’(`expanded`)에 할당합니다 *.*
 * Private 필드를 사용하여 내부 설정/해제 상태를 유지합니다.
 
 ```razor
 <div @onclick="@Toggle">
-    Toggle (Expanded = @_expanded)
+    Toggle (Expanded = @expanded)
 
-    @if (_expanded)
+    @if (expanded)
     {
         @ChildContent
     }
@@ -536,23 +547,23 @@ public class NotifierService
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private bool _expanded;
+    private bool expanded;
 
     protected override void OnInitialized()
     {
-        _expanded = Expanded;
+        expanded = Expanded;
     }
 
     private void Toggle()
     {
-        _expanded = !_expanded;
+        expanded = !expanded;
     }
 }
 ```
 
 ## <a name="partial-class-support"></a>Partial 클래스 지원
 
-이제 Razor 구성 요소가 partial 클래스로 생성됩니다. Razor 구성 요소는 다음 방법 중 하나를 사용하여 작성됩니다.
+Razor 구성 요소가 partial 클래스로 생성됩니다. Razor 구성 요소는 다음 방법 중 하나를 사용하여 작성됩니다.
 
 * C# 코드는 단일 파일에서 HTML 태그와 Razor 코드를 사용하여 [`@code`](xref:mvc/views/razor#code) 블록에 정의됩니다. Blazor 템플릿은 이 접근 방식을 사용하여 Razor 구성 요소를 정의합니다.
 * C# 코드는 partial 클래스로 정의된 코드 숨김 파일에 배치됩니다.
@@ -566,16 +577,16 @@ public class NotifierService
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -589,7 +600,7 @@ Partial 클래스에서 코드 숨김 파일을 사용하여 `Counter` 구성 �
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
@@ -601,11 +612,11 @@ namespace BlazorApp.Pages
 {
     public partial class Counter
     {
-        private int _currentCount = 0;
+        private int currentCount = 0;
 
         void IncrementCount()
         {
-            _currentCount++;
+            currentCount++;
         }
     }
 }
@@ -652,7 +663,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>특성 지정
 
-[`@attribute`](xref:mvc/views/razor#attribute) 지시어를 사용하여 Razor 구성 요소에 특성을 지정할 수 있습니다. 다음 예제는 `[Authorize]` 특성을 구성 요소 클래스에 적용합니다.
+[`@attribute`](xref:mvc/views/razor#attribute) 지시문을 사용하여 Razor 구성 요소에 특성을 지정할 수 있습니다. 다음 예제는 `[Authorize]` 특성을 구성 요소 클래스에 적용합니다.
 
 ```razor
 @page "/"
@@ -661,7 +672,7 @@ namespace BlazorSample
 
 ## <a name="import-components"></a>구성 요소 가져오기
 
-Razor로 작성된 구성 요소의 네임스페이스는 다음을 기준으로 합니다(우선 순위에 따라).
+Razor로 작성된 구성 요소의 네임스페이스는 다음을 기준으로 합니다(우선 순위에 따름).
 
 * Razor 파일( *.razor*) 태그(`@namespace BlazorSample.MyNamespace`)의 [`@namespace`](xref:mvc/views/razor#namespace) 지정
 * 프로젝트 파일(`<RootNamespace>BlazorSample</RootNamespace>`)에서 프로젝트의 `RootNamespace`
@@ -738,10 +749,10 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링됩니다. 값이
 다음 예제에서는 `MarkupString` 형식을 사용하여 정적 HTML 콘텐츠 블록을 구성 요소의 렌더링된 출력에 추가하는 방법을 보여 줍니다.
 
 ```html
-@((MarkupString)_myMarkup)
+@((MarkupString)myMarkup)
 
 @code {
-    private string _myMarkup = 
+    private string myMarkup = 
         "<p class='markup'>This is a <em>markup string</em>.</p>";
 }
 ```
@@ -779,7 +790,7 @@ public class ThemeInfo
             <NavMenu />
         </div>
         <div class="col-sm-9">
-            <CascadingValue Value="_theme">
+            <CascadingValue Value="theme">
                 <div class="content px-4">
                     @Body
                 </div>
@@ -789,7 +800,7 @@ public class ThemeInfo
 </div>
 
 @code {
-    private ThemeInfo _theme = new ThemeInfo { ButtonClass = "btn-success" };
+    private ThemeInfo theme = new ThemeInfo { ButtonClass = "btn-success" };
 }
 ```
 
@@ -806,7 +817,7 @@ public class ThemeInfo
 
 <h1>Cascading Values & Parameters</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <p>
     <button class="btn" @onclick="IncrementCount">
@@ -821,14 +832,14 @@ public class ThemeInfo
 </p>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     [CascadingParameter]
     protected ThemeInfo ThemeInfo { get; set; }
 
     private void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -836,14 +847,14 @@ public class ThemeInfo
 동일한 형식의 여러 값을 동일한 하위 트리 내에서 연계하려면 각 `CascadingValue` 구성 요소와 해당 `CascadingParameter`에 고유한 `Name` 문자열을 제공합니다. 다음 예제에서는 두 개의 `CascadingValue` 구성 요소가 이름별로 다른 `MyCascadingType` 인스턴스를 연계합니다.
 
 ```razor
-<CascadingValue Value=@_parentCascadeParameter1 Name="CascadeParam1">
+<CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
     <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
 
 @code {
-    private MyCascadingType _parentCascadeParameter1;
+    private MyCascadingType parentCascadeParameter1;
 
     [Parameter]
     public MyCascadingType ParentCascadeParameter2 { get; set; }
@@ -923,13 +934,13 @@ public class ThemeInfo
 다음 예제에서는 `RenderFragment` 및 `RenderFragment<T>` 값을 지정하고 구성 요소에서 직접 템플릿을 렌더링하는 방법을 보여 줍니다. 렌더링 조각은 [템플릿 구성 요소](xref:blazor/templated-components)에 인수로 전달될 수도 있습니다.
 
 ```razor
-@_timeTemplate
+@timeTemplate
 
-@_petTemplate(new Pet { Name = "Rex" })
+@petTemplate(new Pet { Name = "Rex" })
 
 @code {
-    private RenderFragment _timeTemplate = @<p>The time is @DateTime.Now.</p>;
-    private RenderFragment<Pet> _petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
+    private RenderFragment timeTemplate = @<p>The time is @DateTime.Now.</p>;
+    private RenderFragment<Pet> petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
 
     private class Pet
     {

@@ -5,19 +5,22 @@ description: ASP.NET Core Blazor 앱에서 Razor 구성 요소 수명 주기 메
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: e7450ad57acc87500bb977aa8349c6ee009e3bf4
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791462"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976703"
 ---
-# <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
+# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
@@ -27,7 +30,7 @@ Blazor 프레임워크는 동기 및 비동기 수명 주기 메서드를 포함
 
 ### <a name="component-initialization-methods"></a>구성 요소 초기화 메서드
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*>는 구성 요소가 부모 구성 요소에서 초기 매개 변수를 받은 후 초기화할 때 호출됩니다. 구성 요소가 비동기 작업을 수행하며, 작업이 완료될 때 새로 고쳐야 하는 경우 `OnInitializedAsync`를 사용합니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>는 구성 요소가 부모 구성 요소에서 초기 매개 변수를 받은 후 초기화할 때 호출됩니다. 구성 요소가 비동기 작업을 수행하며, 작업이 완료될 때 새로 고쳐야 하는 경우 `OnInitializedAsync`를 사용합니다.
 
 동기 작업의 경우 `OnInitialized`를 재정의합니다.
 
@@ -60,7 +63,7 @@ Blazor 서버 앱을 미리 렌더링 중이면 브라우저에 연결되어 있
 
 ### <a name="before-parameters-are-set"></a>매개 변수를 설정하기 전
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*>는 렌더링 트리에서 구성 요소의 부모가 제공하는 매개 변수를 설정합니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A>는 렌더링 트리에서 구성 요소의 부모가 제공하는 매개 변수를 설정합니다.
 
 ```csharp
 public override async Task SetParametersAsync(ParameterView parameters)
@@ -81,7 +84,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 ### <a name="after-parameters-are-set"></a>매개 변수를 설정한 후
 
-다음 두 가지 경우에 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*>가 호출됩니다.
+다음 두 가지 경우에 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A>가 호출됩니다.
 
 * 구성 요소가 초기화되고 부모 구성 요소에서 첫 번째 매개 변수 집합을 받은 경우
 * 부모 구성 요소가 다시 렌더링되고 다음을 제공하는 경우
@@ -109,7 +112,7 @@ protected override void OnParametersSet()
 
 ### <a name="after-component-render"></a>구성 요소 렌더링 후
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender*>는 구성 요소 렌더링을 완료한 후에 호출됩니다. 이때 요소 및 구성 요소 참조가 채워집니다. 렌더링된 DOM 요소에서 작동하는 타사 JavaScript 라이브러리 활성화와 같은 추가 초기화 단계를 렌더링된 콘텐츠로 수행하려면 이 단계를 사용합니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A>는 구성 요소 렌더링을 완료한 후에 호출됩니다. 이때 요소 및 구성 요소 참조가 채워집니다. 렌더링된 DOM 요소에서 작동하는 타사 JavaScript 라이브러리 활성화와 같은 추가 초기화 단계를 렌더링된 콘텐츠로 수행하려면 이 단계를 사용합니다.
 
 `OnAfterRenderAsync` 및 `OnAfterRender`의 `firstRender` 매개 변수와 관련해서 다음 사항을 확인합니다.
 
@@ -147,7 +150,7 @@ protected override void OnAfterRender(bool firstRender)
 
 ### <a name="suppress-ui-refreshing"></a>UI 새로 고침 표시 안 함
 
-UI 새로 고침을 표시하지 않으려면 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender*>를 재정의합니다. 구현에서 `true`를 반환하는 경우 UI가 새로 고쳐집니다.
+UI 새로 고침을 표시하지 않으려면 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>를 재정의합니다. 구현에서 `true`를 반환하는 경우 UI가 새로 고쳐집니다.
 
 ```csharp
 protected override bool ShouldRender()
@@ -164,7 +167,7 @@ protected override bool ShouldRender()
 
 ## <a name="state-changes"></a>상태 변경
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*>는 구성 요소에 상태가 변경되었음을 알립니다. 해당하는 경우, `StateHasChanged`를 호출하면 구성 요소가 다시 렌더링됩니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>는 구성 요소에 상태가 변경되었음을 알립니다. 해당하는 경우, `StateHasChanged`를 호출하면 구성 요소가 다시 렌더링됩니다.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>렌더링 시 불완전한 비동기 작업 처리
 
@@ -195,7 +198,7 @@ Blazor 서버 템플릿의 *Pages/FetchData.razor*:
 ```
 
 > [!NOTE]
-> `Dispose`에서 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> 호출은 지원되지 않습니다. 렌더러를 삭제하는 과정에서 `StateHasChanged`가 호출될 수 있으므로, 해당 시점에 UI 업데이트를 요청할 수는 없습니다.
+> `Dispose`에서 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> 호출은 지원되지 않습니다. 렌더러를 삭제하는 과정에서 `StateHasChanged`가 호출될 수 있으므로, 해당 시점에 UI 업데이트를 요청할 수는 없습니다.
 
 .NET 이벤트에서 이벤트 처리기의 구독을 취소합니다. 다음 [Blazor 양식](xref:blazor/forms-validation) 예제에서는 `Dispose` 메서드에서 이벤트 처리기를 언후크하는 방법을 보여 줍니다.
 
@@ -231,7 +234,7 @@ Blazor 서버 앱에서 이중 렌더링 시나리오를 방지하려면 다음�
 ```csharp
 public class WeatherForecastService
 {
-    private static readonly string[] _summaries = new[]
+    private static readonly string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild",
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -262,7 +265,7 @@ public class WeatherForecastService
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Length)]
+                Summary = summaries[rng.Next(summaries.Length)]
             }).ToArray();
         });
     }
@@ -274,3 +277,73 @@ public class WeatherForecastService
 ## <a name="detect-when-the-app-is-prerendering"></a>앱을 미리 렌더링 중인 경우 검색
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="cancelable-background-work"></a>취소할 수 있는 백그라운드 작업
+
+구성 요소는 네트워크 호출(<xref:System.Net.Http.HttpClient>) 및 데이터베이스와의 상호 작용 등과 같은 장기 실행 백그라운드 작업을 수행하는 경우가 많습니다. 여러 상황에서 시스템 리소스를 절약하기 위해 백그라운드 작업을 중지하는 것이 좋습니다. 예를 들어 사용자가 구성 요소에서 이동할 때 백그라운드 비동기 작업이 자동으로 중지되지 않습니다.
+
+백그라운드 작업 항목에 취소가 필요할 수 있는 다른 이유는 다음과 같습니다.
+
+* 잘못된 입력 데이터 또는 처리 매개 변수를 사용하여 실행 중인 백그라운드 작업이 시작되었습니다.
+* 현재 실행 중인 백그라운드 작업 항목 집합을 새 작업 항목 집합으로 바꾸어야 합니다.
+* 현재 실행 중인 작업의 우선 순위를 변경해야 합니다.
+* 서버에 다시 배포하기 위해 앱을 종료해야 합니다.
+* 서버 리소스가 제한되므로 백그라운드 작업 항목을 다시 예약해야 합니다.
+
+구성 요소에서 취소할 수 있는 백그라운드 작업 패턴을 구현하는 방법은 다음과 같습니다.
+
+* <xref:System.Threading.CancellationTokenSource> 및 <xref:System.Threading.CancellationToken>을 사용합니다.
+* [구성 요소를 삭제](#component-disposal-with-idisposable)할 때 그리고 토큰을 수동으로 취소할 필요가 있을 때, [CancellationTokenSource.Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A)을 호출하여 백그라운드 작업을 취소해야 한다는 신호를 보냅니다.
+* 비동기 호출이 반환된 후에는 토큰에서 <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A>를 호출합니다.
+
+다음 예제에서는
+
+* `await Task.Delay(5000, cts.Token);`는 장기 실행 비동기 백그라운드 작업을 나타냅니다.
+* `BackgroundResourceMethod`는 호출되기 전에 `Resource`가 삭제된 경우 시작하지 않아야 하는 장기 실행 백그라운드 메서드를 나타냅니다.
+
+```razor
+@implements IDisposable
+@using System.Threading
+
+<button @onclick="LongRunningWork">Trigger long running work</button>
+
+@code {
+    private Resource resource = new Resource();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected async Task LongRunningWork()
+    {
+        await Task.Delay(5000, cts.Token);
+
+        cts.Token.ThrowIfCancellationRequested();
+        resource.BackgroundResourceMethod();
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        resource.Dispose();
+    }
+
+    private class Resource : IDisposable
+    {
+        private bool disposed;
+
+        public void BackgroundResourceMethod()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(Resource));
+            }
+            
+            ...
+        }
+        
+        public void Dispose()
+        {
+            disposed = true;
+        }
+    }
+}
+```

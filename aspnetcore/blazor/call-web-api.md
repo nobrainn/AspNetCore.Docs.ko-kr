@@ -5,7 +5,7 @@ description: CORS(원본 간 리소스 공유) 요청 만들기를 포함하여 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/04/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: d823db3688e05f6befefacc9f390e0dcdbf329a7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7ed2d51c0d41a50a2e139d739a0a06cd9f392a83
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767150"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153508"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 웹 API 호출
 
@@ -87,37 +87,37 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
 
 * `GetFromJsonAsync` &ndash; HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.
 
-  다음 코드에서 `_todoItems`는 구성 요소에 의해 표시됩니다. `GetTodoItems` 메서드는 구성 요소가 렌더링을 완료할 때 트리거됩니다([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). 전체 예제는 샘플 앱을 참조하세요.
+  다음 코드에서 `todoItems`는 구성 요소에 의해 표시됩니다. `GetTodoItems` 메서드는 구성 요소가 렌더링을 완료할 때 트리거됩니다([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). 전체 예제는 샘플 앱을 참조하세요.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
   @code {
-      private TodoItem[] _todoItems;
+      private TodoItem[] todoItems;
 
       protected override async Task OnInitializedAsync() => 
-          _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
+          todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
   }
   ```
 
 * `PostAsJsonAsync` &ndash; JSON 인코딩 콘텐츠를 포함하여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.
 
-  다음 코드에서 구성 요소의 바인딩된 요소는 `_newItemName`을 제공합니다. `AddItem` 메서드는 `<button>` 요소를 선택하여 트리거됩니다. 전체 예제는 샘플 앱을 참조하세요.
+  다음 코드에서 구성 요소의 바인딩된 요소는 `newItemName`을 제공합니다. `AddItem` 메서드는 `<button>` 요소를 선택하여 트리거됩니다. 전체 예제는 샘플 앱을 참조하세요.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
-  <input @bind="_newItemName" placeholder="New Todo Item" />
+  <input @bind="newItemName" placeholder="New Todo Item" />
   <button @onclick="@AddItem">Add</button>
 
   @code {
-      private string _newItemName;
+      private string newItemName;
 
       private async Task AddItem()
       {
-          var addItem = new TodoItem { Name = _newItemName, IsComplete = false };
+          var addItem = new TodoItem { Name = newItemName, IsComplete = false };
           await Http.PostAsJsonAsync("api/TodoItems", addItem);
       }
   }
@@ -131,28 +131,28 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
 
 * `PutAsJsonAsync` &ndash; JSON 인코딩 콘텐츠를 포함하여 HTTP PUT 요청을 보냅니다.
 
-  다음 코드에서 구성 요소의 바인딩된 요소는 `Name` 및 `IsCompleted`에 대한 `_editItem` 값을 제공합니다. 항목의 `Id`는 UI의 다른 부분에서 해당 항목을 선택하고 `EditItem`을 호출하면 설정됩니다. `SaveItem` 메서드는 Save `<button>` 요소를 선택하여 트리거됩니다. 전체 예제는 샘플 앱을 참조하세요.
+  다음 코드에서 구성 요소의 바인딩된 요소는 `Name` 및 `IsCompleted`에 대한 `editItem` 값을 제공합니다. 항목의 `Id`는 UI의 다른 부분에서 해당 항목을 선택하고 `EditItem`을 호출하면 설정됩니다. `SaveItem` 메서드는 Save `<button>` 요소를 선택하여 트리거됩니다. 전체 예제는 샘플 앱을 참조하세요.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
-  <input type="checkbox" @bind="_editItem.IsComplete" />
-  <input @bind="_editItem.Name" />
+  <input type="checkbox" @bind="editItem.IsComplete" />
+  <input @bind="editItem.Name" />
   <button @onclick="@SaveItem">Save</button>
 
   @code {
-      private TodoItem _editItem = new TodoItem();
+      private TodoItem editItem = new TodoItem();
 
       private void EditItem(long id)
       {
-          var editItem = _todoItems.Single(i => i.Id == id);
-          _editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
+          var editItem = todoItems.Single(i => i.Id == id);
+          editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
               IsComplete = editItem.IsComplete };
       }
 
       private async Task SaveItem() =>
-          await Http.PutAsJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
+          await Http.PutAsJsonAsync($"api/TodoItems/{editItem.Id}, editItem);
   }
   ```
   
@@ -170,16 +170,142 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
 @using System.Net.Http
 @inject HttpClient Http
 
-<input @bind="_id" />
+<input @bind="id" />
 <button @onclick="@DeleteItem">Delete</button>
 
 @code {
-    private long _id;
+    private long id;
 
     private async Task DeleteItem() =>
-        await Http.DeleteAsync($"api/TodoItems/{_id}");
+        await Http.DeleteAsync($"api/TodoItems/{id}");
 }
 ```
+
+## <a name="named-httpclient-with-ihttpclientfactory"></a>IHttpClientFactory를 사용하여 명명된 HttpClient
+
+<xref:System.Net.Http.IHttpClientFactory> 서비스 및 명명된 <xref:System.Net.Http.HttpClient>의 구성이 지원됩니다.
+
+`Program.Main`(*Program.cs*):
+
+```csharp
+builder.Services.AddHttpClient("ServerAPI", client => 
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+```
+
+`FetchData` 구성 요소(*Pages/FetchData.razor*):
+
+```razor
+@inject IHttpClientFactory ClientFactory
+
+...
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = ClientFactory.CreateClient("ServerAPI");
+
+        forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+            "WeatherForecast");
+    }
+}
+```
+
+## <a name="typed-httpclient"></a>형식화된 HttpClient
+
+형식화된 <xref:System.Net.Http.HttpClient>는 앱의 기본값 또는 명명된 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 하나 이상의 웹 API 엔드포인트에서 데이터를 반환합니다.
+
+*WeatherForecastClient.cs*:
+
+```csharp
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+
+public class WeatherForecastClient
+{
+    private readonly HttpClient client;
+
+    public WeatherForecastClient(HttpClient client)
+    {
+        this.client = client;
+    }
+
+    public async Task<WeatherForecast[]> GetForecastAsync()
+    {
+        var forecasts = new WeatherForecast[0];
+    
+        try
+        {
+            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+                "WeatherForecast");
+        }
+        catch
+        {
+            ...
+        }
+    
+        return forecasts;
+    }
+}
+```
+
+`Program.Main`(*Program.cs*):
+
+```csharp
+builder.Services.AddHttpClient<WeatherForecastClient>(client => 
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+```
+
+구성 요소는 형식화된 `HttpClient`를 삽입하여 웹 API를 호출합니다.
+
+`FetchData` 구성 요소(*Pages/FetchData.razor*):
+
+```razor
+@inject WeatherForecastClient Client
+
+...
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Client.GetForecastAsync();
+    }
+}
+```
+
+## <a name="handle-errors"></a>오류 처리
+
+웹 API와 상호 작용하는 동안 오류가 발생하는 경우 개발자 코드로 처리할 수 있습니다. 예를 들어 `GetFromJsonAsync`에는 `application/json`의 `Content-Type`을 가진 서버 API의 JSON 응답이 필요합니다. 응답이 JSON 형식이 아닌 경우 콘텐츠 유효성 검사는 <xref:System.NotSupportedException>을 throw합니다.
+
+다음 예제에서는 날씨 예측 데이터 요청에 대한 URI 엔드포인트의 철자가 잘못되었습니다. URI는 `WeatherForecast`가 되어야 하지만 호출에는 `WeatherForcast`(“e” 누락)로 표시됩니다.
+
+`GetFromJsonAsync` 호출에서는 JSON이 반환되어야 하지만, 서버는 `text/html`의 `Content-Type`을 사용하여 서버에서 처리되지 않은 예외에 대한 HTML을 반환합니다. 경로를 찾을 수 없고 미들웨어에서 요청에 대한 페이지 또는 보기를 제공할 수 없기 때문에 처리되지 않은 예외가 서버에서 발생합니다.
+
+클라이언트의 `OnInitializedAsync`에서 응답 콘텐츠가 JSON이 아닌 것으로 확인되면 <xref:System.NotSupportedException>이 throw됩니다. `catch` 블록에서 예외가 catch됩니다. 여기서 사용자 지정 논리는 오류를 기록하거나 사용자에게 친숙한 오류 메시지를 표시할 수 있습니다.
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    try
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(
+            "WeatherForcast");
+    }
+    catch (NotSupportedException exception)
+    {
+        ...
+    }
+}
+```
+
+> [!NOTE]
+> 앞의 예제는 데모용입니다. 엔드포인트가 없거나 서버에서 처리되지 않은 예외가 발생한 경우에도 JSON을 반환하도록 웹 API 서버 앱을 구성할 수 있습니다.
+
+자세한 내용은 <xref:blazor/handle-errors>를 참조하세요.
 
 ## <a name="cross-origin-resource-sharing-cors"></a>CORS(원본 간 리소스 공유)
 
@@ -191,8 +317,7 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:security/blazor/webassembly/index>
-* <xref:security/blazor/webassembly/additional-scenarios>
+* <xref:security/blazor/webassembly/additional-scenarios> &ndash; 보안 웹 API 요청을 만들기 위해 `HttpClient` 사용에 대한 검사를 포함합니다.
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS 엔드포인트 구성](xref:fundamentals/servers/kestrel#endpoint-configuration)
