@@ -367,6 +367,8 @@
           uid: blazor/debug
         - name: WebAssembly에서 웹 API 호출
           uid: blazor/call-web-api
+        - name: WebAssembly 성능
+          uid: performance/blazor/webassembly-best-practices
         - name: 프로그레시브 웹 애플리케이션
           uid: blazor/progressive-web-app
         - name: 호스트 및 배포
@@ -557,7 +559,7 @@
     - name: 클라이언트
       displayName: signalr
       items:
-        - name: SignalR 클라이언트 기능
+        - name: 개요
           uid: signalr/client-features
           displayName: signalr
         - name: .NET 클라이언트
@@ -1180,6 +1182,8 @@
       uid: performance/diagnostic-tools
     - name: 로드 및 스트레스 테스트
       uid: test/loadtests
+    - name: Blazor WebAssembly
+      uid: performance/blazor/webassembly-best-practices
 - name: 전역화 및 지역화
   items:
     - name: 개요

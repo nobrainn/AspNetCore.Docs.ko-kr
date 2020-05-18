@@ -5,7 +5,7 @@ description: Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 153e88bb5bd99803f0ac4a0c50213e22a3278cad
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768002"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424522"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
 
@@ -57,8 +57,22 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 * Blazor WebAssembly 앱이 로그인 콜백 엔드포인트(`/authentication/login-callback`)를 로드하면 인증 응답이 처리됩니다.
   * 인증 프로세스가 완료되면 사용자는 인증되고 필요에 따라 사용자가 요청한 원래의 보호된 URL로 다시 돌아갑니다.
   * 어떤 이유로든 인증 프로세스가 실패하는 경우 사용자는 로그인 실패 페이지(`/authentication/login-failed`)로 보내지고 오류가 표시됩니다.
+  
+## <a name="implementation-guidance"></a>구현 지침
 
-## <a name="additional-resources"></a>추가 자료
+이 ‘개요’의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다. 
 
-* 이 ‘개요’의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다. 
-* <xref:security/blazor/webassembly/additional-scenarios>
+독립 실행형 Blazor WebAssembly 앱:
+
+* [OIDC 공급자 및 WebAssembly 인증 라이브러리에 대한 일반 지침](xref:security/blazor/webassembly/standalone-with-authentication-library)
+* [Microsoft 계정](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
+* [AAD(Azure Active Directory)](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
+* [AAD(Azure Active Directory) B2C](xref:security/blazor/webassembly/standalone-with-azure-active-directory-b2c)
+
+호스트형 Blazor WebAssembly 앱:
+
+* [AAD(Azure Active Directory)](xref:security/blazor/webassembly/hosted-with-azure-active-directory)
+* [AAD(Azure Active Directory) B2C](xref:security/blazor/webassembly/hosted-with-azure-active-directory-b2c)
+* [Identity서버](xref:security/blazor/webassembly/hosted-with-identity-server)
+
+구성에 대한 추가 지침은 <xref:security/blazor/webassembly/additional-scenarios>를 참조하세요.
