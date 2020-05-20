@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core Web API에서 응답 데이터 서식 지정
-author: ardalis
-description: ASP.NET Core Web API에서 응답 데이터의 서식을 지정하는 방법을 알아봅니다.
-ms.author: riande
-ms.custom: H1Hack27Feb2017
-ms.date: 04/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/advanced/formatting
-ms.openlocfilehash: 22787b20879c3739ee8a8d74c7a39e7cf8f4d5b0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774238"
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -141,7 +129,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예를 들어:
+`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 다음은 그 예입니다.
 
 ```csharp
 public IActionResult Get()
@@ -155,13 +143,13 @@ public IActionResult Get()
 
 ### <a name="add-newtonsoftjson-based-json-format-support"></a>Newtonsoft.Json 기반 JSON 형식 지원 추가
 
-ASP.NET Core 3.0 이전에는 `Newtonsoft.Json` 패키지를 사용하여 구현된 JSON 포맷터를 기본적으로 사용했습니다. ASP.NET Core 3.0 이후의 기본 JSON 포맷터는 `System.Text.Json`을 기반으로 합니다. `Newtonsoft.Json` 기반 포맷터 및 기능에 대한 지원은 [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet 패키지를 설치하고 `Startup.ConfigureServices`에서 구성하여 이용할 수 있습니다.
+ASP.NET Core 3.0 이전에는 `Newtonsoft.Json` 패키지를 사용하여 구현된 JSON 포맷터를 기본적으로 사용했습니다. ASP.NET Core 3.0 이후의 기본 JSON 포맷터는 `System.Text.Json`을 기반으로 합니다. `Newtonsoft.Json`기반 포맷터 및 기능에 대 한 지원은 [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet 패키지를 설치 하 고에서 구성 하 여 사용할 수 있습니다 `Startup.ConfigureServices` .
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
 
 일부 기능은 `System.Text.Json` 기반 포맷터와 잘 호환되지 않고 `Newtonsoft.Json` 기반 포맷터에 대한 참조를 필요로 할 수 있습니다. 앱이 다음과 같은 경우 `Newtonsoft.Json` 기반 포맷터를 계속해서 사용합니다.
 
-* `Newtonsoft.Json` 속성을 사용합니다. 예를 들어 `[JsonProperty]` 또는 `[JsonIgnore]`입니다.
+* `Newtonsoft.Json` 속성을 사용합니다. 예를 들어 `[JsonProperty]` 또는 `[JsonIgnore]`로 이름을 지정할 수 있습니다.
 * 직렬화 설정을 사용자 지정합니다.
 * `Newtonsoft.Json`은 제공하는 기능에 의존합니다.
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings`를 구성하는 경우. ASP.NET Core 3.0 이전의 `JsonResult.SerializerSettings`는 `Newtonsoft.Json` 고유의 `JsonSerializerSettings`의 인스턴스를 허용합니다.
@@ -180,7 +168,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예를 들어:
+`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 다음은 그 예입니다.
 
 ```csharp
 public IActionResult Get()
@@ -212,7 +200,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 ### <a name="specify-a-format"></a>형식 지정
 
-응답 형식을 제한 하려면 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 필터를 적용 합니다. 대부분의 [필터](xref:mvc/controllers/filters)와 `[Produces]` 마찬가지로, 작업, 컨트롤러 또는 전역 범위에서 적용할 수 있습니다.
+응답 형식을 제한 하려면 필터를 적용 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) 합니다. 대부분의 [필터](xref:mvc/controllers/filters)와 마찬가지로, `[Produces]` 작업, 컨트롤러 또는 전역 범위에서 적용할 수 있습니다.
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
@@ -236,7 +224,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 `StringOutputFormatter`가 없으면 기본 제공 JSON 포맷터가 `string` 반환 형식의 형식을 지정합니다. 기본 제공 JSON 포맷터가 제거되고 XML 포맷터를 사용할 수 있는 경우, XML 포맷터가 `string` 반환 형식의 형식을 지정합니다. 그렇지 않으면 `string` 반환 형식이 `406 Not Acceptable`을 반환합니다.
 
-`HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 예를 들어:
+`HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 다음은 그 예입니다.
 
 * JSON 포맷터는 `null`의 본문이 포함된 응답을 반환합니다.
 * XML 포맷터는 `xsi:nil="true"`로 설정된 특성을 사용하여 빈 XML 요소를 반환합니다.
@@ -248,14 +236,218 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 * 쿼리 문자열 또는 경로의 부분에서.
 * .Xml 또는 .json과 같은 서식 지정 파일 확장명을 사용하여.
 
-요청 경로의 매핑은 API가 사용하는 경로에 지정해야 합니다. 예를 들어:
+요청 경로의 매핑은 API가 사용하는 경로에 지정해야 합니다. 다음은 그 예입니다.
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. 특성 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 은에 형식 값이 있는지 확인 `RouteData` 하 고 응답이 생성 될 때 응답 형식을 적절 한 포맷터에 매핑합니다.
+위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. 특성은에 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 형식 값이 있는지 확인 `RouteData` 하 고 응답이 생성 될 때 응답 형식을 적절 한 포맷터에 매핑합니다.
 
 |           경로        |             포맷터              |
-|------------------------|------------------------------------|
-|   `/api/products/5`    |    기본 출력 포맷터    |
-| `/api/products/5.json` | JSON 포맷터(구성된 경우) |
-| `/api/products/5.xml`  | XML 포맷터(구성된 경우)  |
+|---
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------|---제목: 작성자: 설명: ms author: 밀리초. 사용자 지정: ms. 날짜: 아니요-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------------| |   `/api/products/5`    |    기본 출력 포맷터 | | `/api/products/5.json` | JSON 포맷터 (구성 된 경우) | | `/api/products/5.xml`  | XML 포맷터 (구성 된 경우) |

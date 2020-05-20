@@ -1,24 +1,13 @@
 ---
-title: ASP.NET Core Web API의 JsonPatch
-author: rick-anderson
-description: ASP.NET Core Web API에서 JSON 패치 요청을 처리하는 방법을 알아봅니다.
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/jsonpatch
-ms.openlocfilehash: 3a78fa268cce8cff10fedf5814d61ce0e5faaf4b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766669"
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
+
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API의 JsonPatch
 
 작성자: [Tom Dykstra](https://github.com/tdykstra) 및 [Kirk Larkin](https://github.com/serpent5)
@@ -31,8 +20,8 @@ ms.locfileid: "82766669"
 
 앱에서 JSON 패치 지원을 사용 하도록 설정 하려면 다음 단계를 완료 합니다.
 
-1. [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet 패키지를 설치합니다.
-1. 프로젝트의 `Startup.ConfigureServices` 메서드를 업데이트 하 여 <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>를 호출 합니다. 예를 들어:
+1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet 패키지를 설치 합니다.
+1. 프로젝트의 메서드를 업데이트 `Startup.ConfigureServices` 하 여를 호출 <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> 합니다. 다음은 그 예입니다.
 
     ```csharp
     services
@@ -48,11 +37,11 @@ ms.locfileid: "82766669"
 
 ## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, AddNewtonsoftJson 및 System.object
 
-`AddNewtonsoftJson`모든 JSON `System.Text.Json`콘텐츠의 서식을 지정 하는 데 사용 되는 **all** 기반 입력 및 출력 포맷터를 바꿉니다. 를 사용 하 여 `Newtonsoft.Json`JSON 패치에 대 한 지원을 추가 하 고 다른 포맷터는 변경 하지 않은 채 `Startup.ConfigureServices` 프로젝트의 메서드를 다음과 같이 업데이트 합니다.
+`AddNewtonsoftJson``System.Text.Json` **모든** JSON 콘텐츠의 서식을 지정 하는 데 사용 되는 기반 입력 및 출력 포맷터를 바꿉니다. 를 사용 하 여 JSON 패치에 대 한 지원을 추가 하 고 `Newtonsoft.Json` 다른 포맷터는 변경 하지 않은 채 프로젝트의 메서드를 다음과 같이 업데이트 합니다 `Startup.ConfigureServices` .
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
-위의 코드에는 `Microsoft.AspNetCore.Mvc.NewtonsoftJson` 패키지와 다음 `using` 문이 필요 합니다.
+위의 코드에는 `Microsoft.AspNetCore.Mvc.NewtonsoftJson` 패키지와 다음 문이 필요 합니다 `using` .
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet1)]
 
@@ -110,20 +99,150 @@ JSON 패치 문서를 리소스에 적용 하 여 변경한 내용은 원자성�
 
 작업 개체의 [path](https://tools.ietf.org/html/rfc6901) 속성에서 수준 사이에는 슬래시가 있습니다. `"/address/zipCode"`)을 입력합니다.
 
-0부터 시작하는 인덱스는 배열 요소를 지정하는 데 사용됩니다. `addresses` 배열의 첫 번째 요소는 `/addresses/0`에 있습니다. `add` 배열의 끝에 대 한 인덱스 번호 대신 하이픈 (`-`)을 사용 `/addresses/-`합니다.
+0부터 시작하는 인덱스는 배열 요소를 지정하는 데 사용됩니다. `addresses` 배열의 첫 번째 요소는 `/addresses/0`에 있습니다. 배열의 끝에 대 한 `add` `-` 인덱스 번호 대신 하이픈 ()을 사용 `/addresses/-` 합니다.
 
 ### <a name="operations"></a>작업
 
 다음 표에서는 [JSON 패치 사양](https://tools.ietf.org/html/rfc6902)에 정의된 지원되는 작업을 보여 줍니다.
 
-|작업(Operation)  | 참고 |
-|-----------|--------------------------------|
-| `add`     | 속성 또는 배열 요소를 추가합니다. 기존 속성의 경우 값을 설정합니다.|
-| `remove`  | 속성 또는 배열 요소를 제거합니다. |
-| `replace` | 동일한 위치에서 `add`가 뒤에 오는 `remove`와 같습니다. |
-| `move`    | 소스의 값을 사용하는 대상에 대한 `add`가 뒤에 오는 소스에서 `remove`와 같습니다. |
-| `copy`    | 소스의 값을 사용하는 대상에 대한 `add`와 같습니다. |
-| `test`    | `path`의 값이 제공된 `value`와 같은 경우 성공 상태 코드를 반환합니다.|
+|작업(Operation)  | 메모 |
+|---
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------|---
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------------| | `add`     | 속성 또는 배열 요소를 추가 합니다. 기존 속성: 값을 설정 합니다. | | `remove`  | 속성 또는 배열 요소를 제거 합니다. | | `replace` | `remove`동일한 위치와 동일 `add` 합니다. | | `move`    | 원본 `remove` 에서의 값을 사용 하 여 대상 뒤에 오는 원본에서와 동일 `add` 합니다. | | `copy`    | `add`Source의 value를 사용 하는 대상과 동일 합니다. | | `test`    | 의 값이 제공 된 경우 성공 상태 코드 `path` `value` 를 반환 합니다. |
 
 ## <a name="json-patch-in-aspnet-core"></a>ASP.NET Core의 JSON 패치
 
@@ -137,11 +256,11 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 * 일반적으로 `[FromBody]`를 사용하여 `JsonPatchDocument<T>`를 수락합니다.
 * 패치 문서에서 `ApplyTo`를 호출하여 변경 내용을 적용합니다.
 
-예를 들면 다음과 같습니다.
+예는 다음과 같습니다.
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-샘플 앱의이 코드는 다음 `Customer` 모델과 함께 작동 합니다.
+샘플 앱의이 코드는 다음 모델과 함께 작동 합니다 `Customer` .
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
@@ -194,7 +313,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
     * 속성이 nullable인 경우: null로 설정합니다.
     * 속성이 nullable이 아닌 경우: `default<T>`로 설정합니다.
 
-다음 샘플 패치 문서는를 `CustomerName` null로 설정 하 `Orders[0]`고 삭제 합니다.
+다음 샘플 패치 문서는 `CustomerName` 를 null로 설정 하 고 삭제 합니다 `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
@@ -202,7 +321,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 이 작업은 `add`가 뒤에 오는 `remove`와 기능적으로 동일합니다.
 
-다음 샘플 패치 문서는의 `CustomerName` 값을 설정 하 고 `Orders[0]`를 새 `Order` 개체로 바꿉니다.
+다음 샘플 패치 문서는의 값을 설정 `CustomerName` 하 고를 `Orders[0]` 새 `Order` 개체로 바꿉니다.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
@@ -243,9 +362,9 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>코드 가져오기
+## <a name="get-the-code"></a>코드 다운로드
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples) ([다운로드 하는 방법](xref:index#how-to-download-a-sample)).
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples) ([다운로드하는 방법](xref:index#how-to-download-a-sample))
 
 샘플을 테스트하려면 앱을 실행하고 다음 설정을 사용하여 HTTP 요청을 보냅니다.
 
@@ -254,7 +373,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 * 헤더: `Content-Type: application/json-patch+json`
 * Body: *json 프로젝트 폴더에서 json 패치* 문서 샘플 중 하나를 복사 하 여 붙여넣습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [IETF RFC 5789 PATCH 메서드 사양](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON 패치 사양](https://tools.ietf.org/html/rfc6902)
@@ -328,14 +447,144 @@ JSON 패치 문서를 리소스에 적용하여 변경된 내용은 원자성입
 
 다음 표에서는 [JSON 패치 사양](https://tools.ietf.org/html/rfc6902)에 정의된 지원되는 작업을 보여 줍니다.
 
-|작업(Operation)  | 참고 |
-|-----------|--------------------------------|
-| `add`     | 속성 또는 배열 요소를 추가합니다. 기존 속성의 경우 값을 설정합니다.|
-| `remove`  | 속성 또는 배열 요소를 제거합니다. |
-| `replace` | 동일한 위치에서 `add`가 뒤에 오는 `remove`와 같습니다. |
-| `move`    | 소스의 값을 사용하는 대상에 대한 `add`가 뒤에 오는 소스에서 `remove`와 같습니다. |
-| `copy`    | 소스의 값을 사용하는 대상에 대한 `add`와 같습니다. |
-| `test`    | `path`의 값이 제공된 `value`와 같은 경우 성공 상태 코드를 반환합니다.|
+|작업(Operation)  | 메모 |
+|---
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------|---
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+제목: author: 설명: ms author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------------| | `add`     | 속성 또는 배열 요소를 추가 합니다. 기존 속성: 값을 설정 합니다. | | `remove`  | 속성 또는 배열 요소를 제거 합니다. | | `replace` | `remove`동일한 위치와 동일 `add` 합니다. | | `move`    | 원본 `remove` 에서의 값을 사용 하 여 대상 뒤에 오는 원본에서와 동일 `add` 합니다. | | `copy`    | `add`Source의 value를 사용 하는 대상과 동일 합니다. | | `test`    | 의 값이 제공 된 경우 성공 상태 코드 `path` `value` 를 반환 합니다. |
 
 ## <a name="jsonpatch-in-aspnet-core"></a>ASP.NET Core의 JsonPatch
 
@@ -349,7 +598,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 * 일반적으로 `[FromBody]`를 사용하여 `JsonPatchDocument<T>`를 수락합니다.
 * 패치 문서에서 `ApplyTo`를 호출하여 변경 내용을 적용합니다.
 
-예를 들면 다음과 같습니다.
+예는 다음과 같습니다.
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -455,9 +704,9 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>코드 가져오기
+## <a name="get-the-code"></a>코드 다운로드
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([다운로드 하는 방법](xref:index#how-to-download-a-sample)).
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([다운로드하는 방법](xref:index#how-to-download-a-sample))
 
 샘플을 테스트하려면 앱을 실행하고 다음 설정을 사용하여 HTTP 요청을 보냅니다.
 
@@ -466,7 +715,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 * 헤더: `Content-Type: application/json-patch+json`
 * Body: *json 프로젝트 폴더에서 json 패치* 문서 샘플 중 하나를 복사 하 여 붙여넣습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [IETF RFC 5789 PATCH 메서드 사양](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON 패치 사양](https://tools.ietf.org/html/rfc6902)

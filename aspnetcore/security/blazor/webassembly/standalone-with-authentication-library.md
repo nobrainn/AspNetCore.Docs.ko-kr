@@ -1,32 +1,15 @@
 ---
-title: Blazor인증 라이브러리를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 219364ef2e699ff1029536effd106a80ec02825c
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153408"
+제목: ' Blazor 인증 라이브러리를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱을 보호 합니다. ' 작성자: 설명: monikerRange: ms.:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor인증 라이브러리를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
 [Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 *AAD (Azure Active Directory) 및 Azure Active Directory B2C (AAD B2C)의 경우이 항목의 지침을 따르세요. 이 목차 노드의 AAD 및 AAD B2C 항목을 참조 하세요.*
 
@@ -48,15 +31,13 @@ Visual Studio에서 [ Blazor weasembomapp을 만듭니다](xref:blazor/get-start
 
 ```xml
 <PackageReference 
-    Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
-    Version="{VERSION}" />
+  Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
+  Version="3.2.0" />
 ```
-
-`{VERSION}`위의 패키지 참조에서를 `Microsoft.AspNetCore.Blazor.Templates` 문서에 표시 된 패키지의 버전으로 바꿉니다 <xref:blazor/get-started> .
 
 ## <a name="authentication-service-support"></a>인증 서비스 지원
 
-사용자 인증에 대 한 지원은 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다 `AddOidcAuthentication` `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . 이 메서드는 앱이 공급자 (IP)와 상호 작용 하는 데 필요한 모든 서비스를 설정 Identity 합니다.
+사용자 인증에 대 한 지원은 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다 `AddOidcAuthentication` `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . 이 메서드는 앱이 공급자 (IP)와 상호 작용 하는 데 필요한 서비스를 설정 Identity 합니다.
 
 *Program.cs*:
 
@@ -92,18 +73,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure Portal에서 범위 URI를 제공 하 고 앱이 API에서 *401 권한 없음* 응답을 받을 때 **처리 되지 않은 예외를 throw** 하는 경우 스키마와 호스트를 포함 하지 않는 범위 uri를 사용해 보세요. 예를 들어 Azure Portal는 다음 범위 URI 형식 중 하나를 제공할 수 있습니다.
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> 스키마 및 호스트 없이 범위 URI를 제공 합니다.
->
-> ```csharp
-> options.ProviderOptions.DefaultScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 자세한 내용은 *추가 시나리오* 문서의 다음 섹션을 참조 하십시오.
 
@@ -128,7 +98,39 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logindisplay-component"></a>LoginDisplay 구성 요소
 
-[!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
+구성 `LoginDisplay` 요소 (*Shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.
+
+* 인증 된 사용자의 경우:
+  * 현재 사용자 이름을 표시 합니다.
+  * 앱에서 로그 아웃할 수 있는 단추를 제공 합니다.
+* 익명 사용자의 경우은 로그인 할 수 있는 옵션을 제공 합니다.
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity.Name!
+        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+            Log out
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+```
 
 ## <a name="authentication-component"></a>인증 구성 요소
 
@@ -136,7 +138,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

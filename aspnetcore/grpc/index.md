@@ -1,23 +1,11 @@
 ---
-title: .NET Core에서 gRPC 소개
-author: juntaoluo
-description: Kestrel 서버 및 ASP.NET Core 스택을 사용하는 gRPC 서비스에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: johluo
-ms.date: 09/20/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/index
-ms.openlocfilehash: 2d7d683051fd1eb97f3f57d75bd582109166a6cd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768850"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core에서 gRPC 소개
 
@@ -36,6 +24,8 @@ gRPC의 주요 이점은 다음과 같습니다.
 * 효율성이 중요한 경량 마이크로 서비스.
 * 개발을 위해 여러 언어가 필요한 다중 언어 시스템.
 * 스트리밍 요청 또는 응답을 처리해야 하는 지점 간 실시간 서비스.
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="c-tooling-support-for-proto-files"></a>.proto 파일에 대한 C# 도구 지원
 
@@ -126,8 +116,6 @@ Console.WriteLine(response.Message);
 gRPC 클라이언트는 gRPC 서비스에 대한 수명이 긴 연결을 나타내는 채널을 사용하여 만들어집니다. `GrpcChannel.ForAddress`를 사용하여 채널을 만들 수 있습니다.
 
 클라이언트를 만들고 다른 서비스 메서드를 호출하는 방법에 대한 자세한 내용은 <xref:grpc/client> 문서를 참조하세요.
-
-[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="additional-resources"></a>추가 자료
 

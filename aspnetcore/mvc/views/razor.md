@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core에 대 한 razor 구문 참조
 author: rick-anderson
-description: 웹 페이지 Razor 에 서버 기반 코드를 포함 하는 태그 구문에 대해 알아봅니다.
+description: Razor웹 페이지에 서버 기반 코드를 포함 하는 태그 구문에 대해 알아봅니다.
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: 2831fd2edd029043e9457cd213e32f1a82c2872e
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003196"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424416"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -473,7 +473,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Razor 구성 요소의 경우 `@code` 는의 [`@functions`](#functions) 별칭이 며 권장 됩니다 `@functions`. 두 개 이상의 `@code` 블록이 허용됩니다.
+Razor 구성 요소의 경우 `@code` 는의 별칭이 [`@functions`](#functions) 며 권장 됩니다 `@functions` . 두 개 이상의 `@code` 블록이 허용됩니다.
 
 ::: moniker-end
 
@@ -493,7 +493,7 @@ Razor 구성 요소의 경우 `@code` 는의 [`@functions`](#functions) 별칭�
 
 ::: moniker-end
 
-다음은 그 예입니다. 
+다음은 그 예입니다.
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -639,7 +639,7 @@ Razor는 보기에 전달된 모델에 액세스할 수 있는 `Model` 속성을
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` 지시문은 `Model` 속성의 형식을 지정합니다. 이 지시문은 보기가 파생되는 클래스를 생성한 `RazorPage<T>`의 `T`를 지정합니다. `@model` 지시문이 지정되지 않을 경우 `Model` 속성은 `dynamic` 형식입니다. 자세한 내용은 [강력한 형식의 모델 @model 및 키워드](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)를 참조 하세요.
+`@model` 지시문은 `Model` 속성의 형식을 지정합니다. 이 지시문은 보기가 파생되는 클래스를 생성한 `RazorPage<T>`의 `T`를 지정합니다. `@model` 지시문이 지정되지 않을 경우 `Model` 속성은 `dynamic` 형식입니다. 자세한 내용은 [강력한 형식의 모델 및 @model 키워드](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)를 참조 하세요.
 
 ### <a name="namespace"></a>\@namespace
 
@@ -707,13 +707,15 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor 구성 요소](xref:blazor/components) `@using` 에서는 범위 내에 있는 구성 요소를 제어 합니다.
+[Razor 구성 요소](xref:blazor/components)에서는 `@using` 범위 내에 있는 구성 요소를 제어 합니다.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="directive-attributes"></a>지시문 특성
+
+Razor 지시문 특성은 기호 다음에 예약 된 키워드를 사용 하 여 암시적 식으로 표현 됩니다 `@` . 지시문 특성은 일반적으로 요소가 구문 분석 되거나 다른 기능을 사용 하도록 설정 하는 방식을 변경 합니다.
 
 ### <a name="attributes"></a>\@attributes
 
@@ -896,14 +898,14 @@ public class Pet
 * section
 * 도우미(현재 ASP.NET Core에서 지원되지 않음)
 
-Razor키워드는로 `@(Razor Keyword)` 이스케이프 됩니다 (예: `@(functions)`).
+Razor키워드는로 이스케이프 됩니다 `@(Razor Keyword)` (예: `@(functions)` ).
 
-### <a name="c-razor-keywords"></a>C Razor # 키워드
+### <a name="c-razor-keywords"></a>C # Razor 키워드
 
 * case
 * do
 * default
-* for
+* -
 * foreach
 * if
 * else
@@ -915,19 +917,19 @@ Razor키워드는로 `@(Razor Keyword)` 이스케이프 됩니다 (예: `@(funct
 * using
 * while
 
-C Razor # 키워드는를 `@(@C# Razor Keyword)` `@(@case)`사용 하 여 이중 이스케이프 되어야 합니다 (예:). 첫 번째 `@` 는 파서 Razor 를 이스케이프 합니다. 두 번째 `@`은 C# 파서를 이스케이프합니다.
+C # Razor 키워드는를 사용 하 여 이중 이스케이프 되어야 합니다 `@(@C# Razor Keyword)` (예: `@(@case)` ). 첫 번째는 `@` 파서를 이스케이프 합니다 Razor . 두 번째 `@`은 C# 파서를 이스케이프합니다.
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>에서 사용 되지 않는 예약 된 키워드Razor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>뷰에 대해 Razor 생성 된 c # 클래스를 검사 합니다.
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Razor뷰에 대해 생성 된 c # 클래스를 검사 합니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2.1 이상에서 [ Razor SDK](xref:razor-pages/sdk) 는 파일의 Razor 컴파일을 처리 합니다. 프로젝트를 빌드할 때 SDK는 Razor 프로젝트 루트에서 *>/<target_framework_moniker>/Razor 디렉터리 build_configuration obj/<* 를 생성 합니다. 디렉터리 내의 *Razor* 디렉터리 구조는 프로젝트의 디렉터리 구조를 미러링합니다.
+.NET Core SDK 2.1 이상에서 [ Razor SDK](xref:razor-pages/sdk) 는 파일의 컴파일을 처리 Razor 합니다. 프로젝트를 빌드할 때 SDK는 Razor 프로젝트 루트에서 *>/<target_framework_moniker>/ Razor 디렉터리 build_configuration obj/<* 를 생성 합니다. 디렉터리 내의 디렉터리 구조는 *Razor* 프로젝트의 디렉터리 구조를 미러링합니다.
 
-.NET Core 2.1를 대상으로 하는 ASP.NET Core Razor 2.1 페이지 프로젝트에서 다음 디렉터리 구조를 고려 합니다.
+.NET Core 2.1를 대상으로 하는 ASP.NET Core 2.1 페이지 프로젝트에서 다음 디렉터리 구조를 고려 합니다 Razor .
 
 * **영역인**
   * **지점**
@@ -959,7 +961,7 @@ C Razor # 키워드는를 `@(@C# Razor Keyword)` `@(@case)`사용 하 여 이중
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-*Pages/Index. cshtml*에 대해 생성 된 클래스를 보려면 *obj/Debug/Netcoreapp1.0 2.1/Razor/Pages/Index.g.cshtml.cs*를 엽니다.
+*Pages/Index. cshtml*에 대해 생성 된 클래스를 보려면 *obj/Debug/Netcoreapp1.0 2.1/ Razor /Pages/Index.g.cshtml.cs*를 엽니다.
 
 ::: moniker-end
 
@@ -981,7 +983,7 @@ ASP.NET Core MVC 프로젝트에 다음 클래스를 추가합니다.
 
 ## <a name="view-lookups-and-case-sensitivity"></a>보기 조회 및 대/소문자 구분
 
-뷰 Razor 엔진은 뷰에 대해 대/소문자를 구분 하는 조회를 수행 합니다. 그러나 실제 조회는 기본 파일 시스템에 의해 결정됩니다.
+Razor뷰 엔진은 뷰에 대해 대/소문자를 구분 하는 조회를 수행 합니다. 그러나 실제 조회는 기본 파일 시스템에 의해 결정됩니다.
 
 * 파일 기반 원본:
   * 파일 시스템이 대/소문자를 구문하지 않은 운영 체제(예: Windows)에서는 실제 파일 공급자 조회에서 대/소문자를 구분하지 않습니다. 예를 들어 `return View("Test")`는 */Views/Home/Test.cshtml*, */Views/home/test.cshtml* 및 기타 대/소문자 구분 변형과 일치하는 항목을 반환합니다.
@@ -997,4 +999,4 @@ ASP.NET Core MVC 프로젝트에 다음 클래스를 추가합니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
-[구문을 Razor 사용한 ASP.NET 웹 프로그래밍에 대 한 소개](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) 는 구문을 사용한 Razor 프로그래밍의 많은 샘플을 제공 합니다.
+을 [사용 하는 Razor ASP.NET 웹 프로그래밍 소개 구문은](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) 구문을 사용한 프로그래밍의 많은 예제를 제공 Razor 합니다.

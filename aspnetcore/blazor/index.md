@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor 소개
-author: guardrex
-description: ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하는 방법인 ASP.NET Core Blazor를 살펴봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc, seoapril2019
-ms.date: 03/25/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/index
-ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771952"
+title: ‘ASP.NET Core Blazor’ 작성자 소개: 설명: ‘ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하는 방법인 ASP.NET Core Blazor를 살펴봅니다.’
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor 소개
 
@@ -110,8 +98,6 @@ Welcome to your new app.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Blazor WebAssembly는 .NET을 사용하여 대화형 클라이언트 쪽 웹앱을 빌드하기 위한 단일 페이지 앱 프레임워크입니다. Blazor WebAssembly는 플러그인이나 코드 소스 간 컴파일 없이 개방형 웹 표준을 사용하며, 모바일 브라우저를 포함한 모든 최신 웹 브라우저에서 작동합니다.
 
 웹 브라우저 내에서 .NET 코드를 실행하는 것은 [WebAssembly](https://webassembly.org)(약식 *wasm*)를 통해 가능합니다. WebAssembly는 빠른 다운로드와 최대 실행 속도를 위해 최적화된 압축 바이트 코드 형식입니다. WebAssembly는 개방형 웹 표준이고 플러그 인 없이 웹 브라우저에서 지원됩니다.
@@ -126,7 +112,7 @@ Blazor WebAssembly 앱이 빌드되고 브라우저에서 실행되는 경우:
 * 어셈블리와 .NET 런타임이 브라우저에 다운로드됩니다.
 * Blazor WebAssembly에서 .NET 런타임을 부트스트랩하고 앱의 어셈블리를 로드하도록 런타임을 구성합니다. Blazor WebAssembly 런타임은 JavaScript interop를 사용하여 DOM 조작 및 브라우저 API 호출을 처리합니다.
 
-게시된 앱의 크기인 해당 페이로드 크기는 앱의 유용성에 중요한 성능 요소입니다.  대규모 앱은 브라우저에 다운로드되는 데 비교적 오랜 시간이 걸리므로 사용자 환경이 감소됩니다. Blazor WebAssembly에서는 페이로드 크기를 최적화하여 다운로드 시간을 줄입니다.
+게시된 앱의 크기인 해당 페이로드 크기는 앱의 유용성에 중요한 성능 요소입니다. 대규모 앱은 브라우저에 다운로드되는 데 비교적 오랜 시간이 걸리므로 사용자 환경이 감소됩니다. Blazor WebAssembly에서는 페이로드 크기를 최적화하여 다운로드 시간을 줄입니다.
 
 * [IL(중간 언어) 링커](xref:host-and-deploy/blazor/configure-linker)에서 게시하면 사용되지 않는 코드가 앱에서 제거됩니다.
 * HTTP 응답이 압축됩니다.

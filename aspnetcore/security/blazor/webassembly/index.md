@@ -1,32 +1,16 @@
 ---
-title: ASP.NET Core Blazor WebAssembly 보안
-author: guardrex
-description: Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)로 보호하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/index
-ms.openlocfilehash: 153e88bb5bd99803f0ac4a0c50213e22a3278cad
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424522"
+title: ‘보안 ASP.NET Core Blazor WebAssembly’ 작성자: 설명: ‘Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)로 보호하는 방법을 알아봅니다.’
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
 
 작성자: [Javier Calvarro Nelson](https://github.com/javiercn)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 Blazor WebAssembly 앱은 SPA(단일 페이지 애플리케이션)와 동일한 방식으로 보호됩니다. 사용자를 SPA에 인증하는 여러 가지 방법이 있지만, [OIDC(Open ID Connect)](https://openid.net/connect/)와 같은 [OAuth 2.0 프로토콜](https://oauth.net/) 기반의 구현을 사용하는 것이 가장 일반적이고 포괄적인 방법입니다.
 
@@ -60,7 +44,7 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
   
 ## <a name="implementation-guidance"></a>구현 지침
 
-이 ‘개요’의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다. 
+이 ‘개요’의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다.
 
 독립 실행형 Blazor WebAssembly 앱:
 

@@ -1,4 +1,4 @@
-구성 `LoginDisplay` 요소 (*shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.
+구성 `LoginDisplay` 요소 (*Shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.
 
 * 인증 된 사용자의 경우:
   * 현재 사용자 이름을 표시 합니다.
@@ -14,7 +14,7 @@
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
             Log out
         </button>
     </Authorized>
@@ -24,7 +24,7 @@
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginLogout(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
