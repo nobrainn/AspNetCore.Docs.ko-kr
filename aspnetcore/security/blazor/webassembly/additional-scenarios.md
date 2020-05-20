@@ -1,38 +1,22 @@
 ---
-title: Blazor추가 보안 시나리오 ASP.NET Core
-author: guardrex
-description: Blazor추가 보안 시나리오에 대해 weasembmbom를 구성 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: d460f65e996f1f77136a426b03d6eb548d9e309e
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153470"
+<span data-ttu-id="db7f0-101">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-101">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-102">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-103">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-104">'Identity'</span></span>
+- <span data-ttu-id="db7f0-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-105">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-106">'Razor'</span></span>
+- <span data-ttu-id="db7f0-107">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-107">'SignalR' uid:</span></span> 
+
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="ac88e-103">ASP.NET Core Blazor Weasembmbambambambamba 추가 보안 시나리오</span><span class="sxs-lookup"><span data-stu-id="ac88e-103">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="db7f0-108">Blazor추가 보안 시나리오 ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="db7f0-108">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
 
-<span data-ttu-id="ac88e-104">작성자: [Javier Calvarro Nelson](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="ac88e-104">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
+<span data-ttu-id="db7f0-109">작성자: [Javier Calvarro Nelson](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="db7f0-109">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="db7f0-110">나가는 요청에 토큰 연결</span><span class="sxs-lookup"><span data-stu-id="db7f0-110">Attach tokens to outgoing requests</span></span>
 
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
+<span data-ttu-id="db7f0-111">`AuthorizationMessageHandler`서비스를와 함께 사용 `HttpClient` 하 여 액세스 토큰을 보내는 요청에 연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-111">The `AuthorizationMessageHandler` service can be used with `HttpClient` to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="db7f0-112">토큰은 기존 서비스를 사용 하 여 획득 됩니다 `IAccessTokenProvider` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-112">Tokens are acquired using the existing `IAccessTokenProvider` service.</span></span> <span data-ttu-id="db7f0-113">토큰을 가져올 수 없는 경우 `AccessTokenNotAvailableException` 이 throw 됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-113">If a token can't be acquired, an `AccessTokenNotAvailableException` is thrown.</span></span> <span data-ttu-id="db7f0-114">`AccessTokenNotAvailableException`에는 `Redirect` 사용자가 id 공급자로 이동 하 여 새 토큰을 획득 하는 데 사용할 수 있는 메서드가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-114">`AccessTokenNotAvailableException` has a `Redirect` method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="db7f0-115">는 `AuthorizationMessageHandler` 메서드를 사용 하 여 권한 있는 url, 범위 및 반환 URL을 사용 하 여 구성할 수 있습니다 `ConfigureHandler` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-115">The `AuthorizationMessageHandler` can be configured with the authorized URLs, scopes, and return URL using the `ConfigureHandler` method.</span></span>
 
-## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="ac88e-105">나가는 요청에 토큰 연결</span><span class="sxs-lookup"><span data-stu-id="ac88e-105">Attach tokens to outgoing requests</span></span>
-
-<span data-ttu-id="ac88e-106">`AuthorizationMessageHandler`서비스를와 함께 사용 `HttpClient` 하 여 액세스 토큰을 보내는 요청에 연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-106">The `AuthorizationMessageHandler` service can be used with `HttpClient` to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="ac88e-107">토큰은 기존 서비스를 사용 하 여 획득 됩니다 `IAccessTokenProvider` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-107">Tokens are acquired using the existing `IAccessTokenProvider` service.</span></span> <span data-ttu-id="ac88e-108">토큰을 가져올 수 없는 경우 `AccessTokenNotAvailableException` 이 throw 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-108">If a token can't be acquired, an `AccessTokenNotAvailableException` is thrown.</span></span> <span data-ttu-id="ac88e-109">`AccessTokenNotAvailableException`에는 `Redirect` 사용자가 id 공급자로 이동 하 여 새 토큰을 획득 하는 데 사용할 수 있는 메서드가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-109">`AccessTokenNotAvailableException` has a `Redirect` method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="ac88e-110">는 `AuthorizationMessageHandler` 메서드를 사용 하 여 권한 있는 url, 범위 및 반환 URL을 사용 하 여 구성할 수 있습니다 `ConfigureHandler` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-110">The `AuthorizationMessageHandler` can be configured with the authorized URLs, scopes, and return URL using the `ConfigureHandler` method.</span></span>
-
-<span data-ttu-id="ac88e-111">다음 예제에서는 `AuthorizationMessageHandler` `HttpClient` `Program.Main` (*Program.cs*)에서를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-111">In the following example, `AuthorizationMessageHandler` configures an `HttpClient` in `Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="db7f0-116">다음 예제에서는 `AuthorizationMessageHandler` `HttpClient` `Program.Main` (*Program.cs*)에서를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-116">In the following example, `AuthorizationMessageHandler` configures an `HttpClient` in `Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -52,7 +36,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-<span data-ttu-id="ac88e-112">편의상 `BaseAddressAuthorizationMessageHandler` 앱 기준 주소를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-112">For convenience, a `BaseAddressAuthorizationMessageHandler` is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="ac88e-113">이제 인증 사용 Blazor Weasembomtemplate이 <xref:System.Net.Http.IHttpClientFactory> 서버 API 프로젝트에서를 사용 하 여를 설정 합니다 <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-113">The authentication-enabled Blazor WebAssembly templates now use <xref:System.Net.Http.IHttpClientFactory> in the Server API project to set up an <xref:System.Net.Http.HttpClient> with the `BaseAddressAuthorizationMessageHandler`:</span></span>
+<span data-ttu-id="db7f0-117">편의상 `BaseAddressAuthorizationMessageHandler` 앱 기준 주소를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-117">For convenience, a `BaseAddressAuthorizationMessageHandler` is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="db7f0-118">이제 인증 사용 Blazor weasembomomtemplate이 <xref:System.Net.Http.IHttpClientFactory> 서버 API 프로젝트에서를 사용 하 여를 설정 합니다 <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-118">The authentication-enabled Blazor WebAssembly templates now use <xref:System.Net.Http.IHttpClientFactory> in the Server API project to set up an <xref:System.Net.Http.HttpClient> with the `BaseAddressAuthorizationMessageHandler`:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -68,11 +52,11 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentity.ServerAPI"));
 ```
 
-<span data-ttu-id="ac88e-114">앞의 예제에서 클라이언트를 만든 경우 `CreateClient` <xref:System.Net.Http.HttpClient> 서버 프로젝트에 요청을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-114">Where the client is created with `CreateClient` in the preceding example, the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server project.</span></span>
+<span data-ttu-id="db7f0-119">앞의 예제에서 클라이언트를 만든 경우 `CreateClient` <xref:System.Net.Http.HttpClient> 서버 프로젝트에 요청을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-119">Where the client is created with `CreateClient` in the preceding example, the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server project.</span></span>
 
-<span data-ttu-id="ac88e-115">그런 다음 구성 된를 사용 하 여 <xref:System.Net.Http.HttpClient> 간단한 패턴을 통해 권한 있는 요청을 수행할 수 `try-catch` 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-115">The configured <xref:System.Net.Http.HttpClient> is then used to make authorized requests using a simple `try-catch` pattern.</span></span>
+<span data-ttu-id="db7f0-120">그런 다음 구성 된를 사용 하 여 <xref:System.Net.Http.HttpClient> 간단한 패턴을 통해 권한 있는 요청을 수행할 수 `try-catch` 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-120">The configured <xref:System.Net.Http.HttpClient> is then used to make authorized requests using a simple `try-catch` pattern.</span></span>
 
-<span data-ttu-id="ac88e-116">`FetchData`구성 요소 (*Pages/FetchData. razor*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-116">`FetchData` component (*Pages/FetchData.razor*):</span></span>
+<span data-ttu-id="db7f0-121">`FetchData` 구성 요소(*Pages/FetchData.razor*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-121">`FetchData` component (*Pages/FetchData.razor*):</span></span>
 
 ```csharp
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -94,11 +78,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="typed-httpclient"></a><span data-ttu-id="ac88e-117">형식화 된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="ac88e-117">Typed HttpClient</span></span>
+## <a name="typed-httpclient"></a><span data-ttu-id="db7f0-122">형식화된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="db7f0-122">Typed HttpClient</span></span>
 
-<span data-ttu-id="ac88e-118">단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리 하는 형식화 된 클라이언트를 정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-118">A typed client can be defined that handles all of the HTTP and token acquisition concerns within a single class.</span></span>
+<span data-ttu-id="db7f0-123">단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리 하는 형식화 된 클라이언트를 정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-123">A typed client can be defined that handles all of the HTTP and token acquisition concerns within a single class.</span></span>
 
-<span data-ttu-id="ac88e-119">*WeatherForecastClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="ac88e-119">*WeatherForecastClient.cs*:</span></span>
+<span data-ttu-id="db7f0-124">*WeatherForecastClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="db7f0-124">*WeatherForecastClient.cs*:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -135,7 +119,7 @@ public class WeatherForecastClient
 }
 ```
 
-<span data-ttu-id="ac88e-120">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-120">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="db7f0-125">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-125">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -148,7 +132,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="ac88e-121">`FetchData`구성 요소 (*Pages/FetchData. razor*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-121">`FetchData` component (*Pages/FetchData.razor*):</span></span>
+<span data-ttu-id="db7f0-126">`FetchData` 구성 요소(*Pages/FetchData.razor*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-126">`FetchData` component (*Pages/FetchData.razor*):</span></span>
 
 ```razor
 @inject WeatherForecastClient Client
@@ -161,11 +145,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="configure-the-httpclient-handler"></a><span data-ttu-id="ac88e-122">HttpClient 처리기 구성</span><span class="sxs-lookup"><span data-stu-id="ac88e-122">Configure the HttpClient handler</span></span>
+## <a name="configure-the-httpclient-handler"></a><span data-ttu-id="db7f0-127">HttpClient 처리기 구성</span><span class="sxs-lookup"><span data-stu-id="db7f0-127">Configure the HttpClient handler</span></span>
 
-<span data-ttu-id="ac88e-123"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>아웃 바운드 HTTP 요청에 대해를 사용 하 여 처리기를 추가로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-123">The handler can be further configured with <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> for outbound HTTP requests.</span></span>
+<span data-ttu-id="db7f0-128"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>아웃 바운드 HTTP 요청에 대해를 사용 하 여 처리기를 추가로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-128">The handler can be further configured with <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> for outbound HTTP requests.</span></span>
 
-<span data-ttu-id="ac88e-124">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-124">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="db7f0-129">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-129">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -174,20 +158,20 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="ac88e-125">보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청</span><span class="sxs-lookup"><span data-stu-id="ac88e-125">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
+## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="db7f0-130">보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청</span><span class="sxs-lookup"><span data-stu-id="db7f0-130">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
 
-<span data-ttu-id="ac88e-126">Blazor Weasembomapp이 일반적으로 보안 기본값을 사용 하는 경우 <xref:System.Net.Http.HttpClient> 앱은 명명 된를 구성 하 여 인증 되지 않거나 권한이 없는 웹 API 요청을 수행할 수도 있습니다 <xref:System.Net.Http.HttpClient> .</span><span class="sxs-lookup"><span data-stu-id="ac88e-126">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
+<span data-ttu-id="db7f0-131">BlazorWeasembomapp이 일반적으로 보안 기본값을 사용 하는 경우 <xref:System.Net.Http.HttpClient> 앱은 명명 된를 구성 하 여 인증 되지 않은 웹 API 요청 또는 인증 되지 않은 <xref:System.Net.Http.HttpClient></span><span class="sxs-lookup"><span data-stu-id="db7f0-131">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
 
-<span data-ttu-id="ac88e-127">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-127">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="db7f0-132">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-132">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-<span data-ttu-id="ac88e-128">위의 등록은 기존 보안 기본 등록에 추가 됩니다 <xref:System.Net.Http.HttpClient> .</span><span class="sxs-lookup"><span data-stu-id="ac88e-128">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
+<span data-ttu-id="db7f0-133">위의 등록은 기존 보안 기본 등록에 추가 됩니다 <xref:System.Net.Http.HttpClient> .</span><span class="sxs-lookup"><span data-stu-id="db7f0-133">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
 
-<span data-ttu-id="ac88e-129">구성 요소는 <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory> 인증 되지 않거나 권한이 없는 요청을 만들기 위해에서를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-129">A component creates the <xref:System.Net.Http.HttpClient> from the <xref:System.Net.Http.IHttpClientFactory> to make unauthenticated or unauthorized requests:</span></span>
+<span data-ttu-id="db7f0-134">구성 요소는 <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory> 인증 되지 않거나 권한이 없는 요청을 만들기 위해에서를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-134">A component creates the <xref:System.Net.Http.HttpClient> from the <xref:System.Net.Http.IHttpClientFactory> to make unauthenticated or unauthorized requests:</span></span>
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -208,15 +192,15 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 ```
 
 > [!NOTE]
-> <span data-ttu-id="ac88e-130">`WeatherForecastNoAuthenticationController`이전 예제에 대 한 서버 API의 컨트롤러는 특성으로 표시 되지 않습니다 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) .</span><span class="sxs-lookup"><span data-stu-id="ac88e-130">The controller in the server API, `WeatherForecastNoAuthenticationController` for the preceding example, isn't marked with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute.</span></span>
+> <span data-ttu-id="db7f0-135">`WeatherForecastNoAuthenticationController`이전 예제에 대 한 서버 API의 컨트롤러는 특성으로 표시 되지 않습니다 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) .</span><span class="sxs-lookup"><span data-stu-id="db7f0-135">The controller in the server API, `WeatherForecastNoAuthenticationController` for the preceding example, isn't marked with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute.</span></span>
 
-## <a name="request-additional-access-tokens"></a><span data-ttu-id="ac88e-131">추가 액세스 토큰 요청</span><span class="sxs-lookup"><span data-stu-id="ac88e-131">Request additional access tokens</span></span>
+## <a name="request-additional-access-tokens"></a><span data-ttu-id="db7f0-136">추가 액세스 토큰 요청</span><span class="sxs-lookup"><span data-stu-id="db7f0-136">Request additional access tokens</span></span>
 
-<span data-ttu-id="ac88e-132">액세스 토큰은를 호출 하 여 수동으로 가져올 수 있습니다 `IAccessTokenProvider.RequestAccessToken` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-132">Access tokens can be manually obtained by calling `IAccessTokenProvider.RequestAccessToken`.</span></span>
+<span data-ttu-id="db7f0-137">액세스 토큰은를 호출 하 여 수동으로 가져올 수 있습니다 `IAccessTokenProvider.RequestAccessToken` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-137">Access tokens can be manually obtained by calling `IAccessTokenProvider.RequestAccessToken`.</span></span>
 
-<span data-ttu-id="ac88e-133">다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 AAD (추가 Azure Active Directory) Microsoft Graph API 범위가 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-133">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="ac88e-134">Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후 클라이언트 앱에서 추가 범위가 구성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-134">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app.</span></span>
+<span data-ttu-id="db7f0-138">다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 AAD (추가 Azure Active Directory) Microsoft Graph API 범위가 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-138">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="db7f0-139">Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후 클라이언트 앱에서 추가 범위가 구성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-139">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app.</span></span>
 
-<span data-ttu-id="ac88e-135">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-135">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="db7f0-140">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-140">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -230,9 +214,9 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="ac88e-136">`IAccessTokenProvider.RequestToken`메서드는 앱이 지정 된 범위 집합을 사용 하 여 액세스 토큰을 프로 비전 할 수 있도록 하는 오버 로드를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-136">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
+<span data-ttu-id="db7f0-141">`IAccessTokenProvider.RequestToken`메서드는 앱이 지정 된 범위 집합을 사용 하 여 액세스 토큰을 프로 비전 할 수 있도록 하는 오버 로드를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-141">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
 
-<span data-ttu-id="ac88e-137">Razor 구성 요소에서 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-137">In a Razor component:</span></span>
+<span data-ttu-id="db7f0-142">Razor구성 요소에서:</span><span class="sxs-lookup"><span data-stu-id="db7f0-142">In a Razor component:</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -253,14 +237,14 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="ac88e-138">`TryGetToken`전용인</span><span class="sxs-lookup"><span data-stu-id="ac88e-138">`TryGetToken` returns:</span></span>
+<span data-ttu-id="db7f0-143">`TryGetToken`전용인</span><span class="sxs-lookup"><span data-stu-id="db7f0-143">`TryGetToken` returns:</span></span>
 
-* <span data-ttu-id="ac88e-139">`true`사용할를 `token` 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-139">`true` with the `token` for use.</span></span>
-* <span data-ttu-id="ac88e-140">`false`토큰이 검색 되지 않으면입니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-140">`false` if the token isn't retrieved.</span></span>
+* <span data-ttu-id="db7f0-144">`true`사용할를 `token` 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-144">`true` with the `token` for use.</span></span>
+* <span data-ttu-id="db7f0-145">`false`토큰이 검색 되지 않으면입니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-145">`false` if the token isn't retrieved.</span></span>
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a><span data-ttu-id="ac88e-141">Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage</span><span class="sxs-lookup"><span data-stu-id="ac88e-141">HttpClient and HttpRequestMessage with Fetch API request options</span></span>
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a><span data-ttu-id="db7f0-146">Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage</span><span class="sxs-lookup"><span data-stu-id="db7f0-146">HttpClient and HttpRequestMessage with Fetch API request options</span></span>
 
-<span data-ttu-id="ac88e-142">Blazor weambmbomapp에서 사용 되는 경우 [Httpclient](xref:fundamentals/http-requests) 를 사용 하 여 <xref:System.Net.Http.HttpRequestMessage> 요청을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-142">When running on WebAssembly in a Blazor WebAssembly app, [HttpClient](xref:fundamentals/http-requests) and <xref:System.Net.Http.HttpRequestMessage> can be used to customize requests.</span></span> <span data-ttu-id="ac88e-143">예를 들어 HTTP 메서드 및 요청 헤더를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-143">For example, you can specify the HTTP method and request headers.</span></span> <span data-ttu-id="ac88e-144">다음 구성 요소는 `POST` 서버에서 To Do LIST API 끝점에 대 한 요청을 수행 하 고 응답 본문을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-144">The following component makes a `POST` request to a To Do List API endpoint on the server and shows the response body:</span></span>
+<span data-ttu-id="db7f0-147">Weasembomambomapp에서 제대로 실행 되는 경우 Blazor [httpclient](xref:fundamentals/http-requests) 를 <xref:System.Net.Http.HttpRequestMessage> 사용 하 여 요청을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-147">When running on WebAssembly in a Blazor WebAssembly app, [HttpClient](xref:fundamentals/http-requests) and <xref:System.Net.Http.HttpRequestMessage> can be used to customize requests.</span></span> <span data-ttu-id="db7f0-148">예를 들어 HTTP 메서드 및 요청 헤더를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-148">For example, you can specify the HTTP method and request headers.</span></span> <span data-ttu-id="db7f0-149">다음 구성 요소는 `POST` 서버에서 To Do LIST API 끝점에 대 한 요청을 수행 하 고 응답 본문을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-149">The following component makes a `POST` request to a To Do List API endpoint on the server and shows the response body:</span></span>
 
 ```razor
 @page "/todorequest"
@@ -322,37 +306,257 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="ac88e-145">.NET WebAssembly의 `HttpClient` 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-145">.NET WebAssembly's implementation of `HttpClient` uses [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span></span> <span data-ttu-id="ac88e-146">Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-146">Fetch allows configuring several [request-specific options](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span> 
+<span data-ttu-id="db7f0-150">.NET WebAssembly의 `HttpClient` 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-150">.NET WebAssembly's implementation of `HttpClient` uses [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span></span> <span data-ttu-id="db7f0-151">Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-151">Fetch allows configuring several [request-specific options](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span> 
 
-<span data-ttu-id="ac88e-147">HTTP 페치 요청 옵션은 다음 표에 표시된 `HttpRequestMessage` 확장 메서드로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-147">HTTP fetch request options can be configured with `HttpRequestMessage` extension methods shown in the following table.</span></span>
+<span data-ttu-id="db7f0-152">HTTP 페치 요청 옵션은 다음 표에 표시된 `HttpRequestMessage` 확장 메서드로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-152">HTTP fetch request options can be configured with `HttpRequestMessage` extension methods shown in the following table.</span></span>
 
-| <span data-ttu-id="ac88e-148">`HttpRequestMessage` 확장 메서드</span><span class="sxs-lookup"><span data-stu-id="ac88e-148">`HttpRequestMessage` extension method</span></span> | <span data-ttu-id="ac88e-149">Fetch 요청 속성</span><span class="sxs-lookup"><span data-stu-id="ac88e-149">Fetch request property</span></span> |
-| ------------------------------------- | ---------------------- |
-| `SetBrowserRequestCredentials`        | [<span data-ttu-id="ac88e-150">credentials</span><span class="sxs-lookup"><span data-stu-id="ac88e-150">credentials</span></span>](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| `SetBrowserRequestCache`              | [<span data-ttu-id="ac88e-151">캐시</span><span class="sxs-lookup"><span data-stu-id="ac88e-151">cache</span></span>](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| `SetBrowserRequestMode`               | [<span data-ttu-id="ac88e-152">mode</span><span class="sxs-lookup"><span data-stu-id="ac88e-152">mode</span></span>](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| `SetBrowserRequestIntegrity`          | [<span data-ttu-id="ac88e-153">무결성</span><span class="sxs-lookup"><span data-stu-id="ac88e-153">integrity</span></span>](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| <span data-ttu-id="db7f0-153">`HttpRequestMessage` 확장 메서드</span><span class="sxs-lookup"><span data-stu-id="db7f0-153">`HttpRequestMessage` extension method</span></span> | <span data-ttu-id="db7f0-154">Fetch 요청 속성</span><span class="sxs-lookup"><span data-stu-id="db7f0-154">Fetch request property</span></span> |
+| ---
+<span data-ttu-id="db7f0-155">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-155">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-156">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-156">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-157">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-157">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-158">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-158">'Identity'</span></span>
+- <span data-ttu-id="db7f0-159">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-159">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-160">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-160">'Razor'</span></span>
+- <span data-ttu-id="db7f0-161">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-161">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="ac88e-154">보다 일반적인 `SetBrowserRequestOption` 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-154">You can set additional options using the more generic `SetBrowserRequestOption` extension method.</span></span>
+-
+<span data-ttu-id="db7f0-162">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-162">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-163">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-163">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-164">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-164">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-165">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-165">'Identity'</span></span>
+- <span data-ttu-id="db7f0-166">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-166">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-167">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-167">'Razor'</span></span>
+- <span data-ttu-id="db7f0-168">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-168">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-169">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-169">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-170">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-170">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-171">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-171">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-172">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-172">'Identity'</span></span>
+- <span data-ttu-id="db7f0-173">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-173">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-174">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-174">'Razor'</span></span>
+- <span data-ttu-id="db7f0-175">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-175">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-176">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-176">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-177">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-177">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-178">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-178">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-179">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-179">'Identity'</span></span>
+- <span data-ttu-id="db7f0-180">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-180">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-181">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-181">'Razor'</span></span>
+- <span data-ttu-id="db7f0-182">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-182">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-183">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-183">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-184">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-184">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-185">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-185">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-186">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-186">'Identity'</span></span>
+- <span data-ttu-id="db7f0-187">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-187">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-188">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-188">'Razor'</span></span>
+- <span data-ttu-id="db7f0-189">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-189">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-190">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-190">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-191">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-191">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-192">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-192">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-193">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-193">'Identity'</span></span>
+- <span data-ttu-id="db7f0-194">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-194">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-195">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-195">'Razor'</span></span>
+- <span data-ttu-id="db7f0-196">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-196">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-197">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-197">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-198">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-198">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-199">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-199">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-200">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-200">'Identity'</span></span>
+- <span data-ttu-id="db7f0-201">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-201">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-202">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-202">'Razor'</span></span>
+- <span data-ttu-id="db7f0-203">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-203">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-204">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-204">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-205">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-205">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-206">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-206">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-207">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-207">'Identity'</span></span>
+- <span data-ttu-id="db7f0-208">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-208">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-209">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-209">'Razor'</span></span>
+- <span data-ttu-id="db7f0-210">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-210">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-211">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-211">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-212">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-212">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-213">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-213">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-214">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-214">'Identity'</span></span>
+- <span data-ttu-id="db7f0-215">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-215">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-216">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-216">'Razor'</span></span>
+- <span data-ttu-id="db7f0-217">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-217">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-218">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-218">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-219">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-219">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-220">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-220">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-221">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-221">'Identity'</span></span>
+- <span data-ttu-id="db7f0-222">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-222">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-223">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-223">'Razor'</span></span>
+- <span data-ttu-id="db7f0-224">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-224">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-225">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-225">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-226">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-226">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-227">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-227">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-228">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-228">'Identity'</span></span>
+- <span data-ttu-id="db7f0-229">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-229">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-230">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-230">'Razor'</span></span>
+- <span data-ttu-id="db7f0-231">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-231">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-232">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-232">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-233">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-233">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-234">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-234">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-235">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-235">'Identity'</span></span>
+- <span data-ttu-id="db7f0-236">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-236">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-237">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-237">'Razor'</span></span>
+- <span data-ttu-id="db7f0-238">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-238">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-239">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-239">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-240">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-240">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-241">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-241">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-242">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-242">'Identity'</span></span>
+- <span data-ttu-id="db7f0-243">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-243">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-244">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-244">'Razor'</span></span>
+- <span data-ttu-id="db7f0-245">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-245">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-246">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-246">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-247">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-247">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-248">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-248">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-249">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-249">'Identity'</span></span>
+- <span data-ttu-id="db7f0-250">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-250">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-251">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-251">'Razor'</span></span>
+- <span data-ttu-id="db7f0-252">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-252">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-253">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-253">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-254">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-254">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-255">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-255">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-256">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-256">'Identity'</span></span>
+- <span data-ttu-id="db7f0-257">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-257">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-258">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-258">'Razor'</span></span>
+- <span data-ttu-id="db7f0-259">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-259">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-260">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-260">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-261">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-261">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-262">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-262">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-263">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-263">'Identity'</span></span>
+- <span data-ttu-id="db7f0-264">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-264">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-265">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-265">'Razor'</span></span>
+- <span data-ttu-id="db7f0-266">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-266">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="db7f0-267">------------------- | ---제목: ' ASP.NET Core Blazor weasembmbambaoma 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 weasembmbomommbmbommbmbmboms</span><span class="sxs-lookup"><span data-stu-id="db7f0-267">------------------- | --- title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-268">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-268">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-269">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-269">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-270">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-270">'Identity'</span></span>
+- <span data-ttu-id="db7f0-271">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-271">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-272">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-272">'Razor'</span></span>
+- <span data-ttu-id="db7f0-273">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-273">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-274">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-274">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-275">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-275">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-276">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-276">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-277">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-277">'Identity'</span></span>
+- <span data-ttu-id="db7f0-278">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-278">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-279">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-279">'Razor'</span></span>
+- <span data-ttu-id="db7f0-280">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-280">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-281">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-281">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-282">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-282">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-283">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-283">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-284">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-284">'Identity'</span></span>
+- <span data-ttu-id="db7f0-285">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-285">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-286">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-286">'Razor'</span></span>
+- <span data-ttu-id="db7f0-287">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-287">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-288">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-288">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-289">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-289">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-290">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-290">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-291">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-291">'Identity'</span></span>
+- <span data-ttu-id="db7f0-292">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-292">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-293">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-293">'Razor'</span></span>
+- <span data-ttu-id="db7f0-294">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-294">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-295">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-295">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-296">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-296">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-297">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-297">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-298">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-298">'Identity'</span></span>
+- <span data-ttu-id="db7f0-299">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-299">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-300">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-300">'Razor'</span></span>
+- <span data-ttu-id="db7f0-301">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-301">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-302">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-302">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-303">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-303">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-304">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-304">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-305">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-305">'Identity'</span></span>
+- <span data-ttu-id="db7f0-306">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-306">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-307">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-307">'Razor'</span></span>
+- <span data-ttu-id="db7f0-308">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-308">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-309">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-309">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-310">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-310">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-311">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-311">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-312">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-312">'Identity'</span></span>
+- <span data-ttu-id="db7f0-313">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-313">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-314">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-314">'Razor'</span></span>
+- <span data-ttu-id="db7f0-315">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-315">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-316">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-316">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-317">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-317">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-318">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-318">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-319">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-319">'Identity'</span></span>
+- <span data-ttu-id="db7f0-320">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-320">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-321">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-321">'Razor'</span></span>
+- <span data-ttu-id="db7f0-322">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-322">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-323">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-323">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-324">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-324">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-325">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-325">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-326">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-326">'Identity'</span></span>
+- <span data-ttu-id="db7f0-327">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-327">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-328">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-328">'Razor'</span></span>
+- <span data-ttu-id="db7f0-329">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-329">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="db7f0-330">----------- | | `SetBrowserRequestCredentials`         |  [자격 증명](https://developer.mozilla.org/docs/Web/API/Request/credentials) | | `SetBrowserRequestCache`               |  [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) | | `SetBrowserRequestMode`                |  [모드](https://developer.mozilla.org/docs/Web/API/Request/mode) | `SetBrowserRequestIntegrity` |           |  [무결성](https://developer.mozilla.org/docs/Web/API/Request/integrity) |</span><span class="sxs-lookup"><span data-stu-id="db7f0-330">----------- | | `SetBrowserRequestCredentials`        | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) | | `SetBrowserRequestCache`              | [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) | | `SetBrowserRequestMode`               | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) | | `SetBrowserRequestIntegrity`          | [integrity](https://developer.mozilla.org/docs/Web/API/Request/integrity) |</span></span>
+
+<span data-ttu-id="db7f0-331">보다 일반적인 `SetBrowserRequestOption` 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-331">You can set additional options using the more generic `SetBrowserRequestOption` extension method.</span></span>
  
-<span data-ttu-id="ac88e-155">HTTP 응답은 일반적으로 Blazor Weasembomapp에서 버퍼링 되므로 응답 콘텐츠에 대 한 동기화 읽기를 지원할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-155">The HTTP response is typically buffered in a Blazor WebAssembly app to enable support for sync reads on the response content.</span></span> <span data-ttu-id="ac88e-156">응답 스트리밍을 지원하도록 설정하려면 요청에서 `SetBrowserResponseStreamingEnabled` 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-156">To enable support for response streaming, use the `SetBrowserResponseStreamingEnabled` extension method on the request.</span></span>
+<span data-ttu-id="db7f0-332">HTTP 응답은 일반적으로 응답 콘텐츠에서 동기화 읽기를 지원할 수 있도록 Blazor WebAssembly 앱에서 버퍼링됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-332">The HTTP response is typically buffered in a Blazor WebAssembly app to enable support for sync reads on the response content.</span></span> <span data-ttu-id="db7f0-333">응답 스트리밍을 지원하도록 설정하려면 요청에서 `SetBrowserResponseStreamingEnabled` 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-333">To enable support for response streaming, use the `SetBrowserResponseStreamingEnabled` extension method on the request.</span></span>
 
-<span data-ttu-id="ac88e-157">원본 간 요청에 자격 증명을 포함하려면 `SetBrowserRequestCredentials` 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-157">To include credentials in a cross-origin request, use the `SetBrowserRequestCredentials` extension method:</span></span>
+<span data-ttu-id="db7f0-334">원본 간 요청에 자격 증명을 포함하려면 `SetBrowserRequestCredentials` 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-334">To include credentials in a cross-origin request, use the `SetBrowserRequestCredentials` extension method:</span></span>
 
 ```csharp
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 ```
 
-<span data-ttu-id="ac88e-158">Fetch API 옵션에 대한 자세한 내용은 [MDN 웹 설명서: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac88e-158">For more information on Fetch API options, see [MDN web docs: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span>
+<span data-ttu-id="db7f0-335">Fetch API 옵션에 대한 자세한 내용은 [MDN 웹 설명서: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="db7f0-335">For more information on Fetch API options, see [MDN web docs: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span>
 
-<span data-ttu-id="ac88e-159">CORS 요청에 대한 자격 증명(권한 부여 쿠키/헤더)을 보낼 때 CORS 정책에서 `Authorization` 헤더를 허용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-159">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
+<span data-ttu-id="db7f0-336">CORS 요청에 대한 자격 증명(권한 부여 쿠키/헤더)을 보낼 때 CORS 정책에서 `Authorization` 헤더를 허용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-336">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
 
-<span data-ttu-id="ac88e-160">다음 정책에는 해당 구성이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-160">The following policy includes configuration for:</span></span>
+<span data-ttu-id="db7f0-337">다음 정책에는 해당 구성이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-337">The following policy includes configuration for:</span></span>
 
-* <span data-ttu-id="ac88e-161">요청 원본(`http://localhost:5000`, `https://localhost:5001`).</span><span class="sxs-lookup"><span data-stu-id="ac88e-161">Request origins (`http://localhost:5000`, `https://localhost:5001`).</span></span>
-* <span data-ttu-id="ac88e-162">임의 메서드(동사)</span><span class="sxs-lookup"><span data-stu-id="ac88e-162">Any method (verb).</span></span>
-* <span data-ttu-id="ac88e-163">`Content-Type` 및 `Authorization` 헤더.</span><span class="sxs-lookup"><span data-stu-id="ac88e-163">`Content-Type` and `Authorization` headers.</span></span> <span data-ttu-id="ac88e-164">사용자 지정 헤더(예: `x-custom-header`)를 허용하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-164">To allow a custom header (for example, `x-custom-header`), list the header when calling <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.</span></span>
-* <span data-ttu-id="ac88e-165">클라이언트 쪽 JavaScript 코드에 의해 설정된 자격 증명(`credentials` 속성이 `include`로 설정됨).</span><span class="sxs-lookup"><span data-stu-id="ac88e-165">Credentials set by client-side JavaScript code (`credentials` property set to `include`).</span></span>
+* <span data-ttu-id="db7f0-338">요청 원본(`http://localhost:5000`, `https://localhost:5001`).</span><span class="sxs-lookup"><span data-stu-id="db7f0-338">Request origins (`http://localhost:5000`, `https://localhost:5001`).</span></span>
+* <span data-ttu-id="db7f0-339">임의 메서드(동사)</span><span class="sxs-lookup"><span data-stu-id="db7f0-339">Any method (verb).</span></span>
+* <span data-ttu-id="db7f0-340">`Content-Type` 및 `Authorization` 헤더.</span><span class="sxs-lookup"><span data-stu-id="db7f0-340">`Content-Type` and `Authorization` headers.</span></span> <span data-ttu-id="db7f0-341">사용자 지정 헤더(예: `x-custom-header`)를 허용하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-341">To allow a custom header (for example, `x-custom-header`), list the header when calling <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.</span></span>
+* <span data-ttu-id="db7f0-342">클라이언트 쪽 JavaScript 코드에 의해 설정된 자격 증명(`credentials` 속성이 `include`로 설정됨).</span><span class="sxs-lookup"><span data-stu-id="db7f0-342">Credentials set by client-side JavaScript code (`credentials` property set to `include`).</span></span>
 
 ```csharp
 app.UseCors(policy => 
@@ -362,38 +566,38 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-<span data-ttu-id="ac88e-166">자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소(*Components/HTTPRequestTester.razor*)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac88e-166">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (*Components/HTTPRequestTester.razor*).</span></span>
+<span data-ttu-id="db7f0-343">자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소(*Components/HTTPRequestTester.razor*)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="db7f0-343">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (*Components/HTTPRequestTester.razor*).</span></span>
 
-## <a name="handle-token-request-errors"></a><span data-ttu-id="ac88e-167">토큰 요청 오류 처리</span><span class="sxs-lookup"><span data-stu-id="ac88e-167">Handle token request errors</span></span>
+## <a name="handle-token-request-errors"></a><span data-ttu-id="db7f0-344">토큰 요청 오류 처리</span><span class="sxs-lookup"><span data-stu-id="db7f0-344">Handle token request errors</span></span>
 
-<span data-ttu-id="ac88e-168">SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 하 여 사용자를 인증 하는 경우 인증 상태는 해당 자격 증명을 제공 하는 사용자의 결과로 설정 된 세션 쿠키의 형태로 SPA 및 IP (Id 공급자) 내에서 로컬로 유지 관리 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-168">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
+<span data-ttu-id="db7f0-345">SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 하 여 사용자를 인증 하는 경우 인증 상태는 해당 Identity 자격 증명을 제공 하는 사용자의 결과로 설정 된 세션 쿠키의 형태로 spa 및 공급자 (IP) 내에서 로컬로 유지 관리 됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-345">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
 
-<span data-ttu-id="ac88e-169">일반적으로 사용자에 대 한 IP가 내보내는 토큰은 짧은 시간 동안 일반적으로 1 시간 동안 유효 하므로 클라이언트 앱이 정기적으로 새 토큰을 가져와야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-169">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="ac88e-170">그렇지 않으면 부여 된 토큰이 만료 된 후 사용자가 로그 아웃 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-170">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="ac88e-171">대부분의 경우 OIDC 클라이언트는 사용자가 IP 내에 유지 되는 인증 상태 또는 "세션"으로 인해 다시 인증 하도록 요구 하지 않고 새 토큰을 프로 비전 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-171">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
+<span data-ttu-id="db7f0-346">일반적으로 사용자에 대 한 IP가 내보내는 토큰은 짧은 시간 동안 일반적으로 1 시간 동안 유효 하므로 클라이언트 앱이 정기적으로 새 토큰을 가져와야 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-346">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="db7f0-347">그렇지 않으면 부여 된 토큰이 만료 된 후 사용자가 로그 아웃 됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-347">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="db7f0-348">대부분의 경우 OIDC 클라이언트는 사용자가 IP 내에 유지 되는 인증 상태 또는 "세션"으로 인해 다시 인증 하도록 요구 하지 않고 새 토큰을 프로 비전 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-348">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
 
-<span data-ttu-id="ac88e-172">사용자가 사용자 개입 없이 토큰을 가져올 수 없는 경우도 있습니다. 예를 들어 사용자가 IP에서 명시적으로 로그 아웃 하는 이유가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-172">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="ac88e-173">이 시나리오는 사용자가 방문 하 여 로그 아웃 하는 경우에 발생 `https://login.microsoftonline.com` 합니다. 이러한 시나리오에서 앱은 사용자가 로그 아웃 한 즉시 인식 하지 못합니다. 클라이언트에서 보유 하는 모든 토큰은 더 이상 유효 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-173">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="ac88e-174">또한 클라이언트는 현재 토큰이 만료 된 후 사용자 상호 작용 없이 새 토큰을 프로 비전 할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-174">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
+<span data-ttu-id="db7f0-349">사용자가 사용자 개입 없이 토큰을 가져올 수 없는 경우도 있습니다. 예를 들어 사용자가 IP에서 명시적으로 로그 아웃 하는 이유가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-349">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="db7f0-350">이 시나리오는 사용자가 방문 하 여 로그 아웃 하는 경우에 발생 `https://login.microsoftonline.com` 합니다. 이러한 시나리오에서 앱은 사용자가 로그 아웃 한 즉시 인식 하지 못합니다. 클라이언트에서 보유 하는 모든 토큰은 더 이상 유효 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-350">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="db7f0-351">또한 클라이언트는 현재 토큰이 만료 된 후 사용자 상호 작용 없이 새 토큰을 프로 비전 할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-351">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
 
-<span data-ttu-id="ac88e-175">이러한 시나리오는 토큰 기반 인증에 국한 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-175">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="ac88e-176">이러한 특성은 SPAs 특성의 일부입니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-176">They are part of the nature of SPAs.</span></span> <span data-ttu-id="ac88e-177">쿠키를 사용 하는 SPA는 인증 쿠키를 제거 하는 경우에도 서버 API를 호출 하지 못합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-177">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
+<span data-ttu-id="db7f0-352">이러한 시나리오는 토큰 기반 인증에 국한 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-352">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="db7f0-353">이러한 특성은 SPAs 특성의 일부입니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-353">They are part of the nature of SPAs.</span></span> <span data-ttu-id="db7f0-354">쿠키를 사용 하는 SPA는 인증 쿠키를 제거 하는 경우에도 서버 API를 호출 하지 못합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-354">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
 
-<span data-ttu-id="ac88e-178">앱에서 보호 된 리소스에 대 한 API 호출을 수행 하는 경우 다음 사항을 알고 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-178">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
+<span data-ttu-id="db7f0-355">앱에서 보호 된 리소스에 대 한 API 호출을 수행 하는 경우 다음 사항을 알고 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-355">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
 
-* <span data-ttu-id="ac88e-179">새 액세스 토큰을 프로 비전 하 여 API를 호출 하려면 사용자가 다시 인증 해야 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-179">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
-* <span data-ttu-id="ac88e-180">클라이언트에 유효한 토큰이 있는 경우에도 토큰을 사용자가 해지 했기 때문에 서버에 대 한 호출이 실패할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-180">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
+* <span data-ttu-id="db7f0-356">새 액세스 토큰을 프로 비전 하 여 API를 호출 하려면 사용자가 다시 인증 해야 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-356">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
+* <span data-ttu-id="db7f0-357">클라이언트에 유효한 토큰이 있는 경우에도 토큰을 사용자가 해지 했기 때문에 서버에 대 한 호출이 실패할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-357">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
 
-<span data-ttu-id="ac88e-181">앱에서 토큰을 요청 하는 경우 다음과 같은 두 가지 결과를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-181">When the app requests a token, there are two possible outcomes:</span></span>
+<span data-ttu-id="db7f0-358">앱에서 토큰을 요청 하는 경우 다음과 같은 두 가지 결과를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-358">When the app requests a token, there are two possible outcomes:</span></span>
 
-* <span data-ttu-id="ac88e-182">요청이 성공 하 고 앱에 유효한 토큰이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-182">The request succeeds, and the app has a valid token.</span></span>
-* <span data-ttu-id="ac88e-183">요청이 실패 하 고 앱이 사용자를 다시 인증 하 여 새 토큰을 가져와야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-183">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
+* <span data-ttu-id="db7f0-359">요청이 성공 하 고 앱에 유효한 토큰이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-359">The request succeeds, and the app has a valid token.</span></span>
+* <span data-ttu-id="db7f0-360">요청이 실패 하 고 앱이 사용자를 다시 인증 하 여 새 토큰을 가져와야 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-360">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
 
-<span data-ttu-id="ac88e-184">토큰 요청이 실패 하는 경우 리디렉션을 수행 하기 전에 현재 상태를 저장할 것인지 여부를 결정 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-184">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="ac88e-185">복잡성 수준이 증가 하는 방법에는 여러 가지가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-185">Several approaches exist with increasing levels of complexity:</span></span>
+<span data-ttu-id="db7f0-361">토큰 요청이 실패 하는 경우 리디렉션을 수행 하기 전에 현재 상태를 저장할 것인지 여부를 결정 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-361">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="db7f0-362">복잡성 수준이 증가 하는 방법에는 여러 가지가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-362">Several approaches exist with increasing levels of complexity:</span></span>
 
-* <span data-ttu-id="ac88e-186">세션 저장소에 현재 페이지 상태를 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-186">Store the current page state in session storage.</span></span> <span data-ttu-id="ac88e-187">`OnInitializeAsync`에서 계속 하기 전에 상태를 복원할 수 있는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-187">During `OnInitializeAsync`, check if state can be restored before continuing.</span></span>
-* <span data-ttu-id="ac88e-188">쿼리 문자열 매개 변수를 추가 하 고이 매개 변수를 사용 하 여 이전에 저장 된 상태를 다시 하이드레이션 하며 나중 하는 데 필요한 것으로 앱에 신호를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-188">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
-* <span data-ttu-id="ac88e-189">다른 항목과 충돌을 발생 시 키 지 않고 세션 저장소에 데이터를 저장 하는 고유 식별자를 사용 하 여 쿼리 문자열 매개 변수를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-189">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
+* <span data-ttu-id="db7f0-363">세션 저장소에 현재 페이지 상태를 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-363">Store the current page state in session storage.</span></span> <span data-ttu-id="db7f0-364">`OnInitializeAsync`에서 계속 하기 전에 상태를 복원할 수 있는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-364">During `OnInitializeAsync`, check if state can be restored before continuing.</span></span>
+* <span data-ttu-id="db7f0-365">쿼리 문자열 매개 변수를 추가 하 고이 매개 변수를 사용 하 여 이전에 저장 된 상태를 다시 하이드레이션 하며 나중 하는 데 필요한 것으로 앱에 신호를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-365">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
+* <span data-ttu-id="db7f0-366">다른 항목과 충돌을 발생 시 키 지 않고 세션 저장소에 데이터를 저장 하는 고유 식별자를 사용 하 여 쿼리 문자열 매개 변수를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-366">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
 
-<span data-ttu-id="ac88e-190">아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-190">The following example shows how to:</span></span>
+<span data-ttu-id="db7f0-367">아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-367">The following example shows how to:</span></span>
 
-* <span data-ttu-id="ac88e-191">로그인 페이지로 리디렉션하기 전에 상태를 유지 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-191">Preserve state before redirecting to the login page.</span></span>
-* <span data-ttu-id="ac88e-192">쿼리 문자열 매개 변수를 사용 하 여 인증 이후 이전 상태를 복구 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-192">Recover the previous state afterward authentication using the query string parameter.</span></span>
+* <span data-ttu-id="db7f0-368">로그인 페이지로 리디렉션하기 전에 상태를 유지 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-368">Preserve state before redirecting to the login page.</span></span>
+* <span data-ttu-id="db7f0-369">쿼리 문자열 매개 변수를 사용 하 여 인증 이후 이전 상태를 복구 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-369">Recover the previous state afterward authentication using the query string parameter.</span></span>
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -454,11 +658,11 @@ app.UseCors(policy =>
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="ac88e-193">인증 작업 전에 앱 상태 저장</span><span class="sxs-lookup"><span data-stu-id="ac88e-193">Save app state before an authentication operation</span></span>
+## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="db7f0-370">인증 작업 전에 앱 상태 저장</span><span class="sxs-lookup"><span data-stu-id="db7f0-370">Save app state before an authentication operation</span></span>
 
-<span data-ttu-id="ac88e-194">인증 작업을 수행 하는 동안 브라우저가 IP로 리디렉션되도록 응용 프로그램 상태를 저장 하려는 경우가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-194">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="ac88e-195">상태 컨테이너와 같은 항목을 사용 하 고 인증에 성공 하 고 나면 상태를 복원 하려는 경우를 들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-195">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="ac88e-196">사용자 지정 인증 상태 개체를 사용 하 여 앱 특정 상태 또는 참조를 보존 하 고 인증 작업이 성공적으로 완료 되 면 해당 상태를 복원할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-196">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
+<span data-ttu-id="db7f0-371">인증 작업을 수행 하는 동안 브라우저가 IP로 리디렉션되도록 응용 프로그램 상태를 저장 하려는 경우가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-371">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="db7f0-372">상태 컨테이너와 같은 항목을 사용 하 고 인증에 성공 하 고 나면 상태를 복원 하려는 경우를 들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-372">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="db7f0-373">사용자 지정 인증 상태 개체를 사용 하 여 앱 특정 상태 또는 참조를 보존 하 고 인증 작업이 성공적으로 완료 되 면 해당 상태를 복원할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-373">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
 
-<span data-ttu-id="ac88e-197">`Authentication`구성 요소 (*페이지/인증. razor*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-197">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="db7f0-374">`Authentication`구성 요소 (*페이지/인증. razor*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-374">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/authentication/{action}"
@@ -502,27 +706,152 @@ app.UseCors(policy =>
 }
 ```
 
-## <a name="customize-app-routes"></a><span data-ttu-id="ac88e-198">앱 경로 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="ac88e-198">Customize app routes</span></span>
+## <a name="customize-app-routes"></a><span data-ttu-id="db7f0-375">앱 경로 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="db7f0-375">Customize app routes</span></span>
 
-<span data-ttu-id="ac88e-199">기본적으로 라이브러리는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 다음 표에 나와 있는 경로를 사용 하 여 서로 다른 인증 상태를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-199">By default, the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` library uses the routes shown in the following table for representing different authentication states.</span></span>
+<span data-ttu-id="db7f0-376">기본적으로 라이브러리는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 다음 표에 나와 있는 경로를 사용 하 여 서로 다른 인증 상태를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-376">By default, the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` library uses the routes shown in the following table for representing different authentication states.</span></span>
 
-| <span data-ttu-id="ac88e-200">경로</span><span class="sxs-lookup"><span data-stu-id="ac88e-200">Route</span></span>                            | <span data-ttu-id="ac88e-201">용도</span><span class="sxs-lookup"><span data-stu-id="ac88e-201">Purpose</span></span> |
-| -------------------------------- | ------- |
-| `authentication/login`           | <span data-ttu-id="ac88e-202">로그인 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-202">Triggers a sign-in operation.</span></span> |
-| `authentication/login-callback`  | <span data-ttu-id="ac88e-203">로그인 작업의 결과를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-203">Handles the result of any sign-in operation.</span></span> |
-| `authentication/login-failed`    | <span data-ttu-id="ac88e-204">어떤 이유로 인해 로그인 작업이 실패 하는 경우 오류 메시지를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-204">Displays error messages when the sign-in operation fails for some reason.</span></span> |
-| `authentication/logout`          | <span data-ttu-id="ac88e-205">로그 아웃 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-205">Triggers a sign-out operation.</span></span> |
-| `authentication/logout-callback` | <span data-ttu-id="ac88e-206">로그 아웃 작업의 결과를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-206">Handles the result of a sign-out operation.</span></span> |
-| `authentication/logout-failed`   | <span data-ttu-id="ac88e-207">어떤 이유로 인해 로그 아웃 작업이 실패 하는 경우 오류 메시지를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-207">Displays error messages when the sign-out operation fails for some reason.</span></span> |
-| `authentication/logged-out`      | <span data-ttu-id="ac88e-208">사용자가 성공적으로 로그 아웃 했음을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-208">Indicates that the user has successfully logout.</span></span> |
-| `authentication/profile`         | <span data-ttu-id="ac88e-209">사용자 프로필을 편집 하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-209">Triggers an operation to edit the user profile.</span></span> |
-| `authentication/register`        | <span data-ttu-id="ac88e-210">새 사용자를 등록 하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-210">Triggers an operation to register a new user.</span></span> |
+| <span data-ttu-id="db7f0-377">경로</span><span class="sxs-lookup"><span data-stu-id="db7f0-377">Route</span></span>                            | <span data-ttu-id="db7f0-378">용도</span><span class="sxs-lookup"><span data-stu-id="db7f0-378">Purpose</span></span> |
+| ---
+<span data-ttu-id="db7f0-379">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-379">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-380">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-380">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-381">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-381">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-382">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-382">'Identity'</span></span>
+- <span data-ttu-id="db7f0-383">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-383">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-384">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-384">'Razor'</span></span>
+- <span data-ttu-id="db7f0-385">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-385">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="ac88e-211">위의 표에 표시 된 경로는를 통해 구성할 수 있습니다 `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-211">The routes shown in the preceding table are configurable via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span></span> <span data-ttu-id="ac88e-212">사용자 지정 경로를 제공 하는 옵션을 설정 하는 경우 앱에 각 경로를 처리 하는 경로가 있는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-212">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
+-
+<span data-ttu-id="db7f0-386">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-386">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-387">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-387">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-388">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-388">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-389">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-389">'Identity'</span></span>
+- <span data-ttu-id="db7f0-390">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-390">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-391">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-391">'Razor'</span></span>
+- <span data-ttu-id="db7f0-392">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-392">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="ac88e-213">다음 예제에서 모든 경로에는 접두사가 붙습니다 `/security` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-213">In the following example, all the paths are prefixed with `/security`.</span></span>
+-
+<span data-ttu-id="db7f0-393">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-393">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-394">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-394">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-395">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-395">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-396">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-396">'Identity'</span></span>
+- <span data-ttu-id="db7f0-397">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-397">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-398">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-398">'Razor'</span></span>
+- <span data-ttu-id="db7f0-399">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-399">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="ac88e-214">`Authentication`구성 요소 (*페이지/인증. razor*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-214">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+-
+<span data-ttu-id="db7f0-400">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-400">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-401">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-401">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-402">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-402">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-403">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-403">'Identity'</span></span>
+- <span data-ttu-id="db7f0-404">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-404">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-405">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-405">'Razor'</span></span>
+- <span data-ttu-id="db7f0-406">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-406">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-407">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-407">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-408">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-408">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-409">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-409">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-410">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-410">'Identity'</span></span>
+- <span data-ttu-id="db7f0-411">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-411">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-412">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-412">'Razor'</span></span>
+- <span data-ttu-id="db7f0-413">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-413">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-414">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-414">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-415">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-415">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-416">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-416">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-417">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-417">'Identity'</span></span>
+- <span data-ttu-id="db7f0-418">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-418">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-419">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-419">'Razor'</span></span>
+- <span data-ttu-id="db7f0-420">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-420">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-421">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-421">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-422">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-422">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-423">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-423">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-424">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-424">'Identity'</span></span>
+- <span data-ttu-id="db7f0-425">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-425">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-426">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-426">'Razor'</span></span>
+- <span data-ttu-id="db7f0-427">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-427">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-428">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-428">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-429">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-429">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-430">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-430">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-431">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-431">'Identity'</span></span>
+- <span data-ttu-id="db7f0-432">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-432">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-433">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-433">'Razor'</span></span>
+- <span data-ttu-id="db7f0-434">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-434">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-435">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-435">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-436">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-436">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-437">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-437">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-438">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-438">'Identity'</span></span>
+- <span data-ttu-id="db7f0-439">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-439">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-440">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-440">'Razor'</span></span>
+- <span data-ttu-id="db7f0-441">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-441">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-442">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-442">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-443">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-443">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-444">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-444">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-445">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-445">'Identity'</span></span>
+- <span data-ttu-id="db7f0-446">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-446">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-447">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-447">'Razor'</span></span>
+- <span data-ttu-id="db7f0-448">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-448">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-449">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-449">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-450">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-450">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-451">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-451">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-452">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-452">'Identity'</span></span>
+- <span data-ttu-id="db7f0-453">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-453">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-454">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-454">'Razor'</span></span>
+- <span data-ttu-id="db7f0-455">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-455">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-456">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-456">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-457">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-457">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-458">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-458">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-459">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-459">'Identity'</span></span>
+- <span data-ttu-id="db7f0-460">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-460">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-461">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-461">'Razor'</span></span>
+- <span data-ttu-id="db7f0-462">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-462">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-463">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-463">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-464">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-464">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-465">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-465">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-466">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-466">'Identity'</span></span>
+- <span data-ttu-id="db7f0-467">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-467">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-468">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-468">'Razor'</span></span>
+- <span data-ttu-id="db7f0-469">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-469">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-470">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-470">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-471">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-471">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-472">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-472">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-473">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-473">'Identity'</span></span>
+- <span data-ttu-id="db7f0-474">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-474">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-475">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-475">'Razor'</span></span>
+- <span data-ttu-id="db7f0-476">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-476">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="db7f0-477">---------------- | ---제목: ' ASP.NET Core Blazor weasembmbambaoma 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 weasembmbomommbmbommbmbmboms</span><span class="sxs-lookup"><span data-stu-id="db7f0-477">---------------- | --- title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-478">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-478">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-479">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-479">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-480">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-480">'Identity'</span></span>
+- <span data-ttu-id="db7f0-481">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-481">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-482">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-482">'Razor'</span></span>
+- <span data-ttu-id="db7f0-483">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-483">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="db7f0-484">---- | | `authentication/login`           | 로그인 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-484">---- | | `authentication/login`           | Triggers a sign-in operation.</span></span> <span data-ttu-id="db7f0-485">| | `authentication/login-callback`  | 로그인 작업의 결과를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-485">| | `authentication/login-callback`  | Handles the result of any sign-in operation.</span></span> <span data-ttu-id="db7f0-486">| | `authentication/login-failed`    | 어떤 이유로 인해 로그인 작업이 실패 하는 경우 오류 메시지를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-486">| | `authentication/login-failed`    | Displays error messages when the sign-in operation fails for some reason.</span></span> <span data-ttu-id="db7f0-487">| | `authentication/logout`          | 로그 아웃 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-487">| | `authentication/logout`          | Triggers a sign-out operation.</span></span> <span data-ttu-id="db7f0-488">| | `authentication/logout-callback` | 로그 아웃 작업의 결과를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-488">| | `authentication/logout-callback` | Handles the result of a sign-out operation.</span></span> <span data-ttu-id="db7f0-489">| | `authentication/logout-failed`   | 어떤 이유로 인해 로그 아웃 작업이 실패 하는 경우 오류 메시지를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-489">| | `authentication/logout-failed`   | Displays error messages when the sign-out operation fails for some reason.</span></span> <span data-ttu-id="db7f0-490">| | `authentication/logged-out`      | 사용자가 성공적으로 로그 아웃 했음을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-490">| | `authentication/logged-out`      | Indicates that the user has successfully logout.</span></span> <span data-ttu-id="db7f0-491">| | `authentication/profile`         | 사용자 프로필을 편집 하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-491">| | `authentication/profile`         | Triggers an operation to edit the user profile.</span></span> <span data-ttu-id="db7f0-492">| | `authentication/register`        | 새 사용자를 등록 하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-492">| | `authentication/register`        | Triggers an operation to register a new user.</span></span> |
+
+<span data-ttu-id="db7f0-493">위의 표에 표시 된 경로는를 통해 구성할 수 있습니다 `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-493">The routes shown in the preceding table are configurable via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span></span> <span data-ttu-id="db7f0-494">사용자 지정 경로를 제공 하는 옵션을 설정 하는 경우 앱에 각 경로를 처리 하는 경로가 있는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-494">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
+
+<span data-ttu-id="db7f0-495">다음 예제에서 모든 경로에는 접두사가 붙습니다 `/security` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-495">In the following example, all the paths are prefixed with `/security`.</span></span>
+
+<span data-ttu-id="db7f0-496">`Authentication`구성 요소 (*페이지/인증. razor*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-496">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -536,7 +865,7 @@ app.UseCors(policy =>
 }
 ```
 
-<span data-ttu-id="ac88e-215">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-215">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="db7f0-497">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-497">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -552,7 +881,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-<span data-ttu-id="ac88e-216">요구 사항이 완전히 다른 경로에 대해를 호출 하는 경우 앞에서 설명한 대로 경로를 설정 하 고 `RemoteAuthenticatorView` 명시적인 동작 매개 변수를 사용 하 여을 렌더링 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-216">If the requirement calls for completely different paths, set the routes as described previously and render the `RemoteAuthenticatorView` with an explicit action parameter:</span></span>
+<span data-ttu-id="db7f0-498">요구 사항이 완전히 다른 경로에 대해를 호출 하는 경우 앞에서 설명한 대로 경로를 설정 하 고 `RemoteAuthenticatorView` 명시적인 동작 매개 변수를 사용 하 여을 렌더링 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-498">If the requirement calls for completely different paths, set the routes as described previously and render the `RemoteAuthenticatorView` with an explicit action parameter:</span></span>
 
 ```razor
 @page "/register"
@@ -560,13 +889,13 @@ builder.Services.AddApiAuthorization(options => {
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-<span data-ttu-id="ac88e-217">이렇게 선택 하면 UI를 다른 페이지로 나눌 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-217">You're allowed to break the UI into different pages if you choose to do so.</span></span>
+<span data-ttu-id="db7f0-499">이렇게 선택 하면 UI를 다른 페이지로 나눌 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-499">You're allowed to break the UI into different pages if you choose to do so.</span></span>
 
-## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="ac88e-218">인증 사용자 인터페이스 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="ac88e-218">Customize the authentication user interface</span></span>
+## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="db7f0-500">인증 사용자 인터페이스 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="db7f0-500">Customize the authentication user interface</span></span>
 
-<span data-ttu-id="ac88e-219">`RemoteAuthenticatorView`에는 각 인증 상태에 대 한 기본 UI 조각 집합이 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-219">`RemoteAuthenticatorView` includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="ac88e-220">사용자 지정를 전달 하 여 각 상태를 사용자 지정할 수 있습니다 `RenderFragment` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-220">Each state can be customized by passing in a custom `RenderFragment`.</span></span> <span data-ttu-id="ac88e-221">초기 로그인 프로세스 중에 표시 되는 텍스트를 사용자 지정 하려면에서 `RemoteAuthenticatorView` 다음과 같이 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-221">To customize the displayed text during the initial login process, can change the `RemoteAuthenticatorView` as follows.</span></span>
+<span data-ttu-id="db7f0-501">`RemoteAuthenticatorView`에는 각 인증 상태에 대 한 기본 UI 조각 집합이 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-501">`RemoteAuthenticatorView` includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="db7f0-502">사용자 지정를 전달 하 여 각 상태를 사용자 지정할 수 있습니다 `RenderFragment` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-502">Each state can be customized by passing in a custom `RenderFragment`.</span></span> <span data-ttu-id="db7f0-503">초기 로그인 프로세스 중에 표시 되는 텍스트를 사용자 지정 하려면에서 `RemoteAuthenticatorView` 다음과 같이 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-503">To customize the displayed text during the initial login process, can change the `RemoteAuthenticatorView` as follows.</span></span>
 
-<span data-ttu-id="ac88e-222">`Authentication`구성 요소 (*페이지/인증. razor*):</span><span class="sxs-lookup"><span data-stu-id="ac88e-222">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="db7f0-504">`Authentication`구성 요소 (*페이지/인증. razor*):</span><span class="sxs-lookup"><span data-stu-id="db7f0-504">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -584,25 +913,222 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-<span data-ttu-id="ac88e-223">에는 `RemoteAuthenticatorView` 다음 표에 표시 된 인증 경로 별로 사용할 수 있는 하나의 조각이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-223">The `RemoteAuthenticatorView` has one fragment that can be used per authentication route shown in the following table.</span></span>
+<span data-ttu-id="db7f0-505">에는 `RemoteAuthenticatorView` 다음 표에 표시 된 인증 경로 별로 사용할 수 있는 하나의 조각이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-505">The `RemoteAuthenticatorView` has one fragment that can be used per authentication route shown in the following table.</span></span>
 
-| <span data-ttu-id="ac88e-224">경로</span><span class="sxs-lookup"><span data-stu-id="ac88e-224">Route</span></span>                            | <span data-ttu-id="ac88e-225">조각</span><span class="sxs-lookup"><span data-stu-id="ac88e-225">Fragment</span></span>                |
-| -------------------------------- | ----------------------- |
-| `authentication/login`           | `<LoggingIn>`           |
-| `authentication/login-callback`  | `<CompletingLoggingIn>` |
-| `authentication/login-failed`    | `<LogInFailed>`         |
-| `authentication/logout`          | `<LogOut>`              |
-| `authentication/logout-callback` | `<CompletingLogOut>`    |
-| `authentication/logout-failed`   | `<LogOutFailed>`        |
-| `authentication/logged-out`      | `<LogOutSucceeded>`     |
-| `authentication/profile`         | `<UserProfile>`         |
-| `authentication/register`        | `<Registering>`         |
+| <span data-ttu-id="db7f0-506">경로</span><span class="sxs-lookup"><span data-stu-id="db7f0-506">Route</span></span>                            | <span data-ttu-id="db7f0-507">조각</span><span class="sxs-lookup"><span data-stu-id="db7f0-507">Fragment</span></span>                |
+| ---
+<span data-ttu-id="db7f0-508">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-508">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-509">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-509">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-510">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-510">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-511">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-511">'Identity'</span></span>
+- <span data-ttu-id="db7f0-512">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-512">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-513">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-513">'Razor'</span></span>
+- <span data-ttu-id="db7f0-514">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-514">'SignalR' uid:</span></span> 
 
-## <a name="customize-the-user"></a><span data-ttu-id="ac88e-226">사용자 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="ac88e-226">Customize the user</span></span>
+-
+<span data-ttu-id="db7f0-515">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-515">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-516">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-516">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-517">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-517">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-518">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-518">'Identity'</span></span>
+- <span data-ttu-id="db7f0-519">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-519">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-520">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-520">'Razor'</span></span>
+- <span data-ttu-id="db7f0-521">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-521">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="ac88e-227">앱에 바인딩된 사용자를 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-227">Users bound to the app can be customized.</span></span> <span data-ttu-id="ac88e-228">다음 예에서는 인증 된 모든 사용자가 `amr` 각 사용자의 인증 방법에 대 한 클레임을 받습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-228">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
+-
+<span data-ttu-id="db7f0-522">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-522">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-523">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-523">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-524">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-524">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-525">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-525">'Identity'</span></span>
+- <span data-ttu-id="db7f0-526">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-526">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-527">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-527">'Razor'</span></span>
+- <span data-ttu-id="db7f0-528">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-528">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="ac88e-229">클래스를 확장 하는 클래스를 만듭니다 `RemoteUserAccount` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-229">Create a class that extends the `RemoteUserAccount` class:</span></span>
+-
+<span data-ttu-id="db7f0-529">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-529">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-530">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-530">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-531">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-531">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-532">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-532">'Identity'</span></span>
+- <span data-ttu-id="db7f0-533">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-533">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-534">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-534">'Razor'</span></span>
+- <span data-ttu-id="db7f0-535">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-535">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-536">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-536">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-537">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-537">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-538">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-538">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-539">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-539">'Identity'</span></span>
+- <span data-ttu-id="db7f0-540">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-540">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-541">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-541">'Razor'</span></span>
+- <span data-ttu-id="db7f0-542">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-542">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-543">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-543">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-544">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-544">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-545">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-545">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-546">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-546">'Identity'</span></span>
+- <span data-ttu-id="db7f0-547">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-547">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-548">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-548">'Razor'</span></span>
+- <span data-ttu-id="db7f0-549">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-549">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-550">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-550">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-551">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-551">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-552">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-552">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-553">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-553">'Identity'</span></span>
+- <span data-ttu-id="db7f0-554">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-554">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-555">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-555">'Razor'</span></span>
+- <span data-ttu-id="db7f0-556">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-556">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-557">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-557">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-558">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-558">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-559">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-559">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-560">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-560">'Identity'</span></span>
+- <span data-ttu-id="db7f0-561">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-561">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-562">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-562">'Razor'</span></span>
+- <span data-ttu-id="db7f0-563">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-563">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-564">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-564">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-565">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-565">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-566">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-566">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-567">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-567">'Identity'</span></span>
+- <span data-ttu-id="db7f0-568">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-568">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-569">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-569">'Razor'</span></span>
+- <span data-ttu-id="db7f0-570">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-570">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-571">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-571">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-572">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-572">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-573">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-573">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-574">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-574">'Identity'</span></span>
+- <span data-ttu-id="db7f0-575">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-575">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-576">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-576">'Razor'</span></span>
+- <span data-ttu-id="db7f0-577">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-577">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-578">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-578">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-579">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-579">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-580">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-580">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-581">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-581">'Identity'</span></span>
+- <span data-ttu-id="db7f0-582">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-582">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-583">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-583">'Razor'</span></span>
+- <span data-ttu-id="db7f0-584">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-584">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-585">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-585">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-586">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-586">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-587">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-587">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-588">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-588">'Identity'</span></span>
+- <span data-ttu-id="db7f0-589">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-589">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-590">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-590">'Razor'</span></span>
+- <span data-ttu-id="db7f0-591">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-591">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-592">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-592">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-593">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-593">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-594">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-594">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-595">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-595">'Identity'</span></span>
+- <span data-ttu-id="db7f0-596">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-596">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-597">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-597">'Razor'</span></span>
+- <span data-ttu-id="db7f0-598">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-598">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-599">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-599">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-600">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-600">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-601">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-601">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-602">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-602">'Identity'</span></span>
+- <span data-ttu-id="db7f0-603">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-603">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-604">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-604">'Razor'</span></span>
+- <span data-ttu-id="db7f0-605">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-605">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="db7f0-606">---------------- | ---제목: ' ASP.NET Core Blazor weasembmbambaoma 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 weasembmbomommbmbommbmbmboms</span><span class="sxs-lookup"><span data-stu-id="db7f0-606">---------------- | --- title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-607">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-607">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-608">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-608">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-609">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-609">'Identity'</span></span>
+- <span data-ttu-id="db7f0-610">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-610">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-611">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-611">'Razor'</span></span>
+- <span data-ttu-id="db7f0-612">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-612">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-613">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-613">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-614">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-614">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-615">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-615">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-616">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-616">'Identity'</span></span>
+- <span data-ttu-id="db7f0-617">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-617">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-618">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-618">'Razor'</span></span>
+- <span data-ttu-id="db7f0-619">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-619">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-620">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-620">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-621">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-621">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-622">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-622">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-623">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-623">'Identity'</span></span>
+- <span data-ttu-id="db7f0-624">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-624">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-625">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-625">'Razor'</span></span>
+- <span data-ttu-id="db7f0-626">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-626">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-627">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-627">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-628">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-628">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-629">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-629">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-630">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-630">'Identity'</span></span>
+- <span data-ttu-id="db7f0-631">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-631">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-632">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-632">'Razor'</span></span>
+- <span data-ttu-id="db7f0-633">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-633">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-634">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-634">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-635">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-635">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-636">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-636">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-637">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-637">'Identity'</span></span>
+- <span data-ttu-id="db7f0-638">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-638">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-639">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-639">'Razor'</span></span>
+- <span data-ttu-id="db7f0-640">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-640">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-641">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-641">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-642">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-642">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-643">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-643">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-644">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-644">'Identity'</span></span>
+- <span data-ttu-id="db7f0-645">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-645">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-646">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-646">'Razor'</span></span>
+- <span data-ttu-id="db7f0-647">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-647">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-648">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-648">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-649">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-649">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-650">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-650">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-651">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-651">'Identity'</span></span>
+- <span data-ttu-id="db7f0-652">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-652">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-653">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-653">'Razor'</span></span>
+- <span data-ttu-id="db7f0-654">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-654">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-655">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-655">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-656">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-656">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-657">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-657">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-658">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-658">'Identity'</span></span>
+- <span data-ttu-id="db7f0-659">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-659">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-660">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-660">'Razor'</span></span>
+- <span data-ttu-id="db7f0-661">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-661">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="db7f0-662">제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor</span><span class="sxs-lookup"><span data-stu-id="db7f0-662">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="db7f0-663">monikerRange: ms author: ms: custom: ms. date: no loc:</span><span class="sxs-lookup"><span data-stu-id="db7f0-663">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="db7f0-664">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-664">'Blazor'</span></span>
+- <span data-ttu-id="db7f0-665">'Identity'</span><span class="sxs-lookup"><span data-stu-id="db7f0-665">'Identity'</span></span>
+- <span data-ttu-id="db7f0-666">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="db7f0-666">'Let's Encrypt'</span></span>
+- <span data-ttu-id="db7f0-667">'Razor'</span><span class="sxs-lookup"><span data-stu-id="db7f0-667">'Razor'</span></span>
+- <span data-ttu-id="db7f0-668">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="db7f0-668">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="db7f0-669">------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |</span><span class="sxs-lookup"><span data-stu-id="db7f0-669">------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |</span></span>
+
+## <a name="customize-the-user"></a><span data-ttu-id="db7f0-670">사용자 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="db7f0-670">Customize the user</span></span>
+
+<span data-ttu-id="db7f0-671">앱에 바인딩된 사용자를 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-671">Users bound to the app can be customized.</span></span> <span data-ttu-id="db7f0-672">다음 예에서는 인증 된 모든 사용자가 `amr` 각 사용자의 인증 방법에 대 한 클레임을 받습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-672">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
+
+<span data-ttu-id="db7f0-673">클래스를 확장 하는 클래스를 만듭니다 `RemoteUserAccount` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-673">Create a class that extends the `RemoteUserAccount` class:</span></span>
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -615,7 +1141,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-<span data-ttu-id="ac88e-230">다음을 확장 하는 팩터리를 만듭니다 `AccountClaimsPrincipalFactory<TAccount>` .</span><span class="sxs-lookup"><span data-stu-id="ac88e-230">Create a factory that extends `AccountClaimsPrincipalFactory<TAccount>`:</span></span>
+<span data-ttu-id="db7f0-674">다음을 확장 하는 팩터리를 만듭니다 `AccountClaimsPrincipalFactory<TAccount>` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-674">Create a factory that extends `AccountClaimsPrincipalFactory<TAccount>`:</span></span>
 
 ```csharp
 using System.Security.Claims;
@@ -651,9 +1177,9 @@ public class CustomAccountFactory
 }
 ```
 
-<span data-ttu-id="ac88e-231">`CustomAccountFactory`사용 중인 인증 공급자에 대 한를 등록 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-231">Register the `CustomAccountFactory` for the authentication provider in use.</span></span> <span data-ttu-id="ac88e-232">유효한 등록은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-232">Any of the following registrations are valid:</span></span> 
+<span data-ttu-id="db7f0-675">`CustomAccountFactory`사용 중인 인증 공급자에 대 한를 등록 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-675">Register the `CustomAccountFactory` for the authentication provider in use.</span></span> <span data-ttu-id="db7f0-676">유효한 등록은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-676">Any of the following registrations are valid:</span></span> 
 
-* <span data-ttu-id="ac88e-233">`AddOidcAuthentication`:</span><span class="sxs-lookup"><span data-stu-id="ac88e-233">`AddOidcAuthentication`:</span></span>
+* <span data-ttu-id="db7f0-677">`AddOidcAuthentication`:</span><span class="sxs-lookup"><span data-stu-id="db7f0-677">`AddOidcAuthentication`:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -669,7 +1195,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-* <span data-ttu-id="ac88e-234">`AddMsalAuthentication`:</span><span class="sxs-lookup"><span data-stu-id="ac88e-234">`AddMsalAuthentication`:</span></span>
+* <span data-ttu-id="db7f0-678">`AddMsalAuthentication`:</span><span class="sxs-lookup"><span data-stu-id="db7f0-678">`AddMsalAuthentication`:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -685,7 +1211,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
   
-* <span data-ttu-id="ac88e-235">`AddApiAuthorization`:</span><span class="sxs-lookup"><span data-stu-id="ac88e-235">`AddApiAuthorization`:</span></span>
+* <span data-ttu-id="db7f0-679">`AddApiAuthorization`:</span><span class="sxs-lookup"><span data-stu-id="db7f0-679">`AddApiAuthorization`:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -701,14 +1227,14 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="ac88e-236">인증을 사용한 미리 렌더링 지원</span><span class="sxs-lookup"><span data-stu-id="ac88e-236">Support prerendering with authentication</span></span>
+## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="db7f0-680">인증을 사용한 미리 렌더링 지원</span><span class="sxs-lookup"><span data-stu-id="db7f0-680">Support prerendering with authentication</span></span>
 
-<span data-ttu-id="ac88e-237">호스트된 Blazor WebAssembly 앱 토픽 중 하나의 지침을 따른 후에는 다음 지침에 따라 다음과 같은 동작을 수행하는 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-237">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
+<span data-ttu-id="db7f0-681">호스트된 Blazor WebAssembly 앱 토픽 중 하나의 지침을 따른 후에는 다음 지침에 따라 다음과 같은 동작을 수행하는 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-681">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
 
-* <span data-ttu-id="ac88e-238">인증이 필요하지 않은 경로를 미리 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-238">Prerenders paths for which authorization isn't required.</span></span>
-* <span data-ttu-id="ac88e-239">인증이 필요한 경로를 미리 렌더링하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-239">Doesn't prerender paths for which authorization is required.</span></span>
+* <span data-ttu-id="db7f0-682">인증이 필요하지 않은 경로를 미리 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-682">Prerenders paths for which authorization isn't required.</span></span>
+* <span data-ttu-id="db7f0-683">인증이 필요한 경로를 미리 렌더링하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-683">Doesn't prerender paths for which authorization is required.</span></span>
 
-<span data-ttu-id="ac88e-240">클라이언트 앱의 `Program` 클래스(*Program.cs*)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-240">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
+<span data-ttu-id="db7f0-684">클라이언트 앱의 `Program` 클래스(*Program.cs*)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-684">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
 
 ```csharp
 public class Program
@@ -737,7 +1263,7 @@ public class Program
 }
 ```
 
-<span data-ttu-id="ac88e-241">서버 앱의 `Startup.ConfigureServices`에서 다음과 같은 추가 서비스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-241">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
+<span data-ttu-id="db7f0-685">서버 앱의 `Startup.ConfigureServices`에서 다음과 같은 추가 서비스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-685">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -757,7 +1283,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="ac88e-242">서버 앱의 `Startup.Configure` 메서드에서 `endpoints.MapFallbackToFile("index.html")`을 `endpoints.MapFallbackToPage("/_Host")`로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-242">In the Server app's `Startup.Configure` method, replace `endpoints.MapFallbackToFile("index.html")` with `endpoints.MapFallbackToPage("/_Host")`:</span></span>
+<span data-ttu-id="db7f0-686">서버 앱의 `Startup.Configure` 메서드에서 `endpoints.MapFallbackToFile("index.html")`을 `endpoints.MapFallbackToPage("/_Host")`로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-686">In the Server app's `Startup.Configure` method, replace `endpoints.MapFallbackToFile("index.html")` with `endpoints.MapFallbackToPage("/_Host")`:</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -767,10 +1293,10 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<span data-ttu-id="ac88e-243">서버 앱에서 *Pages* 폴더가 없으면 이 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-243">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="ac88e-244">서버 앱의 *Pages* 폴더 안에 *_Host.cshtml* 페이지를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-244">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="ac88e-245">클라이언트 앱의 *wwwroot/index.html* 파일 콘텐츠를 *Pages/_Host.cshtml* 파일에 붙여넣습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-245">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="ac88e-246">다음과 같이 파일 콘텐츠를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-246">Update the file's contents:</span></span>
+<span data-ttu-id="db7f0-687">서버 앱에서 *Pages* 폴더가 없으면 이 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-687">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="db7f0-688">서버 앱의 *Pages* 폴더 안에 *_Host.cshtml* 페이지를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-688">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="db7f0-689">클라이언트 앱의 *wwwroot/index.html* 파일 콘텐츠를 *Pages/_Host.cshtml* 파일에 붙여넣습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-689">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="db7f0-690">다음과 같이 파일 콘텐츠를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-690">Update the file's contents:</span></span>
 
-* <span data-ttu-id="ac88e-247">`@page "_Host"`를 파일의 맨 위에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-247">Add `@page "_Host"` to the top of the file.</span></span>
-* <span data-ttu-id="ac88e-248">`<app>Loading...</app>` 태그를 다음으로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-248">Replace the `<app>Loading...</app>` tag with the following:</span></span>
+* <span data-ttu-id="db7f0-691">`@page "_Host"`를 파일의 맨 위에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-691">Add `@page "_Host"` to the top of the file.</span></span>
+* <span data-ttu-id="db7f0-692">`<app>Loading...</app>` 태그를 다음으로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-692">Replace the `<app>Loading...</app>` tag with the following:</span></span>
 
   ```cshtml
   <app>
@@ -786,46 +1312,74 @@ app.UseEndpoints(endpoints =>
   </app>
   ```
   
-## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="ac88e-249">호스트된 앱 및 타사 로그인 공급자에 대한 옵션</span><span class="sxs-lookup"><span data-stu-id="ac88e-249">Options for hosted apps and third-party login providers</span></span>
+## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="db7f0-693">호스트된 앱 및 타사 로그인 공급자에 대한 옵션</span><span class="sxs-lookup"><span data-stu-id="db7f0-693">Options for hosted apps and third-party login providers</span></span>
 
-<span data-ttu-id="ac88e-250">타사 공급자를 사용하여 호스트된 Blazor WebAssembly 앱을 인증하고 권한을 부여하는 경우 사용자를 인증하는 데 사용할 수 있는 몇 가지 옵션이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-250">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="ac88e-251">시나리오에 따라 선택하는 옵션이 달라집니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-251">Which one you choose depends on your scenario.</span></span>
+<span data-ttu-id="db7f0-694">타사 공급자를 사용하여 호스트된 Blazor WebAssembly 앱을 인증하고 권한을 부여하는 경우 사용자를 인증하는 데 사용할 수 있는 몇 가지 옵션이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-694">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="db7f0-695">시나리오에 따라 선택하는 옵션이 달라집니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-695">Which one you choose depends on your scenario.</span></span>
 
-<span data-ttu-id="ac88e-252">자세한 내용은 <xref:security/authentication/social/additional-claims>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac88e-252">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
+<span data-ttu-id="db7f0-696">자세한 내용은 <xref:security/authentication/social/additional-claims>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="db7f0-696">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
 
-### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="ac88e-253">보호된 타사 API만 호출하도록 사용자 인증</span><span class="sxs-lookup"><span data-stu-id="ac88e-253">Authenticate users to only call protected third party APIs</span></span>
+### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="db7f0-697">보호된 타사 API만 호출하도록 사용자 인증</span><span class="sxs-lookup"><span data-stu-id="db7f0-697">Authenticate users to only call protected third party APIs</span></span>
 
-<span data-ttu-id="ac88e-254">클라이언트 쪽 OAuth 흐름을 사용하여 사용자를 타사 API 공급자에 대해 인증합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-254">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
+<span data-ttu-id="db7f0-698">클라이언트 쪽 OAuth 흐름을 사용하여 사용자를 타사 API 공급자에 대해 인증합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-698">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
 
  ```csharp
  builder.services.AddOidcAuthentication(options => { ... });
  ```
  
- <span data-ttu-id="ac88e-255">이 시나리오에서는</span><span class="sxs-lookup"><span data-stu-id="ac88e-255">In this scenario:</span></span>
+ <span data-ttu-id="db7f0-699">이 시나리오에서는</span><span class="sxs-lookup"><span data-stu-id="db7f0-699">In this scenario:</span></span>
 
-* <span data-ttu-id="ac88e-256">앱을 호스트하는 서버에서 역할을 재생하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-256">The server hosting the app doesn't play a role.</span></span>
-* <span data-ttu-id="ac88e-257">서버의 API는 보호할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-257">APIs on the server can't be protected.</span></span>
-* <span data-ttu-id="ac88e-258">앱은 보호된 타사 API만 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-258">The app can only call protected third-party APIs.</span></span>
+* <span data-ttu-id="db7f0-700">앱을 호스트하는 서버에서 역할을 재생하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-700">The server hosting the app doesn't play a role.</span></span>
+* <span data-ttu-id="db7f0-701">서버의 API는 보호할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-701">APIs on the server can't be protected.</span></span>
+* <span data-ttu-id="db7f0-702">앱은 보호된 타사 API만 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-702">The app can only call protected third-party APIs.</span></span>
 
-### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="ac88e-259">타사 공급자를 사용하여 사용자를 인증하고 호스트 서버 및 타사에서 보호된 API 호출</span><span class="sxs-lookup"><span data-stu-id="ac88e-259">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
+### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="db7f0-703">타사 공급자를 사용하여 사용자를 인증하고 호스트 서버 및 타사에서 보호된 API 호출</span><span class="sxs-lookup"><span data-stu-id="db7f0-703">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
 
-<span data-ttu-id="ac88e-260">Identity타사 로그인 공급자를 사용 하 여를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-260">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="ac88e-261">타사 API 액세스에 필요한 토큰을 가져와 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-261">Obtain the tokens required for third-party API access and store them.</span></span>
+<span data-ttu-id="db7f0-704">Identity타사 로그인 공급자를 사용 하 여를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-704">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="db7f0-705">타사 API 액세스에 필요한 토큰을 가져와 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-705">Obtain the tokens required for third-party API access and store them.</span></span>
 
-<span data-ttu-id="ac88e-262">사용자가 로그인 할 때는 Identity 인증 프로세스의 일부로 액세스 및 새로 고침 토큰을 수집 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-262">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="ac88e-263">이때 타사 API에 대한 API 호출을 수행하는 데 사용할 수 있는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-263">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
+<span data-ttu-id="db7f0-706">사용자가 로그인 할 때는 Identity 인증 프로세스의 일부로 액세스 및 새로 고침 토큰을 수집 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-706">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="db7f0-707">이때 타사 API에 대한 API 호출을 수행하는 데 사용할 수 있는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-707">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
 
-#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="ac88e-264">서버 액세스 토큰을 사용하여 타사 액세스 토큰 검색</span><span class="sxs-lookup"><span data-stu-id="ac88e-264">Use a server access token to retrieve the third-party access token</span></span>
+#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="db7f0-708">서버 액세스 토큰을 사용하여 타사 액세스 토큰 검색</span><span class="sxs-lookup"><span data-stu-id="db7f0-708">Use a server access token to retrieve the third-party access token</span></span>
 
-<span data-ttu-id="ac88e-265">서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-265">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="ac88e-266">여기에서 타사 액세스 토큰을 사용 하 여 클라이언트에서 직접 타사 API 리소스를 호출 Identity 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-266">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
+<span data-ttu-id="db7f0-709">서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-709">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="db7f0-710">여기에서 타사 액세스 토큰을 사용 하 여 클라이언트에서 직접 타사 API 리소스를 호출 Identity 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-710">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
 
-<span data-ttu-id="ac88e-267">이 방법은 사용하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-267">We don't recommend this approach.</span></span> <span data-ttu-id="ac88e-268">이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-268">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="ac88e-269">OAuth 맥락에서, 퍼블릭 앱은 암호를 안전하게 저장하는 데 신뢰할 수 없으므로 클라이언트 암호를 갖지 않으며, 액세스 토큰은 기밀 클라이언트에 대해 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-269">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="ac88e-270">기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-270">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
+<span data-ttu-id="db7f0-711">이 방법은 사용하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-711">We don't recommend this approach.</span></span> <span data-ttu-id="db7f0-712">이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-712">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="db7f0-713">OAuth 맥락에서, 퍼블릭 앱은 암호를 안전하게 저장하는 데 신뢰할 수 없으므로 클라이언트 암호를 갖지 않으며, 액세스 토큰은 기밀 클라이언트에 대해 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-713">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="db7f0-714">기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-714">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
 
-* <span data-ttu-id="ac88e-271">타사 액세스 토큰에는 타사에서 더 신뢰할 수 있는 클라이언트에 대한 토큰을 내보낸 사실을 기반으로 중요한 작업을 수행하기 위한 추가 범위가 부여될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-271">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
-* <span data-ttu-id="ac88e-272">마찬가지로, 신뢰할 수 없는 클라이언트에 대해서는 새로 고침 토큰을 발급하지 않아야 합니다. 발급할 경우, 다른 제한이 적용되지 않는 한 클라이언트에 무제한 액세스 권한이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-272">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
+* <span data-ttu-id="db7f0-715">타사 액세스 토큰에는 타사에서 더 신뢰할 수 있는 클라이언트에 대한 토큰을 내보낸 사실을 기반으로 중요한 작업을 수행하기 위한 추가 범위가 부여될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-715">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
+* <span data-ttu-id="db7f0-716">마찬가지로, 신뢰할 수 없는 클라이언트에 대해서는 새로 고침 토큰을 발급하지 않아야 합니다. 발급할 경우, 다른 제한이 적용되지 않는 한 클라이언트에 무제한 액세스 권한이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-716">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
 
-#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="ac88e-273">타사 API를 호출하기 위해 클라이언트에서 서버 API로 API 호출 수행</span><span class="sxs-lookup"><span data-stu-id="ac88e-273">Make API calls from the client to the server API in order to call third-party APIs</span></span>
+#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="db7f0-717">타사 API를 호출하기 위해 클라이언트에서 서버 API로 API 호출 수행</span><span class="sxs-lookup"><span data-stu-id="db7f0-717">Make API calls from the client to the server API in order to call third-party APIs</span></span>
 
-<span data-ttu-id="ac88e-274">클라이언트에서 서버 API로 API 호출을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-274">Make an API call from the client to the server API.</span></span> <span data-ttu-id="ac88e-275">서버에서 타사 API 리소스에 대한 액세스 토큰을 검색하고 필요한 호출이 무엇이든 해당 호출을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-275">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
+<span data-ttu-id="db7f0-718">클라이언트에서 서버 API로 API 호출을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-718">Make an API call from the client to the server API.</span></span> <span data-ttu-id="db7f0-719">서버에서 타사 API 리소스에 대한 액세스 토큰을 검색하고 필요한 호출이 무엇이든 해당 호출을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-719">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
 
-<span data-ttu-id="ac88e-276">이 방법을 사용하려면 타사 API를 호출하기 위해 서버를 통한 추가 네트워크 홉이 필요하지만, 궁극적으로 다음과 같은 더 안전한 환경이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-276">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
+<span data-ttu-id="db7f0-720">이 방법을 사용하려면 타사 API를 호출하기 위해 서버를 통한 추가 네트워크 홉이 필요하지만, 궁극적으로 다음과 같은 더 안전한 환경이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-720">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
 
-* <span data-ttu-id="ac88e-277">서버는 새로 고침 토큰을 저장하고 앱이 타사 리소스에 대한 액세스 권한을 잃지 않도록 보장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-277">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
-* <span data-ttu-id="ac88e-278">앱은 더 중요한 권한을 포함할 수 있는 서버의 액세스 토큰을 누출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac88e-278">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
+* <span data-ttu-id="db7f0-721">서버는 새로 고침 토큰을 저장하고 앱이 타사 리소스에 대한 액세스 권한을 잃지 않도록 보장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-721">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
+* <span data-ttu-id="db7f0-722">앱은 더 중요한 권한을 포함할 수 있는 서버의 액세스 토큰을 누출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-722">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a><span data-ttu-id="db7f0-723">OIDC (Open ID Connect) v2.0 끝점 사용</span><span class="sxs-lookup"><span data-stu-id="db7f0-723">Use Open ID Connect (OIDC) v2.0 endpoints</span></span>
+
+<span data-ttu-id="db7f0-724">인증 라이브러리 및 Blazor 템플릿은 OIDC (OPEN ID Connect) v1.0 끝점을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-724">The authentication library and Blazor templates use Open ID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="db7f0-725">V2.0 끝점을 사용 하려면 JWT 전달자 옵션을 구성 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-725">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="db7f0-726">다음 예제에서는 속성에 세그먼트를 추가 하 여 v 2.0에 대해 AAD를 구성 합니다 `v2.0` `Authority` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-726">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the `Authority` property:</span></span>
+
+```csharp
+builder.Services.Configure<JwtBearerOptions>(
+    AzureADDefaults.JwtBearerAuthenticationScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    });
+```
+
+<span data-ttu-id="db7f0-727">또는 앱 설정 (*appsettings*) 파일에서 설정을 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-727">Alternatively, the setting can be made in the app settings (*appsettings.json*) file:</span></span>
+
+```json
+{
+  "Local": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+<span data-ttu-id="db7f0-728">권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 `Authority` 속성을 직접 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-728">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the `Authority` property directly.</span></span> <span data-ttu-id="db7f0-729">`JwtBearerOptions`또는 앱 설정 파일에서 키를 사용 하 여 속성을 설정 합니다 `Authority` .</span><span class="sxs-lookup"><span data-stu-id="db7f0-729">Either set the property in `JwtBearerOptions` or in the app settings file with the `Authority` key.</span></span>
+
+<span data-ttu-id="db7f0-730">V2.0 끝점에 대 한 ID 토큰의 클레임 목록이 변경 됩니다.</span><span class="sxs-lookup"><span data-stu-id="db7f0-730">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="db7f0-731">자세한 내용은 [Microsoft identity platform (v2.0)로 업데이트 하는 이유](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="db7f0-731">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span></span>

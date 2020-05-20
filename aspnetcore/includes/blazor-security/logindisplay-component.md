@@ -1,9 +1,9 @@
-<span data-ttu-id="2fb3d-101">구성 `LoginDisplay` 요소 (*shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb3d-101">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
+<span data-ttu-id="0c7c0-101">구성 `LoginDisplay` 요소 (*Shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="0c7c0-101">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
 
-* <span data-ttu-id="2fb3d-102">인증 된 사용자의 경우:</span><span class="sxs-lookup"><span data-stu-id="2fb3d-102">For authenticated users:</span></span>
-  * <span data-ttu-id="2fb3d-103">현재 사용자 이름을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb3d-103">Displays the current username.</span></span>
-  * <span data-ttu-id="2fb3d-104">앱에서 로그 아웃할 수 있는 단추를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb3d-104">Offers a button to log out of the app.</span></span>
-* <span data-ttu-id="2fb3d-105">익명 사용자의 경우은 로그인 할 수 있는 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb3d-105">For anonymous users, offers the option to log in.</span></span>
+* <span data-ttu-id="0c7c0-102">인증 된 사용자의 경우:</span><span class="sxs-lookup"><span data-stu-id="0c7c0-102">For authenticated users:</span></span>
+  * <span data-ttu-id="0c7c0-103">현재 사용자 이름을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="0c7c0-103">Displays the current username.</span></span>
+  * <span data-ttu-id="0c7c0-104">앱에서 로그 아웃할 수 있는 단추를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="0c7c0-104">Offers a button to log out of the app.</span></span>
+* <span data-ttu-id="0c7c0-105">익명 사용자의 경우은 로그인 할 수 있는 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="0c7c0-105">For anonymous users, offers the option to log in.</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -14,7 +14,7 @@
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
             Log out
         </button>
     </Authorized>
@@ -24,7 +24,7 @@
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginLogout(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
