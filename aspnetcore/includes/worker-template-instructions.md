@@ -15,7 +15,7 @@
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-명령 셸에서 `worker`dotnet new[ 명령과 함께 Worker Service(](/dotnet/core/tools/dotnet-new)) 템플릿을 사용합니다. 다음 예제에서는 `ContosoWorker`라는 Worker Service 앱을 만듭니다. 명령이 실행될 때 `ContosoWorker` 앱의 폴더가 자동으로 만들어집니다.
+명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 Worker Service(`worker`) 템플릿을 사용합니다. 다음 예제에서는 `ContosoWorker`라는 Worker Service 앱을 만듭니다. 명령이 실행될 때 `ContosoWorker` 앱의 폴더가 자동으로 만들어집니다.
 
 ```dotnetcli
 dotnet new worker -o ContosoWorker
