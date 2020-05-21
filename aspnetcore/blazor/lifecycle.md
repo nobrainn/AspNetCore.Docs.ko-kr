@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: e4fcd86b6e6a84d9e34a83688f9fb80c6907e5f3
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976703"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438917"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
@@ -50,7 +50,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-[콘텐츠를 미리 렌더링](xref:blazor/hosting-model-configuration#render-mode)하는 Blazor 서버 앱은 `OnInitializedAsync`를 **두 번** 호출합니다. 
+[콘텐츠를 미리 렌더링](xref:blazor/hosting-model-configuration#render-mode)하는 Blazor 서버 앱은 `OnInitializedAsync`를 **두 번** 호출합니다.
 
 * 첫 번째 호출: 구성 요소가 처음에 페이지 일부로 정적 렌더링될 때
 * 두 번째 호출: 브라우저가 서버에 다시 연결할 때
@@ -144,7 +144,7 @@ protected override void OnAfterRender(bool firstRender)
 }
 ```
 
-`OnAfterRender` 및 `OnAfterRenderAsync`‘는 서버에서 미리 렌더링되는 경우 호출되지 않습니다.’ 
+`OnAfterRender` 및 `OnAfterRenderAsync`‘는 서버에서 미리 렌더링되는 경우 호출되지 않습니다.’
 
 이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
 
@@ -164,6 +164,8 @@ protected override bool ShouldRender()
 구성 요소를 렌더링할 때마다 `ShouldRender`가 호출됩니다.
 
 `ShouldRender`를 재정의한 경우에도 처음에는 구성 요소가 항상 렌더링됩니다.
+
+자세한 내용은 <xref:performance/blazor/webassembly-best-practices#avoid-unnecessary-component-renders>를 참조하세요.
 
 ## <a name="state-changes"></a>상태 변경
 
@@ -216,7 +218,7 @@ Blazor 서버 템플릿의 *Pages/FetchData.razor*:
 
 ## <a name="stateful-reconnection-after-prerendering"></a>미리 렌더링 후의 상태 저장 다시 연결
 
-Blazor 서버 앱에서 `RenderMode`가 `ServerPrerendered`인 경우, 구성 요소는 처음에 페이지 일부로 정적 렌더링됩니다. 브라우저가 서버에 다시 연결하면 구성 요소가 ‘다시’ 렌더링되고, 이제 대화형 구성 요소가 됩니다.  구성 요소를 초기화하기 위한 [OnInitialized{Async}](#component-initialization-methods) 수명 주기 메서드가 있는 경우 메서드가 다음과 같이 ‘두 번’ 실행됩니다. 
+Blazor 서버 앱에서 `RenderMode`가 `ServerPrerendered`인 경우, 구성 요소는 처음에 페이지 일부로 정적 렌더링됩니다. 브라우저가 서버에 다시 연결하면 구성 요소가 ‘다시’ 렌더링되고, 이제 대화형 구성 요소가 됩니다. 구성 요소를 초기화하기 위한 [OnInitialized{Async}](#component-initialization-methods) 수명 주기 메서드가 있는 경우 메서드가 다음과 같이 ‘두 번’ 실행됩니다.
 
 * 구성 요소를 정적으로 미리 렌더링할 때
 * 서버 연결이 설정된 후
