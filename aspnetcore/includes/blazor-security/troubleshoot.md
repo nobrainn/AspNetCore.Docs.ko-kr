@@ -17,7 +17,7 @@
   * Visual Studio의 **실행** 단추에서 **찾아보기** 대화 상자를 엽니다.
   * **추가** 단추를 선택합니다.
   * **프로그램** 필드에서 브라우저의 경로를 제공 합니다.
-  * **인수** 필드에 브라우저에서 incognito 또는 private 모드와 앱의 URL을 여는 데 사용 하는 명령줄 옵션을 제공 합니다. 다음은 그 예입니다.
+  * **인수** 필드에 브라우저에서 incognito 또는 private 모드와 앱의 URL을 여는 데 사용 하는 명령줄 옵션을 제공 합니다. 예를 들어:
     * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
   * **이름 필드에** 이름을 입력 합니다. `Firefox Auth Testing`)을 입력합니다.
@@ -32,3 +32,7 @@
 * **실행** 단추를 선택합니다.
 * 메뉴에서 **디버그**  >  **디버깅 시작** 을 사용 합니다.
 * <kbd>F5</kbd>키를 누릅니다.
+
+### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>JSON Web Token (JWT)의 콘텐츠를 검사 합니다.
+
+JWT (JSON Web Token)를 디코딩하려면 Microsoft의 [jwt.ms](https://jwt.ms/) 도구를 사용 합니다. UI의 값은 브라우저에서 벗어날 필요가 없습니다.

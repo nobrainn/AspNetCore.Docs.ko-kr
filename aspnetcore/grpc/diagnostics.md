@@ -5,19 +5,13 @@ description: .NET의 gRPC 앱에서 진단을 수집하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 33b2ee29830cd3012ff791c949c3a7c23a2e98c7
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
+ms.openlocfilehash: 131144bf7a2c637eb2c1a1d5c54990dd4d429502
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444349"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417514"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET의 gRPC에서 로깅 및 진단
 
@@ -40,11 +34,11 @@ gRPC 서비스와 gRPC 클라이언트는 [.NET Core 로깅](xref:fundamentals/l
 
 gRPC 서비스는 ASP.NET Core에서 호스트되므로 ASP.NET Core 로깅 시스템을 사용합니다. 기본 구성에서 gRPC는 매우 적은 정보를 기록하지만, 이 동작을 구성할 수 있습니다. ASP.NET Core 로깅을 구성하는 방법에 대한 자세한 내용은 [ASP.NET Core 로깅](xref:fundamentals/logging/index#configuration) 문서를 참조하세요.
 
-gRPC는 `Grpc` 범주에 로그를 추가합니다. gRPC의 자세한 로그를 사용하려면 `Grpc`의 `Debug` 하위 섹션에 다음 항목을 추가하여 *appsettings.json* 파일의 `LogLevel` 수준에 `Logging` 접두사를 구성합니다.
+gRPC는 `Grpc` 범주에 로그를 추가합니다. gRPC의 자세한 로그를 사용하려면 `Logging`의 `LogLevel` 하위 섹션에 다음 항목을 추가하여 *appsettings.json* 파일의 `Debug` 수준에 `Grpc` 접두사를 구성합니다.
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
-*을 사용하여* Startup.cs`ConfigureLogging`에서 이 동작을 구성할 수도 있습니다.
+`ConfigureLogging`을 사용하여 *Startup.cs*에서 이 동작을 구성할 수도 있습니다.
 
 [!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
@@ -52,7 +46,7 @@ JSON 기반 구성을 사용하지 않는 경우, 구성 시스템에서 다음 
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-구성 시스템 설명서에서 중첩된 구성 값을 지정하는 방법을 확인합니다. 예를 들어 환경 변수를 사용하는 경우, `_` 대신 두 개의 `:` 문자가 사용됩니다(예: `Logging__LogLevel__Grpc`).
+구성 시스템 설명서에서 중첩된 구성 값을 지정하는 방법을 확인합니다. 예를 들어 환경 변수를 사용하는 경우, `:` 대신 두 개의 `_` 문자가 사용됩니다(예: `Logging__LogLevel__Grpc`).
 
 앱에 대한 자세한 진단을 수집하는 경우 `Debug` 수준을 사용하는 것이 좋습니다. `Trace` 수준은 매우 낮은 수준의 진단을 생성하며, 앱의 문제를 진단하는 데 거의 필요하지 않습니다.
 
@@ -83,7 +77,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 #### <a name="as-a-console-app"></a>콘솔 앱으로
 
-콘솔 앱에서 실행하는 경우 [콘솔 로거](xref:fundamentals/logging/index#console)가 기본적으로 사용되어야 합니다. gRPC 로그가 콘솔에 표시됩니다.
+콘솔 앱에서 실행하는 경우 [콘솔 로거](xref:fundamentals/logging/index#console-provider)가 기본적으로 사용되어야 합니다. gRPC 로그가 콘솔에 표시됩니다.
 
 #### <a name="other-environments"></a>기타 환경
 
@@ -100,7 +94,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 클라이언트 로깅을 사용하도록 설정하는 대체 방법은 [gRPC 클라이언트 팩터리](xref:grpc/clientfactory)를 사용하여 클라이언트를 만드는 것입니다. 클라이언트 팩터리에 등록되고 DI에서 확인된 gRPC 클라이언트는 자동으로 앱의 구성된 로깅을 사용합니다.
 
-앱에서 DI를 사용하지 않는 경우, `ILoggerFactory`LoggerFactory.Create[를 사용하여 새 ](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*) 인스턴스를 만들 수 있습니다. 이 메서드에 액세스하려면 [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) 패키지를 앱에 추가합니다.
+앱에서 DI를 사용하지 않는 경우, [LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)를 사용하여 새 `ILoggerFactory` 인스턴스를 만들 수 있습니다. 이 메서드에 액세스하려면 [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) 패키지를 앱에 추가합니다.
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 

@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor 서버 추가 보안 시나리오
-author: guardrex
-description: 추가 보안 시나리오를 위해 서버를 구성 하는 방법을 알아봅니다 Blazor .
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/19/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444076"
+제목: ' ASP.NET Core Blazor 서버 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 서버를 구성 하는 방법을 알아봅니다. '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor 서버 추가 보안 시나리오
 
@@ -28,7 +16,7 @@ ms.locfileid: "83444076"
 
 서버 앱의 구성 요소 외부에서 사용할 수 있는 토큰은 Razor Blazor 이 섹션에 설명 된 방법으로 구성 요소에 전달 될 수 있습니다. 전체 예제를 비롯 한 샘플 코드는 `Startup.ConfigureServices` [서버 쪽 Blazor 응용 프로그램에 토큰 전달](https://github.com/javiercn/blazor-server-aad-sample)을 참조 하세요.
 
-Blazor일반 페이지 또는 MVC 앱에서와 같이 서버 앱을 인증 Razor 합니다. 토큰을 프로 비전 하 여 인증 쿠키에 저장 합니다. 다음은 그 예입니다.
+Blazor일반 페이지 또는 MVC 앱에서와 같이 서버 앱을 인증 Razor 합니다. 토큰을 프로 비전 하 여 인증 쿠키에 저장 합니다. 예를 들어:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -171,7 +159,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 }
 ```
 
-권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 `Authority` 속성을 직접 설정 합니다. <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>또는 앱 설정 파일에서 키를 사용 하 여 속성을 설정 합니다 `Authority` .
+권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정 합니다. <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>또는 앱 설정 파일에서 키를 사용 하 여 속성을 설정 합니다 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> .
 
 ### <a name="code-changes"></a>코드 변경 내용
 

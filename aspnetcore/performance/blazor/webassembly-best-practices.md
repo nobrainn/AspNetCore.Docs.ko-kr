@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor weasembomperformance 성능 모범 사례
-author: pranavkm
-description: ASP.NET Core Blazor weasembmbomapps의 성능을 향상 하 고 일반적인 성능 문제를 방지 하기 위한 팁입니다.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/blazor/webassembly-best-practices
-ms.openlocfilehash: 9e9b166cb9ce9870a8ff275b72bb12f04b84751b
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439424"
+제목: ' ASP.NET Core Blazor weasembmbambambambambambambomapp ASP.NET Core의 성능을 향상 Blazor 하 고 일반적인 성능 문제를 방지 하기 위한 팁 ' 작성자: 설명: ' 팁
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor weasembomperformance 성능 모범 사례
 
@@ -28,9 +16,9 @@ ms.locfileid: "83439424"
 
 ## <a name="avoid-unnecessary-component-renders"></a>불필요 한 구성 요소 렌더링 방지
 
-Blazor알고리즘에서 구성 요소가 변경 되지 않았다는 것을 인식 하는 경우의 diff 알고리즘은 rerendering를 방지 합니다. 구성 요소 렌더링을 세밀 하 게 제어 하려면 [Componentbase를 재정의 합니다.](xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A)
+Blazor알고리즘에서 구성 요소가 변경 되지 않았다는 것을 인식 하는 경우의 diff 알고리즘은 rerendering를 방지 합니다. <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A?displayProperty=nameWithType>구성 요소 렌더링을 세밀 하 게 제어 하기 위해 재정의 합니다.
 
-초기 렌더링 이후 변경 되지 않는 UI 전용 구성 요소를 작성 하는 경우를 `ShouldRender` 반환 하도록를 구성 합니다 `false` .
+초기 렌더링 이후 변경 되지 않는 UI 전용 구성 요소를 작성 하는 경우를 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 반환 하도록를 구성 합니다 `false` .
 
 ```razor
 @code {
@@ -42,9 +30,9 @@ Blazor알고리즘에서 구성 요소가 변경 되지 않았다는 것을 인�
 
 다음 예제에서는
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>는를 재정의 하 고 필드의 값으로 설정 합니다 .이 필드의 값은 `shouldRender` 처음에 `false` 구성 요소를 로드할 때입니다.
-* 이 단추를 선택 하면 `shouldRender` 가로 설정 되어 `true` 구성 요소가 업데이트 된와 강제로 rerender 됩니다 `currentCount` .
-* Rerendering 바로 뒤 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 의 값을로 설정 하 여 `shouldRender` `false` 다음 번에 단추를 선택할 때까지 추가 rerendering 방지 합니다.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>는를 재정의 하 고 필드의 값으로 설정 합니다 .이 필드의 값은 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 처음에 `false` 구성 요소를 로드할 때입니다.
+* 이 단추를 선택 하면 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 가로 설정 되어 `true` 구성 요소가 업데이트 된와 강제로 rerender 됩니다 `currentCount` .
+* Rerendering 바로 뒤 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 의 값을로 설정 하 여 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> `false` 다음 번에 단추를 선택할 때까지 추가 rerendering 방지 합니다.
 
 ```razor
 <p>Current count: @currentCount</p>

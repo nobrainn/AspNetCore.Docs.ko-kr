@@ -40,13 +40,13 @@
 
 **API 노출**:
 
-1. **범위 추가를**선택 합니다.
+1. **범위 추가**를 선택합니다.
 1. **저장하고 계속**을 선택합니다.
 1. **범위 이름을** 제공 합니다 (예: `API.Access` ).
 1. **관리자 동의 표시 이름** (예:)을 제공 `Access API` 합니다.
 1. **관리자 동의 설명** (예:)을 제공 `Allows the app to access server app API endpoints.` 합니다.
 1. **상태** 가 **사용**으로 설정 되어 있는지 확인 합니다.
-1. **범위 추가**를 선택 합니다.
+1. **범위 추가**를 선택합니다.
 
 다음 정보를 기록 합니다.
 
@@ -109,7 +109,7 @@ dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}"
 
 ### <a name="authentication-package"></a>인증 패키지
 
-ASP.NET Core 웹 Api에 대 한 호출을 인증 하 고 권한을 부여 하는 지원은에서 제공 됩니다 `Microsoft.AspNetCore.Authentication.AzureAD.UI` .
+ASP.NET Core 웹 Api에 대 한 호출을 인증 하 고 권한을 부여 하는 지원은 [AzureAD](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.AzureAD.UI/) 패키지에서 제공 됩니다.
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" 
@@ -118,14 +118,14 @@ ASP.NET Core 웹 Api에 대 한 호출을 인증 하 고 권한을 부여 하는
 
 ### <a name="authentication-service-support"></a>인증 서비스 지원
 
-`AddAuthentication`메서드는 앱 내에서 인증 서비스를 설정 하 고 JWT 전달자 처리기를 기본 인증 방법으로 구성 합니다. `AddAzureADBearer`메서드는 Azure Active Directory에서 내보낸 토큰의 유효성을 검사 하는 데 필요한 JWT 전달자 처리기의 특정 매개 변수를 설정 합니다.
+`AddAuthentication`메서드는 앱 내에서 인증 서비스를 설정 하 고 JWT 전달자 처리기를 기본 인증 방법으로 구성 합니다. <xref:Microsoft.AspNetCore.Authentication.AzureADAuthenticationBuilderExtensions.AddAzureADBearer%2A>메서드는 Azure Active Directory에서 내보낸 토큰의 유효성을 검사 하는 데 필요한 JWT 전달자 처리기의 특정 매개 변수를 설정 합니다.
 
 ```csharp
 services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
     .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
 ```
 
-`UseAuthentication`그리고 `UseAuthorization` 다음을 확인 합니다.
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>그리고 <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> 다음을 확인 합니다.
 
 * 앱에서 들어오는 요청에 대 한 토큰을 구문 분석 하 고 유효성을 검사 하려고 합니다.
 * 적절 한 자격 증명 없이 보호 된 리소스에 액세스 하려고 시도 하는 모든 요청은 실패 합니다.
@@ -183,10 +183,10 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="weatherforecast-controller"></a>WeatherForecast 컨트롤러
 
-WeatherForecast 컨트롤러 (controller */WeatherForecastController*)는 컨트롤러에 적용 되는 특성을 사용 하 여 보호 된 API를 노출 합니다 `[Authorize]` . 다음을 이해 하는 것이 **중요** 합니다.
+WeatherForecast 컨트롤러 (controller */WeatherForecastController*)는 컨트롤러에 적용 되는 특성을 사용 하 여 보호 된 API를 노출 합니다 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) . 다음을 이해 하는 것이 **중요** 합니다.
 
-* 이 api `[Authorize]` 컨트롤러의 특성은이 api를 무단 액세스 로부터 보호 하는 유일한 방법입니다.
-* `[Authorize]`Weasemboma 앱에서 사용 되는 특성은 Blazor 사용자가 앱이 올바르게 작동 하도록 권한이 부여 되어야 한다는 것을 앱에 대 한 힌트로만 사용 됩니다.
+* 이 api [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 컨트롤러의 특성은이 api를 무단 액세스 로부터 보호 하는 유일한 방법입니다.
+* [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Weasemboma 앱에서 사용 되는 특성은 Blazor 사용자가 앱이 올바르게 작동 하도록 권한이 부여 되어야 한다는 것을 앱에 대 한 힌트로만 사용 됩니다.
 
 ```csharp
 [Authorize]
@@ -208,7 +208,7 @@ public class WeatherForecastController : ControllerBase
 
 ### <a name="authentication-package"></a>인증 패키지
 
-회사 또는 학교 계정 ()을 사용 하도록 앱을 만들 때 `SingleOrg` 앱은 [Microsoft 인증 라이브러리](/azure/active-directory/develop/msal-overview) ()에 대 한 패키지 참조를 자동으로 받습니다 `Microsoft.Authentication.WebAssembly.Msal` . 패키지는 앱이 사용자를 인증 하 고 토큰을 가져와서 보호 된 Api를 호출할 수 있도록 지 원하는 기본 형식 집합을 제공 합니다.
+회사 또는 학교 계정 ()을 사용 하도록 앱을 만들 때 `SingleOrg` 앱은 [Microsoft 인증 라이브러리 (Microsoft 인증 라이브러리](/azure/active-directory/develop/msal-overview) )에 대 한 패키지 참조를 자동으로 받습니다 (microsoft 인증 라이브러리 ([Microsoft. Authentication. Webassembly](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)). 패키지는 앱이 사용자를 인증 하 고 토큰을 가져와서 보호 된 Api를 호출할 수 있도록 지 원하는 기본 형식 집합을 제공 합니다.
 
 앱에 인증을 추가 하는 경우 앱의 프로젝트 파일에 패키지를 수동으로 추가 합니다.
 
@@ -217,11 +217,11 @@ public class WeatherForecastController : ControllerBase
   Version="3.2.0" />
 ```
 
-`Microsoft.Authentication.WebAssembly.Msal`패키지는 앱에 패키지를 전이적으로 추가 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 합니다.
+AspNetCore [패키지는 응용](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) 프로그램에 비 전이적으로 인증 패키지를 추가 하 여 전이적으로 추가 합니다 ( [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) ).
 
 ### <a name="authentication-service-support"></a>인증 서비스 지원
 
-`HttpClient`서버 프로젝트에 대 한 요청을 만들 때 액세스 토큰을 포함 하는 인스턴스에 대 한 지원이 추가 됩니다.
+<xref:System.Net.Http.HttpClient>서버 프로젝트에 대 한 요청을 만들 때 액세스 토큰을 포함 하는 인스턴스에 대 한 지원이 추가 됩니다.
 
 *Program.cs*:
 
@@ -234,7 +234,7 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 
-사용자 인증에 대 한 지원은 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal` . 이 메서드는 앱이 공급자 (IP)와 상호 작용 하는 데 필요한 서비스를 설정 Identity 합니다.
+사용자 인증 지원은 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> [Microsoft. Authentication. WebAssembly](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) 패키지에서 제공 하는 확장 메서드를 사용 하 여 서비스 컨테이너에 등록 됩니다. 이 메서드는 앱이 공급자 (IP)와 상호 작용 하는 데 필요한 서비스를 설정 Identity 합니다.
 
 *Program.cs*:
 
@@ -246,7 +246,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-`AddMsalAuthentication`메서드는 콜백을 허용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 합니다. 앱을 구성 하는 데 필요한 값은 앱을 등록할 때 Azure Portal AAD 구성에서 가져올 수 있습니다.
+<xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>메서드는 콜백을 허용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 합니다. 앱을 구성 하는 데 필요한 값은 앱을 등록할 때 Azure Portal AAD 구성에서 가져올 수 있습니다.
 
 구성은 *wwwroot/appsettings. json* 파일에 의해 제공 됩니다.
 

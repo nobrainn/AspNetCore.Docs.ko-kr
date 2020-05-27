@@ -1,11 +1,11 @@
 ---
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor추가 보안 시나리오 ASP.NET Core
@@ -14,9 +14,9 @@ monikerRange: ms author: ms: custom: ms. date: no loc:
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>나가는 요청에 토큰 연결
 
-`AuthorizationMessageHandler`서비스를와 함께 사용 `HttpClient` 하 여 액세스 토큰을 보내는 요청에 연결할 수 있습니다. 토큰은 기존 서비스를 사용 하 여 획득 됩니다 `IAccessTokenProvider` . 토큰을 가져올 수 없는 경우 `AccessTokenNotAvailableException` 이 throw 됩니다. `AccessTokenNotAvailableException`에는 `Redirect` 사용자가 id 공급자로 이동 하 여 새 토큰을 획득 하는 데 사용할 수 있는 메서드가 있습니다. 는 `AuthorizationMessageHandler` 메서드를 사용 하 여 권한 있는 url, 범위 및 반환 URL을 사용 하 여 구성할 수 있습니다 `ConfigureHandler` .
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>서비스를와 함께 사용 <xref:System.Net.Http.HttpClient> 하 여 액세스 토큰을 보내는 요청에 연결할 수 있습니다. 토큰은 기존 서비스를 사용 하 여 획득 됩니다 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> . 토큰을 가져올 수 없는 경우 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> 이 throw 됩니다. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>에는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 사용자가 id 공급자로 이동 하 여 새 토큰을 획득 하는 데 사용할 수 있는 메서드가 있습니다. 는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 메서드를 사용 하 여 권한 있는 url, 범위 및 반환 URL을 사용 하 여 구성할 수 있습니다 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> .
 
-다음 예제에서는 `AuthorizationMessageHandler` `HttpClient` `Program.Main` (*Program.cs*)에서를 구성 합니다.
+다음 예제에서는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> <xref:System.Net.Http.HttpClient> `Program.Main` (*Program.cs*)에서를 구성 합니다.
 
 ```csharp
 using System.Net.Http;
@@ -36,7 +36,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-편의상 `BaseAddressAuthorizationMessageHandler` 앱 기준 주소를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다. 이제 인증 사용 Blazor weasembomomtemplate이 <xref:System.Net.Http.IHttpClientFactory> 서버 API 프로젝트에서를 사용 하 여를 설정 합니다 <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` .
+편의상 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> 앱 기준 주소를 권한 있는 URL로 미리 구성 된가 포함 되어 있습니다. 이제 인증 사용 Blazor weasembomomtemplate이 <xref:System.Net.Http.IHttpClientFactory> 서버 API 프로젝트에서를 사용 하 여를 설정 합니다 <xref:System.Net.Http.HttpClient> <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> .
 
 ```csharp
 using System.Net.Http;
@@ -52,9 +52,9 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentity.ServerAPI"));
 ```
 
-앞의 예제에서 클라이언트를 만든 경우 `CreateClient` <xref:System.Net.Http.HttpClient> 서버 프로젝트에 요청을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
+앞의 예제에서 클라이언트를 만든 경우 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> <xref:System.Net.Http.HttpClient> 서버 프로젝트에 요청을 수행할 때 액세스 토큰이 포함 된 인스턴스가 제공 됩니다.
 
-그런 다음 구성 된를 사용 하 여 <xref:System.Net.Http.HttpClient> 간단한 패턴을 통해 권한 있는 요청을 수행할 수 `try-catch` 있습니다.
+그런 다음 구성 된를 사용 하 여 <xref:System.Net.Http.HttpClient> 간단한 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 통해 권한 있는 요청을 수행할 수 있습니다.
 
 `FetchData` 구성 요소(*Pages/FetchData.razor*):
 
@@ -237,7 +237,7 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-`TryGetToken`전용인
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>전용인
 
 * `true`사용할를 `token` 사용 합니다.
 * `false`토큰이 검색 되지 않으면입니다.
@@ -306,242 +306,22 @@ Weasembomambomapp에서 제대로 실행 되는 경우 Blazor [httpclient](xref:
 }
 ```
 
-.NET WebAssembly의 `HttpClient` 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다. Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다. 
+.NET WebAssembly의 <xref:System.Net.Http.HttpClient> 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다. Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다. 
 
-HTTP 페치 요청 옵션은 다음 표에 표시된 `HttpRequestMessage` 확장 메서드로 구성할 수 있습니다.
+HTTP 페치 요청 옵션은 다음 표에 표시된 <xref:System.Net.Http.HttpRequestMessage> 확장 메서드로 구성할 수 있습니다.
 
-| `HttpRequestMessage` 확장 메서드 | Fetch 요청 속성 |
-| ---
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
+| 확장 메서드 | Fetch 요청 속성 |
+| --- | --- |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [캐시](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [무결성](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------------------- | ---제목: ' ASP.NET Core Blazor weasembmbambaoma 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 weasembmbomommbmbommbmbmboms
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------------ | | `SetBrowserRequestCredentials`         |  [자격 증명](https://developer.mozilla.org/docs/Web/API/Request/credentials) | | `SetBrowserRequestCache`               |  [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) | | `SetBrowserRequestMode`                |  [모드](https://developer.mozilla.org/docs/Web/API/Request/mode) | `SetBrowserRequestIntegrity` |           |  [무결성](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
-
-보다 일반적인 `SetBrowserRequestOption` 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.
+보다 일반적인 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.
  
-HTTP 응답은 일반적으로 응답 콘텐츠에서 동기화 읽기를 지원할 수 있도록 Blazor WebAssembly 앱에서 버퍼링됩니다. 응답 스트리밍을 지원하도록 설정하려면 요청에서 `SetBrowserResponseStreamingEnabled` 확장 메서드를 사용합니다.
+HTTP 응답은 일반적으로 응답 콘텐츠에서 동기화 읽기를 지원할 수 있도록 Blazor WebAssembly 앱에서 버퍼링됩니다. 응답 스트리밍을 지원하도록 설정하려면 요청에서 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> 확장 메서드를 사용합니다.
 
-원본 간 요청에 자격 증명을 포함하려면 `SetBrowserRequestCredentials` 확장 메서드를 사용합니다.
+원본 간 요청에 자격 증명을 포함하려면 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 확장 메서드를 사용합니다.
 
 ```csharp
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
@@ -590,7 +370,7 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 
 토큰 요청이 실패 하는 경우 리디렉션을 수행 하기 전에 현재 상태를 저장할 것인지 여부를 결정 해야 합니다. 복잡성 수준이 증가 하는 방법에는 여러 가지가 있습니다.
 
-* 세션 저장소에 현재 페이지 상태를 저장 합니다. `OnInitializeAsync`에서 계속 하기 전에 상태를 복원할 수 있는지 확인 합니다.
+* 세션 저장소에 현재 페이지 상태를 저장 합니다. [Oninitializedasync 수명 주기 이벤트](xref:blazor/lifecycle#component-initialization-methods) ( <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ) 중에 상태를 복원할 수 있는지 확인 한 다음 계속 합니다.
 * 쿼리 문자열 매개 변수를 추가 하 고이 매개 변수를 사용 하 여 이전에 저장 된 상태를 다시 하이드레이션 하며 나중 하는 데 필요한 것으로 앱에 신호를 보낼 수 있습니다.
 * 다른 항목과 충돌을 발생 시 키 지 않고 세션 저장소에 데이터를 저장 하는 고유 식별자를 사용 하 여 쿼리 문자열 매개 변수를 추가 합니다.
 
@@ -708,146 +488,146 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 
 ## <a name="customize-app-routes"></a>앱 경로 사용자 지정
 
-기본적으로 라이브러리는 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 다음 표에 나와 있는 경로를 사용 하 여 서로 다른 인증 상태를 나타냅니다.
+기본적으로 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리는 다음 표에 나와 있는 경로를 사용 하 여 서로 다른 인증 상태를 나타냅니다.
 
-| 경로                            | 용도 |
+| 경로                            | 목적 |
 | ---
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ---------------- | ---제목: ' ASP.NET Core Blazor weasembmbambaoma 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 weasembmbomommbmbommbmbmboms
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ---- | | `authentication/login`           | 로그인 작업을 트리거합니다. | | `authentication/login-callback`  | 로그인 작업의 결과를 처리 합니다. | | `authentication/login-failed`    | 어떤 이유로 인해 로그인 작업이 실패 하는 경우 오류 메시지를 표시 합니다. | | `authentication/logout`          | 로그 아웃 작업을 트리거합니다. | | `authentication/logout-callback` | 로그 아웃 작업의 결과를 처리 합니다. | | `authentication/logout-failed`   | 어떤 이유로 인해 로그 아웃 작업이 실패 하는 경우 오류 메시지를 표시 합니다. | | `authentication/logged-out`      | 사용자가 성공적으로 로그 아웃 했음을 나타냅니다. | | `authentication/profile`         | 사용자 프로필을 편집 하는 작업을 트리거합니다. | | `authentication/register`        | 새 사용자를 등록 하는 작업을 트리거합니다. |
 
-위의 표에 표시 된 경로는를 통해 구성할 수 있습니다 `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` . 사용자 지정 경로를 제공 하는 옵션을 설정 하는 경우 앱에 각 경로를 처리 하는 경로가 있는지 확인 합니다.
+위의 표에 표시 된 경로는를 통해 구성할 수 있습니다 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType> . 사용자 지정 경로를 제공 하는 옵션을 설정 하는 경우 앱에 각 경로를 처리 하는 경로가 있는지 확인 합니다.
 
 다음 예제에서 모든 경로에는 접두사가 붙습니다 `/security` .
 
@@ -881,7 +661,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-요구 사항이 완전히 다른 경로에 대해를 호출 하는 경우 앞에서 설명한 대로 경로를 설정 하 고 `RemoteAuthenticatorView` 명시적인 동작 매개 변수를 사용 하 여을 렌더링 합니다.
+요구 사항이 완전히 다른 경로에 대해를 호출 하는 경우 앞에서 설명한 대로 경로를 설정 하 고 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> 명시적인 동작 매개 변수를 사용 하 여을 렌더링 합니다.
 
 ```razor
 @page "/register"
@@ -893,7 +673,7 @@ builder.Services.AddApiAuthorization(options => {
 
 ## <a name="customize-the-authentication-user-interface"></a>인증 사용자 인터페이스 사용자 지정
 
-`RemoteAuthenticatorView`에는 각 인증 상태에 대 한 기본 UI 조각 집합이 포함 되어 있습니다. 사용자 지정를 전달 하 여 각 상태를 사용자 지정할 수 있습니다 `RenderFragment` . 초기 로그인 프로세스 중에 표시 되는 텍스트를 사용자 지정 하려면에서 `RemoteAuthenticatorView` 다음과 같이 변경할 수 있습니다.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>에는 각 인증 상태에 대 한 기본 UI 조각 집합이 포함 되어 있습니다. 사용자 지정를 전달 하 여 각 상태를 사용자 지정할 수 있습니다 <xref:Microsoft.AspNetCore.Components.RenderFragment> . 초기 로그인 프로세스 중에 표시 되는 텍스트를 사용자 지정 하려면에서 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> 다음과 같이 변경할 수 있습니다.
 
 `Authentication`구성 요소 (*페이지/인증. razor*):
 
@@ -913,214 +693,214 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-에는 `RemoteAuthenticatorView` 다음 표에 표시 된 인증 경로 별로 사용할 수 있는 하나의 조각이 있습니다.
+에는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> 다음 표에 표시 된 인증 경로 별로 사용할 수 있는 하나의 조각이 있습니다.
 
 | 경로                            | 조각                |
 | ---
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ---------------- | ---제목: ' ASP.NET Core Blazor weasembmbambaoma 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 weasembmbomommbmbommbmbmboms
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 -
 제목: ' ASP.NET Core Blazor Weasembmbmbsembambambambambambambambmbsembmbsembmbommbmbmbmbommbmbmbomommbmb Blazor
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |
 
@@ -1128,7 +908,7 @@ monikerRange: ms author: ms: custom: ms. date: no loc:
 
 앱에 바인딩된 사용자를 사용자 지정할 수 있습니다. 다음 예에서는 인증 된 모든 사용자가 `amr` 각 사용자의 인증 방법에 대 한 클레임을 받습니다.
 
-클래스를 확장 하는 클래스를 만듭니다 `RemoteUserAccount` .
+클래스를 확장 하는 클래스를 만듭니다 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> .
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -1141,7 +921,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-다음을 확장 하는 팩터리를 만듭니다 `AccountClaimsPrincipalFactory<TAccount>` .
+다음을 확장 하는 팩터리를 만듭니다 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> .
 
 ```csharp
 using System.Security.Claims;
@@ -1179,7 +959,7 @@ public class CustomAccountFactory
 
 `CustomAccountFactory`사용 중인 인증 공급자에 대 한를 등록 합니다. 유효한 등록은 다음과 같습니다. 
 
-* `AddOidcAuthentication`:
+* <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1195,7 +975,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-* `AddMsalAuthentication`:
+* <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1211,7 +991,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
   
-* `AddApiAuthorization`:
+* <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1283,7 +1063,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-서버 앱의 `Startup.Configure` 메서드에서 `endpoints.MapFallbackToFile("index.html")`을 `endpoints.MapFallbackToPage("/_Host")`로 바꿉니다.
+서버 앱의 `Startup.Configure` 메서드에서 끝점을 대체 [합니다. 끝점을 사용 하는 MapFallbackToFile ("index .html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) [ MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -1358,7 +1138,7 @@ Identity타사 로그인 공급자를 사용 하 여를 구성 합니다. 타사
 
 ## <a name="use-open-id-connect-oidc-v20-endpoints"></a>OIDC (Open ID Connect) v2.0 끝점 사용
 
-인증 라이브러리 및 Blazor 템플릿은 OIDC (OPEN ID Connect) v1.0 끝점을 사용 합니다. V2.0 끝점을 사용 하려면 JWT 전달자 옵션을 구성 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 합니다. 다음 예제에서는 속성에 세그먼트를 추가 하 여 v 2.0에 대해 AAD를 구성 합니다 `v2.0` `Authority` .
+인증 라이브러리 및 Blazor 템플릿은 OIDC (OPEN ID Connect) v1.0 끝점을 사용 합니다. V2.0 끝점을 사용 하려면 JWT 전달자 옵션을 구성 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 합니다. 다음 예제에서는 속성에 세그먼트를 추가 하 여 v 2.0에 대해 AAD를 구성 합니다 `v2.0` <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> .
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1380,6 +1160,6 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 `Authority` 속성을 직접 설정 합니다. `JwtBearerOptions`또는 앱 설정 파일에서 키를 사용 하 여 속성을 설정 합니다 `Authority` .
+권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정 합니다. <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions>또는 앱 설정 파일 (*appsettings*)에서 키를 사용 하 여 속성을 설정 하거나 설정 합니다 `Authority` .
 
 V2.0 끝점에 대 한 ID 토큰의 클레임 목록이 변경 됩니다. 자세한 내용은 [Microsoft identity platform (v2.0)로 업데이트 하는 이유](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)를 참조 하세요.
