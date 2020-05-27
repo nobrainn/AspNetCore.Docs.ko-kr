@@ -1,9 +1,9 @@
-<span data-ttu-id="fe303-101">구성 요소에 의해 생성 된 페이지 `Authentication` (*Pages/Authentication. razor*)는 서로 다른 인증 단계를 처리 하는 데 필요한 경로를 정의 합니다.</span><span class="sxs-lookup"><span data-stu-id="fe303-101">The page produced by the `Authentication` component (*Pages/Authentication.razor*) defines the routes required for handling different authentication stages.</span></span>
+<span data-ttu-id="ea4c0-101">구성 요소에 의해 생성 된 페이지 `Authentication` (*Pages/Authentication. razor*)는 서로 다른 인증 단계를 처리 하는 데 필요한 경로를 정의 합니다.</span><span class="sxs-lookup"><span data-stu-id="ea4c0-101">The page produced by the `Authentication` component (*Pages/Authentication.razor*) defines the routes required for handling different authentication stages.</span></span>
 
-<span data-ttu-id="fe303-102">`RemoteAuthenticatorView`구성 요소:</span><span class="sxs-lookup"><span data-stu-id="fe303-102">The `RemoteAuthenticatorView` component:</span></span>
+<span data-ttu-id="ea4c0-102"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>구성 요소:</span><span class="sxs-lookup"><span data-stu-id="ea4c0-102">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> component:</span></span>
 
-* <span data-ttu-id="fe303-103">은 (는) [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에서 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="fe303-103">Is provided by the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) package.</span></span>
-* <span data-ttu-id="fe303-104">각 인증 단계에서 적절 한 작업을 수행 하는 작업을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="fe303-104">Manages performing the appropriate actions at each stage of authentication.</span></span>
+* <span data-ttu-id="ea4c0-103">은 (는) [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에서 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ea4c0-103">Is provided by the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) package.</span></span>
+* <span data-ttu-id="ea4c0-104">각 인증 단계에서 적절 한 작업을 수행 하는 작업을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ea4c0-104">Manages performing the appropriate actions at each stage of authentication.</span></span>
 
 ```razor
 @page "/authentication/{action}"
