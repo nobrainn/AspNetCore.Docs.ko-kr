@@ -92,7 +92,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 > 라우팅은 및 미들웨어를 사용 하 여 구성 됩니다 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> . 컨트롤러를 사용 하려면 다음을 수행 합니다.
 >
 > * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>안쪽 `UseEndpoints` 을 호출 하 여 라우트된 컨트롤러 [특성](#ar) 을 매핑합니다.
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>또는 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 를 호출 하 여 [일반적으로 라우팅된](#cr) 컨트롤러를 매핑합니다.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>또는 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 를 호출 하 여 대상 [conventionally routed](#cr) 컨트롤러 및 [특성 라우트된](#ar) 컨트롤러를 모두 매핑합니다.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -203,7 +203,7 @@ ASP.NET Core 3.0 이상의 엔드포인트 라우팅은 다음과 같습니다.
 * 가장 적합 한 후보를 선택 합니다.
 * 예외를 throw합니다.
 
-예를 들어:
+예를 들면 다음과 같습니다.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -257,7 +257,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 특성 라우팅은 특성 모음을 사용하여 작업을 경로 템플릿에 직접 매핑합니다. 다음 `StartUp.Configure` 코드는 REST API에 일반적 이며 다음 샘플에서 사용 됩니다.
 
-[!code-csharp[](routing/samples/3.x/main/StartupApi.cs?name=snippet)]
+[!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
 위의 코드에서 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> 는 `UseEndpoints` 특성 라우트된 컨트롤러를 매핑하기 위해 내부에서 호출 됩니다.
 
@@ -272,10 +272,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 이 예에서는 특성 라우팅과 [기본 라우팅](#cr)간의 주요 프로그래밍 차이점을 강조 합니다. 특성 라우팅은 경로를 지정 하는 데 더 많은 입력이 필요 합니다. 기본 경로는 더 많은 간략하게 경로를 처리 합니다. 그러나 특성 라우팅은 각 [작업](#action)에 적용 되는 경로 템플릿을 정확 하 게 제어 하도록 허용 합니다.
 
-다음 코드에서:
-
-* 컨트롤러 이름 및 작업 이름은 동작이 일치 하는 역할을 **하지 않습니다** .
-* 이전 예제와 동일한 Url을 찾습니다.
+특성 라우팅을 사용 하는 경우에는 [토큰 대체가](#routing-token-replacement-templates-ref-label) 사용 되지 않는 한 컨트롤러 및 작업 이름이 동작이 일치 하는 부분을 재생 하지 않습니다. 다음 예제에서는 이전 예제와 동일한 Url을 찾습니다.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemoController.cs?name=snippet)]
 
@@ -416,7 +413,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 다음 표에서는 `[Route]` 위의 코드에 있는 특성에 대해 설명 합니다.
 
-| attribute               | 와 결합`[Route("Home")]` | 경로 템플릿을 정의 합니다. |
+| 특성               | 와 결합`[Route("Home")]` | 경로 템플릿을 정의 합니다. |
 | ---
 제목: 작성자: 설명: ms author: ms. date: no loc:
 - 'Blazor'
@@ -655,8 +652,6 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
 위의 코드에서는 `[HttpPost("product/{id:int}")]` 경로 제약 조건을 적용 합니다. `ProductsController.ShowProduct`작업은와 같은 URL 경로만 일치 시킵니다 `/product/3` . 경로 템플릿 부분은 `{id:int}` 해당 세그먼트를 정수로 제한 합니다.
-
-[!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet24)]
 
 경로 템플릿 구문에 대한 자세한 설명은 [경로 템플릿 참조](xref:fundamentals/routing#route-template-reference)를 참조하세요.
 
@@ -1094,7 +1089,7 @@ app.UseMvc(routes =>
 
 ### <a name="disambiguating-actions"></a>명확한 작업 구분
 
-두 작업이 라우팅을 통해 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외가 throw됩니다. 예를 들어:
+두 작업이 라우팅을 통해 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외가 throw됩니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 public class ProductsController : Controller

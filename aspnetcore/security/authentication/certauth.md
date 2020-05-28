@@ -1,27 +1,15 @@
 ---
-title: ASP.NET Core에서 인증서 인증 구성
-author: blowdart
-description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: bdorrans
-ms.date: 01/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/authentication/certauth
-ms.openlocfilehash: 2cee719014d57fa01b5e8b14edd703c192cfbe18
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776645"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core에 대 한 [인증서 인증과](https://tools.ietf.org/html/rfc5246#section-7.4.4) 유사한 구현을 포함 합니다. 인증서 인증은 ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 보다 정확 하 게,이는 인증서의 유효성을 검사 한 다음 해당 인증서를에 대해 `ClaimsPrincipal`확인할 수 있는 이벤트를 제공 하는 인증 처리기입니다. 
+`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core에 대 한 [인증서 인증과](https://tools.ietf.org/html/rfc5246#section-7.4.4) 유사한 구현을 포함 합니다. 인증서 인증은 ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 보다 정확 하 게,이는 인증서의 유효성을 검사 한 다음 해당 인증서를에 대해 확인할 수 있는 이벤트를 제공 하는 인증 처리기입니다 `ClaimsPrincipal` . 
 
 인증서 인증을 위해 [호스트를 구성](#configure-your-host-to-require-certificates) 하 고, IIS, Kestrel, Azure Web Apps 또는 사용 중인 다른 모든 항목을 사용 합니다.
 
@@ -34,15 +22,15 @@ ms.locfileid: "82776645"
 
 프록시 및 부하 분산 장치를 사용 하는 환경에서 인증서 인증에 대 한 대안은 OIDC (Openid connect Connect)를 사용 하는 페더레이션 서비스 (ADFS) Active Directory입니다.
 
-## <a name="get-started"></a>시작하기
+## <a name="get-started"></a>시작
 
 HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [호스트를 구성](#configure-your-host-to-require-certificates) 합니다.
 
-웹 앱에서 `Microsoft.AspNetCore.Authentication.Certificate` 패키지에 대 한 참조를 추가 합니다. 그런 다음 `Startup.ConfigureServices` 메서드에서와 함께를 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 호출 하 여 요청을 통해 보낸 클라이언트 `OnCertificateValidated` 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 대리자를 제공 합니다. 해당 정보를로 변환 `ClaimsPrincipal` 하 고 `context.Principal` 속성에 설정 합니다.
+웹 앱에서 패키지에 대 한 참조를 추가 `Microsoft.AspNetCore.Authentication.Certificate` 합니다. 그런 다음 `Startup.ConfigureServices` 메서드에서와 함께를 호출 하 여 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 요청을 `OnCertificateValidated` 통해 보낸 클라이언트 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 대리자를 제공 합니다. 해당 정보를로 변환 하 `ClaimsPrincipal` 고 속성에 설정 `context.Principal` 합니다.
 
-인증이 실패 하는 경우이 처리기는 `403 (Forbidden)` 정상적으로 응답 `401 (Unauthorized)`을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
+인증이 실패 하는 경우이 처리기는 `403 (Forbidden)` 정상적으로 응답을 반환 `401 (Unauthorized)` 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `Startup.Configure` 메서드에 `app.UseAuthentication();` 를 추가 합니다. 그렇지 않으면 인증서 `HttpContext.User` 에서 생성 된로 `ClaimsPrincipal` 설정 되지 않습니다. 예를 들어:
+또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 예를 들면 다음과 같습니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -65,13 +53,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="configure-certificate-validation"></a>인증서 유효성 검사 구성
 
-`CertificateAuthenticationOptions` 처리기에는 인증서에 대해 수행 해야 하는 최소 유효성 검사 인 몇 가지 기본 제공 유효성 검사가 있습니다. 이러한 각 설정은 기본적으로 사용 하도록 설정 되어 있습니다.
+처리기에는 `CertificateAuthenticationOptions` 인증서에 대해 수행 해야 하는 최소 유효성 검사 인 몇 가지 기본 제공 유효성 검사가 있습니다. 이러한 각 설정은 기본적으로 사용 하도록 설정 되어 있습니다.
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = 체인, SelfSigned 또는 모두 (연결 된 | SelfSigned)
 
 기본값: `CertificateTypes.Chained`
 
-이 검사는 적절 한 인증서 유형만 허용 되는지 확인 합니다. 앱에서 자체 서명 된 인증서를 사용 하는 경우이 옵션을 또는 `CertificateTypes.All` `CertificateTypes.SelfSigned`로 설정 해야 합니다.
+이 검사는 적절 한 인증서 유형만 허용 되는지 확인 합니다. 앱에서 자체 서명 된 인증서를 사용 하는 경우이 옵션을 또는로 설정 `CertificateTypes.All` 해야 `CertificateTypes.SelfSigned` 합니다.
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
@@ -111,8 +99,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 처리기에는 두 가지 이벤트가 있습니다.
 
-* `OnAuthenticationFailed`&ndash; 인증 하는 동안 예외가 발생 하 여 반응할 수 있는 경우 호출 됩니다.
-* `OnCertificateValidated`&ndash; 인증서의 유효성을 검사 하 고 유효성 검사를 통과 했으며 기본 보안 주체가 생성 된 후에 호출 됩니다. 이 이벤트를 사용 하 여 사용자 고유의 유효성 검사를 수행 하 고 보안 주체를 확대 하거나 바꿀 수 있습니다. 예를 들면 다음과 같습니다.
+* `OnAuthenticationFailed`: 인증 하는 동안 예외가 발생 하 여 반응할 수 있는 경우 호출 됩니다.
+* `OnCertificateValidated`: 인증서의 유효성을 검사 하 고 유효성 검사를 통과 했으며 기본 보안 주체가 생성 된 후에 호출 됩니다. 이 이벤트를 사용 하 여 사용자 고유의 유효성 검사를 수행 하 고 보안 주체를 확대 하거나 바꿀 수 있습니다. 예를 들면 다음과 같습니다.
   * 인증서가 서비스에 알려져 있는지 확인 하는 중입니다.
   * 사용자 고유의 보안 주체를 구성 합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
 
@@ -148,7 +136,7 @@ services.AddAuthentication(
     });
 ```
 
-인바운드 인증서가 추가 유효성 검사를 충족 하지 않는 경우 오류 원인 `context.Fail("failure reason")` 으로를 호출 합니다.
+인바운드 인증서가 추가 유효성 검사를 충족 하지 않는 경우 `context.Fail("failure reason")` 오류 원인으로를 호출 합니다.
 
 실제 기능을 사용 하려면 데이터베이스 또는 다른 유형의 사용자 저장소에 연결 하는 종속성 주입에 등록 된 서비스를 호출 하는 것이 좋습니다. 대리자에 전달 된 컨텍스트를 사용 하 여 서비스에 액세스 합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
 
@@ -193,7 +181,7 @@ services.AddAuthentication(
     });
 ```
 
-개념적으로 인증서의 유효성 검사는 권한 부여에 대 한 문제입니다. 예를 들어, 권한 부여 정책에서 발급자 또는 지문을 포함 `OnCertificateValidated`하는 것이 아니라 확인을 추가 하는 것은 완벽 하 게 허용 됩니다.
+개념적으로 인증서의 유효성 검사는 권한 부여에 대 한 문제입니다. 예를 들어, 권한 부여 정책에서 발급자 또는 지문을 포함 하는 것이 아니라 확인을 추가 하는 `OnCertificateValidated` 것은 완벽 하 게 허용 됩니다.
 
 ## <a name="configure-your-host-to-require-certificates"></a>인증서를 요구 하도록 호스트 구성
 
@@ -249,12 +237,12 @@ Azure에는 전달 구성이 필요 하지 않습니다. 인증서 전달 미들
 
 ### <a name="use-certificate-authentication-in-custom-web-proxies"></a>사용자 지정 웹 프록시에서 인증서 인증 사용
 
-`AddCertificateForwarding` 메서드는 다음을 지정 하는 데 사용 됩니다.
+`AddCertificateForwarding`메서드는 다음을 지정 하는 데 사용 됩니다.
 
 * 클라이언트 헤더 이름입니다.
-* `HeaderConverter` 속성을 사용 하 여 인증서를 로드 하는 방법입니다.
+* 속성을 사용 하 여 인증서를 로드 하는 방법 `HeaderConverter` 입니다.
 
-사용자 지정 웹 프록시에서 인증서는 사용자 지정 요청 헤더로 전달 됩니다 (예: `X-SSL-CERT`). 이를 사용 하려면에서 `Startup.ConfigureServices`인증서 전달을 구성 합니다.
+사용자 지정 웹 프록시에서 인증서는 사용자 지정 요청 헤더로 전달 됩니다 (예:) `X-SSL-CERT` . 이를 사용 하려면에서 인증서 전달을 구성 합니다 `Startup.ConfigureServices` .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -291,7 +279,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-그런 `Startup.Configure` 다음 메서드는 미들웨어를 추가 합니다. `UseCertificateForwarding`는 및 `UseAuthentication` `UseAuthorization`를 호출 하기 전에 호출 됩니다.
+`Startup.Configure`그런 다음 메서드는 미들웨어를 추가 합니다. `UseCertificateForwarding`는 및를 호출 하기 전에 호출 됩니다 `UseAuthentication` `UseAuthorization` .
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -311,7 +299,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-별도의 클래스를 사용 하 여 유효성 검사 논리를 구현할 수 있습니다. 이 예제에서는 동일한 자체 서명 된 인증서를 사용 하기 때문에 인증서만 사용할 수 있는지 확인 합니다. 클라이언트 인증서와 서버 인증서의 지문이 일치 하는지 확인 합니다. 그렇지 않으면 인증서를 사용할 수 있으며 인증 하는 데 충분 합니다. 이는 메서드 내에서 `AddCertificate` 사용 됩니다. 중간 또는 자식 인증서를 사용 하는 경우 여기에서 주체 또는 발급자의 유효성을 검사할 수도 있습니다.
+별도의 클래스를 사용 하 여 유효성 검사 논리를 구현할 수 있습니다. 이 예제에서는 동일한 자체 서명 된 인증서를 사용 하기 때문에 인증서만 사용할 수 있는지 확인 합니다. 클라이언트 인증서와 서버 인증서의 지문이 일치 하는지 확인 합니다. 그렇지 않으면 인증서를 사용할 수 있으며 인증 하는 데 충분 합니다. 이는 메서드 내에서 사용 됩니다 `AddCertificate` . 중간 또는 자식 인증서를 사용 하는 경우 여기에서 주체 또는 발급자의 유효성을 검사할 수도 있습니다.
 
 ```csharp
 using System.IO;
@@ -420,7 +408,7 @@ private async Task<JsonDocument> GetApiDataWithNamedClient()
 
 ### <a name="create-certificates-in-powershell"></a>PowerShell에서 인증서 만들기
 
-인증서 만들기는이 흐름을 설정 하는 가장 어려운 부분입니다. `New-SelfSignedCertificate` PowerShell cmdlet을 사용 하 여 루트 인증서를 만들 수 있습니다. 인증서를 만들 때 강력한 암호를 사용 합니다. 표시 된 대로 매개 변수 및 `KeyUsageProperty` `KeyUsage` 매개 변수를 추가 하는 것이 중요 합니다.
+인증서 만들기는이 흐름을 설정 하는 가장 어려운 부분입니다. PowerShell cmdlet을 사용 하 여 루트 인증서를 만들 수 있습니다 `New-SelfSignedCertificate` . 인증서를 만들 때 강력한 암호를 사용 합니다. `KeyUsageProperty`표시 된 대로 매개 변수 및 매개 변수를 추가 하는 것이 중요 합니다 `KeyUsage` .
 
 #### <a name="create-root-ca"></a>루트 CA 만들기
 
@@ -435,7 +423,7 @@ Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath roo
 ```
 
 > [!NOTE]
-> 매개 `-DnsName` 변수 값은 앱의 배포 대상과 일치 해야 합니다. 예를 들어 개발용 "localhost"입니다.
+> `-DnsName`매개 변수 값은 앱의 배포 대상과 일치 해야 합니다. 예를 들어 개발용 "localhost"입니다.
 
 #### <a name="install-in-the-trusted-root"></a>신뢰할 수 있는 루트에 설치
 
@@ -445,7 +433,7 @@ https://social.msdn.microsoft.com/Forums/SqlServer/5ed119ef-1704-4be4-8a4f-ef11d
 
 #### <a name="intermediate-certificate"></a>중간 인증서
 
-이제 루트 인증서에서 중간 인증서를 만들 수 있습니다. 이는 모든 사용 사례에는 필요 하지 않지만 많은 인증서를 만들거나 인증서 그룹을 활성화 하거나 비활성화 해야 할 수도 있습니다. `TextExtension` 매개 변수는 인증서의 기본 제약 조건에서 경로 길이를 설정 하는 데 필요 합니다.
+이제 루트 인증서에서 중간 인증서를 만들 수 있습니다. 이는 모든 사용 사례에는 필요 하지 않지만 많은 인증서를 만들거나 인증서 그룹을 활성화 하거나 비활성화 해야 할 수도 있습니다. `TextExtension`매개 변수는 인증서의 기본 제약 조건에서 경로 길이를 설정 하는 데 필요 합니다.
 
 그런 다음 Windows 호스트 시스템의 신뢰할 수 있는 중간 인증서에 중간 인증서를 추가할 수 있습니다.
 

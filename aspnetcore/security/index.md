@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core 보안 개요
-author: rick-anderson
-description: ASP.NET Core의 인증, 권한 부여 및 보안 기본 사항에 대해 알아봅니다.
-ms.author: riande
-ms.custom: mvc
-ms.date: 10/24/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/index
-ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776515"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core 보안 개요
 
@@ -25,7 +13,7 @@ ms.locfileid: "82776515"
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core 보안 기능
 
-ASP.NET Core는 기본 제공 Identity 공급자를 포함하여 앱을 보호하는 여러 도구와 라이브러리를 제공하지만 Facebook, Twitter, LinkedIn 등의 타사 ID 서비스를 사용할 수 있습니다. ASP.NET Core를 사용하면 기밀 정보를 코드에 노출할 필요 없이 저장하고 사용할 수 있는 방법인 앱 비밀을 간편하게 관리할 수 있습니다.
+ASP.NET Core는 기본 제공 ID 공급자를 포함하여 앱을 보호하는 여러 도구와 라이브러리를 제공하지만 Facebook, Twitter, LinkedIn 등의 타사 ID 서비스를 사용할 수도 있습니다. ASP.NET Core를 사용하면 기밀 정보를 코드에 노출할 필요 없이 저장하고 사용할 수 있는 방법인 앱 비밀을 간편하게 관리할 수 있습니다.
 
 ## <a name="authentication-vs-authorization"></a>인증 vs. 권한 부여
 

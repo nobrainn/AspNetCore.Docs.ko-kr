@@ -1,44 +1,32 @@
 ---
-title: ASP.NET Core의 로깅 및 진단SignalR
-author: anurse
-description: ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR .
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: signalr
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/diagnostics
-ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444219"
+제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core SignalR의 로깅 및 진단
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core의 로깅 및 진단SignalR
 
 [Andrew Stanton-간호사](https://twitter.com/anurse)
 
-이 문서에서는 ASP.NET Core SignalR 앱에서 진단 정보를 수집 하 여 문제를 해결 하는 데 도움이 되는 지침을 제공 합니다.
+이 문서에서는 문제 해결을 위해 ASP.NET Core 앱에서 진단 정보를 수집 하기 위한 지침 SignalR 을 제공 합니다.
 
 ## <a name="server-side-logging"></a>서버 쪽 로깅
 
 > [!WARNING]
 > 서버 쪽 로그에는 앱의 중요 한 정보가 포함 될 수 있습니다. 프로덕션 앱의 원시 로그를 GitHub와 같은 공용 포럼에 게시 **하지 마세요** .
 
-SignalR는 ASP.NET Core의 일부 이므로 ASP.NET Core 로깅 시스템을 사용 합니다. 기본 구성에서 SignalR는 매우 적은 정보를 기록 하지만이를 구성할 수 있습니다. ASP.NET Core 로깅 구성에 대 한 자세한 내용은 [ASP.NET Core 로깅](xref:fundamentals/logging/index#configuration) 에 대 한 설명서를 참조 하세요.
+SignalR는 ASP.NET Core의 일부 이므로 ASP.NET Core 로깅 시스템을 사용 합니다. 기본 구성에서는 SignalR 매우 적은 정보를 기록 하지만이를 구성할 수 있습니다. ASP.NET Core 로깅 구성에 대 한 자세한 내용은 [ASP.NET Core 로깅](xref:fundamentals/logging/index#configuration) 에 대 한 설명서를 참조 하세요.
 
-SignalR는 두 개의로 거 범주를 사용 합니다.
+SignalR에서는 두 개의로 거 범주를 사용 합니다.
 
-* `Microsoft.AspNetCore.SignalR`&ndash;허브 프로토콜, 허브 활성화, 메서드 호출 및 기타 허브 관련 작업에 관련 된 로그
-* `Microsoft.AspNetCore.Http.Connections`&ndash;websocket, 긴 폴링 및 서버에서 보낸 이벤트, 하위 수준 SignalR 인프라 등의 전송과 관련 된 로그
+* `Microsoft.AspNetCore.SignalR`: 허브 프로토콜과 관련 된 로그, 허브 활성화, 메서드 호출 및 기타 허브 관련 작업
+* `Microsoft.AspNetCore.Http.Connections`: Websocket, 긴 폴링, 서버에서 보낸 이벤트, 하위 수준 인프라 등의 전송과 관련 된 로그 SignalR
 
-SignalR에서 자세한 로그를 사용 하도록 설정 하려면 `Debug` 의 하위 섹션에 다음 항목을 추가 하 여 위의 접두사를 *appsettings* 파일의 수준으로 구성 합니다 `LogLevel` `Logging` .
+에서 자세한 로그를 사용 하도록 설정 하려면 SignalR `Debug` 의 하위 섹션에 다음 항목을 추가 하 여 위의 접두사를 *appsettings* 파일의 수준으로 구성 합니다 `LogLevel` `Logging` .
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -61,7 +49,7 @@ JSON 기반 구성을 사용 하지 않는 경우 구성 시스템에서 다음 
 
 ### <a name="as-a-console-app-outside-iis"></a>IIS 외부의 콘솔 앱으로
 
-콘솔 응용 프로그램에서 실행 하는 경우 [콘솔로 거](xref:fundamentals/logging/index#console) 를 기본적으로 사용 하도록 설정 해야 합니다. SignalR 로그가 콘솔에 표시 됩니다.
+콘솔 응용 프로그램에서 실행 하는 경우 [콘솔로 거](xref:fundamentals/logging/index#console) 를 기본적으로 사용 하도록 설정 해야 합니다. SignalR로그가 콘솔에 표시 됩니다.
 
 ### <a name="within-iis-express-from-visual-studio"></a>Visual Studio의 IIS Express 내에서
 
@@ -89,18 +77,38 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 다음 표에서는 JavaScript 클라이언트에서 사용할 수 있는 로그 수준을 보여 줍니다. 로그 수준을 이러한 값 중 하나로 설정 하면 해당 수준 및 테이블 위의 모든 수준에서 로깅을 사용할 수 있습니다.
 
 | Level | Description |
-| ----- | ----------- |
-| `None` | 메시지가 기록 되지 않습니다. |
-| `Critical` | 전체 앱에서 오류를 나타내는 메시지입니다. |
-| `Error` | 현재 작업의 실패를 나타내는 메시지입니다. |
-| `Warning` | 심각 하지 않은 문제를 나타내는 메시지입니다. |
-| `Information` | 정보 메시지. |
-| `Debug` | 디버깅에 유용한 진단 메시지입니다. |
-| `Trace` | 특정 문제를 진단 하기 위해 설계 된 매우 자세한 진단 메시지입니다. |
+| ----- | ---
+제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+------ | | `None` | 메시지가 기록 되지 않습니다. | | `Critical` | 전체 앱에서 오류를 나타내는 메시지입니다. | | `Error` | 현재 작업의 실패를 나타내는 메시지입니다. | | `Warning` | 심각 하지 않은 문제를 나타내는 메시지입니다. | | `Information` | 정보 메시지. | | `Debug` | 디버깅에 유용한 진단 메시지입니다. | | `Trace` | 특정 문제를 진단 하기 위해 설계 된 매우 자세한 진단 메시지입니다. |
 
 자세한 정도를 구성 하면 로그가 브라우저 콘솔에 기록 되거나 NodeJS 앱의 표준 출력에 기록 됩니다.
 
-로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 다음은 그 예입니다.
+로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 예를 들면 다음과 같습니다.
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 

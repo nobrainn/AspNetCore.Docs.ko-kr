@@ -1,22 +1,11 @@
 ---
-title: ASP.NET Core MVC 개요
-author: ardalis
-description: 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 및 API를 빌드할 수 있는 풍부한 프레임워크인 ASP.NET Core MVC에 대해 알아봅니다.
-ms.author: riande
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/overview
-ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775468"
+제목: 작성자: 설명: ms author: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -43,7 +32,7 @@ MVC 애플리케이션의 모델은 애플리케이션 및 비즈니스 논리 �
 
 ### <a name="view-responsibilities"></a>보기의 책임
 
-보기는 사용자 인터페이스를 통해 콘텐츠를 제공할 책임이 있습니다. 뷰 엔진을 사용 하 여 .net 코드를 HTML 태그에 포함 합니다. [ Razor ](#razor-view-engine) 보기 내부의 논리를 최소화해야 하며, 보기의 모든 논리는 콘텐츠 제공과 관련되어 있어야 합니다. 복잡한 모델의 데이터를 표시하기 위해 보기에서 다량의 논리를 수행해야 하는 경우 [보기 구성 요소](views/view-components.md), ViewModel 또는 보기 템플릿을 사용하여 보기를 간소화하는 방안을 고려해 보세요.
+보기는 사용자 인터페이스를 통해 콘텐츠를 제공할 책임이 있습니다. [ Razor 뷰 엔진](#razor-view-engine) 을 사용 하 여 .NET 코드를 HTML 태그에 포함 합니다. 보기 내부의 논리를 최소화해야 하며, 보기의 모든 논리는 콘텐츠 제공과 관련되어 있어야 합니다. 복잡한 모델의 데이터를 표시하기 위해 보기에서 다량의 논리를 수행해야 하는 경우 [보기 구성 요소](views/view-components.md), ViewModel 또는 보기 템플릿을 사용하여 보기를 간소화하는 방안을 고려해 보세요.
 
 ### <a name="controller-responsibilities"></a>컨트롤러의 책임
 
@@ -204,7 +193,7 @@ ASP.NET Core MVC는 웹 사이트를 구축할 수 있는 훌륭한 플랫폼일
 </ul>
 ```
 
-뷰 엔진을 사용 하 여 [레이아웃](views/layout.md), [부분 뷰](views/partial.md) 및 대체 가능 섹션을 정의할 수 있습니다. Razor
+Razor뷰 엔진을 사용 하 여 [레이아웃](views/layout.md), [부분 뷰](views/partial.md) 및 대체 가능 섹션을 정의할 수 있습니다.
 
 ### <a name="strongly-typed-views"></a>강력한 형식의 보기
 
@@ -224,7 +213,7 @@ RazorMVC의 뷰는 모델을 기반으로 강력 하 게 형식화 될 수 있�
 
 ### <a name="tag-helpers"></a>태그 도우미
 
-[태그 도우미](views/tag-helpers/intro.md) 를 사용 하면 서버 쪽 코드에서 파일에 Razor HTML 요소를 만들고 렌더링 하는 데 참여할 수 있습니다. 태그 도우미를 사용하여 사용자 지정 태그를 정의하거나(예: `<environment>`) 기존 태그의 동작을 수정할 수 있습니다(예: `<label>`). 태그 도우미는 요소 이름 및 해당 특성에 따라 특정 요소에 바인딩합니다. 서버 쪽 렌더링의 이점을 제공하면서도 HTML 편집 환경을 유지합니다.
+[태그 도우미](views/tag-helpers/intro.md) 를 사용 하면 서버 쪽 코드에서 파일에 HTML 요소를 만들고 렌더링 하는 데 참여할 수 Razor 있습니다. 태그 도우미를 사용하여 사용자 지정 태그를 정의하거나(예: `<environment>`) 기존 태그의 동작을 수정할 수 있습니다(예: `<label>`). 태그 도우미는 요소 이름 및 해당 특성에 따라 특정 요소에 바인딩합니다. 서버 쪽 렌더링의 이점을 제공하면서도 HTML 편집 환경을 유지합니다.
 
 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지로도 사용할 수 있습니다. 태그 도우미는 C#에서 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 LinkTagHelper를 사용하여 `AccountsController`의 `Login` 작업에 대한 링크를 만들 수 있습니다.
 
@@ -249,7 +238,7 @@ RazorMVC의 뷰는 모델을 기반으로 강력 하 게 형식화 될 수 있�
 </environment>
 ```
 
-태그 도우미는 html 기반의 개발 환경과 HTML 및 Razor 태그를 만들기 위한 풍부한 IntelliSense 환경을 제공 합니다. 대부분의 기본 제공 태그 도우미는 기존 HTML 요소를 대상으로 하며 요소에 대한 서버 쪽 특성을 제공합니다.
+태그 도우미는 html 기반의 개발 환경과 HTML 및 태그를 만들기 위한 풍부한 IntelliSense 환경을 제공 Razor 합니다. 대부분의 기본 제공 태그 도우미는 기존 HTML 요소를 대상으로 하며 요소에 대한 서버 쪽 특성을 제공합니다.
 
 ### <a name="view-components"></a>보기 구성 요소
 
@@ -263,5 +252,5 @@ RazorMVC의 뷰는 모델을 기반으로 강력 하 게 형식화 될 수 있�
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC용 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; 강력한 형식의 단위 테스트 라이브러리로, MVC 및 웹 API 앱 테스트를 위한 흐름 인터페이스를 제공합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.*)
+* [AspNetCore-ASP.NET CORE mvc에 대 한 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 강력한 형식의 단위 테스트 라이브러리로, mvc 및 web API 앱 테스트를 위한 흐름 인터페이스를 제공 합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.*)
 * <xref:blazor/integrate-components>

@@ -1,24 +1,11 @@
 ---
-title: .NET Core에서 gRPC 문제 해결
-author: jamesnk
-description: .NET Core에서 gRPC를 사용할 때 발생하는 오류 문제를 해결합니다.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.custom: mvc
-ms.date: 10/16/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/troubleshoot
-ms.openlocfilehash: 6f496b71c86762b35bdb3de33405a5aea6d8f8a5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775377"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core에서 gRPC 문제 해결
 
@@ -66,14 +53,13 @@ static async Task Main(string[] args)
 다른 머신에서 gRPC 서비스를 호출 중이며 인증서를 신뢰할 수 없는 경우 잘못된 인증서를 무시하도록 gRPC 클라이언트를 구성할 수 있습니다. 다음 코드는 [HttpClientHandler.ServerCertificateCustomValidationCallback](/dotnet/api/system.net.http.httpclienthandler.servercertificatecustomvalidationcallback)을 사용하여 신뢰할 수 있는 인증서 없이 호출을 허용합니다.
 
 ```csharp
-var httpClientHandler = new HttpClientHandler();
+var httpHandler = new HttpClientHandler();
 // Return `true` to allow certificates that are untrusted/invalid
-httpClientHandler.ServerCertificateCustomValidationCallback = 
+httpHandler.ServerCertificateCustomValidationCallback = 
     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-var httpClient = new HttpClient(httpClientHandler);
 
 var channel = GrpcChannel.ForAddress("https://localhost:5001",
-    new GrpcChannelOptions { HttpClient = httpClient });
+    new GrpcChannelOptions { HttpHandler = httpHandler });
 var client = new Greet.GreeterClient(channel);
 ```
 
@@ -100,7 +86,7 @@ Kestrel은 macOS 및 이전 Windows 버전(예: Windows 7)에서 TLS를 사용�
 
 > IPv4 루프백 인터페이스에서 https://localhost:5001 에 바인딩할 수 없습니다. ‘macOS에는 ALPN 지원이 없으므로 TLS를 통한 HTTP/2가 지원되지 않습니다.’
 
-이 문제를 해결하려면 TLS ‘없이’ HTTP/2를 사용하도록 Kestrel 및 gRPC 클라이언트를 구성합니다.  이 작업은 개발 중에만 수행해야 합니다. TLS를 사용하지 않으면 gRPC 메시지가 암호화되지 않고 전송됩니다.
+이 문제를 해결하려면 TLS ‘없이’ HTTP/2를 사용하도록 Kestrel 및 gRPC 클라이언트를 구성합니다. 이 작업은 개발 중에만 수행해야 합니다. TLS를 사용하지 않으면 gRPC 메시지가 암호화되지 않고 전송됩니다.
 
 Kestrel은 *Program.cs*에서 TLS 없이 HTTP/2 엔드포인트를 구성해야 합니다.
 

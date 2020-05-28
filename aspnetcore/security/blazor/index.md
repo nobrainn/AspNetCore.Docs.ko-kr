@@ -39,7 +39,7 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 * [Microsoft.AspNetCore.Components.Authorization](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/)에 대한 패키지 참조를 앱의 프로젝트 파일에 추가합니다.
 * `Microsoft.AspNetCore.Components.Authorization` 네임스페이스를 앱의 *_Imports.razor* 파일에 추가합니다.
 
-인증을 처리하려면 이어지는 섹션에서 설명하는 기본 제공 또는 사용자 지정 `AuthenticationStateProvider` 서비스의 구현 방법을 참조하세요.
+인증을 처리하려면 이어지는 섹션에서 설명하는 기본 제공 또는 사용자 지정 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 서비스의 구현 방법을 참조하세요.
 
 앱 및 구성을 만드는 방법에 대한 자세한 내용은 <xref:security/blazor/webassembly/index> 문서를 참조하세요.
 
@@ -51,13 +51,13 @@ Blazor 서버 앱은 SignalR를 사용하여 생성된 실시간 연결을 통�
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider 서비스
 
-기본 제공 `AuthenticationStateProvider` 서비스는 ASP.NET Core's `HttpContext.User`에서 인증 상태 데이터를 가져옵니다. 이것이 바로 인증 상태가 기존의 ASP.NET Core 인증 메커니즘과 통합되는 방식입니다.
+기본 제공 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 서비스는 ASP.NET Core's `HttpContext.User`에서 인증 상태 데이터를 가져옵니다. 이것이 바로 인증 상태가 기존의 ASP.NET Core 인증 메커니즘과 통합되는 방식입니다.
 
-`AuthenticationStateProvider`는 `AuthorizeView` 구성 요소와 `CascadingAuthenticationState` 구성 요소가 인증 상태를 가져오는 데 사용하는 기본 서비스입니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>는 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 구성 요소와 <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> 구성 요소가 인증 상태를 가져오는 데 사용하는 기본 서비스입니다.
 
-일반적으로 `AuthenticationStateProvider`를 직접 사용하지는 않습니다. 이 문서의 뒷부분에서 설명하는 [AuthorizeView 구성 요소](#authorizeview-component) 또는 [Task\<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) 접근 방식을 사용하세요. `AuthenticationStateProvider`를 직접 사용하는 경우의 주요 단점은 기본 인증 상태 데이터가 변경될 때 구성 요소가 자동으로 알림을 받지 못하는 것입니다.
+일반적으로 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 직접 사용하지는 않습니다. 이 문서의 뒷부분에서 설명하는 [AuthorizeView 구성 요소](#authorizeview-component) 또는 [Task\<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) 접근 방식을 사용하세요. <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 직접 사용하는 경우의 주요 단점은 기본 인증 상태 데이터가 변경될 때 구성 요소가 자동으로 알림을 받지 못하는 것입니다.
 
-`AuthenticationStateProvider` 서비스는 다음 예제와 같이 현재 사용자의 <xref:System.Security.Claims.ClaimsPrincipal> 데이터를 제공할 수 있습니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 서비스는 다음 예제와 같이 현재 사용자의 <xref:System.Security.Claims.ClaimsPrincipal> 데이터를 제공할 수 있습니다.
 
 ```razor
 @page "/"
@@ -114,7 +114,7 @@ DI(종속성 주입) 및 서비스에 대한 자세한 내용은 <xref:blazor/de
 
 ## <a name="implement-a-custom-authenticationstateprovider"></a>사용자 지정 AuthenticationStateProvider 구현
 
-앱에 사용자 지정 공급자가 필요한 경우 `AuthenticationStateProvider`를 구현하고 `GetAuthenticationStateAsync`를 재정의합니다.
+앱에 사용자 지정 공급자가 필요한 경우 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 구현하고 `GetAuthenticationStateAsync`를 재정의합니다.
 
 ```csharp
 using System.Security.Claims;
@@ -161,7 +161,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 ## <a name="expose-the-authentication-state-as-a-cascading-parameter"></a>인증 상태를 연계 매개 변수로 공개
 
-사용자가 실행한 작업을 수행하는 경우와 같이 절차적 논리에 인증 상태 데이터가 필요한 경우 `Task<AuthenticationState>` 형식의 연계 매개 변수를 정의하여 인증 상태 데이터를 가져옵니다.
+사용자가 실행한 작업을 수행하는 경우와 같이 절차적 논리에 인증 상태 데이터가 필요한 경우 `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` 형식의 연계 매개 변수를 정의하여 인증 상태 데이터를 가져옵니다.
 
 ```razor
 @page "/"
@@ -195,7 +195,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 `user.Identity.IsAuthenticated`가 `true`이면, 클레임을 열거하고 역할의 멤버 자격을 평가할 수 있습니다.
 
-`App` 구성 요소(*App.razor*)에서 `AuthorizeRouteView` 및 `CascadingAuthenticationState` 구성 요소를 사용하여 `Task<AuthenticationState>` 연계 매개 변수를 설정합니다.
+`App` 구성 요소(*App.razor*)에서 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> 및 <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> 구성 요소를 사용하여 `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` 연계 매개 변수를 설정합니다.
 
 ```razor
 <Router AppAssembly="@typeof(Program).Assembly">
@@ -236,9 +236,9 @@ Blazor 서버 앱에는 옵션 및 인증 서비스가 이미 있으므로 추�
 
 ## <a name="authorizeview-component"></a>AuthorizeView 구성 요소
 
-`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다.
 
-이 구성 요소는 로그인한 사용자 정보에 액세스하는 데 사용할 수 있는 `AuthenticationState` 형식의 `context` 변수를 공개합니다.
+이 구성 요소는 로그인한 사용자 정보에 액세스하는 데 사용할 수 있는 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> 형식의 `context` 변수를 공개합니다.
 
 ```razor
 <AuthorizeView>
@@ -262,22 +262,22 @@ Blazor 서버 앱에는 옵션 및 인증 서비스가 이미 있으므로 추�
 </AuthorizeView>
 ```
 
-`AuthorizeView` 구성 요소는 `NavMenu` 구성 요소(*Shared/NavMenu.razor*)에서 `NavLink`에 대해 목록 항목(`<li>...</li>`)을 표시하는 데 사용될 수 있지만, 이 방법은 렌더링된 출력에서 목록 항목을 제거할 뿐이고 사용자가 해당 구성 요소로 이동하는 것을 방지하지는 않습니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 구성 요소는 `NavMenu` 구성 요소(*Shared/NavMenu.razor*)에서 [NavLink 구성 요소](xref:blazor/routing#navlink-component)(<xref:Microsoft.AspNetCore.Components.Routing.NavLink>)에 대해 목록 항목(`<li>...</li>`)을 표시하는 데 사용될 수 있지만, 이 방법은 렌더링된 출력에서 목록 항목을 제거할 뿐이고 사용자가 해당 구성 요소로 이동하는 것을 방지하지는 않습니다.
 
 `<Authorized>` 및 `<NotAuthorized>` 태그의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목이 포함될 수 있습니다.
 
 UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 부여 조건은 [권한 부여](#authorization) 섹션에서 설명합니다.
 
-권한 부여 조건을 지정하지 않으면 `AuthorizeView`는 기본 정책을 사용하고 다음과 같이 처리합니다.
+권한 부여 조건을 지정하지 않으면 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>는 기본 정책을 사용하고 다음과 같이 처리합니다.
 
 * 인증(로그인)된 사용자를 권한 있는 사용자로 처리
 * 인증되지 않은(로그아웃된) 사용자를 권한 없는 사용자로 처리
 
 ### <a name="role-based-and-policy-based-authorization"></a>역할 기반 및 정책 기반 권한 부여
 
-`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다. 
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다. 
 
-역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
+역할 기반 권한 부여의 경우 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> 매개 변수를 사용합니다.
 
 ```razor
 <AuthorizeView Roles="admin, superuser">
@@ -287,7 +287,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 자세한 내용은 <xref:security/authorization/roles>를 참조하세요.
 
-정책 기반 권한 부여의 경우 `Policy` 매개 변수를 사용합니다.
+정책 기반 권한 부여의 경우 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy> 매개 변수를 사용합니다.
 
 ```razor
 <AuthorizeView Policy="content-editor">
@@ -299,13 +299,13 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 이러한 API는 Blazor 서버나 Blazor WebAssembly 앱에서 사용할 수 있습니다.
 
-`Roles` 또는 `Policy`를 지정하지 않으면 `AuthorizeView`는 기본 정책을 사용합니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> 또는 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy>를 지정하지 않으면 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>는 기본 정책을 사용합니다.
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>비동기 인증 중에 표시되는 콘텐츠
 
 Blazor에서는 인증 상태를 *비동기적으로* 확인할 수 있습니다. 이 접근 방식의 주요 시나리오는 Blazor WebAssembly 앱이 외부 엔드포인트에 인증 요청을 하는 경우입니다.
 
-인증이 진행되는 동안 `AuthorizeView`는 기본적으로 아무 콘텐츠도 표시하지 않습니다. 인증 중에 콘텐츠를 표시하려면 `<Authorizing>` 요소를 사용합니다.
+인증이 진행되는 동안 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>는 기본적으로 아무 콘텐츠도 표시하지 않습니다. 인증 중에 콘텐츠를 표시하려면 `<Authorizing>` 요소를 사용합니다.
 
 ```razor
 <AuthorizeView>
@@ -320,11 +320,11 @@ Blazor에서는 인증 상태를 *비동기적으로* 확인할 수 있습니다
 </AuthorizeView>
 ```
 
-이 접근 방식은 일반적으로 Blazor 서버 앱에 적용할 수 없습니다. Blazor 서버 앱은 상태가 설정되는 즉시 인증 상태를 알 수 있습니다. Blazor 서버 앱의 `AuthorizeView` 구성 요소에 `Authorizing` 콘텐츠를 제공할 수는 있지만, 이 콘텐츠는 표시되지 않습니다.
+이 접근 방식은 일반적으로 Blazor 서버 앱에 적용할 수 없습니다. Blazor 서버 앱은 상태가 설정되는 즉시 인증 상태를 알 수 있습니다. Blazor 서버 앱의 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 구성 요소에 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing> 콘텐츠를 제공할 수는 있지만, 이 콘텐츠는 표시되지 않습니다.
 
 ## <a name="authorize-attribute"></a>[Authorize] 특성
 
-`[Authorize]` 특성은 Razor 구성 요소에서 사용될 수 있습니다.
+[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성은 Razor 구성 요소에서 사용될 수 있습니다.
 
 ```razor
 @page "/"
@@ -334,9 +334,9 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’. 페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
+> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’. 페이지 내의 특정 파트 표시 권한을 부여하려면 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>를 대신 사용합니다.
 
-`[Authorize]` 특성은 역할 기반 또는 정책 기반 권한 부여도 지원합니다. 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
+[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성은 역할 기반 또는 정책 기반 권한 부여도 지원합니다. 역할 기반 권한 부여의 경우 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> 매개 변수를 사용합니다.
 
 ```razor
 @page "/"
@@ -345,7 +345,7 @@ You can only see this if you're signed in.
 <p>You can only see this if you're in the 'admin' or 'superuser' role.</p>
 ```
 
-정책 기반 권한 부여의 경우 `Policy` 매개 변수를 사용합니다.
+정책 기반 권한 부여의 경우 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Policy> 매개 변수를 사용합니다.
 
 ```razor
 @page "/"
@@ -354,17 +354,17 @@ You can only see this if you're signed in.
 <p>You can only see this if you satisfy the 'content-editor' policy.</p>
 ```
 
-`Roles` 또는 `Policy`를 지정하지 않으면 `[Authorize]`는 기본적으로 다음과 같이 처리하는 기본 정책을 사용합니다.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> 또는 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Policy>를 지정하지 않으면 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)는 기본적으로 다음과 같이 처리하는 기본 정책을 사용합니다.
 
 * 인증(로그인)된 사용자를 권한 있는 사용자로 처리
 * 인증되지 않은(로그아웃된) 사용자를 권한 없는 사용자로 처리
 
 ## <a name="customize-unauthorized-content-with-the-router-component"></a>Router 구성 요소를 사용하여 권한 없는 콘텐츠 사용자 지정
 
-`AuthorizeRouteView` 구성 요소와 함께 `Router` 구성 요소를 사용하면 다음과 같은 경우 앱이 사용자 지정 콘텐츠를 지정할 수 있습니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> 구성 요소와 함께 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소를 사용하면 다음과 같은 경우 앱이 사용자 지정 콘텐츠를 지정할 수 있습니다.
 
 * 콘텐츠를 찾을 수 없는 경우
-* 사용자가 구성 요소에 적용된 `[Authorize]` 조건을 충족하지 못하는 경우. `[Authorize]` 특성은 [`[Authorize]` 속성](#authorize-attribute) 섹션에서 설명합니다.
+* 사용자가 구성 요소에 적용된 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 조건을 충족하지 못하는 경우 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성은 [`[Authorize]` 속성](#authorize-attribute) 섹션에서 설명합니다.
 * 비동기 인증이 진행 중인 경우
 
 기본 Blazor 서버 프로젝트 템플릿에서 `App` 구성 요소(*App.razor*)는 사용자 지정 콘텐츠를 설정하는 방법을 보여 줍니다.
@@ -397,7 +397,7 @@ You can only see this if you're signed in.
 
 `<NotFound>`, `<NotAuthorized>` 및 `<Authorizing>` 태그의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목이 포함될 수 있습니다.
 
-`<NotAuthorized>` 요소를 지정하지 않으면 `AuthorizeRouteView`는 다음 대체 메시지를 사용합니다.
+`<NotAuthorized>` 요소를 지정하지 않으면 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView>는 다음 대체 메시지를 사용합니다.
 
 ```html
 Not authorized.
@@ -405,11 +405,11 @@ Not authorized.
 
 ## <a name="notification-about-authentication-state-changes"></a>인증 상태 변경 알림
 
-예를 들어 사용자가 로그아웃했거나 다른 사용자가 해당 역할을 변경하여 기본 인증 상태 데이터가 변경되었음을 앱이 확인하면, [사용자 지정 AuthenticationStateProvider](#implement-a-custom-authenticationstateprovider)는 필요에 따라 `AuthenticationStateProvider` 기본 클래스에서 `NotifyAuthenticationStateChanged` 메서드를 호출할 수 있습니다. 그러면 인증 상태 데이터의 소비자(예: `AuthorizeView`)가 새 데이터를 사용하여 다시 렌더링하라는 알림을 받습니다.
+예를 들어 사용자가 로그아웃했거나 다른 사용자가 해당 역할을 변경하여 기본 인증 상태 데이터가 변경되었음을 앱이 확인하면, [사용자 지정 AuthenticationStateProvider](#implement-a-custom-authenticationstateprovider)는 필요에 따라 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 기본 클래스에서 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.NotifyAuthenticationStateChanged%2A> 메서드를 호출할 수 있습니다. 그러면 인증 상태 데이터의 소비자(예: <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>)가 새 데이터를 사용하여 다시 렌더링하라는 알림을 받습니다.
 
 ## <a name="procedural-logic"></a>절차적 논리
 
-앱이 절차적 논리의 일부로 권한 부여 규칙을 확인해야 하는 경우, `Task<AuthenticationState>` 형식의 연계 매개 변수를 사용하여 사용자의 <xref:System.Security.Claims.ClaimsPrincipal>을 가져옵니다. `IAuthorizationService` 등의 다른 서비스와 `Task<AuthenticationState>`를 결합하여 정책을 평가할 수 있습니다.
+앱이 절차적 논리의 일부로 권한 부여 규칙을 확인해야 하는 경우, `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` 형식의 연계 매개 변수를 사용하여 사용자의 <xref:System.Security.Claims.ClaimsPrincipal>을 가져옵니다. `IAuthorizationService` 등의 다른 서비스와 `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>`를 결합하여 정책을 평가할 수 있습니다.
 
 ```razor
 @using Microsoft.AspNetCore.Authorization
@@ -446,7 +446,7 @@ Not authorized.
 ```
 
 > [!NOTE]
-> Blazor WebAssembly 앱 구성 요소에서 `Microsoft.AspNetCore.Authorization` 및 `Microsoft.AspNetCore.Components.Authorization` 네임스페이스를 추가합니다.
+> Blazor WebAssembly 앱 구성 요소에서 <xref:Microsoft.AspNetCore.Authorization> 및 <xref:Microsoft.AspNetCore.Components.Authorization> 네임스페이스를 추가합니다.
 >
 > ```razor
 > @using Microsoft.AspNetCore.Authorization
@@ -481,7 +481,7 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 </CascadingAuthenticationState>
 ```
 
-`CascadingAuthenticationState`는 기본 `AuthenticationStateProvider` DI 서비스로부터 받은 `Task<AuthenticationState>` 연계 매개 변수를 제공합니다.
+<xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>는 기본 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> DI 서비스로부터 받은 `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` 연계 매개 변수를 제공합니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

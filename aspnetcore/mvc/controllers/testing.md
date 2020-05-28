@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core에서 컨트롤러 논리 테스트
-author: ardalis
-description: ASP.NET Core에서 Moq 및 xUnit로 컨트롤러 논리를 테스트하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 11/07/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/controllers/testing
-ms.openlocfilehash: 4deae7f7511e3ce94450bc06d5fc8dc77a94f212
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767085"
+제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core에서 컨트롤러 논리 단위 테스트
 
@@ -131,9 +118,9 @@ API 호출을 통해 직접 비즈니스 도메인 엔터티를 반환하지 마
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests3&highlight=20-22,28-33)]
 
-## <a name="test-actionresultt"></a>ActionResult\<T> 테스트
+## <a name="test-actionresultt"></a>테스트 ActionResult\<T>
 
-ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>)를 사용 하면에서 `ActionResult` 파생 된 형식을 반환 하거나 특정 형식을 반환할 수 있습니다.
+ASP.NET Core 2.1 이상에서 [ \<T> actionresult](xref:web-api/action-return-types#actionresultt-type) ()를 <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> 사용 하면에서 파생 된 형식을 반환 `ActionResult` 하거나 특정 형식을 반환할 수 있습니다.
 
 샘플 앱에는 지정된 세션 `id`에 대한 `List<IdeaDTO>`를 반환하는 메서드가 포함되어 있습니다. 세션 `id`가 없으면 컨트롤러는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>를 반환합니다.
 
@@ -151,7 +138,7 @@ ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-type
 유효한 세션 `id`에 대한 두 번째 테스트는 메서드가 다음을 반환하는지 확인합니다.
 
 * `List<IdeaDTO>` 유형의 `ActionResult`.
-* [Actionresult\<T>입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `List<IdeaDTO>` 형식입니다.
+* [Actionresult \<T> 입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `List<IdeaDTO>` 형식입니다.
 * 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어임.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -177,8 +164,8 @@ ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-type
 유효한 세션 `id`에 대한, 마지막 테스트는 다음을 확인합니다.
 
 * 메서드가 `BrainstormSession` 유형의 `ActionResult`를 반환함.
-* [Actionresult\<T>입니다. 결과](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) 는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
-* [Actionresult\<T>입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `BrainstormSession` 형식입니다.
+* [Actionresult \<T> 입니다. 결과](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) 는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
+* [Actionresult \<T> 입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `BrainstormSession` 형식입니다.
 * 세션을 업데이트하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됨. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됩니다.
 * 세션에 대해 두 개의 `Idea` 개체가 반환됩니다.
 * 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치함.
@@ -294,9 +281,9 @@ API 호출을 통해 직접 비즈니스 도메인 엔터티를 반환하지 마
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests3&highlight=20-22,28-33)]
 
-## <a name="test-actionresultt"></a>ActionResult\<T> 테스트
+## <a name="test-actionresultt"></a>테스트 ActionResult\<T>
 
-ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>)를 사용 하면에서 `ActionResult` 파생 된 형식을 반환 하거나 특정 형식을 반환할 수 있습니다.
+ASP.NET Core 2.1 이상에서 [ \<T> actionresult](xref:web-api/action-return-types#actionresultt-type) ()를 <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> 사용 하면에서 파생 된 형식을 반환 `ActionResult` 하거나 특정 형식을 반환할 수 있습니다.
 
 샘플 앱에는 지정된 세션 `id`에 대한 `List<IdeaDTO>`를 반환하는 메서드가 포함되어 있습니다. 세션 `id`가 없으면 컨트롤러는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>를 반환합니다.
 
@@ -314,7 +301,7 @@ ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-type
 유효한 세션 `id`에 대한 두 번째 테스트는 메서드가 다음을 반환하는지 확인합니다.
 
 * `List<IdeaDTO>` 유형의 `ActionResult`.
-* [Actionresult\<T>입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `List<IdeaDTO>` 형식입니다.
+* [Actionresult \<T> 입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `List<IdeaDTO>` 형식입니다.
 * 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어임.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -340,8 +327,8 @@ ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-type
 유효한 세션 `id`에 대한, 마지막 테스트는 다음을 확인합니다.
 
 * 메서드가 `BrainstormSession` 유형의 `ActionResult`를 반환함.
-* [Actionresult\<T>입니다. 결과](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) 는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
-* [Actionresult\<T>입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `BrainstormSession` 형식입니다.
+* [Actionresult \<T> 입니다. 결과](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) 는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> 입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
+* [Actionresult \<T> 입니다. 값](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) 은 `BrainstormSession` 형식입니다.
 * 세션을 업데이트하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됨. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됩니다.
 * 세션에 대해 두 개의 `Idea` 개체가 반환됩니다.
 * 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치함.
@@ -350,9 +337,9 @@ ASP.NET Core 2.1 이상에서 [actionresult\<T>](xref:web-api/action-return-type
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:test/integration-tests>
 * [Visual Studio를 사용 하 여 단위 테스트 만들기 및 실행](/visualstudio/test/unit-test-your-code)
-* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC용 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; 강력한 형식의 단위 테스트 라이브러리로, MVC 및 웹 API 앱 테스트를 위한 흐름 인터페이스를 제공합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.*)
+* [AspNetCore-ASP.NET CORE mvc에 대 한 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 강력한 형식의 단위 테스트 라이브러리로, mvc 및 web API 앱 테스트를 위한 흐름 인터페이스를 제공 합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.*)
 

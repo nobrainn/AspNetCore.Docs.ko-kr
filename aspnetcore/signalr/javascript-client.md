@@ -1,11 +1,11 @@
 ---
 제목: ' ASP.NET Core SignalR javascript 클라이언트 작성자: 설명: ' ASP.NET Core SignalR Javascript client 개요 '
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>SignalRJavaScript 클라이언트 ASP.NET Core
@@ -46,7 +46,7 @@ npm 패키지 콘텐츠를 *node_modules \\ @aspnet\signalr\dist\browser * 폴�
 
 ::: moniker-end
 
-SignalR요소에서 JavaScript 클라이언트를 참조 `<script>` 합니다. 다음은 그 예입니다.
+SignalR요소에서 JavaScript 클라이언트를 참조 `<script>` 합니다. 예를 들면 다음과 같습니다.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -54,7 +54,7 @@ SignalR요소에서 JavaScript 클라이언트를 참조 `<script>` 합니다. �
 
 ### <a name="use-a-content-delivery-network-cdn"></a>CDN (Content Delivery Network) 사용
 
-Npm 필수 구성 요소 없이 클라이언트 라이브러리를 사용 하려면 클라이언트 라이브러리의 CDN 호스트 복사본을 참조 합니다. 다음은 그 예입니다.
+Npm 필수 구성 요소 없이 클라이언트 라이브러리를 사용 하려면 클라이언트 라이브러리의 CDN 호스트 복사본을 참조 합니다. 예를 들면 다음과 같습니다.
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -141,10 +141,10 @@ SignalR및에 정의 된 메서드 이름과 인수를 일치 시켜 호출할 �
 
 연결이 설정 될 때 기록할 이벤트의로 거와 유형을 전달 하 여 클라이언트 쪽 로그 추적을 설정 합니다. 메시지는 지정 된 로그 수준 이상으로 기록 됩니다. 사용 가능한 로그 수준은 다음과 같습니다.
 
-* `signalR.LogLevel.Error`&ndash;오류 메시지입니다. `Error`메시지만 로깅합니다.
-* `signalR.LogLevel.Warning`&ndash;잠재적 오류에 대 한 경고 메시지입니다. 로그 `Warning` 및 `Error` 메시지.
-* `signalR.LogLevel.Information`&ndash;오류가 없는 상태 메시지입니다. `Information`, `Warning` 및 메시지를 기록 `Error` 합니다.
-* `signalR.LogLevel.Trace`&ndash;추적 메시지입니다. 허브와 클라이언트 간에 전송 되는 데이터를 포함 하 여 모든 것을 기록 합니다.
+* `signalR.LogLevel.Error`: 오류 메시지입니다. `Error`메시지만 로깅합니다.
+* `signalR.LogLevel.Warning`: 잠재적 오류에 대 한 경고 메시지입니다. 로그 `Warning` 및 `Error` 메시지.
+* `signalR.LogLevel.Information`: 오류가 없는 상태 메시지입니다. `Information`, `Warning` 및 메시지를 기록 `Error` 합니다.
+* `signalR.LogLevel.Trace`: 추적 메시지입니다. 허브와 클라이언트 간에 전송 되는 데이터를 포함 하 여 모든 것을 기록 합니다.
 
 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) 에서 [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) 메서드를 사용 하 여 로그 수준을 구성 합니다. 메시지는 브라우저 콘솔에 기록 됩니다.
 

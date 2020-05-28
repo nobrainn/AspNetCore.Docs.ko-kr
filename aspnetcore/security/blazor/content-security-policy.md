@@ -1,11 +1,11 @@
 ---
 제목: ' ASP.NET Core ' 작성자에 게 콘텐츠 보안 정책 적용 Blazor : 설명: ' ASP.NET Core 앱에서 CSP (콘텐츠 보안 정책)를 사용 하 여 Blazor XSS (교차 사이트 스크립팅) 공격 으로부터 보호 하는 방법을 알아봅니다. '
-monikerRange: ms author: ms: custom: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ‘SignalR’ uid: 
 
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core에 대 한 콘텐츠 보안 정책 적용Blazor
@@ -28,14 +28,14 @@ CSP는 Chrome, Edge, Firefox, Opera 및 Safari를 비롯 한 대부분의 최신
 
 최소한 앱에 대해 다음 지시문 및 소스를 지정 합니다 Blazor . 필요에 따라 추가 지시문 및 소스를 추가 합니다. 다음 지시문은이 문서의 [정책 적용](#apply-the-policy) 섹션에 사용 됩니다. 여기서는 Blazor weasembmbomand Server에 대 한 보안 정책 예제를 Blazor 제공 합니다.
 
-* [기본 uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; 페이지의 태그에 대 한 Url을 제한 `<base>` 합니다. `self`체계 및 포트 번호를 포함 하 여 앱의 원본이 유효한 원본 임을 나타내려면를 지정 합니다.
-* [블록-모두-혼합 콘텐츠](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; HTTP 및 HTTPS 콘텐츠를 혼합 하 여 로드할 수 없습니다.
-* [기본값-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; 정책에 의해 명시적으로 지정 되지 않은 소스 지시문에 대 한 대체 (fallback)를 나타냅니다. `self`체계 및 포트 번호를 포함 하 여 앱의 원본이 유효한 원본 임을 나타내려면를 지정 합니다.
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; 이미지에 대 한 유효한 원본을 나타냅니다.
+* [기본 uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): 페이지의 태그에 대 한 url을 제한 `<base>` 합니다. `self`체계 및 포트 번호를 포함 하 여 앱의 원본이 유효한 원본 임을 나타내려면를 지정 합니다.
+* [블록-혼합-콘텐츠](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): 혼합 HTTP 및 HTTPS 콘텐츠를 로드할 수 없습니다.
+* [default-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src): 정책에 의해 명시적으로 지정 되지 않은 소스 지시문에 대 한 대체 (fallback)를 나타냅니다. `self`체계 및 포트 번호를 포함 하 여 앱의 원본이 유효한 원본 임을 나타내려면를 지정 합니다.
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src): 이미지에 대 한 유효한 소스를 나타냅니다.
   * `data:`Url에서 이미지 로드를 허용 하도록 지정 `data:` 합니다.
   * `https:`HTTPS 끝점에서 이미지 로드를 허용 하도록 지정 합니다.
-* [개체-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; `<object>`, 및 태그의 유효한 원본을 나타냅니다 `<embed>` `<applet>` . `none`모든 URL 원본을 방지 하도록 지정 합니다.
-* [스크립트-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; 스크립트에 대 한 유효한 원본을 나타냅니다.
+* [개체-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src): `<object>` , `<embed>` 및 태그의 유효한 소스를 나타냅니다 `<applet>` . `none`모든 URL 원본을 방지 하도록 지정 합니다.
+* [스크립트-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): 스크립트의 유효한 원본을 나타냅니다.
   * `https://stackpath.bootstrapcdn.com/`부트스트랩 스크립트에 대 한 호스트 소스를 지정 합니다.
   * `self`체계 및 포트 번호를 포함 하 여 앱의 원본이 유효한 원본 임을 나타내려면를 지정 합니다.
   * BlazorWeasembomapp에서:
@@ -45,11 +45,11 @@ CSP는 Chrome, Edge, Firefox, Opera 및 Safari를 비롯 한 대부분의 최신
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * `unsafe-eval`및 메서드를 사용 하 여 `eval()` 문자열에서 코드를 만드는 방법을 지정 합니다.
   * Blazor서버 앱에서 `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` 스타일 시트에 대 한 대체 (fallback) 검색을 수행 하는 인라인 스크립트에 대 한 해시를 지정 합니다.
-* [스타일-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; 스타일 시트의 유효한 원본을 나타냅니다.
+* [스타일-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): 스타일 시트의 유효한 원본을 나타냅니다.
   * `https://stackpath.bootstrapcdn.com/`부트스트랩 스타일 시트에 대 한 호스트 소스를 지정 합니다.
   * `self`체계 및 포트 번호를 포함 하 여 앱의 원본이 유효한 원본 임을 나타내려면를 지정 합니다.
   * `unsafe-inline`인라인 스타일을 사용할 수 있도록 지정 합니다. 서버 앱의 UI에서 Blazor 초기 요청 후 클라이언트와 서버를 다시 연결 하려면 인라인 선언이 필요 합니다. 이후 릴리스에서는가 더 이상 필요 하지 않도록 인라인 스타일이 제거 될 수 있습니다 `unsafe-inline` .
-* [업그레이드-안전 하지 않은 요청](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; 안전 하지 않은 (HTTP) 원본의 콘텐츠 Url을 HTTPS를 통해 안전 하 게 가져와야 함을 나타냅니다.
+* [업그레이드-안전](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests)하지 않은 요청: 비보안 (HTTP) 원본의 콘텐츠 URL을 HTTPS를 통해 안전 하 게 가져와야 함을 나타냅니다.
 
 이전 지시문은 Microsoft Internet Explorer를 제외한 모든 브라우저에서 지원 됩니다.
 
