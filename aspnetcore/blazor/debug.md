@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor WebAssembly 디버그
-author: guardrex
-description: Blazor 앱을 디버그하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/16/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/debug
-ms.openlocfilehash: 9acbb8e7b122a8d527d16ce33af01c2e7e7608bf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767540"
+title: 'ASP.NET Core Blazor WebAssembly 디버깅' author: description: 'Blazor 앱을 디버그하는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
 [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우저 개발 도구를 사용하여 디버그할 수 있습니다.  또는 Visual Studio나 Visual Studio Code를 사용하여 앱을 디버그할 수도 있습니다.
 
@@ -34,10 +20,10 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 * Visual Studio 및 Visual Studio Code에서 디버깅 지원으로 앱을 실행합니다(<kbd>F5</kbd> 키 지원).
 * 코드를 한 단계씩 실행합니다(<kbd>F10</kbd> 키).
 * 브라우저에서 <kbd>F8</kbd> 키를 사용하여 또는 Visual Studio나 Visual Studio Code에서 <kbd>F5</kbd> 키를 사용하여 코드 실행을 다시 시작합니다.
-* ‘로컬’ 표시에서 지역 변수의 값을 확인합니다. 
+* ‘로컬’ 표시에서 지역 변수의 값을 확인합니다.
 * JavaScript에서 .NET으로 이동하고 .NET에서 JavaScript로 이동하는 호출 체인을 포함하여 호출 스택을 확인합니다.
 
-현재 사용 가능하지 ‘않은’ 시나리오는 다음과 같습니다. 
+현재 사용 가능하지 ‘않은’ 시나리오는 다음과 같습니다.
 
 * 배열을 검사합니다.
 * 마우스를 올려 멤버를 검사합니다.
@@ -58,8 +44,6 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio 및 Visual Studio Code의 디버깅 사용 설정
 
-ASP.NET Core 3.2 미리 보기 3 이상 Blazor WebAssembly 프로젝트 템플릿([최신 릴리스는 3.2 미리 보기 4](xref:blazor/get-started))을 사용하여 만든 새 프로젝트에서는 자동으로 디버깅을 사용하도록 설정됩니다.
-
 기존 Blazor WebAssembly 앱에서 디버깅을 사용하도록 설정하려면 각 시작 프로필이 다음 `inspectUri` 속성을 포함하도록 프로젝트의 *launchSettings.json* 파일을 업데이트합니다.
 
 ```json
@@ -79,7 +63,6 @@ ASP.NET Core 3.2 미리 보기 3 이상 Blazor WebAssembly 프로젝트 템플�
 
 Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면
 
-1. [최신 미리 보기 릴리스의 Visual Studio 2019 16.6](https://visualstudio.com/preview)(미리 보기 2 이상)을 설치했는지 확인합니다.
 1. ASP.NET Core가 호스트한 새 Blazor WebAssembly 앱을 만듭니다.
 1. <kbd>F5</kbd> 키를 눌러 디버거에서 앱을 실행합니다.
 1. `IncrementCount` 메서드의 *Counter.razor*에 중단점을 설정합니다.
@@ -145,7 +128,7 @@ Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
 
 1. <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd>를 누릅니다.
 
-1. 브라우저는 원격 디버깅이 설정된 상태로 실행되어야 합니다. 원격 디버깅을 사용하지 않도록 설정한 경우, **디버그 가능한 브라우저 탭을 찾을 수 없음** 오류 페이지가 생성됩니다. 오류 페이지에는 Blazor 디버깅 프록시가 앱에 연결할 수 있도록 디버깅 포트가 열려 있는 상태에서 브라우저를 실행하는 작업에 대한 지침이 포함되어 있습니다. ‘모든 브라우저 인스턴스를 닫고’ 지침에 따라 브라우저를 다시 시작합니다. 
+1. 브라우저는 원격 디버깅이 설정된 상태로 실행되어야 합니다. 원격 디버깅을 사용하지 않도록 설정한 경우, **디버그 가능한 브라우저 탭을 찾을 수 없음** 오류 페이지가 생성됩니다. 오류 페이지에는 Blazor 디버깅 프록시가 앱에 연결할 수 있도록 디버깅 포트가 열려 있는 상태에서 브라우저를 실행하는 작업에 대한 지침이 포함되어 있습니다. ‘모든 브라우저 인스턴스를 닫고’ 지침에 따라 브라우저를 다시 시작합니다.
 
 원격 디버깅을 사용하도록 설정하여 브라우저를 실행한 후 디버깅 바로 가기 키를 누르면 새 디버거 탭이 열립니다. 잠시 후에 **소스** 탭에 앱의 .NET 어셈블리 목록이 표시됩니다. 각 어셈블리를 펼쳐 디버깅에 사용할 수 있는 *.cs*/ *.razor* 소스 파일을 찾습니다. 중단점을 설정하고 앱의 탭으로 다시 전환한 다음, 코드를 실행하면 중단점이 적중됩니다. 중단점이 적중되면 코드를 한 단계씩 실행(<kbd>F10</kbd> 키)하거나 코드 실행을 정상적으로 다시 시작(<kbd>F8</kbd> 키)합니다.
 

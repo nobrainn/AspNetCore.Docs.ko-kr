@@ -1,23 +1,11 @@
 ---
-title: Visual Studio를 사용하여 Azure에 ASP.NET Core 앱 게시
-author: rick-anderson
-description: Visual Studio를 사용하여 Azure App Service에 ASP.NET Core 앱을 게시하는 방법을 알아봅니다.
-ms.author: riande
-ms.custom: mvc
-ms.date: 07/10/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 634fb821ef0478dbcf57fdbb991a2e8bbb9402f1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777087"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio를 사용하여 Azure에 ASP.NET Core 앱 게시
 
@@ -45,23 +33,22 @@ Visual Studio 시작 페이지에서 **파일 > 새로 만들기 > 프로젝트.
 
 **새 프로젝트** 대화 상자를 완료합니다.
 
-* 왼쪽 창에서 **.NET Core**를 선택합니다.
-* 가운데 창에서 **ASP.NET Core 웹 애플리케이션**을 선택합니다.
-* **확인**을 선택합니다.
+* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다.
+* **새로 만들기**를 선택합니다.
 
 ![새 프로젝트 대화 상자](publish-to-azure-webapp-using-vs/_static/new_prj.png)
 
 **새 ASP.NET Core 웹 애플리케이션** 대화 상자에서:
 
 * **웹 애플리케이션**을 선택합니다.
-* **인증 변경**을 선택합니다.
+* 인증에서 **변경**을 선택합니다.
 
-![새 프로젝트 대화 상자](publish-to-azure-webapp-using-vs/_static/new_prj_2.png)
+![새 ASP.NET Core 웹 대화 상자](publish-to-azure-webapp-using-vs/_static/new_prj_2.png)
 
 **인증 변경** 대화 상자가 나타납니다. 
 
 * **개별 사용자 계정**을 선택합니다.
-* **확인**을 선택하여 **새 ASP.NET Core 웹 애플리케이션**으로 돌아간 다음 다시 **확인**을 선택합니다.
+* **확인**을 선택하여 **새 ASP.NET Core 웹 애플리케이션**으로 돌아간 다음 **만들기**를 선택합니다.
 
 ![새 ASP.NET Core 웹 인증 대화 상자](publish-to-azure-webapp-using-vs/_static/new_prj_auth.png) 
 
@@ -70,7 +57,7 @@ Visual Studio는 솔루션을 만듭니다.
 ## <a name="run-the-app"></a>앱 실행
 
 * Ctrl+F5를 눌러 프로젝트를 실행합니다.
-* **정보** 및 **연락처** 링크를 테스트합니다.
+* **개인 정보** 링크를 테스트합니다.
 
 ![localhost의 Microsoft Edge에서 열린 웹 애플리케이션](publish-to-azure-webapp-using-vs/_static/show.png)
 
@@ -78,14 +65,14 @@ Visual Studio는 솔루션을 만듭니다.
 
 * **등록**을 선택하고 새 사용자를 등록합니다. 가상의 전자 메일 주소를 사용할 수 있습니다. 제출하면 페이지에 다음과 같은 오류가 표시됩니다.
 
-    *"내부 서버 오류: 요청을 처리하는 동안 데이터베이스 작업이 실패했습니다. SQL 예외: 데이터베이스를 열 수 없습니다. 애플리케이션 DB 컨텍스트에 대한 기존 마이그레이션 적용으로 이 문제를 해결할 수 있습니다.”*
+    *"요청을 처리하는 동안 데이터베이스 작업이 실패했습니다. 애플리케이션 DB 컨텍스트에 대한 기존 마이그레이션 적용으로 이 문제를 해결할 수 있습니다.”*
 * **마이그레이션 적용**을 선택한 다음 페이지가 업데이트되면 페이지를 새로 고칩니다.
 
-![내부 서버 오류: 요청을 처리하는 동안 데이터베이스 작업이 실패했습니다. SQL 예외: 데이터베이스를 열 수 없습니다. 애플리케이션 DB 컨텍스트에 대한 기존 마이그레이션 적용으로 이 문제를 해결할 수 있습니다.](publish-to-azure-webapp-using-vs/_static/mig.png)
+![요청을 처리하는 동안 데이터베이스 작업이 실패했습니다. 애플리케이션 DB 컨텍스트에 대한 기존 마이그레이션 적용으로 이 문제를 해결할 수 있습니다.](publish-to-azure-webapp-using-vs/_static/mig.png)
 
-앱은 새 사용자를 등록하는 데 사용한 전자 메일 및 **로그아웃** 링크를 표시합니다.
+앱은 새 사용자를 등록하는 데 사용한 이메일 및 **로그아웃** 링크를 표시합니다.
 
-![Microsoft Edge에서 열린 웹 애플리케이션. 레지스터 링크는 텍스트 Hello email@domain.com으로 교체됩니다.](publish-to-azure-webapp-using-vs/_static/hello.png)
+![Microsoft Edge에서 열린 웹 애플리케이션. 레지스터 링크는 텍스트 Hello user1@example.com으로 교체됩니다.](publish-to-azure-webapp-using-vs/_static/hello.png)
 
 ## <a name="deploy-the-app-to-azure"></a>Azure에 앱 배포
 
@@ -95,53 +82,76 @@ Visual Studio는 솔루션을 만듭니다.
 
 **게시** 대화 상자에서:
 
-* **Microsoft Azure App Service**를 선택합니다.
-* 기어 아이콘을 선택한 다음 **프로필 만들기**를 선택합니다.
-* **프로필 만들기**를 선택합니다.
+* **Azure**를 선택합니다.
+* **새로 만들기**를 선택합니다.
 
 ![게시 대화 상자](publish-to-azure-webapp-using-vs/_static/maas1.png)
 
-### <a name="create-azure-resources"></a>Azure 리소스 만들기
+**게시** 대화 상자에서:
+
+* **Azure App Service(Linux)** 를 선택합니다.
+* **새로 만들기**를 선택합니다.
+
+![게시 대화 상자: Azure Service 선택](publish-to-azure-webapp-using-vs/_static/maas2.png)
+
+**게시** 대화 상자에서 **새 Azure App Service 만들기...** 를 선택합니다.
+
+![게시 대화 상자: Azure Service 인스턴스 선택](publish-to-azure-webapp-using-vs/_static/maas3.png)
 
 **App Service 만들기** 대화 상자가 나타납니다.
 
-* 구독을 입력합니다.
 * **앱 이름**, **리소스 그룹** 및 **App Service 계획** 항목 필드가 채워집니다. 이러한 이름을 유지하거나 변경할 수 있습니다.
+* **만들기**를 선택합니다.
 
-![App Service 대화 상자](publish-to-azure-webapp-using-vs/_static/newrg1.png)
+![App Service 만들기 대화 상자](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
-* **서비스** 탭을 선택하여 새 데이터베이스를 만듭니다.
+만들기가 완료되면 대화 상자가 자동으로 닫히고 **게시** 대화 상자가 다시 포커스를 받습니다.
 
-* 녹색 **+** 아이콘을 선택하여 새 SQL Database를 만듭니다.
+* 방금 만든 새 인스턴스가 자동으로 선택됩니다.
+* **마침**을 선택합니다.
 
-![새 SQL Database](publish-to-azure-webapp-using-vs/_static/sql.png)
+![게시 대화 상자: App Service 인스턴스 선택](publish-to-azure-webapp-using-vs/_static/select_as.png)
 
-* **SQL Database 구성** 대화 상자에서 **새로 만들기...** 를 선택하여 새 데이터베이스 서버를 만듭니다.
+다음으로 **게시 프로필 요약** 페이지가 표시됩니다. 이 애플리케이션에 SQL Server 데이터베이스가 필요하므로 이를 구성하라는 메시지가 표시됩니다. **구성**을 선택합니다.
 
-![새 SQL Database 및 서버](publish-to-azure-webapp-using-vs/_static/conf.png)
+![게시 프로필 요약 페이지: SQL Server 종속성 구성](publish-to-azure-webapp-using-vs/_static/sql.png)
 
-**SQL Server 구성** 대화 상자가 나타납니다.
+**종속성 구성** 대화 상자가 나타납니다.
 
-* 관리자 사용자 이름 및 암호를 입력한 다음 **확인**을 선택합니다. 기본 **서버 이름**을 유지할 수 있습니다. 
+* **Azure SQL Database**를 선택합니다.
+* **새로 만들기**를 선택합니다.
 
-> [!NOTE]
-> "관리자"는 관리자 사용자 이름으로 사용할 수 없습니다.
+![SQL Server 종속성 구성 대화 상자](publish-to-azure-webapp-using-vs/_static/sql1.png)
 
-![SQL Server 구성 대화 상자](publish-to-azure-webapp-using-vs/_static/conf_servername.png)
+**Azure SQL Database 구성** 대화 상자에서 **SQL 데이터베이스 만들기**를 선택합니다.
 
-* **확인**을 선택합니다.
+![Azure SQL Database 구성 대화 상자](publish-to-azure-webapp-using-vs/_static/sql2.png)
 
-Visual Studio가 **App Service 만들기** 대화 상자로 돌아갑니다.
+**Azure SQL 데이터베이스 만들기**가 표시됩니다.
 
-* **App Service 만들기** 대화 상자에서 **만들기**를 선택합니다.
+* **데이터베이스 이름**, **리소스 그룹**, **데이터베이스 서버** 및 **App Service 계획** 항목 필드가 채워집니다. 채워진 값을 유지하거나 변경할 수 있습니다.
+* 선택한 **데이터베이스 서버**에 대한 **데이터베이스 관리자 사용자 이름** 및 **데이터베이스 관리자 암호**를 입력합니다. 사용하는 계정에 새 Azure SQL 데이터베이스를 만드는 데 필요한 권한이 있어야 합니다.
+* **만들기**를 선택합니다.
 
-![SQL Database 구성 대화 상자](publish-to-azure-webapp-using-vs/_static/conf_final.png)
+![새 Azure SQL Database 대화 상자](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
-Visual Studio는 Azure에서 웹앱 및 SQL Server를 만듭니다. 이 단계는 몇 분 정도 걸릴 수 있습니다. 만든 리소스에 대한 자세한 내용은 [추가 리소스](#additional-resources)를 참조하세요.
+만들기가 완료되면 대화 상자가 자동으로 닫히고 **Azure SQL Database 구성** 대화 상자가 다시 표시됩니다.
 
-배포가 완료되면 **설정**을 선택합니다.
+* 방금 만든 새 인스턴스가 자동으로 선택됩니다.
+* **새로 만들기**를 선택합니다.
 
-![SQL Server 구성 대화 상자](publish-to-azure-webapp-using-vs/_static/set.png)
+![Azure SQL Database 구성 대화 상자](publish-to-azure-webapp-using-vs/_static/sql_select.png)
+
+**Azure SQL Database 구성** 대화 상자의 다음 단계에서 다음 작업을 수행합니다.
+
+* **데이터베이스 연결 사용자 이름** 및 **데이터베이스 연결 암호** 필드를 입력합니다. 이들은 애플리케이션이 런타임 시 데이터베이스에 연결하는 데 사용하는 세부 정보입니다. 이전 단계에서 사용한 관리자 사용자 이름 및 암호와 동일한 세부 정보를 사용하지 않는 것이 가장 좋습니다.
+* **마침**을 선택합니다.
+
+![Azure SQL Database 구성 대화 상자, 연결 문자열 세부 정보](publish-to-azure-webapp-using-vs/_static/sql_connection.png)
+
+**게시 프로필 요약** 페이지에서 **설정**을 선택합니다.
+
+![게시 프로필 요약 페이지: 설정 편집](publish-to-azure-webapp-using-vs/_static/pp_configured.png)
 
 **게시** 대화 상자의 **설정** 페이지에서:
 
@@ -150,27 +160,21 @@ Visual Studio는 Azure에서 웹앱 및 SQL Server를 만듭니다. 이 단계�
 
 * **저장**을 선택합니다. Visual Studio가 **게시** 대화 상자로 돌아갑니다. 
 
-![게시 대화 상자: 설정 패널](publish-to-azure-webapp-using-vs/_static/pubs.png)
+![게시 대화 상자: 설정 패널](publish-to-azure-webapp-using-vs/_static/pp_settings.png)
 
 **게시**를 클릭합니다. Visual Studio는 Azure에 앱을 게시합니다. 배포가 완료되면 앱이 브라우저에서 열립니다.
 
-### <a name="test-your-app-in-azure"></a>Azure에서 앱 테스트
-
-* **정보** 및 **연락처** 링크 테스트
-
-* 새 사용자 등록
-
-![Azure App Service의 Microsoft Edge에서 열린 웹 애플리케이션](publish-to-azure-webapp-using-vs/_static/register.png)
+![게시 대화 상자: 설정 패널](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 
 ### <a name="update-the-app"></a>앱 업데이트
 
-* *Pages/About.cshtml* Razor 페이지를 편집하고 내용을 변경합니다. 예를 들어 단락을 수정하여 “Hello ASP.NET Core!” 문구를 표시할 수 있습니다.
+* *Pages/Index.cshtml* Razor 페이지를 편집하고 내용을 변경합니다. 예를 들어 단락을 수정하여 “Hello ASP.NET Core!” 문구를 표시할 수 있습니다.
 
-    [!code-html[About](publish-to-azure-webapp-using-vs/sample/about.cshtml?highlight=9&range=1-9)]
+    [!code-html[Index](publish-to-azure-webapp-using-vs/sample/index.cshtml?highlight=10&range=1-12)]
 
-* 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시...** 를 선택합니다.
+* **게시 프로필 요약** 페이지에서 다시 **게시**를 선택합니다.
 
-![강조 표시된 게시 링크로 열린 바로 가기 메뉴](publish-to-azure-webapp-using-vs/_static/pub.png)
+![게시 프로필 요약 페이지](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 
 * 앱이 게시된 후 변경 내용이 Azure에서 제공되는지 확인합니다.
 

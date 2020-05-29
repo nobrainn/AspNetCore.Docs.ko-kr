@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: aa338bbe61eec14bc1e1b3606e11e26bfb0e6a09
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: 610cb9124f59ed07f1fe6193f92052b4513450c8
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967469"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424245"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor 이벤트 처리
 
@@ -136,7 +136,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공합니다. 대리자 형
 
 ## <a name="eventcallback"></a>EventCallback
 
-중첩된 구성 요소를 사용하는 일반적인 시나리오에서는 자식 구성 요소 이벤트가 발생할 때(예: `onclick` 이벤트가 자식에서 발생할 때) 부모 구성 요소의 메서드를 실행하려고 합니다. 구성 요소 간에 이벤트를 공개하려면 `EventCallback`을 사용합니다. 부모 구성 요소는 자식 구성 요소의 `EventCallback`에 콜백 메서드를 할당할 수 있습니다.
+중첩된 구성 요소를 사용하는 일반적인 시나리오는 자식 구성 요소 이벤트가 발생할 때 부모 구성 요소의 메서드를 실행하는 것입니다. 자식 구성 요소에서 발생하는 `onclick` 이벤트가 일반적인 사용 사례입니다. 구성 요소 간에 이벤트를 공개하려면 `EventCallback`을 사용합니다. 부모 구성 요소는 자식 구성 요소의 `EventCallback`에 콜백 메서드를 할당할 수 있습니다.
 
 샘플 앱(*Components/ChildComponent.razor*)의 `ChildComponent`는 단추의 `onclick` 처리기가 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 수신하도록 설정된 방법을 보여 줍니다. `EventCallback`은 주변 디바이스의 `onclick` 이벤트에 적합한 `MouseEventArgs` 형식입니다.
 

@@ -13,22 +13,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 5c6771dd7249bfb8280ba20e1ce75967f279971c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771587"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424327"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
 작성자: [Rainer Stropek](https://www.timecockpit.com) 및 [Luke Latham](https://github.com/guardrex)
 
-메뉴, 저작권 메시지, 회사 로고 등의 일부 앱 요소는 일반적으로 앱의 전체 레이아웃에 포함되며 앱의 모든 구성 요소에서 사용됩니다. 앱의 모든 구성 요소에 해당 요소의 코드를 복사하는 것은 효율적인 방법이 아닙니다. 요소 중 하나에 업데이트가 필요할 때마다 모든 구성 요소를 업데이트해야 합니다. 해당 중복은 유지 관리하기 어렵고, 시간이 지남에 따라 일관성 없는 콘텐츠가 발생할 수 있습니다. ‘레이아웃’을 통해 이 문제를 해결할 수 있습니다. 
+메뉴, 저작권 메시지, 회사 로고 등의 일부 앱 요소는 일반적으로 앱의 전체 레이아웃에 포함되며 앱의 모든 구성 요소에서 사용됩니다. 이러한 요소의 코드를 앱의 모든 구성 요소에 복사하는 것은 효율적이지 않습니다. 요소 중 하나에 업데이트가 필요할 때마다 모든 구성 요소를 업데이트해야 합니다. 해당 중복은 유지 관리하기 어렵고, 시간이 지남에 따라 일관성 없는 콘텐츠가 발생할 수 있습니다. ‘레이아웃’을 통해 이 문제를 해결할 수 있습니다.
 
 기술적으로 레이아웃은 또 다른 구성 요소입니다. 레이아웃은 Razor 템플릿 또는 C# 코드에서 정의되며 [데이터 바인딩](xref:blazor/data-binding), [종속성 주입](xref:blazor/dependency-injection) 및 기타 구성 요소 시나리오를 사용할 수 있습니다.
 
-‘구성 요소’를 ‘레이아웃’으로 전환하기 위해 구성 요소는 다음을 수행합니다.  
+‘구성 요소’를 ‘레이아웃’으로 전환하기 위해 구성 요소는 다음을 수행합니다. 
 
 * 레이아웃 내부에 렌더링된 콘텐츠의 `Body` 속성을 정의하는 `LayoutComponentBase`에서 상속합니다.
 * Razor 구문 `@Body`를 사용하여 콘텐츠가 렌더링되는 위치를 레이아웃 태그에 지정합니다.
@@ -61,7 +61,7 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-구성 요소에서 직접 레이아웃을 지정하면 라우터에서 설정된 ‘기본 레이아웃’이나 *_Imports.razor*에서 가져온 `@layout` 지시문이 재정의됩니다. 
+구성 요소에서 직접 레이아웃을 지정하면 라우터에서 설정된 ‘기본 레이아웃’이나 *_Imports.razor*에서 가져온 `@layout` 지시문이 재정의됩니다.
 
 ## <a name="centralized-layout-selection"></a>중앙에서 레이아웃 선택
 
@@ -77,7 +77,7 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
 
 *_Imports.razor* 파일은 [Razor 뷰 및 Pages용 _ViewImports.cshtml](xref:mvc/views/layout#importing-shared-directives) 파일과 유사하지만, 구체적으로 Razor 구성 요소 파일에 적용됩니다.
 
-*_Imports.razor*에서 레이아웃을 지정하면 라우터의 ‘기본 레이아웃’으로 지정된 레이아웃이 재정의됩니다. 
+*_Imports.razor*에서 레이아웃을 지정하면 라우터의 ‘기본 레이아웃’으로 지정된 레이아웃이 재정의됩니다.
 
 ## <a name="nested-layouts"></a>중첩된 레이아웃
 

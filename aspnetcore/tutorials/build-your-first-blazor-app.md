@@ -1,32 +1,26 @@
 ---
-title: 첫 번째 Blazor 앱 빌드
-author: guardrex
-description: Blazor 앱을 단계별로 빌드합니다.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/20/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: tutorials/first-blazor-app
-ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776606"
+title: '첫 번째 Blazor 앱 빌드' author: description: 'Blazor 앱을 단계별로 빌드합니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+이 자습서에서는 Blazor 앱을 만들고 수정하는 방법을 보여줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
 
-이 자습서에서는 Blazor 앱을 만들고 수정하는 방법을 보여줍니다.
+> [!div class="checklist"]
+> * 할 일 목록 Blazor 앱 프로젝트 만들기
+> * Razor 구성 요소 수정
+> * 구성 요소에서 이벤트 처리 및 데이터 바인딩 사용
+> * Blazor 앱에서 DI(종속성 주입) 및 라우팅 사용
+
+이 모든 과정을 마치면 채팅 앱을 실행할 수 있습니다.
 
 ## <a name="build-components"></a>구성 요소 빌드
 
@@ -127,7 +121,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 *Pages/FetchData.razor*:
 
-[!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
+[!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-9)]
 
 [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 루프는 각 예측 인스턴스를 날씨 데이터 테이블의 행으로 렌더링하는 데 사용됩니다.
 
@@ -213,6 +207,18 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
 1. 앱을 다시 빌드하고 실행합니다. 할 일 항목을 추가하여 새 코드를 테스트합니다.
+
+## <a name="next-steps"></a>다음 단계
+
+본 자습서에서는 다음 작업에 관한 방법을 학습했습니다.
+
+> [!div class="checklist"]
+> * 할 일 목록 Blazor 앱 프로젝트 만들기
+> * Razor 구성 요소 수정
+> * 구성 요소에서 이벤트 처리 및 데이터 바인딩 사용
+> * Blazor 앱에서 DI(종속성 주입) 및 라우팅 사용
+
+구성 요소를 빌드하고 사용하는 방법을 알아봅니다.
 
 > [!div class="nextstepaction"]
 > <xref:blazor/components>

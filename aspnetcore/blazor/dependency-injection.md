@@ -1,34 +1,20 @@
 ---
-title: ASP.NET Core Blazor 종속성 주입
-author: guardrex
-description: Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 참조하세요.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/04/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/dependency-injection
-ms.openlocfilehash: e96698bd0bd8f3f3b290ba24bc8169efb16f1d03
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967534"
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
 작성자: [Rainer Stropek](https://www.timecockpit.com) 및 [Mike Rousos](https://github.com/mjrousos)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Blazor는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 지원합니다. 앱은 기본 제공 서비스를 구성 요소에 삽입하여 사용할 수 있습니다. 앱은 사용자 지정 서비스를 정의 및 등록하고 DI를 통해 앱 전체에서 사용하도록 할 수도 있습니다.
 
-DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입니다. DI는 Blazor 앱에서 다음과 같은 작업을 수행하는 데 유용하게 사용할 수 있습니다.
+DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입니다. 이는 Blazor 앱에서 다음과 같은 경우에 유용할 수 있습니다.
 
 * 여러 구성 요소에서 *singleton* 서비스라고 하는 단일 서비스 클래스 인스턴스를 공유합니다.
 * 참조 추상화를 사용하여 구체적인 서비스 클래스의 구성 요소를 분리합니다. 예를 들어, 앱의 데이터에 액세스하기 위한 `IDataAccess` 인터페이스를 살펴보겠습니다. 이 인터페이스는 구체적 `DataAccess` 클래스에 의해 구현되고 앱의 서비스 컨테이너에 서비스로 등록됩니다. 구성 요소는 DI를 사용하여 `IDataAccess` 구현을 수신하는 경우 구체적인 형식에 결합되지 않습니다. 단위 테스트의 모의 구현을 위해서는 이 구현을 바꿀 수 있습니다.
@@ -38,10 +24,59 @@ DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입�
 기본 서비스는 앱의 서비스 컬렉션에 자동으로 추가됩니다.
 
 | 서비스 | 수명 | 설명 |
-| ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Transient | URI로 식별되는 리소스에서 HTTP 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공합니다.<br><br>Blazor WebAssembly 앱의 `HttpClient` 인스턴스는 브라우저를 사용하여 백그라운드에서 HTTP 트래픽을 처리합니다.<br><br>Blazor 서버 앱에는 기본적으로 서비스로 구성된 `HttpClient`는 포함되지 않습니다. Blazor 서버 앱에 대한 `HttpClient`를 제공합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
-| `IJSRuntime` | Singleton(Blazor WebAssembly)<br>범위 지정(Blazor 서버) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/call-javascript-from-dotnet>를 참조하세요. |
-| `NavigationManager` | Singleton(Blazor WebAssembly)<br>범위 지정(Blazor 서버) | URI 및 탐색 상태를 사용하기 위한 도우미를 포함합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조하세요. |
+| ---
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+---- | --- title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+---- | --- title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+------ | | <xref:System.Net.Http.HttpClient> | 일시적 | URI로 식별되는 리소스에서 HTTP 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공합니다.<br><br>Blazor WebAssembly 앱의 `HttpClient` 인스턴스는 브라우저를 사용하여 백그라운드에서 HTTP 트래픽을 처리합니다.<br><br>Blazor 서버 앱에는 기본적으로 서비스로 구성된 `HttpClient`는 포함되지 않습니다. Blazor 서버 앱에 `HttpClient`를 제공합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. | | `IJSRuntime` | 싱글톤(Blazor WebAssembly)<br>범위 지정됨(Blazor Server) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/call-javascript-from-dotnet>를 참조하세요. | | `NavigationManager` | 싱글톤(Blazor WebAssembly)<br>범위 지정됨(Blazor Server) | URI 및 탐색 상태를 사용하기 위한 도우미를 포함합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조하세요. |
 
 사용자 지정 서비스 공급자는 테이블에 나열된 기본 서비스를 자동으로 제공하지 않습니다. 사용자 지정 서비스 공급자를 사용하고 표에 표시된 서비스가 필요한 경우 새 서비스 공급자에 필요한 서비스를 추가합니다.
 
@@ -133,10 +168,51 @@ public void ConfigureServices(IServiceCollection services)
 다음 표에 표시된 수명으로 서비스를 구성할 수 있습니다.
 
 | 수명 | 설명 |
-| -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly 앱에는 현재, DI 범위에 대한 개념이 없습니다. `Scoped` 등록 서비스는 `Singleton` 서비스처럼 동작합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원합니다. Blazor 서버 앱에서 범위가 지정된 서비스 등록은 *연결*로 범위가 지정됩니다. 따라서 현재, 브라우저에서 클라이언트 쪽을 실행하려는 의도가 있더라도 현재 사용자로 범위를 지정해야 하는 서비스에 대해서는 범위 지정 서비스를 사용하는 것이 좋습니다. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI는 서비스의 *단일 인스턴스*를 만듭니다. `Singleton` 서비스가 필요한 모든 구성 요소는 동일한 서비스의 인스턴스를 수신합니다. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 구성 요소는 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스*을 받습니다. |
+| ---
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+---- | --- title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 종속성 주입' author: description: 'Blazor 앱이 구성 요소에 서비스를 주입할 수 있는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+------ | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly 앱에는 현재, DI 범위에 대한 개념이 없습니다. `Scoped` 등록 서비스는 `Singleton` 서비스처럼 동작합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원합니다. Blazor 서버 앱에서 범위가 지정된 서비스 등록은 *연결*로 범위가 지정됩니다. 따라서 현재, 브라우저에서 클라이언트 쪽을 실행하려는 의도가 있더라도 현재 사용자로 범위를 지정해야 하는 서비스에 대해서는 범위 지정 서비스를 사용하는 것이 좋습니다. | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI는 서비스의 *단일 인스턴스*를 만듭니다. `Singleton` 서비스가 필요한 모든 구성 요소는 동일한 서비스의 인스턴스를 수신합니다. | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | 구성 요소는 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스*를 받습니다. |
 
 DI 시스템은 ASP.NET Core에서 DI 시스템을 기준으로 합니다. 자세한 내용은 <xref:fundamentals/dependency-injection>를 참조하세요.
 
@@ -153,7 +229,7 @@ DI 시스템은 ASP.NET Core에서 DI 시스템을 기준으로 합니다. 자�
 
 다음 예제에서는 `@inject`을 사용하는 방법을 보여 줍니다. `Services.IDataAccess`를 구현하는 서비스는 구성 요소의 속성 `DataRepository`에 주입됩니다. 코드가 `IDataAccess` 추상화만 사용하는 방식에 유의하세요.
 
-[!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
+[!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,20)]
 
 내부적으로 생성된 속성(`DataRepository`)은 `InjectAttribute` 특성을 사용합니다. 일반적으로 이 특성은 직접 사용되지 않습니다. 구성 요소에 기본 클래스가 필요하고 주입된 속성이 기본 클래스에도 필요하면 `InjectAttribute`를 수동으로 추가합니다.
 

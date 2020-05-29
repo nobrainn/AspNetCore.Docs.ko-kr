@@ -5,7 +5,7 @@ description: Visual Studio에서 게시 프로필을 만들고 다양한 대상�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 0de20b93929162f79d4d15fc4731959e48bb3b6c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776372"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83439008"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core 앱 배포용 Visual Studio 게시 프로필(.pubxml)
 
@@ -36,7 +36,7 @@ ms.locfileid: "82776372"
 
 위 `<Project>` 요소의 `Sdk` 특성은 각각 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* 및 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets*에서 MSBuild [속성](/visualstudio/msbuild/msbuild-properties) 및 [대상](/visualstudio/msbuild/msbuild-targets)을 가져옵니다. `$(MSBuildSDKsPath)`(Visual Studio 2019 Enterprise 사용)의 기본 위치는 *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* 폴더입니다.
 
-`Microsoft.NET.Sdk.Web`(웹 SDK)은 `Microsoft.NET.Sdk`(.NET Core SDK) 및 `Microsoft.NET.Sdk.Razor`([Razor SDK](xref:razor-pages/sdk))를 비롯한 다른 SDK에 종속됩니다. 각 종속 SDK와 연결된 MSBuild 속성과 대상을 가져옵니다. 게시 대상은 사용된 게시 방법에 따라 해당 대상 집합을 가져옵니다.
+`Microsoft.NET.Sdk.Web`([웹 SDK](xref:razor-pages/web-sdk))은 `Microsoft.NET.Sdk`([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) 및 `Microsoft.NET.Sdk.Razor`([Razor SDK](xref:razor-pages/sdk))를 비롯한 다른 SDK에 종속됩니다. 각 종속 SDK와 연결된 MSBuild 속성과 대상을 가져옵니다. 게시 대상은 사용된 게시 방법에 따라 해당 대상 집합을 가져옵니다.
 
 MSBuild 또는 Visual Studio가 프로젝트를 로드하면 다음 높은 수준의 작업이 수행됩니다.
 
@@ -52,13 +52,13 @@ MSBuild 또는 Visual Studio가 프로젝트를 로드하면 다음 높은 수�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-웹 SDK는 [Razor SDK](xref:razor-pages/sdk)를 가져옵니다. 따라서 `**\*.cshtml` 및 `**\*.razor` 패턴과 일치하는 파일도 `Content` 항목 목록에 포함됩니다.
+[웹 SDK](xref:razor-pages/web-sdk)는 [Razor SDK](xref:razor-pages/sdk)를 가져옵니다. 따라서 `**\*.cshtml` 및 `**\*.razor` 패턴과 일치하는 파일도 `Content` 항목 목록에 포함됩니다.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-웹 SDK는 [Razor SDK](xref:razor-pages/sdk)를 가져옵니다. 따라서 `**\*.cshtml` 패턴과 일치하는 파일도 `Content` 항목 목록에 포함됩니다.
+[웹 SDK](xref:razor-pages/web-sdk)는 [Razor SDK](xref:razor-pages/sdk)를 가져옵니다. 따라서 `**\*.cshtml` 패턴과 일치하는 파일도 `Content` 항목 목록에 포함됩니다.
 
 ::: moniker-end
 
@@ -382,7 +382,7 @@ MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks
 </ItemGroup>
 ```
 
-`<MsDeploySkipRules>`는 배포 사이트에서 ‘건너뛰기’ 대상을 삭제하지 않습니다.  `<Content>` 대상 파일 및 폴더는 배포 사이트에서 삭제됩니다. 예를 들어 배포된 웹앱에 다음 파일이 포함되었다고 가정합니다.
+`<MsDeploySkipRules>`는 배포 사이트에서 ‘건너뛰기’ 대상을 삭제하지 않습니다. `<Content>` 대상 파일 및 폴더는 배포 사이트에서 삭제됩니다. 예를 들어 배포된 웹앱에 다음 파일이 포함되었다고 가정합니다.
 
 * *Views/Home/About1.cshtml*
 * *Views/Home/About2.cshtml*
@@ -409,7 +409,7 @@ MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks
 </ItemGroup>
 ```
 
-앞의 `<MsDeploySkipRules>` 요소는 ‘건너뛴’ 파일이 배포되지 않도록 합니다.  해당 파일은 배포된 후에 삭제되지 않습니다.
+앞의 `<MsDeploySkipRules>` 요소는 ‘건너뛴’ 파일이 배포되지 않도록 합니다. 해당 파일은 배포된 후에 삭제되지 않습니다.
 
 다음 `<Content>` 요소는 배포 사이트에서 대상 파일을 삭제합니다.
 
@@ -440,7 +440,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 ## <a name="include-files"></a>포함 파일
 
-다음 섹션에서는 게시 시점에서의 파일 포함을 위한 여러 가지 방법을 설명합니다. [일반 파일 포함](#general-file-inclusion) 섹션에서는 웹 SDK의 게시 대상 파일이 제공하는 `DotNetPublishFiles` 항목을 사용합니다. [선택적 파일 포함](#selective-file-inclusion) 섹션에서는 .NET Core SDK의 게시 대상 파일이 제공하는 `ResolvedFileToPublish` 항목을 사용합니다. Web SDK는 .NET Core SDK를 사용하기 때문에 ASP.NET Core 프로젝트에서 항목 중 하나를 사용할 수 있습니다.
+다음 섹션에서는 게시 시점에서의 파일 포함을 위한 여러 가지 방법을 설명합니다. [일반 파일 포함](#general-file-inclusion) 섹션에서는 [웹 SDK](xref:razor-pages/web-sdk)의 게시 대상 파일이 제공하는 `DotNetPublishFiles` 항목을 사용합니다. [선택적 파일 포함](#selective-file-inclusion) 섹션에서는 [.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)의 게시 대상 파일이 제공하는 `ResolvedFileToPublish` 항목을 사용합니다. Web SDK는 .NET Core SDK를 사용하기 때문에 ASP.NET Core 프로젝트에서 항목 중 하나를 사용할 수 있습니다.
 
 ### <a name="general-file-inclusion"></a>일반 파일 포함
 

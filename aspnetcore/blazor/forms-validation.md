@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: ec2bc2867acdd1c9be42f77cb38be36abb8c8108
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: d7182594fbc22d056caff0864a053a0a92fa4e84
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967482"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438891"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 양식 및 유효성 검사
 
@@ -65,7 +65,7 @@ public class ExampleModel
 
 * 양식은 `ExampleModel` 형식에서 정의된 유효성 검사를 사용하여 `name` 필드에서 사용자 입력의 유효성을 검사합니다. 모델은 구성 요소의 `@code` 블록에 생성되고 프라이빗 필드(`exampleModel`)에 저장됩니다. 필드는 `<EditForm>` 요소의 `Model` 특성에 할당됩니다.
 * `InputText` 구성 요소의 `@bind-Value`는 다음과 같이 바인딩합니다.
-  * 모델 속성(`exampleModel.Name`)을 `InputText` 구성 요소의 `Value` 속성에 바인딩합니다.
+  * 모델 속성(`exampleModel.Name`)을 `InputText` 구성 요소의 `Value` 속성에 바인딩합니다. 속성 바인딩에 대한 자세한 내용은 <xref:blazor/data-binding#parent-to-child-binding-with-component-parameters>를 참조하세요.
   * 변경 이벤트 대리자를 `InputText` 구성 요소의 `ValueChanged` 속성에 바인딩합니다.
 * `DataAnnotationsValidator` 구성 요소는 데이터 주석을 사용하여 유효성 검사 지원을 연결합니다.
 * `ValidationSummary` 구성 요소는 유효성 검사 메시지를 요약합니다.
@@ -198,11 +198,11 @@ public class Starship
 
 * **Submit** 단추를 선택하면 `HandleSubmit` 메서드가 실행됩니다.
 * 양식의 `EditContext`를 사용하여 양식의 유효성을 검사합니다.
-* 서버에서 웹 API 엔드포인트를 호출하는 `ServerValidate` 메서드에 `EditContext`를 전달하여 양식의 유효성을 추가로 검사합니다(‘표시되지 않음’). 
+* 서버에서 웹 API 엔드포인트를 호출하는 `ServerValidate` 메서드에 `EditContext`를 전달하여 양식의 유효성을 추가로 검사합니다(‘표시되지 않음’).
 * `isValid`를 확인하여 클라이언트 쪽 및 서버 쪽 유효성 검사 결과에 따라 추가 코드를 실행합니다.
 
 ```razor
-<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
+<EditForm EditContext="@editContext" OnSubmit="HandleSubmit">
 
     ...
 
@@ -353,8 +353,8 @@ public class Starship
 
 Blazor는 다음 두 가지 유형의 유효성 검사를 수행합니다.
 
-* ‘필드 유효성 검사’는 사용자가 Tab 키를 눌러 필드를 벗어날 때 수행됩니다.  필드 유효성을 검사하는 동안 `DataAnnotationsValidator` 구성 요소는 보고된 모든 유효성 검사 결과를 필드에 연결합니다.
-* ‘모델 유효성 검사’는 사용자가 양식을 제출할 때 수행됩니다.  모델 유효성을 검사하는 동안 `DataAnnotationsValidator` 구성 요소는 유효성 검사 결과에 보고된 멤버 이름을 기준으로 필드를 확인합니다. 개별 멤버와 연결되지 않은 유효성 검사 결과는 필드가 아니라 모델과 연결됩니다.
+* ‘필드 유효성 검사’는 사용자가 Tab 키를 눌러 필드를 벗어날 때 수행됩니다. 필드 유효성을 검사하는 동안 `DataAnnotationsValidator` 구성 요소는 보고된 모든 유효성 검사 결과를 필드에 연결합니다.
+* ‘모델 유효성 검사’는 사용자가 양식을 제출할 때 수행됩니다. 모델 유효성을 검사하는 동안 `DataAnnotationsValidator` 구성 요소는 유효성 검사 결과에 보고된 멤버 이름을 기준으로 필드를 확인합니다. 개별 멤버와 연결되지 않은 유효성 검사 결과는 필드가 아니라 모델과 연결됩니다.
 
 ### <a name="validation-summary-and-validation-message-components"></a>유효성 검사 요약 및 유효성 검사 메시지 구성 요소
 
@@ -401,17 +401,17 @@ private class MyCustomValidator : ValidationAttribute
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazor 데이터 주석 유효성 검사 패키지
 
-[Microsoft.AspNetCore.Components.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)은 `DataAnnotationsValidator` 구성 요소를 사용하여 유효성 검사 환경 간격을 채우는 패키지입니다. 이 패키지는 현재 ‘실험적’입니다. 
+[Microsoft.AspNetCore.Components.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)은 `DataAnnotationsValidator` 구성 요소를 사용하여 유효성 검사 환경 간격을 채우는 패키지입니다. 이 패키지는 현재 ‘실험적’입니다.
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty] 특성
 
-<xref:System.ComponentModel.DataAnnotations.CompareAttribute>는 유효성 검사 결과를 특정 멤버에 연결하지 않으므로 `DataAnnotationsValidator` 구성 요소에서 제대로 작동하지 않습니다. 이로 인해 제출 시 전체 모델의 유효성을 검사하는 경우와 필드 수준 유효성 검사 간에 동작이 일치하지 않을 수 있습니다. [Microsoft.AspNetCore.Components.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) ‘실험적’ 패키지는 해당 제한 사항을 해결하는 추가 유효성 검사 특성인 `ComparePropertyAttribute`를 도입합니다.  Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체합니다.
+<xref:System.ComponentModel.DataAnnotations.CompareAttribute>는 유효성 검사 결과를 특정 멤버에 연결하지 않으므로 `DataAnnotationsValidator` 구성 요소에서 제대로 작동하지 않습니다. 이로 인해 제출 시 전체 모델의 유효성을 검사하는 경우와 필드 수준 유효성 검사 간에 동작이 일치하지 않을 수 있습니다. [Microsoft.AspNetCore.Components.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) ‘실험적’ 패키지는 해당 제한 사항을 해결하는 추가 유효성 검사 특성인 `ComparePropertyAttribute`를 도입합니다. Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체합니다.
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>중첩된 모델, 컬렉션 형식 및 복합 형식
 
 Blazor는 기본 제공 `DataAnnotationsValidator`와 함께 데이터 주석을 사용하여 양식 입력의 유효성 검사를 지원합니다. 그러나 `DataAnnotationsValidator`는 컬렉션 형식 또는 복합 형식 속성이 아닌, 양식에 바인딩된 모델의 최상위 속성에 대해서만 유효성을 검사합니다.
 
-컬렉션 형식 및 복합 형식 속성을 포함하여 바인딩된 모델의 전체 개체 그래프에 대해 유효성을 검사하려면 ‘실험적’ [Microsoft.AspNetCore.Components.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) 패키지에서 제공하는 `ObjectGraphDataAnnotationsValidator`를 사용합니다. 
+컬렉션 형식 및 복합 형식 속성을 포함하여 바인딩된 모델의 전체 개체 그래프에 대해 유효성을 검사하려면 ‘실험적’ [Microsoft.AspNetCore.Components.DataAnnotations.Validation](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) 패키지에서 제공하는 `ObjectGraphDataAnnotationsValidator`를 사용합니다.
 
 ```razor
 <EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
