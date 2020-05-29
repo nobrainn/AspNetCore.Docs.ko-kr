@@ -55,7 +55,7 @@ Blazor 서버 앱은 SignalR를 사용하여 생성된 실시간 연결을 통�
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>는 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> 구성 요소와 <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> 구성 요소가 인증 상태를 가져오는 데 사용하는 기본 서비스입니다.
 
-일반적으로 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 직접 사용하지는 않습니다. 이 문서의 뒷부분에서 설명하는 [AuthorizeView 구성 요소](#authorizeview-component) 또는 [Task\<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) 접근 방식을 사용하세요. <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 직접 사용하는 경우의 주요 단점은 기본 인증 상태 데이터가 변경될 때 구성 요소가 자동으로 알림을 받지 못하는 것입니다.
+일반적으로 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 직접 사용하지는 않습니다. [AuthorizeView 구성 요소](#authorizeview-component) 또는 이 문서의 뒷부분에서 설명하는 [Task\<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) 접근 방식을 사용합니다. <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>를 직접 사용하는 경우의 주요 단점은 기본 인증 상태 데이터가 변경될 때 구성 요소가 자동으로 알림을 받지 못하는 것입니다.
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 서비스는 다음 예제와 같이 현재 사용자의 <xref:System.Security.Claims.ClaimsPrincipal> 데이터를 제공할 수 있습니다.
 
@@ -76,7 +76,7 @@ Blazor 서버 앱은 SignalR를 사용하여 생성된 실시간 연결을 통�
     <ul>
         @foreach (var claim in _claims)
         {
-            <li>@claim.Type &ndash; @claim.Value</li>
+            <li>@claim.Type: @claim.Value</li>
         }
     </ul>
 }
@@ -467,7 +467,7 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 
 일반적인 오류:
 
-* **권한을 부여하려면 Task\<AuthenticationState> 형식의 연계 매개 변수가 필요합니다. CascadingAuthenticationState를 사용하여 이 매개 변수를 제공하는 것이 좋습니다.**
+* **권한을 부여하려면 Task 형식의 연계 매개 변수가 필요합니다\<AuthenticationState>. CascadingAuthenticationState를 사용하여 이 매개 변수를 제공하는 것이 좋습니다.**
 
 * **`authenticationStateTask`에 대해 `null` 값을 받았습니다.**
 

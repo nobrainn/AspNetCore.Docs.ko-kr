@@ -1347,7 +1347,7 @@ Index: 5  Value: value5
 
 ## <a name="access-configuration-in-razor-pages"></a>Razor Pages의 구성 액세스
 
-다음 코드는 Razor의 구성 데이터를 표시합니다.
+다음 코드는 Razor 페이지의 구성 데이터를 표시합니다.
 
 [!code-cshtml[](index/samples/3.x/ConfigSample/Pages/Test5.cshtml)]
 
@@ -1495,7 +1495,7 @@ using Microsoft.Extensions.Configuration;
 자세한 내용은 다음 항목을 참조하세요.
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets> &ndash; 환경 변수를 사용하여 중요한 데이터를 저장하는 방법에 대한 조언을 포함합니다. 비밀 관리자는 파일 구성 공급자를 사용하여 사용자 비밀을 로컬 시스템의 JSON 파일에 저장합니다. 파일 구성 공급자에 대해서는 이 항목의 뒷부분에서 설명합니다.
+* <xref:security/app-secrets>: 환경 변수를 사용하여 중요한 데이터를 저장하는 방법에 대한 조언을 포함합니다. 비밀 관리자는 파일 구성 공급자를 사용하여 사용자 비밀을 로컬 시스템의 JSON 파일에 저장합니다. 파일 구성 공급자에 대해서는 이 항목의 뒷부분에서 설명합니다.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)가 ASP.NET Core 앱에 대한 앱 비밀을 안전하게 저장합니다. 자세한 내용은 <xref:security/key-vault-configuration>를 참조하세요.
 
@@ -2948,8 +2948,8 @@ title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
 
 서버에 사용자 지정 연결 문자열 환경 변수가 만들어집니다.
 
-* 이름 &ndash; `CUSTOMCONNSTR_ReleaseDB`
-* 값 &ndash; `Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
+* 이름: `CUSTOMCONNSTR_ReleaseDB`
+* 값: `Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
 
 `IConfiguration`이 삽입되고 `_config`라는 필드에 할당된 경우 값을 읽습니다.
 
@@ -3028,8 +3028,8 @@ JSON 파일 구성을 활성화하려면 <xref:Microsoft.Extensions.Configuratio
 
 `CreateDefaultBuilder`를 사용하여 새 호스트 작성기를 초기화할 때 `AddJsonFile`이 자동으로 두 번 호출됩니다. 이 메서드는 호출되면 다음에서 구성을 로드합니다.
 
-* *appsettings.json* &ndash; 이 파일을 먼저 읽습니다. 파일의 환경 버전이 *appsettings.json* 파일에서 제공한 값을 재정의할 수 있습니다.
-* *appsettings.{Environment}.json* &ndash; 파일의 환경 버전은 [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)을 기반으로 로드됩니다.
+* *appsettings.json*: 이 파일을 먼저 읽었습니다. 파일의 환경 버전이 *appsettings.json* 파일에서 제공한 값을 재정의할 수 있습니다.
+* *appsettings.{Environment}.json*: 파일의 환경 버전은 [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)을 기반으로 합니다.
 
 자세한 내용은 [기본 구성](#default-configuration) 섹션을 참조하세요.
 

@@ -451,8 +451,8 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 <RemoteAuthenticatorViewCore Action="@Action" 
-    AuthenticationState="AuthenticationState" OnLoginSucceded="RestoreState" 
-    OnLogoutSucceded="RestoreState" />
+    AuthenticationState="AuthenticationState" OnLogInSucceeded="RestoreState" 
+    OnLogOutSucceeded="RestoreState" />
 
 @code {
     [Parameter]

@@ -25,13 +25,8 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 
 현재 사용 가능하지 ‘않은’ 시나리오는 다음과 같습니다.
 
-* 배열을 검사합니다.
-* 마우스를 올려 멤버를 검사합니다.
-* 디버그 모드로 관리 코드를 한 단계씩 실행합니다.
-* 값 형식에 대한 전체 지원을 받습니다.
 * 처리되지 않은 예외에서 중단합니다.
 * 앱 시작 중에 중단점을 적중시킵니다.
-* 서비스 작업자를 사용하여 앱을 디버그합니다.
 
 향후 릴리스에서 계속해서 디버깅 환경을 개선하기 위해 노력하겠습니다.
 
@@ -78,7 +73,7 @@ Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면
 
 Blazor WebAssembly 앱을 디버그하는 동안 서버 코드도 디버그할 수 있습니다.
 
-1. `OnInitializedAsync`의 *FetchData.razor* 페이지에 중단점을 설정합니다.
+1. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>의 *FetchData.razor* 페이지에 중단점을 설정합니다.
 1. `Get` 작업 메서드의 `WeatherForecastController`에 중단점을 설정합니다.
 1. **데이터 페치** 탭으로 이동하여 `FetchData` 구성 요소가 서버에 HTTP 요청을 보내기 직전에 첫 번째 중단점을 적중시킵니다.
 

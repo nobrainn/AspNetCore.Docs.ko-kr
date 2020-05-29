@@ -45,7 +45,7 @@ monikerRange: ms.author: ms.custom: ms.date: no-loc:
 > [!NOTE]
 > 앱이 *publish* 폴더에 게시될 때 덮어쓰지 않는 IIS용 사용자 지정 *web.config* 파일을 사용하려면 <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>를 참조하세요.
 
-`IWebAssemblyHostEnvironment`를 삽입하고 `Environment` 속성을 읽어 구성 요소에서 앱의 환경을 가져옵니다.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment>를 삽입하고 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> 속성을 읽어 구성 요소에서 앱의 환경을 가져옵니다.
 
 ```razor
 @page "/"
@@ -57,7 +57,7 @@ monikerRange: ms.author: ms.custom: ms.date: no-loc:
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-시작하는 동안 `WebAssemblyHostBuilder`는 `HostEnvironment` 속성을 통해 `IWebAssemblyHostEnvironment`를 노출하므로 개발자가 환경 관련 논리를 코드에 포함할 수 있습니다.
+시작하는 동안 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder>는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> 속성을 통해 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment>를 노출하므로 개발자가 환경 관련 논리를 코드에 포함할 수 있습니다.
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -71,7 +71,7 @@ if (builder.HostEnvironment.Environment == "Custom")
 * `IsDevelopment()`
 * `IsProduction()`
 * `IsStaging()`
-* `IsEnvironment(“{ENVIRONMENT NAME}”)
+* `IsEnvironment("{ENVIRONMENT NAME}")`
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())
@@ -85,7 +85,7 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-`NavigationManager` 서비스를 사용할 수 없는 경우 시작하는 동안 `IWebAssemblyHostEnvironment.BaseAddress` 속성을 사용할 수 있습니다.
+<xref:Microsoft.AspNetCore.Components.NavigationManager> 서비스를 사용할 수 없는 경우 시작하는 동안 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> 속성을 사용할 수 있습니다.
 
 ### <a name="configuration"></a>Configuration
 
@@ -176,7 +176,7 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-*wwwroot* 폴더에서 구성으로 다른 구성 파일을 읽으려면 `HttpClient`를 사용하여 파일 콘텐츠를 가져옵니다. 이 방법을 사용하는 경우 다음 예제와 같이 기존 `HttpClient` 서비스 등록은 생성된 로컬 클라이언트를 사용하여 파일을 읽을 수 있습니다.
+*wwwroot* 폴더에서 구성으로 다른 구성 파일을 읽으려면 <xref:System.Net.Http.HttpClient>를 사용하여 파일 콘텐츠를 가져옵니다. 이 방법을 사용하는 경우 다음 예제와 같이 기존 <xref:System.Net.Http.HttpClient> 서비스 등록은 생성된 로컬 클라이언트를 사용하여 파일을 읽을 수 있습니다.
 
 *wwwroot/cars.json*:
 
@@ -212,9 +212,9 @@ builder.Configuration.AddJsonStream(stream);
 
 ```json
 {
-  "AzureAD": {
-    "Authority": "https://login.microsoftonline.com/",
-    "ClientId": "aeaebf0f-d416-4d92-a08f-e1d5b51fc494"
+  "Local": {
+    "Authority": "{AUTHORITY}",
+    "ClientId": "{CLIENT ID}"
   }
 }
 ```
@@ -223,7 +223,7 @@ builder.Configuration.AddJsonStream(stream);
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
-    builder.Configuration.Bind("AzureAD", options);
+    builder.Configuration.Bind("Local", options.ProviderOptions);
 ```
 
 #### <a name="logging-configuration"></a>로깅 구성
@@ -473,102 +473,16 @@ Blazor 서버 앱은 기본적으로 클라이언트가 서버에 연결되기 �
 </body>
 ```
 
-`RenderMode`는 구성 요소에 대해 다음을 구성합니다.
+<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>는 구성 요소에 대해 다음을 구성합니다.
 
 * 페이지에 미리 렌더링할지 여부
 * 페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부
 
-| `RenderMode`        | 설명 |
-| ---
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----------- | --- title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 호스팅 모델 구성' author: description: 'Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합하는 방법을 포함하여 Blazor 호스팅 모델 구성을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `ServerPrerendered` | 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. | | `Server`            | Blazor 서버 앱의 표식을 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. | | `Static`            | 구성 요소를 정적 HTML에 렌더링합니다. |
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | 설명 |
+| --- | --- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | 구성 요소를 정적 HTML에 렌더링합니다. |
 
 정적 HTML 페이지에서 서버 구성 요소를 렌더링할 수는 없습니다.
 

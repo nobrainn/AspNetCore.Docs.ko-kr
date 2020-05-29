@@ -11,16 +11,6 @@ title: author: description: monikerRange: ms.author: ms.date: no-loc:
 
 작성자: [James Newton-King](https://twitter.com/jamesnk)
 
-> [!IMPORTANT]
-> **.NET의 gRPC-Web 지원은 실험적입니다.**
->
-> .NET용 gRPC-Web은 커밋된 제품이 아니라 실험적 프로젝트입니다. 다음 작업을 수행하려고 합니다.
->
-> * gRPC-Web 구현 방법이 유효한지 테스트합니다.
-> * 프록시를 통해 gRPC-Web을 설정하는 기존 방법에 비해 이 방법이 .NET 개발자에게 유용한지 아닌지에 대한 피드백을 받습니다.
->
-> 개발자가 좋아하고 생산성을 높일 수 있는 제품을 빌드할 수 있도록 [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet)에서 피드백을 남겨 주시기 바랍니다.
-
 브라우저 기반 앱에서 HTTP/2 gRPC 서비스를 호출할 수는 없습니다. [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)은 브라우저 JavaScript 및 Blazor 앱에서 gRPC 서비스를 호출할 수 있게 해주는 프로토콜입니다. 이 문서에서는 .NET Core에서 gRPC-Web을 사용하는 방법을 설명합니다.
 
 ## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>ASP.NET Core의 gRPC-Web 및 Envoy
