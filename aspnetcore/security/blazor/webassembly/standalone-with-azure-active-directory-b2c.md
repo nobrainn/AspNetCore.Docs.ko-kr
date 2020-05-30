@@ -1,10 +1,10 @@
 ---
-제목: ' Blazor Azure Active Directory B2C ' 만든이를 사용 하 여 ASP.NET Core weasemboman 독립 실행형 앱에 보안을 설정 합니다. 설명: 설명: monikerRange: ms
+제목: ASP.NET Core ' Blazor Azure Active Directory B2C ' author: guardrex description: monikerRange: ' >= aspnetcore-3.1 ' ms author: riande. custom: mvc ms. date: 05/19/2020 no loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ‘SignalR’ uid: 
+- ' SignalR ' uid: security/blazor/weasembambb2c
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
@@ -22,7 +22,7 @@ Blazor인증을 위해 [AAD (AZURE ACTIVE DIRECTORY) B2C](/azure/active-director
 * AAD B2C 인스턴스입니다 (예: `https://contoso.b2clogin.com/` 후행 슬래시를 포함 하는).
 * AAD B2C 테 넌 트 도메인 (예: `contoso.onmicrosoft.com` ).
 
-[자습서: Azure Active Directory B2C에 응용 프로그램 등록](/azure/active-directory-b2c/tutorial-register-applications) 의 지침에 따라 *클라이언트 앱*에 대 한 AAD 앱을 등록 합니다.
+[자습서: Azure Active Directory B2C에 응용 프로그램 등록](/azure/active-directory-b2c/tutorial-register-applications) 의 지침에 따라 *클라이언트 앱* 에 대 한 AAD 앱을 등록 하 고 다음을 수행 합니다.
 
 1. **Azure Active Directory**  >  **앱 등록**에서 **새 등록**을 선택 합니다.
 1. 앱에 대 한 **이름** (예: ** Blazor 독립 실행형 AAD B2C**)을 제공 합니다.
@@ -110,7 +110,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예제:
+예:
 
 ```json
 {

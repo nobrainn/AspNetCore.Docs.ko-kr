@@ -1,10 +1,10 @@
 ---
-제목: ' Blazor Azure Active Directory B2C ' 만든이를 사용 하 여 ASP.NET Core weasembomomomommbomoms 호스트 된 앱에 보안을 설정 합니다. 설명: 설명: monikerRange: ms. 날짜:
+제목: ASP.NET Core ' Blazor Azure Active Directory B2C ' author: guardrex description: monikerRange: ' >= aspnetcore-3.1 ' ms author: riande. 사용자 지정: mvc ms. 날짜: 05/19/2020 no loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ‘SignalR’ uid: 
+- ' SignalR ' uid: security/blazor/we/webassembly
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
@@ -26,7 +26,7 @@
 
 ### <a name="register-a-server-api-app"></a>서버 API 앱 등록
 
-[자습서: Azure Active Directory B2C에 응용 프로그램 등록](/azure/active-directory-b2c/tutorial-register-applications) 의 지침에 따라 *서버 API 앱*에 대 한 AAD 앱을 등록 합니다.
+[자습서: Azure Active Directory B2C에 응용 프로그램 등록](/azure/active-directory-b2c/tutorial-register-applications) 의 지침에 따라 *서버 API 앱* 에 대 한 AAD 앱을 등록 하 고 다음을 수행 합니다.
 
 1. **Azure Active Directory**  >  **앱 등록**에서 **새 등록**을 선택 합니다.
 1. 앱에 대 한 **이름** (예: ** Blazor Server AAD B2C**)을 제공 합니다.
@@ -58,7 +58,7 @@
 
 ### <a name="register-a-client-app"></a>클라이언트 앱 등록
 
-[자습서: Azure Active Directory B2C에 응용 프로그램 등록](/azure/active-directory-b2c/tutorial-register-applications) 의 지침에 따라 *클라이언트 앱*에 대 한 AAD 앱을 등록 합니다.
+[자습서: Azure Active Directory B2C에 응용 프로그램 등록](/azure/active-directory-b2c/tutorial-register-applications) 의 지침에 따라 *클라이언트 앱* 에 대 한 AAD 앱을 등록 하 고 다음을 수행 합니다.
 
 1. **Azure Active Directory**  >  **앱 등록**에서 **새 등록**을 선택 합니다.
 1. 응용 프로그램의 **이름** (예: ** Blazor 클라이언트 AAD B2C**)을 제공 합니다.
@@ -180,7 +180,7 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-예제:
+예:
 
 ```json
 {
@@ -272,7 +272,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예제:
+예:
 
 ```json
 {
