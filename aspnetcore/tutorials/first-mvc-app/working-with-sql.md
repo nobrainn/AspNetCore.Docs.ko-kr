@@ -24,7 +24,7 @@ ms.locfileid: "82776209"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 [Startup.cs](xref:fundamentals/dependency-injection) 파일의 `ConfigureServices` 메서드에서 *종속성 주입* 컨테이너에 등록됩니다.
+`MvcMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 *Startup.cs* 파일의 `ConfigureServices` 메서드에서 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록됩니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -34,7 +34,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
@@ -70,7 +70,7 @@ LocalDB는 프로그램 개발을 위한 SQL Server Express 데이터베이스 �
 
   ![테이블 데이터를 보여 주는 열린 Movie 테이블](working-with-sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -80,7 +80,7 @@ LocalDB는 프로그램 개발을 위한 SQL Server Express 데이터베이스 �
 
 ## <a name="seed-the-database"></a>데이터베이스 시드
 
-`SeedData`Models*폴더에*라는 새 클래스를 만듭니다. 생성된 코드를 다음으로 바꿉니다.
+*Models* 폴더에 `SeedData`라는 새 클래스를 만듭니다. 생성된 코드를 다음으로 바꿉니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/SeedData.cs?name=snippet_1)]
 
@@ -117,7 +117,7 @@ if (context.Movie.Any())
     * 비 디버그 모드에서 VS를 실행했다면 F5 키를 눌러 디버그 모드에서 실행합니다.
     * 디버그 모드에서 VS를 실행했다면 디버거를 중지하고 F5 키를 누릅니다.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 앱을 중지 및 시작하여 데이터베이스를 시드합니다.
 
@@ -136,7 +136,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 [Startup.cs](xref:fundamentals/dependency-injection) 파일의 `ConfigureServices` 메서드에서 *종속성 주입* 컨테이너에 등록됩니다.
+`MvcMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 *Startup.cs* 파일의 `ConfigureServices` 메서드에서 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록됩니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -146,7 +146,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
@@ -182,7 +182,7 @@ LocalDB는 프로그램 개발을 위한 SQL Server Express 데이터베이스 �
 
   ![테이블 데이터를 보여 주는 열린 Movie 테이블](working-with-sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -192,7 +192,7 @@ LocalDB는 프로그램 개발을 위한 SQL Server Express 데이터베이스 �
 
 ## <a name="seed-the-database"></a>데이터베이스 시드
 
-`SeedData`Models*폴더에*라는 새 클래스를 만듭니다. 생성된 코드를 다음으로 바꿉니다.
+*Models* 폴더에 `SeedData`라는 새 클래스를 만듭니다. 생성된 코드를 다음으로 바꿉니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -229,7 +229,7 @@ if (context.Movie.Any())
     * 비 디버그 모드에서 VS를 실행했다면 F5 키를 눌러 디버그 모드에서 실행합니다.
     * 디버그 모드에서 VS를 실행했다면 디버거를 중지하고 F5 키를 누릅니다.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 앱을 중지 및 시작하여 데이터베이스를 시드합니다.
 

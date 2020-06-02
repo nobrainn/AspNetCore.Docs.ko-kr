@@ -41,7 +41,7 @@ OWIN은 서로 다른 개체 모델이 있는 두 프레임워크를 함께 사�
 
 ASP.NET Core의 OWIN 지원은 `Microsoft.AspNetCore.Owin` 패키지의 일부로 배포됩니다. 이 패키지를 설치하여 OWIN 지원을 프로젝트로 가져올 수 있습니다.
 
-OWIN 미들웨어는 [ 인터페이스 및 특정 키 설정(예: ](https://owin.org/spec/spec/owin-1.0.0.html))이 필요한 `Func<IDictionary<string, object>, Task>`OWIN 사양`owin.ResponseBody`을 준수합니다. 다음과 같은 간단한 OWIN 미들웨어는 "Hello World"를 표시합니다.
+OWIN 미들웨어는 `Func<IDictionary<string, object>, Task>` 인터페이스 및 특정 키 설정(예: `owin.ResponseBody`)이 필요한 [OWIN 사양](https://owin.org/spec/spec/owin-1.0.0.html)을 준수합니다. 다음과 같은 간단한 OWIN 미들웨어는 "Hello World"를 표시합니다.
 
 ```csharp
 public Task OwinHello(IDictionary<string, object> environment)
@@ -62,7 +62,7 @@ public Task OwinHello(IDictionary<string, object> environment)
 
 샘플 서명은 `Task`를 반환하고 OWIN에 필요한 `IDictionary<string, object>`를 수락합니다.
 
-다음 코드는 `OwinHello` 확장 메서드로 `UseOwin` 미들웨어(위에 표시된)를 ASP.NET Core 파이프라인에 추가하는 방법을 보여줍니다.
+다음 코드는 `UseOwin` 확장 메서드로 `OwinHello` 미들웨어(위에 표시된)를 ASP.NET Core 파이프라인에 추가하는 방법을 보여줍니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app)

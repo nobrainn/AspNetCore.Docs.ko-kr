@@ -111,7 +111,7 @@ Azure에 앱을 배포하기 전에 로컬 머신에서 제대로 실행되고 �
 ## <a name="generate-the-deployment-package-locally"></a>로컬로 배포 패키지 생성
 
 - Visual Studio Code 터미널 열기
-- `Release`라는 하위 폴더에 `publish` 패키지를 생성하려면 다음 명령을 사용합니다.
+- `publish`라는 하위 폴더에 `Release` 패키지를 생성하려면 다음 명령을 사용합니다.
   - `dotnet publish -c Release -o ./publish`
 - 프로젝트 구조 아래에 새 `publish` 폴더가 생성됩니다.
 
@@ -125,7 +125,7 @@ Visual Studio Code용 Azure App Service 확장을 활용하여 아래 단계에 
 
 - `publish` 폴더를 마우스 오른쪽 단추로 클릭하고 `Deploy to Web App...`을 선택합니다.
 - 웹앱을 만들 구독을 선택합니다.
-- `Create New Web App`를 선택합니다.
+- `Create New Web App` 선택
 - 웹앱의 이름 입력
 
 이 확장은 새 웹앱을 만들고 자동으로 패키지 배포를 시작합니다. 배포가 완료되면 `Browse Website`를 클릭하여 배포의 유효성 검사를 합니다.

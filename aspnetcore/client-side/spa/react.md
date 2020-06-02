@@ -49,7 +49,7 @@ Visual Studio 또는 .NET Core CLI에서 앱을 실행합니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-`ASPNETCORE_Environment` 값을 가진 `Development` 환경 변수가 있는지 확인합니다. Windows(PowerShell 이외의 프롬프트)에서 `SET ASPNETCORE_Environment=Development`를 실행합니다. Linux 또는 macOS에서 `export ASPNETCORE_Environment=Development`를 실행합니다.
+`Development` 값을 가진 `ASPNETCORE_Environment` 환경 변수가 있는지 확인합니다. Windows(PowerShell 이외의 프롬프트)에서 `SET ASPNETCORE_Environment=Development`를 실행합니다. Linux 또는 macOS에서 `export ASPNETCORE_Environment=Development`를 실행합니다.
 
 [dotnet build](/dotnet/core/tools/dotnet-build)를 실행하여 앱이 제대로 빌드되는지 확인합니다. 첫 번째 실행에서 빌드 프로세스는 npm 종속성을 복원하고 이 작업에는 몇 분 정도 소요될 수 있습니다. 후속 빌드는 훨씬 더 빠릅니다.
 
@@ -67,7 +67,7 @@ Visual Studio 또는 .NET Core CLI에서 앱을 실행합니다.
 
 ## <a name="install-npm-packages"></a>npm 패키지 설치
 
-타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예들 들어 다음과 같습니다.
+타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들어:
 
 ```console
 cd ClientApp
