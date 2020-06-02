@@ -1,11 +1,11 @@
 ---
-title: ‘ASP.NET Core Blazor 인증 및 권한 부여’ 작성자: 설명: ‘Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니다.’
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
+title: ‘ASP.NET Core Blazor 인증 및 권한 부여’ 작성자: guardrex 설명: ‘Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니다.’
+monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date: 05/19/2020 no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ‘SignalR’ uid: 
+- 'SignalR' uid: security/blazor/index
 
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
@@ -454,14 +454,6 @@ Not authorized.
 > ```
 >
 > 이러한 네임스페이스는 앱의 *_Imports.razor* 파일에 추가하여 전역적으로 제공할 수 있습니다.
-
-## <a name="authorization-in-blazor-webassembly-apps"></a>Blazor WebAssembly 앱의 권한 부여
-
-Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
-
-**항상 클라이언트 쪽 앱을 통해 액세스한 API 엔드포인트 내에서 서버의 권한 부여 확인을 수행합니다.**
-
-자세한 내용은 <xref:security/blazor/webassembly/index>의 문서를 참조하세요.
 
 ## <a name="troubleshoot-errors"></a>오류 문제 해결
 

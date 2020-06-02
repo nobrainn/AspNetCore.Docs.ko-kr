@@ -1,11 +1,11 @@
 ---
-title: ‘보안 ASP.NET Core Blazor WebAssembly’ 작성자: 설명: ‘Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)로 보호하는 방법을 알아봅니다.’
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
+title: ‘보안 ASP.NET Core Blazor WebAssembly’ 작성자: guardrex 설명: ‘Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)로 보호하는 방법을 알아봅니다.’
+monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date: 06/01/2020 no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ‘SignalR’ uid: 
+- 'SignalR' uid: security/blazor/webassembly/index
 
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
@@ -41,7 +41,19 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 * Blazor WebAssembly 앱이 로그인 콜백 엔드포인트(`/authentication/login-callback`)를 로드하면 인증 응답이 처리됩니다.
   * 인증 프로세스가 완료되면 사용자는 인증되고 필요에 따라 사용자가 요청한 원래의 보호된 URL로 다시 돌아갑니다.
   * 어떤 이유로든 인증 프로세스가 실패하는 경우 사용자는 로그인 실패 페이지(`/authentication/login-failed`)로 보내지고 오류가 표시됩니다.
-  
+
+## <a name="authorization"></a>권한 부여
+
+Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
+
+**항상 클라이언트 쪽 앱을 통해 액세스한 API 엔드포인트 내에서 서버의 권한 부여 확인을 수행합니다.**
+
+## <a name="refresh-tokens"></a>새로 고침 토큰
+
+새로 고침 토큰은 Blazor WebAssembly 앱에서 클라이언트 쪽으로 보호될 수 없습니다. 따라서 직접 사용하기 위해 새로 고침 토큰이 앱에 전송되어서는 안됩니다.
+
+새로 고침 토큰은 타사 API에 액세스하는 호스트된 Blazor WebAssembly 솔루션의 서버 쪽 앱에서 유지 관리하고 사용될 수 있습니다. 자세한 내용은 <xref:security/blazor/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>를 참조하세요.
+
 ## <a name="implementation-guidance"></a>구현 지침
 
 이 ‘개요’의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다.
