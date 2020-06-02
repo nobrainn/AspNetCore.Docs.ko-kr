@@ -161,7 +161,11 @@
           displayName: 'tutorial, razor, razor pages, ui'
           href: /learn/modules/create-razor-pages-aspnet-core/
         - name: 웹 API 앱>>
+          displayName: tutorial
           href: /learn/modules/build-web-api-net-core/
+        - name: 클라우드 네이티브 마이크로 서비스 >>
+          displayName: 'tutorial, kubernetes, aks, acr, docker'
+          href: /learn/modules/microservices-aspnet-core/
         - name: 데이터 액세스 >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
