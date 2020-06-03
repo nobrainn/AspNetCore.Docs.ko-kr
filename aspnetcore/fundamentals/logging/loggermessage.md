@@ -1,34 +1,21 @@
 ---
-title: ASP.NET Core에서 LoggerMessage를 사용한 고성능 로깅
-author: rick-anderson
-description: LoggerMessage를 사용하여 고성능 로깅 시나리오에 적은 개체 할당을 필요로 하는 캐시 가능한 대리자를 만드는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 08/26/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: 67281b99f1ed8955ee29eb68b446d71a0c5c7838
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768366"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>ASP.NET Core에서 LoggerMessage를 사용한 고성능 로깅
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:Microsoft.Extensions.Logging.LoggerMessage> 기능은 [ 및 ](xref:Microsoft.Extensions.Logging.LoggerExtensions)와 같은 <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*>로거 확장 메서드<xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*>에 비해 적은 개체 할당 및 감소된 계산 오버헤드를 필요로 하는 캐시 가능한 대리자를 만듭니다. 고성능 로깅 시나리오의 경우 <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴을 사용합니다.
+<xref:Microsoft.Extensions.Logging.LoggerMessage> 기능은 <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> 및 <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*>와 같은 [로거 확장 메서드](xref:Microsoft.Extensions.Logging.LoggerExtensions)에 비해 적은 개체 할당 및 감소된 계산 오버헤드를 필요로 하는 캐시 가능한 대리자를 만듭니다. 고성능 로깅 시나리오의 경우 <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴을 사용합니다.
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage>는 로거 확장 메서드에 비해 다음과 같은 성능 이점을 제공합니다.
 
-* 로거 확장 메서드는 `int`에 대한 `object`와 같은 "boxing"(변환) 값 형식이 필요합니다. <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴은 정적 <xref:System.Action> 필드 및 강력한 형식의 매개 변수가 있는 확장 메서드를 사용하여 boxing을 방지합니다.
+* 로거 확장 메서드는 `object`에 대한 `int`와 같은 "boxing"(변환) 값 형식이 필요합니다. <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴은 정적 <xref:System.Action> 필드 및 강력한 형식의 매개 변수가 있는 확장 메서드를 사용하여 boxing을 방지합니다.
 * 로거 확장 메서드는 로그 메시지가 기록될 때마다 메시지 템플릿(명명된 형식 문자열)을 구문 분석해야 합니다. <xref:Microsoft.Extensions.Logging.LoggerMessage>는 메시지가 정의될 때 템플릿 구문 분석이 한번만 필요합니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/loggermessage/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
@@ -41,7 +28,7 @@ ms.locfileid: "82768366"
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> 메서드에 제공된 문자열은 템플릿이며 보간된 문자열이 아닙니다. 자리 표시자는 형식이 지정된 순서로 채워집니다. 템플릿의 자리 표시자 이름은 템플릿에서 알기 쉽고 일관되어야 합니다. 구조적 로그 데이터 내에서 속성 이름으로 사용됩니다. 자리 표시자 이름으로 [파스칼식 대/소문자](/dotnet/standard/design-guidelines/capitalization-conventions)를 권장합니다. 예: `{Count}`, `{FirstName}`
 
-각 로그 메시지는 <xref:System.Action>LoggerMessage.Define[에서 만들어진 정적 필드에 보관된 ](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)입니다. 예를 들어 샘플 앱은 인덱스 페이지의 GET 요청에 대한 로그 메시지를 설명하는 필드를 만듭니다(*Internal/LoggerExtensions.cs*).
+각 로그 메시지는 [LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)에서 만들어진 정적 필드에 보관된 <xref:System.Action>입니다. 예를 들어 샘플 앱은 인덱스 페이지의 GET 요청에 대한 로그 메시지를 설명하는 필드를 만듭니다(*Internal/LoggerExtensions.cs*).
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -54,7 +41,7 @@ ms.locfileid: "82768366"
 샘플 앱의 인덱스 페이지에 대한 요청은 다음을 설정합니다.
 
 * 로그 수준을 `Information`으로
-* 이벤트 ID를 `1` 메서드의 이름이 있는 `IndexPageRequested`로
+* 이벤트 ID를 `IndexPageRequested` 메서드의 이름이 있는 `1`로
 * 메시지 템플릿(명명된 형식 문자열)을 문자열로
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet5)]
@@ -65,7 +52,7 @@ ms.locfileid: "82768366"
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet9)]
 
-`IndexPageRequested`는 `OnGetAsync`Pages/Index.cshtml.cs*에서*  메서드의 로거에서 호출됩니다.
+`IndexPageRequested`는 *Pages/Index.cshtml.cs*에서 `OnGetAsync` 메서드의 로거에서 호출됩니다.
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet2&highlight=3)]
 
@@ -77,7 +64,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
       GET request for Index page
 ```
 
-로그 메시지에 매개 변수를 전달하려면 정적 필드를 만들 때 최대 6개의 형식을 정의합니다. 샘플 앱은 `string` 필드에 대한 <xref:System.Action> 형식을 정의하여 견적을 추가할 때 문자열을 기록합니다.
+로그 메시지에 매개 변수를 전달하려면 정적 필드를 만들 때 최대 6개의 형식을 정의합니다. 샘플 앱은 <xref:System.Action> 필드에 대한 `string` 형식을 정의하여 견적을 추가할 때 문자열을 기록합니다.
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet2)]
 
@@ -102,7 +89,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-샘플 앱은 견적 삭제를 위한 [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 구현합니다. 성공적인 삭제 작업에 대한 정보 메시지가 기록됩니다. 예외가 throw될 경우 삭제 작업에 대한 오류 메시지가 기록됩니다. 실패한 삭제 작업에 대한 로그 메시지는 예외 스택 추적(*Internal/LoggerExtensions.cs*)을 포함합니다.
+샘플 앱은 견적 삭제를 위한 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 구현합니다. 성공적인 삭제 작업에 대한 정보 메시지가 기록됩니다. 예외가 throw될 경우 삭제 작업에 대한 오류 메시지가 기록됩니다. 실패한 삭제 작업에 대한 로그 메시지는 예외 스택 추적(*Internal/LoggerExtensions.cs*)을 포함합니다.
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -112,7 +99,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-인덱스 페이지에 대한 페이지 모델에서 성공적인 견적 삭제는 로거에서 `QuoteDeleted` 메서드를 호출합니다. 삭제에 대한 견적을 찾을 수 없는 경우 <xref:System.ArgumentNullException>이 throw됩니다. 예외는 [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 의해 트래핑되고 `QuoteDeleteFailed`catch[ 블록의 로거에서 ](/dotnet/csharp/language-reference/keywords/try-catch) 메서드를 호출하여 기록됩니다(*Pages/Index.cshtml.cs*).
+인덱스 페이지에 대한 페이지 모델에서 성공적인 견적 삭제는 로거에서 `QuoteDeleted` 메서드를 호출합니다. 삭제에 대한 견적을 찾을 수 없는 경우 <xref:System.ArgumentNullException>이 throw됩니다. 예외는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 의해 트래핑되고 [catch](/dotnet/csharp/language-reference/keywords/try-catch) 블록의 로거에서 `QuoteDeleteFailed` 메서드를 호출하여 기록됩니다(*Pages/Index.cshtml.cs*).
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -141,15 +128,15 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 
 ## <a name="loggermessagedefinescope"></a>LoggerMessage.DefineScope
 
-[DefineScope(String)](xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*)는 <xref:System.Func%601>로그 범위[ 정의를 위한 ](xref:fundamentals/logging/index#log-scopes) 대리자를 만듭니다. <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 오버로드는 명명된 형식 문자열(템플릿)로 최대 3개의 형식 매개 변수 전달을 허용합니다.
+[DefineScope(String)](xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*)는 [로그 범위](xref:fundamentals/logging/index#log-scopes) 정의를 위한 <xref:System.Func%601> 대리자를 만듭니다. <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 오버로드는 명명된 형식 문자열(템플릿)로 최대 3개의 형식 매개 변수 전달을 허용합니다.
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> 메서드의 경우와 마찬가지로 <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 메서드에 제공된 문자열은 템플릿이며 보간된 문자열이 아닙니다. 자리 표시자는 형식이 지정된 순서로 채워집니다. 템플릿의 자리 표시자 이름은 템플릿에서 알기 쉽고 일관되어야 합니다. 구조적 로그 데이터 내에서 속성 이름으로 사용됩니다. 자리 표시자 이름으로 [파스칼식 대/소문자](/dotnet/standard/design-guidelines/capitalization-conventions)를 권장합니다. 예: `{Count}`, `{FirstName}`
 
-[ 메서드를 사용하여 일련의 로그 메시지에 적용하도록 ](xref:fundamentals/logging/index#log-scopes)로그 범위<xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*>를 정의합니다.
+<xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 메서드를 사용하여 일련의 로그 메시지에 적용하도록 [로그 범위](xref:fundamentals/logging/index#log-scopes)를 정의합니다.
 
 샘플 앱에는 데이터베이스에서 모든 견적을 삭제하기 위한 **모두 지우기** 단추가 있습니다. 견적은 한 번에 하나를 제거하여 삭제됩니다. 견적이 삭제될 때마다 로거에서 `QuoteDeleted` 메서드가 호출됩니다. 로그 범위가 이러한 로그 메시지에 추가됩니다.
 
-`IncludeScopes`appsettings.json*의 콘솔 로거 섹션에서* 를 사용하도록 설정합니다.
+*appsettings.json*의 콘솔 로거 섹션에서 `IncludeScopes`를 사용하도록 설정합니다.
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
@@ -161,7 +148,7 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet8)]
 
-로그 메시지에 대한 정적 확장 메서드를 제공합니다. 메시지 템플릿에 표시되는 명명된 속성에 대한 모든 형식 매개 변수를 포함합니다. 샘플 앱은 `count`를 삭제하고 반환하는 데 `_allQuotesDeletedScope`의 견적을 사용합니다.
+로그 메시지에 대한 정적 확장 메서드를 제공합니다. 메시지 템플릿에 표시되는 명명된 속성에 대한 모든 형식 매개 변수를 포함합니다. 샘플 앱은 `_allQuotesDeletedScope`를 삭제하고 반환하는 데 `count`의 견적을 사용합니다.
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet12)]
 
@@ -190,11 +177,11 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:Microsoft.Extensions.Logging.LoggerMessage> 기능은 [ 및 ](xref:Microsoft.Extensions.Logging.LoggerExtensions)와 같은 <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*>로거 확장 메서드<xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*>에 비해 적은 개체 할당 및 감소된 계산 오버헤드를 필요로 하는 캐시 가능한 대리자를 만듭니다. 고성능 로깅 시나리오의 경우 <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴을 사용합니다.
+<xref:Microsoft.Extensions.Logging.LoggerMessage> 기능은 <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> 및 <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*>와 같은 [로거 확장 메서드](xref:Microsoft.Extensions.Logging.LoggerExtensions)에 비해 적은 개체 할당 및 감소된 계산 오버헤드를 필요로 하는 캐시 가능한 대리자를 만듭니다. 고성능 로깅 시나리오의 경우 <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴을 사용합니다.
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage>는 로거 확장 메서드에 비해 다음과 같은 성능 이점을 제공합니다.
 
-* 로거 확장 메서드는 `int`에 대한 `object`와 같은 "boxing"(변환) 값 형식이 필요합니다. <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴은 정적 <xref:System.Action> 필드 및 강력한 형식의 매개 변수가 있는 확장 메서드를 사용하여 boxing을 방지합니다.
+* 로거 확장 메서드는 `object`에 대한 `int`와 같은 "boxing"(변환) 값 형식이 필요합니다. <xref:Microsoft.Extensions.Logging.LoggerMessage> 패턴은 정적 <xref:System.Action> 필드 및 강력한 형식의 매개 변수가 있는 확장 메서드를 사용하여 boxing을 방지합니다.
 * 로거 확장 메서드는 로그 메시지가 기록될 때마다 메시지 템플릿(명명된 형식 문자열)을 구문 분석해야 합니다. <xref:Microsoft.Extensions.Logging.LoggerMessage>는 메시지가 정의될 때 템플릿 구문 분석이 한번만 필요합니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/loggermessage/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
@@ -207,7 +194,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> 메서드에 제공된 문자열은 템플릿이며 보간된 문자열이 아닙니다. 자리 표시자는 형식이 지정된 순서로 채워집니다. 템플릿의 자리 표시자 이름은 템플릿에서 알기 쉽고 일관되어야 합니다. 구조적 로그 데이터 내에서 속성 이름으로 사용됩니다. 자리 표시자 이름으로 [파스칼식 대/소문자](/dotnet/standard/design-guidelines/capitalization-conventions)를 권장합니다. 예: `{Count}`, `{FirstName}`
 
-각 로그 메시지는 <xref:System.Action>LoggerMessage.Define[에서 만들어진 정적 필드에 보관된 ](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)입니다. 예를 들어 샘플 앱은 인덱스 페이지의 GET 요청에 대한 로그 메시지를 설명하는 필드를 만듭니다(*Internal/LoggerExtensions.cs*).
+각 로그 메시지는 [LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*)에서 만들어진 정적 필드에 보관된 <xref:System.Action>입니다. 예를 들어 샘플 앱은 인덱스 페이지의 GET 요청에 대한 로그 메시지를 설명하는 필드를 만듭니다(*Internal/LoggerExtensions.cs*).
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -220,7 +207,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 샘플 앱의 인덱스 페이지에 대한 요청은 다음을 설정합니다.
 
 * 로그 수준을 `Information`으로
-* 이벤트 ID를 `1` 메서드의 이름이 있는 `IndexPageRequested`로
+* 이벤트 ID를 `IndexPageRequested` 메서드의 이름이 있는 `1`로
 * 메시지 템플릿(명명된 형식 문자열)을 문자열로
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet5)]
@@ -231,7 +218,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet9)]
 
-`IndexPageRequested`는 `OnGetAsync`Pages/Index.cshtml.cs*에서*  메서드의 로거에서 호출됩니다.
+`IndexPageRequested`는 *Pages/Index.cshtml.cs*에서 `OnGetAsync` 메서드의 로거에서 호출됩니다.
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet2&highlight=3)]
 
@@ -243,7 +230,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
       GET request for Index page
 ```
 
-로그 메시지에 매개 변수를 전달하려면 정적 필드를 만들 때 최대 6개의 형식을 정의합니다. 샘플 앱은 `string` 필드에 대한 <xref:System.Action> 형식을 정의하여 견적을 추가할 때 문자열을 기록합니다.
+로그 메시지에 매개 변수를 전달하려면 정적 필드를 만들 때 최대 6개의 형식을 정의합니다. 샘플 앱은 <xref:System.Action> 필드에 대한 `string` 형식을 정의하여 견적을 추가할 때 문자열을 기록합니다.
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet2)]
 
@@ -268,7 +255,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-샘플 앱은 견적 삭제를 위한 [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 구현합니다. 성공적인 삭제 작업에 대한 정보 메시지가 기록됩니다. 예외가 throw될 경우 삭제 작업에 대한 오류 메시지가 기록됩니다. 실패한 삭제 작업에 대한 로그 메시지는 예외 스택 추적(*Internal/LoggerExtensions.cs*)을 포함합니다.
+샘플 앱은 견적 삭제를 위한 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 구현합니다. 성공적인 삭제 작업에 대한 정보 메시지가 기록됩니다. 예외가 throw될 경우 삭제 작업에 대한 오류 메시지가 기록됩니다. 실패한 삭제 작업에 대한 로그 메시지는 예외 스택 추적(*Internal/LoggerExtensions.cs*)을 포함합니다.
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -278,7 +265,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-인덱스 페이지에 대한 페이지 모델에서 성공적인 견적 삭제는 로거에서 `QuoteDeleted` 메서드를 호출합니다. 삭제에 대한 견적을 찾을 수 없는 경우 <xref:System.ArgumentNullException>이 throw됩니다. 예외는 [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 의해 트래핑되고 `QuoteDeleteFailed`catch[ 블록의 로거에서 ](/dotnet/csharp/language-reference/keywords/try-catch) 메서드를 호출하여 기록됩니다(*Pages/Index.cshtml.cs*).
+인덱스 페이지에 대한 페이지 모델에서 성공적인 견적 삭제는 로거에서 `QuoteDeleted` 메서드를 호출합니다. 삭제에 대한 견적을 찾을 수 없는 경우 <xref:System.ArgumentNullException>이 throw됩니다. 예외는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 의해 트래핑되고 [catch](/dotnet/csharp/language-reference/keywords/try-catch) 블록의 로거에서 `QuoteDeleteFailed` 메서드를 호출하여 기록됩니다(*Pages/Index.cshtml.cs*).
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 
@@ -309,15 +296,15 @@ Parameter name: entity
 
 ## <a name="loggermessagedefinescope"></a>LoggerMessage.DefineScope
 
-[DefineScope(String)](xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*)는 <xref:System.Func%601>로그 범위[ 정의를 위한 ](xref:fundamentals/logging/index#log-scopes) 대리자를 만듭니다. <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 오버로드는 명명된 형식 문자열(템플릿)로 최대 3개의 형식 매개 변수 전달을 허용합니다.
+[DefineScope(String)](xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*)는 [로그 범위](xref:fundamentals/logging/index#log-scopes) 정의를 위한 <xref:System.Func%601> 대리자를 만듭니다. <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 오버로드는 명명된 형식 문자열(템플릿)로 최대 3개의 형식 매개 변수 전달을 허용합니다.
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> 메서드의 경우와 마찬가지로 <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 메서드에 제공된 문자열은 템플릿이며 보간된 문자열이 아닙니다. 자리 표시자는 형식이 지정된 순서로 채워집니다. 템플릿의 자리 표시자 이름은 템플릿에서 알기 쉽고 일관되어야 합니다. 구조적 로그 데이터 내에서 속성 이름으로 사용됩니다. 자리 표시자 이름으로 [파스칼식 대/소문자](/dotnet/standard/design-guidelines/capitalization-conventions)를 권장합니다. 예: `{Count}`, `{FirstName}`
 
-[ 메서드를 사용하여 일련의 로그 메시지에 적용하도록 ](xref:fundamentals/logging/index#log-scopes)로그 범위<xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*>를 정의합니다.
+<xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> 메서드를 사용하여 일련의 로그 메시지에 적용하도록 [로그 범위](xref:fundamentals/logging/index#log-scopes)를 정의합니다.
 
 샘플 앱에는 데이터베이스에서 모든 견적을 삭제하기 위한 **모두 지우기** 단추가 있습니다. 견적은 한 번에 하나를 제거하여 삭제됩니다. 견적이 삭제될 때마다 로거에서 `QuoteDeleted` 메서드가 호출됩니다. 로그 범위가 이러한 로그 메시지에 추가됩니다.
 
-`IncludeScopes`appsettings.json*의 콘솔 로거 섹션에서* 를 사용하도록 설정합니다.
+*appsettings.json*의 콘솔 로거 섹션에서 `IncludeScopes`를 사용하도록 설정합니다.
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
@@ -329,7 +316,7 @@ Parameter name: entity
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet8)]
 
-로그 메시지에 대한 정적 확장 메서드를 제공합니다. 메시지 템플릿에 표시되는 명명된 속성에 대한 모든 형식 매개 변수를 포함합니다. 샘플 앱은 `count`를 삭제하고 반환하는 데 `_allQuotesDeletedScope`의 견적을 사용합니다.
+로그 메시지에 대한 정적 확장 메서드를 제공합니다. 메시지 템플릿에 표시되는 명명된 속성에 대한 모든 형식 매개 변수를 포함합니다. 샘플 앱은 `_allQuotesDeletedScope`를 삭제하고 반환하는 데 `count`의 견적을 사용합니다.
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet12)]
 
@@ -358,4 +345,4 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ## <a name="additional-resources"></a>추가 자료
 
-* 자세한 내용은[로깅](xref:fundamentals/logging/index)을 참고하시기 바랍니다.
+* [로깅](xref:fundamentals/logging/index)

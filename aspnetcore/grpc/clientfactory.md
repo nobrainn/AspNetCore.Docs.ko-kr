@@ -1,23 +1,11 @@
 ---
-title: .NET Core의 gRPC 클라이언트 팩터리 통합
-author: jamesnk
-description: 클라이언트 팩터리를 사용하여 gRPC 클라이언트를 만드는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/clientfactory
-ms.openlocfilehash: 42b786b9a4d9b422ccf92d7a329979894a35b275
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774719"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core의 gRPC 클라이언트 팩터리 통합
 
@@ -31,7 +19,7 @@ ms.locfileid: "82774719"
 
 ## <a name="register-grpc-clients"></a>gRPC 클라이언트 등록
 
-gRPC 클라이언트를 등록하기 위해서 `AddGrpcClient`에서 gRPC 형식 클라이언트 클래스 및 서비스 주소를 지정하여 제네릭 `Startup.ConfigureServices` 확장 메서드를 사용할 수 있습니다.
+gRPC 클라이언트를 등록하기 위해서 `Startup.ConfigureServices`에서 gRPC 형식 클라이언트 클래스 및 서비스 주소를 지정하여 제네릭 `AddGrpcClient` 확장 메서드를 사용할 수 있습니다.
 
 ```csharp
 services.AddGrpcClient<Greeter.GreeterClient>(o =>
@@ -69,7 +57,7 @@ public class AggregatorService : Aggregator.AggregatorBase
 
 ## <a name="configure-httpclient"></a>HttpClient 구성
 
-`HttpClientFactory`는 gRPC 클라이언트에서 사용하는 `HttpClient`를 만듭니다. 표준 `HttpClientFactory` 메서드는 나가는 요청 미들웨어를 추가하거나 `HttpClientHandler`의 기본 `HttpClient`를 구성하는 데 사용할 수 있습니다.
+`HttpClientFactory`는 gRPC 클라이언트에서 사용하는 `HttpClient`를 만듭니다. 표준 `HttpClientFactory` 메서드는 나가는 요청 미들웨어를 추가하거나 `HttpClient`의 기본 `HttpClientHandler`를 구성하는 데 사용할 수 있습니다.
 
 ```csharp
 services
@@ -120,6 +108,17 @@ services
         o.Address = new Uri("https://localhost:5001");
     })
     .EnableCallContextPropagation();
+```
+
+기본적으로 클라이언트를 gRPC 호출 컨텍스트의 외부에서 사용하는 경우 `EnableCallContextPropagation` 오류가 발생합니다. 이 오류는 전파할 호출 컨텍스트가 없다는 경고를 표시하기 위한 것입니다. 호출 컨텍스트 외부에서 클라이언트를 사용하려는 경우 `SuppressContextNotFoundErrors`를 사용하여 클라이언트를 구성하면 오류가 표시되지 않습니다.
+
+```csharp
+services
+    .AddGrpcClient<Greeter.GreeterClient>(o =>
+    {
+        o.Address = new Uri("https://localhost:5001");
+    })
+    .EnableCallContextPropagation(o => o.SuppressContextNotFoundErrors = true);
 ```
 
 최종 기한 및 RPC 취소에 대한 자세한 내용은 [RPC 수명 주기](https://www.grpc.io/docs/guides/concepts/#rpc-life-cycle)를 참조하세요.

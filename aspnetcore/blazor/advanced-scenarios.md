@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor 고급 시나리오
-author: guardrex
-description: 수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/advanced-scenarios
-ms.openlocfilehash: b47e7b1d7ff148bb5a8d299d3d2089999f017863
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967339"
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor 고급 시나리오
 
@@ -26,7 +14,7 @@ ms.locfileid: "82967339"
 
 ## <a name="blazor-server-circuit-handler"></a>Blazor 서버 회로 처리기
 
-Blazor 서버에서는 코드를 통해 사용자 회로 상태 변경 시 코드를 실행할 수 있게 해주는 ‘회로 처리기’를 정의할 수 있습니다.  회로 처리기는 `CircuitHandler`에서 파생되고 앱의 서비스 컨테이너에 클래스를 등록하여 구현됩니다. 다음 회로 처리기 예제에서는 열린 SignalR 연결을 추적합니다.
+Blazor 서버에서는 코드를 통해 사용자 회로 상태 변경 시 코드를 실행할 수 있게 해주는 ‘회로 처리기’를 정의할 수 있습니다. 회로 처리기는 `CircuitHandler`에서 파생되고 앱의 서비스 컨테이너에 클래스를 등록하여 구현됩니다. 다음 회로 처리기 예제에서는 열린 SignalR 연결을 추적합니다.
 
 ```csharp
 using System.Collections.Generic;
@@ -74,10 +62,10 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="manual-rendertreebuilder-logic"></a>수동 RenderTreeBuilder 논리
 
-`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`는 C# 코드를 사용한 구성 요소 수동 빌드를 포함하여 구성 요소와 요소를 조작하기 위한 메서드를 제공합니다.
+<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>는 C# 코드를 사용한 구성 요소 수동 빌드를 포함하여 구성 요소와 요소를 조작하기 위한 메서드를 제공합니다.
 
 > [!NOTE]
-> `RenderTreeBuilder`를 사용하여 구성 요소를 만드는 것은 고급 시나리오입니다. 구성 요소의 형식이 잘못된 경우(예: 닫히지 않은 태그) 정의되지 않은 동작이 발생할 수 있습니다.
+> <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>를 사용하여 구성 요소를 만드는 것은 고급 시나리오입니다. 구성 요소의 형식이 잘못된 경우(예: 닫히지 않은 태그) 정의되지 않은 동작이 발생할 수 있습니다.
 
 다른 구성 요소에 수동으로 빌드할 수 있는 다음 `PetDetails` 구성 요소를 확인합니다.
 
@@ -93,7 +81,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-다음 예제에서 `CreateComponent` 메서드의 루프는 세 개의 `PetDetails` 구성 요소를 생성합니다. `RenderTreeBuilder` 메서드를 호출하여 구성 요소(`OpenComponent` 및 `AddAttribute`)를 만드는 경우 시퀀스 번호는 소스 코드 줄 번호입니다. Blazor diff 알고리즘은 개별 호출이 아니라 개별 코드 줄에 해당하는 시퀀스 번호를 사용합니다. `RenderTreeBuilder` 메서드를 사용하여 구성 요소를 만드는 경우 시퀀스 번호의 인수를 하드 코딩합니다. **계산 또는 카운터를 사용하여 시퀀스 번호를 생성하면 성능이 저하될 수 있습니다.** 자세한 내용은 [시퀀스 번호는 실행 순서가 아니라 코드 줄 번호와 관련이 있음](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) 섹션을 참조하세요.
+다음 예제에서 `CreateComponent` 메서드의 루프는 세 개의 `PetDetails` 구성 요소를 생성합니다. <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 메서드를 호출하여 구성 요소(`OpenComponent` 및 `AddAttribute`)를 만드는 경우 시퀀스 번호는 소스 코드 줄 번호입니다. Blazor diff 알고리즘은 개별 호출이 아니라 개별 코드 줄에 해당하는 시퀀스 번호를 사용합니다. <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 메서드를 사용하여 구성 요소를 만드는 경우 시퀀스 번호의 인수를 하드 코딩합니다. **계산 또는 카운터를 사용하여 시퀀스 번호를 생성하면 성능이 저하될 수 있습니다.** 자세한 내용은 [시퀀스 번호는 실행 순서가 아니라 코드 줄 번호와 관련이 있음](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) 섹션을 참조하세요.
 
 `BuiltContent` 구성 요소:
 
@@ -129,15 +117,15 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!WARNING]
-> `Microsoft.AspNetCore.Components.RenderTree`의 형식을 사용하여 렌더링 작업 ‘결과’를 처리할 수 있습니다.  해당 형식은 Blazor 프레임워크 구현의 내부 세부 정보이며, ‘불안정’하고 이후 릴리스에서 변경될 수 있는 것으로 간주되어야 합니다. 
+> <xref:Microsoft.AspNetCore.Components.RenderTree>의 형식을 사용하여 렌더링 작업 ‘결과’를 처리할 수 있습니다. 해당 형식은 Blazor 프레임워크 구현의 내부 세부 정보이며, ‘불안정’하고 이후 릴리스에서 변경될 수 있는 것으로 간주되어야 합니다.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>시퀀스 번호는 실행 순서가 아니라 코드 줄 번호와 관련이 있음
 
 Razor 구성 요소 파일( *.razor*)은 항상 컴파일됩니다. 컴파일 단계를 사용하여 런타임에 앱 성능을 개선하는 정보를 삽입할 수 있으므로 컴파일은 코드 해석보다 잠재적 이점이 있습니다.
 
-해당 개선 사항의 주요 예로 ‘시퀀스 번호’가 있습니다.  시퀀스 번호는 정렬된 개별 코드 줄에서 생성된 해당 출력을 런타임에 표시합니다. 런타임은 이 정보를 사용하여 선형 시간으로 효율적인 트리 diff를 생성하며, 일반적인 트리 diff 알고리즘에서 가능한 속도보다 훨씬 더 빠릅니다.
+해당 개선 사항의 주요 예로 ‘시퀀스 번호’가 있습니다. 시퀀스 번호는 정렬된 개별 코드 줄에서 생성된 해당 출력을 런타임에 표시합니다. 런타임은 이 정보를 사용하여 선형 시간으로 효율적인 트리 diff를 생성하며, 일반적인 트리 diff 알고리즘에서 가능한 속도보다 훨씬 더 빠릅니다.
 
-다음 Razor 구성 요소( *.razor*) 파일을 확인합니다.
+다음 Razor 구성 요소( *.razor*) 파일을 고려해 보세요.
 
 ```razor
 @if (someFlag)
@@ -162,15 +150,73 @@ builder.AddContent(1, "Second");
 코드를 처음 실행할 때 `someFlag`가 `true`인 경우 작성기는 다음을 받게 됩니다.
 
 | 순서 | 형식      | 데이터   |
-| :------: | --------- | :----: |
-| 0        | 텍스트 노드 | 첫째  |
-| 1        | 텍스트 노드 | Second |
+| :---
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+---: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+----- | :----: | | 0        | 텍스트 노드 | 1차  | | 1        | 텍스트 노드 | 2차 |
 
 `someFlag`가 `false`로 전환되었으며, 태그를 다시 렌더링했다고 가정합니다. 이번에는 작성기가 다음을 받게 됩니다.
 
 | 순서 | 형식       | 데이터   |
-| :------: | ---------- | :----: |
-| 1        | 텍스트 노드  | Second |
+| :---
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+---: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+----- | :----: | | 1        | 텍스트 노드 | 2차 |
 
 런타임은 diff를 통해 시퀀스 `0`의 항목이 제거된 것을 확인하고 다음과 같은 간단한 *편집 스크립트*를 생성합니다.
 
@@ -194,17 +240,74 @@ builder.AddContent(seq++, "Second");
 이제 첫 번째 출력은 다음과 같습니다.
 
 | 순서 | 형식      | 데이터   |
-| :------: | --------- | :----: |
-| 0        | 텍스트 노드 | 첫째  |
-| 1        | 텍스트 노드 | Second |
+| :---
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+---: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+----- | :----: | | 0        | 텍스트 노드 | 1차  | | 1        | 텍스트 노드 | 2차 |
 
 이 결과는 이전 사례와 동일하므로 부정적인 이슈가 없습니다. 두 번째 렌더링에서 `someFlag`는 `false`이고, 출력은 다음과 같습니다.
 
 | 순서 | 형식      | 데이터   |
-| :------: | --------- | ------ |
-| 0        | 텍스트 노드 | Second |
+| :---
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
 
-이번에는 diff 알고리즘에서 ‘두 가지’ 변경 사항이 발생했음을 확인하고, 다음과 같은 편집 스크립트를 생성합니다. 
+---: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+-
+title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+----- | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
+--- | | 0        | 텍스트 노드 | 2차 |
+
+이번에는 diff 알고리즘에서 ‘두 가지’ 변경 사항이 발생했음을 확인하고, 다음과 같은 편집 스크립트를 생성합니다.
 
 * 첫 번째 텍스트 노드의 값을 `Second`로 변경합니다.
 * 두 번째 텍스트 노드를 제거합니다.
@@ -217,7 +320,7 @@ builder.AddContent(seq++, "Second");
 
 * 시퀀스 번호를 동적으로 생성하면 앱 성능이 저하됩니다.
 * 컴파일 시간에 캡처하지 않는 한, 필요한 정보가 없기 때문에 프레임워크에서 런타임에 고유한 시퀀스 번호를 자동으로 만들 수 없습니다.
-* 수동으로 구현된 긴 `RenderTreeBuilder` 논리 블록을 작성하면 안 됩니다. *.razor* 파일을 사용하고 컴파일러를 통해 시퀀스 번호를 처리하는 것이 좋습니다. 수동 `RenderTreeBuilder` 논리를 사용해야 하는 경우, 긴 코드 블록을 `OpenRegion`/`CloseRegion` 호출에 래핑된 작은 조각으로 분할합니다. 영역마다 고유한 시퀀스 번호 공간이 있으므로, 각 영역 내에서 0(또는 다른 임의 숫자)부터 다시 시작할 수 있습니다.
+* 수동으로 구현된 긴 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 논리 블록을 작성하면 안 됩니다. *.razor* 파일을 사용하고 컴파일러를 통해 시퀀스 번호를 처리하는 것이 좋습니다. 수동 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 논리를 사용해야 하는 경우, 긴 코드 블록을 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A>/<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> 호출에 래핑된 작은 조각으로 분할합니다. 영역마다 고유한 시퀀스 번호 공간이 있으므로, 각 영역 내에서 0(또는 다른 임의 숫자)부터 다시 시작할 수 있습니다.
 * 시퀀스 번호를 하드 코딩한 경우, 시퀀스 번호의 값만 증가하면 diff 알고리즘을 사용할 수 있습니다. 초기 값과 간격은 관련이 없습니다. 한 가지 타당한 옵션은 코드 줄 번호를 시퀀스 번호로 사용하거나 0부터 시작하고 1씩, 100씩 또는 선호하는 간격만큼 늘리는 것입니다. 
 * Blazor는 시퀀스 번호를 사용하는 반면, 다른 트리 diff UI 프레임워크는 시퀀스 번호를 사용하지 않습니다. diff는 시퀀스 번호를 사용할 때 훨씬 더 빠르며, Blazor는 *.razor* 파일을 작성하는 개발자를 위해 시퀀스 번호를 자동으로 처리하는 컴파일 단계의 이점이 있습니다.
 
@@ -335,12 +438,12 @@ public class FileUploader : IDisposable
 
 앞의 예제에서:
 
-* `maxBase64SegmentSize`를 `8192`에서 계산된 `maxBase64SegmentSize = segmentSize * 4 / 3`로 설정합니다.
+* `maxBase64SegmentSize`를 `maxBase64SegmentSize = segmentSize * 4 / 3`에서 계산된 `8192`로 설정합니다.
 * 하위 수준 .NET Core 메모리 관리 API를 사용하여 서버의 메모리 세그먼트를 `uploadedSegments`에 저장합니다.
 * `ReceiveFile` 메서드를 사용하여 JS interop을 통해 업로드를 처리합니다.
   * `jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`와의 JS interop을 통해 파일 크기를 바이트 단위로 결정합니다.
   * 수신할 세그먼트 수를 계산하여 `numberOfSegments`에 저장합니다.
-  * `for`와의 JS interop을 통해 `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` 루프에서 세그먼트를 요청합니다. 디코딩 전에 마지막 세그먼트를 제외한 모든 세그먼트는 8,192바이트여야 합니다. 클라이언트가 효율적인 방식으로 데이터를 보내도록 강제 적용합니다.
+  * `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`와의 JS interop을 통해 `for` 루프에서 세그먼트를 요청합니다. 디코딩 전에 마지막 세그먼트를 제외한 모든 세그먼트는 8,192바이트여야 합니다. 클라이언트가 효율적인 방식으로 데이터를 보내도록 강제 적용합니다.
   * 수신된 각 세그먼트에 대해 <xref:System.Convert.TryFromBase64String%2A>을 사용하여 디코딩 전에 검사를 수행합니다.
   * 업로드가 완료되면 데이터를 포함하는 스트림이 새 <xref:System.IO.Stream>(`SegmentedStream`)으로 반환됩니다.
 

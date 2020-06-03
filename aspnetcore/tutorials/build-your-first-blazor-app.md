@@ -69,11 +69,11 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 ## <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소는 매개 변수를 포함할 수도 있습니다. 구성 요소 매개 변수는 `[Parameter]` 특성이 지정된 구성 요소 클래스의 공용 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소는 매개 변수를 포함할 수도 있습니다. 구성 요소 매개 변수는 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성이 지정된 구성 요소 클래스의 공용 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 1. 구성 요소의 `@code` C# 코드를 다음과 같이 업데이트합니다.
 
-   * `[Parameter]` 특성이 지정된 공용 `IncrementAmount` 속성을 추가합니다.
+   * [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성이 지정된 공용 `IncrementAmount` 속성을 추가합니다.
    * `currentCount` 값을 증가시킬 때 `IncrementAmount` 속성을 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
    *Pages/Counter.razor*:
@@ -105,7 +105,7 @@ Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Sta
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-`@inject` 지시문은 `WeatherForecastService` 서비스의 인스턴스를 `FetchData` 구성 요소에 주입하기 위해서 사용됩니다.
+[`@inject`](xref:mvc/views/razor#inject) 지시문은 `WeatherForecastService` 서비스의 인스턴스를 `FetchData` 구성 요소에 주입하기 위해 사용됩니다.
 
 *Pages/FetchData.razor*:
 
@@ -117,7 +117,7 @@ Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Sta
 
 ### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly 환경
 
-Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져오기 위해서 `HttpClient`가 주입됩니다.
+Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져오기 위해서 <xref:System.Net.Http.HttpClient>가 주입됩니다.
 
 *Pages/FetchData.razor*:
 

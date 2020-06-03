@@ -143,7 +143,7 @@ SUT의 [환경](xref:fundamentals/environments)이 설정되지 않은 경우 �
 
    SUT의 데이터베이스 컨텍스트는 `Startup.ConfigureServices` 메서드에 등록되어 있습니다. 테스트 앱의 `builder.ConfigureServices` 콜백은 앱의 `Startup.ConfigureServices` 코드가 실행된 *후*에 실행됩니다. 실행 순서는 ASP.NET Core 3.0의 릴리스를 포함하는 [일반 호스트](xref:fundamentals/host/generic-host)의 호환성이 손상되는 변경에 해당합니다. 앱의 데이터베이스와는 다른 데이터베이스를 테스트에 사용하려면 앱의 데이터베이스 컨텍스트를 `builder.ConfigureServices`에서 바꾸어야 합니다.
 
-   여전히 [Web Host}(xref:fundamentals/host/web-host)를 사용하는 SUT의 경우 SUT의 `Startup.ConfigureServices` 코드 *이전에* 테스트 앱의 `builder.ConfigureServices` 콜백이 실행됩니다. 테스트 앱의 `builder.ConfigureTestServices` 콜백은 *이후에* 실행됩니다.
+   여전히 [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 SUT의 경우, SUT의 `Startup.ConfigureServices` 코드 이전에 테스트 앱의 `builder.ConfigureServices` 콜백이 실행됩니다. 테스트 앱의 `builder.ConfigureTestServices` 콜백은 *이후에* 실행됩니다.
 
    샘플 앱은 데이터베이스 컨텍스트에 대한 서비스 설명자를 찾고, 이 설명자를 사용하여 서비스 등록을 제거합니다. 그런 다음, 팩터리는 테스트를 위해 메모리 내 데이터베이스를 사용하는 새 `ApplicationDbContext`를 추가합니다.
 
@@ -178,7 +178,7 @@ SUT에 대한 POST 요청은 앱의 [데이터 보호 위조 방지 시스템](x
 
 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)의 `SendAsync` 도우미 확장 메서드(*Helpers/HttpClientExtensions.cs*) 및 `GetDocumentAsync` 도우미 메서드(*Helpers/HtmlHelpers.cs*)는 [AngleSharp](https://anglesharp.github.io/) 파서를 사용하여 다음 메서드를 사용한 위조 방지 확인을 처리합니다.
 
-* `GetDocumentAsync` &ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage)를 수신하고 `IHtmlDocument`를 반환합니다. `GetDocumentAsync`는 원본 `HttpResponseMessage`에 따라 *가상 응답*을 준비하는 팩터리를 사용합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조하세요.
+* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage)를 수신하고 `IHtmlDocument`를 반환합니다. `GetDocumentAsync`는 원본 `HttpResponseMessage`에 따라 *가상 응답*을 준비하는 팩터리를 사용합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조하세요.
 * `HttpClient`에 대한 `SendAsync` 확장 메서드는 [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage)를 작성하고 [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_)를 호출하여 요청을 SUT에 제출합니다. `SendAsync`에 대한 오버로드는 HTML 양식(`IHtmlFormElement`) 및 다음을 허용합니다.
   * 양식(`IHtmlElement`)의 제출 단추
   * 양식 값 컬렉션(`IEnumerable<KeyValuePair<string, string>>`)
@@ -573,7 +573,7 @@ title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
 
 SUT의 데이터베이스 컨텍스트는 `Startup.ConfigureServices` 메서드에 등록되어 있습니다. 테스트 앱의 `builder.ConfigureServices` 콜백은 앱의 `Startup.ConfigureServices` 코드가 실행된 *후*에 실행됩니다. 다른 데이터베이스를 테스트에 사용하려면 앱의 데이터베이스 컨텍스트를 `builder.ConfigureServices`에서 바꾸어야 합니다. 자세한 내용은 [WebApplicationFactory 사용자 지정](#customize-webapplicationfactory) 섹션을 참조하세요.
 
-여전히 [Web Host}(xref:fundamentals/host/web-host)를 사용하는 SUT의 경우 SUT의 `Startup.ConfigureServices` 코드 *이전에* 테스트 앱의 `builder.ConfigureServices` 콜백이 실행됩니다. 테스트 앱의 `builder.ConfigureTestServices` 콜백은 *이후에* 실행됩니다.
+여전히 [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 SUT의 경우, SUT의 `Startup.ConfigureServices` 코드 이전에 테스트 앱의 `builder.ConfigureServices` 콜백이 실행됩니다. 테스트 앱의 `builder.ConfigureTestServices` 콜백은 *이후에* 실행됩니다.
 
 ::: moniker-end
 
@@ -719,7 +719,7 @@ SUT에 대한 POST 요청은 앱의 [데이터 보호 위조 방지 시스템](x
 
 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)의 `SendAsync` 도우미 확장 메서드(*Helpers/HttpClientExtensions.cs*) 및 `GetDocumentAsync` 도우미 메서드(*Helpers/HtmlHelpers.cs*)는 [AngleSharp](https://anglesharp.github.io/) 파서를 사용하여 다음 메서드를 사용한 위조 방지 확인을 처리합니다.
 
-* `GetDocumentAsync` &ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage)를 수신하고 `IHtmlDocument`를 반환합니다. `GetDocumentAsync`는 원본 `HttpResponseMessage`에 따라 *가상 응답*을 준비하는 팩터리를 사용합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조하세요.
+* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage)를 수신하고 `IHtmlDocument`를 반환합니다. `GetDocumentAsync`는 원본 `HttpResponseMessage`에 따라 *가상 응답*을 준비하는 팩터리를 사용합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조하세요.
 * `HttpClient`에 대한 `SendAsync` 확장 메서드는 [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage)를 작성하고 [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_)를 호출하여 요청을 SUT에 제출합니다. `SendAsync`에 대한 오버로드는 HTML 양식(`IHtmlFormElement`) 및 다음을 허용합니다.
   * 양식(`IHtmlElement`)의 제출 단추
   * 양식 값 컬렉션(`IEnumerable<KeyValuePair<string, string>>`)

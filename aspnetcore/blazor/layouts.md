@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor 레이아웃
-author: guardrex
-description: Blazor 앱의 재사용 가능한 레이아웃 구성 요소를 만드는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/layouts
-ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424327"
+title: 'ASP.NET Core Blazor 레이아웃' author: description: 'Blazor 앱의 재사용 가능한 레이아웃 구성 요소를 만드는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -30,10 +18,10 @@ ms.locfileid: "83424327"
 
 ‘구성 요소’를 ‘레이아웃’으로 전환하기 위해 구성 요소는 다음을 수행합니다. 
 
-* 레이아웃 내부에 렌더링된 콘텐츠의 `Body` 속성을 정의하는 `LayoutComponentBase`에서 상속합니다.
+* 레이아웃 내부에 렌더링된 콘텐츠의 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> 속성을 정의하는 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase>에서 상속합니다.
 * Razor 구문 `@Body`를 사용하여 콘텐츠가 렌더링되는 위치를 레이아웃 태그에 지정합니다.
 
-다음 코드 샘플은 레이아웃 구성 요소인 *MainLayout.razor*의 Razor 템플릿을 보여 줍니다. 레이아웃은 `LayoutComponentBase`를 상속하고 탐색 모음과 바닥글 사이에 `@Body`를 설정합니다.
+다음 코드 샘플은 레이아웃 구성 요소인 *MainLayout.razor*의 Razor 템플릿을 보여 줍니다. 레이아웃은 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase>를 상속하고 탐색 모음과 바닥글 사이에 `@Body`를 설정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
@@ -41,21 +29,21 @@ Blazor 앱 템플릿 중 하나를 기반으로 하는 앱에서 `MainLayout` �
 
 ## <a name="default-layout"></a>기본 레이아웃
 
-앱의 *App.razor* 파일에 있는 `Router` 구성 요소에서 기본 앱 레이아웃을 지정합니다. 기본 Blazor 템플릿에서 제공하는 다음 `Router` 구성 요소는 `MainLayout` 구성 요소에 기본 레이아웃을 설정합니다.
+앱의 *App.razor* 파일에 있는 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소에서 기본 앱 레이아웃을 지정합니다. 기본 Blazor 템플릿에서 제공하는 다음 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 `MainLayout` 구성 요소에 기본 레이아웃을 설정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-`NotFound` 콘텐츠의 기본 레이아웃을 제공하려면 `NotFound` 콘텐츠에 대해 `LayoutView`를 지정합니다.
+<xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 콘텐츠의 기본 레이아웃을 제공하려면 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 콘텐츠에 대해 <xref:Microsoft.AspNetCore.Components.LayoutView>를 지정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-`Router` 구성 요소에 대한 자세한 내용은 <xref:blazor/routing>을 참조하세요.
+<xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소에 대한 자세한 내용은 <xref:blazor/routing>을 참조하세요.
 
 라우터에서 레이아웃을 기본 레이아웃으로 지정하는 경우 구성 요소별 또는 폴더별로 재정의할 수 있기 때문에 유용합니다. 가장 일반적인 방법이므로 라우터를 사용하여 앱의 기본 레이아웃을 설정하는 것이 좋습니다.
 
 ## <a name="specify-a-layout-in-a-component"></a>구성 요소에서 레이아웃 지정
 
-Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적용할 수 있습니다. 컴파일러는 `@layout`을 구성 요소 클래스에 적용되는 `LayoutAttribute`로 변환합니다.
+Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적용할 수 있습니다. 컴파일러는 `@layout`을 구성 요소 클래스에 적용되는 <xref:Microsoft.AspNetCore.Components.LayoutAttribute>로 변환합니다.
 
 다음 `MasterList` 구성 요소의 콘텐츠는 `MasterLayout`의 `@Body` 위치에 삽입됩니다.
 

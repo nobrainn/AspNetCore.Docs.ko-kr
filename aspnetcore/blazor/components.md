@@ -69,8 +69,8 @@ Blazor 앱의 Razor 구성 요소는 Razor 구문을 광범위하게 사용합�
 
 Razor 구문에서 콘텐츠에 액세스하는 경우 다음 섹션에 특히 주의해야 합니다.
 
-* [지시문](xref:mvc/views/razor#directives) &ndash; 일반적으로 구성 요소 태그가 구문 분석되거나 작동하는 방식을 변경하는 `@` 접두사가 있는 예약 키워드입니다.
-* [지시문 특성](xref:mvc/views/razor#directive-attributes) &ndash; 일반적으로 구성 요소가 구문 분석되거나 작동하는 방식을 변경하는 `@` 접두사가 있는 예약 키워드입니다.
+* [지시문](xref:mvc/views/razor#directives): 일반적으로 구성 요소 태그가 구문 분석되거나 작동하는 방식을 변경하는 `@` 접두사가 있는 예약 키워드입니다.
+* [지시문 특성](xref:mvc/views/razor#directive-attributes): 일반적으로 구성 요소가 구문 분석되거나 작동하는 방식을 변경하는 `@` 접두사가 있는 예약 키워드입니다.
 
 ## <a name="static-assets"></a>정적 자산
 
@@ -110,7 +110,7 @@ Razor 구성 요소는 물결표-슬래시 표기법(`~/`)을 지원하지 **않
 
 Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 템플릿을 제공하여 수행됩니다.
 
-[`@page`][9] 지시문을 포함하는 Razor 파일이 컴파일되면 생성된 클래스에 경로 템플릿을 지정하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute>가 제공됩니다. 런타임에 라우터는 `RouteAttribute`를 사용하여 구성 요소 클래스를 검색하고, 요청된 URL과 일치하는 경로 템플릿을 포함하는 구성 요소를 렌더링합니다.
+[`@page`][9] 지시문을 포함하는 Razor 파일이 컴파일되면 생성된 클래스에 경로 템플릿을 지정하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute>가 제공됩니다. 런타임에 라우터는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute>를 사용하여 구성 요소 클래스를 검색하고, 요청된 URL과 일치하는 경로 템플릿을 포함하는 구성 요소를 렌더링합니다.
 
 ```razor
 @page "/ParentComponent"
@@ -136,7 +136,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 ### <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소에는 `[Parameter]` 특성을 사용하여 구성 요소 클래스의 퍼블릭 속성을 사용하여 정의되는 *구성 요소 매개 변수*가 있을 수 있습니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소에는 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성을 사용하여 구성 요소 클래스의 퍼블릭 속성을 사용하여 정의되는 구성 요소 매개 변수가 있을 수 있습니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 *Components/ChildComponent.razor*:
 
@@ -155,14 +155,14 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 구성 요소는 다른 구성 요소의 콘텐츠를 설정할 수 있습니다. 할당 구성 요소는 받는 구성 요소를 지정하는 태그 간 콘텐츠를 제공합니다.
 
-다음 예제에서 `ChildComponent`에는 렌더링할 UI의 세그먼트를 나타내는 `RenderFragment`를 나타내는 `ChildContent` 속성이 있습니다. `ChildContent`의 값은 콘텐츠를 렌더링해야 하는 구성 요소의 태그에 배치됩니다. `ChildContent` 값은 부모 구성 요소에서 수신되고 부트스트랩 패널의 `panel-body` 내에서 렌더링됩니다.
+다음 예제에서 `ChildComponent`에는 렌더링할 UI의 세그먼트를 나타내는 <xref:Microsoft.AspNetCore.Components.RenderFragment>를 나타내는 `ChildContent` 속성이 있습니다. `ChildContent`의 값은 콘텐츠를 렌더링해야 하는 구성 요소의 태그에 배치됩니다. `ChildContent` 값은 부모 구성 요소에서 수신되고 부트스트랩 패널의 `panel-body` 내에서 렌더링됩니다.
 
 *Components/ChildComponent.razor*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> `RenderFragment` 콘텐츠를 받는 속성은 규칙에 따라 이름 `ChildContent`가 지정되어야 합니다.
+> <xref:Microsoft.AspNetCore.Components.RenderFragment> 콘텐츠를 받는 속성은 규칙에 따라 이름 `ChildContent`가 지정되어야 합니다.
 
 샘플 앱의 `ParentComponent`는 콘텐츠를 `<ChildComponent>` 태그 안에 배치하여 `ChildComponent`를 렌더링하기 위한 콘텐츠를 제공할 수 있습니다.
 
@@ -229,7 +229,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
        size="50">
 ```
 
-임의 특성을 허용하려면 `CaptureUnmatchedValues` 속성이 `true`로 설정한 상태로 `[Parameter]` 특성을 사용하여 구성 요소 매개 변수를 정의합니다.
+임의 특성을 허용하려면 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 속성이 `true`로 설정된 상태로 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성을 사용하여 구성 요소 매개 변수를 정의합니다.
 
 ```razor
 @code {
@@ -238,7 +238,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 }
 ```
 
-`[Parameter]`의 `CaptureUnmatchedValues` 속성을 사용하면 해당 매개 변수는 다른 매개 변수와 일치하지 않는 모든 특성을 일치시킬 수 있습니다. 구성 요소는 `CaptureUnmatchedValues`를 사용하여 단일 매개 변수만 정의할 수 있습니다. `CaptureUnmatchedValues`에 사용되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서는 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
+[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute)의 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> 속성을 사용하면 해당 매개 변수는 다른 매개 변수와 일치하지 않는 모든 특성을 일치시킬 수 있습니다. 구성 요소는 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>를 사용하여 단일 매개 변수만 정의할 수 있습니다. <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>에 사용되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서는 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
 
 요소 특성의 위치에 상대적인 [`@attributes`][3]의 위치는 중요합니다. 요소에 [`@attributes`][3]가 스플래팅되면 오른쪽에서 왼쪽으로(마지막에 도달하면 처음으로) 특성이 처리됩니다. `Child` 구성 요소를 사용하는 구성 요소의 다음 예를 살펴보세요.
 
@@ -320,7 +320,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출하여 상태 업데이트
 
-Blazor는 동기화 컨텍스트(`SynchronizationContext`)를 사용하여 단일 논리적 실행 스레드를 적용합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에서 발생하는 모든 이벤트 콜백은 이 동기화 컨텍스트에서 실행됩니다.
+Blazor는 동기화 컨텍스트(<xref:System.Threading.SynchronizationContext>)를 사용하여 단일 논리적 실행 스레드를 적용합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에서 발생하는 모든 이벤트 콜백은 이 동기화 컨텍스트에서 실행됩니다.
 
 Blazor 서버의 동기화 컨텍스트는 단일 스레드인 브라우저의 WebAssembly 모델과 거의 일치하도록 단일 스레드 환경 에뮬레이션을 시도합니다. 지정된 시점에서 작업이 정확히 하나의 스레드에서만 수행되어 단일 논리적 스레드의 느낌을 제공합니다. 두 작업이 동시에 실행되지는 않습니다.
 
@@ -438,7 +438,7 @@ public class NotifierService
 
 ### <a name="when-to-use-key"></a>\@ 키를 사용하는 경우
 
-일반적으로 목록이 렌더링될 때마다(예: `@foreach` 블록에서) [`@key`][5]를 사용하는 것이 적절하며 [`@key`][5]를 정의하기 위한 적절한 값이 있습니다.
+일반적으로 목록이 렌더링될 때마다(예: [foreach](/dotnet/csharp/language-reference/keywords/foreach-in) 블록에서) [`@key`][5]를 사용하는 것이 적절하며 [`@key`][5]를 정의하기 위한 적절한 값이 있습니다.
 
 [`@key`][5]를 사용하여 개체가 변경될 때 Blazor가 요소 또는 구성 요소 하위 트리를 유지하지 않도록 할 수도 있습니다.
 
@@ -469,7 +469,7 @@ public class NotifierService
 
 다음 조건에서는 매개 변수를 덮어씁니다.
 
-* 자식 구성 요소 콘텐츠가 `RenderFragment`로 렌더링되는 경우
+* 자식 구성 요소 콘텐츠가 <xref:Microsoft.AspNetCore.Components.RenderFragment>로 렌더링되는 경우
 * <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 부모 구성 요소에서 호출되는 경우
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 호출될 때 부모 구성 요소가 렌더링되고 자식 구성 요소에 새 매개 변수 값이 제공되므로 매개 변수가 재설정됩니다.
@@ -503,7 +503,7 @@ public class NotifierService
 }
 ```
 
-`Expander` 구성 요소는 `StateHasChanged`를 호출할 수 있는 부모 구성 요소에 추가됩니다.
+`Expander` 구성 요소는 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>를 호출할 수 있는 부모 구성 요소에 추가됩니다.
 
 ```razor
 <Expander Expanded="true">
@@ -517,7 +517,7 @@ public class NotifierService
 </button>
 ```
 
-처음에 `Expander` 구성 요소는 `Expanded` 속성이 전환될 때 독립적으로 동작합니다. 자식 구성 요소는 상태를 예상대로 유지합니다. 부모에서 `StateHasChanged`가 호출되면 첫 번째 자식 구성 요소의 `Expanded` 매개 변수가 초기 값(`true`)으로 다시 설정됩니다. 두 번째 `Expander` 구성 요소에서는 렌더링디는 자식 콘텐츠가 없으므로 구성 요소의 `Expanded` 값이 다시 설정되지 않습니다.
+처음에 `Expander` 구성 요소는 `Expanded` 속성이 전환될 때 독립적으로 동작합니다. 자식 구성 요소는 상태를 예상대로 유지합니다. 부모에서 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 호출되면 첫 번째 자식 구성 요소의 `Expanded` 매개 변수가 초기 값(`true`)으로 다시 설정됩니다. 두 번째 `Expander` 구성 요소에서는 렌더링디는 자식 콘텐츠가 없으므로 구성 요소의 `Expanded` 값이 다시 설정되지 않습니다.
 
 앞의 시나리오에서 상태를 유지하려면 `Expander` 구성 요소에서 ‘private 필드’를 사용하여 전환된 상태를 유지합니다 *.*
 
@@ -632,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>기본 클래스 지정
 
-[`@inherits`][6] 지시어를 사용하여 구성 요소에 대한 기본 클래스를 지정할 수 있습니다. 다음 예제에서는 구성 요소가 기본 클래스 `BlazorRocksBase`를 상속하여 구성 요소의 속성과 메서드를 제공하는 방법을 보여 줍니다. 기본 클래스는 `ComponentBase`에서 파생되어야 합니다.
+[`@inherits`][6] 지시어를 사용하여 구성 요소에 대한 기본 클래스를 지정할 수 있습니다. 다음 예제에서는 구성 요소가 기본 클래스 `BlazorRocksBase`를 상속하여 구성 요소의 속성과 메서드를 제공하는 방법을 보여 줍니다. 기본 클래스는 <xref:Microsoft.AspNetCore.Components.ComponentBase>에서 파생되어야 합니다.
 
 *Pages/BlazorRocks.razor*:
 
@@ -660,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>특성 지정
 
-[`@attribute`][7] 지시문을 사용하여 Razor 구성 요소에 특성을 지정할 수 있습니다. 다음 예제는 `[Authorize]` 특성을 구성 요소 클래스에 적용합니다.
+[`@attribute`][7] 지시문을 사용하여 Razor 구성 요소에 특성을 지정할 수 있습니다. 다음 예제에서는 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성을 구성 요소 클래스에 적용합니다.
 
 ```razor
 @page "/"
@@ -700,9 +700,9 @@ This is the Index page.
 > [!NOTE]
 > `global::` 한정자는 지원되지 않습니다.
 >
-> 별칭이 지정된 `using` 문(예: `@using Foo = Bar`)을 사용하여 구성 요소를 가져오는 것은 지원되지 않습니다.
+> 별칭이 지정된 [using](/dotnet/csharp/language-reference/keywords/using-statement) 문(예: `@using Foo = Bar`)을 사용하여 구성 요소를 가져오는 것은 지원되지 않습니다.
 >
-> 부분적으로 정규화된 이름은 지원되지 않습니다. 예를 들어, `<Shared.NavMenu></Shared.NavMenu>`를 사용하여 `@using BlazorSample`을 추가하고 `NavMenu.razor`를 참조하는 것은 지원되지 않습니다.
+> 부분적으로 정규화된 이름은 지원되지 않습니다. 예를 들어 `<Shared.NavMenu></Shared.NavMenu>`를 사용하여 `@using BlazorSample`을 추가하고 `NavMenu` 구성 요소(`NavMenu.razor`)를 참조하는 것은 지원되지 않습니다.
 
 ## <a name="conditional-html-element-attributes"></a>조건부 HTML 요소 특성
 
@@ -771,7 +771,7 @@ public class ThemeInfo
 }
 ```
 
-상위 구성 요소는 연계 값 구성 요소를 사용하여 연계 값을 제공할 수 있습니다. `CascadingValue` 구성 요소는 구성 요소 계층의 하위 트리를 래핑하고 해당 하위 트리 내의 모든 구성 요소에 단일 값을 제공합니다.
+상위 구성 요소는 연계 값 구성 요소를 사용하여 연계 값을 제공할 수 있습니다. <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 구성 요소는 구성 요소 계층의 하위 트리를 래핑하고 해당 하위 트리 내의 모든 구성 요소에 단일 값을 제공합니다.
 
 예를 들어, 샘플 앱은 테마 정보(`ThemeInfo`)를 앱 레이아웃 중 하나에 `@Body` 속성의 레이아웃 본문을 구성하는 모든 구성 요소에 대한 연계 매개 변수로 지정합니다. 레이아웃 구성 요소에서 `ButtonClass`에는 `btn-success` 값이 할당됩니다. 모든 하위 구성 요소는 `ThemeInfo` 연계 개체를 통해 이 속성을 사용할 수 있습니다.
 
@@ -801,7 +801,7 @@ public class ThemeInfo
 }
 ```
 
-연계 값을 사용하기 위해 구성 요소는 `[CascadingParameter]` 특성을 사용하여 연계 매개 변수를 선언합니다. 연계 값은 형식별로 연계 매개 변수에 바인딩됩니다.
+연계 값을 사용하기 위해 구성 요소는 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 특성을 사용하여 연계 매개 변수를 선언합니다. 연계 값은 형식별로 연계 매개 변수에 바인딩됩니다.
 
 샘플 앱에서 `CascadingValuesParametersTheme` 구성 요소는 `ThemeInfo` 연계 값을 연계 매개 변수에 바인딩합니다. 이 매개 변수는 구성 요소에 의해 표시되는 단추 중 하나에 대해 CSS 클래스를 설정하는 데 사용됩니다.
 
@@ -841,7 +841,7 @@ public class ThemeInfo
 }
 ```
 
-동일한 형식의 여러 값을 동일한 하위 트리 내에서 연계하려면 각 `CascadingValue` 구성 요소와 해당 `CascadingParameter`에 고유한 `Name` 문자열을 제공합니다. 다음 예제에서는 두 개의 `CascadingValue` 구성 요소가 이름별로 다른 `MyCascadingType` 인스턴스를 연계합니다.
+동일한 형식의 여러 값을 동일한 하위 트리 내에서 연계하려면 각 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 구성 요소와 해당 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 특성에 고유한 <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> 문자열을 제공합니다. 다음 예제에서는 두 개의 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> 구성 요소가 이름별로 다른 `MyCascadingType` 인스턴스를 연계합니다.
 
 ```razor
 <CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
@@ -928,7 +928,7 @@ public class ThemeInfo
 @<{HTML tag}>...</{HTML tag}>
 ```
 
-다음 예제에서는 `RenderFragment` 및 `RenderFragment<T>` 값을 지정하고 구성 요소에서 직접 템플릿을 렌더링하는 방법을 보여 줍니다. 렌더링 조각은 [템플릿 구성 요소](xref:blazor/templated-components)에 인수로 전달될 수도 있습니다.
+다음 예제에서는 <xref:Microsoft.AspNetCore.Components.RenderFragment> 및 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> 값을 지정하고 구성 요소에서 직접 템플릿을 렌더링하는 방법을 보여 줍니다. 렌더링 조각은 [템플릿 구성 요소](xref:blazor/templated-components)에 인수로 전달될 수도 있습니다.
 
 ```razor
 @timeTemplate
@@ -970,11 +970,11 @@ Blazor는 HTML을 렌더링하므로 SVG(Scalable Vector Graphics) 이미지( *.
 }
 ```
 
-그러나 인라인 SVG 태그는 일부 시나리오에서 지원되지 않습니다. `<svg>` 태그를 구성 요소 파일(*razor*)에 직접 배치하면 기본 이미지 렌더링이 지원되지만 많은 고급 시나리오는 아직 지원되지 않습니다. 예를 들어, `<use>` 태그는 현재 적용되지 않으며 `@bind`를 일부 SVG 태그에서는 사용할 수 없습니다. 자세한 내용은 [Blazor(dotnet/aspnetcore #18271)에서 SVG 지원](https://github.com/dotnet/aspnetcore/issues/18271)을 참조하세요.
+그러나 인라인 SVG 태그는 일부 시나리오에서 지원되지 않습니다. `<svg>` 태그를 구성 요소 파일(*razor*)에 직접 배치하면 기본 이미지 렌더링이 지원되지만 많은 고급 시나리오는 아직 지원되지 않습니다. 예를 들어, `<use>` 태그는 현재 적용되지 않으며 [`@bind`][10]를 일부 SVG 태그에서는 사용할 수 없습니다. 자세한 내용은 [Blazor(dotnet/aspnetcore #18271)에서 SVG 지원](https://github.com/dotnet/aspnetcore/issues/18271)을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:security/blazor/server/threat-mitigation> &ndash; 리소스를 소모하지 않도록 하는 Blazor 서버 앱을 빌드하는 방법에 대한 지침을 포함합니다.
+* <xref:security/blazor/server/threat-mitigation>: 리소스를 소모하지 않도록 하는 Blazor 서버 앱을 빌드하는 방법에 대한 지침을 포함합니다.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

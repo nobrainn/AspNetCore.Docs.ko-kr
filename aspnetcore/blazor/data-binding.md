@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor 데이터 바인딩
-author: guardrex
-description: Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 기능에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/26/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/data-binding
-ms.openlocfilehash: b4951c5eb712b15db3a7c1ccd57ae01c530a23ef
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967170"
+title: 'ASP.NET Core Blazor 데이터 바인딩' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 기능에 대해 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 데이터 바인딩
 
@@ -40,7 +28,7 @@ Razor 구성 요소는 필드, 속성 또는 Razor 식 값을 사용하여 [`@bi
 
 텍스트 상자는 속성 값 변경에 대한 대응이 아니라, 구성 요소가 렌더링되는 경우에만 UI에서 업데이트됩니다. 이벤트 처리기 코드를 실행하면 구성 요소가 자체적으로 렌더링되므로 속성 업데이트는 *일반적으로* 이벤트 처리기가 트리거되는 즉시 UI에 반영됩니다.
 
-`CurrentValue` 속성에 `@bind`를 사용하는 것(`<input @bind="CurrentValue" />`)은 기본적으로 다음과 같습니다.
+`CurrentValue` 속성에 [`@bind`](xref:mvc/views/razor#bind)를 사용하는 것(`<input @bind="CurrentValue" />`)은 기본적으로 다음과 같습니다.
 
 ```razor
 <input value="@CurrentValue"
@@ -52,7 +40,7 @@ Razor 구성 요소는 필드, 속성 또는 Razor 식 값을 사용하여 [`@bi
 }
 ```
 
-구성 요소가 렌더링되면 input 요소의 `value`를 `CurrentValue` 속성에서 가져옵니다. 사용자가 텍스트 상자에 입력을 하고 요소 포커스를 변경하면 `onchange` 이벤트가 발생하고 `CurrentValue` 속성이 변경된 값으로 설정됩니다. 실제로는 `@bind`에서 형식 변환이 수행되는 경우를 처리하므로 코드 생성은 더 복잡해집니다. 원칙적으로 `@bind`는 식의 현재 값을 `value` 특성과 연결하고 등록된 처리기를 사용하여 변경 내용을 처리합니다.
+구성 요소가 렌더링되면 input 요소의 `value`를 `CurrentValue` 속성에서 가져옵니다. 사용자가 텍스트 상자에 입력을 하고 요소 포커스를 변경하면 `onchange` 이벤트가 발생하고 `CurrentValue` 속성이 변경된 값으로 설정됩니다. 실제로는 [`@bind`](xref:mvc/views/razor#bind)에서 형식 변환이 수행되는 경우를 처리하므로 코드 생성은 더 복잡해집니다. 원칙적으로 [`@bind`](xref:mvc/views/razor#bind)는 식의 현재 값을 `value` 특성과 연결하고 등록된 처리기를 사용하여 변경 내용을 처리합니다.
 
 또한 `event` 매개 변수에 `@bind:event` 특성을 포함하여 다른 이벤트에 속성 또는 필드를 바인딩합니다. 다음 예에서는 `oninput` 이벤트에서 `CurrentValue` 속성을 바인딩합니다.
 
@@ -84,7 +72,10 @@ Razor 구성 요소는 필드, 속성 또는 Razor 식 값을 사용하여 [`@bi
 }
 ```
 
-특성 바인딩은 대/소문자를 구분합니다. 예를 들어, `@bind`는 유효하고 `@Bind`는 유효하지 않습니다.
+특성 바인딩은 대/소문자를 구분합니다.
+
+* `@bind`는 유효합니다.
+* `@Bind` 및 `@BIND`는 잘못되었습니다.
 
 ## <a name="unparsable-values"></a>구문 분석할 수 없는 값
 
@@ -110,13 +101,13 @@ Razor 구성 요소는 필드, 속성 또는 Razor 식 값을 사용하여 [`@bi
 
 * `oninput` 이벤트를 사용하지 마세요. 기본 `onchange` 이벤트를 사용합니다(`@bind="{PROPERTY OR FIELD}"`만 지정). 이 경우 요소가 포커스를 잃을 때까지 잘못된 값은 복귀되지 않습니다.
 * `int?` 또는 `string`과 같은 nullable 형식에 바인딩하고 잘못된 항목을 처리하기 위한 사용자 지정 논리를 제공합니다.
-* `InputNumber` 또는 `InputDate`와 같은 [양식 유효성 검사 구성 요소](xref:blazor/forms-validation)를 사용합니다. 양식 유효성 검사 구성 요소에는 잘못된 입력을 관리하기 위한 기본 제공 지원이 있습니다. 양식 유효성 검사 구성 요소:
-  * 사용자가 연결된 `EditContext`에서 잘못된 입력을 제공하고 유효성 검사 오류를 수신할 수 있도록 허용합니다.
+* <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> 또는 <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601>와 같은 [양식 유효성 검사 구성 요소](xref:blazor/forms-validation)를 사용합니다. 양식 유효성 검사 구성 요소에는 잘못된 입력을 관리하기 위한 기본 제공 지원이 있습니다. 양식 유효성 검사 구성 요소:
+  * 사용자가 연결된 <xref:Microsoft.AspNetCore.Components.Forms.EditContext>에서 잘못된 입력을 제공하고 유효성 검사 오류를 수신할 수 있도록 허용합니다.
   * 사용자가 추가 Webform 데이터를 입력하는 것을 방해하지 않고 UI에서 유효성 검사 오류를 표시합니다.
 
 ## <a name="format-strings"></a>형식 문자열
 
-데이터 바인딩은 [`@bind:format`](xref:mvc/views/razor#bind)를 사용하여 <xref:System.DateTime> 형식 문자열에 작동합니다. 통화 또는 숫자 형식 등의 다른 형식 식은 현재 사용할 수 없습니다.
+데이터 바인딩은 `@bind:format`을 사용하여 <xref:System.DateTime> 형식 문자열에 작동합니다. 통화 또는 숫자 형식 등의 다른 형식 식은 현재 사용할 수 없습니다.
 
 ```razor
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -162,7 +153,7 @@ Blazor에서는 기본적으로 날짜 형식을 지정할 수 있도록 지원�
 }
 ```
 
-`EventCallback<T>`는 <xref:blazor/event-handling#eventcallback>에 설명됩니다.
+<xref:Microsoft.AspNetCore.Components.EventCallback%601>는 <xref:blazor/event-handling#eventcallback>에 설명됩니다.
 
 다음 부모 구성 요소는
 
@@ -235,7 +226,7 @@ Blazor에서는 기본적으로 날짜 형식을 지정할 수 있도록 지원�
 
 일반적인 시나리오는 데이터 바인딩 매개 변수를 구성 요소 출력의 페이지 요소에 체인하는 것입니다. 여러 수준의 바인딩이 동시에 발생하기 때문에 이 시나리오를 *체인 바인딩*이라고 합니다.
 
-페이지의 요소에 `@bind` 구문을 사용하여 체인 바인딩을 구현할 수 없습니다. 이벤트 처리기 및 값은 별도로 지정해야 합니다. 그러나 부모 구성 요소는 구성 요소의 매개 변수에서 `@bind` 구문을 사용할 수 있습니다.
+페이지의 요소에 [`@bind`](xref:mvc/views/razor#bind) 구문을 사용하여 체인 바인딩을 구현할 수 없습니다. 이벤트 처리기 및 값은 별도로 지정해야 합니다. 그러나 부모 구성 요소는 구성 요소의 매개 변수에서 [`@bind`](xref:mvc/views/razor#bind) 구문을 사용할 수 있습니다.
 
 다음 `PasswordField` 구성 요소(*PasswordField. razor*):
 

@@ -20,9 +20,9 @@ Blazor 앱은 .NET 메서드에서 JavaScript 함수를 호출하고 JavaScript 
 
 ## <a name="static-net-method-call"></a>정적 .NET 메서드 호출
 
-JavaScript에서 정적 .NET 메서드를 호출하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용합니다. 호출할 정적 메서드의 식별자, 함수를 포함하는 어셈블리의 이름 및 인수를 전달합니다. 비동기 버전은 Blazor 서버 시나리오를 지원하기 위해 선호됩니다. .NET 메서드는 public, static이며 `[JSInvokable]` 특성이 있어야 합니다. 개방형 제네릭 메서드를 호출하는 것은 현재 지원되지 않습니다.
+JavaScript에서 정적 .NET 메서드를 호출하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용합니다. 호출할 정적 메서드의 식별자, 함수를 포함하는 어셈블리의 이름 및 인수를 전달합니다. 비동기 버전은 Blazor 서버 시나리오를 지원하기 위해 선호됩니다. .NET 메서드는 공용, 정적이며 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 특성이 있어야 합니다. 개방형 제네릭 메서드를 호출하는 것은 현재 지원되지 않습니다.
 
-샘플 앱에는 `int` 배열을 반환하기 위한 C# 메서드가 포함되어 있습니다. `JSInvokable` 특성이 메서드에 적용됩니다.
+샘플 앱에는 `int` 배열을 반환하기 위한 C# 메서드가 포함되어 있습니다. [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 특성이 메서드에 적용됩니다.
 
 *Pages/JsInterop.razor*:
 
@@ -57,7 +57,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 네 번째 배열 값은 `ReturnArrayAsync`에서 반환된 배열(`data.push(4);`)로 푸시됩니다.
 
-기본적으로 메서드 식별자는 메서드 이름이지만 `JSInvokableAttribute` 생성자를 사용하여 다른 식별자를 지정할 수 있습니다.
+기본적으로 메서드 식별자는 메서드 이름이지만 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 특성 생성자를 사용하여 다른 식별자를 지정할 수 있습니다.
 
 ```csharp
 @code {
@@ -86,8 +86,8 @@ returnArrayAsyncJs: function () {
 JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. JavaScript에서 .NET 인스턴스 메서드를 호출하려면 다음을 수행합니다.
 
 * JavaScript에 대한 참조로 .NET 인스턴스를 전달합니다.
-  * `DotNetObjectReference.Create`에 대한 정적 호출을 수행합니다.
-  * 인스턴스를 `DotNetObjectReference` 인스턴스로 래핑하고 `DotNetObjectReference` 인스턴스에서 `Create`를 호출합니다. `DotNetObjectReference` 개체를 삭제합니다. 이 섹션의 뒷부분을 참조하세요.
+  * <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType>에 대한 정적 호출을 수행합니다.
+  * 인스턴스를 <xref:Microsoft.JSInterop.DotNetObjectReference> 인스턴스로 래핑하고 <xref:Microsoft.JSInterop.DotNetObjectReference> 인스턴스에서 <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A>를 호출합니다. <xref:Microsoft.JSInterop.DotNetObjectReference> 개체를 삭제합니다. 이 섹션의 뒷부분을 참조하세요.
 * `invokeMethod` 또는 `invokeMethodAsync` 함수를 사용하여 인스턴스에서 .NET 인스턴스 메서드를 호출합니다. JavaScript에서 다른 .NET 메서드를 호출할 때 .NET 인스턴스를 인수로 전달할 수도 있습니다.
 
 > [!NOTE]
@@ -133,9 +133,9 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 Hello, Blazor!
 ```
 
-메모리 누수를 방지하고 `DotNetObjectReference`를 만드는 구성 요소에서 가비지 수집을 허용하려면 다음 방법 중 하나를 채택합니다.
+메모리 누수를 방지하고 <xref:Microsoft.JSInterop.DotNetObjectReference>를 만드는 구성 요소에서 가비지 수집을 허용하려면 다음 방법 중 하나를 채택합니다.
 
-* `DotNetObjectReference` 인스턴스를 만든 클래스에서 개체를 삭제합니다.
+* <xref:Microsoft.JSInterop.DotNetObjectReference> 인스턴스를 만든 클래스에서 개체를 삭제합니다.
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -197,7 +197,7 @@ Hello, Blazor!
   }
   ```
 
-* 구성 요소나 클래스가 `DotNetObjectReference`를 삭제하지 않는 경우 `.dispose()`를 호출하여 클라이언트에서 개체를 삭제합니다.
+* 구성 요소나 클래스가 <xref:Microsoft.JSInterop.DotNetObjectReference>를 삭제하지 않는 경우 `.dispose()`를 호출하여 클라이언트에서 개체를 삭제합니다.
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -211,7 +211,7 @@ Hello, Blazor!
 구성 요소의 .NET 메서드를 호출하려면 다음을 수행합니다.
 
 * `invokeMethod` 또는 `invokeMethodAsync` 함수를 사용하여 구성 요소에 대한 정적 메서드 호출을 수행합니다.
-* 구성 요소의 정적 메서드는 인스턴스 메서드 호출을 호출되는 `Action`으로 래핑합니다.
+* 구성 요소의 정적 메서드는 인스턴스 메서드 호출을 호출되는 <xref:System.Action>으로 래핑합니다.
 
 클라이언트 쪽 JavaScript에서 다음을 실행합니다.
 
@@ -257,11 +257,11 @@ function updateMessageCallerJS() {
 }
 ```
 
-여러 구성 요소가 있고 각각 호출하는 인스턴스 메서드를 포함하는 경우 도우미 클래스를 사용하여 각 구성 요소의 인스턴스 메서드(`Action`)를 호출합니다.
+여러 구성 요소가 있고 각각 호출하는 인스턴스 메서드를 포함하는 경우 도우미 클래스를 사용하여 각 구성 요소의 인스턴스 메서드(<xref:System.Action>)를 호출합니다.
 
 다음 예제에서는
 
-* `JSInterop` 구성 요소에는 몇 가지 `ListItem` 구성 요소가 포함되어 있습니다.
+* `JSInteropExample` 구성 요소에는 몇 가지 `ListItem` 구성 요소가 포함되어 있습니다.
 * 각 `ListItem` 구성 요소는 메시지와 단추로 구성됩니다.
 * `ListItem` 구성 요소 단추를 선택하면 해당 `ListItem`의 `UpdateMessage` 메서드가 목록 항목 텍스트를 변경하고 단추를 숨깁니다.
 
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Pages/JSInterop.razor*:
+*Pages/JSInteropExample.razor*:
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 

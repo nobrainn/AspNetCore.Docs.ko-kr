@@ -46,8 +46,8 @@ Blazor 서버는 상태 저장 앱 프레임워크입니다. 대체로 앱은 �
 
 데이터 지속성은 일반적으로 사용자가 특별히 노력해서 만든 높은 가치의 상태에만 필요합니다. 다음 예제에서 상태를 유지하면 상업 활동의 시간 또는 지원을 절약할 수 있습니다.
 
-* 다단계 WebForm - 상태가 손실된 경우 사용자가 다단계 프로세스의 완료된 여러 단계에 대한 데이터를 다시 입력하려면 오랜 시간이 걸립니다. 이 시나리오에서는 사용자가 다단계 양식을 벗어났다가 나중에 양식으로 돌아올 경우 상태가 손실됩니다.
-* 쇼핑 카트 - 잠재적 수익을 나타내는, 상업적으로 중요한 앱 구성 요소를 유지 관리할 수 있습니다. 상태와 쇼핑 카트가 손실된 사용자는 나중에 사이트로 돌아올 때 제품 또는 서비스를 더 적게 구매할 수도 있습니다.
+* 다단계 WebForm: 상태가 손실된 경우 사용자가 다단계 프로세스의 완료된 여러 단계에 대한 데이터를 다시 입력하려면 오랜 시간이 걸립니다. 이 시나리오에서는 사용자가 다단계 양식을 벗어났다가 나중에 양식으로 돌아올 경우 상태가 손실됩니다.
+* 쇼핑 카트: 잠재적 수익을 나타내는, 상업적으로 중요한 앱 구성 요소를 유지 관리할 수 있습니다. 상태와 쇼핑 카트가 손실된 사용자는 나중에 사이트로 돌아올 때 제품 또는 서비스를 더 적게 구매할 수도 있습니다.
 
 일반적으로 로그인 대화 상자에 입력되었으며 제출되지 않은 사용자 이름과 같이 다시 만들기 쉬운 상태를 유지할 필요는 없습니다.
 
@@ -147,7 +147,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ### <a name="save-and-load-data-within-a-component"></a>구성 요소 내에서 데이터 저장 및 로드
 
-브라우저 스토리지에 데이터를 로드하거나 저장해야 하는 구성 요소에서 [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component)를 사용하여 다음 중 하나의 인스턴스를 삽입합니다.
+브라우저 스토리지에 데이터를 로드하거나 저장해야 하는 구성 요소에서 [`@inject`](xref:mvc/views/razor#inject)를 사용하여 다음 중 하나의 인스턴스를 삽입합니다.
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -184,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-구성 요소의 매개 변수에 탐색 상태가 포함된 경우, `ProtectedSessionStore.GetAsync`를 호출하고 결과를 `OnInitializedAsync`가 아닌 `OnParametersSetAsync`에 할당합니다. `OnInitializedAsync`는 구성 요소를 처음 인스턴스화할 때 한 번만 호출됩니다. 나중에 사용자가 동일한 페이지를 유지하면서 다른 URL로 이동하는 경우에는 `OnInitializedAsync`가 다시 호출되지 않습니다. 자세한 내용은 <xref:blazor/lifecycle>를 참조하세요.
+구성 요소의 매개 변수에 탐색 상태가 포함된 경우, `ProtectedSessionStore.GetAsync`를 호출하고 결과를 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>가 아닌 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>에 할당합니다. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>는 구성 요소를 처음 인스턴스화할 때 한 번만 호출됩니다. 나중에 사용자가 동일한 페이지를 유지하면서 다른 URL로 이동하는 경우에는 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>가 다시 호출되지 않습니다. 자세한 내용은 <xref:blazor/lifecycle>를 참조하세요.
 
 > [!WARNING]
 > 이 섹션의 예제는 서버에서 미리 렌더링을 사용하지 않는 경우에만 작동합니다. 미리 렌더링을 사용하는 경우 다음과 같은 오류가 생성됩니다.
@@ -314,7 +314,7 @@ else
 
 `CounterStateProvider` 구성 요소는 로드가 완료될 때까지 자식 콘텐츠를 렌더링하지 않고 로드 단계를 처리합니다.
 
-`CounterStateProvider` 구성 요소를 사용하려면 카운터 상태에 액세스해야 하는 다른 모든 구성 요소를 이 구성 요소 인스턴스로 래핑합니다. 앱의 모든 구성 요소가 상태에 액세스할 수 있게 하려면 `App` 구성 요소(*App.razor*)의 `Router`를 `CounterStateProvider` 구성 요소로 래핑합니다.
+`CounterStateProvider` 구성 요소를 사용하려면 카운터 상태에 액세스해야 하는 다른 모든 구성 요소를 이 구성 요소 인스턴스로 래핑합니다. 앱의 모든 구성 요소가 상태에 액세스할 수 있게 하려면 `App` 구성 요소(*App.razor*)의 <xref:Microsoft.AspNetCore.Components.Routing.Router>를 `CounterStateProvider` 구성 요소로 래핑합니다.
 
 ```razor
 <CounterStateProvider>

@@ -1,31 +1,19 @@
 ---
-title: ASP.NET Core 부하/스트레스 테스트
-author: Jeremy-Meng
-description: ASP.NET Core 앱의 부하 테스트 및 스트레스 테스트를 위한 몇 가지 주요 도구와 방법을 알아봅니다.
-ms.author: riande
-ms.custom: mvc
-ms.date: 4/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: test/loadtests
-ms.openlocfilehash: cf99eaa71846ea705a312b0fb773605fc77b0d97
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775260"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 부하/스트레스 테스트
 
 부하 테스트와 스트레스 테스트는 웹앱의 성능과 확장성을 보장하는 데 중요합니다. 유사한 테스트를 공유하는 경우가 많지만, 두 테스트의 목표는 서로 다릅니다.
 
-**부하 테스트** - 앱에서 응답 목표를 충족하면서 특정 시나리오에서 지정된 사용자 부하를 처리할 수 있는지를 테스트합니다. 정상 조건으로 앱을 실행합니다.
+**부하 테스트**: 앱에서 응답 목표를 충족하면서 특정 시나리오에서 지정된 사용자 부하를 처리할 수 있는지를 테스트합니다. 정상 조건으로 앱을 실행합니다.
 
-**스트레스 테스트** - 극단적인 조건에서 앱을 실행할 때의 앱 안정성을 테스트하며, 오랫동안 실행하는 경우가 많습니다. 이 테스트는 앱에서 부하를 급하게 또는 점진적으로 늘려 높은 사용자 부하를 적용하거나, 앱의 컴퓨팅 리소스를 제한합니다.
+**스트레스 테스트**: 극단적인 조건에서 앱을 실행할 때의 앱 안정성을 테스트하며, 오랫동안 실행하는 경우가 많습니다. 이 테스트는 앱에서 부하를 급하게 또는 점진적으로 늘려 높은 사용자 부하를 적용하거나, 앱의 컴퓨팅 리소스를 제한합니다.
 
 스트레스 테스트는 스트레스 상태의 앱이 오류를 복구하고 정상적으로 예상 동작으로 돌아올 수 있는지를 확인합니다. 스트레스 상태에서는 정상 조건으로 앱을 실행하지 않습니다.
 

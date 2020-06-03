@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core 3.0의 새로운 기능
-author: rick-anderson
-description: ASP.NET Core 3.0의 새로운 기능에 대해 알아봅니다.
-ms.author: riande
-ms.custom: mvc
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: aspnetcore-3.0
-ms.openlocfilehash: aa0b2b51632cff729449018f9823c38cc26ce612
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774095"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -76,9 +64,9 @@ Blazor의 구성 요소는 일반적으로 HTML과 C#의 자연 혼합인 Razor 
 
 ASP.NET Core 3.0의 gRPC 기능에는 다음이 포함됩니다.
 
-* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; gRPC 서비스 호스팅을 위한 ASP.NET Core 프레임워크입니다. ASP.NET의 gRPC는 로깅, DI(종속성 주입), 인증 및 권한 부여와 같은 표준 ASP.NET Core 기능과 통합됩니다.
-* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; 친숙한 `HttpClient`를 기반으로 하는 .NET Core용 gRPC 클라이언트입니다.
-* [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; gRPC 클라이언트와 `HttpClientFactory`를 통합합니다.
+* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore): gRPC 서비스 호스팅을 위한 ASP.NET Core 프레임워크입니다. ASP.NET의 gRPC는 로깅, DI(종속성 주입), 인증 및 권한 부여와 같은 표준 ASP.NET Core 기능과 통합됩니다.
+* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client): 친숙한 `HttpClient`를 기반으로 하는 .NET Core용 gRPC 클라이언트입니다.
+* [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory): gRPC 클라이언트와 `HttpClientFactory`를 통합합니다.
 
 자세한 내용은 <xref:grpc/index>를 참조하세요.
 
@@ -322,8 +310,8 @@ Json.NET을 ASP.NET Core 3.0에 추가하려면 [Newtonsoft.Json 기반 JSON 형
 
 다음 목록에는 새 Razor 지시문이 포함되어 있습니다.
 
-* [`@attribute`](xref:mvc/views/razor#attribute) &ndash; `@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 예: `@attribute [Authorize]`.
-* [`@implements`](xref:mvc/views/razor#implements) &ndash; `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다. 예: `@implements IDisposable`.
+* [`@attribute`](xref:mvc/views/razor#attribute): `@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 예: `@attribute [Authorize]`.
+* [`@implements`](xref:mvc/views/razor#implements): `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다. 예: `@implements IDisposable`.
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4는 웹 API 및 SPA에 대한 인증 및 권한 부여를 지원합니다.
 

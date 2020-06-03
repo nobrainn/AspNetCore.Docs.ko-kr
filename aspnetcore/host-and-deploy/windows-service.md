@@ -1,24 +1,11 @@
 ---
-title: Windows 서비스에서 ASP.NET Core 호스트
-author: rick-anderson
-description: Windows 서비스에서 ASP.NET Core 앱을 호스트하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/windows-service
-ms.openlocfilehash: 4ad9086c60e58f89bdde4962d7487036df251cc1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776346"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -66,8 +53,8 @@ Host.CreateDefaultBuilder(args)
 
 다음 샘플 앱은 이 항목과 함께 제공됩니다.
 
-* 백그라운드 작업자 서비스 샘플 &ndash; 백그라운드 작업에 [호스팅된 서비스](xref:fundamentals/host/hosted-services)를 사용하는 [작업자 서비스 템플릿](#worker-service-template)을 기반으로 하는 비 웹앱 샘플입니다.
-* 웹앱 서비스 샘플 &ndash; 백그라운드 작업에 [호스티드 서비스](xref:fundamentals/host/hosted-services)를 사용하여 Windows 서비스로 실행되는 Razor Pages 웹앱 샘플입니다.
+* 백그라운드 작업자 서비스 샘플: 백그라운드 작업에 [호스팅된 서비스](xref:fundamentals/host/hosted-services)를 사용하는 [작업자 서비스 템플릿](#worker-service-template)을 기반으로 하는 비 웹앱 샘플입니다.
+* 웹앱 서비스 샘플: 백그라운드 작업에 [호스팅된 서비스](xref:fundamentals/host/hosted-services)를 사용하여 Windows 서비스로 실행되는 Razor Pages 웹앱 샘플입니다.
 
 MVC 지침은 <xref:mvc/overview> 및 <xref:migration/22-to-30>의 문서를 참조하세요.
 
@@ -172,12 +159,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}` &ndash; 호스트의 앱 폴더 경로(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; 서비스 사용자 계정(예: `Contoso\ServiceUser`).
-* `{SERVICE NAME}` &ndash; 서비스 이름(예: `MyService`).
-* `{EXE FILE PATH}` &ndash; 앱의 실행 파일 경로(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
-* `{DESCRIPTION}` &ndash; 서비스 설명(예: `My sample service`).
-* `{DISPLAY NAME}` &ndash; 서비스 표시 이름(예: `My Service`).
+* `{EXE PATH}`: 호스트의 앱 폴더 경로입니다(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
+* `{DOMAIN OR COMPUTER NAME\USER}`: 서비스 사용자 계정입니다(예: `Contoso\ServiceUser`).
+* `{SERVICE NAME}`: 서비스 이름입니다(예: `MyService`).
+* `{EXE FILE PATH}`: 앱의 실행 파일 경로입니다(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
+* `{DESCRIPTION}`: 서비스 설명입니다(예: `My sample service`).
+* `{DISPLAY NAME}`: 서비스 표시 이름입니다(예: `My Service`).
 
 ### <a name="start-a-service"></a>서비스 시작
 
@@ -395,7 +382,7 @@ Razor Pages 또는 MVC 프레임워크를 사용하는 웹앱 기반 서비스�
 
 FDD(프레임워크 종속 배포)에서는 대상 시스템에 .NET Core의 공유 시스템 차원 버전이 있어야 합니다. 이 문서의 지침에 따라 FDD 시나리오가 채택된 경우 SDK는 *프레임워크 종속 실행 파일*이라는 실행 파일( *.exe*)을 생성합니다.
 
-Windows [RID(런타임 식별자)](/dotnet/core/rid-catalog)([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier))는 대상 프레임워크를 포함합니다. 다음 예제에서는 RID가 `win7-x64`로 설정됩니다. `<SelfContained>` 속성은 `false`로 설정됩니다. 해당 속성은 SDK에 Windows용 실행 파일( *.exe*)과 공유 .NET Core Framework에 종속되는 앱을 생성하도록 지시합니다.
+Windows [RID(런타임 식별자)](/dotnet/core/rid-catalog)([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier))에는 대상 프레임워크가 포함되어 있습니다. 다음 예제에서는 RID가 `win7-x64`로 설정됩니다. `<SelfContained>` 속성은 `false`로 설정됩니다. 해당 속성은 SDK에 Windows용 실행 파일( *.exe*)과 공유 .NET Core Framework에 종속되는 앱을 생성하도록 지시합니다.
 
 ASP.NET Core 앱을 게시할 때 일반적으로 생성되는 *web.config* 파일은 Windows 서비스 앱에 필요하지 않습니다. *web.config* 파일이 생성되지 않도록 하려면 `<IsTransformWebConfigDisabled>` 속성을 `true`로 설정합니다.
 
@@ -484,12 +471,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}` &ndash; 호스트의 앱 폴더 경로(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; 서비스 사용자 계정(예: `Contoso\ServiceUser`).
-* `{SERVICE NAME}` &ndash; 서비스 이름(예: `MyService`).
-* `{EXE FILE PATH}` &ndash; 앱의 실행 파일 경로(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
-* `{DESCRIPTION}` &ndash; 서비스 설명(예: `My sample service`).
-* `{DISPLAY NAME}` &ndash; 서비스 표시 이름(예: `My Service`).
+* `{EXE PATH}`: 호스트의 앱 폴더 경로입니다(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
+* `{DOMAIN OR COMPUTER NAME\USER}`: 서비스 사용자 계정입니다(예: `Contoso\ServiceUser`).
+* `{SERVICE NAME}`: 서비스 이름입니다(예: `MyService`).
+* `{EXE FILE PATH}`: 앱의 실행 파일 경로입니다(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
+* `{DESCRIPTION}`: 서비스 설명입니다(예: `My sample service`).
+* `{DISPLAY NAME}`: 서비스 표시 이름입니다(예: `My Service`).
 
 ### <a name="start-a-service"></a>서비스 시작
 
@@ -729,7 +716,7 @@ Razor Pages 또는 MVC 프레임워크를 사용하는 웹앱 기반 서비스�
 
 FDD(프레임워크 종속 배포)에서는 대상 시스템에 .NET Core의 공유 시스템 차원 버전이 있어야 합니다. 이 문서의 지침에 따라 FDD 시나리오가 채택된 경우 SDK는 *프레임워크 종속 실행 파일*이라는 실행 파일( *.exe*)을 생성합니다.
 
-Windows [RID(런타임 식별자)](/dotnet/core/rid-catalog)([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier))는 대상 프레임워크를 포함합니다. 다음 예제에서는 RID가 `win7-x64`로 설정됩니다. `<SelfContained>` 속성은 `false`로 설정됩니다. 해당 속성은 SDK에 Windows용 실행 파일( *.exe*)과 공유 .NET Core Framework에 종속되는 앱을 생성하도록 지시합니다.
+Windows [RID(런타임 식별자)](/dotnet/core/rid-catalog)([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier))에는 대상 프레임워크가 포함되어 있습니다. 다음 예제에서는 RID가 `win7-x64`로 설정됩니다. `<SelfContained>` 속성은 `false`로 설정됩니다. 해당 속성은 SDK에 Windows용 실행 파일( *.exe*)과 공유 .NET Core Framework에 종속되는 앱을 생성하도록 지시합니다.
 
 `<UseAppHost>` 속성은 `true`로 설정됩니다. 이 속성은 서비스에 FDD의 활성화 경로(실행 파일, *.exe*)를 제공합니다.
 
@@ -821,12 +808,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}` &ndash; 호스트의 앱 폴더 경로(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; 서비스 사용자 계정(예: `Contoso\ServiceUser`).
-* `{SERVICE NAME}` &ndash; 서비스 이름(예: `MyService`).
-* `{EXE FILE PATH}` &ndash; 앱의 실행 파일 경로(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
-* `{DESCRIPTION}` &ndash; 서비스 설명(예: `My sample service`).
-* `{DISPLAY NAME}` &ndash; 서비스 표시 이름(예: `My Service`).
+* `{EXE PATH}`: 호스트의 앱 폴더 경로입니다(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
+* `{DOMAIN OR COMPUTER NAME\USER}`: 서비스 사용자 계정입니다(예: `Contoso\ServiceUser`).
+* `{SERVICE NAME}`: 서비스 이름입니다(예: `MyService`).
+* `{EXE FILE PATH}`: 앱의 실행 파일 경로입니다(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
+* `{DESCRIPTION}`: 서비스 설명입니다(예: `My sample service`).
+* `{DISPLAY NAME}`: 서비스 표시 이름입니다(예: `My Service`).
 
 ### <a name="start-a-service"></a>서비스 시작
 

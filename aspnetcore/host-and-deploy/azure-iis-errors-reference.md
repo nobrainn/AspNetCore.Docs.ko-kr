@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core를 사용하는 Azure App Service 및 IIS에 대한 일반적인 오류 참조
-author: rick-anderson
-description: Azure App Service 및 IIS에서 ASP.NET Core 앱을 호스팅할 때 일반적인 오류에 대한 문제 해결 조언을 얻습니다.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 7b3454fbd891ca26d44125810a10eb3b3c2c3933
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775208"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core를 사용하는 Azure App Service 및 IIS에 대한 일반적인 오류 참조
 
@@ -32,13 +19,13 @@ ms.locfileid: "82775208"
 
 * 브라우저 동작(상태 코드 및 오류 메시지)
 * 애플리케이션 이벤트 로그 항목
-  * Azure App Service &ndash;는 <xref:test/troubleshoot-azure-iis>을 참조하세요.
+  * Azure App Service: <xref:test/troubleshoot-azure-iis>을 참조하세요.
   * IIS
     1. **Windows** 메뉴에서 **시작**을 선택하고, *이벤트 뷰어*를 입력하고, **Enter**를 누릅니다.
     1. **이벤트 뷰어**가 열리면 사이드바에서 **Windows 로그** > **애플리케이션**을 확장합니다.
 * ASP.NET Core 모듈 stdout 및 디버그 로그 항목
-  * Azure App Service &ndash;는 <xref:test/troubleshoot-azure-iis>을 참조하세요.
-  * IIS &ndash;는 ASP.NET Core 모듈 항목의 [로그 생성 및 리디렉션](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 및 [향상된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 섹션의 지침을 따릅니다.
+  * Azure App Service: <xref:test/troubleshoot-azure-iis>을 참조하세요.
+  * IIS: ASP.NET Core 모듈 항목의 [로그 생성 및 리디렉션](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 및 [향상된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 섹션의 지침을 따릅니다.
 
 오류 정보를 다음 일반 오류와 비교합니다. 일치하는 항목이 발견되면 문제 해결 권장 사항을 따릅니다.
 
@@ -56,7 +43,7 @@ OS를 업그레이드하는 동안 **C:\Windows\SysWOW64\inetsrv** 디렉터리�
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>사이트 확장 누락, 32비트(x86) 및 64비트(x64) 사이트 확장이 설치됨 또는 잘못된 프로세스 비트 수가 설정됨
 
-Azure App Services에서 호스트하는 앱에 적용됩니다. 
+Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * **브라우저:** HTTP 오류 500.0 - ANCM In-Process 처리기 로드 실패
 
@@ -77,7 +64,7 @@ Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * 미리 보기 런타임에서 앱을 실행 중이며 32비트(x86) 및 64비트(x64) [사이트 확장](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)이 둘 다 설치된 경우 앱의 비트 수와 일치하지 않는 사이트 확장을 제거합니다. 사이트 확장을 제거한 후 앱을 다시 시작합니다. 앱이 다시 시작될 때까지 몇 초간 기다립니다.
 
-* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다. 
+* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다.
 
 * **애플리케이션 설정**에 있는 앱의 **플랫폼**이 앱의 비트 수와 일치하는지 확인합니다.
 
@@ -127,7 +114,7 @@ x86 프레임워크 종속 배포(`<PlatformTarget>x86</PlatformTarget>`)의 경
 
 * 사용 중인 앱에 대해 올바른 URI 엔드포인트를 확인합니다. 바인딩을 확인합니다.
 
-* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다. 
+* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다.
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>CoreWebEngine 또는 W3SVC 서버 기능이 사용되지 않음
 
@@ -211,7 +198,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
   특정 런타임이 필요한 경우 [.NET Download Archives](https://dotnet.microsoft.com/download/archives)에서 런타임을 다운로드하여 시스템에 설치합니다. 설치를 완료하려면 시스템을 다시 시작하거나 명령 프롬프트에서 **net stop was /y**에 이어 **net start w3svc**를 실행하여 IIS를 다시 시작합니다.
 
-## <a name="incorrect-arguments-of-aspnetcore-element"></a>\<aspNetCore> 요소의 잘못된 인수
+## <a name="incorrect-arguments-of-aspnetcore-element"></a>\<aspNetCore> 요소의 인수가 잘못됨
 
 * **브라우저:** HTTP 오류 500.0 - ANCM In-Process 처리기 로드 실패
 
@@ -255,9 +242,9 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 문제 해결:
 
-애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다. 
+애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다.
 
-## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함되어 있음
+## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함됨
 
 * **브라우저:** HTTP 오류 500.19 - 내부 서버 오류
 
@@ -320,13 +307,13 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 * 브라우저 동작(상태 코드 및 오류 메시지)
 * 애플리케이션 이벤트 로그 항목
-  * Azure App Service &ndash;는 <xref:test/troubleshoot-azure-iis>을 참조하세요.
+  * Azure App Service: <xref:test/troubleshoot-azure-iis>을 참조하세요.
   * IIS
     1. **Windows** 메뉴에서 **시작**을 선택하고, *이벤트 뷰어*를 입력하고, **Enter**를 누릅니다.
     1. **이벤트 뷰어**가 열리면 사이드바에서 **Windows 로그** > **애플리케이션**을 확장합니다.
 * ASP.NET Core 모듈 stdout 및 디버그 로그 항목
-  * Azure App Service &ndash;는 <xref:test/troubleshoot-azure-iis>을 참조하세요.
-  * IIS &ndash;는 ASP.NET Core 모듈 항목의 [로그 생성 및 리디렉션](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 및 [향상된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 섹션의 지침을 따릅니다.
+  * Azure App Service: <xref:test/troubleshoot-azure-iis>을 참조하세요.
+  * IIS: ASP.NET Core 모듈 항목의 [로그 생성 및 리디렉션](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 및 [향상된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 섹션의 지침을 따릅니다.
 
 오류 정보를 다음 일반 오류와 비교합니다. 일치하는 항목이 발견되면 문제 해결 권장 사항을 따릅니다.
 
@@ -344,7 +331,7 @@ OS를 업그레이드하는 동안 **C:\Windows\SysWOW64\inetsrv** 디렉터리�
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>사이트 확장 누락, 32비트(x86) 및 64비트(x64) 사이트 확장이 설치됨 또는 잘못된 프로세스 비트 수가 설정됨
 
-Azure App Services에서 호스트하는 앱에 적용됩니다. 
+Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * **브라우저:** HTTP 오류 500.0 - ANCM In-Process 처리기 로드 실패
 
@@ -363,7 +350,7 @@ Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * 미리 보기 런타임에서 앱을 실행 중이며 32비트(x86) 및 64비트(x64) [사이트 확장](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)이 둘 다 설치된 경우 앱의 비트 수와 일치하지 않는 사이트 확장을 제거합니다. 사이트 확장을 제거한 후 앱을 다시 시작합니다. 앱이 다시 시작될 때까지 몇 초간 기다립니다.
 
-* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다. 
+* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다.
 
 * **애플리케이션 설정**에 있는 앱의 **플랫폼**이 앱의 비트 수와 일치하는지 확인합니다.
 
@@ -409,7 +396,7 @@ x86 프레임워크 종속 배포(`<PlatformTarget>x86</PlatformTarget>`)의 경
 
 * 사용 중인 앱에 대해 올바른 URI 엔드포인트를 확인합니다. 바인딩을 확인합니다.
 
-* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다. 
+* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다.
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>CoreWebEngine 또는 W3SVC 서버 기능이 사용되지 않음
 
@@ -487,7 +474,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
   특정 런타임이 필요한 경우 [.NET Download Archives](https://dotnet.microsoft.com/download/archives)에서 런타임을 다운로드하여 시스템에 설치합니다. 설치를 완료하려면 시스템을 다시 시작하거나 명령 프롬프트에서 **net stop was /y**에 이어 **net start w3svc**를 실행하여 IIS를 다시 시작합니다.
 
-## <a name="incorrect-arguments-of-aspnetcore-element"></a>\<aspNetCore> 요소의 잘못된 인수
+## <a name="incorrect-arguments-of-aspnetcore-element"></a>\<aspNetCore> 요소의 인수가 잘못됨
 
 * **브라우저:** HTTP 오류 502.5 - 프로세스 오류
 
@@ -515,9 +502,9 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 문제 해결:
 
-애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다. 
+애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다.
 
-## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함되어 있음
+## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함됨
 
 * **브라우저:** HTTP 오류 500.19 - 내부 서버 오류
 

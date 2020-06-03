@@ -11,11 +11,11 @@ title: 'ASP.NET Core Blazor 라우팅' author: description: monikerRange: ms.aut
 
 [Luke Latham](https://github.com/guardrex)으로
 
-요청을 라우팅하는 방법과 Blazor 앱에서 `NavLink` 구성 요소를 사용하여 탐색 링크를 만드는 방법을 알아봅니다.
+요청을 라우팅하는 방법과 Blazor 앱에서 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소를 사용하여 탐색 링크를 만드는 방법을 알아봅니다.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 엔드포인트 라우팅 통합
 
-Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/routing)에 통합됩니다. `Startup.Configure`의 `MapBlazorHub`를 사용하여 대화형 구성 요소에 대해 들어오는 연결을 허용하도록 ASP.NET Core 앱을 구성합니다.
+Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/routing)에 통합됩니다. `Startup.Configure`의 <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A>를 사용하여 대화형 구성 요소에 대해 들어오는 연결을 허용하도록 ASP.NET Core 앱을 구성합니다.
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -23,7 +23,7 @@ Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 
 ## <a name="route-templates"></a>경로 템플릿
 
-`Router` 구성 요소는 지정된 경로를 사용하여 각 구성 요소로 라우팅할 수 있도록 합니다. `Router` 구성 요소는 *App.razor* 파일에 표시됩니다.
+<xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 지정된 경로를 사용하여 각 구성 요소로 라우팅할 수 있도록 합니다. <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 *App.razor* 파일에 표시됩니다.
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -38,12 +38,12 @@ Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 
 `@page` 지시문을 포함하는 *.razor* 파일을 컴파일하면, 생성된 클래스에 경로 템플릿을 지정하는 <xref:Microsoft.AspNetCore.Components.RouteAttribute>가 제공됩니다.
 
-런타임에 `RouteView` 구성 요소는 다음을 수행합니다.
+런타임에 <xref:Microsoft.AspNetCore.Components.RouteView> 구성 요소는 다음을 수행합니다.
 
-* 원하는 매개 변수와 함께 `Router`에서 `RouteData`를 받습니다.
+* 원하는 매개 변수와 함께 <xref:Microsoft.AspNetCore.Components.Routing.Router>에서 <xref:Microsoft.AspNetCore.Components.RouteData>를 받습니다.
 * 지정된 매개 변수를 사용하여 지정된 구성 요소를 해당 레이아웃(또는 선택적 기본 레이아웃)으로 렌더링합니다.
 
-필요한 경우, 레이아웃을 지정하지 않는 구성 요소에 사용할 `DefaultLayout` 매개 변수를 레이아웃 클래스로 지정할 수 있습니다. 기본 Blazor 템플릿은 `MainLayout` 구성 요소를 지정합니다. *MainLayout.razor*는 템플릿 프로젝트의 *Shared* 폴더에 있습니다. 레이아웃에 대한 자세한 내용은 <xref:blazor/layouts>을 참조하세요.
+필요한 경우, 레이아웃을 지정하지 않는 구성 요소에 사용할 <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> 매개 변수를 레이아웃 클래스로 지정할 수 있습니다. 기본 Blazor 템플릿은 `MainLayout` 구성 요소를 지정합니다. *MainLayout.razor*는 템플릿 프로젝트의 *Shared* 폴더에 있습니다. 레이아웃에 대한 자세한 내용은 <xref:blazor/layouts>을 참조하세요.
 
 한 구성 요소에 여러 개의 경로 템플릿을 적용할 수 있습니다. 다음 구성 요소는 `/BlazorRoute` 및 `/DifferentBlazorRoute`에 대한 요청에 응답합니다.
 
@@ -59,9 +59,9 @@ Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 
-`Router` 구성 요소를 사용하면 요청된 경로의 콘텐츠를 찾을 수 없는 경우 앱에서 사용자 지정 콘텐츠를 지정할 수 있습니다.
+<xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소를 사용하면 요청된 경로의 콘텐츠를 찾을 수 없는 경우 앱에서 사용자 지정 콘텐츠를 지정할 수 있습니다.
 
-*App.razor* 파일에서 `Router` 구성 요소의 `NotFound` 템플릿 매개 변수에 사용자 지정 콘텐츠를 설정합니다.
+*App.razor* 파일에서 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소의 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 템플릿 매개 변수에 사용자 지정 콘텐츠를 설정합니다.
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -75,11 +75,11 @@ Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 </Router>
 ```
 
-`<NotFound>` 태그의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목을 포함할 수 있습니다. `NotFound` 콘텐츠에 기본 레이아웃을 적용하려면 <xref:blazor/layouts>을 참조하세요.
+`<NotFound>` 태그의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목을 포함할 수 있습니다. <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> 콘텐츠에 기본 레이아웃을 적용하려면 <xref:blazor/layouts>을 참조하세요.
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>여러 어셈블리에서 구성 요소로 라우팅
 
-`AdditionalAssemblies` 매개 변수를 사용하여 라우팅 가능한 구성 요소를 검색할 때 고려할 추가 어셈블리를 `Router` 구성 요소에 대해 지정할 수 있습니다. 지정한 어셈블리는 `AppAssembly`에서 지정한 어셈블리에 추가로 고려됩니다. 다음 예제에서 `Component1`은 참조된 클래스 라이브러리에서 정의된 라우팅 가능한 구성 요소입니다. 다음 `AdditionalAssemblies` 예제에서는 `Component1`에 대해 라우팅 지원이 생성됩니다.
+<xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> 매개 변수를 사용하여 라우팅 가능한 구성 요소를 검색할 때 고려할 추가 어셈블리를 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소에 대해 지정할 수 있습니다. 지정한 어셈블리는 `AppAssembly`에서 지정한 어셈블리에 추가로 고려됩니다. 다음 예제에서 `Component1`은 참조된 클래스 라이브러리에서 정의된 라우팅 가능한 구성 요소입니다. 다음 <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> 예제에서는 `Component1`에 대해 라우팅 지원이 생성됩니다.
 
 ```razor
 <Router
@@ -606,7 +606,7 @@ title: 'ASP.NET Core Blazor 라우팅' author: description: monikerRange: ms.aut
 ---------------: | | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 아니요                               | | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 예                              | | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | 예                              | | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | 예                              | | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | 예                              | | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 아니요                               | | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | 예                              | | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | 예                              |
 
 > [!WARNING]
-> CLR 형식(예: `int` 또는 `DateTime`)으로 변환되는 URL을 확인하는 경로 제약 조건은 항상 고정 문화권을 사용합니다. 이러한 제약 조건은 URL은 지역화될 수 없다고 가정합니다.
+> CLR 형식(예: `int` 또는 <xref:System.DateTime>)으로 변환되는 URL을 확인하는 경로 제약 조건은 항상 고정 문화권을 사용합니다. 이러한 제약 조건은 URL은 지역화될 수 없다고 가정합니다.
 
 ### <a name="routing-with-urls-that-contain-dots"></a>점이 포함된 URL을 사용한 라우팅
 
@@ -628,20 +628,20 @@ Blazor 서버 앱에서 *_Host.cshtml*의 기본 경로는 `/`(`@page "/"`)입�
 
 ## <a name="navlink-component"></a>NavLink 구성 요소
 
-탐색 링크를 만드는 경우 HTML 하이퍼링크 요소(`<a>`) 대신 `NavLink` 구성 요소를 사용합니다. `NavLink` 구성 요소는 `href`가 현재 URL과 일치하는지 아닌지에 따라 `active` CSS 클래스를 전환한다는 점을 제외하고 `<a>` 요소처럼 동작합니다. `active` 클래스는 사용자가 표시되는 탐색 링크 중에서 활성 페이지를 파악하는 데 도움이 됩니다.
+탐색 링크를 만드는 경우 HTML 하이퍼링크 요소(`<a>`) 대신 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소를 사용합니다. <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소는 `href`가 현재 URL과 일치하는지 아닌지에 따라 `active` CSS 클래스를 전환한다는 점을 제외하고 `<a>` 요소처럼 동작합니다. `active` 클래스는 사용자가 표시되는 탐색 링크 중에서 활성 페이지를 파악하는 데 도움이 됩니다.
 
-다음 `NavMenu` 구성 요소는 `NavLink` 구성 요소를 사용하는 방법을 보여 주는 [부트스트랩](https://getbootstrap.com/docs/) 탐색 모음을 만듭니다.
+다음 `NavMenu` 구성 요소는 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소를 사용하는 방법을 보여 주는 [부트스트랩](https://getbootstrap.com/docs/) 탐색 모음을 만듭니다.
 
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
-`<NavLink>` 요소의 `Match` 특성에 할당할 수 있는 다음 두 가지 `NavLinkMatch` 옵션이 있습니다.
+`<NavLink>` 요소의 `Match` 특성에 할당할 수 있는 다음 두 가지 <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> 옵션이 있습니다.
 
-* `NavLinkMatch.All` - 현재 URL 전체와 일치하는 경우 `NavLink`가 활성 상태입니다.
-* `NavLinkMatch.Prefix`(‘기본값’) - 현재 URL의 접두사와 일치하는 경우 `NavLink`가 활성 상태입니다.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>: 현재 URL 전체와 일치하는 경우 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>가 활성 상태입니다.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType>(기본값): 현재 URL의 접두사와 일치하는 경우 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>가 활성 상태입니다.
 
-위의 예제에서 홈 `NavLink` `href=""`는 홈 URL과 일치하고, 앱의 기본 경로 URL(예: `https://localhost:5001/`)에 있는 `active` CSS 클래스만 받습니다. 두 번째 `NavLink`는 사용자가 `MyComponent` 접두사를 포함하는 URL(예: `https://localhost:5001/MyComponent` 및 `https://localhost:5001/MyComponent/AnotherSegment`)을 방문할 때 `active` 클래스를 받습니다.
+위의 예제에서 홈 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""`는 홈 URL과 일치하고, 앱의 기본 경로 URL(예: `https://localhost:5001/`)에 있는 `active` CSS 클래스만 받습니다. 두 번째 <xref:Microsoft.AspNetCore.Components.Routing.NavLink>는 사용자가 `MyComponent` 접두사를 포함하는 URL(예: `https://localhost:5001/MyComponent` 및 `https://localhost:5001/MyComponent/AnotherSegment`)을 방문할 때 `active` 클래스를 받습니다.
 
-추가 `NavLink` 구성 요소 특성이 렌더링된 앵커 태그로 전달됩니다. 다음 예제에서 `NavLink` 구성 요소는 `target` 특성을 포함합니다.
+추가 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소 특성이 렌더링된 앵커 태그로 전달됩니다. 다음 예제에서 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소는 `target` 특성을 포함합니다.
 
 ```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
@@ -655,7 +655,7 @@ Blazor 서버 앱에서 *_Host.cshtml*의 기본 경로는 `/`(`@page "/"`)입�
 
 ## <a name="uri-and-navigation-state-helpers"></a>URI 및 탐색 상태 도우미
 
-<xref:Microsoft.AspNetCore.Components.NavigationManager>를 사용하여 C# 코드로 URI 및 탐색 작업을 수행할 수 있습니다. `NavigationManager`는 다음 표에 나와 있는 이벤트와 메서드를 제공합니다.
+<xref:Microsoft.AspNetCore.Components.NavigationManager>를 사용하여 C# 코드로 URI 및 탐색 작업을 수행할 수 있습니다. <xref:Microsoft.AspNetCore.Components.NavigationManager>는 다음 표에 나와 있는 이벤트와 메서드를 제공합니다.
 
 | 멤버 | 설명 |
 | ---
@@ -689,7 +689,7 @@ title: 'ASP.NET Core Blazor 라우팅' author: description: monikerRange: ms.aut
 - 'Razor'
 - ‘SignalR’ uid: 
 
------- | | Uri | 현재 절대 URI를 가져옵니다. | | BaseUri | 절대 URI를 생성하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI(후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri`는 *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor 서버)에 있는 문서 `<base>` 요소의 `href` 특성에 해당합니다. | | NavigateTo | 지정된 URI로 이동합니다. `forceLoad`가 `true`인 경우<ul><li>클라이언트 쪽 라우팅이 무시됩니다.</li><li>클라이언트 쪽 라우터에서 URI를 정상적으로 처리했는지와 상관없이 브라우저에서 서버의 새 페이지를 강제로 로드합니다.</li></ul> | | LocationChanged | 탐색 위치가 변경된 경우에 발생하는 이벤트입니다. | | ToAbsoluteUri | 상대 URI를 절대 URI로 변환합니다. | | <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | 기본 URI(예: 이전에 `GetBaseUri`에서 반환된 URI)가 제공된 경우, 절대 URI를 기본 URI 접두사의 상대 URI로 변환합니다. |
+------ | | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | 현재 절대 URI를 가져옵니다. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | 절대 URI를 생성하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI(후행 슬래시 포함)를 가져옵니다. 일반적으로 <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri>는 *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor 서버)에 있는 문서 `<base>` 요소의 `href` 특성에 해당합니다. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | 지정한 URI로 이동합니다. `forceLoad`가 `true`인 경우<ul><li>클라이언트 쪽 라우팅이 무시됩니다.</li><li>클라이언트 쪽 라우터에서 URI를 정상적으로 처리했는지와 상관없이 브라우저에서 서버의 새 페이지를 강제로 로드합니다.</li></ul> | | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | 탐색 위치가 변경된 경우에 발생하는 이벤트입니다. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | 상대 URI를 절대 URI로 변환합니다. | | <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | 기본 URI(예: 이전에 <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri>에서 반환된 URI)가 제공된 경우, 절대 URI를 기본 URI 접두사의 상대 URI로 변환합니다. |
 
 단추를 선택하면 다음 구성 요소가 앱의 `Counter` 구성 요소로 이동합니다.
 
@@ -711,7 +711,7 @@ title: 'ASP.NET Core Blazor 라우팅' author: description: monikerRange: ms.aut
 }
 ```
 
-다음 구성 요소는 위치 변경 이벤트를 처리합니다. `HandleLocationChanged` 메서드는 프레임워크에서 `Dispose`를 호출할 때 언후크됩니다. 메서드를 언후크하면 구성 요소의 가비지 수집이 허용됩니다.
+다음 구성 요소는 <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType>을 설정하여 위치 변경 이벤트를 처리합니다. `HandleLocationChanged` 메서드는 프레임워크에서 `Dispose`를 호출할 때 언후크됩니다. 메서드를 언후크하면 구성 요소의 가비지 수집이 허용됩니다.
 
 ```razor
 @implements IDisposable
@@ -737,7 +737,7 @@ public void Dispose()
 
 <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs>는 이벤트에 대해 다음과 같은 정보를 제공합니다.
 
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location> &ndash; 새 위치의 URL
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted> &ndash; `true`인 경우 Blazor는 브라우저에서 탐색을 가로챕니다. `false`인 경우 [NavigationManager.NavigateTo](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A)에서 탐색을 수행합니다.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: 새 위치의 URL입니다.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: `true`인 경우 Blazor는 브라우저에서 탐색을 가로챘습니다. `false`인 경우 <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType>에서 탐색이 발생했습니다.
 
 구성 요소 삭제에 대한 자세한 내용은 <xref:blazor/lifecycle#component-disposal-with-idisposable>을 참조하세요.

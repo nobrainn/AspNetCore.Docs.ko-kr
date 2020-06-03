@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor 세계화 및 지역화
-author: guardrex
-description: 여러 문화권과 언어의 사용자가 Razor 구성 요소에 액세스할 수 있도록 하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/globalization-localization
-ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772493"
+title: 'ASP.NET Core Blazor 세계화 및 지역화' author: description: '여러 문화권과 언어의 사용자가 Razor 구성 요소에 액세스할 수 있도록 하는 방법을 알아봅니다.'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
 
@@ -31,18 +19,18 @@ ms.locfileid: "82772493"
 
 다음과 같은 제한된 ASP.NET Core의 지역화 시나리오가 현재 지원됩니다.
 
-* `IStringLocalizer<>`는  Blazor 앱에서 지원됩니다.
-* `IHtmlLocalizer<>`, `IViewLocalizer<>` 및 데이터 주석 지역화는 ASP.NET Core MVC 시나리오로, Blazor 앱에서 **지원되지 않습니다**.
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> 및 <xref:Microsoft.Extensions.Localization.IStringLocalizer%601>는 Blazor 앱에서 지원됩니다.
+* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>, <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> 및 데이터 주석 지역화는 ASP.NET Core MVC 시나리오로, Blazor 앱에서 **지원되지 않습니다**.
 
 자세한 내용은 <xref:fundamentals/localization>를 참조하세요.
 
 ## <a name="globalization"></a>전역화
 
-Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 표시하기 위해 형식을 지정하고 값을 구문 분석합니다.
+Blazor의 [`@bind`](xref:mvc/views/razor#bind) 기능은 사용자의 현재 문화권에 따라 표시하기 위해 형식을 지정하고 값을 구문 분석합니다.
 
 현재 문화권은 <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> 속성에서 액세스할 수 있습니다.
 
-[CultureInfo.InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture)는 다음 필드 형식(`<input type="{TYPE}" />`)에 사용됩니다.
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>는 다음 필드 형식(`<input type="{TYPE}" />`)에 사용됩니다.
 
 * `date`
 * `number`
@@ -59,7 +47,7 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 표시하기
 * `month`
 * `week`
 
-`@bind`는 `@bind:culture` 매개 변수를 지원하여 값을 구문 분석하고 서식을 지정하기 위한 <xref:System.Globalization.CultureInfo?displayProperty=fullName>을 제공합니다. `date` 및 `number` 필드 형식을 사용할 때는 문화권을 지정하지 않는 것이 좋습니다. `date` 및 `number`는 필수 문화권을 제공하는 Blazor가 기본적으로 제공되어 있습니다.
+[`@bind`](xref:mvc/views/razor#bind)는 `@bind:culture` 매개 변수를 지원하여 값을 구문 분석하고 서식을 지정하기 위한 <xref:System.Globalization.CultureInfo?displayProperty=fullName>을 제공합니다. `date` 및 `number` 필드 형식을 사용할 때는 문화권을 지정하지 않는 것이 좋습니다. `date` 및 `number`는 필수 문화권을 제공하는 Blazor가 기본적으로 제공되어 있습니다.
 
 ## <a name="localization"></a>지역화
 
@@ -67,7 +55,7 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 표시하기
 
 Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)를 사용하여 문화권을 설정합니다.
 
-문화권을 명시적으로 구성하려면 `Program.Main`에서 `CultureInfo.DefaultThreadCurrentCulture`와 `CultureInfo.DefaultThreadCurrentUICulture`를 설정하세요.
+문화권을 명시적으로 구성하려면 `Program.Main`에서 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType>와 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType>를 설정하세요.
 
 기본적으로 Blazor WebAssembly 앱에 대한 Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 링커 동작을 제어하는 방법에 대한 자세한 내용과 지침은 <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>을 참조하세요.
 
@@ -146,7 +134,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> `LocalRedirect` 작업 결과를 사용하여 오픈 리디렉션 공격을 방지합니다. 자세한 내용은 <xref:security/preventing-open-redirects>를 참조하세요.
+> <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> 작업 결과를 사용하여 오픈 리디렉션 공격을 방지합니다. 자세한 내용은 <xref:security/preventing-open-redirects>를 참조하세요.
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행하는 방법의 예를 보여 줍니다.
 

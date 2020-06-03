@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core 프로젝트 문제 해결 및 디버깅
-author: Rick-Anderson
-description: ASP.NET Core 프로젝트를 사용하여 경고 및 오류를 이해하고 문제를 해결합니다.
-ms.author: riande
-ms.custom: mvc
-ms.date: 07/10/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: test/troubleshoot
-ms.openlocfilehash: 74b494f6d16637a54ab7f1b5c0cf9fbb86248fe7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776619"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>ASP.NET Core 프로젝트 문제 해결 및 디버깅
 
@@ -79,9 +67,9 @@ ASP.NET Core에 대한 **새 프로젝트** 대화 상자에서 다음과 같은
 
 앱이 요청에 응답할 수 있는 경우 미들웨어를 사용하여 앱에서 다음 데이터를 가져올 수 있습니다.
 
-* 요청 &ndash; 메서드, 체계, 호스트, pathbase, 경로, 쿼리 문자열, 헤더
-* 연결 &ndash; 원격 IP 주소, 원격 포트, 로컬 IP 주소, 로컬 포트, 클라이언트 인증서
-* Identity &ndash; 이름, 표시 이름
+* 요청: 메서드, 체계, 호스트, pathbase, 경로, 쿼리 문자열, 헤더
+* 연결: 원격 IP 주소, 원격 포트, 로컬 IP 주소, 로컬 포트, 클라이언트 인증서
+* Identity: Name, display name
 * 구성 설정
 * 환경 변수
 

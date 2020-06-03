@@ -32,8 +32,8 @@ IIS *web.config* 압축 구성에 대해서는 [IIS: Brotli 및 Gzip 압축](#br
 
 Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 Blazor 서버에서 호스트한 앱의 요청을 라우팅하는 것처럼 간단하지 않습니다. 다음 두 가지 구성 요소가 있는 Blazor WebAssembly 앱을 생각해 보겠습니다.
 
-* *Main.razor* &ndash; 앱의 루트에 로드되며 `About` 구성 요소에 대한 링크(`href="About"`)를 포함합니다.
-* *About.razor* &ndash; `About` 구성 요소입니다.
+* *Main.razor*: 앱의 루트에 로드되며 `About` 구성 요소에 대한 링크(`href="About"`)를 포함합니다.
+* *About.razor*: `About` 구성 요소입니다.
 
 브라우저의 주소 표시줄을 사용하여 앱의 기본 문서를 요청하는 경우(예: `https://www.contoso.com/`):
 
@@ -83,11 +83,11 @@ IIS는 Blazor 앱에 사용할 수 있는 정적 파일 서버입니다. Blazor�
 Blazor 프로젝트가 게시되면 다음 IIS 구성을 사용하여 *web.config* 파일이 생성됩니다.
 
 * 다음 파일 확장명에 대해 MIME 형식을 설정합니다.
-  * *.dll* &ndash; `application/octet-stream`
-  * *.json* &ndash; `application/json`
-  * *.wasm* &ndash; `application/wasm`
-  * *.woff* &ndash; `application/font-woff`
-  * *.woff2* &ndash; `application/font-woff`
+  * *.dll*: `application/octet-stream`
+  * *.json*: `application/json`
+  * *.wasm*: `application/wasm`
+  * *.woff*: `application/font-woff`
+  * *.woff2*: `application/font-woff`
 * 다음 MIME 형식에 대해 HTTP 압축을 사용합니다.
   * `application/octet-stream`
   * `application/wasm`

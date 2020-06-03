@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core Blazor 템플릿 기반 구성 요소
-author: guardrex
-description: 템플릿 기반 구성 요소에서 하나 이상의 UI 템플릿을 매개 변수로 허용한 다음, 이 매개 변수를 구성 요소 렌더링 논리의 일부로 사용할 수 있는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/templated-components
-ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771069"
+title: 'ASP.NET Core Blazor 템플릿 기반 구성 요소' author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core Blazor 템플릿 기반 구성 요소
 
@@ -31,7 +18,7 @@ ms.locfileid: "82771069"
 
 ## <a name="template-parameters"></a>템플릿 매개 변수
 
-템플릿 기반 구성 요소는 `RenderFragment` 또는 `RenderFragment<T>` 형식의 구성 요소 매개 변수를 하나 이상 지정하여 정의합니다. 렌더링 조각은 렌더링할 UI 세그먼트를 나타냅니다. `RenderFragment<T>`는 렌더링 조각을 호출할 때 지정할 수 있는 형식 매개 변수를 사용합니다.
+템플릿 기반 구성 요소는 <xref:Microsoft.AspNetCore.Components.RenderFragment> 또는 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> 형식의 구성 요소 매개 변수를 하나 이상 지정하여 정의합니다. 렌더링 조각은 렌더링할 UI 세그먼트를 나타냅니다. <xref:Microsoft.AspNetCore.Components.RenderFragment%601>는 렌더링 조각을 호출할 때 지정할 수 있는 형식 매개 변수를 사용합니다.
 
 `TableTemplate` 구성 요소:
 
@@ -57,7 +44,7 @@ ms.locfileid: "82771069"
 
 ## <a name="template-context-parameters"></a>템플릿 컨텍스트 매개 변수
 
-요소로 전달된 `RenderFragment<T>` 형식의 구성 요소 인수에는 `context`라는 암시적 매개 변수(예: 위의 코드 샘플에서 `@context.PetId`)가 있지만, 자식 요소의 `Context` 특성을 사용하여 매개 변수 이름을 변경할 수 있습니다. 다음 예제에서 `RowTemplate` 요소의 `Context` 특성은 `pet` 매개 변수를 지정합니다.
+요소로 전달된 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> 형식의 구성 요소 인수에는 `context`라는 암시적 매개 변수(예: 위의 코드 샘플에서 `@context.PetId`)가 있지만, 자식 요소의 `Context` 특성을 사용하여 매개 변수 이름을 변경할 수 있습니다. 다음 예제에서 `RowTemplate` 요소의 `Context` 특성은 `pet` 매개 변수를 지정합니다.
 
 ```razor
 <TableTemplate Items="pets">

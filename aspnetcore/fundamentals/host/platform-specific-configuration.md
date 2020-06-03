@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core에서 호스팅 시작 어셈블리 사용
-author: rick-anderson
-description: IHostingStartup 구현을 사용하여 외부 어셈블리에서 ASP.NET Core 앱을 강화하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc, seodec18
-ms.date: 09/26/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: afbffc752f9c184ef32c9518464a94a615828dab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776580"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ‘SignalR’ uid: 
+
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core에서 호스팅 시작 어셈블리 사용
 
@@ -242,7 +229,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 호스팅 시작 활성화 옵션은 다음과 같습니다.
 
-* [런타임 저장소](#runtime-store) &ndash; 활성화에는 활성화를 위한 컴파일 시간 참조가 필요하지 않습니다. 샘플 앱은 호스팅 시작 어셈블리 및 종속성 파일을 *배포* 폴더 안에 배치하여 다중 머신 환경에서 호스팅 시작의 배포를 용이하게 합니다. *배포* 폴더에는 호스팅 시작을 사용하도록 배포 시스템에 환경 변수를 만들거나 수정하는 PowerShell 스크립트도 포함되어 있습니다.
+* [런타임 저장소](#runtime-store): 활성화에는 활성화를 위한 컴파일 시간 참조가 필요하지 않습니다. 샘플 앱은 호스팅 시작 어셈블리 및 종속성 파일을 *배포* 폴더 안에 배치하여 다중 머신 환경에서 호스팅 시작의 배포를 용이하게 합니다. *배포* 폴더에는 호스팅 시작을 사용하도록 배포 시스템에 환경 변수를 만들거나 수정하는 PowerShell 스크립트도 포함되어 있습니다.
 * 활성화에 필요한 컴파일 시간 참조
   * [NuGet 패키지](#nuget-package)
   * [프로젝트 bin 폴더](#project-bin-folder)
@@ -329,10 +316,10 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 {ADDITIONAL DEPENDENCIES PATH}/shared/{SHARED FRAMEWORK NAME}/{SHARED FRAMEWORK VERSION}/{ENHANCEMENT ASSEMBLY NAME}.deps.json
 ```
 
-* `{ADDITIONAL DEPENDENCIES PATH}` &ndash; `DOTNET_ADDITIONAL_DEPS` 환경 변수에 추가되는 위치입니다.
-* `{SHARED FRAMEWORK NAME}` &ndash; 이 추가 종속성 파일에 대한 공유 프레임워크가 필요합니다.
-* `{SHARED FRAMEWORK VERSION}` &ndash; 최소 공유 프레임워크 버전입니다.
-* `{ENHANCEMENT ASSEMBLY NAME}` &ndash; 향상된 기능의 어셈블리 이름입니다.
+* `{ADDITIONAL DEPENDENCIES PATH}`: `DOTNET_ADDITIONAL_DEPS` 환경 변수에 추가되는 위치입니다.
+* `{SHARED FRAMEWORK NAME}`: 이 추가 종속성 파일에 대한 공유 프레임워크가 필요합니다.
+* `{SHARED FRAMEWORK VERSION}`: 최소 공유 프레임워크 버전입니다.
+* `{ENHANCEMENT ASSEMBLY NAME}`: 향상된 기능의 어셈블리 이름입니다.
 
 샘플 앱(*RuntimeStore* 프로젝트)에서 추가 종속성 파일은 다음 위치에 배치됩니다.
 
@@ -376,8 +363,8 @@ NuGet 패키지 및 런타임 저장소에 대한 자세한 내용은 다음 항
   * 사용하는 프로젝트에서 액세스할 수 있는 위치입니다.
 * 호스팅 시작 종속성 파일은 [런타임 저장소](#runtime-store) 섹션에 설명된 대로 향상된 앱에서 사용할 수 있습니다(컴파일 시간 참조 없이).
 * .NET Framework를 대상으로 지정하는 경우 어셈블리는 기본 로드 컨텍스트에 로드될 수 있습니다. 즉, .NET Framework는 어셈블리가 다음 위치 중 하나에 있는 것을 의미합니다.
-  * 애플리케이션 기준 위치 경로 &ndash; 앱의 실행 파일( *.exe*)이 있는 *bin* 폴더입니다.
-  * GAC(전역 어셈블리 캐시) &ndash; GAC는 여러 .NET Framework 앱이 공유하는 어셈블리를 저장합니다. 자세한 내용은 [방법: .NET Framework 설명서의 전역 어셈블리 캐시](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)에 어셈블리를 설치합니다.
+  * 애플리케이션 기본 경로: 애플리케이션의 실행 파일( *.exe*)이 있는 *bin* 폴더입니다.
+  * GAC(전역 어셈블리 캐시): GAC에는 여러 .NET Framework 앱이 공유하는 어셈블리가 저장됩니다. 자세한 내용은 [방법: .NET Framework 설명서의 전역 어셈블리 캐시](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)에 어셈블리를 설치합니다.
 
 ## <a name="sample-code"></a>샘플 코드
 
@@ -628,7 +615,7 @@ HostingStartupLibrary;HostingStartupPackage;StartupDiagnostics
 
 호스팅 시작 활성화 옵션은 다음과 같습니다.
 
-* [런타임 저장소](#runtime-store) &ndash; 활성화에는 활성화를 위한 컴파일 시간 참조가 필요하지 않습니다. 샘플 앱은 호스팅 시작 어셈블리 및 종속성 파일을 *배포* 폴더 안에 배치하여 다중 머신 환경에서 호스팅 시작의 배포를 용이하게 합니다. *배포* 폴더에는 호스팅 시작을 사용하도록 배포 시스템에 환경 변수를 만들거나 수정하는 PowerShell 스크립트도 포함되어 있습니다.
+* [런타임 저장소](#runtime-store): 활성화에는 활성화를 위한 컴파일 시간 참조가 필요하지 않습니다. 샘플 앱은 호스팅 시작 어셈블리 및 종속성 파일을 *배포* 폴더 안에 배치하여 다중 머신 환경에서 호스팅 시작의 배포를 용이하게 합니다. *배포* 폴더에는 호스팅 시작을 사용하도록 배포 시스템에 환경 변수를 만들거나 수정하는 PowerShell 스크립트도 포함되어 있습니다.
 * 활성화에 필요한 컴파일 시간 참조
   * [NuGet 패키지](#nuget-package)
   * [프로젝트 bin 폴더](#project-bin-folder)
@@ -715,10 +702,10 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 {ADDITIONAL DEPENDENCIES PATH}/shared/{SHARED FRAMEWORK NAME}/{SHARED FRAMEWORK VERSION}/{ENHANCEMENT ASSEMBLY NAME}.deps.json
 ```
 
-* `{ADDITIONAL DEPENDENCIES PATH}` &ndash; `DOTNET_ADDITIONAL_DEPS` 환경 변수에 추가되는 위치입니다.
-* `{SHARED FRAMEWORK NAME}` &ndash; 이 추가 종속성 파일에 대한 공유 프레임워크가 필요합니다.
-* `{SHARED FRAMEWORK VERSION}` &ndash; 최소 공유 프레임워크 버전입니다.
-* `{ENHANCEMENT ASSEMBLY NAME}` &ndash; 향상된 기능의 어셈블리 이름입니다.
+* `{ADDITIONAL DEPENDENCIES PATH}`: `DOTNET_ADDITIONAL_DEPS` 환경 변수에 추가되는 위치입니다.
+* `{SHARED FRAMEWORK NAME}`: 이 추가 종속성 파일에 대한 공유 프레임워크가 필요합니다.
+* `{SHARED FRAMEWORK VERSION}`: 최소 공유 프레임워크 버전입니다.
+* `{ENHANCEMENT ASSEMBLY NAME}`: 향상된 기능의 어셈블리 이름입니다.
 
 샘플 앱(*RuntimeStore* 프로젝트)에서 추가 종속성 파일은 다음 위치에 배치됩니다.
 
@@ -762,8 +749,8 @@ NuGet 패키지 및 런타임 저장소에 대한 자세한 내용은 다음 항
   * 사용하는 프로젝트에서 액세스할 수 있는 위치입니다.
 * 호스팅 시작 종속성 파일은 [런타임 저장소](#runtime-store) 섹션에 설명된 대로 향상된 앱에서 사용할 수 있습니다(컴파일 시간 참조 없이).
 * .NET Framework를 대상으로 지정하는 경우 어셈블리는 기본 로드 컨텍스트에 로드될 수 있습니다. 즉, .NET Framework는 어셈블리가 다음 위치 중 하나에 있는 것을 의미합니다.
-  * 애플리케이션 기준 위치 경로 &ndash; 앱의 실행 파일( *.exe*)이 있는 *bin* 폴더입니다.
-  * GAC(전역 어셈블리 캐시) &ndash; GAC는 여러 .NET Framework 앱이 공유하는 어셈블리를 저장합니다. 자세한 내용은 [방법: .NET Framework 설명서의 전역 어셈블리 캐시](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)에 어셈블리를 설치합니다.
+  * 애플리케이션 기본 경로: 애플리케이션의 실행 파일( *.exe*)이 있는 *bin* 폴더입니다.
+  * GAC(전역 어셈블리 캐시): GAC에는 여러 .NET Framework 앱이 공유하는 어셈블리가 저장됩니다. 자세한 내용은 [방법: .NET Framework 설명서의 전역 어셈블리 캐시](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)에 어셈블리를 설치합니다.
 
 ## <a name="sample-code"></a>샘플 코드
 
