@@ -1,11 +1,11 @@
 ---
-제목: ' 만든이의 사용자 및 그룹 관리 SignalR : 설명: ' ASP.NET Core SignalR 사용자 및 그룹 관리 개요 '
-monikerRange: ms author: ms: custom: ms. date: no loc:
+제목: ' SignalR author: bradygaster description: ' ASP.NET Core 사용자 및 그룹 관리의 개요 '에서 사용자 및 그룹을 관리 SignalR 합니다.
+monikerRange: ' >= aspnetcore-2.1 ' ms author: bradyg ms. custom: mvc ms. date: 05/17/2020 no loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: signalr/groups
 
 ---
 
@@ -15,7 +15,7 @@ monikerRange: ms author: ms: custom: ms. date: no loc:
 
 SignalR지정 된 연결 그룹 뿐만 아니라 특정 사용자와 연결 된 모든 연결에 메시지를 보낼 수 있습니다.
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/)[(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ## <a name="users-in-signalr"></a>사용자의SignalR
 
@@ -43,7 +43,7 @@ SignalR지정 된 연결 그룹 뿐만 아니라 특정 사용자와 연결 된 
 > [!NOTE]
 > 그룹 이름은 대/소문자를 구분 합니다.
 
-## <a name="related-resources"></a>관련 리소스
+## <a name="related-resources"></a>관련 참고 자료
 
 * [시작](xref:tutorials/signalr)
 * [허브](xref:signalr/hubs)
