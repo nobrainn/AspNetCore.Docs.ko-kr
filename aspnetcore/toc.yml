@@ -1168,7 +1168,7 @@
       uid: performance/performance-best-practices
     - name: 메모리 및 GC
       uid: performance/memory
-    - name: 응답 캐싱
+    - name: 캐싱
       items:
         - name: 개요
           uid: performance/caching/response
