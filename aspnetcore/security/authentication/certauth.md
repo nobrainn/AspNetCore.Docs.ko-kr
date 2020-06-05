@@ -1,17 +1,29 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core에서 인증서 인증 구성
+author: blowdart
+description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: bdorrans
+ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/certauth
+ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454612"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core에 대 한 [인증서 인증과](https://tools.ietf.org/html/rfc5246#section-7.4.4) 유사한 구현을 포함 합니다. 인증서 인증은 ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 보다 정확 하 게,이는 인증서의 유효성을 검사 한 다음 해당 인증서를에 대해 확인할 수 있는 이벤트를 제공 하는 인증 처리기입니다 `ClaimsPrincipal` . 
+`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core에 대 한 [인증서 인증과](https://tools.ietf.org/html/rfc5246#section-7.4.4) 유사한 구현을 포함 합니다. 인증서 인증은 ASP.NET Core에 도달하기 훨씬 전에 TLS 수준에서 수행됩니다. 보다 정확 하 게,이는 인증서의 유효성을 검사 한 다음 해당 인증서를에 대해 확인할 수 있는 이벤트를 제공 하는 인증 처리기입니다 `ClaimsPrincipal` . 
 
-인증서 인증을 위해 [호스트를 구성](#configure-your-host-to-require-certificates) 하 고, IIS, Kestrel, Azure Web Apps 또는 사용 중인 다른 모든 항목을 사용 합니다.
+인증서 인증을 위해 [서버를 구성](#configure-your-server-to-require-certificates) 하 고, IIS, Kestrel, Azure Web Apps 또는 사용 중인 다른 모든 항목을 구성 합니다.
 
 ## <a name="proxy-and-load-balancer-scenarios"></a>프록시 및 부하 분산 장치 시나리오
 
@@ -22,15 +34,15 @@ title: author: description: monikerRange: ms.author: ms.date: no-loc:
 
 프록시 및 부하 분산 장치를 사용 하는 환경에서 인증서 인증에 대 한 대안은 OIDC (Openid connect Connect)를 사용 하는 페더레이션 서비스 (ADFS) Active Directory입니다.
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 
-HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [호스트를 구성](#configure-your-host-to-require-certificates) 합니다.
+HTTPS 인증서를 획득 하 고 적용 한 다음 인증서를 요구 하도록 [서버를 구성](#configure-your-server-to-require-certificates) 합니다.
 
 웹 앱에서 패키지에 대 한 참조를 추가 `Microsoft.AspNetCore.Authentication.Certificate` 합니다. 그런 다음 `Startup.ConfigureServices` 메서드에서와 함께를 호출 하 여 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 요청을 `OnCertificateValidated` 통해 보낸 클라이언트 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 대리자를 제공 합니다. 해당 정보를로 변환 하 `ClaimsPrincipal` 고 속성에 설정 `context.Principal` 합니다.
 
 인증이 실패 하는 경우이 처리기는 `403 (Forbidden)` 정상적으로 응답을 반환 `401 (Unauthorized)` 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 예를 들면 다음과 같습니다.
+또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 다음은 그 예입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -183,7 +195,7 @@ services.AddAuthentication(
 
 개념적으로 인증서의 유효성 검사는 권한 부여에 대 한 문제입니다. 예를 들어, 권한 부여 정책에서 발급자 또는 지문을 포함 하는 것이 아니라 확인을 추가 하는 `OnCertificateValidated` 것은 완벽 하 게 허용 됩니다.
 
-## <a name="configure-your-host-to-require-certificates"></a>인증서를 요구 하도록 호스트 구성
+## <a name="configure-your-server-to-require-certificates"></a>인증서를 요구 하도록 서버 구성
 
 ### <a name="kestrel"></a>Kestrel
 
