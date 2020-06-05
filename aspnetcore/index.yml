@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: ASP.NET 설명서
+title: ASP.NET Core 설명서
 summary: ASP.NET Core를 사용하여 빠르고 안전한 플랫폼 간 및 클라우드 기반 웹앱과 서비스를 만드는 방법을 알아봅니다. 자습서, 샘플 코드, 기본 사항, API 참조 등을 찾아보세요.
 brand: aspnet
 metadata:
-  title: ASP.NET 설명서
+  title: ASP.NET Core 설명서
   description: ASP.NET Core를 사용하여 빠르고 안전한 플랫폼 간 및 클라우드 기반 웹앱과 서비스를 만드는 방법을 알아봅니다. 자습서, 샘플 코드, 기본 사항, API 참조 등을 찾아보세요.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 05/01/2020
-  ms.openlocfilehash: 2d653ab5ca78fb856098fb5f250a235e3f2635d0
-  ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+  ms.date: 06/03/2020
+  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
+  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
   ms.translationtype: HT
   ms.contentlocale: ko-KR
-  ms.lasthandoff: 05/02/2020
-  ms.locfileid: "82727707"
+  ms.lasthandoff: 06/04/2020
+  ms.locfileid: "84355426"
 highlightedContent:
   items:
   - title: 아무 플랫폼에서 5분 만에 ASP.NET Core 앱 만들기
@@ -39,12 +39,12 @@ highlightedContent:
   - title: 첫 번째 실시간 웹앱 만들기
     itemType: get-started
     url: tutorials/signalr.md
-  - title: 첫 번째 데이터 기반 MVC 웹앱 만들기
-    itemType: get-started
-    url: tutorials/first-mvc-app//start-mvc.md
+  - title: ASP.NET 4.x 설명서
+    itemType: overview
+    url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: ASP.NET Core 앱 개발
-  summary: 대화형 웹앱, 웹 API, MVC 패턴화 앱, 실시간 앱 등 선택
+  summary: 대화형 웹앱, 웹 API, MVC 패턴화 앱, 실시간 앱 등을 선택합니다. ASP.NET 4.x 설명서는 [ASP.NET](https://docs.microsoft.com/aspnet/overview)을 참조하세요.
   items:
   - title: 대화형 클라이언트 쪽 Blazor 앱
     summary: 기본에 가까운 성능을 위해 WebAssembly를 활용할 수 있는 재사용 가능한 UI 구성 요소를 사용하여 개발
@@ -306,7 +306,7 @@ additionalContent:
     - title: Azure 및 ASP.NET Core
       links:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet
-        text: ASP.NET 웹앱 배포
+        text: ASP.NET Core 웹앱 배포
       - url: https://docs.microsoft.com/visualstudio/containers/container-tools?view=vs-2019.md
         text: ASP.NET Core 및 Docker
       - url: https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/
@@ -314,7 +314,7 @@ additionalContent:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
         text: App Service 및 Azure SQL Database
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-connect-msi
-        text: ASP.NET 및 Azure SQL Database를 사용하는 관리 ID
+        text: ASP.NET Core 및 Azure SQL Database를 사용하는 관리 ID
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api
         text: Azure App Service의 CORS를 사용하는 웹 API
       - url: https://docs.microsoft.com/learn/modules/capture-application-logs-app-service/
@@ -373,4 +373,4 @@ additionalContent:
         text: 일반 클라이언트측 웹 기술
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/development-process-for-azure
         text: Azure 개발 프로세스
-  footer: ASP.NET 문서에 참여합니다. [기여자 가이드](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md)를 참조하세요.
+  footer: ASP.NET Core 설명서에 참여합니다. [기여자 가이드](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md)를 참조하세요.
