@@ -5,7 +5,7 @@ description: Blazor [IdentityServer](https://identityserver.io/) 백 엔드를 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/11/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,48 +13,52 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 2ab43ac5f4de398c57707de23a06a1650f6140cb
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
+ms.openlocfilehash: ade2d88c6a2d59e169c9019e871982a74ae46b33
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153628"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452319"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a><span data-ttu-id="95e63-103">Blazor서버를 사용 하 여 ASP.NET Core weasemboman 호스팅된 앱 보안 Identity</span><span class="sxs-lookup"><span data-stu-id="95e63-103">Secure an ASP.NET Core Blazor WebAssembly hosted app with Identity Server</span></span>
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a><span data-ttu-id="ac0c1-103">Blazor서버를 사용 하 여 ASP.NET Core weasemboman 호스팅된 앱 보안 Identity</span><span class="sxs-lookup"><span data-stu-id="ac0c1-103">Secure an ASP.NET Core Blazor WebAssembly hosted app with Identity Server</span></span>
 
-<span data-ttu-id="95e63-104">[Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="95e63-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="ac0c1-104">[Javier Calvarro e](https://github.com/javiercn) 및 [Luke latham 문자](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="ac0c1-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+<span data-ttu-id="ac0c1-105">이 문서에서는 Blazor [IdentityServer](https://identityserver.io/) 를 사용 하 여 사용자 및 API 호출을 인증 하는 새 호스팅된 앱을 만드는 방법을 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-105">This article explains how to create a new Blazor hosted app that uses [IdentityServer](https://identityserver.io/) to authenticate users and API calls.</span></span>
 
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
+# <a name="visual-studio"></a>[<span data-ttu-id="ac0c1-106">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ac0c1-106">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="95e63-105">Blazor [IdentityServer](https://identityserver.io/) 를 사용 하 여 사용자 및 API 호출을 인증 하는 Visual Studio에서 새로 호스팅된 앱을 만들려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-105">To create a new Blazor hosted app in Visual Studio that uses [IdentityServer](https://identityserver.io/) to authenticate users and API calls:</span></span>
+<span data-ttu-id="ac0c1-107">Visual Studio에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-107">In Visual Studio:</span></span>
 
-1. <span data-ttu-id="95e63-106">Visual Studio를 사용 하 여 새 \*\* Blazor weasembomapp\*\* 을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-106">Use Visual Studio to create a new **Blazor WebAssembly** app.</span></span> <span data-ttu-id="95e63-107">자세한 내용은 <xref:blazor/get-started>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="95e63-107">For more information, see <xref:blazor/get-started>.</span></span>
-1. <span data-ttu-id="95e63-108">**새 Blazor 앱 만들기** 대화 상자의 **인증** 섹션에서 **변경** 을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-108">In the **Create a new Blazor app** dialog, select **Change** in the **Authentication** section.</span></span>
-1. <span data-ttu-id="95e63-109">**개별 사용자 계정** , **확인을**차례로 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-109">Select **Individual User Accounts** followed by **OK**.</span></span>
-1. <span data-ttu-id="95e63-110">**고급** 섹션에서 **호스팅된 ASP.NET Core** 확인란을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-110">Select the **ASP.NET Core hosted** checkbox in the **Advanced** section.</span></span>
-1. <span data-ttu-id="95e63-111">**만들기** 단추를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-111">Select the **Create** button.</span></span>
+1. <span data-ttu-id="ac0c1-108">새 \*\* Blazor weasembomapp\*\* 을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-108">Create a new **Blazor WebAssembly** app.</span></span> <span data-ttu-id="ac0c1-109">자세한 내용은 <xref:blazor/get-started>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-109">For more information, see <xref:blazor/get-started>.</span></span>
+1. <span data-ttu-id="ac0c1-110">**새 Blazor 앱 만들기** 대화 상자의 **인증** 섹션에서 **변경** 을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-110">In the **Create a new Blazor app** dialog, select **Change** in the **Authentication** section.</span></span>
+1. <span data-ttu-id="ac0c1-111">**개별 사용자 계정** , **확인을**차례로 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-111">Select **Individual User Accounts** followed by **OK**.</span></span>
+1. <span data-ttu-id="ac0c1-112">**고급** 섹션에서 **호스팅된 ASP.NET Core** 확인란을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-112">Select the **ASP.NET Core hosted** checkbox in the **Advanced** section.</span></span>
+1. <span data-ttu-id="ac0c1-113">**만들기** 단추를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-113">Select the **Create** button.</span></span>
 
-<span data-ttu-id="95e63-112">명령 셸에서 앱을 만들려면 다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-112">To create the app in a command shell, execute the following command:</span></span>
+# <a name="net-core-cli"></a>[<span data-ttu-id="ac0c1-114">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="ac0c1-114">.NET Core CLI</span></span>](#tab/netcore-cli/)
+
+<span data-ttu-id="ac0c1-115">명령 셸에서 앱을 만들려면 다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-115">To create the app in a command shell, execute the following command:</span></span>
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual -ho
 ```
 
-<span data-ttu-id="95e63-113">출력 위치를 지정 하려면 프로젝트 폴더 (없는 경우)를 지정 하 고 명령에 출력 옵션을 포함 합니다 (예: `-o BlazorSample` ).</span><span class="sxs-lookup"><span data-stu-id="95e63-113">To specify the output location, which creates a project folder if it doesn't exist, include the output option in the command with a path (for example, `-o BlazorSample`).</span></span> <span data-ttu-id="95e63-114">또한 폴더 이름은 프로젝트 이름의 일부가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-114">The folder name also becomes part of the project's name.</span></span>
+<span data-ttu-id="ac0c1-116">출력 위치를 지정 하려면 프로젝트 폴더 (없는 경우)를 지정 하 고 명령에 출력 옵션을 포함 합니다 (예: `-o BlazorSample` ).</span><span class="sxs-lookup"><span data-stu-id="ac0c1-116">To specify the output location, which creates a project folder if it doesn't exist, include the output option in the command with a path (for example, `-o BlazorSample`).</span></span> <span data-ttu-id="ac0c1-117">또한 폴더 이름은 프로젝트 이름의 일부가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-117">The folder name also becomes part of the project's name.</span></span>
 
-## <a name="server-app-configuration"></a><span data-ttu-id="95e63-115">서버 앱 구성</span><span class="sxs-lookup"><span data-stu-id="95e63-115">Server app configuration</span></span>
+---
 
-<span data-ttu-id="95e63-116">다음 섹션에서는 인증 지원을 포함 하는 경우 프로젝트에 대 한 추가 설명입니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-116">The following sections describe additions to the project when authentication support is included.</span></span>
+## <a name="server-app-configuration"></a><span data-ttu-id="ac0c1-118">서버 앱 구성</span><span class="sxs-lookup"><span data-stu-id="ac0c1-118">Server app configuration</span></span>
 
-### <a name="startup-class"></a><span data-ttu-id="95e63-117">시작 클래스</span><span class="sxs-lookup"><span data-stu-id="95e63-117">Startup class</span></span>
+<span data-ttu-id="ac0c1-119">다음 섹션에서는 인증 지원을 포함 하는 경우 프로젝트에 대 한 추가 설명입니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-119">The following sections describe additions to the project when authentication support is included.</span></span>
 
-<span data-ttu-id="95e63-118">클래스에는 `Startup` 다음과 같은 추가 항목이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-118">The `Startup` class has the following additions:</span></span>
+### <a name="startup-class"></a><span data-ttu-id="ac0c1-120">시작 클래스</span><span class="sxs-lookup"><span data-stu-id="ac0c1-120">Startup class</span></span>
 
-* <span data-ttu-id="95e63-119">`Startup.ConfigureServices`의 경우</span><span class="sxs-lookup"><span data-stu-id="95e63-119">In `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="ac0c1-121">클래스에는 `Startup` 다음과 같은 추가 기능이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-121">The `Startup` class has the following additions.</span></span>
 
-  * Identity<span data-ttu-id="95e63-120">:</span><span class="sxs-lookup"><span data-stu-id="95e63-120">:</span></span>
+* <span data-ttu-id="ac0c1-122">`Startup.ConfigureServices`의 경우</span><span class="sxs-lookup"><span data-stu-id="ac0c1-122">In `Startup.ConfigureServices`:</span></span>
+
+  * <span data-ttu-id="ac0c1-123">ASP.NET Core Identity :</span><span class="sxs-lookup"><span data-stu-id="ac0c1-123">ASP.NET Core Identity:</span></span>
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -66,69 +70,69 @@ dotnet new blazorwasm -au Individual -ho
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
-  * <span data-ttu-id="95e63-121">IdentityServer <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> IdentityServer 위에 몇 가지 기본 ASP.NET Core 규칙을 설정 하는 추가 도우미 메서드를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-121">IdentityServer with an additional <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method that sets up some default ASP.NET Core conventions on top of IdentityServer:</span></span>
+  * <span data-ttu-id="ac0c1-124">IdentityServer <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> IdentityServer 위에 기본 ASP.NET Core 규칙을 설정 하는 추가 도우미 메서드를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-124">IdentityServer with an additional <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method that sets up default ASP.NET Core conventions on top of IdentityServer:</span></span>
 
     ```csharp
     services.AddIdentityServer()
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * <span data-ttu-id="95e63-122"><xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>IdentityServer에서 생성 한 JWT 토큰의 유효성을 검사 하도록 앱을 구성 하는 추가 도우미 메서드를 사용 하 여 인증 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-122">Authentication with an additional <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> helper method that configures the app to validate JWT tokens produced by IdentityServer:</span></span>
+  * <span data-ttu-id="ac0c1-125"><xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>IdentityServer에서 생성 한 JWT 토큰의 유효성을 검사 하도록 앱을 구성 하는 추가 도우미 메서드를 사용 하 여 인증 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-125">Authentication with an additional <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> helper method that configures the app to validate JWT tokens produced by IdentityServer:</span></span>
 
     ```csharp
     services.AddAuthentication()
         .AddIdentityServerJwt();
     ```
 
-* <span data-ttu-id="95e63-123">`Startup.Configure`의 경우</span><span class="sxs-lookup"><span data-stu-id="95e63-123">In `Startup.Configure`:</span></span>
+* <span data-ttu-id="ac0c1-126">`Startup.Configure`의 경우</span><span class="sxs-lookup"><span data-stu-id="ac0c1-126">In `Startup.Configure`:</span></span>
 
-  * <span data-ttu-id="95e63-124">요청 자격 증명의 유효성을 검사 하 고 요청 컨텍스트에서 사용자를 설정 해야 하는 인증 미들웨어입니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-124">The authentication middleware that is responsible for validating the request credentials and setting the user on the request context:</span></span>
-
-    ```csharp
-    app.UseAuthentication();
-    ```
-
-  * <span data-ttu-id="95e63-125">OIDC (Open ID Connect) 끝점을 노출 하는 IdentityServer 미들웨어입니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-125">The IdentityServer middleware that exposes the Open ID Connect (OIDC) endpoints:</span></span>
+  * <span data-ttu-id="ac0c1-127">IdentityServer 미들웨어는 OIDC (Open ID Connect) 끝점을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-127">The IdentityServer middleware exposes the Open ID Connect (OIDC) endpoints:</span></span>
 
     ```csharp
     app.UseIdentityServer();
     ```
 
-  * <span data-ttu-id="95e63-126">인증 및 권한 부여 미들웨어:</span><span class="sxs-lookup"><span data-stu-id="95e63-126">Authentication and Authorization Middleware:</span></span>
+  * <span data-ttu-id="ac0c1-128">인증 미들웨어는 요청 자격 증명의 유효성을 검사 하 고 요청 컨텍스트에서 사용자를 설정 하는 작업을 담당 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-128">The Authentication middleware is responsible for validating request credentials and setting the user on the request context:</span></span>
+
+    ```csharp
+    app.UseAuthentication();
+    ```
+
+  * <span data-ttu-id="ac0c1-129">권한 부여 미들웨어는 권한 부여 기능을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-129">Authorization Middleware enables authorization capabilities:</span></span>
 
     ```csharp
     app.UseAuthentication();
     app.UseAuthorization();
     ```
 
-### <a name="addapiauthorization"></a><span data-ttu-id="95e63-127">AddApiAuthorization</span><span class="sxs-lookup"><span data-stu-id="95e63-127">AddApiAuthorization</span></span>
+### <a name="addapiauthorization"></a><span data-ttu-id="ac0c1-130">AddApiAuthorization</span><span class="sxs-lookup"><span data-stu-id="ac0c1-130">AddApiAuthorization</span></span>
 
-<span data-ttu-id="95e63-128"><xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A>도우미 메서드는 ASP.NET Core 시나리오에 대 한 [IdentityServer](https://identityserver.io/) 를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-128">The <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method configures [IdentityServer](https://identityserver.io/) for ASP.NET Core scenarios.</span></span> <span data-ttu-id="95e63-129">IdentityServer는 앱 보안 문제를 처리 하기 위한 강력 하 고 확장 가능한 프레임 워크입니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-129">IdentityServer is a powerful and extensible framework for handling app security concerns.</span></span> <span data-ttu-id="95e63-130">IdentityServer는 가장 일반적인 시나리오에 대 한 불필요 한 복잡성을 노출 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-130">IdentityServer exposes unnecessary complexity for the most common scenarios.</span></span> <span data-ttu-id="95e63-131">따라서 유용한 시작 지점을 고려 하는 규칙 집합과 구성 옵션이 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-131">Consequently, a set of conventions and configuration options is provided that we consider a good starting point.</span></span> <span data-ttu-id="95e63-132">인증을 변경 해야 하는 경우 앱의 요구 사항에 맞게 인증을 사용자 지정 하기 위해 IdentityServer의 모든 기능을 계속 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-132">Once your authentication needs change, the full power of IdentityServer is still available to customize authentication to suit an app's requirements.</span></span>
+<span data-ttu-id="ac0c1-131"><xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A>도우미 메서드는 ASP.NET Core 시나리오에 대 한 [IdentityServer](https://identityserver.io/) 를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-131">The <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> helper method configures [IdentityServer](https://identityserver.io/) for ASP.NET Core scenarios.</span></span> <span data-ttu-id="ac0c1-132">IdentityServer는 앱 보안 문제를 처리 하기 위한 강력 하 고 확장 가능한 프레임 워크입니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-132">IdentityServer is a powerful and extensible framework for handling app security concerns.</span></span> <span data-ttu-id="ac0c1-133">IdentityServer는 가장 일반적인 시나리오에 대 한 불필요 한 복잡성을 노출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-133">IdentityServer exposes unnecessary complexity for the most common scenarios.</span></span> <span data-ttu-id="ac0c1-134">따라서 유용한 시작 지점을 고려 하는 규칙 집합과 구성 옵션이 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-134">Consequently, a set of conventions and configuration options is provided that we consider a good starting point.</span></span> <span data-ttu-id="ac0c1-135">인증을 변경 해야 하는 경우 앱의 요구 사항에 맞게 인증을 사용자 지정 하는 데 IdentityServer의 모든 기능을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-135">Once your authentication needs change, the full power of IdentityServer is available to customize authentication to suit an app's requirements.</span></span>
 
-### <a name="addidentityserverjwt"></a><span data-ttu-id="95e63-133">AddIdentityServerJwt</span><span class="sxs-lookup"><span data-stu-id="95e63-133">AddIdentityServerJwt</span></span>
+### <a name="addidentityserverjwt"></a><span data-ttu-id="ac0c1-136">AddIdentityServerJwt</span><span class="sxs-lookup"><span data-stu-id="ac0c1-136">AddIdentityServerJwt</span></span>
 
-<span data-ttu-id="95e63-134"><xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-134">The <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> helper method configures a policy scheme for the app as the default authentication handler.</span></span> <span data-ttu-id="95e63-135">정책은 Identity URL 공간의 모든 하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다 Identity `/Identity` .</span><span class="sxs-lookup"><span data-stu-id="95e63-135">The policy is configured to allow Identity to handle all requests routed to any subpath in the Identity URL space `/Identity`.</span></span> <span data-ttu-id="95e63-136">는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 다른 모든 요청을 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-136">The <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> handles all other requests.</span></span> <span data-ttu-id="95e63-137">또한이 메서드는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-137">Additionally, this method:</span></span>
+<span data-ttu-id="ac0c1-137"><xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-137">The <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> helper method configures a policy scheme for the app as the default authentication handler.</span></span> <span data-ttu-id="ac0c1-138">정책은 Identity URL 공간의 모든 하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다 Identity `/Identity` .</span><span class="sxs-lookup"><span data-stu-id="ac0c1-138">The policy is configured to allow Identity to handle all requests routed to any subpath in the Identity URL space `/Identity`.</span></span> <span data-ttu-id="ac0c1-139">는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 다른 모든 요청을 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-139">The <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> handles all other requests.</span></span> <span data-ttu-id="ac0c1-140">또한이 메서드는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-140">Additionally, this method:</span></span>
 
-* <span data-ttu-id="95e63-138">`{APPLICATION NAME}API`기본 범위인 IdentityServer를 사용 하 여 API 리소스를 등록 `{APPLICATION NAME}API` 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-138">Registers an `{APPLICATION NAME}API` API resource with IdentityServer with a default scope of `{APPLICATION NAME}API`.</span></span>
-* <span data-ttu-id="95e63-139">앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 하도록 JWT 전달자 토큰 미들웨어를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-139">Configures the JWT Bearer Token Middleware to validate tokens issued by IdentityServer for the app.</span></span>
+* <span data-ttu-id="ac0c1-141">`{APPLICATION NAME}API`기본 범위인 IdentityServer를 사용 하 여 API 리소스를 등록 `{APPLICATION NAME}API` 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-141">Registers an `{APPLICATION NAME}API` API resource with IdentityServer with a default scope of `{APPLICATION NAME}API`.</span></span>
+* <span data-ttu-id="ac0c1-142">앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 하도록 JWT 전달자 토큰 미들웨어를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-142">Configures the JWT Bearer Token Middleware to validate tokens issued by IdentityServer for the app.</span></span>
 
-### <a name="weatherforecastcontroller"></a><span data-ttu-id="95e63-140">WeatherForecastController</span><span class="sxs-lookup"><span data-stu-id="95e63-140">WeatherForecastController</span></span>
+### <a name="weatherforecastcontroller"></a><span data-ttu-id="ac0c1-143">WeatherForecastController</span><span class="sxs-lookup"><span data-stu-id="ac0c1-143">WeatherForecastController</span></span>
 
-<span data-ttu-id="95e63-141">`WeatherForecastController`(*Controller/WeatherForecastController*)에서 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성은 클래스에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-141">In the `WeatherForecastController` (*Controllers/WeatherForecastController.cs*), the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute is applied to the class.</span></span> <span data-ttu-id="95e63-142">특성은 리소스에 액세스 하기 위한 기본 정책에 따라 사용자에 게 권한이 부여 되어야 함을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-142">The attribute indicates that the user must be authorized based on the default policy to access the resource.</span></span> <span data-ttu-id="95e63-143">기본 권한 부여 정책은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> 앞에서 언급 한 정책 체계에 의해 설정 되는 기본 인증 체계를 사용 하도록 구성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-143">The default authorization policy is configured to use the default authentication scheme, which is set up by <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> to the policy scheme that was mentioned earlier.</span></span> <span data-ttu-id="95e63-144">도우미 메서드는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 를 앱에 대 한 요청에 대 한 기본 처리기로 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-144">The helper method configures <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> as the default handler for requests to the app.</span></span>
+<span data-ttu-id="ac0c1-144">`WeatherForecastController`(*Controller/WeatherForecastController*)에서 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성은 클래스에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-144">In the `WeatherForecastController` (*Controllers/WeatherForecastController.cs*), the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute is applied to the class.</span></span> <span data-ttu-id="ac0c1-145">특성은 리소스에 액세스 하기 위한 기본 정책에 따라 사용자에 게 권한이 부여 되어야 함을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-145">The attribute indicates that the user must be authorized based on the default policy to access the resource.</span></span> <span data-ttu-id="ac0c1-146">기본 권한 부여 정책은에 의해 설정 되는 기본 인증 체계를 사용 하도록 구성 됩니다 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> .</span><span class="sxs-lookup"><span data-stu-id="ac0c1-146">The default authorization policy is configured to use the default authentication scheme, which is set up by <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>.</span></span> <span data-ttu-id="ac0c1-147">도우미 메서드는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 를 앱에 대 한 요청에 대 한 기본 처리기로 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-147">The helper method configures <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> as the default handler for requests to the app.</span></span>
 
-### <a name="applicationdbcontext"></a><span data-ttu-id="95e63-145">ApplicationDbContext</span><span class="sxs-lookup"><span data-stu-id="95e63-145">ApplicationDbContext</span></span>
+### <a name="applicationdbcontext"></a><span data-ttu-id="ac0c1-148">ApplicationDbContext</span><span class="sxs-lookup"><span data-stu-id="ac0c1-148">ApplicationDbContext</span></span>
 
-<span data-ttu-id="95e63-146">`ApplicationDbContext`(*Data/ApplicationDbContext*)에서 <xref:Microsoft.EntityFrameworkCore.DbContext> Identity <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> IdentityServer에 대 한 스키마를 포함 하도록 확장 하는 예외와 함께에서 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-146">In the `ApplicationDbContext` (*Data/ApplicationDbContext.cs*), the same <xref:Microsoft.EntityFrameworkCore.DbContext> is used in Identity with the exception that it extends <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> to include the schema for IdentityServer.</span></span> <span data-ttu-id="95e63-147"><xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-147"><xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> is derived from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>.</span></span>
+<span data-ttu-id="ac0c1-149">`ApplicationDbContext`(*Data/ApplicationDbContext*)에서 <xref:Microsoft.EntityFrameworkCore.DbContext> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> IdentityServer에 대 한 스키마를 포함 하도록를 확장 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-149">In the `ApplicationDbContext` (*Data/ApplicationDbContext.cs*), <xref:Microsoft.EntityFrameworkCore.DbContext> extends <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> to include the schema for IdentityServer.</span></span> <span data-ttu-id="ac0c1-150"><xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-150"><xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> is derived from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>.</span></span>
 
-<span data-ttu-id="95e63-148">데이터베이스 스키마에 대 한 모든 권한을 얻으려면 사용 가능한 클래스 중 하나에서 상속 하 Identity <xref:Microsoft.EntityFrameworkCore.DbContext> 고 Identity 메서드를 호출 하 여 스키마를 포함 하도록 컨텍스트를 구성 합니다 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` .</span><span class="sxs-lookup"><span data-stu-id="95e63-148">To gain full control of the database schema, inherit from one of the available Identity <xref:Microsoft.EntityFrameworkCore.DbContext> classes and configure the context to include the Identity schema by calling `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` in the `OnModelCreating` method.</span></span>
+<span data-ttu-id="ac0c1-151">데이터베이스 스키마에 대 한 모든 권한을 얻으려면 사용 가능한 클래스 중 하나에서 상속 하 Identity <xref:Microsoft.EntityFrameworkCore.DbContext> 고 Identity 메서드를 호출 하 여 스키마를 포함 하도록 컨텍스트를 구성 합니다 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> .</span><span class="sxs-lookup"><span data-stu-id="ac0c1-151">To gain full control of the database schema, inherit from one of the available Identity <xref:Microsoft.EntityFrameworkCore.DbContext> classes and configure the context to include the Identity schema by calling `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` in the <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> method.</span></span>
 
-### <a name="oidcconfigurationcontroller"></a><span data-ttu-id="95e63-149">OidcConfigurationController</span><span class="sxs-lookup"><span data-stu-id="95e63-149">OidcConfigurationController</span></span>
+### <a name="oidcconfigurationcontroller"></a><span data-ttu-id="ac0c1-152">OidcConfigurationController</span><span class="sxs-lookup"><span data-stu-id="ac0c1-152">OidcConfigurationController</span></span>
 
-<span data-ttu-id="95e63-150">`OidcConfigurationController`(*Controller/OidcConfigurationController*)에서 클라이언트 끝점은 oidc 매개 변수를 제공 하도록 프로 비전 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-150">In the `OidcConfigurationController` (*Controllers/OidcConfigurationController.cs*), the client endpoint is provisioned to serve OIDC parameters.</span></span>
+<span data-ttu-id="ac0c1-153">`OidcConfigurationController`(*Controller/OidcConfigurationController*)에서 클라이언트 끝점은 oidc 매개 변수를 제공 하도록 프로 비전 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-153">In the `OidcConfigurationController` (*Controllers/OidcConfigurationController.cs*), the client endpoint is provisioned to serve OIDC parameters.</span></span>
 
-### <a name="app-settings-files"></a><span data-ttu-id="95e63-151">앱 설정 파일</span><span class="sxs-lookup"><span data-stu-id="95e63-151">App settings files</span></span>
+### <a name="app-settings-files"></a><span data-ttu-id="ac0c1-154">앱 설정 파일</span><span class="sxs-lookup"><span data-stu-id="ac0c1-154">App settings files</span></span>
 
-<span data-ttu-id="95e63-152">프로젝트 루트의 앱 설정 파일 (*appsettings*)에서 `IdentityServer` 섹션은 구성 된 클라이언트 목록에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-152">In the app settings file (*appsettings.json*) at the project root, the `IdentityServer` section describes the list of configured clients.</span></span> <span data-ttu-id="95e63-153">다음 예제에는 단일 클라이언트가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-153">In the following example, there's a single client.</span></span> <span data-ttu-id="95e63-154">클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-154">The client name corresponds to the app name and is mapped by convention to the OAuth `ClientId` parameter.</span></span> <span data-ttu-id="95e63-155">프로필은 구성 중인 앱 유형을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-155">The profile indicates the app type being configured.</span></span> <span data-ttu-id="95e63-156">프로필은 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-156">The profile is used internally to drive conventions that simplify the configuration process for the server.</span></span> <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+<span data-ttu-id="ac0c1-155">프로젝트 루트의 앱 설정 파일 (*appsettings*)에서 `IdentityServer` 섹션은 구성 된 클라이언트 목록에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-155">In the app settings file (*appsettings.json*) at the project root, the `IdentityServer` section describes the list of configured clients.</span></span> <span data-ttu-id="ac0c1-156">다음 예제에는 단일 클라이언트가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-156">In the following example, there's a single client.</span></span> <span data-ttu-id="ac0c1-157">클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-157">The client name corresponds to the app name and is mapped by convention to the OAuth `ClientId` parameter.</span></span> <span data-ttu-id="ac0c1-158">프로필은 구성 중인 앱 유형을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-158">The profile indicates the app type being configured.</span></span> <span data-ttu-id="ac0c1-159">프로필은 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-159">The profile is used internally to drive conventions that simplify the configuration process for the server.</span></span> <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
 ```json
 "IdentityServer": {
@@ -140,59 +144,57 @@ dotnet new blazorwasm -au Individual -ho
 }
 ```
 
-## <a name="client-app-configuration"></a><span data-ttu-id="95e63-157">클라이언트 앱 구성</span><span class="sxs-lookup"><span data-stu-id="95e63-157">Client app configuration</span></span>
+## <a name="client-app-configuration"></a><span data-ttu-id="ac0c1-160">클라이언트 앱 구성</span><span class="sxs-lookup"><span data-stu-id="ac0c1-160">Client app configuration</span></span>
 
-### <a name="authentication-package"></a><span data-ttu-id="95e63-158">인증 패키지</span><span class="sxs-lookup"><span data-stu-id="95e63-158">Authentication package</span></span>
+### <a name="authentication-package"></a><span data-ttu-id="ac0c1-161">인증 패키지</span><span class="sxs-lookup"><span data-stu-id="ac0c1-161">Authentication package</span></span>
 
-<span data-ttu-id="95e63-159">개별 사용자 계정 ()을 사용 하도록 앱을 만들면 앱 `Individual` 은 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 앱의 프로젝트 파일에서 패키지에 대 한 패키지 참조를 자동으로 받습니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-159">When an app is created to use Individual User Accounts (`Individual`), the app automatically receives a package reference for the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package in the app's project file.</span></span> <span data-ttu-id="95e63-160">패키지는 앱이 사용자를 인증 하 고 토큰을 가져와서 보호 된 Api를 호출할 수 있도록 지 원하는 기본 형식 집합을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-160">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
+<span data-ttu-id="ac0c1-162">개별 사용자 계정 ()을 사용 하도록 앱을 만들 때 앱 `Individual` 은 앱의 프로젝트 파일에서 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에 대 한 패키지 참조를 자동으로 받습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-162">When an app is created to use Individual User Accounts (`Individual`), the app automatically receives a package reference for the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) package in the app's project file.</span></span> <span data-ttu-id="ac0c1-163">패키지는 앱이 사용자를 인증 하 고 토큰을 가져와서 보호 된 Api를 호출할 수 있도록 지 원하는 기본 형식 집합을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-163">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
 
-<span data-ttu-id="95e63-161">앱에 인증을 추가 하는 경우 앱의 프로젝트 파일에 패키지를 수동으로 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-161">If adding authentication to an app, manually add the package to the app's project file:</span></span>
+<span data-ttu-id="ac0c1-164">앱에 인증을 추가 하는 경우 앱의 프로젝트 파일에 패키지를 수동으로 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-164">If adding authentication to an app, manually add the package to the app's project file:</span></span>
 
 ```xml
 <PackageReference 
-    Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
-    Version="{VERSION}" />
+  Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
+  Version="3.2.0" />
 ```
 
-<span data-ttu-id="95e63-162">`{VERSION}`위의 패키지 참조에서를 `Microsoft.AspNetCore.Blazor.Templates` 문서에 표시 된 패키지의 버전으로 바꿉니다 <xref:blazor/get-started> .</span><span class="sxs-lookup"><span data-stu-id="95e63-162">Replace `{VERSION}` in the preceding package reference with the version of the `Microsoft.AspNetCore.Blazor.Templates` package shown in the <xref:blazor/get-started> article.</span></span>
+### <a name="api-authorization-support"></a><span data-ttu-id="ac0c1-165">API 권한 부여 지원</span><span class="sxs-lookup"><span data-stu-id="ac0c1-165">API authorization support</span></span>
 
-### <a name="api-authorization-support"></a><span data-ttu-id="95e63-163">API 권한 부여 지원</span><span class="sxs-lookup"><span data-stu-id="95e63-163">API authorization support</span></span>
-
-<span data-ttu-id="95e63-164">사용자 인증에 대 한 지원은 패키지 내에서 제공 된 확장 메서드에 의해 서비스 컨테이너에 연결 됩니다 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` .</span><span class="sxs-lookup"><span data-stu-id="95e63-164">The support for authenticating users is plugged into the service container by the extension method provided inside the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package.</span></span> <span data-ttu-id="95e63-165">이 메서드는 앱이 기존 인증 시스템과 상호 작용 하는 데 필요한 모든 서비스를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-165">This method sets up all the services needed for the app to interact with the existing authorization system.</span></span>
+<span data-ttu-id="ac0c1-166">사용자 인증에 대 한 지원은 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 내에서 제공 하는 확장 메서드에 의해 서비스 컨테이너에 연결 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-166">The support for authenticating users is plugged into the service container by the extension method provided inside the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) package.</span></span> <span data-ttu-id="ac0c1-167">이 메서드는 앱에서 기존 권한 부여 시스템과 상호 작용 하는 데 필요한 서비스를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-167">This method sets up the services required by the app to interact with the existing authorization system.</span></span>
 
 ```csharp
 builder.Services.AddApiAuthorization();
 ```
 
-<span data-ttu-id="95e63-166">기본적으로에서 규칙에 따라 앱에 대 한 구성을 로드 합니다 `_configuration/{client-id}` .</span><span class="sxs-lookup"><span data-stu-id="95e63-166">By default, it loads the configuration for the app by convention from `_configuration/{client-id}`.</span></span> <span data-ttu-id="95e63-167">규칙에 따라 클라이언트 ID는 앱의 어셈블리 이름으로 설정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-167">By convention, the client ID is set to the app's assembly name.</span></span> <span data-ttu-id="95e63-168">옵션으로 오버 로드를 호출 하 여 별도의 끝점을 가리키도록이 URL을 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-168">This URL can be changed to point to a separate endpoint by calling the overload with options.</span></span>
+<span data-ttu-id="ac0c1-168">기본적으로 앱에 대 한 구성은에서 규칙에 따라 로드 됩니다 `_configuration/{client-id}` .</span><span class="sxs-lookup"><span data-stu-id="ac0c1-168">By default, configuration for the app is loaded by convention from `_configuration/{client-id}`.</span></span> <span data-ttu-id="ac0c1-169">규칙에 따라 클라이언트 ID는 앱의 어셈블리 이름으로 설정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-169">By convention, the client ID is set to the app's assembly name.</span></span> <span data-ttu-id="ac0c1-170">옵션으로 오버 로드를 호출 하 여 별도의 끝점을 가리키도록이 URL을 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-170">This URL can be changed to point to a separate endpoint by calling the overload with options.</span></span>
 
-### <a name="imports-file"></a><span data-ttu-id="95e63-169">파일 가져오기</span><span class="sxs-lookup"><span data-stu-id="95e63-169">Imports file</span></span>
+### <a name="imports-file"></a><span data-ttu-id="ac0c1-171">파일 가져오기</span><span class="sxs-lookup"><span data-stu-id="ac0c1-171">Imports file</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
 
-### <a name="index-page"></a><span data-ttu-id="95e63-170">인덱스 페이지</span><span class="sxs-lookup"><span data-stu-id="95e63-170">Index page</span></span>
+### <a name="index-page"></a><span data-ttu-id="ac0c1-172">인덱스 페이지</span><span class="sxs-lookup"><span data-stu-id="ac0c1-172">Index page</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
 
-### <a name="app-component"></a><span data-ttu-id="95e63-171">앱 구성 요소</span><span class="sxs-lookup"><span data-stu-id="95e63-171">App component</span></span>
+### <a name="app-component"></a><span data-ttu-id="ac0c1-173">앱 구성 요소</span><span class="sxs-lookup"><span data-stu-id="ac0c1-173">App component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-### <a name="redirecttologin-component"></a><span data-ttu-id="95e63-172">RedirectToLogin 구성 요소</span><span class="sxs-lookup"><span data-stu-id="95e63-172">RedirectToLogin component</span></span>
+### <a name="redirecttologin-component"></a><span data-ttu-id="ac0c1-174">RedirectToLogin 구성 요소</span><span class="sxs-lookup"><span data-stu-id="ac0c1-174">RedirectToLogin component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-### <a name="logindisplay-component"></a><span data-ttu-id="95e63-173">LoginDisplay 구성 요소</span><span class="sxs-lookup"><span data-stu-id="95e63-173">LoginDisplay component</span></span>
+### <a name="logindisplay-component"></a><span data-ttu-id="ac0c1-175">LoginDisplay 구성 요소</span><span class="sxs-lookup"><span data-stu-id="ac0c1-175">LoginDisplay component</span></span>
 
-<span data-ttu-id="95e63-174">구성 `LoginDisplay` 요소 (*Shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-174">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
+<span data-ttu-id="ac0c1-176">구성 `LoginDisplay` 요소 (*Shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-176">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
 
-* <span data-ttu-id="95e63-175">인증 된 사용자의 경우:</span><span class="sxs-lookup"><span data-stu-id="95e63-175">For authenticated users:</span></span>
-  * <span data-ttu-id="95e63-176">현재 사용자 이름을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-176">Displays the current user name.</span></span>
-  * <span data-ttu-id="95e63-177">ASP.NET Core의 사용자 프로필 페이지에 대 한 링크를 제공 Identity 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-177">Offers a link to the user profile page in ASP.NET Core Identity.</span></span>
-  * <span data-ttu-id="95e63-178">앱에서 로그 아웃할 수 있는 단추를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-178">Offers a button to log out of the app.</span></span>
-* <span data-ttu-id="95e63-179">익명 사용자의 경우:</span><span class="sxs-lookup"><span data-stu-id="95e63-179">For anonymous users:</span></span>
-  * <span data-ttu-id="95e63-180">등록할 수 있는 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-180">Offers the option to register.</span></span>
-  * <span data-ttu-id="95e63-181">로그인 할 수 있는 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-181">Offers the option to log in.</span></span>
+* <span data-ttu-id="ac0c1-177">인증 된 사용자의 경우:</span><span class="sxs-lookup"><span data-stu-id="ac0c1-177">For authenticated users:</span></span>
+  * <span data-ttu-id="ac0c1-178">현재 사용자 이름을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-178">Displays the current user name.</span></span>
+  * <span data-ttu-id="ac0c1-179">ASP.NET Core의 사용자 프로필 페이지에 대 한 링크를 제공 Identity 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-179">Offers a link to the user profile page in ASP.NET Core Identity.</span></span>
+  * <span data-ttu-id="ac0c1-180">앱에서 로그 아웃할 수 있는 단추를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-180">Offers a button to log out of the app.</span></span>
+* <span data-ttu-id="ac0c1-181">익명 사용자의 경우:</span><span class="sxs-lookup"><span data-stu-id="ac0c1-181">For anonymous users:</span></span>
+  * <span data-ttu-id="ac0c1-182">등록할 수 있는 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-182">Offers the option to register.</span></span>
+  * <span data-ttu-id="ac0c1-183">로그인 할 수 있는 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-183">Offers the option to log in.</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -222,23 +224,210 @@ builder.Services.AddApiAuthorization();
 }
 ```
 
-### <a name="authentication-component"></a><span data-ttu-id="95e63-182">인증 구성 요소</span><span class="sxs-lookup"><span data-stu-id="95e63-182">Authentication component</span></span>
+### <a name="authentication-component"></a><span data-ttu-id="ac0c1-184">인증 구성 요소</span><span class="sxs-lookup"><span data-stu-id="ac0c1-184">Authentication component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
-### <a name="fetchdata-component"></a><span data-ttu-id="95e63-183">FetchData 구성 요소</span><span class="sxs-lookup"><span data-stu-id="95e63-183">FetchData component</span></span>
+### <a name="fetchdata-component"></a><span data-ttu-id="ac0c1-185">FetchData 구성 요소</span><span class="sxs-lookup"><span data-stu-id="ac0c1-185">FetchData component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
 
-## <a name="run-the-app"></a><span data-ttu-id="95e63-184">앱 실행</span><span class="sxs-lookup"><span data-stu-id="95e63-184">Run the app</span></span>
+## <a name="run-the-app"></a><span data-ttu-id="ac0c1-186">앱 실행</span><span class="sxs-lookup"><span data-stu-id="ac0c1-186">Run the app</span></span>
 
-<span data-ttu-id="95e63-185">서버 프로젝트에서 앱을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-185">Run the app from the Server project.</span></span> <span data-ttu-id="95e63-186">Visual Studio를 사용 하는 경우 **솔루션 탐색기** 에서 서버 프로젝트를 선택 하 고 도구 모음에서 **실행** 단추를 선택 하거나 **디버그** 메뉴에서 앱을 시작 합니다.</span><span class="sxs-lookup"><span data-stu-id="95e63-186">When using Visual Studio, select the Server project in **Solution Explorer** and select the **Run** button in the toolbar or start the app from the **Debug** menu.</span></span>
+<span data-ttu-id="ac0c1-187">서버 프로젝트에서 앱을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-187">Run the app from the Server project.</span></span> <span data-ttu-id="ac0c1-188">Visual Studio를 사용 하는 경우 다음 중 하나를 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-188">When using Visual Studio, either:</span></span>
+
+* <span data-ttu-id="ac0c1-189">도구 모음에서 **시작 프로젝트** 드롭다운 목록을 *서버 API 앱* 으로 설정 하 고 **실행** 단추를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-189">Set the **Startup Projects** drop down list in the toolbar to the *Server API app* and select the **Run** button.</span></span>
+* <span data-ttu-id="ac0c1-190">**솔루션 탐색기** 에서 서버 프로젝트를 선택 하 고 도구 모음에서 **실행** 단추를 선택 하거나 **디버그** 메뉴에서 앱을 시작 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-190">Select the Server project in **Solution Explorer** and select the **Run** button in the toolbar or start the app from the **Debug** menu.</span></span>
+
+## <a name="name-and-role-claim-with-api-authorization"></a><span data-ttu-id="ac0c1-191">API 권한 부여를 사용 하 여 이름 및 역할 클레임</span><span class="sxs-lookup"><span data-stu-id="ac0c1-191">Name and role claim with API authorization</span></span>
+
+### <a name="custom-user-factory"></a><span data-ttu-id="ac0c1-192">사용자 지정 사용자 팩터리</span><span class="sxs-lookup"><span data-stu-id="ac0c1-192">Custom user factory</span></span>
+
+<span data-ttu-id="ac0c1-193">클라이언트 앱에서 사용자 지정 사용자 팩터리를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-193">In the Client app, create a custom user factory.</span></span> Identity<span data-ttu-id="ac0c1-194">서버는 단일 클레임에서 여러 역할을 JSON 배열로 보냅니다 `role` .</span><span class="sxs-lookup"><span data-stu-id="ac0c1-194"> Server sends multiple roles as a JSON array in a single `role` claim.</span></span> <span data-ttu-id="ac0c1-195">단일 역할은 클레임에서 문자열 값으로 전송 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-195">A single role is sent as a string value in the claim.</span></span> <span data-ttu-id="ac0c1-196">팩터리는 `role` 각 사용자의 역할에 대 한 개별 클레임을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-196">The factory creates an individual `role` claim for each of the user's roles.</span></span>
+
+<span data-ttu-id="ac0c1-197">*CustomUserFactory.cs*:</span><span class="sxs-lookup"><span data-stu-id="ac0c1-197">*CustomUserFactory.cs*:</span></span>
+
+```csharp
+using System.Linq;
+using System.Security.Claims;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+
+public class CustomUserFactory
+    : AccountClaimsPrincipalFactory<RemoteUserAccount>
+{
+    public CustomUserFactory(IAccessTokenProviderAccessor accessor)
+        : base(accessor)
+    {
+    }
+
+    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
+        RemoteUserAccount account,
+        RemoteAuthenticationUserOptions options)
+    {
+        var user = await base.CreateUserAsync(account, options);
+
+        if (user.Identity.IsAuthenticated)
+        {
+            var identity = (ClaimsIdentity)user.Identity;
+            var roleClaims = identity.FindAll(identity.RoleClaimType);
+
+            if (roleClaims != null && roleClaims.Any())
+            {
+                foreach (var existingClaim in roleClaims)
+                {
+                    identity.RemoveClaim(existingClaim);
+                }
+
+                var rolesElem = account.AdditionalProperties[identity.RoleClaimType];
+
+                if (rolesElem is JsonElement roles)
+                {
+                    if (roles.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var role in roles.EnumerateArray())
+                        {
+                            identity.AddClaim(new Claim(options.RoleClaim, role.GetString()));
+                        }
+                    }
+                    else
+                    {
+                        identity.AddClaim(new Claim(options.RoleClaim, roles.GetString()));
+                    }
+                }
+            }
+        }
+
+        return user;
+    }
+}
+```
+
+<span data-ttu-id="ac0c1-198">클라이언트 앱에서 팩터리 `Program.Main` (*Program.cs*)를 등록 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-198">In the Client app, register the factory in `Program.Main` (*Program.cs*):</span></span>
+
+```csharp
+builder.Services.AddApiAuthorization()
+    .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
+```
+
+<span data-ttu-id="ac0c1-199">서버 앱에서 <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> 작성기에 대해를 호출 하면 Identity 역할 관련 서비스가 추가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-199">In the Server app, call <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> on the Identity builder, which adds role-related services:</span></span>
+
+```csharp
+using Microsoft.AspNetCore.Identity;
+
+...
+
+services.AddDefaultIdentity<ApplicationUser>(options => 
+    options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+```
+
+### <a name="configure-identity-server"></a><span data-ttu-id="ac0c1-200">Identity서버 구성</span><span class="sxs-lookup"><span data-stu-id="ac0c1-200">Configure Identity Server</span></span>
+
+<span data-ttu-id="ac0c1-201">다음 방법 중 **하나**를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-201">Use **one** of the following approaches:</span></span>
+
+* [<span data-ttu-id="ac0c1-202">API 권한 부여 옵션</span><span class="sxs-lookup"><span data-stu-id="ac0c1-202">API authorization options</span></span>](#api-authorization-options)
+* [<span data-ttu-id="ac0c1-203">프로필 서비스</span><span class="sxs-lookup"><span data-stu-id="ac0c1-203">Profile Service</span></span>](#profile-service)
+
+#### <a name="api-authorization-options"></a><span data-ttu-id="ac0c1-204">API 권한 부여 옵션</span><span class="sxs-lookup"><span data-stu-id="ac0c1-204">API authorization options</span></span>
+
+<span data-ttu-id="ac0c1-205">서버 앱에서:</span><span class="sxs-lookup"><span data-stu-id="ac0c1-205">In the Server app:</span></span>
+
+* <span data-ttu-id="ac0c1-206">Identity `name` 및 `role` 클레임을 ID 토큰 및 액세스 토큰에 추가 하도록 서버를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-206">Configure Identity Server to put the `name` and `role` claims into the ID token and access token.</span></span>
+* <span data-ttu-id="ac0c1-207">JWT 토큰 처리기에서 역할에 대 한 기본 매핑을 방지 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-207">Prevent the default mapping for roles in the JWT token handler.</span></span>
+
+```csharp
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+
+...
+
+services.AddIdentityServer()
+    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {
+        options.IdentityResources["openid"].UserClaims.Add("name");
+        options.ApiResources.Single().UserClaims.Add("name");
+        options.IdentityResources["openid"].UserClaims.Add("role");
+        options.ApiResources.Single().UserClaims.Add("role");
+    });
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
+```
+
+#### <a name="profile-service"></a><span data-ttu-id="ac0c1-208">프로필 서비스</span><span class="sxs-lookup"><span data-stu-id="ac0c1-208">Profile Service</span></span>
+
+<span data-ttu-id="ac0c1-209">서버 앱에서 `ProfileService` 구현을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-209">In the Server app, create a `ProfileService` implementation.</span></span>
+
+<span data-ttu-id="ac0c1-210">*ProfileService.cs*:</span><span class="sxs-lookup"><span data-stu-id="ac0c1-210">*ProfileService.cs*:</span></span>
+
+```csharp
+using IdentityModel;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
+using System.Threading.Tasks;
+
+public class ProfileService : IProfileService
+{
+    public ProfileService()
+    {
+    }
+
+    public Task GetProfileDataAsync(ProfileDataRequestContext context)
+    {
+        var nameClaim = context.Subject.FindAll(JwtClaimTypes.Name);
+        context.IssuedClaims.AddRange(nameClaim);
+
+        var roleClaims = context.Subject.FindAll(JwtClaimTypes.Role);
+        context.IssuedClaims.AddRange(roleClaims);
+
+        return Task.CompletedTask;
+    }
+
+    public Task IsActiveAsync(IsActiveContext context)
+    {
+        return Task.CompletedTask;
+    }
+}
+```
+
+<span data-ttu-id="ac0c1-211">서버 앱에서 프로필 서비스를 등록 합니다 `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="ac0c1-211">In the Server app, register the Profile Service in `Startup.ConfigureServices`:</span></span>
+
+```csharp
+using IdentityServer4.Services;
+
+...
+
+services.AddTransient<IProfileService, ProfileService>();
+```
+
+### <a name="use-authorization-mechanisms"></a><span data-ttu-id="ac0c1-212">권한 부여 메커니즘 사용</span><span class="sxs-lookup"><span data-stu-id="ac0c1-212">Use authorization mechanisms</span></span>
+
+<span data-ttu-id="ac0c1-213">클라이언트 앱에서는이 시점에서 구성 요소 권한 부여 방법이 작동 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-213">In the Client app, component authorization approaches are functional at this point.</span></span> <span data-ttu-id="ac0c1-214">구성 요소의 권한 부여 메커니즘은 역할을 사용 하 여 사용자에 게 권한을 부여할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-214">Any of the authorization mechanisms in components can use a role to authorize the user:</span></span>
+
+* <span data-ttu-id="ac0c1-215">[AuthorizeView 구성 요소](xref:security/blazor/index#authorizeview-component) (예: `<AuthorizeView Roles="admin">` )</span><span class="sxs-lookup"><span data-stu-id="ac0c1-215">[AuthorizeView component](xref:security/blazor/index#authorizeview-component) (Example: `<AuthorizeView Roles="admin">`)</span></span>
+* <span data-ttu-id="ac0c1-216">[ `[Authorize]` attribute 지시문](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (예: `@attribute [Authorize(Roles = "admin")]` )</span><span class="sxs-lookup"><span data-stu-id="ac0c1-216">[`[Authorize]` attribute directive](xref:security/blazor/index#authorize-attribute) (<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>) (Example: `@attribute [Authorize(Roles = "admin")]`)</span></span>
+* <span data-ttu-id="ac0c1-217">[절차적 논리](xref:security/blazor/index#procedural-logic) (예: `if (user.IsInRole("admin")) { ... }` )</span><span class="sxs-lookup"><span data-stu-id="ac0c1-217">[Procedural logic](xref:security/blazor/index#procedural-logic) (Example: `if (user.IsInRole("admin")) { ... }`)</span></span>
+
+  <span data-ttu-id="ac0c1-218">여러 역할 테스트가 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-218">Multiple role tests are supported:</span></span>
+
+  ```csharp
+  if (user.IsInRole("admin") && user.IsInRole("developer"))
+  {
+      ...
+  }
+  ```
+
+<span data-ttu-id="ac0c1-219">`User.Identity.Name`는 클라이언트 앱에서 사용자의 사용자 이름 (일반적으로 로그인 메일 주소)으로 채워집니다.</span><span class="sxs-lookup"><span data-stu-id="ac0c1-219">`User.Identity.Name` is populated in the Client app with the user's user name, which is usually their sign-in email address.</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a><span data-ttu-id="95e63-187">추가 자료</span><span class="sxs-lookup"><span data-stu-id="95e63-187">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="ac0c1-220">추가 리소스</span><span class="sxs-lookup"><span data-stu-id="ac0c1-220">Additional resources</span></span>
 
+* [<span data-ttu-id="ac0c1-221">Azure App Service 배포</span><span class="sxs-lookup"><span data-stu-id="ac0c1-221">Deployment to Azure App Service</span></span>](xref:security/authentication/identity/spa#deploy-to-production)
+* [<span data-ttu-id="ac0c1-222">Key Vault에서 인증서 가져오기 (Azure 설명서)</span><span class="sxs-lookup"><span data-stu-id="ac0c1-222">Import a certificate from Key Vault (Azure documentation)</span></span>](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)
 * <xref:security/blazor/webassembly/additional-scenarios>
-* [<span data-ttu-id="95e63-188">보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청</span><span class="sxs-lookup"><span data-stu-id="95e63-188">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
+* [<span data-ttu-id="ac0c1-223">보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청</span><span class="sxs-lookup"><span data-stu-id="ac0c1-223">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
