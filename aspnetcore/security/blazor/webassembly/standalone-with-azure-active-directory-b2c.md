@@ -1,11 +1,24 @@
 ---
-제목: ASP.NET Core ' Blazor Azure Active Directory B2C ' author: guardrex description: monikerRange: ' >= aspnetcore-3.1 ' ms author: riande. custom: mvc ms. date: 05/19/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: security/blazor/weasembambb2c
-
+title: BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+ms.openlocfilehash: 911eeffbe632d8f285d54ae78b62f17851205e83
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84214962"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
@@ -110,7 +123,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예:
+예제:
 
 ```json
 {

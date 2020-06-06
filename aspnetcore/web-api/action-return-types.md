@@ -1,12 +1,23 @@
 ---
-제목: ASP.NET Core web API author의 컨트롤러 작업 반환 형식: scottaddie description: ASP.NET Core web API에서 다양 한 컨트롤러 작업 메서드 반환 형식을 사용 하는 방법에 대해 알아봅니다.
-ms author: scaddie ms. custom: mvc ms. date: 02/03/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 웹-a p i/작업-반환 형식
-
+title: ASP.NET Core 웹 API에서 컨트롤러 작업 반환 형식
+author: scottaddie
+description: ASP.NET Core 웹 API에서 다양한 컨트롤러 작업 메서드 반환 형식을 사용하는 방법을 알아봅니다.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 02/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/action-return-types
+ms.openlocfilehash: 57bc91feb9c4242dbea120ee00db1cba46784c61
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253788"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core 웹 API에서 컨트롤러 작업 반환 형식
 

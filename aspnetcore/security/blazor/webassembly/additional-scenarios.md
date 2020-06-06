@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core Blazor Weasembmbambambambambambambambmbsembmbsembommbmbmbomommbmbmbommbmbmbomommbmb Blazor
-monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date: 06/01/2020 no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: security/blazor/we/webassembly/추가 시나리오
-
+title: Blazor추가 보안 시나리오 ASP.NET Core
+author: guardrex
+description: Blazor추가 보안 시나리오에 대해 weasembmbom를 구성 하는 방법에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/additional-scenarios
+ms.openlocfilehash: de752eb180767bbb269107ebc478a4422448f968
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272036"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor추가 보안 시나리오 ASP.NET Core
 

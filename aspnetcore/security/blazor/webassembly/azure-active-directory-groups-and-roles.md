@@ -1,11 +1,11 @@
 ---
-title: Azure Active Directory Blazor 그룹 및 역할을 사용 하 여 ASP.NET Core weasembmbse
+title: BlazorAzure Active Directory 그룹 및 역할을 사용 하 여 ASP.NET Core weasembmbse
 author: guardrex
-description: Azure Active Directory 그룹 및 역할 Blazor 을 사용 하도록 weasemboma를 구성 하는 방법을 알아봅니다.
+description: BlazorAzure Active Directory 그룹 및 역할을 사용 하도록 weasemboma를 구성 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: afdb5ddc4d4ed08d0f1ecaf7158af283dda6b302
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976884"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451877"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD 그룹, 관리 역할 및 사용자 정의 역할
 
 By [Luke Latham](https://github.com/guardrex) 및 [Javier Calvarro e](https://github.com/javiercn)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-AAD (Azure Active Directory)는 ASP.NET Core Id와 결합할 수 있는 몇 가지 권한 부여 방법을 제공 합니다.
+AAD (Azure Active Directory)는 ASP.NET Core와 결합할 수 있는 몇 가지 권한 부여 방법을 제공 합니다 Identity .
 
 * 사용자 정의 그룹
   * 보안
@@ -38,7 +34,7 @@ AAD (Azure Active Directory)는 ASP.NET Core Id와 결합할 수 있는 몇 가�
   * 기본 제공 관리 역할
   * 사용자 정의 역할
 
-이 문서의 지침은 다음 항목에서 설명 하는 Blazor Weasembmbaaad 배포 시나리오에 적용 됩니다.
+이 문서의 지침은 Blazor 다음 항목에서 설명 하는 weasembommbsembomsemboma에 적용 됩니다.
 
 * [Microsoft 계정을 사용하는 독립 실행형](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
 * [AAD를 사용하는 독립 실행형](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
@@ -46,16 +42,16 @@ AAD (Azure Active Directory)는 ASP.NET Core Id와 결합할 수 있는 몇 가�
 
 ### <a name="user-defined-groups-and-built-in-administrative-roles"></a>사용자 정의 그룹 및 기본 제공 관리 역할
 
-`groups` 멤버 자격 클레임을 제공 하도록 Azure Portal에서 앱을 구성 하려면 다음 Azure 문서를 참조 하세요. 사용자를 사용자 정의 AAD 그룹 및 기본 제공 관리 역할에 할당 합니다.
+멤버 자격 클레임을 제공 하도록 Azure Portal에서 앱을 구성 하려면 `groups` 다음 Azure 문서를 참조 하세요. 사용자를 사용자 정의 AAD 그룹 및 기본 제공 관리 역할에 할당 합니다.
 
 * [Azure AD 보안 그룹을 사용하는 역할](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [groupMembershipClaims 특성](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 다음 예에서는 사용자가 AAD 기본 제공 *청구 관리자* 역할에 할당 된 것으로 가정 합니다.
 
-AAD에서 `groups` 전송 하는 단일 클레임은 사용자의 그룹 및 역할을 JSON 배열의 개체 Id (guid)로 표시 합니다. 앱은 그룹 및 역할의 JSON 배열을 앱이 [정책을](xref:security/authorization/policies) 구성할 수 `group` 있는 개별 클레임으로 변환 해야 합니다.
+`groups`AAD에서 전송 하는 단일 클레임은 사용자의 그룹 및 역할을 JSON 배열의 개체 id (guid)로 표시 합니다. 앱은 그룹 및 역할의 JSON 배열을 `group` 앱이 [정책을](xref:security/authorization/policies) 구성할 수 있는 개별 클레임으로 변환 해야 합니다.
 
-그룹 `RemoteUserAccount` 및 역할에 대 한 배열 속성을 포함 하도록 확장 합니다.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>그룹 및 역할에 대 한 배열 속성을 포함 하도록 확장 합니다.
 
 *CustomUserAccount.cs*:
 
@@ -73,7 +69,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱에서 사용자 지정 사용자 팩터리를 만듭니다. 다음 팩터리는 [사용자 정의 역할](#user-defined-roles) 섹션에서 `roles` 설명 하는 클레임 배열을 처리 하도록 구성 되어 있습니다.
+호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱에서 사용자 지정 사용자 팩터리를 만듭니다. 다음 팩터리는 `roles` [사용자 정의 역할](#user-defined-roles) 섹션에서 설명 하는 클레임 배열을 처리 하도록 구성 되어 있습니다.
 
 ```csharp
 using System.Security.Claims;
@@ -119,7 +115,7 @@ public class CustomUserFactory
 
 원본 `groups` 클레임은 프레임 워크에 의해 자동으로 제거 되므로이를 제거 하는 코드를 제공할 필요가 없습니다.
 
-호스팅된 솔루션의 독립 `Program.Main` 실행형 앱 또는 클라이언트 앱의 (*Program.cs*)에 팩터리를 등록 합니다.
+`Program.Main`호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱의 (*Program.cs*)에 팩터리를 등록 합니다.
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -135,7 +131,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-에서 `Program.Main`각 그룹 또는 역할에 대 한 [정책을](xref:security/authorization/policies) 만듭니다. 다음 예에서는 AAD 기본 제공 *청구 관리자* 역할에 대 한 정책을 만듭니다.
+에서 각 그룹 또는 역할에 대 한 [정책을](xref:security/authorization/policies) 만듭니다 `Program.Main` . 다음 예에서는 AAD 기본 제공 *청구 관리자* 역할에 대 한 정책을 만듭니다.
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -168,7 +164,7 @@ AAD 역할 개체 Id의 전체 목록은 [aad 관리 역할 그룹 id](#aad-admi
 </AuthorizeView>
 ```
 
-전체 구성 요소에 대 한 액세스는 [ `[Authorize]` 특성 지시문](xref:security/blazor/index#authorize-attribute) 지시어를 사용 하 여 정책을 기반으로 할 수 있습니다.
+전체 구성 요소에 대 한 액세스는 [ `[Authorize]` ] 특성 지시어] (f: security/blazor/index #) ()를 사용 하는 정책을 기반으로 할 수 있습니다 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> .
 
 ```razor
 @page "/"
@@ -220,7 +216,7 @@ AAD 역할 개체 Id의 전체 목록은 [aad 관리 역할 그룹 id](#aad-admi
 
 AAD에 등록 된 앱은 사용자 정의 역할을 사용 하도록 구성할 수도 있습니다.
 
-`roles` 멤버 자격 클레임을 제공 하도록 Azure Portal에서 앱을 구성 하려면 [방법: 응용 프로그램에 앱 역할 추가 및 Azure 설명서의 토큰에서 수신](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) 을 참조 하세요.
+멤버 자격 클레임을 제공 하도록 Azure Portal에서 앱을 구성 하려면 `roles` [방법: 응용 프로그램에 앱 역할 추가 및 Azure 설명서의 토큰에서 수신](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) 을 참조 하세요.
 
 다음 예제에서는 앱이 두 개의 역할로 구성 되어 있다고 가정 합니다.
 
@@ -228,15 +224,15 @@ AAD에 등록 된 앱은 사용자 정의 역할을 사용 하도록 구성할 �
 * `developer`
 
 > [!NOTE]
-> Azure AD Premium 계정을 사용 하지 않고 보안 그룹에 역할을 할당할 수는 없지만 사용자를 역할에 할당 하 고 표준 `roles` Azure 계정으로 사용자에 대 한 클레임을 받을 수 있습니다. 이 섹션의 지침에는 Azure AD Premium 계정이 필요 하지 않습니다.
+> Azure AD Premium 계정을 사용 하지 않고 보안 그룹에 역할을 할당할 수는 없지만 사용자를 역할에 할당 하 고 `roles` 표준 Azure 계정으로 사용자에 대 한 클레임을 받을 수 있습니다. 이 섹션의 지침에는 Azure AD Premium 계정이 필요 하지 않습니다.
 >
 > 각 추가 역할 할당에 대해 **_사용자를 다시 추가_** 하 여 Azure Portal에서 여러 역할을 할당 합니다.
 
-AAD에서 `roles` 전송 하는 단일 클레임은 사용자 정의 역할을 JSON 배열의 `appRoles` `value`s로 표시 합니다. 앱은 역할의 JSON 배열을 개별 `role` 클레임으로 변환 해야 합니다.
+`roles`AAD에서 전송 하는 단일 클레임은 사용자 정의 역할을 `appRoles` `value` JSON 배열의 s로 표시 합니다. 앱은 역할의 JSON 배열을 개별 클레임으로 변환 해야 합니다 `role` .
 
-[사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 표시 된는 `roles` `CustomUserFactory` JSON 배열 값을 사용 하는 클레임에 대해 작동 하도록 설정 됩니다. `CustomUserFactory` [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 표시 된 대로 호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱에를 추가 하 고 등록 합니다. 원본 `roles` 클레임은 프레임 워크에 의해 자동으로 제거 되므로이를 제거 하는 코드를 제공할 필요가 없습니다.
+`CustomUserFactory` [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 표시 된는 JSON 배열 값을 사용 하는 클레임에 대해 작동 하도록 설정 됩니다 `roles` . `CustomUserFactory` [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 표시 된 대로 호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱에를 추가 하 고 등록 합니다. 원본 `roles` 클레임은 프레임 워크에 의해 자동으로 제거 되므로이를 제거 하는 코드를 제공할 필요가 없습니다.
 
-호스팅된 `Program.Main` 솔루션의 독립 실행형 앱 또는 클라이언트 앱에서 역할 클레임으로 이름이 "`role`" 인 클레임을 지정 합니다.
+`Program.Main`호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱에서 역할 클레임으로 이름이 "" 인 클레임을 지정 합니다 `role` .
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -247,11 +243,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-이 시점에서 구성 요소 권한 부여 방법이 작동 합니다. 구성 요소의 권한 부여 메커니즘은 `admin` 역할을 사용 하 여 사용자에 게 권한을 부여할 수 있습니다.
+이 시점에서 구성 요소 권한 부여 방법이 작동 합니다. 구성 요소의 권한 부여 메커니즘은 역할을 사용 `admin` 하 여 사용자에 게 권한을 부여할 수 있습니다.
 
-* [AuthorizeView 구성 요소](xref:security/blazor/index#authorizeview-component) (예 `<AuthorizeView Roles="admin">`:)
-* attribute 지시문 (예: `@attribute [Authorize(Roles = "admin")]`) [ `[Authorize]` ](xref:security/blazor/index#authorize-attribute)
-* [절차적 논리](xref:security/blazor/index#procedural-logic) (예: `if (user.IsInRole("admin")) { ... }`)
+* [AuthorizeView 구성 요소](xref:security/blazor/index#authorizeview-component) (예: `<AuthorizeView Roles="admin">` )
+* [ `[Authorize]` ] 특성 지시문] (f: security/blazor/index # 권한 부여-특성) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (예: `@attribute [Authorize(Roles = "admin")]` )
+* [절차적 논리](xref:security/blazor/index#procedural-logic) (예: `if (user.IsInRole("admin")) { ... }` )
 
   여러 역할 테스트가 지원 됩니다.
 
@@ -264,7 +260,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="aad-adminstrative-role-group-ids"></a>AAD 관리 역할 그룹 Id
 
-다음 표에 제공 된 개체 Id는 클레임에 대 한 `group` [정책을](xref:security/authorization/policies) 만드는 데 사용 됩니다. 정책을 통해 앱은 앱의 다양 한 작업에 대 한 사용자 권한을 부여할 수 있습니다. 자세한 내용은 [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션을 참조 하세요.
+다음 표에 제공 된 개체 Id는 클레임에 대 한 [정책을](xref:security/authorization/policies) 만드는 데 사용 됩니다 `group` . 정책을 통해 앱은 앱의 다양 한 작업에 대 한 사용자 권한을 부여할 수 있습니다. 자세한 내용은 [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션을 참조 하세요.
 
 AAD 관리 역할 | 개체 ID입니다.
 --- | ---

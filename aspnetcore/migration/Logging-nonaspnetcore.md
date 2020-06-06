@@ -1,14 +1,24 @@
 ---
-제목: pakrym-2.1에서 2.2 또는 3.0 author로 마이그레이션: description: 2.1에서 2.2 또는 3.0을 사용 하는 non-ASP.NET Core 응용 프로그램을 마이그레이션하는 방법에 대해 알아봅니다.
-pakrym: 사용자 지정: mvc ms. date: 01/04/2019 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 마이그레이션/로깅-nonaspnetcore
-
+title: Microsoft Extensions. 로깅 2.1에서 2.2 또는 3.0로 마이그레이션
+author: pakrym
+description: 2.1에서 2.2 또는 3.0로 non-ASP.NET를 사용 하는 Core 응용 프로그램을 마이그레이션하는 방법에 대해 알아봅니다.
+ms.author: pakrym
+ms.custom: mvc
+ms.date: 01/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/logging-nonaspnetcore
+ms.openlocfilehash: 2fd738ed0e0a06d0793e3c624d40a13725b53cd8
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84274234"
 ---
-
 # <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a>Microsoft Extensions. 로깅 2.1에서 2.2 또는 3.0로 마이그레이션
 
 이 문서에서는 `Microsoft.Extensions.Logging` 2.1에서 2.2 또는 3.0로를 사용 하는 Non-ASP.NET Core 응용 프로그램을 마이그레이션하는 일반적인 단계를 간략하게 설명 합니다.
@@ -65,7 +75,7 @@ using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole())
 }
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Microsoft. extension. Console NuGet 패키지](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/).
 * <xref:fundamentals/logging/index>

@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ClaimsPrincipal에서 마이그레이션
+author: mjrousos
+description: ASP.NET Core에서 현재 인증 된 사용자의 id 및 클레임을 검색 하기 위해 ClaimsPrincipal에서 다른 곳으로 마이그레이션하는 방법에 대해 알아봅니다.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 03/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/claimsprincipal-current
+ms.openlocfilehash: 4bcbaa1854016d7393d019a9c275bc8221974d7a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145618"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>ClaimsPrincipal에서 마이그레이션
 

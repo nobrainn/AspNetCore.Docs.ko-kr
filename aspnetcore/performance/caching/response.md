@@ -1,12 +1,23 @@
 ---
-제목: ASP.NET Core 작성자의 응답 캐싱: rick-anderson description: 응답 캐싱을 사용 하 여 대역폭 요구 사항을 낮추고 ASP.NET Core 앱의 성능을 향상 시키는 방법을 알아봅니다.
-monikerRange: ' >= aspnetcore-2.1 ' ms author: riande. 날짜: 11/04/2019 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 성능/캐싱/응답
-
+title: ASP.NET Core의 응답 캐싱
+author: rick-anderson
+description: 응답 캐싱을 사용하여 ASP.NET Core 앱의 성능을 향상하고 대역폭 요구 사항을 낮추는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.date: 11/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/caching/response
+ms.openlocfilehash: 87ff2633ded612eba2c996583b4a6cf997fe8e18
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84105768"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱
 
@@ -181,7 +192,7 @@ Cache-Control: public,max-age=10
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [캐시에 응답 저장](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

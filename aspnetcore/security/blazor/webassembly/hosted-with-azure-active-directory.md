@@ -1,11 +1,24 @@
 ---
-제목: ASP.NET Core ' Blazor Azure Active Directory ' author: guardrex description: monikerRange: ' >= aspnetcore-3.1 ' ms author: riande. 사용자 지정: mvc ms. 날짜: 05/19/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: security/blazor/we/wembsemba/hosted-active directory
-
+title: BlazorAzure Active Directory를 사용 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/hosted-with-azure-active-directory
+ms.openlocfilehash: 9e76b300c159a2a1432aa4b1c6e47b3d91084a85
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84215093"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>BlazorAzure Active Directory를 사용 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
 
@@ -168,7 +181,7 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-예:
+예제:
 
 ```json
 {
@@ -260,7 +273,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예:
+예제:
 
 ```json
 {

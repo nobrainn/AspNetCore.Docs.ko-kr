@@ -1,12 +1,23 @@
 ---
-제목: ASP.NET Core Web API author에서 응답 데이터 서식 지정: ardalis description: ASP.NET Core Web API에서 응답 데이터의 형식을 지정 하는 방법에 대해 알아봅니다.
-H1Hack27Feb2017: riande ms. custom: ms. date: 04/17/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: web-api/고급/서식
-
+title: ASP.NET Core Web API에서 응답 데이터 서식 지정
+author: ardalis
+description: ASP.NET Core Web API에서 응답 데이터의 서식을 지정하는 방법을 알아봅니다.
+ms.author: riande
+ms.custom: H1Hack27Feb2017
+ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/advanced/formatting
+ms.openlocfilehash: 865b2e58b38c16a54815ce0923a78ac98f2247f1
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355372"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 

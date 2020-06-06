@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Web API에서 ASP.NET Core로 마이그레이션
+author: ardalis
+description: ASP.NET 4.x Web API에서 ASP.NET Core MVC로 웹 API 구현을 마이그레이션하는 방법에 대해 알아봅니다.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/webapi
+ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145553"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API에서 ASP.NET Core로 마이그레이션
 
@@ -130,7 +142,7 @@ ASP.NET Core *API* 프로젝트 템플릿에는 생성 된 코드의 끝점 라�
 
 마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1`) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

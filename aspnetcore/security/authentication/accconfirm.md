@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: b7856a3004cfc76acfb485ff8f1fadf87f5aa904
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777113"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451747"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core의 계정 확인 및 암호 복구
 
@@ -52,16 +52,18 @@ cd WebPWrecover
 dotnet run
 ```
 
-앱을 실행 하 고, **등록** 링크를 선택 하 고, 사용자를 등록 합니다. 등록 되 면 전자 메일 확인을 시뮬레이트하는 `/Identity/Account/RegisterConfirmation` 링크를 포함 하는 to 페이지로 리디렉션됩니다.
+앱을 실행 하 고, **등록** 링크를 선택 하 고, 사용자를 등록 합니다. 등록 되 면 `/Identity/Account/RegisterConfirmation` 전자 메일 확인을 시뮬레이트하는 링크를 포함 하는 to 페이지로 리디렉션됩니다.
 
-* 링크를 `Click here to confirm your account` 선택 합니다.
+* 링크를 선택 `Click here to confirm your account` 합니다.
 * **로그인** 링크를 선택 하 고 동일한 자격 증명을 사용 하 여 로그인 합니다.
-* `/Identity/Account/Manage/PersonalData` 페이지로 리디렉션되는 `Hello YourEmail@provider.com!` 링크를 선택 합니다.
+* `Hello YourEmail@provider.com!`페이지로 리디렉션되는 링크를 선택 합니다 `/Identity/Account/Manage/PersonalData` .
 * 왼쪽에서 **개인 데이터** 탭을 선택 하 고 **삭제**를 선택 합니다.
 
 ### <a name="configure-an-email-provider"></a>전자 메일 공급자 구성
 
 이 자습서에서는 [SendGrid](https://sendgrid.com) 를 사용 하 여 전자 메일을 보냅니다. 전자 메일을 보내려면 SendGrid 계정 및 키가 필요 합니다. 다른 전자 메일 공급자를 사용할 수 있습니다. SendGrid 또는 다른 전자 메일 서비스를 사용 하 여 전자 메일을 보내는 것이 좋습니다. SMTP는 안전 하 게 보호 하 고 올바르게 설정 하기 어렵습니다.
+
+SendGrid 계정에는 [발신자를 추가](https://sendgrid.com/docs/ui/sending-email/senders/)해야 합니다.
 
 보안 전자 메일 키를 인출 하는 클래스를 만듭니다. 이 샘플의 경우 *Services/AuthMessageSenderOptions*을 만듭니다.
 
@@ -69,7 +71,7 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-[암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및 `SendGridUser` `SendGridKey` 를 설정 합니다. 예를 들어:
+`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 다음은 그 예입니다.
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -78,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` 디렉터리에 있는 *비밀. json* 파일의 키/값 쌍을 저장 합니다.
+Windows에서 Secret Manager는 디렉터리에 있는 *비밀. json* 파일의 키/값 쌍을 저장 합니다 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
 
-*비밀. json* 파일의 내용이 암호화 되지 않습니다. 다음 태그는 *비밀. json* 파일을 보여 줍니다. `SendGridKey` 값이 제거 되었습니다.
+*비밀. json* 파일의 내용이 암호화 되지 않습니다. 다음 태그는 *비밀. json* 파일을 보여 줍니다. `SendGridKey`값이 제거 되었습니다.
 
 ```json
 {
@@ -95,7 +97,7 @@ Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-use
 
 이 자습서에서는 [SendGrid](https://sendgrid.com/)를 통해 전자 메일 알림을 추가 하는 방법을 보여 주지만 SMTP 및 기타 메커니즘을 사용 하 여 전자 메일을 보낼 수 있습니다.
 
-NuGet 패키지 `SendGrid` 를 설치 합니다.
+NuGet 패키지를 설치 합니다 `SendGrid` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -119,7 +121,7 @@ dotnet add package SendGrid
 
 ### <a name="implement-iemailsender"></a>IEmailSender 구현
 
-를 구현 `IEmailSender`하려면 다음과 유사한 코드를 사용 하 여 *서비스/emailsender .cs* 를 만듭니다.
+를 구현 하려면 `IEmailSender` 다음과 유사한 코드를 사용 하 여 *서비스/emailsender .cs* 를 만듭니다.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/EmailSender.cs)]
 
@@ -128,7 +130,7 @@ dotnet add package SendGrid
 `ConfigureServices` *Startup.cs* 파일의 메서드에 다음 코드를 추가 합니다.
 
 * 을 `EmailSender` 임시 서비스로 추가 합니다.
-* 구성 인스턴스 `AuthMessageSenderOptions` 를 등록 합니다.
+* `AuthMessageSenderOptions`구성 인스턴스를 등록 합니다.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
 
@@ -161,13 +163,13 @@ dotnet add package SendGrid
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
 
-기본 제공 Id 사용자 토큰 ( [AspNetCore/src/identity/extension. Core/src/TokenOptions](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) )은 [하루에 한 시간 제한이](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)있습니다.
+기본 제공 Identity 사용자 토큰 ( [AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 참조)에는 [1 일 시간 제한이](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)있습니다.
 
 ### <a name="change-the-email-token-lifespan"></a>전자 메일 토큰 수명 변경
 
-[Id 사용자 토큰](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 의 기본 토큰 수명은 [1 일](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)입니다. 이 섹션에서는 전자 메일 토큰 수명을 변경 하는 방법을 보여 줍니다.
+[ Identity 사용자 토큰](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 의 기본 토큰 수명은 [1 일](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)입니다. 이 섹션에서는 전자 메일 토큰 수명을 변경 하는 방법을 보여 줍니다.
 
-사용자 지정 [DataProtectorTokenProvider\<tuser>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) 을 추가 <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>하 고 다음을 수행 합니다.
+사용자 지정 [DataProtectorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) 및를 추가 합니다 <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> .
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -185,8 +187,8 @@ dotnet add package SendGrid
 
 전자 메일을 사용할 수 없는 경우:
 
-* 가 호출 되었는지 확인 `EmailSender.Execute` `SendGridClient.SendEmailAsync` 하려면에서 중단점을 설정 합니다.
-* 비슷한 코드를 `EmailSender.Execute`사용 하 여 [전자 메일을 보내는 콘솔 앱](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) 을 만듭니다.
+* `EmailSender.Execute`가 호출 되었는지 확인 하려면에서 중단점을 설정 `SendGridClient.SendEmailAsync` 합니다.
+* 비슷한 코드를 사용 하 여 [전자 메일을 보내는 콘솔 앱](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) 을 만듭니다 `EmailSender.Execute` .
 * [전자 메일 작업](https://sendgrid.com/docs/User_Guide/email_activity.html) 페이지를 검토 합니다.
 * 스팸 폴더를 확인 합니다.
 * 다른 전자 메일 공급자 (Microsoft, Yahoo, Gmail 등)에서 다른 전자 메일 별칭을 사용해 보세요.
@@ -198,9 +200,9 @@ dotnet add package SendGrid
 
 이 섹션을 완료 하려면 먼저 외부 인증 공급자를 사용 하도록 설정 해야 합니다. [Facebook, Google 및 외부 공급자 인증](xref:security/authentication/social/index)을 참조 하세요.
 
-전자 메일 링크를 클릭 하 여 로컬 및 소셜 계정을 결합할 수 있습니다. 다음 시퀀스에서 "RickAndMSFT@gmail.com"는 먼저 로컬 로그인으로 만들어집니다. 그러나 계정을 소셜 로그인으로 먼저 만든 다음 로컬 로그인을 추가할 수 있습니다.
+전자 메일 링크를 클릭 하 여 로컬 및 소셜 계정을 결합할 수 있습니다. 다음 시퀀스에서는 " RickAndMSFT@gmail.com "이 (가) 로컬 로그인으로 먼저 생성 되지만 계정을 소셜 로그인으로 먼저 만든 다음 로컬 로그인을 추가할 수 있습니다.
 
-![웹 응용 프로그램 RickAndMSFT@gmail.com : 사용자 인증 됨](accconfirm/_static/rick.png)
+![웹 응용 프로그램: RickAndMSFT@gmail.com 사용자 인증 됨](accconfirm/_static/rick.png)
 
 **관리** 링크를 클릭 합니다. 이 계정과 연결 된 0 외부 (소셜 로그인)를 확인 합니다.
 
@@ -227,7 +229,7 @@ dotnet add package SendGrid
 
 [.NET Core 2.2 SDK 이상](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-identity"></a>웹 앱 및 스 캐 폴드 Id 만들기
+## <a name="create-a-web--app-and-scaffold-identity"></a>웹 앱 및 스 캐 폴드 만들기Identity
 
 다음 명령을 실행 하 여 인증을 사용 하는 웹 앱을 만듭니다.
 
@@ -245,11 +247,11 @@ dotnet run
 
 ## <a name="test-new-user-registration"></a>새 사용자 등록 테스트
 
-앱을 실행 하 고, **등록** 링크를 선택 하 고, 사용자를 등록 합니다. 이때 전자 메일에 대 한 유일한 유효성 검사는 [`[EmailAddress]`](/dotnet/api/system.componentmodel.dataannotations.emailaddressattribute) 특성을 사용 합니다. 등록을 제출 하면 앱에 로그인 됩니다. 자습서의 뒷부분에서 새로운 사용자가 전자 메일의 유효성을 검사할 때까지 로그인 할 수 없도록 코드를 업데이트 합니다.
+앱을 실행 하 고, **등록** 링크를 선택 하 고, 사용자를 등록 합니다. 이때 전자 메일에 대 한 유일한 유효성 검사는 특성을 사용 [`[EmailAddress]`](/dotnet/api/system.componentmodel.dataannotations.emailaddressattribute) 합니다. 등록을 제출 하면 앱에 로그인 됩니다. 자습서의 뒷부분에서 새로운 사용자가 전자 메일의 유효성을 검사할 때까지 로그인 할 수 없도록 코드를 업데이트 합니다.
 
 [!INCLUDE[](~/includes/view-identity-db.md)]
 
-테이블의 `EmailConfirmed` 필드는 `False`입니다.
+테이블의 필드는 `EmailConfirmed` `False` 입니다.
 
 앱에서 확인 전자 메일을 보낼 때 다음 단계에서이 전자 메일을 다시 사용 하는 것이 좋습니다. 행을 마우스 오른쪽 단추로 클릭 하 고 **삭제**를 선택 합니다. 전자 메일 별칭을 삭제 하면 다음 단계에서 보다 쉽게 수행할 수 있습니다.
 
@@ -257,11 +259,11 @@ dotnet run
 
 ## <a name="require-email-confirmation"></a>전자 메일 확인 필요
 
-새 사용자 등록의 전자 메일을 확인 하는 것이 가장 좋습니다. 전자 메일 확인을 사용 하면 다른 사용자를 가장 하지 않는 것을 확인할 수 있습니다. 즉, 다른 사용자의 전자 메일을 사용 하 여 등록 하지 않았습니다. 토론 포럼이 있고 ""을 ""로yli@example.comnolivetto@contoso.com등록 하지 못하도록 하는 경우를 가정해 보겠습니다. 전자 메일 확인이 없으면nolivetto@contoso.com""이 (가) 앱에서 원치 않는 전자 메일을 받을 수 있습니다. "ylo@example.com"로 실수로 등록 한 사용자가 "yli"의 맞춤법 오류를 발견 했다고 가정 합니다. 앱에 올바른 전자 메일이 없기 때문에 암호 복구를 사용할 수 없습니다. 전자 메일 확인은 봇에서 제한 된 보호 기능을 제공 합니다. 전자 메일 확인은 전자 메일 계정이 많은 악의적인 사용자 로부터 보호를 제공 하지 않습니다.
+새 사용자 등록의 전자 메일을 확인 하는 것이 가장 좋습니다. 전자 메일 확인을 사용 하면 다른 사용자를 가장 하지 않는 것을 확인할 수 있습니다. 즉, 다른 사용자의 전자 메일을 사용 하 여 등록 하지 않았습니다. 토론 포럼이 있고 ""을 ""로 등록 하지 못하도록 하는 경우를 가정해 보겠습니다 yli@example.com nolivetto@contoso.com . 전자 메일 확인이 없으면 ""이 (가) nolivetto@contoso.com 앱에서 원치 않는 전자 메일을 받을 수 있습니다. ""로 실수로 등록 한 사용자가 ylo@example.com "yli"의 맞춤법 오류를 발견 했다고 가정 합니다. 앱에 올바른 전자 메일이 없기 때문에 암호 복구를 사용할 수 없습니다. 전자 메일 확인은 봇에서 제한 된 보호 기능을 제공 합니다. 전자 메일 확인은 전자 메일 계정이 많은 악의적인 사용자 로부터 보호를 제공 하지 않습니다.
 
 일반적으로 새 사용자가 확인 된 전자 메일을 보내기 전에 데이터를 웹 사이트에 게시 하는 것을 방지 하려고 합니다.
 
-확인 `Startup.ConfigureServices` 된 전자 메일을 요구 하도록 업데이트 합니다.
+`Startup.ConfigureServices`확인 된 전자 메일을 요구 하도록 업데이트 합니다.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=8-11)]
 
@@ -269,7 +271,7 @@ dotnet run
 
 ### <a name="configure-email-provider"></a>전자 메일 공급자 구성
 
-이 자습서에서는 [SendGrid](https://sendgrid.com) 를 사용 하 여 전자 메일을 보냅니다. 전자 메일을 보내려면 SendGrid 계정 및 키가 필요 합니다. 다른 전자 메일 공급자를 사용할 수 있습니다. ASP.NET Core 2.x에는 앱 `System.Net.Mail`에서 전자 메일을 보낼 수 있는가 포함 되어 있습니다. SendGrid 또는 다른 전자 메일 서비스를 사용 하 여 전자 메일을 보내는 것이 좋습니다. SMTP는 안전 하 게 보호 하 고 올바르게 설정 하기 어렵습니다.
+이 자습서에서는 [SendGrid](https://sendgrid.com) 를 사용 하 여 전자 메일을 보냅니다. 전자 메일을 보내려면 SendGrid 계정 및 키가 필요 합니다. 다른 전자 메일 공급자를 사용할 수 있습니다. ASP.NET Core 2.x에는 `System.Net.Mail` 앱에서 전자 메일을 보낼 수 있는가 포함 되어 있습니다. SendGrid 또는 다른 전자 메일 서비스를 사용 하 여 전자 메일을 보내는 것이 좋습니다. SMTP는 안전 하 게 보호 하 고 올바르게 설정 하기 어렵습니다.
 
 보안 전자 메일 키를 인출 하는 클래스를 만듭니다. 이 샘플의 경우 *Services/AuthMessageSenderOptions*을 만듭니다.
 
@@ -277,16 +279,16 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-[암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및 `SendGridUser` `SendGridKey` 를 설정 합니다. 예를 들어:
+`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 다음은 그 예입니다.
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` 디렉터리에 있는 *비밀. json* 파일의 키/값 쌍을 저장 합니다.
+Windows에서 Secret Manager는 디렉터리에 있는 *비밀. json* 파일의 키/값 쌍을 저장 합니다 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
 
-*비밀. json* 파일의 내용이 암호화 되지 않습니다. 다음 태그는 *비밀. json* 파일을 보여 줍니다. `SendGridKey` 값이 제거 되었습니다.
+*비밀. json* 파일의 내용이 암호화 되지 않습니다. 다음 태그는 *비밀. json* 파일을 보여 줍니다. `SendGridKey`값이 제거 되었습니다.
 
 ```json
 {
@@ -301,7 +303,7 @@ Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-use
 
 이 자습서에서는 [SendGrid](https://sendgrid.com/)를 통해 전자 메일 알림을 추가 하는 방법을 보여 주지만 SMTP 및 기타 메커니즘을 사용 하 여 전자 메일을 보낼 수 있습니다.
 
-NuGet 패키지 `SendGrid` 를 설치 합니다.
+NuGet 패키지를 설치 합니다 `SendGrid` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -325,7 +327,7 @@ dotnet add package SendGrid
 
 ### <a name="implement-iemailsender"></a>IEmailSender 구현
 
-를 구현 `IEmailSender`하려면 다음과 유사한 코드를 사용 하 여 *서비스/emailsender .cs* 를 만듭니다.
+를 구현 하려면 `IEmailSender` 다음과 유사한 코드를 사용 하 여 *서비스/emailsender .cs* 를 만듭니다.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/EmailSender.cs)]
 
@@ -334,13 +336,13 @@ dotnet add package SendGrid
 `ConfigureServices` *Startup.cs* 파일의 메서드에 다음 코드를 추가 합니다.
 
 * 을 `EmailSender` 임시 서비스로 추가 합니다.
-* 구성 인스턴스 `AuthMessageSenderOptions` 를 등록 합니다.
+* `AuthMessageSenderOptions`구성 인스턴스를 등록 합니다.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=15-99)]
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>계정 확인 및 암호 복구 사용
 
-템플릿에는 계정 확인 및 암호 복구를 위한 코드가 있습니다. *영역/Identity/Pages/Account/Register.cshtml.cs*에서 메서드를 `OnPostAsync` 찾습니다.
+템플릿에는 계정 확인 및 암호 복구를 위한 코드가 있습니다. `OnPostAsync` *영역/ Identity /Pages/Account/Register.cshtml.cs*에서 메서드를 찾습니다.
 
 다음 줄을 주석으로 처리 하 여 새로 등록 된 사용자가 자동으로 로그인 하지 않도록 합니다.
 
@@ -364,7 +366,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 ### <a name="view-the-manage-page"></a>관리 페이지 보기
 
-브라우저: 사용자 이름을 사용 하 여 브라우저 ![창에서 사용자 이름을 선택 합니다.](accconfirm/_static/un.png)
+브라우저: ![ 사용자 이름을 사용 하 여 브라우저 창에서 사용자 이름을 선택 합니다.](accconfirm/_static/un.png)
 
 관리 페이지는 **프로필** 탭이 선택 된 상태로 표시 됩니다. 전자 **메일** 에는 전자 메일이 확인 되었다는 확인란이 표시 됩니다.
 
@@ -387,13 +389,13 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAllTokens.cs?name=snippet1&highlight=15-16)]
 
-기본 제공 Identity 사용자 토큰 ( [AspNetCore/srcIdentity//Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 참조)에는 [1 일 시간 제한이](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)있습니다.
+기본 제공 Identity 사용자 토큰 ( [AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 참조)에는 [1 일 시간 제한이](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)있습니다.
 
 ### <a name="change-the-email-token-lifespan"></a>전자 메일 토큰 수명 변경
 
-사용자 토큰의 기본 토큰 수명은 [1 일](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)입니다. [ Identity ](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 이 섹션에서는 전자 메일 토큰 수명을 변경 하는 방법을 보여 줍니다.
+[ Identity 사용자 토큰](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 의 기본 토큰 수명은 [1 일](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)입니다. 이 섹션에서는 전자 메일 토큰 수명을 변경 하는 방법을 보여 줍니다.
 
-사용자 지정 [DataProtectorTokenProvider\<tuser>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) 을 추가 <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>하 고 다음을 수행 합니다.
+사용자 지정 [DataProtectorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) 및를 추가 합니다 <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> .
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -411,8 +413,8 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 전자 메일을 사용할 수 없는 경우:
 
-* 가 호출 되었는지 확인 `EmailSender.Execute` `SendGridClient.SendEmailAsync` 하려면에서 중단점을 설정 합니다.
-* 비슷한 코드를 `EmailSender.Execute`사용 하 여 [전자 메일을 보내는 콘솔 앱](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) 을 만듭니다.
+* `EmailSender.Execute`가 호출 되었는지 확인 하려면에서 중단점을 설정 `SendGridClient.SendEmailAsync` 합니다.
+* 비슷한 코드를 사용 하 여 [전자 메일을 보내는 콘솔 앱](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) 을 만듭니다 `EmailSender.Execute` .
 * [전자 메일 작업](https://sendgrid.com/docs/User_Guide/email_activity.html) 페이지를 검토 합니다.
 * 스팸 폴더를 확인 합니다.
 * 다른 전자 메일 공급자 (Microsoft, Yahoo, Gmail 등)에서 다른 전자 메일 별칭을 사용해 보세요.
@@ -424,9 +426,9 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 이 섹션을 완료 하려면 먼저 외부 인증 공급자를 사용 하도록 설정 해야 합니다. [Facebook, Google 및 외부 공급자 인증](xref:security/authentication/social/index)을 참조 하세요.
 
-전자 메일 링크를 클릭 하 여 로컬 및 소셜 계정을 결합할 수 있습니다. 다음 시퀀스에서 "RickAndMSFT@gmail.com"는 먼저 로컬 로그인으로 만들어집니다. 그러나 계정을 소셜 로그인으로 먼저 만든 다음 로컬 로그인을 추가할 수 있습니다.
+전자 메일 링크를 클릭 하 여 로컬 및 소셜 계정을 결합할 수 있습니다. 다음 시퀀스에서는 " RickAndMSFT@gmail.com "이 (가) 로컬 로그인으로 먼저 생성 되지만 계정을 소셜 로그인으로 먼저 만든 다음 로컬 로그인을 추가할 수 있습니다.
 
-![웹 응용 프로그램 RickAndMSFT@gmail.com : 사용자 인증 됨](accconfirm/_static/rick.png)
+![웹 응용 프로그램: RickAndMSFT@gmail.com 사용자 인증 됨](accconfirm/_static/rick.png)
 
 **관리** 링크를 클릭 합니다. 이 계정과 연결 된 0 외부 (소셜 로그인)를 확인 합니다.
 

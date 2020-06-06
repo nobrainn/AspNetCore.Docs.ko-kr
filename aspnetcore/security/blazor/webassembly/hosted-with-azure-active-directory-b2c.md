@@ -1,11 +1,24 @@
 ---
-제목: ASP.NET Core ' Blazor Azure Active Directory B2C ' author: guardrex description: monikerRange: ' >= aspnetcore-3.1 ' ms author: riande. 사용자 지정: mvc ms. 날짜: 05/19/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: security/blazor/we/webassembly
-
+title: BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+ms.openlocfilehash: b369bf0e9b20bcb87345e3e10c314ae6227464d1
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84215083"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
 
@@ -180,7 +193,7 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-예:
+예제:
 
 ```json
 {
@@ -272,7 +285,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예:
+예제:
 
 ```json
 {

@@ -1,14 +1,25 @@
 ---
-제목: ' SignalR author: bradygaster description: ' ASP.NET Core 사용자 및 그룹 관리의 개요 '에서 사용자 및 그룹을 관리 SignalR 합니다.
-monikerRange: ' >= aspnetcore-2.1 ' ms author: bradyg ms. custom: mvc ms. date: 05/17/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: signalr/groups
-
+title: 에서 사용자 및 그룹 관리SignalR
+author: bradygaster
+description: ASP.NET Core SignalR 사용자 및 그룹 관리 개요
+monikerRange: '>= aspnetcore-2.1'
+ms.author: bradyg
+ms.custom: mvc
+ms.date: 05/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/groups
+ms.openlocfilehash: dfa989654069bc85f0a936751dbabe384c63e917
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "83550000"
 ---
-
 # <a name="manage-users-and-groups-in-signalr"></a>에서 사용자 및 그룹 관리SignalR
 
 만든 사람 [Brennan Conroy](https://github.com/BrennanConroy)
