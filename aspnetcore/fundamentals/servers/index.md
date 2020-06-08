@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 74affbb7d18d80e2e55714df100d820aed2ce427
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d57fcd5883a869c5421b88321d4a279f3f938c9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776183"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452150"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core의 웹 서버 구현
 
@@ -158,9 +158,9 @@ HTTP.sys 구성 지침은 <xref:fundamentals/servers/httpsys>를 참조하세요
 
 IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버가 실행됩니다.
 
-* [Visual Studio](https://visualstudio.microsoft.com) &ndash; 실행 프로필을 사용하여 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module) 또는 콘솔에서 앱 및 서버를 시작할 수 있습니다.
-* [Visual Studio Code](https://code.visualstudio.com/) &ndash; [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode)로 앱 및 서버를 시작합니다. 그러면 CoreCLR 디버거를 활성화합니다.
-* [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/) &ndash; [Mono Soft-Mode 디버거](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/)로 앱 및 서버를 시작합니다.
+* [Visual Studio](https://visualstudio.microsoft.com): 실행 프로필을 사용하여 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module) 또는 콘솔에서 앱 및 서버를 시작할 수 있습니다.
+* [Visual Studio Code](https://code.visualstudio.com/): [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode)로 앱 및 서버를 시작합니다. 그러면 CoreCLR 디버거를 활성화합니다.
+* [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/): 앱과 서버는 [Mono Soft-Mode 디버거](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/)에 의해 시작됩니다.
 
 프로젝트의 폴더에 있는 명령 프롬프트에서 앱을 시작할 때 [dotnet run](/dotnet/core/tools/dotnet-run)은 서버 및 앱을 시작합니다(Kestrel 및 HTTP.sys만 해당). `Debug`(기본값) 또는 `Release`로 설정되어 있는 `-c|--configuration` 옵션으로 구성을 지정합니다.
 

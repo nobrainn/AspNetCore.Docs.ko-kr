@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: bbd8b6fcd357b8929bf097450854d98fbea2570e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5ba7bbde49bfc232795d375a1ec644825a0dee1e
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772637"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454638"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor 서버 앱 보호
 
@@ -37,9 +37,9 @@ ms.locfileid: "82772637"
 다른 ASP.NET Core 프로젝트에 사용할 수 있는 것과 동일한 인증 메커니즘 세트를 제공하는 대화 상자가 열립니다.
 
 * **인증 없음**
-* **개별 사용자 계정** &ndash; 사용자 계정은 다음과 같이 저장할 수 있습니다.
-  * ASP.NET Core의 [ID](xref:security/authentication/identity) 시스템을 사용하여 앱에 저장
-  * [Azure AD B2C](xref:security/authentication/azure-ad-b2c) 사용
+* **개별 사용자 계정**: 사용자 계정은 다음과 같이 저장될 수 있습니다.
+  * ASP.NET Core의 [Identity](xref:security/authentication/identity) 시스템을 사용하는 앱 내에 저장
+  * [Azure AD B2C](xref:security/authentication/azure-ad-b2c)를 사용하여 저장
 * **회사 또는 학교 계정**
 * **Windows 인증**
 
@@ -56,7 +56,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | 인증 메커니즘 | 설명 |
 | ------------------------ | ----------- |
 | `None`(기본값)         | 인증 없음 |
-| `Individual`             | ASP.NET Core ID를 사용하여 앱에 저장된 사용자 |
+| `Individual`             | ASP.NET Core Identity을 사용하여 앱에 저장된 사용자 |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c)에 저장된 사용자 |
 | `SingleOrg`              | 단일 테넌트에 대한 조직 인증 |
 | `MultiOrg`               | 여러 테넌트에 대한 조직 인증 |
@@ -75,7 +75,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 1. **새 Blazor 서버 앱 구성** 단계의 **인증** 드롭다운에서 **개별 인증(앱 내)** 을 선택합니다.
 
-1. ASP.NET Core ID를 사용하여 앱에 저장된 개별 사용자에 대한 앱이 만들어집니다.
+1. ASP.NET Core Identity을 사용하여 앱에 저장된 개별 사용자에 대한 앱이 만들어집니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -90,7 +90,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | 인증 메커니즘 | 설명 |
 | ------------------------ | ----------- |
 | `None`(기본값)         | 인증 없음 |
-| `Individual`             | ASP.NET Core ID를 사용하여 앱에 저장된 사용자 |
+| `Individual`             | ASP.NET Core Identity을 사용하여 앱에 저장된 사용자 |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c)에 저장된 사용자 |
 | `SingleOrg`              | 단일 테넌트에 대한 조직 인증 |
 | `MultiOrg`               | 여러 테넌트에 대한 조직 인증 |
@@ -108,3 +108,10 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ## <a name="secure-an-existing-app"></a>기존 앱 보호
 
 Blazor 서버 앱은 ASP.NET Core 앱과 동일한 방식으로 보안을 위해 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요.
+
+## <a name="scaffold-identity"></a>스캐폴드 Identity
+
+Blazor 서버 프로젝트에 스캐폴드 Identity 실행:
+
+* [기존 권한 없음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
+* [권한 있음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).

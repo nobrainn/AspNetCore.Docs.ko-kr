@@ -5,7 +5,7 @@ description: Blazor 앱을 호스트하고 배포하는 방법을 알아봅니�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,18 +13,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 9d57b81cd813d02a65b6d3a39c7f1a1aa8a069c7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 482b066d347c2c572b0ffb78ccab1ac391195823
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775169"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452241"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor 호스트 및 배포
+# <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core 호스트 및 배포 Blazor
 
 작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 ## <a name="publish-the-app"></a>앱 게시
 
@@ -56,9 +54,9 @@ dotnet publish -c Release
 게시 위치:
 
 * Blazor WebAssembly
-  * 독립 실행형 &ndash; 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 게시됩니다. 앱을 정적 사이트로 배포하려면 *wwwroot* 폴더의 내용을 정적 사이트 호스트에 복사합니다.
-  * 호스트됨 &ndash; 클라이언트 Blazor WebAssembly 앱이 서버 앱의 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 서버 앱의 다른 정적 웹 자산과 함께 게시됩니다. 호스트에 *게시* 폴더의 콘텐츠를 배포합니다.
-* Blazor 서버 &ndash; 앱이 */bin/Release/{TARGET FRAMEWORK}/publish* 폴더에 게시됩니다. 호스트에 *게시* 폴더의 콘텐츠를 배포합니다.
+  * 독립 실행형: 해당 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 게시됩니다. 앱을 정적 사이트로 배포하려면 *wwwroot* 폴더의 내용을 정적 사이트 호스트에 복사합니다.
+  * 호스트형: 클라이언트 Blazor WebAssembly 앱이 서버 앱의 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 서버 앱의 다른 정적 웹 자산과 함께 게시됩니다. 호스트에 *게시* 폴더의 콘텐츠를 배포합니다.
+* Blazor 서버: 해당 앱이 */bin/Release/{TARGET FRAMEWORK}/publish* 폴더에 게시됩니다. 호스트에 *게시* 폴더의 콘텐츠를 배포합니다.
 
 이 폴더의 자산은 웹 서버에 배포됩니다. 배포는 사용 중인 개발 도구에 따라 수동 프로세스일 수도 있고 자동 프로세스일 수도 있습니다.
 
