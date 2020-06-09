@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core의 로깅 및 진단SignalR
+author: anurse
+description: ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR .
+monikerRange: '>= aspnetcore-2.1'
+ms.author: anurse
+ms.custom: signalr
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/diagnostics
+ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507318"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core의 로깅 및 진단SignalR
 
@@ -77,34 +89,14 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 다음 표에서는 JavaScript 클라이언트에서 사용할 수 있는 로그 수준을 보여 줍니다. 로그 수준을 이러한 값 중 하나로 설정 하면 해당 수준 및 테이블 위의 모든 수준에서 로깅을 사용할 수 있습니다.
 
 | Level | Description |
-| ----- | ---
-제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: ' ASP.NET Core SignalR ' 작성자: 설명: ' ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅니다 SignalR . '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `None` | 메시지가 기록 되지 않습니다. | | `Critical` | 전체 앱에서 오류를 나타내는 메시지입니다. | | `Error` | 현재 작업의 실패를 나타내는 메시지입니다. | | `Warning` | 심각 하지 않은 문제를 나타내는 메시지입니다. | | `Information` | 정보 메시지. | | `Debug` | 디버깅에 유용한 진단 메시지입니다. | | `Trace` | 특정 문제를 진단 하기 위해 설계 된 매우 자세한 진단 메시지입니다. |
+| ----- | ----------- |
+| `None` | 메시지가 기록 되지 않습니다. |
+| `Critical` | 전체 앱에서 오류를 나타내는 메시지입니다. |
+| `Error` | 현재 작업의 실패를 나타내는 메시지입니다. |
+| `Warning` | 심각 하지 않은 문제를 나타내는 메시지입니다. |
+| `Information` | 정보 메시지. |
+| `Debug` | 디버깅에 유용한 진단 메시지입니다. |
+| `Trace` | 특정 문제를 진단 하기 위해 설계 된 매우 자세한 진단 메시지입니다. |
 
 자세한 정도를 구성 하면 로그가 브라우저 콘솔에 기록 되거나 NodeJS 앱의 표준 출력에 기록 됩니다.
 
@@ -218,7 +210,40 @@ tcpdump -i [interface] -w trace.pcap
 
 ![GitHub 문제로 로그 파일 끌기](diagnostics/attaching-diagnostics-files.png)
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="metrics"></a>메트릭
+
+메트릭은 시간 간격에 대 한 데이터 측정값의 표현입니다. 예를 들어 초당 요청 수입니다. 메트릭 데이터를 사용 하면 상위 수준에서 앱의 상태를 확인할 수 있습니다. .NET gRPC 메트릭은를 사용 하 여 내보내집니다 <xref:System.Diagnostics.Tracing.EventCounter> .
+
+### <a name="signalr-server-metrics"></a>SignalR서버 메트릭
+
+SignalR서버 메트릭은 이벤트 원본에 보고 됩니다 <xref:Microsoft.AspNetCore.Http.Connections> .
+
+| Name                    | Description                 |
+|-------------------------|-----------------------------|
+| `connections-started`   | 시작 되는 총 연결   |
+| `connections-stopped`   | 중지 된 총 연결   |
+| `connections-timed-out` | 총 연결 시간 초과 |
+| `current-connections`   | 현재 연결         |
+| `connections-duration`  | 평균 연결 기간 |
+
+### <a name="observe-metrics"></a>메트릭 관찰
+
+[dotnet-카운터](/dotnet/core/diagnostics/dotnet-counters) 는 임시 상태 모니터링 및 첫 번째 수준의 성능 조사를 위한 성능 모니터링 도구입니다. 을 공급자 이름으로 사용 하 여 .NET 앱을 모니터링 `Microsoft.AspNetCore.Http.Connections` 합니다. 예:
+
+```console
+> dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections
+
+Press p to pause, r to resume, q to quit.
+    Status: Running
+[Microsoft.AspNetCore.Http.Connections]
+    Average Connection Duration (ms)       16,040.56
+    Current Connections                         1
+    Total Connections Started                   8
+    Total Connections Stopped                   7
+    Total Connections Timed Out                 0
+```
+
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

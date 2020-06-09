@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core Blazor weasembmbambambambambambambomapp ASP.NET Core의 성능을 향상 Blazor 하 고 일반적인 성능 문제를 방지 하기 위한 팁 ' 작성자: 설명: ' 팁
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core Blazor weasembomperformance 성능 모범 사례
+author: pranavkm
+description: ASP.NET Core Blazor weasembmbomapps의 성능을 향상 하 고 일반적인 성능 문제를 방지 하기 위한 팁입니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/blazor/webassembly-best-practices
+ms.openlocfilehash: 950d87a6f09e998e47e96c93c5d68bb3f19ddafb
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529634"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor weasembomperformance 성능 모범 사례
 
@@ -28,7 +40,7 @@ Blazor알고리즘에서 구성 요소가 변경 되지 않았다는 것을 인�
 
 대부분의 앱은 세부적인 제어를 요구 하지 않지만 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> UI 이벤트에 응답 하는 구성 요소를 선택적으로 렌더링 하는 데 사용할 수도 있습니다.
 
-다음 예제에서는
+다음 예제에서,
 
 * <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>는를 재정의 하 고 필드의 값으로 설정 합니다 .이 필드의 값은 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 처음에 `false` 구성 요소를 로드할 때입니다.
 * 이 단추를 선택 하면 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 가로 설정 되어 `true` 구성 요소가 업데이트 된와 강제로 rerender 됩니다 `currentCount` .
@@ -58,7 +70,7 @@ Blazor알고리즘에서 구성 요소가 변경 되지 않았다는 것을 인�
 }
 ```
 
-자세한 내용은 <xref:blazor/lifecycle#after-component-render>를 참조하세요.
+자세한 내용은 <xref:blazor/lifecycle#after-component-render>을 참조하세요.
 
 ## <a name="virtualize-re-usable-fragments"></a>다시 사용 가능한 조각 가상화
 
@@ -131,6 +143,12 @@ BlazorWeasembmboma <xref:Microsoft.JSInterop.IJSRuntime> 는 서버 앱에서 �
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="compression"></a>압축
+
+BlazorWeasembomambomapp이 게시 되 면 게시 하는 동안 출력을 정적으로 압축 하 여 앱의 크기를 줄이고 런타임 압축을 위한 오버 헤드를 제거 합니다. Blazor는 서버를 사용 하 여 콘텐츠 negotation를 수행 하 고 정적으로 압축 된 파일을 제공 합니다.
+
+앱이 배포 된 후 앱이 압축 된 파일을 사용 하는지 확인 합니다. 브라우저의 개발자 도구에서 네트워크 탭을 검사 하 고 파일이 또는로 제공 되는지 확인 `Content-Encoding: br` `Content-Encoding: gz` 합니다. 호스트가 압축 된 파일을 처리 하지 않는 경우의 지침을 따르세요 <xref:host-and-deploy/blazor/webassembly#compression> .
 
 ### <a name="disable-unused-features"></a>사용 하지 않는 기능 사용 안 함
 
