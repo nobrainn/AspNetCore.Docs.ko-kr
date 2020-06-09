@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: ASP.NET Core 설명서
+title: ASP.NET 설명서
 summary: ASP.NET Core를 사용하여 빠르고 안전한 플랫폼 간 및 클라우드 기반 웹앱과 서비스를 만드는 방법을 알아봅니다. 자습서, 샘플 코드, 기본 사항, API 참조 등을 찾아보세요.
 brand: aspnet
 metadata:
-  title: ASP.NET Core 설명서
+  title: ASP.NET 설명서
   description: ASP.NET Core를 사용하여 빠르고 안전한 플랫폼 간 및 클라우드 기반 웹앱과 서비스를 만드는 방법을 알아봅니다. 자습서, 샘플 코드, 기본 사항, API 참조 등을 찾아보세요.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 06/03/2020
-  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
-  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
+  ms.date: 06/05/2020
+  ms.openlocfilehash: 25b5387c8956ea7931751525ea954f6f702c0cde
+  ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
   ms.translationtype: HT
   ms.contentlocale: ko-KR
-  ms.lasthandoff: 06/04/2020
-  ms.locfileid: "84355426"
+  ms.lasthandoff: 06/08/2020
+  ms.locfileid: "84507326"
 highlightedContent:
   items:
   - title: 아무 플랫폼에서 5분 만에 ASP.NET Core 앱 만들기
@@ -44,7 +44,7 @@ highlightedContent:
     url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: ASP.NET Core 앱 개발
-  summary: 대화형 웹앱, 웹 API, MVC 패턴화 앱, 실시간 앱 등을 선택합니다. ASP.NET 4.x 설명서는 [ASP.NET](https://docs.microsoft.com/aspnet/overview)을 참조하세요.
+  summary: 대화형 웹앱, 웹 API, MVC 패턴화 앱, 실시간 앱 등 선택
   items:
   - title: 대화형 클라이언트 쪽 Blazor 앱
     summary: 기본에 가까운 성능을 위해 WebAssembly를 활용할 수 있는 재사용 가능한 UI 구성 요소를 사용하여 개발
