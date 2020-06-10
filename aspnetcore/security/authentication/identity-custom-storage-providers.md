@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106587"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652987"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core에 대 한 사용자 지정 저장소 공급자Identity
 
@@ -25,7 +25,7 @@ ms.locfileid: "84106587"
 
 ASP.NET Core Identity 은 사용자 지정 저장소 공급자를 만들어 앱에 연결 하는 데 사용할 수 있는 확장 가능한 시스템입니다. 이 항목에서는 ASP.NET Core에 대 한 사용자 지정 저장소 공급자를 만드는 방법에 대해 설명 합니다 Identity . 사용자 고유의 저장소 공급자를 만드는 데 중요 한 개념을 설명 하지만 단계별 연습은 아닙니다.
 
-[GitHub에서 샘플 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)
+[GitHub에서 샘플 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample)
 
 ## <a name="introduction"></a>소개
 
