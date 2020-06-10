@@ -1,12 +1,23 @@
 ---
-제목: ' ASP.NET Core ' 작성자의 사용자 지정 저장소 공급자 Identity : 설명: ' ASP.NET Core에 대 한 사용자 지정 저장소 공급자를 구성 하는 방법을 알아봅니다 Identity . '
-ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core에 대 한 사용자 지정 저장소 공급자Identity
+author: ardalis
+description: ASP.NET Core에 대 한 사용자 지정 저장소 공급자를 구성 하는 방법을 알아봅니다 Identity .
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/identity-custom-storage-providers
+ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106587"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core에 대 한 사용자 지정 저장소 공급자Identity
 

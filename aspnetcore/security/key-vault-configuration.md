@@ -1,11 +1,24 @@
 ---
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core의 Azure Key Vault 구성 공급자
+author: rick-anderson
+description: Azure Key Vault 구성 공급자를 사용 하 여 런타임에 로드 된 이름-값 쌍을 사용 하 여 앱을 구성 하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/key-vault-configuration
+ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106678"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
@@ -206,79 +219,12 @@ config.AddAzureKeyVault(
     });
 ```
 
-| 속성         | 설명 |
-| ---
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--------- | ---제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient> 값을 검색 하는 데 사용할입니다. | | `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> 비밀 로드를 제어 하는 데 사용 되는 인스턴스입니다. | | `ReloadInterval` | `Timespan` 변경에 대 한 주요 자격 증명 모음 폴링 시도 사이에 대기 합니다. 기본값은 `null` (구성이 다시 로드 되지 않음)입니다. | | `Vault`          | 키 자격 증명 모음 URI입니다. |
+| 속성         | Description |
+| ---------------- | ----------- |
+| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>값을 검색 하는 데 사용할입니다. |
+| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>비밀 로드를 제어 하는 데 사용 되는 인스턴스입니다. |
+| `ReloadInterval` | `Timespan`변경에 대 한 주요 자격 증명 모음 폴링 시도 사이에 대기 합니다. 기본값은 `null` (구성이 다시 로드 되지 않음)입니다. |
+| `Vault`          | 키 자격 증명 모음 URI입니다. |
 
 ## <a name="use-a-key-name-prefix"></a>키 이름 접두사 사용
 
@@ -417,7 +363,7 @@ Configuration.Reload();
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
 * [Microsoft Azure: Key Vault 설명서](/azure/key-vault/)
-* [Azure Key Vault에 대해 HSM 보호된 키를 생성하고 전송하는 방법](/azure/key-vault/key-vault-hsm-protected-keys)
+* [Azure Key Vault 용 HSM 보호 키를 생성 하 고 전송 하는 방법](/azure/key-vault/key-vault-hsm-protected-keys)
 * [KeyVaultClient 클래스](/dotnet/api/microsoft.azure.keyvault.keyvaultclient)
 * [빠른 시작: .NET 웹앱을 사용하여 Azure Key Vault에서 비밀 설정 및 검색](/azure/key-vault/quick-create-net)
 * [자습서: .NET에서 Azure Windows Virtual Machine에 Azure Key Vault를 사용하는 방법](/azure/key-vault/tutorial-net-windows-virtual-machine)
@@ -744,7 +690,7 @@ Configuration.Reload();
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
 * [Microsoft Azure: Key Vault 설명서](/azure/key-vault/)
-* [Azure Key Vault에 대해 HSM 보호된 키를 생성하고 전송하는 방법](/azure/key-vault/key-vault-hsm-protected-keys)
+* [Azure Key Vault 용 HSM 보호 키를 생성 하 고 전송 하는 방법](/azure/key-vault/key-vault-hsm-protected-keys)
 * [KeyVaultClient 클래스](/dotnet/api/microsoft.azure.keyvault.keyvaultclient)
 * [빠른 시작: .NET 웹앱을 사용하여 Azure Key Vault에서 비밀 설정 및 검색](/azure/key-vault/quick-create-net)
 * [자습서: .NET에서 Azure Windows Virtual Machine에 Azure Key Vault를 사용하는 방법](/azure/key-vault/tutorial-net-windows-virtual-machine)

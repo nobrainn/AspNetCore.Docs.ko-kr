@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core ' 작성자에 게 콘텐츠 보안 정책 적용 Blazor : 설명: ' ASP.NET Core 앱에서 CSP (콘텐츠 보안 정책)를 사용 하 여 Blazor XSS (교차 사이트 스크립팅) 공격 으로부터 보호 하는 방법을 알아봅니다. '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core에 대 한 콘텐츠 보안 정책 적용Blazor
+author: guardrex
+description: ASP.NET Core apps에서 CSP (콘텐츠 보안 정책)를 사용 하 여 Blazor XSS (사이트 간 스크립팅) 공격 으로부터 보호 하는 방법에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/content-security-policy
+ms.openlocfilehash: 8615b199373ca856c252b9f843e3635770367e4a
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106392"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core에 대 한 콘텐츠 보안 정책 적용Blazor
 

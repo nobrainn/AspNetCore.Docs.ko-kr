@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core Blazor 서버 ' 작성자: 설명: ' 서버 앱에 대 한 보안 위협을 완화 하는 방법 알아보기 '에 대 한 위협 완화 지침 Blazor
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core 서버에 대 한 위협 완화 지침 Blazor
+author: guardrex
+description: 서버 앱에 대 한 보안 위협을 완화 하는 방법에 대해 알아봅니다 Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/05/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/threat-mitigation
+ms.openlocfilehash: 06f9cc2d70367ea90a519ddd508a156e88adcb61
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864633"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core 서버에 대 한 위협 완화 지침 Blazor
 
@@ -37,7 +49,7 @@ JS interop는 인터넷을 통해 발생 하 고 클라이언트는 원격 브�
 
 DoS (서비스 거부) 공격은 일반적으로 앱 또는 서버 리소스의 고갈를 검색 합니다. 그러나 리소스 소모는 시스템의 공격에 대 한 결과일 수도 있습니다. 예를 들어 높은 사용자 수요로 인해 유한 리소스를 모두 사용할 수 있습니다. DoS는 [dos (서비스 거부) 공격](#denial-of-service-dos-attacks) 섹션에 자세히 설명 되어 있습니다.
 
-Blazor데이터베이스 및 파일 핸들 (파일 읽기 및 쓰기에 사용 됨)과 같은 프레임 워크 외부의 리소스는 리소스가 고갈 될 수도 있습니다. 자세한 내용은 <xref:performance/performance-best-practices>를 참조하세요.
+Blazor데이터베이스 및 파일 핸들 (파일 읽기 및 쓰기에 사용 됨)과 같은 프레임 워크 외부의 리소스는 리소스가 고갈 될 수도 있습니다. 자세한 내용은 <xref:performance/performance-best-practices>을 참조하세요.
 
 ### <a name="cpu"></a>CPU
 
@@ -122,7 +134,7 @@ DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 �
 
 앞의 시나리오를 방지 하기 위해 다음 예방 조치를 취해야 합니다.
 
-* 호출 중에 발생할 수 있는 오류를 고려 하 여 [try-catch 문 내](/dotnet/csharp/language-reference/keywords/try-catch) 에서 JS interop 호출을 래핑합니다. 자세한 내용은 <xref:blazor/handle-errors#javascript-interop>를 참조하세요.
+* 호출 중에 발생할 수 있는 오류를 고려 하 여 [try-catch 문 내](/dotnet/csharp/language-reference/keywords/try-catch) 에서 JS interop 호출을 래핑합니다. 자세한 내용은 <xref:blazor/handle-errors#javascript-interop>을 참조하세요.
 * 작업을 수행 하기 전에 오류 메시지를 포함 하 여 JS interop 호출에서 반환 된 데이터의 유효성을 검사 합니다.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>브라우저에서 호출 된 .NET 메서드
@@ -144,7 +156,7 @@ JavaScript에서 .NET 메서드로의 호출을 신뢰 하지 않습니다. .NET
 
 이벤트는 서버 앱에 대 한 진입점을 제공 Blazor 합니다. 웹 앱에서 끝점을 보호 하는 동일한 규칙이 서버 앱에서 이벤트 처리에 적용 Blazor 됩니다. 악의적인 클라이언트는 이벤트에 대 한 페이로드로 전송 하려는 모든 데이터를 보낼 수 있습니다.
 
-예를 들어:
+예를 들면 다음과 같습니다.
 
 * 에 대 한 변경 이벤트는 `<select>` 앱이 클라이언트에 제공 하는 옵션에 포함 되지 않은 값을 보낼 수 있습니다.
 * 는 `<input>` 클라이언트 쪽 유효성 검사를 무시 하 고 모든 텍스트 데이터를 서버에 보낼 수 있습니다.
@@ -344,7 +356,7 @@ XSS 취약성이 있는 경우 앱은 렌더링 된 페이지에 사용자 입�
 
 XSS 공격 으로부터 보호 하는 과정에서 [CSP (콘텐츠 보안 정책)](https://developer.mozilla.org/docs/Web/HTTP/CSP)와 같은 xss 완화를 구현 하는 것이 좋습니다.
 
-자세한 내용은 <xref:security/cross-site-scripting>를 참조하세요.
+자세한 내용은 <xref:security/cross-site-scripting>을 참조하세요.
 
 ### <a name="cross-origin-protection"></a>원본 간 보호
 
@@ -353,7 +365,7 @@ XSS 공격 으로부터 보호 하는 과정에서 [CSP (콘텐츠 보안 정책
 * Blazor서버 앱을 방지 하기 위해 추가 조치를 취해야 하는 경우를 제외 하 고는 서버 앱에 액세스할 수 있습니다. 크로스-원본 액세스를 사용 하지 않도록 설정 하려면 파이프라인에 CORS 미들웨어를 추가 하 고를 끝점 메타 데이터에 추가 하 여 끝점에서 CORS를 사용 하지 않도록 설정 <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> Blazor 하거나 [ SignalR 크로스-원본 리소스 공유를 구성](xref:signalr/security#cross-origin-resource-sharing)하 여 허용 되는 원본 집합을 제한 합니다.
 * CORS를 사용 하는 경우 CORS 구성에 따라 앱을 보호 하기 위해 추가 단계가 필요할 수 있습니다. CORS를 전역적으로 사용 하는 경우 Blazor <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> 끝점 경로 작성기에서를 호출한 후 끝점 메타 데이터에 메타 데이터를 추가 하 여 서버 허브에 대해 cors를 사용 하지 않도록 설정할 수 있습니다.
 
-자세한 내용은 <xref:security/anti-request-forgery>를 참조하세요.
+자세한 내용은 <xref:security/anti-request-forgery>을 참조하세요.
 
 ### <a name="click-jacking"></a>클릭-킹
 
@@ -381,7 +393,7 @@ Blazor서버 응용 프로그램 세션이 시작 되 면 서버는 세션 시�
 * 가능 하면 상대 링크를 사용 합니다.
 * 페이지에 포함 하기 전에 절대 링크 대상이 유효한 지 확인 합니다.
 
-자세한 내용은 <xref:security/preventing-open-redirects>를 참조하세요.
+자세한 내용은 <xref:security/preventing-open-redirects>을 참조하세요.
 
 ## <a name="security-checklist"></a>보안 검사 목록
 

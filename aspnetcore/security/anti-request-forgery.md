@@ -1,11 +1,23 @@
 ---
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core에서 교차 사이트 요청 위조 (XSRF/CSRF) 공격 방지
+author: steve-smith
+description: 악의적인 웹 사이트가 클라이언트 브라우저와 앱 간의 상호 작용에 영향을 줄 수 있는 웹 앱에 대 한 공격을 방지 하는 방법을 알아봅니다.
+ms.author: riande
+ms.custom: mvc
+ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/anti-request-forgery
+ms.openlocfilehash: 89a7a12c943933f745793eeccb4f3d2e4856063f
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105911"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core에서 교차 사이트 요청 위조 (XSRF/CSRF) 공격 방지
 
@@ -205,38 +217,11 @@ services.AddAntiforgery(options =>
 &dagger;`Cookie` [CookieBuilder](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder) 클래스의 속성을 사용 하 여 위조 방지 속성을 설정 합니다.
 
 | 옵션 | 설명 |
-| ---
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
---- | ---제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | [쿠키](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | 위조 방지 쿠키를 만드는 데 사용 되는 설정을 결정 합니다. | | [Formfieldname](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | 위조 방지 시스템이 뷰에서 위조 방지 토큰을 렌더링 하는 데 사용 하는 숨겨진 양식 필드의 이름입니다. | | [헤드 ername](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | 위조 방지 시스템에서 사용 하는 헤더의 이름입니다. 이면 `null` 시스템은 폼 데이터만 고려 합니다. | | [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | 헤더 생성을 표시 하지 않을 지 여부를 지정 합니다 `X-Frame-Options` . 기본적으로 헤더는 "SAMEORIGIN" 값을 사용 하 여 생성 됩니다. 기본값은 `false`입니다. |
+| ------ | ----------- |
+| [쿠키](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | 위조 방지 쿠키를 만드는 데 사용 되는 설정을 결정 합니다. |
+| [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | 위조 방지 시스템이 뷰에서 위조 방지 토큰을 렌더링 하는 데 사용 하는 숨겨진 양식 필드의 이름입니다. |
+| [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | 위조 방지 시스템에서 사용 하는 헤더의 이름입니다. 이면 `null` 시스템은 폼 데이터만 고려 합니다. |
+| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | 헤더 생성을 표시 하지 않을 지 여부를 지정 합니다 `X-Frame-Options` . 기본적으로 헤더는 "SAMEORIGIN" 값을 사용 하 여 생성 됩니다. 기본값은 `false`입니다. |
 
 ::: moniker-end
 
@@ -256,38 +241,15 @@ services.AddAntiforgery(options =>
 ```
 
 | 옵션 | 설명 |
-| ---
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
---- | ---제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-제목: author: 설명: ms author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | [쿠키](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | 위조 방지 쿠키를 만드는 데 사용 되는 설정을 결정 합니다. | | [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | 쿠키의 도메인입니다. 기본값은 `null`입니다. 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 쿠키를 대신 하는 것이 좋습니다. 도메인. | | [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | 쿠키의 이름입니다. 설정 하지 않으면 시스템에서 [DefaultCookiePrefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) ("로 시작 하는 고유한 이름을 생성 합니다. AspNetCore. "). 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 대신 Cookie.Name를 사용할 것을 권장 합니다. | | [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | 쿠키에 설정 된 경로입니다. 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 권장 되는 대안은 Cookie. Path입니다. | | [Formfieldname](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | 위조 방지 시스템이 뷰에서 위조 방지 토큰을 렌더링 하는 데 사용 하는 숨겨진 양식 필드의 이름입니다. | | [헤드 ername](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | 위조 방지 시스템에서 사용 하는 헤더의 이름입니다. 이면 `null` 시스템은 폼 데이터만 고려 합니다. | | [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | 위조 방지 시스템에 HTTPS가 필요한 지 여부를 지정 합니다. 이면 `true` HTTPS가 아닌 요청이 실패 합니다. 기본값은 `false`입니다. 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 대신 쿠키를 설정 하는 것이 좋습니다. SecurePolicy. | | [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | 헤더 생성을 표시 하지 않을 지 여부를 지정 합니다 `X-Frame-Options` . 기본적으로 헤더는 "SAMEORIGIN" 값을 사용 하 여 생성 됩니다. 기본값은 `false`입니다. |
+| ------ | ----------- |
+| [쿠키](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | 위조 방지 쿠키를 만드는 데 사용 되는 설정을 결정 합니다. |
+| [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | 쿠키의 도메인입니다. 기본값은 `null`입니다. 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 쿠키를 대신 하는 것이 좋습니다. 도메인. |
+| [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | 쿠키의 이름입니다. 설정 하지 않으면 시스템에서 [DefaultCookiePrefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) ("로 시작 하는 고유한 이름을 생성 합니다. AspNetCore. "). 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 대신 Cookie.Name를 사용할 것을 권장 합니다. |
+| [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | 쿠키에 설정 된 경로입니다. 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 권장 되는 대안은 Cookie. Path입니다. |
+| [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | 위조 방지 시스템이 뷰에서 위조 방지 토큰을 렌더링 하는 데 사용 하는 숨겨진 양식 필드의 이름입니다. |
+| [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | 위조 방지 시스템에서 사용 하는 헤더의 이름입니다. 이면 `null` 시스템은 폼 데이터만 고려 합니다. |
+| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | 위조 방지 시스템에 HTTPS가 필요한 지 여부를 지정 합니다. 이면 `true` HTTPS가 아닌 요청이 실패 합니다. 기본값은 `false`입니다. 이 속성은 사용 되지 않으며 이후 버전에서 제거 될 예정입니다. 대신 쿠키를 설정 하는 것이 좋습니다. SecurePolicy. |
+| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | 헤더 생성을 표시 하지 않을 지 여부를 지정 합니다 `X-Frame-Options` . 기본적으로 헤더는 "SAMEORIGIN" 값을 사용 하 여 생성 됩니다. 기본값은 `false`입니다. |
 
 ::: moniker-end
 

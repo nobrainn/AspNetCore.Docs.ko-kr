@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core SignalR javascript 클라이언트 작성자: 설명: ' ASP.NET Core SignalR Javascript client 개요 '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: SignalRJavaScript 클라이언트 ASP.NET Core
+author: bradygaster
+description: SignalRJavaScript 클라이언트 ASP.NET Core 개요
+monikerRange: '>= aspnetcore-2.1'
+ms.author: bradyg
+ms.custom: mvc
+ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/javascript-client
+ms.openlocfilehash: 4b3a4b2323b7f221d9cd1aab1c56d1d9828eb916
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106457"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>SignalRJavaScript 클라이언트 ASP.NET Core
 

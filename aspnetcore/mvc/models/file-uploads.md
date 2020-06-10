@@ -1,11 +1,24 @@
 ---
-제목: author: 설명: monikerRange: ms: custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core에서 파일 업로드
+author: rick-anderson
+description: 모델 바인딩 및 스트리밍을 사용하여 ASP.NET Core MVC에서 파일을 업로드하는 방법입니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/models/file-uploads
+ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83838320"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
@@ -176,7 +189,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 [Fetch API](https://caniuse.com/#feat=fetch)를 지원하지 않는 클라이언트에 대해 JavaScript로 양식 POST를 수행하려면 다음 방법 중 하나를 사용합니다.
 
 * Fetch Polyfill(예: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))을 사용합니다.
-* 대신 `XMLHttpRequest`를 예를 들어:
+* 대신 `XMLHttpRequest`를 예를 들면 다음과 같습니다.
 
   ```javascript
   <script>
@@ -235,7 +248,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 > [!NOTE]
 > 바인딩은 이름을 기준으로 양식 파일을 일치시킵니다. 예를 들어 `<input type="file" name="formFile">`의 HTML `name` 값은 바인딩된 C# 매개 변수/속성(`FormFile`)과 일치해야 합니다. 자세한 내용은 [이름 특성 값을 POST 메서드의 매개 변수 이름과 일치](#match-name-attribute-value-to-parameter-name-of-post-method) 섹션을 참조하세요.
 
-다음 예제를 참조하세요.
+다음 예제가 하는 일:
 
 * 하나 이상의 업로드된 파일을 반복합니다.
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*)을 사용하여 파일 이름을 포함하는 파일 전체 경로를 반환합니다. 
@@ -449,7 +462,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ### <a name="file-extension-validation"></a>파일 확장명 유효성 검사
 
-업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들어:
+업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -552,7 +565,7 @@ if (formFile.Length > _fileSizeLimit)
 
 폼 데이터를 Razor 게시 하거나 JavaScript를 직접 사용 하는 형식이 아닌 `FormData` 경우 폼의 요소에 지정 된 이름이 나 `FormData` 컨트롤러 작업의 매개 변수 이름과 일치 해야 합니다.
 
-다음 예제에서는
+다음 예제에서,
 
 * `<input>` 요소를 사용하는 경우 `name` 특성은 값 `battlePlans`로 설정됩니다.
 
@@ -707,7 +720,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조 하세요.
 
 ASP.NET Core 모듈의 제한 사항 또는 IIS 요청 필터링 모듈의 존재로 인해 업로드가 2GB 또는 4GB로 제한될 수 있습니다. 자세한 내용은 [크기가 2GB 이상인 파일을 업로드할 수 없음(dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711)을 참조하세요.
 
@@ -905,7 +918,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 [Fetch API](https://caniuse.com/#feat=fetch)를 지원하지 않는 클라이언트에 대해 JavaScript로 양식 POST를 수행하려면 다음 방법 중 하나를 사용합니다.
 
 * Fetch Polyfill(예: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))을 사용합니다.
-* 대신 `XMLHttpRequest`를 예를 들어:
+* 대신 `XMLHttpRequest`를 예를 들면 다음과 같습니다.
 
   ```javascript
   <script>
@@ -964,7 +977,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 > [!NOTE]
 > 바인딩은 이름을 기준으로 양식 파일을 일치시킵니다. 예를 들어 `<input type="file" name="formFile">`의 HTML `name` 값은 바인딩된 C# 매개 변수/속성(`FormFile`)과 일치해야 합니다. 자세한 내용은 [이름 특성 값을 POST 메서드의 매개 변수 이름과 일치](#match-name-attribute-value-to-parameter-name-of-post-method) 섹션을 참조하세요.
 
-다음 예제를 참조하세요.
+다음 예제가 하는 일:
 
 * 하나 이상의 업로드된 파일을 반복합니다.
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*)을 사용하여 파일 이름을 포함하는 파일 전체 경로를 반환합니다. 
@@ -1178,7 +1191,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ### <a name="file-extension-validation"></a>파일 확장명 유효성 검사
 
-업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들어:
+업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1281,7 +1294,7 @@ if (formFile.Length > _fileSizeLimit)
 
 폼 데이터를 Razor 게시 하거나 JavaScript를 직접 사용 하는 형식이 아닌 `FormData` 경우 폼의 요소에 지정 된 이름이 나 `FormData` 컨트롤러 작업의 매개 변수 이름과 일치 해야 합니다.
 
-다음 예제에서는
+다음 예제에서,
 
 * `<input>` 요소를 사용하는 경우 `name` 특성은 값 `battlePlans`로 설정됩니다.
 
@@ -1429,7 +1442,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조 하세요.
 
 ASP.NET Core 모듈의 제한 사항 또는 IIS 요청 필터링 모듈의 존재로 인해 업로드가 2GB 또는 4GB로 제한될 수 있습니다. 자세한 내용은 [크기가 2GB 이상인 파일을 업로드할 수 없음(dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711)을 참조하세요.
 

@@ -1,12 +1,24 @@
 ---
-제목: ' ASP.NET Core Blazor 서버 추가 보안 시나리오 ' 작성자: 설명: ' Blazor 추가 보안 시나리오를 위해 서버를 구성 하는 방법을 알아봅니다. '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core Blazor 서버 추가 보안 시나리오
+author: guardrex
+description: 추가 보안 시나리오를 위해 서버를 구성 하는 방법을 알아봅니다 Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/additional-scenarios
+ms.openlocfilehash: f172df7f2333fd79ba175ec8a3a6925ec07f1113
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851527"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor 서버 추가 보안 시나리오
 
@@ -16,7 +28,7 @@ monikerRange: ms.author: ms.custom: ms.date: no-loc:
 
 서버 앱의 구성 요소 외부에서 사용할 수 있는 토큰은 Razor Blazor 이 섹션에 설명 된 방법으로 구성 요소에 전달 될 수 있습니다. 전체 예제를 비롯 한 샘플 코드는 `Startup.ConfigureServices` [서버 쪽 Blazor 응용 프로그램에 토큰 전달](https://github.com/javiercn/blazor-server-aad-sample)을 참조 하세요.
 
-Blazor일반 페이지 또는 MVC 앱에서와 같이 서버 앱을 인증 Razor 합니다. 토큰을 프로 비전 하 여 인증 쿠키에 저장 합니다. 예를 들어:
+Blazor일반 페이지 또는 MVC 앱에서와 같이 서버 앱을 인증 Razor 합니다. 토큰을 프로 비전 하 여 인증 쿠키에 저장 합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

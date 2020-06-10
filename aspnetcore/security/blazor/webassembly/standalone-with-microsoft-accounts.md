@@ -1,11 +1,24 @@
 ---
-제목: ' Blazor Microsoft 계정을 사용 하 여 ASP.NET Core weasemboman 독립 실행형 앱을 보호 합니다. ' 작성자: 설명: monikerRange: ms. 작성자: 밀리초: 사용자 지정: ms. 날짜:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: BlazorMicrosoft 계정을 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+ms.openlocfilehash: e4c49f899d5988dc42b16c16eb5114613c7204ba
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83852340"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>BlazorMicrosoft 계정을 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
