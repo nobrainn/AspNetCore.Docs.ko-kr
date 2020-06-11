@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: 웹 팜에 ASP.NET Core 호스트
+author: rick-anderson
+description: 웹 팜 환경에서 공유 리소스가 있는 ASP.NET Core 앱의 여러 인스턴스를 호스트하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/web-farm
+ms.openlocfilehash: 37a50fa2939eb31e66925fa907212d54577bd20b
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106574"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>웹 팜에 ASP.NET Core 호스트
 
@@ -52,78 +65,12 @@ title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
 다음 시나리오에서는 추가 구성이 필요하지 않지만 웹 팜 구성이 필요한 기술을 사용합니다.
 
 | 시나리오 | &hellip; 사용 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----------- | | 인증 | 데이터 보호(<xref:security/data-protection/configuration/overview>참조).<br><br>자세한 내용은 <xref:security/authentication/cookie> 및 <xref:security/cookie-sharing>를 참조하세요. | | Identity | 인증 및 데이터베이스 구성.<br><br>자세한 내용은 <xref:security/authentication/identity>를 참조하세요. | | 세션 | 데이터 보호(암호화된 쿠키)(<xref:security/data-protection/configuration/overview> 참조) 및 캐싱(<xref:performance/caching/distributed> 참조).<br><br>자세한 내용은 [세션 및 앱 상태: 세션 상태](xref:fundamentals/app-state#session-state)를 참조하세요. | | TempData | 데이터 보호(암호화된 쿠키)(<xref:security/data-protection/configuration/overview> 참조) 또는 세션([세션 및 앱 상태: 세션 상태](xref:fundamentals/app-state#session-state) 참조).<br><br>자세한 내용은 [세션 및 앱 상태: TempData](xref:fundamentals/app-state#tempdata)를 참조하세요. | | 위조 방지 | 데이터 보호(<xref:security/data-protection/configuration/overview> 참조)<br><br>자세한 내용은 <xref:security/anti-request-forgery>를 참조하세요. |
+| -------- | ------------------- |
+| 인증 | 데이터 보호(<xref:security/data-protection/configuration/overview> 참조).<br><br>자세한 내용은 <xref:security/authentication/cookie> 및 <xref:security/cookie-sharing>를 참조하세요. |
+| Identity | 인증 및 데이터베이스 구성.<br><br>자세한 내용은 <xref:security/authentication/identity>를 참조하세요. |
+| 세션 | 데이터 보호(암호화된 쿠키)(<xref:security/data-protection/configuration/overview> 참조) 및 캐싱(<xref:performance/caching/distributed> 참조).<br><br>자세한 내용은 [세션 및 앱 상태: 세션 상태](xref:fundamentals/app-state#session-state)를 참조하세요. |
+| TempData | 데이터 보호(암호화된 쿠키)(<xref:security/data-protection/configuration/overview> 참조) 또는 세션([세션 및 앱 상태: 세션 상태](xref:fundamentals/app-state#session-state) 참조).<br><br>자세한 내용은 [세션 및 앱 상태: TempData](xref:fundamentals/app-state#tempdata)를 참조하세요. |
+| 위조 방지 | 데이터 보호(<xref:security/data-protection/configuration/overview> 참조).<br><br>자세한 내용은 <xref:security/anti-request-forgery>를 참조하세요. |
 
 ## <a name="troubleshoot"></a>문제 해결
 

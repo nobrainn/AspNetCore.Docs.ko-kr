@@ -1,11 +1,23 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: gRPC 서비스와 HTTP API 비교
+author: jamesnk
+description: gRPC와 HTTP API를 비교한 방법과 권장 시나리오를 알아봅니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: jamesnk
+ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/comparison
+ms.openlocfilehash: f622a1518781c255d36762dc651f975625dabf7c
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106132"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
@@ -18,333 +30,15 @@ title: author: description: monikerRange: ms.author: ms.date: no-loc:
 다음 표에서는 gRPC와 JSON을 사용하는 HTTP API 간의 고급 기능 비교를 제공합니다.
 
 | 기능          | gRPC                                               | JSON을 사용하는 HTTP API           |
-| ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--------- | --- title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
-------------------------- | --- title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
---------------- | | 계약         | 필요( *.proto*)                                | 선택(OpenAPI)            | | 프로토콜         | HTTP/2                                             | HTTP                          | | 페이로드          | [Protobuf(소규모, 이진)](#performance)           | JSON(대규모, 사람이 읽을 수 있음)  | | 규범 | [엄격한 사양](#strict-specification)      | 느슨함. 모든 HTTP가 유효합니다.     | | 스트리밍        | [클라이언트, 서버, 양방향](#streaming)       | 클라이언트, 서버                | | 브라우저 지원  | [아니요(grpc-web 필요)](#limited-browser-support) | 예                           | | 보안         | 전송(TLS)                                    | 전송(TLS)               | | 클라이언트 코드 생성 | [예](#code-generation)                      | OpenAPI + 타사 도구 |
+| ---------------- | -------------------------------------------------- | ----------------------------- |
+| 계약         | 필수( *.proto*)                                | 선택 사항(OpenAPI)            |
+| 프로토콜         | HTTP/2                                             | HTTP                          |
+| Payload          | [Protobuf](#performance)(소형, 이진)           | JSON(대형, 사람이 읽을 수 있음)  |
+| 규범 | [엄격한 사양](#strict-specification)      | 느슨함. 모든 HTTP가 유효합니다.     |
+| 스트리밍        | [클라이언트, 서버, 양방향](#streaming)       | 클라이언트, 서버                |
+| 브라우저 지원  | [아니요(gRPC-웹 필요)](#limited-browser-support) | 예                           |
+| 보안         | 전송(TLS)                                    | 전송(TLS)               |
+| 클라이언트 코드 생성 | [예](#code-generation)                      | OpenAPI + 타사 도구 |
 
 ## <a name="grpc-strengths"></a>gRPC 장점
 

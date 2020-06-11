@@ -1,12 +1,24 @@
 ---
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core Blazor 고급 시나리오
+author: guardrex
+description: 수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/advanced-scenarios
+ms.openlocfilehash: 3345f545e230ada78e6c66fc9eb049060d5794d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851161"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor 고급 시나리오
 
@@ -150,73 +162,15 @@ builder.AddContent(1, "Second");
 코드를 처음 실행할 때 `someFlag`가 `true`인 경우 작성기는 다음을 받게 됩니다.
 
 | 순서 | 형식      | 데이터   |
-| :---
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------ | :----: | | 0        | 텍스트 노드 | 1차  | | 1        | 텍스트 노드 | 2차 |
+| :------: | --------- | :----: |
+| 0        | 텍스트 노드 | 첫째  |
+| 1        | 텍스트 노드 | Second |
 
 `someFlag`가 `false`로 전환되었으며, 태그를 다시 렌더링했다고 가정합니다. 이번에는 작성기가 다음을 받게 됩니다.
 
 | 순서 | 형식       | 데이터   |
-| :---
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------ | :----: | | 1        | 텍스트 노드 | 2차 |
+| :------: | ---------- | :----: |
+| 1        | 텍스트 노드  | Second |
 
 런타임은 diff를 통해 시퀀스 `0`의 항목이 제거된 것을 확인하고 다음과 같은 간단한 *편집 스크립트*를 생성합니다.
 
@@ -240,72 +194,15 @@ builder.AddContent(seq++, "Second");
 이제 첫 번째 출력은 다음과 같습니다.
 
 | 순서 | 형식      | 데이터   |
-| :---
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------ | :----: | | 0        | 텍스트 노드 | 1차  | | 1        | 텍스트 노드 | 2차 |
+| :------: | --------- | :----: |
+| 0        | 텍스트 노드 | 첫째  |
+| 1        | 텍스트 노드 | Second |
 
 이 결과는 이전 사례와 동일하므로 부정적인 이슈가 없습니다. 두 번째 렌더링에서 `someFlag`는 `false`이고, 출력은 다음과 같습니다.
 
 | 순서 | 형식      | 데이터   |
-| :---
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----: | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------ | --- title: 'ASP.NET Core Blazor 고급 시나리오' author: description: '수동 RenderTreeBuilder 논리를 앱에 통합하는 방법을 포함하여 Blazor의 고급 시나리오에 대해 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
---- | | 0        | 텍스트 노드 | 2차 |
+| :------: | --------- | ------ |
+| 0        | 텍스트 노드 | Second |
 
 이번에는 diff 알고리즘에서 ‘두 가지’ 변경 사항이 발생했음을 확인하고, 다음과 같은 편집 스크립트를 생성합니다.
 

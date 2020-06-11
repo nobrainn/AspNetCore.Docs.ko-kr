@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core 프로젝트 문제 해결 및 디버깅
+author: Rick-Anderson
+description: ASP.NET Core 프로젝트를 사용하여 경고 및 오류를 이해하고 문제를 해결합니다.
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: test/troubleshoot
+ms.openlocfilehash: bd5e74569717db26496760eaaa2760122d4b49e7
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106496"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>ASP.NET Core 프로젝트 문제 해결 및 디버깅
 

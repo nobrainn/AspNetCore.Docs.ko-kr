@@ -1,5 +1,9 @@
 <a name="dc"></a>
 
+### <a name="add-nuget-packages-and-ef-tools"></a>NuGet 패키지 및 EF 도구 추가
+
+[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
+
 ### <a name="add-a-database-context-class"></a>데이터베이스 컨텍스트 클래스 추가
 
 RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다음 `RazorPagesMovieContext` 클래스를 *Data* 폴더에 추가:
@@ -17,10 +21,6 @@ RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다�
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
-
-### <a name="add-nuget-packages-and-ef-tools"></a>NuGet 패키지 및 EF 도구 추가
-
-[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 <a name="reg"></a>
 

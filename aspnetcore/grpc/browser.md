@@ -1,11 +1,23 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: 브라우저 앱에서 gRPC 사용
+author: jamesnk
+description: gRPC-Web을 사용하여 브라우저 앱에서 호출할 수 있도록 gRPC 서비스를 ASP.NET Core에서 구성하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: jamesnk
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/browser
+ms.openlocfilehash: 6f66a94b41e6e13550396e2e19fdf48f9dc63d46
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106600"
 ---
 # <a name="use-grpc-in-browser-apps"></a>브라우저 앱에서 gRPC 사용
 

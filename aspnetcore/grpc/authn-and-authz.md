@@ -1,13 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core용 gRPC의 인증 및 권한 부여
+author: jamesnk
+description: ASP.NET Core용 gRPC에서 인증 및 권한 부여를 사용하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: jamesnk
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/authn-and-authz
+ms.openlocfilehash: f9d2e73f57d69e1eb5039019dc9e64193cf67820
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105794"
 ---
-
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core용 gRPC의 인증 및 권한 부여
 
 작성자: [James Newton-King](https://twitter.com/jamesnk)

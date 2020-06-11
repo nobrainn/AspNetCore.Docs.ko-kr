@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core의 파일 공급자
+author: rick-anderson
+description: ASP.NET Core에서 파일 공급자를 사용하여 파일 시스템 액세스를 추상화하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/06/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/file-providers
+ms.openlocfilehash: 1e243d31a1c6b1f6ac6c9f7966ce07ecb01ceae5
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106185"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core의 파일 공급자
 
@@ -47,70 +60,10 @@ ASP.NET Core에서 파일 공급자를 사용하여 파일 시스템 액세스�
 다음 표에서는 `IFileProvider`의 구현을 보여 줍니다.
 
 | 구현 | 설명 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
-------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | [CompositeFileProvider](#compositefileprovider) | 하나 이상의 개별 공급자로부터 얻어진 파일 및 디렉터리에 대한 결합된 액세스를 제공하기 위해 사용됩니다. | | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | 어셈블리에 포함된 파일에 액세스하는 데 사용됩니다. | | [PhysicalFileProvider](#physicalfileprovider) |시스템의 물리적 파일에 액세스하는 데 사용됩니다. |
+| -------------- | ----------- |
+| [CompositeFileProvider](#compositefileprovider) | 하나 이상의 다른 공급자의 파일 및 디렉터리에 대한 결합된 액세스를 제공하기 위해 사용됩니다. |
+| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | 어셈블리에 포함된 파일에 액세스하기 위해 사용됩니다. |
+| [PhysicalFileProvider](#physicalfileprovider) | 시스템의 물리적 파일에 액세스하기 위해 사용됩니다. |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
@@ -170,46 +123,10 @@ var manifestEmbeddedProvider =
 * 포함된 파일 매니페스트를 포함하는 포함 리소스의 이름 지정
 
 | 오버로드 | 설명 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `ManifestEmbeddedFileProvider(Assembly, String)` | 선택적인 `root` 상대 경로 매개 변수를 허용합니다. `root`를 지정하여 <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*>에 대한 호출의 범위를 제공된 경로의 해당 리소스로 지정합니다. | | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 선택적인 `root` 상대 경로 매개 변수 및 `lastModified` 날짜(<xref:System.DateTimeOffset>) 매개 변수를 허용합니다. `lastModified` 날짜는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>가 반환한 <xref:Microsoft.Extensions.FileProviders.IFileInfo> 인스턴스에 대한 마지막 수정 날짜의 범위를 지정합니다. | | `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 선택적인 `root` 상대 경로, `lastModified` 날짜 및 `manifestName` 매개 변수를 허용합니다. `manifestName`은 매니페스트가 포함된 포함 리소스의 이름을 나타냅니다. |
+| -------- | ----------- |
+| `ManifestEmbeddedFileProvider(Assembly, String)` | 선택적인 `root` 상대 경로 매개 변수를 허용합니다. `root`를 지정하여 <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*>에 대한 호출의 범위를 제공된 경로의 해당 리소스로 지정합니다. |
+| `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 선택적인 `root` 상대 경로 매개 변수 및 `lastModified` 날짜(<xref:System.DateTimeOffset>) 매개 변수를 허용합니다. `lastModified` 날짜는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>가 반환한 <xref:Microsoft.Extensions.FileProviders.IFileInfo> 인스턴스에 대한 마지막 수정 날짜의 범위를 지정합니다. |
+| `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 선택적인 `root` 상대 경로, `lastModified` 날짜 및 `manifestName` 매개 변수를 허용합니다. `manifestName`은 매니페스트가 포함된 포함 리소스의 이름을 나타냅니다. |
 
 ### <a name="compositefileprovider"></a>CompositeFileProvider
 
@@ -250,40 +167,11 @@ Docker 컨테이너나 네트워크 공유 같은 일부 파일 시스템은 변
 다음 표에서는 GLOB 패턴의 일반적인 예를 보여 줍니다.
 
 |무늬  |설명  |
-|---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------|---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------|
-|`directory/file.txt`|특정 디렉터리의 특정 파일과 일치합니다.| |`directory/*.txt`|특정 디렉터리에서 확장명이 *.txt*인 모든 파일과 일치합니다.| |`directory/*/appsettings.json`|*directory* 폴더의 한 수준 아래 디렉터리의 모든 *appsettings.json* 파일과 정확히 일치합니다.| |`directory/**/*.txt`|*directory* 폴더 아래의 모든 위치에서 발견되는 모든 *.txt* 파일과 일치합니다.|
+|---------|---------|
+|`directory/file.txt`|특정 디렉터리에 있는 특정 파일을 일치시킵니다.|
+|`directory/*.txt`|특정 디렉터리에서 확장명이 *.txt*인 파일을 모두 찾습니다.|
+|`directory/*/appsettings.json`|*directory* 폴더보다 정확히 한 수준 아래의 디렉터리에서 모든 *appsettings.json* 파일을 찾습니다.|
+|`directory/**/*.txt`|*directory* 폴더 아래의 모든 곳에서 찾은 확장명이 *.txt*인 모든 파일을 찾습니다.|
 
 ::: moniker-end
 
@@ -323,70 +211,10 @@ ASP.NET Core에서 파일 공급자를 사용하여 파일 시스템 액세스�
 `IFileProvider`의 세 가지 구현을 사용할 수 있습니다.
 
 | 구현 | 설명 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
-------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | [PhysicalFileProvider](#physicalfileprovider) | 물리적 공급자는 시스템의 물리적 파일에 액세스하기 위해서 사용됩니다. | | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | 매니페스트 포함 공급자는 어셈블리에 포함된 파일에 액세스하는 데 사용됩니다. | | [CompositeFileProvider](#compositefileprovider) | 복합 공급자는 하나 이상의 개별 공급자로부터 얻어진 파일 및 디렉터리에 대한 결합된 액세스를 접근을 지원하기 위해 사용됩니다. |
+| -------------- | ----------- |
+| [PhysicalFileProvider](#physicalfileprovider) | 물리적 공급자는 시스템의 물리적 파일에 액세스하기 위해서 사용됩니다. |
+| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | 매니페스트 임베디드 공급자는 어셈블리에 포함된 파일에 액세스하기 위해서 사용됩니다. |
+| [CompositeFileProvider](#compositefileprovider) | 마지막으로 복합 공급자는 하나 이상의 개별 공급자로부터 얻어진 파일 및 디렉터리에 대한 복합적인 접근을 지원하기 위해서 사용됩니다. |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
@@ -442,46 +270,10 @@ var manifestEmbeddedProvider =
 * 포함된 파일 매니페스트를 포함하는 포함 리소스의 이름 지정
 
 | 오버로드 | 설명 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `ManifestEmbeddedFileProvider(Assembly, String)` | 선택적인 `root` 상대 경로 매개 변수를 허용합니다. `root`를 지정하여 <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*>에 대한 호출의 범위를 제공된 경로의 해당 리소스로 지정합니다. | | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 선택적인 `root` 상대 경로 매개 변수 및 `lastModified` 날짜(<xref:System.DateTimeOffset>) 매개 변수를 허용합니다. `lastModified` 날짜는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>가 반환한 <xref:Microsoft.Extensions.FileProviders.IFileInfo> 인스턴스에 대한 마지막 수정 날짜의 범위를 지정합니다. | | `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 선택적인 `root` 상대 경로, `lastModified` 날짜 및 `manifestName` 매개 변수를 허용합니다. `manifestName`은 매니페스트가 포함된 포함 리소스의 이름을 나타냅니다. |
+| -------- | ----------- |
+| `ManifestEmbeddedFileProvider(Assembly, String)` | 선택적인 `root` 상대 경로 매개 변수를 허용합니다. `root`를 지정하여 <xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*>에 대한 호출의 범위를 제공된 경로의 해당 리소스로 지정합니다. |
+| `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 선택적인 `root` 상대 경로 매개 변수 및 `lastModified` 날짜(<xref:System.DateTimeOffset>) 매개 변수를 허용합니다. `lastModified` 날짜는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>가 반환한 <xref:Microsoft.Extensions.FileProviders.IFileInfo> 인스턴스에 대한 마지막 수정 날짜의 범위를 지정합니다. |
+| `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 선택적인 `root` 상대 경로, `lastModified` 날짜 및 `manifestName` 매개 변수를 허용합니다. `manifestName`은 매니페스트가 포함된 포함 리소스의 이름을 나타냅니다. |
 
 ### <a name="compositefileprovider"></a>CompositeFileProvider
 

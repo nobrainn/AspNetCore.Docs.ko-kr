@@ -1,12 +1,24 @@
 ---
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합
+author: guardrex
+description: Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/integrate-components
+ms.openlocfilehash: 97515ec519c4bedb0478f510ec9ed739b5d76e4f
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105248"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합
 
@@ -117,60 +129,10 @@ Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면
    * 페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부
 
    | 렌더링 모드 | 설명 |
-   | ---
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | --- title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. `App` 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` 구성 요소를 정적 HTML에 렌더링합니다. |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. `App` 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` 구성 요소를 정적 HTML에 렌더링합니다. |
 
    구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.
 
@@ -241,60 +203,10 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
    * 페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부
 
    | 렌더링 모드 | 설명 |
-   | ---
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | --- title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합' author: description: 'Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오를 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. `App` 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` 구성 요소를 정적 HTML에 렌더링합니다. |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. `App` 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` 구성 요소를 정적 HTML에 렌더링합니다. |
 
    구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.
 

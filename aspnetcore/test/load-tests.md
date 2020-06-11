@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core 부하/스트레스 테스트
+author: Jeremy-Meng
+description: ASP.NET Core 앱의 부하 테스트 및 스트레스 테스트를 위한 몇 가지 주요 도구와 방법을 알아봅니다.
+ms.author: riande
+ms.custom: mvc
+ms.date: 4/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: test/loadtests
+ms.openlocfilehash: f0c930a7689c7288a58cfc3ca630d3cd324bf2cd
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106808"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 부하/스트레스 테스트
 

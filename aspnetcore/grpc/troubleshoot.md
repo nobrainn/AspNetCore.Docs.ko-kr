@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: .NET Core에서 gRPC 문제 해결
+author: jamesnk
+description: .NET Core에서 gRPC를 사용할 때 발생하는 오류 문제를 해결합니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: jamesnk
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/troubleshoot
+ms.openlocfilehash: bd4888a4516fcbbdbee82670d9993436f992cb8a
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105170"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core에서 gRPC 문제 해결
 

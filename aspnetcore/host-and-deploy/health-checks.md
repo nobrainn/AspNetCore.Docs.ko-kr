@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core의 상태 검사
+author: rick-anderson
+description: 앱 및 데이터베이스와 같은 ASP.NET Core 인프라의 상태 검사를 설정하는 방법에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-2.2'
+ms.author: riande
+ms.custom: mvc
+ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/health-checks
+ms.openlocfilehash: cb3ee4f3bf9061d212c1fee85f3f4a22946be097
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105781"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 

@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
+author: spboyer
+description: Visual Studio 도구 및 Windows용 Docker를 사용하여 ASP.NET Core 앱을 컨테이너화하는 방법에 대해 알아봅니다.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 09/12/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/docker/visual-studio-tools-for-docker
+ms.openlocfilehash: 391cc18e499cdfaa67beeced382fd53b16a668a2
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105222"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
 
