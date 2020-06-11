@@ -75,7 +75,7 @@
               uid: tutorials/first-mvc-app/new-field
             - name: 유효성 검사 추가
               uid: tutorials/first-mvc-app/validation
-            - name: 세부 정보 및 삭제 메서드 검사
+            - name: 세부 정보 검토 및 삭제
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial
