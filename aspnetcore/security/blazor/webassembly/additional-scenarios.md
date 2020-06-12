@@ -5,7 +5,7 @@ description: Blazor추가 보안 시나리오에 대해 weasembmbom를 구성 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: de752eb180767bbb269107ebc478a4422448f968
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 35038cb7b96afd7c009f1210251e38273aa4aad8
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84272036"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679659"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor추가 보안 시나리오 ASP.NET Core
 
@@ -522,50 +522,140 @@ SPA (단일 페이지 응용 프로그램)가 OIDC (Open ID Connect)를 사용 �
 
 ## <a name="save-app-state-before-an-authentication-operation"></a>인증 작업 전에 앱 상태 저장
 
-인증 작업을 수행 하는 동안 브라우저가 IP로 리디렉션되도록 응용 프로그램 상태를 저장 하려는 경우가 있습니다. 상태 컨테이너와 같은 항목을 사용 하 고 인증에 성공 하 고 나면 상태를 복원 하려는 경우를 들 수 있습니다. 사용자 지정 인증 상태 개체를 사용 하 여 앱 특정 상태 또는 참조를 보존 하 고 인증 작업이 성공적으로 완료 되 면 해당 상태를 복원할 수 있습니다.
+인증 작업을 수행 하는 동안 브라우저가 IP로 리디렉션되도록 응용 프로그램 상태를 저장 하려는 경우가 있습니다. 상태 컨테이너를 사용 하 고 인증에 성공 하 고 나면 상태를 복원 하려는 경우를 들 수 있습니다. 사용자 지정 인증 상태 개체를 사용 하 여 앱 특정 상태 또는 참조를 보존 하 고 인증 작업이 성공적으로 완료 된 후 해당 상태를 복원할 수 있습니다. 다음 예제에서는이 방법을 보여 줍니다.
 
-`Authentication`구성 요소 (*페이지/인증. razor*):
+앱의 상태 값을 저장 하는 속성을 사용 하 여 앱에서 상태 컨테이너 클래스가 생성 됩니다. 다음 예제에서는 컨테이너를 사용 하 여 기본 템플릿의 `Counter` 구성 요소 (*Pages/counter. razor*)의 카운터 값을 유지 합니다. 컨테이너를 serialize 하 고 deserialize 하는 메서드는을 기반으로 <xref:System.Text.Json> 합니다.
+
+```csharp
+using System.Text.Json;
+
+public class StateContainer
+{
+    public int CounterValue { get; set; }
+
+    public string GetStateForLocalStorage()
+    {
+        return JsonSerializer.Serialize(this);
+    }
+
+    public void SetStateFromLocalStorage(string locallyStoredState)
+    {
+        var deserializedState = 
+            JsonSerializer.Deserialize<StateContainer>(locallyStoredState);
+
+        CounterValue = deserializedState.CounterValue;
+    }
+}
+```
+
+`Counter`구성 요소는 상태 컨테이너를 사용 하 여 `currentCount` 구성 요소 외부에서 값을 유지 합니다.
+
+```razor
+@page "/counter"
+@inject StateContainer State
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    protected override void OnInitialized()
+    {
+        if (State.CounterValue > 0)
+        {
+            currentCount = State.CounterValue;
+        }
+    }
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        State.CounterValue = currentCount;
+    }
+}
+```
+
+에서를 `ApplicationAuthenticationState` 만듭니다 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState> . `Id`로컬로 저장 된 상태에 대 한 식별자 역할을 하는 속성을 제공 합니다.
+
+*ApplicationAuthenticationState.cs*:
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class ApplicationAuthenticationState : RemoteAuthenticationState
+{
+    public string Id { get; set; }
+}
+```
+
+`Authentication`구성 요소 (*Pages/Authentication. razor*)는 `StateContainer` serialization 및 deserialization 메서드와 함께 로컬 세션 저장소를 사용 하 여 앱의 상태를 저장 하 고 복원 합니다 `GetStateForLocalStorage` `SetStateFromLocalStorage` .
 
 ```razor
 @page "/authentication/{action}"
-@inject JSRuntime JS
+@inject IJSRuntime JS
 @inject StateContainer State
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
-<RemoteAuthenticatorViewCore Action="@Action" 
-    AuthenticationState="AuthenticationState" OnLogInSucceeded="RestoreState" 
-    OnLogOutSucceeded="RestoreState" />
+<RemoteAuthenticatorViewCore Action="@Action"
+                             TAuthenticationState="ApplicationAuthenticationState"
+                             AuthenticationState="AuthenticationState"
+                             OnLogInSucceeded="RestoreState"
+                             OnLogOutSucceeded="RestoreState" />
 
 @code {
     [Parameter]
     public string Action { get; set; }
 
-    public class ApplicationAuthenticationState : RemoteAuthenticationState
-    {
-        public string Id { get; set; }
-    }
+    public ApplicationAuthenticationState AuthenticationState { get; set; } =
+        new ApplicationAuthenticationState();
 
     protected async override Task OnInitializedAsync()
     {
-        if (RemoteAuthenticationActions.IsAction(RemoteAuthenticationActions.LogIn, 
+        if (RemoteAuthenticationActions.IsAction(RemoteAuthenticationActions.LogIn,
+            Action) ||
+            RemoteAuthenticationActions.IsAction(RemoteAuthenticationActions.LogOut,
             Action))
         {
             AuthenticationState.Id = Guid.NewGuid().ToString();
-            await JS.InvokeVoidAsync("sessionStorage.setKey", 
-                AuthenticationState.Id, State.Store());
+
+            await JS.InvokeVoidAsync("sessionStorage.setItem",
+                AuthenticationState.Id, State.GetStateForLocalStorage());
         }
     }
 
-    public async Task RestoreState(ApplicationAuthenticationState state)
+    private async Task RestoreState(ApplicationAuthenticationState state)
     {
-        var stored = await JS.InvokeAsync<string>("sessionStorage.getKey", 
-            state.Id);
-        State.FromStore(stored);
-    }
+        if (state.Id != null)
+        {
+            var locallyStoredState = await JS.InvokeAsync<string>(
+                "sessionStorage.getItem", state.Id);
 
-    public ApplicationAuthenticationState AuthenticationState { get; set; } = 
-        new ApplicationAuthenticationState();
+            if (locallyStoredState != null)
+            {
+                State.SetStateFromLocalStorage(locallyStoredState);
+                await JS.InvokeVoidAsync("sessionStorage.removeItem", state.Id);
+            }
+        }
+    }
 }
+```
+
+이 예제에서는 인증을 위해 AAD (Azure Active Directory)를 사용 합니다. `Program.Main`(*Program.cs*):
+
+* 는 `ApplicationAuthenticationState` MSAL (Microsoft 인증 Library) 형식으로 구성 됩니다 `RemoteAuthenticationState` .
+* 상태 컨테이너는 서비스 컨테이너에 등록 됩니다.
+
+```csharp
+builder.Services.AddMsalAuthentication<ApplicationAuthenticationState>(options =>
+{
+    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
+});
+
+builder.Services.AddSingleton<StateContainer>();
 ```
 
 ## <a name="customize-app-routes"></a>앱 경로 사용자 지정
@@ -823,7 +913,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-서버 앱의 `Startup.Configure` 메서드에서 끝점을 대체 [합니다. 끝점을 사용 하는 MapFallbackToFile ("index .html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) [ MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):
+서버 앱의 `Startup.Configure` 메서드에서 끝점을 대체 [합니다. MapFallbackToFile ("index.html") (](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) 끝점 포함) [ MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -909,7 +999,7 @@ builder.Services.Configure<JwtBearerOptions>(
     });
 ```
 
-또는 앱 설정 (*appsettings*) 파일에서 설정을 수행할 수 있습니다.
+또는 앱 설정 (*appsettings.json*) 파일에서 설정을 수행할 수 있습니다.
 
 ```json
 {
@@ -920,6 +1010,6 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정 합니다. <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions>또는 앱 설정 파일 (*appsettings*)에서 키를 사용 하 여 속성을 설정 하거나 설정 합니다 `Authority` .
+권한에 대 한 세그먼트의 추적가 비 AAD 공급자와 같은 앱의 OIDC 공급자에 적합 하지 않은 경우 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정 합니다. <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions>또는 앱 설정 파일 (*appsettings.js*)에서 키를 사용 하 여 속성을 설정 하거나 설정 합니다 `Authority` .
 
 V2.0 끝점에 대 한 ID 토큰의 클레임 목록이 변경 됩니다. 자세한 내용은 [Microsoft identity platform (v2.0)로 업데이트 하는 이유](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)를 참조 하세요.
