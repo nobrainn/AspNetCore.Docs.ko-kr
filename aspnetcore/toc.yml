@@ -560,6 +560,9 @@
         - name: API 디자인 고려 사항
           uid: signalr/api-design
           displayName: signalr
+        - name: 허브 필터
+          uid: signalr/hub-filters
+          displayName: signalr
     - name: 클라이언트
       displayName: signalr
       items:
