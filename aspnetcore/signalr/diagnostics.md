@@ -5,7 +5,7 @@ description: ASP.NET Core 앱에서 진단을 수집 하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: signalr
-ms.date: 06/08/2020
+ms.date: 06/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507318"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755965"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core의 로깅 및 진단SignalR
 
@@ -38,7 +38,7 @@ SignalR에서는 두 개의로 거 범주를 사용 합니다.
 * `Microsoft.AspNetCore.SignalR`: 허브 프로토콜과 관련 된 로그, 허브 활성화, 메서드 호출 및 기타 허브 관련 작업
 * `Microsoft.AspNetCore.Http.Connections`: Websocket, 긴 폴링, 서버에서 보낸 이벤트, 하위 수준 인프라 등의 전송과 관련 된 로그 SignalR
 
-에서 자세한 로그를 사용 하도록 설정 하려면 SignalR `Debug` 의 하위 섹션에 다음 항목을 추가 하 여 위의 접두사를 *appsettings* 파일의 수준으로 구성 합니다 `LogLevel` `Logging` .
+에서 자세한 로그를 사용 하도록 설정 하려면 SignalR `Debug` 의 하위 섹션에 다음 항목을 추가 하 여 *appsettings.js* 파일의 수준에 위의 접두사를 모두 구성 합니다 `LogLevel` `Logging` .
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -100,7 +100,7 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 
 자세한 정도를 구성 하면 로그가 브라우저 콘솔에 기록 되거나 NodeJS 앱의 표준 출력에 기록 됩니다.
 
-로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 예를 들면 다음과 같습니다.
+로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 예:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -110,6 +110,8 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 > 클라이언트 쪽 로그에는 앱의 중요 한 정보가 포함 될 수 있습니다. 프로덕션 앱의 원시 로그를 GitHub와 같은 공용 포럼에 게시 **하지 마세요** .
 
 에서 메서드를 사용 하 여 .NET 클라이언트에서 로그를 가져올 수 있습니다 `ConfigureLogging` `HubConnectionBuilder` . 이는 및에서 메서드와 동일한 방식으로 작동 합니다 `ConfigureLogging` `WebHostBuilder` `HostBuilder` . ASP.NET Core에서 사용 하는 것과 동일한 로깅 공급자를 구성할 수 있습니다. 그러나 개별 로깅 공급자에 대 한 NuGet 패키지를 수동으로 설치 하 고 사용 하도록 설정 해야 합니다.
+
+BlazorWeasembomapp에 .net 클라이언트 로깅을 추가 하려면를 참조 <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging> 하세요.
 
 ### <a name="console-logging"></a>콘솔 로깅
 
@@ -243,7 +245,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

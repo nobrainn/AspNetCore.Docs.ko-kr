@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 911eeffbe632d8f285d54ae78b62f17851205e83
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ec35614e3bc4b5b6422b254dfe579c1cb7ca8310
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84214962"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724395"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C를 사용 하 여 ASP.NET Core weasembomoma 독립 실행형 앱 보호
 
@@ -41,7 +41,7 @@ Blazor인증을 위해 [AAD (AZURE ACTIVE DIRECTORY) B2C](/azure/active-director
 1. 앱에 대 한 **이름** (예: ** Blazor 독립 실행형 AAD B2C**)을 제공 합니다.
 1. **지원 되는 계정 유형**에 대해 다중 테 넌 트 옵션 ( **모든 조직 디렉터리 또는 모든 Id 공급자의 계정)을 선택 합니다. Azure AD B2C를 사용 하 여 사용자를 인증 합니다.**
 1. **리디렉션 uri** 드롭다운 집합을 **웹** 으로 그대로 두고 다음 리디렉션 uri를 제공 `https://localhost:{PORT}/authentication/login-callback` 합니다. Kestrel에서 실행 되는 앱의 기본 포트는 5001입니다. 앱이 다른 Kestrel 포트에서 실행 되는 경우 앱의 포트를 사용 합니다. IIS Express의 경우 앱에 대해 임의로 생성 된 포트는 **디버그** 패널의 앱 속성에서 찾을 수 있습니다. 이 시점에 앱이 존재 하지 않고 IIS Express 포트를 알 수 없으므로 앱을 만든 후에이 단계로 돌아와서 리디렉션 URI를 업데이트 합니다. 사용자 IIS Express 리디렉션 URI를 업데이트 하는 것을 알리기 위해이 항목의 뒷부분에 설명 되어 있습니다.
-1. **Permissions**  >  **Openid connect에 관리자 동의 하도록 요구 권한을 부여 하 고 offline_access 권한이** 설정 되어 있는지 확인 합니다.
+1. **Permissions**  >  **Openid connect에 게 관리자 동의 부여** 권한이 있는지 확인 하 고 offline_access 권한이 사용 되는지 확인 합니다.
 1. **등록**을 선택합니다.
 
 응용 프로그램 ID (클라이언트 ID)를 기록 합니다 (예: `11111111-1111-1111-1111-111111111111` ).
@@ -111,7 +111,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>메서드는 콜백을 허용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 합니다. 앱을 구성 하는 데 필요한 값은 앱을 등록할 때 AAD 구성에서 가져올 수 있습니다.
 
-구성은 *wwwroot/appsettings. json* 파일에 의해 제공 됩니다.
+구성은 파일 *의 wwwroot/appsettings.js* 에서 제공 됩니다.
 
 ```json
 {
@@ -123,7 +123,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예제:
+예:
 
 ```json
 {
@@ -182,7 +182,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

@@ -1,12 +1,24 @@
 ---
-title: ‘ASP.NET Core Blazor’ 작성자 소개: 설명: ‘ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하는 방법인 ASP.NET Core Blazor를 살펴봅니다.’
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core Blazor 소개
+author: guardrex
+description: ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하는 방법인 ASP.NET Core Blazor를 살펴봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc, seoapril2019
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/index
+ms.openlocfilehash: eb8a6d2ddbd3e8f61626566878a7af5f5a2525d8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "83608189"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor 소개
 

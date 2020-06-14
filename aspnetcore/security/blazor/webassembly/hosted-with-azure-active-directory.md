@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 9e76b300c159a2a1432aa4b1c6e47b3d91084a85
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 5c73b5e5416956e2f6996e5692100e8c02a25cbf
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84215093"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724343"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>BlazorAzure Active Directory를 사용 하 여 ASP.NET Core weasembomomommbmboman 호스팅된 앱 보호
 
@@ -40,7 +40,7 @@ ms.locfileid: "84215093"
 1. 앱에 대 한 **이름** (예: ** Blazor 서버 AAD**)을 제공 합니다.
 1. **지원 되는 계정 유형을**선택 합니다. 이 환경 **에서는이 조직 디렉터리에만 계정** (단일 테 넌 트)을 선택할 수 있습니다.
 1. *서버 API 앱* 은이 시나리오에서 **리디렉션 uri** 를 요구 하지 않으므로 드롭다운을 **웹** 으로 설정 하 고 리디렉션 uri를 입력 하지 않도록 합니다.
-1. **Permissions**  >  **Grant admin 동의 하도록 요구 to openid connect and offline_access permissions 확인란을** 사용 하지 않도록 설정 합니다.
+1. **권한**  >  **부여 관리자 동의에 openid connect 및 offline_access 권한 확인란을** 사용 하지 않도록 설정 합니다.
 1. **등록**을 선택합니다.
 
 다음 정보를 기록 합니다.
@@ -74,7 +74,7 @@ ms.locfileid: "84215093"
 1. 응용 프로그램의 **이름** (예: ** Blazor 클라이언트 AAD**)을 제공 합니다.
 1. **지원 되는 계정 유형을**선택 합니다. 이 환경 **에서는이 조직 디렉터리에만 계정** (단일 테 넌 트)을 선택할 수 있습니다.
 1. **리디렉션 uri** 드롭다운 집합을 **웹** 으로 그대로 두고 다음 리디렉션 uri를 제공 `https://localhost:{PORT}/authentication/login-callback` 합니다. Kestrel에서 실행 되는 앱의 기본 포트는 5001입니다. 앱이 다른 Kestrel 포트에서 실행 되는 경우 앱의 포트를 사용 합니다. IIS Express의 경우 **디버그** 패널의 서버 앱 속성에서 앱에 대해 임의로 생성 된 포트를 찾을 수 있습니다. 이 시점에 앱이 존재 하지 않고 IIS Express 포트를 알 수 없으므로 앱을 만든 후에이 단계로 돌아와서 리디렉션 URI를 업데이트 합니다. [응용 프로그램 만들기](#create-the-app) 섹션에는 사용자 IIS EXPRESS 리디렉션 URI를 업데이트 하 라는 알림이 표시 됩니다.
-1. **Permissions**  >  **Grant admin 동의 하도록 요구 to openid connect and offline_access permissions 확인란을** 사용 하지 않도록 설정 합니다.
+1. **권한**  >  **부여 관리자 동의에 openid connect 및 offline_access 권한 확인란을** 사용 하지 않도록 설정 합니다.
 1. **등록**을 선택합니다.
 
 *클라이언트 앱* 응용 프로그램 Id (클라이언트 id)를 기록 합니다 (예: `33333333-3333-3333-3333-333333333333` ).
@@ -93,7 +93,7 @@ ms.locfileid: "84215093"
 1. **이름** 열에서 *서버 API 앱* 을 선택 합니다 (예: ** Blazor 서버 AAD**).
 1. **API** 목록을 엽니다.
 1. API에 대 한 액세스를 사용 하도록 설정 합니다 (예: `API.Access` ).
-1. **모든 권한**을 선택합니다.
+1. **권한 추가**를 선택합니다.
 1. **{테 넌 트 이름}에 대 한 관리자 콘텐츠 부여** 단추를 선택 합니다. **예**를 선택하여 확인합니다.
 
 ### <a name="create-the-app"></a>앱 만들기
@@ -168,7 +168,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="app-settings"></a>앱 설정
 
-*Appsettings* 파일에는 액세스 토큰의 유효성을 검사 하는 데 사용 되는 JWT 전달자 처리기를 구성 하는 옵션이 포함 되어 있습니다.
+파일 *의appsettings.js* 에는 액세스 토큰의 유효성을 검사 하는 데 사용 되는 JWT 전달자 처리기를 구성 하는 옵션이 포함 되어 있습니다.
 
 ```json
 {
@@ -181,7 +181,7 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-예제:
+예:
 
 ```json
 {
@@ -261,7 +261,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>메서드는 콜백을 허용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 합니다. 앱을 구성 하는 데 필요한 값은 앱을 등록할 때 Azure Portal AAD 구성에서 가져올 수 있습니다.
 
-구성은 *wwwroot/appsettings. json* 파일에 의해 제공 됩니다.
+구성은 파일 *의 wwwroot/appsettings.js* 에서 제공 됩니다.
 
 ```json
 {
@@ -273,7 +273,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-예제:
+예:
 
 ```json
 {
@@ -351,7 +351,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [보안 기본 클라이언트를 사용 하는 앱의 인증 되지 않은 또는 무단 웹 API 요청](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

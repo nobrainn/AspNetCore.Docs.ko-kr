@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 87cdf02a6f6babc869d90658e6a7cd54db73bb68
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451877"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756030"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD 그룹, 관리 역할 및 사용자 정의 역할
 
@@ -29,7 +29,7 @@ AAD (Azure Active Directory)는 ASP.NET Core와 결합할 수 있는 몇 가지 
 * 사용자 정의 그룹
   * 보안
   * O365
-  * 배포
+  * 분포
 * 역할
   * 기본 제공 관리 역할
   * 사용자 정의 역할
@@ -164,7 +164,7 @@ AAD 역할 개체 Id의 전체 목록은 [aad 관리 역할 그룹 id](#aad-admi
 </AuthorizeView>
 ```
 
-전체 구성 요소에 대 한 액세스는 [ `[Authorize]` ] 특성 지시어] (f: security/blazor/index #) ()를 사용 하는 정책을 기반으로 할 수 있습니다 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> .
+전체 구성 요소에 대 한 액세스는 [ `[Authorize]` 특성 지시어](xref:security/blazor/index#authorize-attribute) ()를 사용 하는 정책을 기반으로 할 수 있습니다 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> .
 
 ```razor
 @page "/"
@@ -246,7 +246,7 @@ builder.Services.AddMsalAuthentication(options =>
 이 시점에서 구성 요소 권한 부여 방법이 작동 합니다. 구성 요소의 권한 부여 메커니즘은 역할을 사용 `admin` 하 여 사용자에 게 권한을 부여할 수 있습니다.
 
 * [AuthorizeView 구성 요소](xref:security/blazor/index#authorizeview-component) (예: `<AuthorizeView Roles="admin">` )
-* [ `[Authorize]` ] 특성 지시문] (f: security/blazor/index # 권한 부여-특성) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (예: `@attribute [Authorize(Roles = "admin")]` )
+* [ `[Authorize]` attribute 지시문](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (예: `@attribute [Authorize(Roles = "admin")]` )
 * [절차적 논리](xref:security/blazor/index#procedural-logic) (예: `if (user.IsInRole("admin")) { ... }` )
 
   여러 역할 테스트가 지원 됩니다.
@@ -273,7 +273,7 @@ B2C IEF 키 집합 관리자 | 0c2e87e5-94f9-4adb-ae8c-bcafe11bd368
 B2C IEF 정책 관리자 | bfcab36c-10c6-4b13-b63c-4d8b62c0c44e
 B2C 사용자 흐름 관리자 | baa531b7-8cf0-44ad-8f98-eded88dae827
 B2C 사용자 흐름 특성 관리자 | dd0baca0-a535-48c1-b871-8431abe16452
-대금 청구 관리자 | 69ff516a-b57d-4697-a429-9de4af7b5609
+청구 관리자 | 69ff516a-b57d-4697-a429-9de4af7b5609
 클라우드 애플리케이션 관리자 | 250b5fe3-b553-458d-9a53-b782c13c34bf
 클라우드 디바이스 관리자 | 26cd4b44-2636-4ddb-bdfa-27feae66f86d
 규정 준수 관리자 | 9d6e1dd0-c9f8-45f8-b558-b134f700116c
@@ -285,7 +285,7 @@ B2C 사용자 흐름 특성 관리자 | dd0baca0-a535-48c1-b871-8431abe16452
 Dynamics 365 관리자 | f20a9cfa-9fdf-49a8-a977-1afe446a1d6e
 Exchange 관리자 | b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652
 외부 Identity 공급자 관리자 | febfaeb4-e478-407a-b4b3-f4d9716618a2
-전역 관리자 | a45ba61b-44db-462c-924b-3b2719152588
+글로벌 관리자 | a45ba61b-44db-462c-924b-3b2719152588
 전역 판독기 | f6903b21-6aba-4124-b44c-76671796b9d5
 그룹 관리자 | 158b3e5a-d89d-460b-92b5-3b34985f0197
 게스트 초대자 | 4c730a1d-cc22-44af-8f9f-4eec635c7502

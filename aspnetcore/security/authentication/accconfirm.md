@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8d4488b3953a8c87033d3a092b656409a0c6a52d
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451747"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724369"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core의 계정 확인 및 암호 복구
 
@@ -38,7 +38,7 @@ ASP.NET Core 1.1 버전은 [이 PDF 파일](https://webpifeed.blob.core.windows.
 
 ::: moniker range="> aspnetcore-2.2"
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 조건
 
 [.NET Core 3.0 SDK 이상](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -63,7 +63,7 @@ dotnet run
 
 이 자습서에서는 [SendGrid](https://sendgrid.com) 를 사용 하 여 전자 메일을 보냅니다. 전자 메일을 보내려면 SendGrid 계정 및 키가 필요 합니다. 다른 전자 메일 공급자를 사용할 수 있습니다. SendGrid 또는 다른 전자 메일 서비스를 사용 하 여 전자 메일을 보내는 것이 좋습니다. SMTP는 안전 하 게 보호 하 고 올바르게 설정 하기 어렵습니다.
 
-SendGrid 계정에는 [발신자를 추가](https://sendgrid.com/docs/ui/sending-email/senders/)해야 합니다.
+SendGrid 계정에는 [발신자를 추가](https://sendgrid.com/docs/ui/sending-email/senders/)해야 할 수 있습니다.
 
 보안 전자 메일 키를 인출 하는 클래스를 만듭니다. 이 샘플의 경우 *Services/AuthMessageSenderOptions*을 만듭니다.
 
@@ -71,7 +71,7 @@ SendGrid 계정에는 [발신자를 추가](https://sendgrid.com/docs/ui/sending
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 다음은 그 예입니다.
+`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 예:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -80,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows에서 Secret Manager는 디렉터리에 있는 *비밀. json* 파일의 키/값 쌍을 저장 합니다 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
+Windows에서 Secret Manager는 디렉터리의 파일 *에 있는secrets.js* 의 키/값 쌍을 저장 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` 합니다.
 
-*비밀. json* 파일의 내용이 암호화 되지 않습니다. 다음 태그는 *비밀. json* 파일을 보여 줍니다. `SendGridKey`값이 제거 되었습니다.
+파일의 *secrets.js* 내용이 암호화 되지 않았습니다. 다음 태그는 파일 *의secrets.js* 을 보여 줍니다. `SendGridKey`값이 제거 되었습니다.
 
 ```json
 {
@@ -225,7 +225,7 @@ dotnet add package SendGrid
 
 ::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 조건
 
 [.NET Core 2.2 SDK 이상](https://dotnet.microsoft.com/download/dotnet-core)
 
@@ -279,16 +279,16 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 다음은 그 예입니다.
+`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 예:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows에서 Secret Manager는 디렉터리에 있는 *비밀. json* 파일의 키/값 쌍을 저장 합니다 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
+Windows에서 Secret Manager는 디렉터리의 파일 *에 있는secrets.js* 의 키/값 쌍을 저장 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` 합니다.
 
-*비밀. json* 파일의 내용이 암호화 되지 않습니다. 다음 태그는 *비밀. json* 파일을 보여 줍니다. `SendGridKey`값이 제거 되었습니다.
+파일의 *secrets.js* 내용이 암호화 되지 않았습니다. 다음 태그는 파일 *의secrets.js* 을 보여 줍니다. `SendGridKey`값이 제거 되었습니다.
 
 ```json
 {
