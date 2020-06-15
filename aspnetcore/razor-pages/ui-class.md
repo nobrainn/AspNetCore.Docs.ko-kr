@@ -12,75 +12,75 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 2c2a2c1e13b2d511ecf8c1c02c235192861fd486
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 32aa1cdab0e552a1255c01b5135e9a82a0e37c77
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774277"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451903"
 ---
-# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a><span data-ttu-id="a9fbc-103">ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용하여 재사용 가능한 UI 만들기</span><span class="sxs-lookup"><span data-stu-id="a9fbc-103">Create reusable UI using the Razor class library project in ASP.NET Core</span></span>
+# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a><span data-ttu-id="51b71-103">ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용하여 재사용 가능한 UI 만들기</span><span class="sxs-lookup"><span data-stu-id="51b71-103">Create reusable UI using the Razor class library project in ASP.NET Core</span></span>
 
-<span data-ttu-id="a9fbc-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="a9fbc-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="51b71-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="51b71-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="a9fbc-105">Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 RCL(Razor 클래스 라이브러리)로 빌드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-105">Razor views, pages, controllers, page models, [Razor components](xref:blazor/class-libraries), [View components](xref:mvc/views/view-components), and data models can be built into a Razor class library (RCL).</span></span> <span data-ttu-id="a9fbc-106">RCL은 패키지되고 재사용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-106">The RCL can be packaged and reused.</span></span> <span data-ttu-id="a9fbc-107">애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-107">Applications can include the RCL and override the views and pages it contains.</span></span> <span data-ttu-id="a9fbc-108">보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-108">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span>
+<span data-ttu-id="51b71-105">RCL(Razor 클래스 라이브러리)에 Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 기본적으로 빌드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-105">Razor views, pages, controllers, page models, [Razor components](xref:blazor/class-libraries), [View components](xref:mvc/views/view-components), and data models can be built into a Razor class library (RCL).</span></span> <span data-ttu-id="51b71-106">RCL은 패키지되고 재사용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-106">The RCL can be packaged and reused.</span></span> <span data-ttu-id="51b71-107">애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-107">Applications can include the RCL and override the views and pages it contains.</span></span> <span data-ttu-id="51b71-108">뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-108">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span>
 
-<span data-ttu-id="a9fbc-109">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="a9fbc-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="51b71-109">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="51b71-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="create-a-class-library-containing-razor-ui"></a><span data-ttu-id="a9fbc-110">Razor UI를 포함하는 클래스 라이브러리 만들기</span><span class="sxs-lookup"><span data-stu-id="a9fbc-110">Create a class library containing Razor UI</span></span>
+## <a name="create-a-class-library-containing-razor-ui"></a><span data-ttu-id="51b71-110">Razor UI를 포함하는 클래스 라이브러리 만들기</span><span class="sxs-lookup"><span data-stu-id="51b71-110">Create a class library containing Razor UI</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="a9fbc-111">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a9fbc-111">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="51b71-111">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="51b71-111">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="a9fbc-112">Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-112">From Visual Studio select **Create new a new project**.</span></span>
-* <span data-ttu-id="a9fbc-113">**Razor 클래스 라이브러리** > **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-113">Select **Razor Class Library** > **Next**.</span></span>
-* <span data-ttu-id="a9fbc-114">라이브러리 이름을 지정하고(예: "RazorClassLib") > **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-114">Name the library (for example, "RazorClassLib"), > **Create**.</span></span> <span data-ttu-id="a9fbc-115">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-115">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
-* <span data-ttu-id="a9fbc-116">뷰를 지원해야 하는 경우 **페이지 및 뷰 지원**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-116">Select **Support pages and views** if you need to support views.</span></span> <span data-ttu-id="a9fbc-117">기본적으로 Razor Pages만 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-117">By default, only Razor Pages are supported.</span></span> <span data-ttu-id="a9fbc-118">**만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-118">Select **Create**.</span></span>
+* <span data-ttu-id="51b71-112">Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-112">From Visual Studio select **Create new a new project**.</span></span>
+* <span data-ttu-id="51b71-113">**Razor 클래스 라이브러리** > **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-113">Select **Razor Class Library** > **Next**.</span></span>
+* <span data-ttu-id="51b71-114">라이브러리 이름을 지정하고(예: "RazorClassLib") > **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-114">Name the library (for example, "RazorClassLib"), > **Create**.</span></span> <span data-ttu-id="51b71-115">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-115">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
+* <span data-ttu-id="51b71-116">뷰를 지원해야 하는 경우 **페이지 및 뷰 지원**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-116">Select **Support pages and views** if you need to support views.</span></span> <span data-ttu-id="51b71-117">기본적으로 Razor Pages만 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-117">By default, only Razor Pages are supported.</span></span> <span data-ttu-id="51b71-118">**만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-118">Select **Create**.</span></span>
 
-<span data-ttu-id="a9fbc-119">RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-119">The Razor class library (RCL) template defaults to Razor component development by default.</span></span> <span data-ttu-id="a9fbc-120">**페이지 및 뷰 지원** 옵션은 페이지와 뷰를 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-120">The **Support pages and views** option supports pages and views.</span></span>
+<span data-ttu-id="51b71-119">RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-119">The Razor class library (RCL) template defaults to Razor component development by default.</span></span> <span data-ttu-id="51b71-120">**페이지 및 뷰 지원** 옵션은 페이지와 뷰를 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-120">The **Support pages and views** option supports pages and views.</span></span>
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="a9fbc-121">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="a9fbc-121">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="51b71-121">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="51b71-121">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="a9fbc-122">명령줄에서 `dotnet new razorclasslib`을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-122">From the command line, run `dotnet new razorclasslib`.</span></span> <span data-ttu-id="a9fbc-123">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="a9fbc-123">For example:</span></span>
+<span data-ttu-id="51b71-122">명령줄에서 `dotnet new razorclasslib`을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-122">From the command line, run `dotnet new razorclasslib`.</span></span> <span data-ttu-id="51b71-123">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="51b71-123">For example:</span></span>
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
 ```
 
-<span data-ttu-id="a9fbc-124">RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-124">The Razor class library (RCL) template defaults to Razor component development by default.</span></span> <span data-ttu-id="a9fbc-125">페이지 및 뷰 지원을 제공하려면 `--support-pages-and-views` 옵션을 전달합니다(`dotnet new razorclasslib --support-pages-and-views`).</span><span class="sxs-lookup"><span data-stu-id="a9fbc-125">Pass the `--support-pages-and-views` option (`dotnet new razorclasslib --support-pages-and-views`) to provide support for pages and views.</span></span>
+<span data-ttu-id="51b71-124">RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-124">The Razor class library (RCL) template defaults to Razor component development by default.</span></span> <span data-ttu-id="51b71-125">페이지 및 뷰 지원을 제공하려면 `--support-pages-and-views` 옵션을 전달합니다(`dotnet new razorclasslib --support-pages-and-views`).</span><span class="sxs-lookup"><span data-stu-id="51b71-125">Pass the `--support-pages-and-views` option (`dotnet new razorclasslib --support-pages-and-views`) to provide support for pages and views.</span></span>
 
-<span data-ttu-id="a9fbc-126">자세한 내용은 [dotnet new](/dotnet/core/tools/dotnet-new)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-126">For more information, see [dotnet new](/dotnet/core/tools/dotnet-new).</span></span> <span data-ttu-id="a9fbc-127">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-127">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
+<span data-ttu-id="51b71-126">자세한 내용은 [dotnet new](/dotnet/core/tools/dotnet-new)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-126">For more information, see [dotnet new](/dotnet/core/tools/dotnet-new).</span></span> <span data-ttu-id="51b71-127">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-127">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
 
 ---
 
-<span data-ttu-id="a9fbc-128">RCL에 Razor 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-128">Add Razor files to the RCL.</span></span>
+<span data-ttu-id="51b71-128">RCL에 Razor 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-128">Add Razor files to the RCL.</span></span>
 
-<span data-ttu-id="a9fbc-129">ASP.NET Core 템플릿은 RCL 콘텐츠가 *Areas* 폴더에 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-129">The ASP.NET Core templates assume the RCL content is in the *Areas* folder.</span></span> <span data-ttu-id="a9fbc-130">`~/Areas/Pages`가 아닌 `~/Pages`의 콘텐츠를 공개하는 RCL을 만들려면 [RCL 페이지 레이아웃](#rcl-pages-layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-130">See [RCL Pages layout](#rcl-pages-layout) to create an RCL that exposes content in `~/Pages` rather than `~/Areas/Pages`.</span></span>
+<span data-ttu-id="51b71-129">ASP.NET Core 템플릿은 RCL 콘텐츠가 *Areas* 폴더에 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-129">The ASP.NET Core templates assume the RCL content is in the *Areas* folder.</span></span> <span data-ttu-id="51b71-130">`~/Areas/Pages`가 아닌 `~/Pages`의 콘텐츠를 공개하는 RCL을 만들려면 [RCL 페이지 레이아웃](#rcl-pages-layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="51b71-130">See [RCL Pages layout](#rcl-pages-layout) to create an RCL that exposes content in `~/Pages` rather than `~/Areas/Pages`.</span></span>
 
-## <a name="reference-rcl-content"></a><span data-ttu-id="a9fbc-131">RCL 콘텐츠 참조</span><span class="sxs-lookup"><span data-stu-id="a9fbc-131">Reference RCL content</span></span>
+## <a name="reference-rcl-content"></a><span data-ttu-id="51b71-131">RCL 콘텐츠 참조</span><span class="sxs-lookup"><span data-stu-id="51b71-131">Reference RCL content</span></span>
 
-<span data-ttu-id="a9fbc-132">RCL은 다음에서 참조할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-132">The RCL can be referenced by:</span></span>
+<span data-ttu-id="51b71-132">RCL은 다음에서 참조할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-132">The RCL can be referenced by:</span></span>
 
-* <span data-ttu-id="a9fbc-133">NuGet 패키지.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-133">NuGet package.</span></span> <span data-ttu-id="a9fbc-134">[NuGet 패키지 만들기](/nuget/create-packages/creating-a-package), [dotnet 추가 패키지](/dotnet/core/tools/dotnet-add-package) 및 [NuGet 패키지 만들기 및 게시](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-134">See [Creating NuGet packages](/nuget/create-packages/creating-a-package) and [dotnet add package](/dotnet/core/tools/dotnet-add-package) and [Create and publish a NuGet package](/nuget/quickstart/create-and-publish-a-package-using-visual-studio).</span></span>
-* <span data-ttu-id="a9fbc-135">*{ProjectName}.csproj*.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-135">*{ProjectName}.csproj*.</span></span> <span data-ttu-id="a9fbc-136">[dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-136">See [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference).</span></span>
+* <span data-ttu-id="51b71-133">NuGet 패키지.</span><span class="sxs-lookup"><span data-stu-id="51b71-133">NuGet package.</span></span> <span data-ttu-id="51b71-134">[NuGet 패키지 만들기](/nuget/create-packages/creating-a-package), [dotnet 추가 패키지](/dotnet/core/tools/dotnet-add-package) 및 [NuGet 패키지 만들기 및 게시](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-134">See [Creating NuGet packages](/nuget/create-packages/creating-a-package) and [dotnet add package](/dotnet/core/tools/dotnet-add-package) and [Create and publish a NuGet package](/nuget/quickstart/create-and-publish-a-package-using-visual-studio).</span></span>
+* <span data-ttu-id="51b71-135">*{ProjectName}.csproj*.</span><span class="sxs-lookup"><span data-stu-id="51b71-135">*{ProjectName}.csproj*.</span></span> <span data-ttu-id="51b71-136">[dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-136">See [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference).</span></span>
 
-## <a name="override-views-partial-views-and-pages"></a><span data-ttu-id="a9fbc-137">보기, 부분 보기 및 페이지 재정의</span><span class="sxs-lookup"><span data-stu-id="a9fbc-137">Override views, partial views, and pages</span></span>
+## <a name="override-views-partial-views-and-pages"></a><span data-ttu-id="51b71-137">보기, 부분 보기 및 페이지 재정의</span><span class="sxs-lookup"><span data-stu-id="51b71-137">Override views, partial views, and pages</span></span>
 
-<span data-ttu-id="a9fbc-138">보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-138">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span> <span data-ttu-id="a9fbc-139">예를 들어 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml*을 WebApp1에 추가하면, WebApp1의 Page1이 RCL의 Page1보다 우선 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-139">For example, add *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* to WebApp1, and Page1 in the WebApp1 will take precedence over Page1 in the RCL.</span></span>
+<span data-ttu-id="51b71-138">뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-138">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span> <span data-ttu-id="51b71-139">예를 들어 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml*을 WebApp1에 추가하면, WebApp1의 Page1이 RCL의 Page1보다 우선 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-139">For example, add *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* to WebApp1, and Page1 in the WebApp1 will take precedence over Page1 in the RCL.</span></span>
 
-<span data-ttu-id="a9fbc-140">샘플 다운로드에서 *WebApp1/Areas/MyFeature2*를 *WebApp1/Areas/MyFeature*로 이름을 바꾸어 우선적으로 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-140">In the sample download, rename *WebApp1/Areas/MyFeature2* to *WebApp1/Areas/MyFeature* to test precedence.</span></span>
+<span data-ttu-id="51b71-140">샘플 다운로드에서 *WebApp1/Areas/MyFeature2*를 *WebApp1/Areas/MyFeature*로 이름을 바꾸어 우선적으로 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-140">In the sample download, rename *WebApp1/Areas/MyFeature2* to *WebApp1/Areas/MyFeature* to test precedence.</span></span>
 
-<span data-ttu-id="a9fbc-141">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 부분 보기를 *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*에 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-141">Copy the *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* partial view to *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*.</span></span> <span data-ttu-id="a9fbc-142">새 위치를 나타내기 위해 태그를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-142">Update the markup to indicate the new location.</span></span> <span data-ttu-id="a9fbc-143">해당 부분의 앱 버전이 사용되고 있는지 확인하려면 앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-143">Build and run the app to verify the app's version of the partial is being used.</span></span>
+<span data-ttu-id="51b71-141">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 부분 보기를 *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*에 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-141">Copy the *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* partial view to *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*.</span></span> <span data-ttu-id="51b71-142">새 위치를 나타내기 위해 태그를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-142">Update the markup to indicate the new location.</span></span> <span data-ttu-id="51b71-143">해당 부분의 앱 버전이 사용되고 있는지 확인하려면 앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-143">Build and run the app to verify the app's version of the partial is being used.</span></span>
 
-### <a name="rcl-pages-layout"></a><span data-ttu-id="a9fbc-144">RCL 페이지 레이아웃</span><span class="sxs-lookup"><span data-stu-id="a9fbc-144">RCL Pages layout</span></span>
+### <a name="rcl-pages-layout"></a><span data-ttu-id="51b71-144">RCL 페이지 레이아웃</span><span class="sxs-lookup"><span data-stu-id="51b71-144">RCL Pages layout</span></span>
 
-<span data-ttu-id="a9fbc-145">웹앱의 *Pages* 폴더에 있는 것처럼 RCL 콘텐츠를 참조하려면 다음 파일 구조로 이루어진 RCL 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-145">To reference RCL content as though it is part of the web app's *Pages* folder, create the RCL project with the following file structure:</span></span>
+<span data-ttu-id="51b71-145">웹앱의 *Pages* 폴더에 있는 것처럼 RCL 콘텐츠를 참조하려면 다음 파일 구조로 이루어진 RCL 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-145">To reference RCL content as though it is part of the web app's *Pages* folder, create the RCL project with the following file structure:</span></span>
 
-* <span data-ttu-id="a9fbc-146">*RazorUIClassLib/Pages*</span><span class="sxs-lookup"><span data-stu-id="a9fbc-146">*RazorUIClassLib/Pages*</span></span>
-* <span data-ttu-id="a9fbc-147">*RazorUIClassLib/Pages/Shared*</span><span class="sxs-lookup"><span data-stu-id="a9fbc-147">*RazorUIClassLib/Pages/Shared*</span></span>
+* <span data-ttu-id="51b71-146">*RazorUIClassLib/Pages*</span><span class="sxs-lookup"><span data-stu-id="51b71-146">*RazorUIClassLib/Pages*</span></span>
+* <span data-ttu-id="51b71-147">*RazorUIClassLib/Pages/Shared*</span><span class="sxs-lookup"><span data-stu-id="51b71-147">*RazorUIClassLib/Pages/Shared*</span></span>
 
-<span data-ttu-id="a9fbc-148">*RazorUIClassLib/Pages/Shared*에 *_Header.cshtml* 및 *_Footer.cshtml*이라는 두 개의 부분 파일이 들어 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-148">Suppose *RazorUIClassLib/Pages/Shared* contains two partial files: *_Header.cshtml* and *_Footer.cshtml*.</span></span> <span data-ttu-id="a9fbc-149">*_Layout.cshtml* 파일에 `<partial>` 태그를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-149">The `<partial>` tags could be added to *_Layout.cshtml* file:</span></span>
+<span data-ttu-id="51b71-148">*RazorUIClassLib/Pages/Shared*에 *_Header.cshtml* 및 *_Footer.cshtml*이라는 두 개의 부분 파일이 들어 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-148">Suppose *RazorUIClassLib/Pages/Shared* contains two partial files: *_Header.cshtml* and *_Footer.cshtml*.</span></span> <span data-ttu-id="51b71-149">*_Layout.cshtml* 파일에 `<partial>` 태그를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-149">The `<partial>` tags could be added to *_Layout.cshtml* file:</span></span>
 
 ```cshtml
 <body>
@@ -90,19 +90,21 @@ dotnet new razorclasslib -o RazorUIClassLib
 </body>
 ```
 
-## <a name="create-an-rcl-with-static-assets"></a><span data-ttu-id="a9fbc-150">정적 자산을 사용하여 RCL 만들기</span><span class="sxs-lookup"><span data-stu-id="a9fbc-150">Create an RCL with static assets</span></span>
+## <a name="create-an-rcl-with-static-assets"></a><span data-ttu-id="51b71-150">정적 자산을 사용하여 RCL 만들기</span><span class="sxs-lookup"><span data-stu-id="51b71-150">Create an RCL with static assets</span></span>
 
-<span data-ttu-id="a9fbc-151">RCL 또는 RCL의 사용 앱에서 참조할 수 있는 도우미 정적 자산이 RCL에 필요할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-151">An RCL may require companion static assets that can be referenced by either the RCL or the consuming app of the RCL.</span></span> <span data-ttu-id="a9fbc-152">ASP.NET Core에서는 사용 앱이 사용할 수 있는 정적 자산을 포함하는 RCL을 만들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-152">ASP.NET Core allows creating RCLs that include static assets that are available to a consuming app.</span></span>
+<span data-ttu-id="51b71-151">RCL 또는 RCL의 사용 앱에서 참조할 수 있는 도우미 정적 자산이 RCL에 필요할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-151">An RCL may require companion static assets that can be referenced by either the RCL or the consuming app of the RCL.</span></span> <span data-ttu-id="51b71-152">ASP.NET Core에서는 사용 앱이 사용할 수 있는 정적 자산을 포함하는 RCL을 만들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-152">ASP.NET Core allows creating RCLs that include static assets that are available to a consuming app.</span></span>
 
-<span data-ttu-id="a9fbc-153">도우미 자산을 RCL의 일부로 포함하려면 클래스 라이브러리에 *wwwroot* 폴더를 만들고 필요한 모든 파일을 해당 폴더에 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-153">To include companion assets as part of an RCL, create a *wwwroot* folder in the class library and include any required files in that folder.</span></span>
+<span data-ttu-id="51b71-153">도우미 자산을 RCL의 일부로 포함하려면 클래스 라이브러리에 *wwwroot* 폴더를 만들고 필요한 모든 파일을 해당 폴더에 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-153">To include companion assets as part of an RCL, create a *wwwroot* folder in the class library and include any required files in that folder.</span></span>
 
-<span data-ttu-id="a9fbc-154">RCL을 패키지하면 *wwwroot* 폴더에 있는 모든 도우미 자산이 패키지에 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-154">When packing an RCL, all companion assets in the *wwwroot* folder are automatically included in the package.</span></span>
+<span data-ttu-id="51b71-154">RCL을 패키지하면 *wwwroot* 폴더에 있는 모든 도우미 자산이 패키지에 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-154">When packing an RCL, all companion assets in the *wwwroot* folder are automatically included in the package.</span></span>
 
-### <a name="exclude-static-assets"></a><span data-ttu-id="a9fbc-155">정적 자산 제외</span><span class="sxs-lookup"><span data-stu-id="a9fbc-155">Exclude static assets</span></span>
+<span data-ttu-id="51b71-155">NuGet.exe 버전 `nuget pack` 대신 `dotnet pack` 명령을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-155">Use the `dotnet pack` command rather than the NuGet.exe version `nuget pack`.</span></span>
 
-<span data-ttu-id="a9fbc-156">정적 자산을 제외하려면 프로젝트 파일의 `$(DefaultItemExcludes)` 속성 그룹에 원하는 제외 경로를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-156">To exclude static assets, add the desired exclusion path to the `$(DefaultItemExcludes)` property group in the project file.</span></span> <span data-ttu-id="a9fbc-157">항목을 세미콜론(`;`)으로 구분합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-157">Separate entries with a semicolon (`;`).</span></span>
+### <a name="exclude-static-assets"></a><span data-ttu-id="51b71-156">정적 자산 제외</span><span class="sxs-lookup"><span data-stu-id="51b71-156">Exclude static assets</span></span>
 
-<span data-ttu-id="a9fbc-158">다음 예제에서 *wwwroot* 폴더에 있는 *lib.css* 스타일시트는 정적 자산으로 간주되지 않아 게시된 RCL에 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-158">In the following example, the *lib.css* stylesheet in the *wwwroot* folder isn't considered a static asset and isn't included in the published RCL:</span></span>
+<span data-ttu-id="51b71-157">정적 자산을 제외하려면 프로젝트 파일의 `$(DefaultItemExcludes)` 속성 그룹에 원하는 제외 경로를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-157">To exclude static assets, add the desired exclusion path to the `$(DefaultItemExcludes)` property group in the project file.</span></span> <span data-ttu-id="51b71-158">항목을 세미콜론(`;`)으로 구분합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-158">Separate entries with a semicolon (`;`).</span></span>
+
+<span data-ttu-id="51b71-159">다음 예제에서 *wwwroot* 폴더에 있는 *lib.css* 스타일시트는 정적 자산으로 간주되지 않아 게시된 RCL에 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-159">In the following example, the *lib.css* stylesheet in the *wwwroot* folder isn't considered a static asset and isn't included in the published RCL:</span></span>
 
 ```xml
 <PropertyGroup>
@@ -110,19 +112,19 @@ dotnet new razorclasslib -o RazorUIClassLib
 </PropertyGroup>
 ```
 
-### <a name="typescript-integration"></a><span data-ttu-id="a9fbc-159">TypeScript 통합</span><span class="sxs-lookup"><span data-stu-id="a9fbc-159">Typescript integration</span></span>
+### <a name="typescript-integration"></a><span data-ttu-id="51b71-160">TypeScript 통합</span><span class="sxs-lookup"><span data-stu-id="51b71-160">Typescript integration</span></span>
 
-<span data-ttu-id="a9fbc-160">RCL에 TypeScript 파일을 포함하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-160">To include TypeScript files in an RCL:</span></span>
+<span data-ttu-id="51b71-161">RCL에 TypeScript 파일을 포함하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-161">To include TypeScript files in an RCL:</span></span>
 
-1. <span data-ttu-id="a9fbc-161">*wwwroot* 폴더 외부에 TypeScript 파일( *.ts*)을 배치합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-161">Place the TypeScript files (*.ts*) outside of the *wwwroot* folder.</span></span> <span data-ttu-id="a9fbc-162">예를 들어 *Client* 폴더에 파일을 배치합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-162">For example, place the files in a *Client* folder.</span></span>
+1. <span data-ttu-id="51b71-162">*wwwroot* 폴더 외부에 TypeScript 파일( *.ts*)을 배치합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-162">Place the TypeScript files (*.ts*) outside of the *wwwroot* folder.</span></span> <span data-ttu-id="51b71-163">예를 들어 *Client* 폴더에 파일을 배치합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-163">For example, place the files in a *Client* folder.</span></span>
 
-1. <span data-ttu-id="a9fbc-163">*wwwroot* 폴더에 대한 TypeScript 빌드 출력을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-163">Configure the TypeScript build output for the *wwwroot* folder.</span></span> <span data-ttu-id="a9fbc-164">프로젝트 파일의 `PropertyGroup` 내부에 `TypescriptOutDir` 속성을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-164">Set the `TypescriptOutDir` property inside of a `PropertyGroup` in the project file:</span></span>
+1. <span data-ttu-id="51b71-164">*wwwroot* 폴더에 대한 TypeScript 빌드 출력을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-164">Configure the TypeScript build output for the *wwwroot* folder.</span></span> <span data-ttu-id="51b71-165">프로젝트 파일의 `PropertyGroup` 내부에 `TypescriptOutDir` 속성을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-165">Set the `TypescriptOutDir` property inside of a `PropertyGroup` in the project file:</span></span>
 
    ```xml
    <TypescriptOutDir>wwwroot</TypescriptOutDir>
    ```
 
-1. <span data-ttu-id="a9fbc-165">프로젝트 파일의 `PropertyGroup` 내부에 다음 대상을 추가하여 TypeScript 대상을 `ResolveCurrentProjectStaticWebAssets` 대상의 종속성으로 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-165">Include the TypeScript target as a dependency of the `ResolveCurrentProjectStaticWebAssets` target by adding the following target inside of a `PropertyGroup` in the project file:</span></span>
+1. <span data-ttu-id="51b71-166">프로젝트 파일의 `PropertyGroup` 내부에 다음 대상을 추가하여 TypeScript 대상을 `ResolveCurrentProjectStaticWebAssets` 대상의 종속성으로 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-166">Include the TypeScript target as a dependency of the `ResolveCurrentProjectStaticWebAssets` target by adding the following target inside of a `PropertyGroup` in the project file:</span></span>
 
    ```xml
    <ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
@@ -131,11 +133,11 @@ dotnet new razorclasslib -o RazorUIClassLib
    </ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
    ```
 
-### <a name="consume-content-from-a-referenced-rcl"></a><span data-ttu-id="a9fbc-166">참조된 RCL의 콘텐츠 사용</span><span class="sxs-lookup"><span data-stu-id="a9fbc-166">Consume content from a referenced RCL</span></span>
+### <a name="consume-content-from-a-referenced-rcl"></a><span data-ttu-id="51b71-167">참조된 RCL의 콘텐츠 사용</span><span class="sxs-lookup"><span data-stu-id="51b71-167">Consume content from a referenced RCL</span></span>
 
-<span data-ttu-id="a9fbc-167">RCL의 *wwwroot* 폴더에 포함된 파일은 접두사 `_content/{LIBRARY NAME}/` 아래에서 RCL 또는 사용 앱에 공개됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-167">The files included in the *wwwroot* folder of the RCL are exposed to either the RCL or the consuming app under the prefix `_content/{LIBRARY NAME}/`.</span></span> <span data-ttu-id="a9fbc-168">예를 들어 *Razor.Class.Lib*라는 라이브러리의 정적 콘텐츠 경로는 `_content/Razor.Class.Lib/`가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-168">For example, a library named *Razor.Class.Lib* results in a path to static content at `_content/Razor.Class.Lib/`.</span></span> <span data-ttu-id="a9fbc-169">NuGet 패키지를 생성할 때 어셈블리 이름이 패키지 ID와 다른 경우 `{LIBRARY NAME}`에 패키지 ID를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-169">When producing a NuGet package and the assembly name isn't the same as the package ID, use the package ID for `{LIBRARY NAME}`.</span></span>
+<span data-ttu-id="51b71-168">RCL의 *wwwroot* 폴더에 포함된 파일은 접두사 `_content/{LIBRARY NAME}/` 아래에서 RCL 또는 사용 앱에 공개됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-168">The files included in the *wwwroot* folder of the RCL are exposed to either the RCL or the consuming app under the prefix `_content/{LIBRARY NAME}/`.</span></span> <span data-ttu-id="51b71-169">예를 들어 *Razor.Class.Lib*라는 라이브러리의 정적 콘텐츠 경로는 `_content/Razor.Class.Lib/`가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-169">For example, a library named *Razor.Class.Lib* results in a path to static content at `_content/Razor.Class.Lib/`.</span></span> <span data-ttu-id="51b71-170">NuGet 패키지를 생성할 때 어셈블리 이름이 패키지 ID와 다른 경우 `{LIBRARY NAME}`에 패키지 ID를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-170">When producing a NuGet package and the assembly name isn't the same as the package ID, use the package ID for `{LIBRARY NAME}`.</span></span>
 
-<span data-ttu-id="a9fbc-170">사용 앱은 `<script>`, `<style>`, `<img>` 및 기타 HTML 태그를 사용하여 라이브러리에서 제공하는 정적 자산을 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-170">The consuming app references static assets provided by the library with `<script>`, `<style>`, `<img>`, and other HTML tags.</span></span> <span data-ttu-id="a9fbc-171">`Startup.Configure`에서 사용 앱에 대해 [정적 파일 지원](xref:fundamentals/static-files)이 사용하도록 설정되어 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-171">The consuming app must have [static file support](xref:fundamentals/static-files) enabled in `Startup.Configure`:</span></span>
+<span data-ttu-id="51b71-171">사용 앱은 `<script>`, `<style>`, `<img>` 및 기타 HTML 태그를 사용하여 라이브러리에서 제공하는 정적 자산을 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-171">The consuming app references static assets provided by the library with `<script>`, `<style>`, `<img>`, and other HTML tags.</span></span> <span data-ttu-id="51b71-172">`Startup.Configure`에서 사용 앱에 대해 [정적 파일 지원](xref:fundamentals/static-files)이 사용하도록 설정되어 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-172">The consuming app must have [static file support](xref:fundamentals/static-files) enabled in `Startup.Configure`:</span></span>
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -148,7 +150,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-<span data-ttu-id="a9fbc-172">빌드 출력(`dotnet run`)에서 사용 앱을 실행하는 경우, 개발 환경에서는 정적 웹 자산이 기본적으로 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-172">When running the consuming app from build output (`dotnet run`), static web assets are enabled by default in the Development environment.</span></span> <span data-ttu-id="a9fbc-173">빌드 출력에서 실행할 때 다른 환경의 자산을 지원하려면 호스트 작성기의 *Program.cs*에서 `UseStaticWebAssets`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-173">To support assets in other environments when running from build output, call `UseStaticWebAssets` on the host builder in *Program.cs*:</span></span>
+<span data-ttu-id="51b71-173">빌드 출력(`dotnet run`)에서 사용 앱을 실행하는 경우, 개발 환경에서는 정적 웹 자산이 기본적으로 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-173">When running the consuming app from build output (`dotnet run`), static web assets are enabled by default in the Development environment.</span></span> <span data-ttu-id="51b71-174">빌드 출력에서 실행할 때 다른 환경의 자산을 지원하려면 호스트 작성기의 *Program.cs*에서 `UseStaticWebAssets`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-174">To support assets in other environments when running from build output, call `UseStaticWebAssets` on the host builder in *Program.cs*:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Hosting;
@@ -171,87 +173,87 @@ public class Program
 }
 ```
 
-<span data-ttu-id="a9fbc-174">게시된 출력(`dotnet publish`)에서 앱을 실행하는 경우 `UseStaticWebAssets`를 호출할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-174">Calling `UseStaticWebAssets` isn't required when running an app from published output (`dotnet publish`).</span></span>
+<span data-ttu-id="51b71-175">게시된 출력(`dotnet publish`)에서 앱을 실행하는 경우 `UseStaticWebAssets`를 호출할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-175">Calling `UseStaticWebAssets` isn't required when running an app from published output (`dotnet publish`).</span></span>
 
-### <a name="multi-project-development-flow"></a><span data-ttu-id="a9fbc-175">다중 프로젝트 개발 흐름</span><span class="sxs-lookup"><span data-stu-id="a9fbc-175">Multi-project development flow</span></span>
+### <a name="multi-project-development-flow"></a><span data-ttu-id="51b71-176">다중 프로젝트 개발 흐름</span><span class="sxs-lookup"><span data-stu-id="51b71-176">Multi-project development flow</span></span>
 
-<span data-ttu-id="a9fbc-176">사용 앱이 실행되는 경우와 관련해서 다음 사항을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-176">When the consuming app runs:</span></span>
+<span data-ttu-id="51b71-177">사용 앱이 실행되는 경우와 관련해서 다음 사항을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-177">When the consuming app runs:</span></span>
 
-* <span data-ttu-id="a9fbc-177">RCL의 자산은 원래 폴더에 유지됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-177">The assets in the RCL stay in their original folders.</span></span> <span data-ttu-id="a9fbc-178">자산이 사용 앱으로 이동되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-178">The assets aren't moved to the consuming app.</span></span>
-* <span data-ttu-id="a9fbc-179">RCL *wwwroot* 폴더 내의 모든 변경 내용은 RCL을 다시 빌드한 후 사용 앱에 반영됩니다. 사용 앱을 다시 빌드할 필요는 없습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-179">Any change within the RCL's *wwwroot* folder is reflected in the consuming app after the RCL is rebuilt and without rebuilding the consuming app.</span></span>
+* <span data-ttu-id="51b71-178">RCL의 자산은 원래 폴더에 유지됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-178">The assets in the RCL stay in their original folders.</span></span> <span data-ttu-id="51b71-179">자산이 사용 앱으로 이동되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-179">The assets aren't moved to the consuming app.</span></span>
+* <span data-ttu-id="51b71-180">RCL *wwwroot* 폴더 내의 모든 변경 내용은 RCL을 다시 빌드한 후 사용 앱에 반영됩니다. 사용 앱을 다시 빌드할 필요는 없습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-180">Any change within the RCL's *wwwroot* folder is reflected in the consuming app after the RCL is rebuilt and without rebuilding the consuming app.</span></span>
 
-<span data-ttu-id="a9fbc-180">RCL을 빌드하면 정적 웹 자산 위치를 설명하는 매니페스트가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-180">When the RCL is built, a manifest is produced that describes the static web asset locations.</span></span> <span data-ttu-id="a9fbc-181">사용 앱은 런타임에 매니페스트를 읽어 참조된 프로젝트와 패키지의 자산을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-181">The consuming app reads the manifest at runtime to consume the assets from referenced projects and packages.</span></span> <span data-ttu-id="a9fbc-182">RCL에 새 자산이 추가된 경우 RCL을 다시 빌드해서 매니페스트를 업데이트해야 사용 앱이 새 자산에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-182">When a new asset is added to an RCL, the RCL must be rebuilt to update its manifest before a consuming app can access the new asset.</span></span>
+<span data-ttu-id="51b71-181">RCL을 빌드하면 정적 웹 자산 위치를 설명하는 매니페스트가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-181">When the RCL is built, a manifest is produced that describes the static web asset locations.</span></span> <span data-ttu-id="51b71-182">사용 앱은 런타임에 매니페스트를 읽어 참조된 프로젝트와 패키지의 자산을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-182">The consuming app reads the manifest at runtime to consume the assets from referenced projects and packages.</span></span> <span data-ttu-id="51b71-183">RCL에 새 자산이 추가된 경우 RCL을 다시 빌드해서 매니페스트를 업데이트해야 사용 앱이 새 자산에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-183">When a new asset is added to an RCL, the RCL must be rebuilt to update its manifest before a consuming app can access the new asset.</span></span>
 
-### <a name="publish"></a><span data-ttu-id="a9fbc-183">게시</span><span class="sxs-lookup"><span data-stu-id="a9fbc-183">Publish</span></span>
+### <a name="publish"></a><span data-ttu-id="51b71-184">게시</span><span class="sxs-lookup"><span data-stu-id="51b71-184">Publish</span></span>
 
-<span data-ttu-id="a9fbc-184">앱을 게시하면 참조된 모든 프로젝트와 패키지의 도우미 자산이 `_content/{LIBRARY NAME}/` 아래에 있는 게시된 앱의 *wwwroot* 폴더에 복사됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-184">When the app is published, the companion assets from all referenced projects and packages are copied into the *wwwroot* folder of the published app under `_content/{LIBRARY NAME}/`.</span></span>
+<span data-ttu-id="51b71-185">앱을 게시하면 참조된 모든 프로젝트와 패키지의 도우미 자산이 `_content/{LIBRARY NAME}/` 아래에 있는 게시된 앱의 *wwwroot* 폴더에 복사됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-185">When the app is published, the companion assets from all referenced projects and packages are copied into the *wwwroot* folder of the published app under `_content/{LIBRARY NAME}/`.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="a9fbc-185">Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 RCL(Razor 클래스 라이브러리)로 빌드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-185">Razor views, pages, controllers, page models, [Razor components](xref:blazor/class-libraries), [View components](xref:mvc/views/view-components), and data models can be built into a Razor class library (RCL).</span></span> <span data-ttu-id="a9fbc-186">RCL은 패키지되고 재사용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-186">The RCL can be packaged and reused.</span></span> <span data-ttu-id="a9fbc-187">애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-187">Applications can include the RCL and override the views and pages it contains.</span></span> <span data-ttu-id="a9fbc-188">보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-188">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span>
+<span data-ttu-id="51b71-186">RCL(Razor 클래스 라이브러리)에 Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 기본적으로 빌드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-186">Razor views, pages, controllers, page models, [Razor components](xref:blazor/class-libraries), [View components](xref:mvc/views/view-components), and data models can be built into a Razor class library (RCL).</span></span> <span data-ttu-id="51b71-187">RCL은 패키지되고 재사용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-187">The RCL can be packaged and reused.</span></span> <span data-ttu-id="51b71-188">애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-188">Applications can include the RCL and override the views and pages it contains.</span></span> <span data-ttu-id="51b71-189">뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-189">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span>
 
-<span data-ttu-id="a9fbc-189">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="a9fbc-189">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="51b71-190">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="51b71-190">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="create-a-class-library-containing-razor-ui"></a><span data-ttu-id="a9fbc-190">Razor UI를 포함하는 클래스 라이브러리 만들기</span><span class="sxs-lookup"><span data-stu-id="a9fbc-190">Create a class library containing Razor UI</span></span>
+## <a name="create-a-class-library-containing-razor-ui"></a><span data-ttu-id="51b71-191">Razor UI를 포함하는 클래스 라이브러리 만들기</span><span class="sxs-lookup"><span data-stu-id="51b71-191">Create a class library containing Razor UI</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="a9fbc-191">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a9fbc-191">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="51b71-192">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="51b71-192">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="a9fbc-192">Visual Studio **파일** 메뉴에서 **새로 만들기** >**프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-192">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="a9fbc-193">**새 ASP.NET Core 웹 애플리케이션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-193">Select **ASP.NET Core Web Application**.</span></span>
-* <span data-ttu-id="a9fbc-194">라이브러리 이름 지정(예: "RazorClassLib") > **확인**입니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-194">Name the library (for example, "RazorClassLib") > **OK**.</span></span> <span data-ttu-id="a9fbc-195">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-195">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
-* <span data-ttu-id="a9fbc-196">**ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-196">Verify **ASP.NET Core 2.1** or later is selected.</span></span>
-* <span data-ttu-id="a9fbc-197">**Razor 클래스 라이브러리** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-197">Select **Razor Class Library** > **OK**.</span></span>
+* <span data-ttu-id="51b71-193">Visual Studio **파일** 메뉴에서 **새로 만들기** >**프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-193">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="51b71-194">**새 ASP.NET Core 웹 애플리케이션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-194">Select **ASP.NET Core Web Application**.</span></span>
+* <span data-ttu-id="51b71-195">라이브러리 이름 지정(예: "RazorClassLib") > **확인**입니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-195">Name the library (for example, "RazorClassLib") > **OK**.</span></span> <span data-ttu-id="51b71-196">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-196">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
+* <span data-ttu-id="51b71-197">**ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-197">Verify **ASP.NET Core 2.1** or later is selected.</span></span>
+* <span data-ttu-id="51b71-198">**Razor 클래스 라이브러리** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-198">Select **Razor Class Library** > **OK**.</span></span>
 
-<span data-ttu-id="a9fbc-198">RCL에는 다음과 같은 프로젝트 파일이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-198">An RCL has the following project file:</span></span>
+<span data-ttu-id="51b71-199">RCL에는 다음과 같은 프로젝트 파일이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-199">An RCL has the following project file:</span></span>
 
 [!code-xml[](ui-class/samples/cli/RazorUIClassLib/RazorUIClassLib.csproj)]
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="a9fbc-199">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="a9fbc-199">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="51b71-200">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="51b71-200">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="a9fbc-200">명령줄에서 `dotnet new razorclasslib`을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-200">From the command line, run `dotnet new razorclasslib`.</span></span> <span data-ttu-id="a9fbc-201">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="a9fbc-201">For example:</span></span>
+<span data-ttu-id="51b71-201">명령줄에서 `dotnet new razorclasslib`을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-201">From the command line, run `dotnet new razorclasslib`.</span></span> <span data-ttu-id="51b71-202">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="51b71-202">For example:</span></span>
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
 ```
 
-<span data-ttu-id="a9fbc-202">자세한 내용은 [dotnet new](/dotnet/core/tools/dotnet-new)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-202">For more information, see [dotnet new](/dotnet/core/tools/dotnet-new).</span></span> <span data-ttu-id="a9fbc-203">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-203">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
+<span data-ttu-id="51b71-203">자세한 내용은 [dotnet new](/dotnet/core/tools/dotnet-new)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-203">For more information, see [dotnet new](/dotnet/core/tools/dotnet-new).</span></span> <span data-ttu-id="51b71-204">생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-204">To avoid a file name collision with the generated view library, ensure the library name doesn't end in `.Views`.</span></span>
 
 ---
 
-<span data-ttu-id="a9fbc-204">RCL에 Razor 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-204">Add Razor files to the RCL.</span></span>
+<span data-ttu-id="51b71-205">RCL에 Razor 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-205">Add Razor files to the RCL.</span></span>
 
-<span data-ttu-id="a9fbc-205">ASP.NET Core 템플릿은 RCL 콘텐츠가 *Areas* 폴더에 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-205">The ASP.NET Core templates assume the RCL content is in the *Areas* folder.</span></span> <span data-ttu-id="a9fbc-206">`~/Areas/Pages`가 아닌 `~/Pages`의 콘텐츠를 공개하는 RCL을 만들려면 [RCL 페이지 레이아웃](#rcl-pages-layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-206">See [RCL Pages layout](#rcl-pages-layout) to create an RCL that exposes content in `~/Pages` rather than `~/Areas/Pages`.</span></span>
+<span data-ttu-id="51b71-206">ASP.NET Core 템플릿은 RCL 콘텐츠가 *Areas* 폴더에 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-206">The ASP.NET Core templates assume the RCL content is in the *Areas* folder.</span></span> <span data-ttu-id="51b71-207">`~/Areas/Pages`가 아닌 `~/Pages`의 콘텐츠를 공개하는 RCL을 만들려면 [RCL 페이지 레이아웃](#rcl-pages-layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="51b71-207">See [RCL Pages layout](#rcl-pages-layout) to create an RCL that exposes content in `~/Pages` rather than `~/Areas/Pages`.</span></span>
 
-## <a name="reference-rcl-content"></a><span data-ttu-id="a9fbc-207">RCL 콘텐츠 참조</span><span class="sxs-lookup"><span data-stu-id="a9fbc-207">Reference RCL content</span></span>
+## <a name="reference-rcl-content"></a><span data-ttu-id="51b71-208">RCL 콘텐츠 참조</span><span class="sxs-lookup"><span data-stu-id="51b71-208">Reference RCL content</span></span>
 
-<span data-ttu-id="a9fbc-208">RCL은 다음에서 참조할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-208">The RCL can be referenced by:</span></span>
+<span data-ttu-id="51b71-209">RCL은 다음에서 참조할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-209">The RCL can be referenced by:</span></span>
 
-* <span data-ttu-id="a9fbc-209">NuGet 패키지.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-209">NuGet package.</span></span> <span data-ttu-id="a9fbc-210">[NuGet 패키지 만들기](/nuget/create-packages/creating-a-package), [dotnet 추가 패키지](/dotnet/core/tools/dotnet-add-package) 및 [NuGet 패키지 만들기 및 게시](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-210">See [Creating NuGet packages](/nuget/create-packages/creating-a-package) and [dotnet add package](/dotnet/core/tools/dotnet-add-package) and [Create and publish a NuGet package](/nuget/quickstart/create-and-publish-a-package-using-visual-studio).</span></span>
-* <span data-ttu-id="a9fbc-211">*{ProjectName}.csproj*.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-211">*{ProjectName}.csproj*.</span></span> <span data-ttu-id="a9fbc-212">[dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-212">See [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference).</span></span>
+* <span data-ttu-id="51b71-210">NuGet 패키지.</span><span class="sxs-lookup"><span data-stu-id="51b71-210">NuGet package.</span></span> <span data-ttu-id="51b71-211">[NuGet 패키지 만들기](/nuget/create-packages/creating-a-package), [dotnet 추가 패키지](/dotnet/core/tools/dotnet-add-package) 및 [NuGet 패키지 만들기 및 게시](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-211">See [Creating NuGet packages](/nuget/create-packages/creating-a-package) and [dotnet add package](/dotnet/core/tools/dotnet-add-package) and [Create and publish a NuGet package](/nuget/quickstart/create-and-publish-a-package-using-visual-studio).</span></span>
+* <span data-ttu-id="51b71-212">*{ProjectName}.csproj*.</span><span class="sxs-lookup"><span data-stu-id="51b71-212">*{ProjectName}.csproj*.</span></span> <span data-ttu-id="51b71-213">[dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-213">See [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference).</span></span>
 
-## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a><span data-ttu-id="a9fbc-213">연습: RCL 프로젝트를 만들고 Razor Pages 프로젝트에서 사용</span><span class="sxs-lookup"><span data-stu-id="a9fbc-213">Walkthrough: Create an RCL project and use from a Razor Pages project</span></span>
+## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a><span data-ttu-id="51b71-214">연습: RCL 프로젝트를 만들고 Razor Pages 프로젝트에서 사용</span><span class="sxs-lookup"><span data-stu-id="51b71-214">Walkthrough: Create an RCL project and use from a Razor Pages project</span></span>
 
-<span data-ttu-id="a9fbc-214">[전체 프로젝트](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)를 다운로드하여 만들지 않고 테스트할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-214">You can download the [complete project](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) and test it rather than creating it.</span></span> <span data-ttu-id="a9fbc-215">샘플 다운로드에는 프로젝트를 쉽게 테스트하게 하는 링크와 추가 코드가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-215">The sample download contains additional code and links that make the project easy to test.</span></span> <span data-ttu-id="a9fbc-216">샘플 다운로드 대 단계별 지침에 대한 주석을 사용하여 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/6098)에서 사용자 의견을 그대로 둘 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-216">You can leave feedback in [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/6098) with your comments on download samples versus step-by-step instructions.</span></span>
+<span data-ttu-id="51b71-215">[전체 프로젝트](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)를 다운로드하여 만들지 않고 테스트할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-215">You can download the [complete project](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) and test it rather than creating it.</span></span> <span data-ttu-id="51b71-216">샘플 다운로드에는 프로젝트를 쉽게 테스트하게 하는 링크와 추가 코드가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-216">The sample download contains additional code and links that make the project easy to test.</span></span> <span data-ttu-id="51b71-217">샘플 다운로드 대 단계별 지침에 대한 주석을 사용하여 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/6098)에서 사용자 의견을 그대로 둘 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-217">You can leave feedback in [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/6098) with your comments on download samples versus step-by-step instructions.</span></span>
 
-### <a name="test-the-download-app"></a><span data-ttu-id="a9fbc-217">다운로드 앱 테스트</span><span class="sxs-lookup"><span data-stu-id="a9fbc-217">Test the download app</span></span>
+### <a name="test-the-download-app"></a><span data-ttu-id="51b71-218">다운로드 앱 테스트</span><span class="sxs-lookup"><span data-stu-id="51b71-218">Test the download app</span></span>
 
-<span data-ttu-id="a9fbc-218">완료된 앱을 다운로드하지 않고 연습 프로젝트를 만들려는 경우 [다음 섹션](#create-an-rcl)으로 건너 뜁니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-218">If you haven't downloaded the completed app and would rather create the walkthrough project, skip to the [next section](#create-an-rcl).</span></span>
+<span data-ttu-id="51b71-219">완료된 앱을 다운로드하지 않고 연습 프로젝트를 만들려는 경우 [다음 섹션](#create-an-rcl)으로 건너 뜁니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-219">If you haven't downloaded the completed app and would rather create the walkthrough project, skip to the [next section](#create-an-rcl).</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="a9fbc-219">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a9fbc-219">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="51b71-220">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="51b71-220">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="a9fbc-220">Visual Studio에서 *.sln* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-220">Open the *.sln* file in Visual Studio.</span></span> <span data-ttu-id="a9fbc-221">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-221">Run the app.</span></span>
+<span data-ttu-id="51b71-221">Visual Studio에서 *.sln* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-221">Open the *.sln* file in Visual Studio.</span></span> <span data-ttu-id="51b71-222">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-222">Run the app.</span></span>
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="a9fbc-222">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="a9fbc-222">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="51b71-223">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="51b71-223">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="a9fbc-223">*cli* 디렉터리의 명령 프롬프트에서 RCL 및 웹앱을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-223">From a command prompt in the *cli* directory, build the RCL and web app.</span></span>
+<span data-ttu-id="51b71-224">*cli* 디렉터리의 명령 프롬프트에서 RCL 및 웹앱을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-224">From a command prompt in the *cli* directory, build the RCL and web app.</span></span>
 
 ```dotnetcli
 dotnet build
 ```
 
-<span data-ttu-id="a9fbc-224">*WebApp1* 디렉터리로 이동해 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-224">Move to the *WebApp1* directory and run the app:</span></span>
+<span data-ttu-id="51b71-225">*WebApp1* 디렉터리로 이동해 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-225">Move to the *WebApp1* directory and run the app:</span></span>
 
 ```dotnetcli
 dotnet run
@@ -259,26 +261,26 @@ dotnet run
 
 ---
 
-<span data-ttu-id="a9fbc-225">[WebApp1 테스트](#test-webapp1)의 지침 준수</span><span class="sxs-lookup"><span data-stu-id="a9fbc-225">Follow the instructions in [Test WebApp1](#test-webapp1)</span></span>
+<span data-ttu-id="51b71-226">[WebApp1 테스트](#test-webapp1)의 지침 준수</span><span class="sxs-lookup"><span data-stu-id="51b71-226">Follow the instructions in [Test WebApp1](#test-webapp1)</span></span>
 
-## <a name="create-an-rcl"></a><span data-ttu-id="a9fbc-226">RCL 만들기</span><span class="sxs-lookup"><span data-stu-id="a9fbc-226">Create an RCL</span></span>
+## <a name="create-an-rcl"></a><span data-ttu-id="51b71-227">RCL 만들기</span><span class="sxs-lookup"><span data-stu-id="51b71-227">Create an RCL</span></span>
 
-<span data-ttu-id="a9fbc-227">이 섹션에서는 RCL을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-227">In this section, an RCL is created.</span></span> <span data-ttu-id="a9fbc-228">Razor 파일이 RCL에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-228">Razor files are added to the RCL.</span></span>
+<span data-ttu-id="51b71-228">이 섹션에서는 RCL을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-228">In this section, an RCL is created.</span></span> Razor<span data-ttu-id="51b71-229"> 파일이 RCL에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-229"> files are added to the RCL.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="a9fbc-229">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a9fbc-229">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="51b71-230">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="51b71-230">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="a9fbc-230">RCL 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-230">Create the RCL project:</span></span>
+<span data-ttu-id="51b71-231">RCL 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-231">Create the RCL project:</span></span>
 
-* <span data-ttu-id="a9fbc-231">Visual Studio **파일** 메뉴에서 **새로 만들기** >**프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-231">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="a9fbc-232">**새 ASP.NET Core 웹 애플리케이션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-232">Select **ASP.NET Core Web Application**.</span></span>
-* <span data-ttu-id="a9fbc-233">앱 이름을 **RazorUIClassLib**로 지정하고 > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-233">Name the app **RazorUIClassLib** > **OK**.</span></span>
-* <span data-ttu-id="a9fbc-234">**ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-234">Verify **ASP.NET Core 2.1** or later is selected.</span></span>
-* <span data-ttu-id="a9fbc-235">**Razor 클래스 라이브러리** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-235">Select **Razor Class Library** > **OK**.</span></span>
-* <span data-ttu-id="a9fbc-236">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*이라는 Razor 부분 보기 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-236">Add a Razor partial view file named *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*.</span></span>
+* <span data-ttu-id="51b71-232">Visual Studio **파일** 메뉴에서 **새로 만들기** >**프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-232">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="51b71-233">**새 ASP.NET Core 웹 애플리케이션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-233">Select **ASP.NET Core Web Application**.</span></span>
+* <span data-ttu-id="51b71-234">앱 이름을 **RazorUIClassLib**로 지정하고 > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-234">Name the app **RazorUIClassLib** > **OK**.</span></span>
+* <span data-ttu-id="51b71-235">**ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-235">Verify **ASP.NET Core 2.1** or later is selected.</span></span>
+* <span data-ttu-id="51b71-236">**Razor 클래스 라이브러리** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-236">Select **Razor Class Library** > **OK**.</span></span>
+* <span data-ttu-id="51b71-237">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*이라는 Razor 부분 뷰 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-237">Add a Razor partial view file named *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*.</span></span>
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="a9fbc-237">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="a9fbc-237">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="51b71-238">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="51b71-238">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="a9fbc-238">명령줄에서 다음을 실행하세요.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-238">From the command line, run the following:</span></span>
+<span data-ttu-id="51b71-239">명령줄에서 다음을 실행하세요.</span><span class="sxs-lookup"><span data-stu-id="51b71-239">From the command line, run the following:</span></span>
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -286,65 +288,65 @@ dotnet new page -n _Message -np -o RazorUIClassLib/Areas/MyFeature/Pages/Shared
 dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 ```
 
-<span data-ttu-id="a9fbc-239">이전 명령은</span><span class="sxs-lookup"><span data-stu-id="a9fbc-239">The preceding commands:</span></span>
+<span data-ttu-id="51b71-240">이전 명령은</span><span class="sxs-lookup"><span data-stu-id="51b71-240">The preceding commands:</span></span>
 
-* <span data-ttu-id="a9fbc-240">`RazorUIClassLib` RCL을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-240">Creates the `RazorUIClassLib` RCL.</span></span>
-* <span data-ttu-id="a9fbc-241">Razor _Message 페이지를 만들어 RCL에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-241">Creates a Razor _Message page, and adds it to the RCL.</span></span> <span data-ttu-id="a9fbc-242">`-np` 매개 변수는 `PageModel`가 없는 페이지를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-242">The `-np` parameter creates the page without a `PageModel`.</span></span>
-* <span data-ttu-id="a9fbc-243">[_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) 파일을 만들어 RCL에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-243">Creates a [_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) file and adds it to the RCL.</span></span>
+* <span data-ttu-id="51b71-241">`RazorUIClassLib` RCL을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-241">Creates the `RazorUIClassLib` RCL.</span></span>
+* <span data-ttu-id="51b71-242">Razor _Message 페이지를 만들어 RCL에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-242">Creates a Razor _Message page, and adds it to the RCL.</span></span> <span data-ttu-id="51b71-243">`-np` 매개 변수는 `PageModel`가 없는 페이지를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-243">The `-np` parameter creates the page without a `PageModel`.</span></span>
+* <span data-ttu-id="51b71-244">[_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) 파일을 만들어 RCL에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-244">Creates a [_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) file and adds it to the RCL.</span></span>
 
-<span data-ttu-id="a9fbc-244">다음 섹션에서 추가하는 Razor Pages 프로젝트의 레이아웃을 사용하려면 *_ViewStart.cshtml* 파일이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-244">The *_ViewStart.cshtml* file is required to use the layout of the Razor Pages project (which is added in the next section).</span></span>
+<span data-ttu-id="51b71-245">다음 섹션에서 추가하는 Razor Pages 프로젝트의 레이아웃을 사용하려면 *_ViewStart.cshtml* 파일이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-245">The *_ViewStart.cshtml* file is required to use the layout of the Razor Pages project (which is added in the next section).</span></span>
 
 ---
 
-### <a name="add-razor-files-and-folders-to-the-project"></a><span data-ttu-id="a9fbc-245">프로젝트에 Razor 파일 및 폴더 추가</span><span class="sxs-lookup"><span data-stu-id="a9fbc-245">Add Razor files and folders to the project</span></span>
+### <a name="add-razor-files-and-folders-to-the-project"></a><span data-ttu-id="51b71-246">프로젝트에 Razor 파일 및 폴더 추가</span><span class="sxs-lookup"><span data-stu-id="51b71-246">Add Razor files and folders to the project</span></span>
 
-* <span data-ttu-id="a9fbc-246">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*에서 태그를 다음 코드로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-246">Replace the markup in *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* with the following code:</span></span>
+* <span data-ttu-id="51b71-247">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*에서 태그를 다음 코드로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-247">Replace the markup in *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* with the following code:</span></span>
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml)]
 
-* <span data-ttu-id="a9fbc-247">*RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml*에서 태그를 다음 코드로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-247">Replace the markup in *RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml* with the following code:</span></span>
+* <span data-ttu-id="51b71-248">*RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml*에서 태그를 다음 코드로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-248">Replace the markup in *RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml* with the following code:</span></span>
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  <span data-ttu-id="a9fbc-248">`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`은 부분 보기(`<partial name="_Message" />`)를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-248">`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` is required to use the partial view (`<partial name="_Message" />`).</span></span> <span data-ttu-id="a9fbc-249">`@addTagHelper` 지시문을 포함하지 않고 *_ViewImports.cshtml* 파일을 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-249">Rather than including the `@addTagHelper` directive, you can add a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="a9fbc-250">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="a9fbc-250">For example:</span></span>
+  <span data-ttu-id="51b71-249">`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`은 부분 보기(`<partial name="_Message" />`)를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-249">`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` is required to use the partial view (`<partial name="_Message" />`).</span></span> <span data-ttu-id="51b71-250">`@addTagHelper` 지시문을 포함하지 않고 *_ViewImports.cshtml* 파일을 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-250">Rather than including the `@addTagHelper` directive, you can add a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="51b71-251">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="51b71-251">For example:</span></span>
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
   ```
 
-  <span data-ttu-id="a9fbc-251">*_ViewImports.cshtml*에 대한 자세한 내용은 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-251">For more information on *_ViewImports.cshtml*, see [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives)</span></span>
+  <span data-ttu-id="51b71-252">*_ViewImports.cshtml*에 대한 자세한 내용은 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="51b71-252">For more information on *_ViewImports.cshtml*, see [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives)</span></span>
 
-* <span data-ttu-id="a9fbc-252">컴파일러 오류가 없는지 확인하려면 클래스 라이브러리를 빌드하십시오.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-252">Build the class library to verify there are no compiler errors:</span></span>
+* <span data-ttu-id="51b71-253">컴파일러 오류가 없는지 확인하려면 클래스 라이브러리를 빌드하십시오.</span><span class="sxs-lookup"><span data-stu-id="51b71-253">Build the class library to verify there are no compiler errors:</span></span>
 
   ```dotnetcli
   dotnet build RazorUIClassLib
   ```
 
-<span data-ttu-id="a9fbc-253">빌드 출력은 *RazorUIClassLib.dll* 및 *RazorUIClassLib.Views.dll*을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-253">The build output contains *RazorUIClassLib.dll* and *RazorUIClassLib.Views.dll*.</span></span> <span data-ttu-id="a9fbc-254">*RazorUIClassLib.Views.dll*은 컴파일된 Razor 콘텐츠를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-254">*RazorUIClassLib.Views.dll* contains the compiled Razor content.</span></span>
+<span data-ttu-id="51b71-254">빌드 출력은 *RazorUIClassLib.dll* 및 *RazorUIClassLib.Views.dll*을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-254">The build output contains *RazorUIClassLib.dll* and *RazorUIClassLib.Views.dll*.</span></span> <span data-ttu-id="51b71-255">*RazorUIClassLib.Views.dll*은 컴파일된 Razor 콘텐츠를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-255">*RazorUIClassLib.Views.dll* contains the compiled Razor content.</span></span>
 
-### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a><span data-ttu-id="a9fbc-255">Razor 페이지 프로젝트에서 Razor UI 라이브러리 사용</span><span class="sxs-lookup"><span data-stu-id="a9fbc-255">Use the Razor UI library from a Razor Pages project</span></span>
+### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a><span data-ttu-id="51b71-256">Razor Pages 프로젝트에서 Razor UI 라이브러리 사용</span><span class="sxs-lookup"><span data-stu-id="51b71-256">Use the Razor UI library from a Razor Pages project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="a9fbc-256">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a9fbc-256">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="51b71-257">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="51b71-257">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="a9fbc-257">Razor 페이지 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-257">Create the Razor Pages web app:</span></span>
+<span data-ttu-id="51b71-258">Razor Pages 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-258">Create the Razor Pages web app:</span></span>
 
-* <span data-ttu-id="a9fbc-258">**솔루션 탐색기**에서 솔루션을 마우스 오른쪽 단추로 클릭하고 > **추가** > **새 프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-258">From **Solution Explorer**, right-click the solution > **Add** >  **New Project**.</span></span>
-* <span data-ttu-id="a9fbc-259">**새 ASP.NET Core 웹 애플리케이션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-259">Select **ASP.NET Core Web Application**.</span></span>
-* <span data-ttu-id="a9fbc-260">**WebApp1** 앱 이름을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-260">Name the app **WebApp1**.</span></span>
-* <span data-ttu-id="a9fbc-261">**ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-261">Verify **ASP.NET Core 2.1** or later is selected.</span></span>
-* <span data-ttu-id="a9fbc-262">**웹 애플리케이션** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-262">Select **Web Application** > **OK**.</span></span>
+* <span data-ttu-id="51b71-259">**솔루션 탐색기**에서 솔루션을 마우스 오른쪽 단추로 클릭하고 > **추가** > **새 프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-259">From **Solution Explorer**, right-click the solution > **Add** >  **New Project**.</span></span>
+* <span data-ttu-id="51b71-260">**새 ASP.NET Core 웹 애플리케이션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-260">Select **ASP.NET Core Web Application**.</span></span>
+* <span data-ttu-id="51b71-261">**WebApp1** 앱 이름을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-261">Name the app **WebApp1**.</span></span>
+* <span data-ttu-id="51b71-262">**ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-262">Verify **ASP.NET Core 2.1** or later is selected.</span></span>
+* <span data-ttu-id="51b71-263">**웹 애플리케이션** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-263">Select **Web Application** > **OK**.</span></span>
 
-* <span data-ttu-id="a9fbc-263">**솔루션 탐색기**에서 **WebApp1**를 마우스 오른쪽 단추로 클릭하고 **스타트업 프로젝트로 설정**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-263">From **Solution Explorer**, right-click on **WebApp1** and select **Set as StartUp Project**.</span></span>
-* <span data-ttu-id="a9fbc-264">**솔루션 탐색기**에서 **WebApp1**을 마우스 오른쪽 단추로 클릭하고 **빌드 종속성** > **프로젝트 종속성**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-264">From **Solution Explorer**, right-click on **WebApp1** and select **Build Dependencies** > **Project Dependencies**.</span></span>
-* <span data-ttu-id="a9fbc-265">**RazorUIClassLib**를 **WebApp1**의 종속성으로 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-265">Check **RazorUIClassLib** as a dependency of **WebApp1**.</span></span>
-* <span data-ttu-id="a9fbc-266">**솔루션 탐색기**에서 **WebApp1**을 마우스 오른쪽 단추로 클릭하고 **추가** > **참조**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-266">From **Solution Explorer**, right-click on **WebApp1** and select **Add** > **Reference**.</span></span>
-* <span data-ttu-id="a9fbc-267">**참조 관리자** 대화 상자에서 **RazorUIClassLib** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-267">In the **Reference Manager** dialog, check **RazorUIClassLib** > **OK**.</span></span>
+* <span data-ttu-id="51b71-264">**솔루션 탐색기**에서 **WebApp1**를 마우스 오른쪽 단추로 클릭하고 **스타트업 프로젝트로 설정**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-264">From **Solution Explorer**, right-click on **WebApp1** and select **Set as StartUp Project**.</span></span>
+* <span data-ttu-id="51b71-265">**솔루션 탐색기**에서 **WebApp1**을 마우스 오른쪽 단추로 클릭하고 **빌드 종속성** > **프로젝트 종속성**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-265">From **Solution Explorer**, right-click on **WebApp1** and select **Build Dependencies** > **Project Dependencies**.</span></span>
+* <span data-ttu-id="51b71-266">**RazorUIClassLib**를 **WebApp1**의 종속성으로 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-266">Check **RazorUIClassLib** as a dependency of **WebApp1**.</span></span>
+* <span data-ttu-id="51b71-267">**솔루션 탐색기**에서 **WebApp1**을 마우스 오른쪽 단추로 클릭하고 **추가** > **참조**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-267">From **Solution Explorer**, right-click on **WebApp1** and select **Add** > **Reference**.</span></span>
+* <span data-ttu-id="51b71-268">**참조 관리자** 대화 상자에서 **RazorUIClassLib** > **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-268">In the **Reference Manager** dialog, check **RazorUIClassLib** > **OK**.</span></span>
 
-<span data-ttu-id="a9fbc-268">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-268">Run the app.</span></span>
+<span data-ttu-id="51b71-269">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-269">Run the app.</span></span>
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="a9fbc-269">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="a9fbc-269">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="51b71-270">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="51b71-270">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="a9fbc-270">Razor Pages 앱과 RCL을 포함하는 솔루션 파일과 Razor Pages 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-270">Create a Razor Pages web app and a solution file containing the Razor Pages app and the RCL:</span></span>
+<span data-ttu-id="51b71-271">Razor Pages 앱과 RCL을 포함하는 Razor Pages 웹앱 및 솔루션 파일을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-271">Create a Razor Pages web app and a solution file containing the Razor Pages app and the RCL:</span></span>
 
 ```dotnetcli
 dotnet new webapp -o WebApp1
@@ -354,7 +356,7 @@ dotnet sln add RazorUIClassLib
 dotnet add WebApp1 reference RazorUIClassLib
 ```
 
-<span data-ttu-id="a9fbc-271">웹앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-271">Build and run the web app:</span></span>
+<span data-ttu-id="51b71-272">웹앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-272">Build and run the web app:</span></span>
 
 ```dotnetcli
 cd WebApp1
@@ -363,26 +365,26 @@ dotnet run
 
 ---
 
-### <a name="test-webapp1"></a><span data-ttu-id="a9fbc-272">WebApp1 테스트</span><span class="sxs-lookup"><span data-stu-id="a9fbc-272">Test WebApp1</span></span>
+### <a name="test-webapp1"></a><span data-ttu-id="51b71-273">WebApp1 테스트</span><span class="sxs-lookup"><span data-stu-id="51b71-273">Test WebApp1</span></span>
 
-<span data-ttu-id="a9fbc-273">`/MyFeature/Page1`로 이동하여 Razor UI 클래스 라이브러리가 사용 중인지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-273">Browse to `/MyFeature/Page1` to verify that the Razor UI class library is in use.</span></span>
+<span data-ttu-id="51b71-274">`/MyFeature/Page1`로 이동하여 Razor UI 클래스 라이브러리가 사용 중인지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-274">Browse to `/MyFeature/Page1` to verify that the Razor UI class library is in use.</span></span>
 
-## <a name="override-views-partial-views-and-pages"></a><span data-ttu-id="a9fbc-274">보기, 부분 보기 및 페이지 재정의</span><span class="sxs-lookup"><span data-stu-id="a9fbc-274">Override views, partial views, and pages</span></span>
+## <a name="override-views-partial-views-and-pages"></a><span data-ttu-id="51b71-275">보기, 부분 보기 및 페이지 재정의</span><span class="sxs-lookup"><span data-stu-id="51b71-275">Override views, partial views, and pages</span></span>
 
-<span data-ttu-id="a9fbc-275">뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-275">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span> <span data-ttu-id="a9fbc-276">예를 들어 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml*을 WebApp1에 추가하면, WebApp1의 Page1이 RCL의 Page1보다 우선 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-276">For example, add *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* to WebApp1, and Page1 in the WebApp1 will take precedence over Page1 in the RCL.</span></span>
+<span data-ttu-id="51b71-276">뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-276">When a view, partial view, or Razor Page is found in both the web app and the RCL, the Razor markup (*.cshtml* file) in the web app takes precedence.</span></span> <span data-ttu-id="51b71-277">예를 들어 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml*을 WebApp1에 추가하면, WebApp1의 Page1이 RCL의 Page1보다 우선 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-277">For example, add *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* to WebApp1, and Page1 in the WebApp1 will take precedence over Page1 in the RCL.</span></span>
 
-<span data-ttu-id="a9fbc-277">샘플 다운로드에서 *WebApp1/Areas/MyFeature2*를 *WebApp1/Areas/MyFeature*로 이름을 바꾸어 우선적으로 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-277">In the sample download, rename *WebApp1/Areas/MyFeature2* to *WebApp1/Areas/MyFeature* to test precedence.</span></span>
+<span data-ttu-id="51b71-278">샘플 다운로드에서 *WebApp1/Areas/MyFeature2*를 *WebApp1/Areas/MyFeature*로 이름을 바꾸어 우선적으로 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-278">In the sample download, rename *WebApp1/Areas/MyFeature2* to *WebApp1/Areas/MyFeature* to test precedence.</span></span>
 
-<span data-ttu-id="a9fbc-278">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 부분 보기를 *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*에 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-278">Copy the *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* partial view to *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*.</span></span> <span data-ttu-id="a9fbc-279">새 위치를 나타내기 위해 태그를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-279">Update the markup to indicate the new location.</span></span> <span data-ttu-id="a9fbc-280">해당 부분의 앱 버전이 사용되고 있는지 확인하려면 앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-280">Build and run the app to verify the app's version of the partial is being used.</span></span>
+<span data-ttu-id="51b71-279">*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 부분 보기를 *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*에 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-279">Copy the *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* partial view to *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml*.</span></span> <span data-ttu-id="51b71-280">새 위치를 나타내기 위해 태그를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-280">Update the markup to indicate the new location.</span></span> <span data-ttu-id="51b71-281">해당 부분의 앱 버전이 사용되고 있는지 확인하려면 앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-281">Build and run the app to verify the app's version of the partial is being used.</span></span>
 
-### <a name="rcl-pages-layout"></a><span data-ttu-id="a9fbc-281">RCL 페이지 레이아웃</span><span class="sxs-lookup"><span data-stu-id="a9fbc-281">RCL Pages layout</span></span>
+### <a name="rcl-pages-layout"></a><span data-ttu-id="51b71-282">RCL 페이지 레이아웃</span><span class="sxs-lookup"><span data-stu-id="51b71-282">RCL Pages layout</span></span>
 
-<span data-ttu-id="a9fbc-282">웹앱의 *Pages* 폴더에 있는 것처럼 RCL 콘텐츠를 참조하려면 다음 파일 구조로 이루어진 RCL 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-282">To reference RCL content as though it is part of the web app's *Pages* folder, create the RCL project with the following file structure:</span></span>
+<span data-ttu-id="51b71-283">웹앱의 *Pages* 폴더에 있는 것처럼 RCL 콘텐츠를 참조하려면 다음 파일 구조로 이루어진 RCL 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-283">To reference RCL content as though it is part of the web app's *Pages* folder, create the RCL project with the following file structure:</span></span>
 
-* <span data-ttu-id="a9fbc-283">*RazorUIClassLib/Pages*</span><span class="sxs-lookup"><span data-stu-id="a9fbc-283">*RazorUIClassLib/Pages*</span></span>
-* <span data-ttu-id="a9fbc-284">*RazorUIClassLib/Pages/Shared*</span><span class="sxs-lookup"><span data-stu-id="a9fbc-284">*RazorUIClassLib/Pages/Shared*</span></span>
+* <span data-ttu-id="51b71-284">*RazorUIClassLib/Pages*</span><span class="sxs-lookup"><span data-stu-id="51b71-284">*RazorUIClassLib/Pages*</span></span>
+* <span data-ttu-id="51b71-285">*RazorUIClassLib/Pages/Shared*</span><span class="sxs-lookup"><span data-stu-id="51b71-285">*RazorUIClassLib/Pages/Shared*</span></span>
 
-<span data-ttu-id="a9fbc-285">*RazorUIClassLib/Pages/Shared*에 *_Header.cshtml* 및 *_Footer.cshtml*이라는 두 개의 부분 파일이 들어 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-285">Suppose *RazorUIClassLib/Pages/Shared* contains two partial files: *_Header.cshtml* and *_Footer.cshtml*.</span></span> <span data-ttu-id="a9fbc-286">*_Layout.cshtml* 파일에 `<partial>` 태그를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a9fbc-286">The `<partial>` tags could be added to *_Layout.cshtml* file:</span></span>
+<span data-ttu-id="51b71-286">*RazorUIClassLib/Pages/Shared*에 *_Header.cshtml* 및 *_Footer.cshtml*이라는 두 개의 부분 파일이 들어 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-286">Suppose *RazorUIClassLib/Pages/Shared* contains two partial files: *_Header.cshtml* and *_Footer.cshtml*.</span></span> <span data-ttu-id="51b71-287">*_Layout.cshtml* 파일에 `<partial>` 태그를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="51b71-287">The `<partial>` tags could be added to *_Layout.cshtml* file:</span></span>
 
 ```cshtml
 <body>
@@ -394,6 +396,6 @@ dotnet run
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="a9fbc-287">추가 자료</span><span class="sxs-lookup"><span data-stu-id="a9fbc-287">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="51b71-288">추가 자료</span><span class="sxs-lookup"><span data-stu-id="51b71-288">Additional resources</span></span>
 
 * <xref:blazor/class-libraries>
