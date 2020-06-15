@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 5e617a201cbd133e695bdadc08dc6c797f97b6be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 10d6f0bd6f6b95efbe868e4bc21513460e1f0b67
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773629"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652469"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>자습서: 복잡한 데이터 모델 만들기 - ASP.NET MVC 및 EF Core 사용
 
@@ -78,7 +78,7 @@ ms.locfileid: "82773629"
 
 * 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 서식을 사용하여 데이터를 렌더링합니다.
 
-자세한 내용은 [\<입력> 태그 도우미 설명서](../../mvc/views/working-with-forms.md#the-input-tag-helper)를 참조하세요.
+자세한 내용은 [\<input> 태그 도우미 설명서](../../mvc/views/working-with-forms.md#the-input-tag-helper)를 참조하세요.
 
 앱을 실행하고 학생 인덱스 페이지로 이동하여 등록 날짜에 대해 시간이 더 이상 표시되지 않음을 확인합니다. 학생 모델을 사용하는 다른 보기에도 동일하게 적용됩니다.
 
@@ -95,7 +95,7 @@ ms.locfileid: "82773629"
 `StringLength` 특성은 이름에 공백을 입력할 수 있습니다. `RegularExpression` 특성을 사용하여 입력에 제한을 적용할 수 있습니다. 예를 들어 다음 코드는 첫 번째 문자가 대문자여야 하고, 나머지 문자는 알파벳순이어야 합니다.
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 `MaxLength` 특성은 `StringLength` 특성과 비슷한 기능을 제공하지만, 클라이언트 쪽 유효성 검사는 제공하지 않습니다.

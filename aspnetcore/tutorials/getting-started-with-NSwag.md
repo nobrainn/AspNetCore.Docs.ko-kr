@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 50096ae6a77d5f8b07e6be795d9401fcbfd421e3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cd4cc6778de7d2156243dc91fba64b2bdb79cf08
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776710"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452124"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -107,11 +107,11 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 
 다음 옵션 중 하나를 선택하여 NSwag의 코드 생성 기능을 활용할 수 있습니다.
 
-* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) - C# 또는 TypeScript로 API 클라이언트 코드를 생성하기 위한 Windows 데스크톱 앱
+* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio): C# 또는 TypeScript로 API 클라이언트 코드를 생성하기 위한 Windows 데스크톱 앱.
 * 프로젝트 내에서 코드 생성을 위한 [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) 또는 [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) NuGet 패키지.
 * [명령줄](https://github.com/RicoSuter/NSwag/wiki/CommandLine)의 NSwag.
 * [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild) NuGet 패키지.
-* [Unchase OpenAPI(Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) - C# 또는 TypeScript로 API 클라이언트 코드를 생성하기 위한 Visual Studio Connected Service. 또한 NSwag를 사용하여 OpenAPI 서비스용 C# 컨트롤러를 생성합니다.
+* [Unchase OpenAPI(Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice): C# 또는 TypeScript로 API 클라이언트 코드를 생성하기 위한 Visual Studio Connected Service. 또한 NSwag를 사용하여 OpenAPI 서비스용 C# 컨트롤러를 생성합니다.
 
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio로 코드 생성
 

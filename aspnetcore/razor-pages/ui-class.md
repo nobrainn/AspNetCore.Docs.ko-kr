@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 2c2a2c1e13b2d511ecf8c1c02c235192861fd486
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 32aa1cdab0e552a1255c01b5135e9a82a0e37c77
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774277"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451903"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용하여 재사용 가능한 UI 만들기
 
@@ -25,7 +25,7 @@ ms.locfileid: "82774277"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 RCL(Razor 클래스 라이브러리)로 빌드할 수 있습니다. RCL은 패키지되고 재사용될 수 있습니다. 애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다. 보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.
+RCL(Razor 클래스 라이브러리)에 Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 기본적으로 빌드할 수 있습니다. RCL은 패키지되고 재사용될 수 있습니다. 애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다. 뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -67,7 +67,7 @@ RCL은 다음에서 참조할 수 있습니다.
 
 ## <a name="override-views-partial-views-and-pages"></a>보기, 부분 보기 및 페이지 재정의
 
-보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다. 예를 들어 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml*을 WebApp1에 추가하면, WebApp1의 Page1이 RCL의 Page1보다 우선 적용됩니다.
+뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다. 예를 들어 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml*을 WebApp1에 추가하면, WebApp1의 Page1이 RCL의 Page1보다 우선 적용됩니다.
 
 샘플 다운로드에서 *WebApp1/Areas/MyFeature2*를 *WebApp1/Areas/MyFeature*로 이름을 바꾸어 우선적으로 테스트합니다.
 
@@ -97,6 +97,8 @@ RCL 또는 RCL의 사용 앱에서 참조할 수 있는 도우미 정적 자산�
 도우미 자산을 RCL의 일부로 포함하려면 클래스 라이브러리에 *wwwroot* 폴더를 만들고 필요한 모든 파일을 해당 폴더에 포함합니다.
 
 RCL을 패키지하면 *wwwroot* 폴더에 있는 모든 도우미 자산이 패키지에 자동으로 포함됩니다.
+
+NuGet.exe 버전 `nuget pack` 대신 `dotnet pack` 명령을 사용합니다.
 
 ### <a name="exclude-static-assets"></a>정적 자산 제외
 
@@ -190,7 +192,7 @@ RCL을 빌드하면 정적 웹 자산 위치를 설명하는 매니페스트가 
 
 ::: moniker range="< aspnetcore-3.0"
 
-Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 RCL(Razor 클래스 라이브러리)로 빌드할 수 있습니다. RCL은 패키지되고 재사용될 수 있습니다. 애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다. 보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.
+RCL(Razor 클래스 라이브러리)에 Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [Razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components) 및 데이터 모델을 기본적으로 빌드할 수 있습니다. RCL은 패키지되고 재사용될 수 있습니다. 애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다. 뷰, 부분 뷰 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선으로 적용됩니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -274,7 +276,7 @@ RCL 프로젝트를 만듭니다.
 * 앱 이름을 **RazorUIClassLib**로 지정하고 > **확인**을 선택합니다.
 * **ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.
 * **Razor 클래스 라이브러리** > **확인**을 선택합니다.
-* *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*이라는 Razor 부분 보기 파일을 추가합니다.
+* *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*이라는 Razor 부분 뷰 파일을 추가합니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -322,11 +324,11 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 빌드 출력은 *RazorUIClassLib.dll* 및 *RazorUIClassLib.Views.dll*을 포함합니다. *RazorUIClassLib.Views.dll*은 컴파일된 Razor 콘텐츠를 포함합니다.
 
-### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>Razor 페이지 프로젝트에서 Razor UI 라이브러리 사용
+### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>Razor Pages 프로젝트에서 Razor UI 라이브러리 사용
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Razor 페이지 웹앱을 만듭니다.
+Razor Pages 웹앱을 만듭니다.
 
 * **솔루션 탐색기**에서 솔루션을 마우스 오른쪽 단추로 클릭하고 > **추가** > **새 프로젝트**를 선택합니다.
 * **새 ASP.NET Core 웹 애플리케이션**을 선택합니다.
@@ -344,7 +346,7 @@ Razor 페이지 웹앱을 만듭니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-Razor Pages 앱과 RCL을 포함하는 솔루션 파일과 Razor Pages 웹앱을 만듭니다.
+Razor Pages 앱과 RCL을 포함하는 Razor Pages 웹앱 및 솔루션 파일을 만듭니다.
 
 ```dotnetcli
 dotnet new webapp -o WebApp1

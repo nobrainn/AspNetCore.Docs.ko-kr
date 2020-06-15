@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core의 컨트롤러 메서드 및 보기
+title: 6부. ASP.NET Core의 컨트롤러 메서드 및 보기
 author: rick-anderson
-description: ASP.NET Core에서 컨트롤러 메서드, 보기 및 DataAnnotations를 사용하는 방법을 배웁니다.
+description: 6부. ASP.NET Core MVC 앱에 모델 추가
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 444c870fcf9e866f0c382e32af174442d11d3af5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 50b527cee19f19316fd9034759c05817010fefbb
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777581"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653024"
 ---
-# <a name="controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 메서드 및 보기
+# <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>6부. ASP.NET Core의 컨트롤러 메서드 및 보기
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -118,13 +118,13 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 파일의 맨 위에서 보기 템플릿에 `@model MvcMovie.Models.Movie` 문이 지정된 방식을 살펴보세요. `@model MvcMovie.Models.Movie`는 이 보기가 보기 템플릿에 대한 모델로 `Movie` 형식을 기대하고 있음을 지정합니다.
 
-스캐폴드 코드는 몇 가지 태그 도우미 메서드를 사용하여 HTML 마크업을 간소화합니다. [레이블 태그 도우미](xref:mvc/views/working-with-forms)는 필드 이름을 표시합니다("Title", "ReleaseDate", "Genre", "Price" 등). [입력 태그 도우미](xref:mvc/views/working-with-forms)는 HTML `<input>` 요소를 렌더링합니다. [유효성 검사 태그 도우미](xref:mvc/views/working-with-forms)는 해당 속성과 연결된 모든 유효성 검사 메시지를 표시합니다.
+스캐폴드 코드는 몇 가지 태그 도우미 메서드를 사용하여 HTML 마크업을 간소화합니다. [레이블 태그 도우미](xref:mvc/views/working-with-forms)는 필드 이름을 표시합니다(“Title”, “ReleaseDate”, “Genre” 또는 “Price”). [입력 태그 도우미](xref:mvc/views/working-with-forms)는 HTML `<input>` 요소를 렌더링합니다. [유효성 검사 태그 도우미](xref:mvc/views/working-with-forms)는 해당 속성과 연결된 모든 유효성 검사 메시지를 표시합니다.
 
 응용 프로그램을 실행하고 `/Movies` URL로 이동합니다. **Edit** 링크를 클릭합니다. 브라우저에서 페이지의 소스를 봅니다. `<form>` 요소에 대해 생성된 HTML은 다음과 같습니다.
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
-`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소의 내부에 위치합니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [Form 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다. 
+`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소의 내부에 위치합니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [Form 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다.
 
 ## <a name="processing-the-post-request"></a>POST 요청 처리
 

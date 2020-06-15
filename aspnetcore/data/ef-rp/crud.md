@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - CRUD - 2/8
+title: 2부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - CRUD
 author: rick-anderson
-description: EF Core를 사용한 만들기, 읽기, 업데이트, 삭제 방법을 보여 줍니다.
+description: Razor Pages 및 Entity Framework 자습서 시리즈의 2부입니다.
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 62e35639d5e3d43bd20c9f92b75fa101d7914f82
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650151"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652359"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - CRUD - 2/8
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>2부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - CRUD
 
 작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -104,7 +110,7 @@ ms.locfileid: "78650151"
 
 애플리케이션 모델은 흔히 도메인 모델이라고 합니다. 도메인 모델은 일반적으로 데이터베이스의 해당 엔터티에 필요한 모든 속성을 포함합니다. 보기 모델은 사용되는 UI에 필요한 속성만 포함합니다(예: 만들기 페이지).
 
-뷰 모델 외에도 일부 앱은 바인딩 모델 또는 입력 모델을 사용하여 Razor 페이지 페이지 모델 클래스와 브라우저 간에 데이터를 전달합니다. 
+뷰 모델 외에도 일부 앱은 바인딩 모델 또는 입력 모델을 사용하여 Razor Pages 페이지 모델 클래스와 브라우저 간에 데이터를 전달합니다. 
 
 다음 `Student` 뷰 모델을 살펴보세요.
 
@@ -185,9 +191,9 @@ ms.locfileid: "78650151"
 
 이 자습서에서는 스캐폴드된 CRUD(만들기, 읽기, 업데이트, 삭제) 코드를 검토 및 사용자 지정합니다.
 
-복잡성을 최소화하고 이러한 자습서의 초점을 EF Core로 유지하기 위해 페이지 모델에 EF Core 코드를 사용합니다. 일부 개발자는 UI(Razor 페이지) 및 데이터 액세스 계층 간에 추상화 계층을 생성하도록 서비스 계층 또는 리포지토리 패턴을 사용합니다.
+복잡성을 최소화하고 이러한 자습서의 초점을 EF Core로 유지하기 위해 페이지 모델에 EF Core 코드를 사용합니다. 일부 개발자는 UI(Razor Pages) 및 데이터 액세스 계층 간에 추상화 계층을 생성하도록 서비스 계층 또는 리포지토리 패턴을 사용합니다.
 
-이 자습서에서는 *Student* 폴더에서 Razor Pages 만들기, 편집, 삭제 및 세부 정보가 검사됩니다.
+이 자습서에서는 *Students* 폴더에서 만들기, 편집, 삭제 및 세부 정보 Razor Pages가 검사됩니다.
 
 스캐폴드된 코드는 만들기, 편집 및 삭제 페이지에 대해 다음과 같은 패턴을 사용합니다.
 
@@ -231,7 +237,7 @@ ms.locfileid: "78650151"
 
 앱을 실행하고 **세부 정보** 링크를 선택합니다. URL은 `http://localhost:5000/Students/Details?id=2` 양식입니다. 학생 ID는 쿼리 문자열(`?id=2`)을 사용하여 전달됩니다.
 
-`"{id:int}"` 경로 템플릿을 사용하도록 편집, 세부 정보 및 삭제 Razor 페이지를 업데이트합니다. 이러한 각 페이지에 대한 page 지시문을 `@page`에서 `@page "{id:int}"`로 변경합니다.
+`"{id:int}"` 경로 템플릿을 사용하도록 편집, 세부 정보 및 삭제 Razor Pages를 업데이트합니다. 이러한 각 페이지에 대한 page 지시문을 `@page`에서 `@page "{id:int}"`로 변경합니다.
 
 정수 경로 값을 포함하지 **않는** “{id:int}” 경로 템플릿이 있는 페이지에 대한 요청은 HTTP 404(찾을 수 없음) 오류를 반환합니다. 예를 들어 `http://localhost:5000/Students/Details`는 404 오류를 반환합니다. ID를 옵션으로 설정하려면 경로 제약 조건에 `?`를 추가하면 됩니다.
 
@@ -310,7 +316,7 @@ ms.locfileid: "78650151"
 
 ### <a name="view-model"></a>뷰 모델
 
-뷰 모델은 일반적으로 애플리케이션에서 사용되는 모델에 포함된 속성의 하위 집합을 포함합니다. 애플리케이션 모델은 흔히 도메인 모델이라고 합니다. 도메인 모델은 일반적으로 DB의 해당 엔터티에 필요한 모든 속성을 포함합니다. 뷰 모델은 UI 계층에 필요한 속성만 포함합니다(예: 만들기 페이지). 뷰 모델 외에도 일부 앱은 바인딩 모델 또는 입력 모델을 사용하여 Razor 페이지 페이지 모델 클래스와 브라우저 간에 데이터를 전달합니다. 다음 `Student` 뷰 모델을 살펴보세요.
+뷰 모델은 일반적으로 애플리케이션에서 사용되는 모델에 포함된 속성의 하위 집합을 포함합니다. 애플리케이션 모델은 흔히 도메인 모델이라고 합니다. 도메인 모델은 일반적으로 DB의 해당 엔터티에 필요한 모든 속성을 포함합니다. 뷰 모델은 UI 계층에 필요한 속성만 포함합니다(예: 만들기 페이지). 뷰 모델 외에도 일부 앱은 바인딩 모델 또는 입력 모델을 사용하여 Razor Pages 페이지 모델 클래스와 브라우저 간에 데이터를 전달합니다. 다음 `Student` 뷰 모델을 살펴보세요.
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
@@ -324,7 +330,7 @@ ms.locfileid: "78650151"
 
 `StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
 
-Razor 페이지에서 `PageModel` 파생 클래스는 뷰 모델입니다.
+Razor Pages에서 `PageModel` 파생 클래스는 뷰 모델입니다.
 
 ## <a name="update-the-edit-page"></a>편집 페이지 업데이트
 
@@ -387,7 +393,7 @@ DB 컨텍스트는 메모리의 엔터티가 해당하는 DB의 행과 동기화
 
 ### <a name="update-the-delete-razor-page"></a>삭제 Razor 페이지 업데이트
 
-다음 강조 표시된 오류 메시지를 삭세 Razor 페이지에 추가합니다.
+다음 강조 표시된 오류 메시지를 삭제 Razor 페이지에 추가합니다.
 <!--
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Delete.cshtml?name=snippet&highlight=11)]
 -->

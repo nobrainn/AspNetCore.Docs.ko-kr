@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0b28e99d9c56d92e157e9010880e58ec5165196a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c2b76b59ae775b9268fa77019bf8420e5e4108b6
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774987"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452294"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
@@ -98,17 +98,24 @@ Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 �
 
 * **파일** > **새 솔루션**을 선택합니다.
 
-  ![macOS 새 솔루션](./start-mvc/_static/new_project_vsmac.png)
+  ![macOS 새 솔루션](start-mvc/_static/new_project_vsmac.png)
 
-* **.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)** > **다음**을 선택합니다.
+* Mac용 Visual Studio 버전 8.6 미만에서 **.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)**  > **다음**을 선택합니다. 버전 8.6 이상에서 **웹 및 콘솔** > **앱** > **웹 애플리케이션(Model-View-Controller)**  > **다음**을 선택합니다.
 
-  ![macOS 새 프로젝트 대화 상자](./start-mvc/_static/new_project_mvc_vsmac.png)
+  ![macOS 웹앱 템플릿 선택](start-mvc/_static/web_app_template_vsmac.png)
 
-* **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 3.1**의 **대상 프레임워크**를 설정합니다.
+* 다음 구성을 확인합니다.
 
-  ![macOS .NET Core 3.1 선택](./start-mvc/_static/new_project_31_vsmac.png)
+  * **대상 프레임워크**가 **.NET Core 3.1**로 설정되어 있는지
+  * **인증**이 **인증 안 함**으로 설정되어 있는지
+   
+  **새로 만들기**를 선택합니다.
+
+  ![macOS .NET Core 3.1 선택](start-mvc/_static/new_project_31_vsmac.png)
 
 * 프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.
+
+  ![macOS 프로젝트 이름 지정](start-mvc/_static/MvcMovie.png)
 
 ---
 
@@ -248,9 +255,7 @@ Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 �
 
   ![macOS 새 솔루션](./start-mvc/_static/new_project_vsmac.png)
 
-* **.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)** > **다음**을 선택합니다.
-
-  ![macOS 새 프로젝트 대화 상자](./start-mvc/_static/new_project_mvc_vsmac.png)
+* Mac용 Visual Studio 버전 8.6 미만에서 **.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)**  > **다음**을 선택합니다. 버전 8.6 이상에서 **웹 및 콘솔** > **앱** > **웹 애플리케이션(Model-View-Controller)**  > **다음**을 선택합니다.
 
 * **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 2.2**라는 기본 **대상 프레임워크**를 수락합니다.
 

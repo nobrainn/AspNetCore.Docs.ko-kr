@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
+title: 5부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 데이터 모델
 author: rick-anderson
-description: 이 자습서에서는 더 많은 엔터티 및 관계를 추가하고, 서식 지정, 유효성 검사 및 매핑 규칙을 지정하여 데이터 모델을 사용자 지정합니다.
+description: Razor Pages 및 Entity Framework 자습서 시리즈의 5부입니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 1d81a0444487c6396bb32381ed2cb26d44312c3a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f44ca9857ea127cf7e662e2712cc6d4b460450e9
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650211"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652493"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
+# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>5부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 데이터 모델
 
 작성자: [Tom Dykstra](https://github.com/tdykstra) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -81,7 +87,7 @@ ms.locfileid: "78650211"
 * 브라우저는 HTML5 기능을 활성화할 수 있습니다. 예를 들어 달력 컨트롤, 로캘에 적합한 통화 기호, 메일 링크, 클라이언트 쪽 입력 유효성 검사를 표시합니다.
 * 기본적으로 브라우저는 로캘에 따른 올바른 형식을 사용하여 데이터를 렌더링합니다.
 
-자세한 내용은 [\<입력> 태그 도우미 설명서](xref:mvc/views/working-with-forms#the-input-tag-helper)를 참조하세요.
+자세한 내용은 [\<input> 태그 도우미 설명서](xref:mvc/views/working-with-forms#the-input-tag-helper)를 참조하세요.
 
 ### <a name="the-stringlength-attribute"></a>StringLength 특성
 
@@ -96,7 +102,7 @@ ms.locfileid: "78650211"
 `StringLength` 특성은 이름에 공백을 입력할 수 있습니다. [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) 특성은 입력에 제한을 적용하는 데 사용될 수 있습니다. 예를 들어 다음 코드는 첫 번째 문자가 대문자여야 하고, 나머지 문자는 알파벳순이어야 합니다.
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -771,7 +777,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 * 브라우저는 HTML5 기능을 활성화할 수 있습니다. 예를 들어 달력 컨트롤, 로캘에 적합한 통화 기호, 이메일 링크, 클라이언트 쪽 입력 유효성 검사 등을 표시합니다.
 * 기본적으로 브라우저는 로캘에 따른 올바른 형식을 사용하여 데이터를 렌더링합니다.
 
-자세한 내용은 [\<입력> 태그 도우미 설명서](xref:mvc/views/working-with-forms#the-input-tag-helper)를 참조하세요.
+자세한 내용은 [\<input> 태그 도우미 설명서](xref:mvc/views/working-with-forms#the-input-tag-helper)를 참조하세요.
 
 앱을 실행합니다. 학생 인덱스 페이지로 이동합니다. 시간이 더 이상 표시되지 않습니다. `Student` 모델을 사용하는 모든 보기는 시간을 제외한 날짜를 표시합니다.
 
@@ -788,7 +794,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 위의 코드는 이름을 최대 50자로 제한합니다. `StringLength` 특성은 이름에 공백을 입력할 수 있습니다. [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) 특성은 입력에 제한을 적용하는 데 사용됩니다. 예를 들어 다음 코드는 첫 번째 문자가 대문자여야 하고, 나머지 문자는 사전순이어야 합니다.
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 앱을 실행합니다.

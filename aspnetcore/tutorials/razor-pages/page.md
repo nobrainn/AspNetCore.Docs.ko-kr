@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core의 스캐폴드된 Razor Pages
+title: 3부. ASP.NET Core의 스캐폴드된 Razor Pages
 author: rick-anderson
-description: 스캐폴딩을 통해 생성된 Razor Pages를 설명합니다.
+description: Razor Pages에 대한 자습서 시리즈의 3부입니다.
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 22afbc729cc73427b3d04bee379534cda38b39bd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6195982f902c17d835d2675c1231eed347d603c2
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774849"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652806"
 ---
-# <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core의 스캐폴드된 Razor 페이지
+# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>3부. ASP.NET Core의 스캐폴드된 Razor Pages
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -34,15 +34,15 @@ ms.locfileid: "82774849"
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs)]
 
-Razor 페이지는 `PageModel`에서 파생됩니다. 일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다. 생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다. 모든 스캐폴드된 페이지가 이 패턴을 따릅니다. Entity Framework로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.
+Razor Pages는 `PageModel`에서 파생됩니다. 일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다. 생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다. 모든 스캐폴드된 페이지가 이 패턴을 따릅니다. Entity Framework로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.
 
-페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다. `OnGetAsync` 또는 `OnGet`을 호출하여 페이지 상태를 초기화합니다. 이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.
+페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor Page에 동영상 목록을 반환합니다. `OnGetAsync` 또는 `OnGet`을 호출하여 페이지 상태를 초기화합니다. 이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.
 
 `OnGet`이 `void`를 반환하거나 `OnGetAsync`가 `Task`를 반환하면 return 문이 사용되지 않은 것입니다. 반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다. *Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>*Pages/Movies/Index.cshtml* Razor 페이지를 살펴봅니다.
+<a name="index"></a> *Pages/Movies/Index.cshtml* Razor Page를 살펴봅니다.
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
@@ -66,7 +66,7 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
 
-`@model` 지시문은 Razor 페이지에 전달되는 모델 형식을 지정합니다. 이전 예제에서 `@model` 줄은 Razor 페이지에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다. 모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.
+`@model` 지시문은 Razor Page에 전달되는 모델 형식을 지정합니다. 위의 예제에서 `@model` 줄은 Razor Page에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다. 모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.
 
 ### <a name="the-layout-page"></a>레이아웃 페이지
 
@@ -118,7 +118,7 @@ changing in in the next step.
 <a class="navbar-brand" asp-page="/Movies/Index">RpMovie</a>
 ```
 
-이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다. 이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다. `asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor 페이지의 링크를 만듭니다. `asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다. 자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.
+이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다. 이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다. `asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor Page의 링크를 만듭니다. `asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다. 자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.
 
 변경 내용을 저장하고 **RpMovie** 링크를 클릭하여 앱을 테스트합니다. 문제가 있는 경우 GitHub에서 [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) 파일을 참조하세요.
 
@@ -135,7 +135,7 @@ changing in in the next step.
 
 ### <a name="the-create-page-model"></a>Create 페이지 모델
 
-*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다. 
+*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다.
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
@@ -151,9 +151,9 @@ changing in in the next step.
 
 모델 오류가 없는 경우 데이터가 저장되고 브라우저가 인덱스 페이지로 리디렉션됩니다.
 
-### <a name="the-create-razor-page"></a>만들기 Razor 페이지
+### <a name="the-create-razor-page"></a>Create Razor Page
 
-*Pages/Movies/Create.cshtml* Razor 페이지 파일을 살펴봅니다.
+*Pages/Movies/Create.cshtml* Razor Page 파일을 살펴봅니다.
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
@@ -227,15 +227,15 @@ Visual Studio에서는 다음 태그를 태그 도우미에 사용되는 독특�
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
 
-Razor 페이지는 `PageModel`에서 파생됩니다. 일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다. 생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다. 모든 스캐폴드된 페이지가 이 패턴을 따릅니다. Entity Framework로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.
+Razor Pages는 `PageModel`에서 파생됩니다. 일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다. 생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다. 모든 스캐폴드된 페이지가 이 패턴을 따릅니다. Entity Framework로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.
 
-페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다. 페이지 상태를 초기화하기 위해 `OnGetAsync` 또는 `OnGet`이 Razor 페이지에서 호출됩니다. 이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.
+페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor Page에 동영상 목록을 반환합니다. `OnGetAsync` 또는 `OnGet`은 페이지 상태를 초기화하기 위해 Razor Page에서 호출됩니다. 이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.
 
 `OnGet`에서 `void`를 반환하거나 `OnGetAsync`에서 `Task`를 반환하면 반환 메서드가 사용되지 않은 것입니다. 반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다. *Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>*Pages/Movies/Index.cshtml* Razor 페이지를 살펴봅니다.
+<a name="index"></a> *Pages/Movies/Index.cshtml* Razor Page를 살펴봅니다.
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
 
@@ -257,13 +257,13 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
 
-`@model` 지시문은 Razor 페이지에 전달되는 모델 형식을 지정합니다. 이전 예제에서 `@model` 줄은 Razor 페이지에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다. 모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.
+`@model` 지시문은 Razor Page에 전달되는 모델 형식을 지정합니다. 위의 예제에서 `@model` 줄은 Razor Page에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다. 모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.
 
 ### <a name="the-layout-page"></a>레이아웃 페이지
 
 메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**). 각 페이지는 동일한 메뉴 레이아웃을 보여줍니다. 메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Pages/Shared/_Layout.cshtml* 파일을 엽니다.
 
-[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트의 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 ‘래핑됩니다’.  예를 들어 **개인 정보** 링크를 선택하는 경우 **Pages/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.
+[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트의 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 ‘래핑됩니다’. 예를 들어 **개인 정보** 링크를 선택하는 경우 **Pages/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.
 
 <a name="vd"></a>
 
@@ -304,7 +304,7 @@ changing in in the next step.
 <a class="navbar-brand" asp-page="/Movies/Index">RpMovie</a>
 ```
 
-이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다. 이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다. `asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor 페이지의 링크를 만듭니다. `asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다. 자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.
+이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다. 이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다. `asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor Page의 링크를 만듭니다. `asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다. 자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.
 
 변경 내용을 저장하고 **RpMovie** 링크를 클릭하여 앱을 테스트합니다. 문제가 있는 경우 GitHub에서 [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) 파일을 참조하세요.
 
@@ -321,7 +321,7 @@ changing in in the next step.
 
 ### <a name="the-create-page-model"></a>Create 페이지 모델
 
-*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다. 
+*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다.
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
@@ -337,9 +337,9 @@ changing in in the next step.
 
 모델 오류가 없는 경우 데이터가 저장되고 브라우저가 인덱스 페이지로 리디렉션됩니다.
 
-### <a name="the-create-razor-page"></a>만들기 Razor 페이지
+### <a name="the-create-razor-page"></a>Create Razor Page
 
-*Pages/Movies/Create.cshtml* Razor 페이지 파일을 살펴봅니다.
+*Pages/Movies/Create.cshtml* Razor Page 파일을 살펴봅니다.
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 

@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC 앱에 보기 추가
+title: 3부. ASP.NET Core MVC 앱에 뷰 추가
 author: rick-anderson
-description: 간단한 ASP.NET Core MVC 앱에 보기 추가
+description: ASP.NET Core MVC에 대한 자습서 시리즈의 3부입니다.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
@@ -11,28 +11,28 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: c89e0f0428fa7556fcd6b75cdfc1dd19109ec1c8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3976ecba1a6bbf30c3147bf1cef78c5ced5bec62
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774602"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652830"
 ---
-# <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
+# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>3부. ASP.NET Core MVC 앱에 뷰 추가
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 섹션에서는 [Razor](xref:mvc/views/razor) 보기 파일을 사용하도록 `HelloWorldController` 클래스를 수정하여 클라이언트에 대한 HTML 응답을 생성하는 프로세스를 깔끔하게 캡슐화합니다.
+이 섹션에서는 [Razor](xref:mvc/views/razor) 뷰 파일을 사용하도록 `HelloWorldController` 클래스를 수정하여 클라이언트에 대한 HTML 응답을 생성하는 프로세스를 깔끔하게 캡슐화합니다.
 
-Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보기 템플릿의 확장자는 *.cshtml* 입니다. C#으로 HTML 출력을 만드는 세련된 방법을 제공합니다.
+Razor를 사용하여 뷰 템플릿 파일을 만듭니다. Razor 기반 뷰 템플릿의 파일 확장명은 *.cshtml*입니다. C#으로 HTML 출력을 만드는 세련된 방법을 제공합니다.
 
 현재 `Index` 메서드는 컨트롤러 클래스에서 하드 코딩된 메시지 문자열을 반환합니다. `HelloWorldController` 클래스에서 `Index` 메서드를 다음 코드로 바꿉니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-앞의 코드는 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.Controller.View*> 메서드를 호출합니다. HTML 응답을 생성하기 위해 뷰 템플릿을 사용합니다. 위의 `Index` 메서드와 같은 컨트롤러 메서드(‘동작 메서드’라고도 함)는 일반적으로 `string`과 같은 형식이 아닌 <xref:Microsoft.AspNetCore.Mvc.IActionResult>(또는 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 클래스)를 반환합니다. 
+앞의 코드는 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.Controller.View*> 메서드를 호출합니다. HTML 응답을 생성하기 위해 뷰 템플릿을 사용합니다. 위의 `Index` 메서드와 같은 컨트롤러 메서드(‘동작 메서드’라고도 함)는 일반적으로 `string`과 같은 형식이 아닌 <xref:Microsoft.AspNetCore.Mvc.IActionResult>(또는 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 클래스)를 반환합니다.
 
 ## <a name="add-a-view"></a>보기 추가
 
@@ -46,7 +46,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
   * 오른쪽 위의 검색 상자에 *뷰*를 입력합니다.
 
-  * **Razor 뷰**를 선택합니다.
+  * **Razor 뷰** 선택
 
   * *이름* 상자 값은 **Index.cshtml**을 유지하세요.
 
@@ -76,11 +76,11 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ---
 
-*Views/HelloWorld/Index.cshtml* Razor 보기 파일의 콘텐츠를 다음으로 대체합니다.
+*Views/HelloWorld/Index.cshtml* Razor 뷰 파일의 콘텐츠를 다음으로 대체합니다.
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-`https://localhost:{PORT}/HelloWorld`로 이동합니다. `HelloWorldController`의 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문만 실행합니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정합니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용합니다. 기본 보기 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*이 사용됩니다. 아래 이미지는 보기에 하드 코딩된 “Hello from our View Template!” 문자열을 보여줍니다.
+`https://localhost:{PORT}/HelloWorld`로 이동합니다. `HelloWorldController`의 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문만 실행합니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정합니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용합니다. 기본 뷰 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*의 뷰 템플릿이 사용됩니다. 아래 이미지는 보기에 하드 코딩된 “Hello from our View Template!” 문자열을 보여줍니다.
 
 ![브라우저 창](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -181,15 +181,15 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 섹션에서는 [Razor](xref:mvc/views/razor) 보기 파일을 사용하도록 `HelloWorldController` 클래스를 수정하여 클라이언트에 대한 HTML 응답을 생성하는 프로세스를 깔끔하게 캡슐화합니다.
+이 섹션에서는 [Razor](xref:mvc/views/razor) 뷰 파일을 사용하도록 `HelloWorldController` 클래스를 수정하여 클라이언트에 대한 HTML 응답을 생성하는 프로세스를 깔끔하게 캡슐화합니다.
 
-Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보기 템플릿의 확장자는 *.cshtml* 입니다. C#으로 HTML 출력을 만드는 세련된 방법을 제공합니다.
+Razor를 사용하여 뷰 템플릿 파일을 만듭니다. Razor 기반 뷰 템플릿의 파일 확장명은 *.cshtml*입니다. C#으로 HTML 출력을 만드는 세련된 방법을 제공합니다.
 
 현재 `Index` 메서드는 컨트롤러 클래스에서 하드 코딩된 메시지 문자열을 반환합니다. `HelloWorldController` 클래스에서 `Index` 메서드를 다음 코드로 바꿉니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-앞의 코드는 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.Controller.View*> 메서드를 호출합니다. HTML 응답을 생성하기 위해 뷰 템플릿을 사용합니다. 위의 `Index` 메서드와 같은 컨트롤러 메서드(‘동작 메서드’라고도 함)는 일반적으로 `string`과 같은 형식이 아닌 <xref:Microsoft.AspNetCore.Mvc.IActionResult>(또는 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 클래스)를 반환합니다. 
+앞의 코드는 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.Controller.View*> 메서드를 호출합니다. HTML 응답을 생성하기 위해 뷰 템플릿을 사용합니다. 위의 `Index` 메서드와 같은 컨트롤러 메서드(‘동작 메서드’라고도 함)는 일반적으로 `string`과 같은 형식이 아닌 <xref:Microsoft.AspNetCore.Mvc.IActionResult>(또는 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 클래스)를 반환합니다.
 
 ## <a name="add-a-view"></a>보기 추가
 
@@ -203,7 +203,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
   * 오른쪽 위의 검색 상자에 *뷰*를 입력합니다.
 
-  * **Razor 뷰**를 선택합니다.
+  * **Razor 뷰** 선택
 
   * *이름* 상자 값은 **Index.cshtml**을 유지하세요.
 

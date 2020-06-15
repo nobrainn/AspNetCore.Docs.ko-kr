@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC 앱에서 SQL 작업
+title: 5부. ASP.NET Core MVC 앱에서 데이터베이스 작업
 author: rick-anderson
-description: ASP.NET Core MVC 앱에서 SQL Server LocalDB 또는 SQLite를 사용하는 방법에 대해 알아봅니다.
+description: 5부. ASP.NET Core MVC 앱에 모델 추가
 ms.author: riande
 ms.date: 8/16/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: 54b10f10fb048819fced223f77f06a32102512d0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7fdd147f4de00a593a77977d2b53e5369667fe78
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776209"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652513"
 ---
-# <a name="work-with-sql-in-aspnet-core"></a>ASP.NET Core에서 SQL 작업
+# <a name="part-5-work-with-a-database-in-an-aspnet-core-mvc-app"></a>5부. ASP.NET Core MVC 앱에서 데이터베이스 작업
 
 ::: moniker range=">= aspnetcore-3.0"
 

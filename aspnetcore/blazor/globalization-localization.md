@@ -1,12 +1,24 @@
 ---
-title: 'ASP.NET Core Blazor 세계화 및 지역화' author: description: '여러 문화권과 언어의 사용자가 Razor 구성 요소에 액세스할 수 있도록 하는 방법을 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core Blazor 세계화 및 지역화
+author: guardrex
+description: 여러 문화권과 언어의 사용자가 Razor 구성 요소에 액세스할 수 있도록 하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/globalization-localization
+ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419738"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
 
@@ -74,34 +86,39 @@ Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#loc
 
 #### <a name="cookies"></a>쿠키
 
-지역화 문화권 쿠키는 사용자의 문화권을 유지할 수 있습니다. 쿠키는 앱의 호스트 페이지(*Pages/Host.cshtml.cs*)의 `OnGet` 메서드에서 생성됩니다. 지역화 미들웨어는 후속 요청에서 쿠키를 읽어 사용자의 문화권을 설정합니다. 
+지역화 문화권 쿠키는 사용자의 문화권을 유지할 수 있습니다. 지역화 미들웨어는 후속 요청에서 쿠키를 읽어 사용자의 문화권을 설정합니다. 
 
 쿠키를 사용하면 WebSocket 연결이 문화권을 올바르게 전파할 수 있게 됩니다. 지역화 체계가 URL 경로 또는 쿼리 문자열을 기준으로 하는 경우 스키마는 WebSocket을 사용하지 못할 수 있으므로 문화권이 유지되지 않습니다. 따라서 지역화 문화권 쿠키를 사용하는 것이 좋습니다.
 
 문화권이 지역화 쿠키에 유지되는 경우 임의 기술을 사용하여 문화권을 할당할 수 있습니다. 앱에 서버 쪽 ASP.NET Core에 대해 설정된 지역화 체계가 이미 있는 경우 앱의 기존 지역화 인프라를 계속 사용하고 앱의 체계 내에서 지역화 문화권 쿠키를 설정합니다.
 
-다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다. Blazor 서버 앱에 다음 내용이 포함된 *Pages/_Host.cshtml.cs* 파일을 만듭니다.
+다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다. *Pages/_Host.cshtml* 파일에서 여는 `<body>` 태그 바로 안에 Razor 식을 만듭니다.
 
-```csharp
-public class HostModel : PageModel
-{
-    public void OnGet()
-    {
-        HttpContext.Response.Cookies.Append(
+```cshtml
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+...
+
+<body>
+    @{
+        this.HttpContext.Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(
                 new RequestCulture(
                     CultureInfo.CurrentCulture,
                     CultureInfo.CurrentUICulture)));
     }
-}
+
+    ...
+</body>
 ```
 
 지역화는 다음과 같은 이벤트 시퀀스에 따라 앱에서 처리됩니다.
 
 1. 브라우저가 앱에 초기 HTTP 요청을 보냅니다.
 1. 문화권은 지역화 미들웨어에 의해 할당됩니다.
-1. *_Host.cshtml.cs*의 `OnGet` 메서드는 응답의 일부로 쿠키에 문화권을 유지합니다.
+1. `_Host` 페이지( *_Host.cshtml*)의 Razor 식은 응답의 일부로 쿠키에 문화권을 유지합니다.
 1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor 서버 세션을 만듭니다.
 1. 지역화 미들웨어는 쿠키를 읽고 문화권을 할당합니다.
 1. Blazor 서버 세션이 올바른 문화권으로 시작합니다.
@@ -135,6 +152,25 @@ public class CultureController : Controller
 
 > [!WARNING]
 > <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> 작업 결과를 사용하여 오픈 리디렉션 공격을 방지합니다. 자세한 내용은 <xref:security/preventing-open-redirects>를 참조하세요.
+
+앱이 컨트롤러 작업을 처리하도록 구성되지 않은 경우 다음과 같습니다.
+
+* `Startup.ConfigureServices`의 서비스 컬렉션에 MVC 서비스를 추가합니다.
+
+  ```csharp
+  services.AddControllers();
+  ```
+
+* `Startup.Configure`에서 컨트롤러 엔드포인트 라우팅을 추가합니다.
+
+  ```csharp
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+      endpoints.MapBlazorHub();
+      endpoints.MapFallbackToPage("/_Host");
+  });
+  ```
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행하는 방법의 예를 보여 줍니다.
 

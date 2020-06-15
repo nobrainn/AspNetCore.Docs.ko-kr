@@ -5,7 +5,7 @@ description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/03/2020
+ms.date: 06/04/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: e69b91035c65739dde724330e83793c0b8b5481a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8c06d3a4d0d75a3e2fd9f699af38a23833fa8bce
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775156"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419946"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Blazor 서버 호스트 및 배포
 
@@ -147,6 +147,41 @@ http {
 * [WebSocket Proxy로 활용하는 NGINX](https://www.nginx.com/blog/websocket-nginx/)
 * [WebSocket 프록시](http://nginx.org/docs/http/websocket.html)
 * <xref:host-and-deploy/linux-nginx>
+
+## <a name="linux-with-apache"></a>Apache를 사용하는 Linux
+
+Linux에서 Apache 뒤에 Blazor 앱을 호스트하려면 HTTP 및 WebSockets 트래픽에 대해 `ProxyPass`를 구성합니다.
+
+다음 예제에서는
+
+* Kestrel 서버가 호스트 컴퓨터에서 실행되고 있습니다.
+* 앱은 포트 5000에서 트래픽을 수신 대기합니다.
+
+```
+ProxyRequests       On
+ProxyPreserveHost   On
+ProxyPassMatch      ^/_blazor/(.*) http://localhost:5000/_blazor/$1
+ProxyPass           /_blazor ws://localhost:5000/_blazor
+ProxyPass           / http://localhost:5000/
+ProxyPassReverse    / http://localhost:5000/
+```
+
+다음 모듈을 사용하도록 설정합니다.
+
+```
+a2enmod   proxy
+a2enmod   proxy_wstunnel
+```
+
+브라우저 콘솔에서 WebSockets 오류를 확인합니다. 오류의 예는 다음과 같습니다.
+
+* Firefox가 ws://the-domain-name.tld/_blazor?id=XXX에서 서버에 대한 연결을 설정할 수 없습니다.
+* 오류: ‘WebSockets’ 전송을 시작하지 못했습니다. 오류: 전송에 오류가 있습니다.
+* 오류: ‘LongPolling’ 전송을 시작하지 못했습니다. TypeError: this.transport가 정의되지 않았습니다.
+* 오류: 사용 가능한 전송 중 하나를 사용하여 서버에 연결할 수 없습니다. WebSockets 실패
+* 오류: 연결 상태가 ‘연결됨’이 아닌 경우 데이터를 보낼 수 없습니다.
+
+자세한 내용은 [Apache 설명서](https://httpd.apache.org/docs/current/mod/mod_proxy.html)를 참조하세요.
 
 ### <a name="measure-network-latency"></a>네트워크 대기 시간 측정
 

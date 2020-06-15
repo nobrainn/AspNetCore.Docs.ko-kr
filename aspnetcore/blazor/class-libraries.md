@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: 57f3494fd825b6549c40f56962da2c8076e8fd51
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b7819404066267003a340629979f2339c66724b0
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767098"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452020"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
 작성자: [Simon Timms](https://github.com/stimms)
 
-프로젝트 간에 [RCL](xref:razor-pages/ui-class)(Razor 클래스 라이브러리)의 구성 요소를 공유할 수 있습니다. 다음 위치에서 *Razor 구성 요소 클래스 라이브러리*를 포함할 수 있습니다.
+프로젝트 간에 [RCL(Razor 클래스 라이브러리)](xref:razor-pages/ui-class)의 구성 요소를 공유할 수 있습니다. 다음 위치에서 ‘Razor 구성 요소 클래스 라이브러리’를 포함할 수 있습니다.
 
 * 솔루션의 다른 프로젝트
 * NuGet 패키지
@@ -89,7 +89,7 @@ ms.locfileid: "82767098"
 다른 프로젝트의 라이브러리에서 정의된 구성 요소를 사용하려면 다음 방법의 하나를 사용합니다.
 
 * 네임스페이스를 포함하는 전체 형식 이름을 사용합니다.
-* Razor의 [\@using](xref:mvc/views/razor#using) 지시문을 사용합니다. 개별 구성 요소는 이름으로 추가할 수 있습니다.
+* Razor의 [`@using`](xref:mvc/views/razor#using) 지시문을 사용합니다. 개별 구성 요소는 이름으로 추가할 수 있습니다.
 
 다음 예제에서 `MyComponentLib1`은 `SalesReport` 구성 요소가 포함된 구성 요소 라이브러리입니다.
 

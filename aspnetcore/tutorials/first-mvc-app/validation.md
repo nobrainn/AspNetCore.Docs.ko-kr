@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC 앱에 유효성 검사 추가
+title: 9부. ASP.NET Core MVC 앱에 유효성 검사 추가
 author: rick-anderson
-description: ASP.NET Core 앱에 유효성 검사를 추가하는 방법.
+description: ASP.NET Core MVC에 대한 자습서 시리즈의 9부입니다.
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 6e46a4ace7c99096f1a7d47946a21fd7a5c657e7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70cc66955fdaee6ff93648523c2977587e6b05d6
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776196"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652451"
 ---
-# <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 유효성 검사 추가
+# <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>9부. ASP.NET Core MVC 앱에 유효성 검사 추가
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -55,7 +55,7 @@ MVC 및 Entity Framework Core Code First가 제공하는 유효성 검사 지원
 
 컨트롤러나 보기의 코드를 전혀 수정하지 않고도 어떻게 유효성 검사 UI가 생성되는지 궁금할 것입니다. 다음 코드는 두 `Create` 메서드를 보여줍니다.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
 
 첫 번째(HTTP GET) `Create` 작업 메서드는 최초 Create 양식을 표시합니다. 두 번째(`[HttpPost]`) 버전은 양식 게시를 처리합니다. 두 번째 `Create` 메서드(`[HttpPost]` 버전)는 `ModelState.IsValid`를 호출하여 영화의 유효성 검사 오류 여부를 확인합니다. 이 메서드를 호출하면 개체에 적용된 모든 유효성 검사 특성이 평가됩니다. 개체에 유효성 검사 오류가 있으면 `Create` 메서드는 양식을 다시 표시합니다. 오류가 없으면 메서드가 데이터베이스에 새 영화를 저장합니다. 이 영화 예제에서는 클라이언트 쪽에서 유효성 검사 오류가 감지되면 서버에 양식이 게시되지 않으며, 두 번째 `Create` 메서드가 절대 호출되지 않습니다. 브라우저에서 JavaScript를 사용하지 않으면 클라이언트 유효성 검사가 비활성화되며 모든 유효성 검사 오류를 감지하는 HTTP POST `Create` 메서드 `ModelState.IsValid`를 테스트할 수 있습니다.
 
@@ -89,7 +89,7 @@ JavaScript를 사용하지 않도록 설정한 뒤에 잘못된 데이터를 게
 
 *Movie.cs* 파일을 열고 `Movie` 클래스를 검토합니다. `System.ComponentModel.DataAnnotations` 네임스페이스는 기본 제공 유효성 검사 특성 모음 외에도 서식 특성을 제공합니다. 이미 `DataType` 열거 값을 출시일 밑 가격 필드에 적용했습니다. 다음 코드는 적절한 `DataType` 특성이 적용된 `ReleaseDate` 및 `Price` 속성을 보여줍니다.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
 `DataType` 특성은 데이터에 서식을 지정하도록(그리고 URL에 대한 `<a>` 및 이메일에 대한 `<a href="mailto:EmailAddress.com">` 과 같은 요소/특성을 제공하도록) 보기 엔진에 대한 힌트만 제공합니다. `RegularExpression` 특성을 사용하여 데이터 형식의 유효성을 검사할 수 있습니다. `DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용되며 유효성 검사 특성이 아닙니다. 이 예제에서는 시간을 제외한 날짜만 추적하고자 합니다. `DataType` 열거형은 Date, Time, PhoneNumber, Currency, EmailAddress를 비롯한 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 형식별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시라고 발음합니다) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 전혀 제공하지 **않습니다**
 

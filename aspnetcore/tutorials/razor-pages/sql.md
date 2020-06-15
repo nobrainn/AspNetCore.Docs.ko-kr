@@ -1,7 +1,7 @@
 ---
-title: 데이터베이스 및 ASP.NET Core 작업
+title: 4부. 데이터베이스 및 ASP.NET Core 작업
 author: rick-anderson
-description: 데이터베이스 및 ASP.NET Core 작업을 설명합니다.
+description: Razor Pages에 대한 자습서 시리즈의 4부입니다.
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 159588ec750f0ede534522aa9397fc2aefb58cd6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 21ae2ed4e91a0b3e52b1cdad1f4f4686c50614ba
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775611"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652978"
 ---
-# <a name="work-with-a-database-and-aspnet-core"></a>데이터베이스 및 ASP.NET Core 작업
+# <a name="part-4-with-a-database-and-aspnet-core"></a>4부. 데이터베이스 및 ASP.NET Core 작업
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Joe Audette](https://twitter.com/joeaudette)
 

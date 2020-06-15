@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core의 Razor 페이지에 새 필드 추가
+title: 7부. ASP.NET Core의 Razor Page에 새 필드 추가
 author: rick-anderson
-description: Entity Framework Core를 사용하여 Razor 페이지에 새 필드를 추가하는 방법을 보여 줍니다.
+description: Razor Pages에 대한 자습서 시리즈의 7부입니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 683d6718f4dcdb73c45cbcf94f6ac4f477b71bcd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15d4ccbe88c2147210918a3db1416983fb30132b
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769736"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652800"
 ---
-# <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 새 필드 추가
+# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>7부. ASP.NET Core의 Razor Page에 새 필드 추가
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 

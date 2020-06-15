@@ -1,12 +1,24 @@
 ---
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: ASP.NET Core Razor SDK
+author: Rick-Anderson
+description: 페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc, seodec18
+ms.date: 03/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: razor-pages/sdk
+ms.openlocfilehash: 555965b96b0d4d541c70f8a137d4f098dc06a4d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106626"
 ---
 # <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -98,134 +110,58 @@ Razor SDK를 사용하여 Razor 뷰 또는 Razor Pages를 포함하는 클래스
 ::: moniker-end
 
 | 항목 | 설명 |
-| ----- | ---
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `RazorGenerate` | 코드 생성에 입력되는 항목 요소( *.cshtml* 파일)입니다. | | `RazorComponent` | Razor 구성 요소 코드 생성에 입력되는 항목 요소( *.razor* 파일)입니다. | | `RazorCompile` |Razor 컴파일 대상에 입력되는 항목 요소( *.cs* 파일)입니다. 이 `ItemGroup`을 사용하여 Razor 어셈블리에 컴파일할 추가 파일을 지정합니다. | | `RazorTargetAssemblyAttribute` | 코드에 사용된 항목 요소는 Razor 어셈블리의 특성을 생성합니다. 예를 들어:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` | | `RazorEmbeddedResource` | 생성된 Razor 어셈블리에 포함 리소스로 추가된 항목 요소입니다. |
+| ----- | ----------- |
+| `RazorGenerate` | 코드 생성에 입력되는 항목 요소( *.cshtml* 파일)입니다. |
+| `RazorComponent` | Razor 구성 요소 코드 생성에 입력되는 항목 요소( *.razor* 파일)입니다. |
+| `RazorCompile` | Razor 컴파일 대상에 입력되는 항목 요소( *.cs* 파일)입니다. 이 `ItemGroup`을 사용하여 Razor 어셈블리에 컴파일할 추가 파일을 지정합니다. |
+| `RazorTargetAssemblyAttribute` | 코드에 사용된 항목 요소는 Razor 어셈블리의 특성을 생성합니다. 예를 들어:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
+| `RazorEmbeddedResource` | 생성된 Razor 어셈블리에 포함 리소스로 추가된 항목 요소입니다. |
 
 ::: moniker range=">= aspnetcore-3.0"
 
 | 속성 | 설명 |
-| ---
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----- | --- title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `RazorTargetName` | Razor에서 생성한 어셈블리의 파일 이름(확장명 제외)입니다. | | `RazorOutputPath` | Razor 출력 디렉터리입니다. | | `RazorCompileToolset` | Razor 어셈블리를 빌드하는 데 사용되는 도구 집합을 결정하는 데 사용됩니다. 유효한 값은 `Implicit`, `RazorSDK` 및 `PrecompilationTool`입니다. | | [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 기본값은 `true`입니다. `true`인 경우 *web.config*, *.json* 및 *.cshtml* 파일을 프로젝트의 콘텐츠로 포함합니다. `Microsoft.NET.Sdk.Web`를 통해 참조되는 경우 *wwwroot*의 파일 및 구성 파일도 포함됩니다. | | `EnableDefaultRazorGenerateItems` | `true`인 경우, `RazorGenerate` 항목의 `Content` 항목에서 *.cshtml* 파일을 포함합니다. | | `GenerateRazorTargetAssemblyInfo` | `true`인 경우, `RazorAssemblyAttribute`로 지정된 특성을 포함하는 *.cs* 파일을 생성하고 이 파일을 컴파일 출력에 포함시킵니다. | | `EnableDefaultRazorTargetAssemblyInfoAttributes` | `true`인 경우, `RazorAssemblyAttribute`에 어셈블리 특성의 기본 집합을 추가합니다. | | `CopyRazorGenerateFilesToPublishDirectory` | `true`인 경우, `RazorGenerate` 항목( *.cshtml* 파일)을 게시 디렉터리에 복사합니다. 일반적으로 Razor 파일은 빌드 시간 또는 게시 시간에 컴파일에 참여하는 경우 게시된 앱에 필요하지 않습니다. 기본값은 `false`입니다. | | `PreserveCompilationReferences` | `true`인 경우, 참조 어셈블리 항목을 게시 디렉터리에 복사합니다. 일반적으로 참조 어셈블리는 Razor 컴파일이 빌드 시간 또는 게시 시간에 발생하는 경우 게시된 앱에 필요하지 않습니다. 게시된 앱에 런타임 컴파일이 필요한 경우 `true`로 설정합니다. 예를 들어, 앱이 런타임에 *.cshtml* 파일을 수정하거나 포함된 뷰를 사용하는 경우 값을 `true`로 설정합니다. 기본값은 `false`입니다. | | `IncludeRazorContentInPack` | `true`인 경우, 모든 Razor 콘텐츠 항목( *.cshtml* 파일)은 생성된 NuGet 패키지에 포함되도록 표시됩니다. 기본값은 `false`입니다. | | `EmbedRazorGenerateSources` | `true`인 경우, 생성된 Razor 어셈블리에 포함된 파일로 RazorGenerate( *.cshtml*) 항목을 추가합니다. 기본값은 `false`입니다. | | `UseRazorBuildServer` | `true`인 경우, 영구적 빌드 서버 프로세스를 사용하여 코드 생성 작업을 오프로드합니다. 기본값은 `UseSharedCompilation`입니다. | | `GenerateMvcApplicationPartsAssemblyAttributes` | `true`인 경우 SDK는 런타임에 MVC에서 애플리케이션 파트 검색을 수행하는 데 사용되는 추가 특성을 생성합니다. | | `DefaultWebContentItemExcludes` | 웹 또는 Razor SDK를 대상으로 하는 프로젝트의 `Content` 항목 그룹에서 제외될 항목 요소에 대한 와일드카드 사용 패턴 | | `ExcludeConfigFilesFromBuildOutput` | `true`인 경우 *.config* 및 *.json* 파일이 빌드 출력 디렉터리에 복사되지 않습니다. | | `AddRazorSupportForMvc` | When `true`인 경우 MVC 뷰 또는 Razor Pages를 포함하는 애플리케이션을 빌드할 때 필요한 MVC 구성에 대한 지원을 추가하도록 Razor SDK를 구성합니다. 이 속성은 웹 SDK를 대상으로 하는 .NET Core 3.0 이상 프로젝트에 대해 암시적으로 설정됩니다. | | `RazorLangVersion` | 대상으로 할 Razor 언어의 버전입니다. |
+| -------- | ----------- |
+| `RazorTargetName` | Razor에서 생성한 어셈블리의 파일 이름(확장명 제외)입니다. |
+| `RazorOutputPath` | Razor 출력 디렉터리입니다. |
+| `RazorCompileToolset` | Razor 어셈블리를 빌드하는 데 사용되는 도구 집합을 결정하는 데 사용됩니다. 유효한 값은 `Implicit`, `RazorSDK` 및 `PrecompilationTool`입니다. |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 기본값은 `true`입니다. `true`인 경우 *web.config*, *.json* 및 *.cshtml* 파일을 프로젝트의 콘텐츠로 포함합니다. `Microsoft.NET.Sdk.Web`를 통해 참조되는 경우 *wwwroot*의 파일 및 구성 파일도 포함됩니다. |
+| `EnableDefaultRazorGenerateItems` | `true`인 경우, `RazorGenerate` 항목의 `Content` 항목에서 *.cshtml* 파일을 포함합니다. |
+| `GenerateRazorTargetAssemblyInfo` | `true`인 경우, `RazorAssemblyAttribute`로 지정된 특성을 포함하는 *.cs* 파일을 생성하고 이 파일을 컴파일 출력에 포함시킵니다. |
+| `EnableDefaultRazorTargetAssemblyInfoAttributes` | `true`인 경우, `RazorAssemblyAttribute`에 어셈블리 특성의 기본 집합을 추가합니다. |
+| `CopyRazorGenerateFilesToPublishDirectory` | `true`인 경우, `RazorGenerate` 항목( *.cshtml*) 파일을 게시 디렉터리에 복사합니다. 일반적으로 Razor 파일은 빌드 시간 또는 게시 시간에 컴파일에 참여하는 경우 게시된 앱에 필요하지 않습니다. 기본값은 `false`입니다. |
+| `PreserveCompilationReferences` | `true`인 경우, 참조 어셈블리 항목을 게시 디렉터리에 복사합니다. 일반적으로 참조 어셈블리는 Razor 컴파일이 빌드 시간 또는 게시 시간에 발생하는 경우 게시된 앱에 필요하지 않습니다. 게시된 앱에 런타임 컴파일이 필요한 경우 `true`로 설정합니다. 예를 들어, 앱이 런타임에 *.cshtml* 파일을 수정하거나 포함된 뷰를 사용하는 경우 값을 `true`로 설정합니다. 기본값은 `false`입니다. |
+| `IncludeRazorContentInPack` | `true`인 경우, 모든 Razor 콘텐츠 항목( *.cshtml* 파일)은 생성된 NuGet 패키지에 포함되도록 표시됩니다. 기본값은 `false`입니다. |
+| `EmbedRazorGenerateSources` | `true`인 경우, 생성된 Razor 어셈블리에 포함된 파일로 RazorGenerate( *.cshtml*) 항목을 추가합니다. 기본값은 `false`입니다. |
+| `UseRazorBuildServer` | `true`인 경우, 영구적 빌드 서버 프로세스를 사용하여 코드 생성 작업을 오프로드합니다. 기본값은 `UseSharedCompilation`입니다. |
+| `GenerateMvcApplicationPartsAssemblyAttributes` | `true`인 경우 SDK는 런타임에 MVC에서 애플리케이션 파트 검색을 수행하는 데 사용되는 추가 특성을 생성합니다. |
+| `DefaultWebContentItemExcludes` | 웹 또는 Razor SDK를 대상으로 하는 프로젝트의 `Content` 항목 그룹에서 제외될 항목 요소에 대한 globbing 패턴입니다. |
+| `ExcludeConfigFilesFromBuildOutput` | `true`인 경우 *.config* 및 *.json* 파일은 빌드 출력 디렉터리에 복사되지 않습니다. |
+| `AddRazorSupportForMvc` | `true`인 경우 MVC 뷰나 Razor Pages를 포함하는 애플리케이션을 빌드할 때 필요한 MVC 구성에 대한 지원을 추가하도록 Razor SDK를 구성합니다. 이 속성은 웹 SDK를 대상으로 하는 .NET Core 3.0 이상 프로젝트용으로 암시적으로 설정됩니다. |
+| `RazorLangVersion` | 대상으로 지정할 Razor 언어의 버전입니다. |
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
 | 속성 | 설명 |
-| ---
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
----- | --- title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
--
-title: 'ASP.NET Core Razor SDK' author: description: '페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor Pages를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
------- | | `RazorTargetName` | Razor에서 생성한 어셈블리의 파일 이름(확장명 제외)입니다. | | `RazorOutputPath` | Razor 출력 디렉터리입니다. | | `RazorCompileToolset` | Razor 어셈블리를 빌드하는 데 사용되는 도구 집합을 결정하는 데 사용됩니다. 유효한 값은 `Implicit`, `RazorSDK` 및 `PrecompilationTool`입니다. | | [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 기본값은 `true`입니다. `true`인 경우 *web.config*, *.json* 및 *.cshtml* 파일을 프로젝트의 콘텐츠로 포함합니다. `Microsoft.NET.Sdk.Web`를 통해 참조되는 경우 *wwwroot*의 파일 및 구성 파일도 포함됩니다. | | `EnableDefaultRazorGenerateItems` | `true`인 경우, `RazorGenerate` 항목의 `Content` 항목에서 *.cshtml* 파일을 포함합니다. | | `GenerateRazorTargetAssemblyInfo` | `true`인 경우, `RazorAssemblyAttribute`로 지정된 특성을 포함하는 *.cs* 파일을 생성하고 이 파일을 컴파일 출력에 포함시킵니다. | | `EnableDefaultRazorTargetAssemblyInfoAttributes` | `true`인 경우, `RazorAssemblyAttribute`에 어셈블리 특성의 기본 집합을 추가합니다. | | `CopyRazorGenerateFilesToPublishDirectory` | `true`인 경우, `RazorGenerate` 항목( *.cshtml* 파일)을 게시 디렉터리에 복사합니다. 일반적으로 Razor 파일은 빌드 시간 또는 게시 시간에 컴파일에 참여하는 경우 게시된 앱에 필요하지 않습니다. 기본값은 `false`입니다. | | `CopyRefAssembliesToPublishDirectory` | `true`인 경우, 참조 어셈블리 항목을 게시 디렉터리에 복사합니다. 일반적으로 참조 어셈블리는 Razor 컴파일이 빌드 시간 또는 게시 시간에 발생하는 경우 게시된 앱에 필요하지 않습니다. 게시된 앱에 런타임 컴파일이 필요한 경우 `true`로 설정합니다. 예를 들어, 앱이 런타임에 *.cshtml* 파일을 수정하거나 포함된 뷰를 사용하는 경우 값을 `true`로 설정합니다. 기본값은 `false`입니다. | | `IncludeRazorContentInPack` | `true`인 경우, 모든 Razor 콘텐츠 항목( *.cshtml* 파일)은 생성된 NuGet 패키지에 포함되도록 표시됩니다. 기본값은 `false`입니다. | | `EmbedRazorGenerateSources` | `true`인 경우, 생성된 Razor 어셈블리에 포함된 파일로 RazorGenerate( *.cshtml*) 항목을 추가합니다. 기본값은 `false`입니다. | | `UseRazorBuildServer` | `true`인 경우, 영구적 빌드 서버 프로세스를 사용하여 코드 생성 작업을 오프로드합니다. 기본값은 `UseSharedCompilation`입니다. | | `GenerateMvcApplicationPartsAssemblyAttributes` | `true`인 경우 SDK는 런타임에 MVC에서 애플리케이션 파트 검색을 수행하는 데 사용되는 추가 특성을 생성합니다. | | `DefaultWebContentItemExcludes` | 웹 또는 Razor SDK를 대상으로 하는 프로젝트의 `Content` 항목 그룹에서 제외될 항목 요소에 대한 와일드카드 사용 패턴 | | `ExcludeConfigFilesFromBuildOutput` | `true`인 경우 *.config* 및 *.json* 파일이 빌드 출력 디렉터리에 복사되지 않습니다. | | `AddRazorSupportForMvc` | When `true`인 경우 MVC 뷰 또는 Razor Pages를 포함하는 애플리케이션을 빌드할 때 필요한 MVC 구성에 대한 지원을 추가하도록 Razor SDK를 구성합니다. 이 속성은 웹 SDK를 대상으로 하는 .NET Core 3.0 이상 프로젝트에 대해 암시적으로 설정됩니다. | | `RazorLangVersion` | 대상으로 할 Razor 언어의 버전입니다. |
+| -------- | ----------- |
+| `RazorTargetName` | Razor에서 생성한 어셈블리의 파일 이름(확장명 제외)입니다. |
+| `RazorOutputPath` | Razor 출력 디렉터리입니다. |
+| `RazorCompileToolset` | Razor 어셈블리를 빌드하는 데 사용되는 도구 집합을 결정하는 데 사용됩니다. 유효한 값은 `Implicit`, `RazorSDK` 및 `PrecompilationTool`입니다. |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 기본값은 `true`입니다. `true`인 경우 *web.config*, *.json* 및 *.cshtml* 파일을 프로젝트의 콘텐츠로 포함합니다. `Microsoft.NET.Sdk.Web`를 통해 참조되는 경우 *wwwroot*의 파일 및 구성 파일도 포함됩니다. |
+| `EnableDefaultRazorGenerateItems` | `true`인 경우, `RazorGenerate` 항목의 `Content` 항목에서 *.cshtml* 파일을 포함합니다. |
+| `GenerateRazorTargetAssemblyInfo` | `true`인 경우, `RazorAssemblyAttribute`로 지정된 특성을 포함하는 *.cs* 파일을 생성하고 이 파일을 컴파일 출력에 포함시킵니다. |
+| `EnableDefaultRazorTargetAssemblyInfoAttributes` | `true`인 경우, `RazorAssemblyAttribute`에 어셈블리 특성의 기본 집합을 추가합니다. |
+| `CopyRazorGenerateFilesToPublishDirectory` | `true`인 경우, `RazorGenerate` 항목( *.cshtml*) 파일을 게시 디렉터리에 복사합니다. 일반적으로 Razor 파일은 빌드 시간 또는 게시 시간에 컴파일에 참여하는 경우 게시된 앱에 필요하지 않습니다. 기본값은 `false`입니다. |
+| `CopyRefAssembliesToPublishDirectory` | `true`인 경우, 참조 어셈블리 항목을 게시 디렉터리에 복사합니다. 일반적으로 참조 어셈블리는 Razor 컴파일이 빌드 시간 또는 게시 시간에 발생하는 경우 게시된 앱에 필요하지 않습니다. 게시된 앱에 런타임 컴파일이 필요한 경우 `true`로 설정합니다. 예를 들어, 앱이 런타임에 *.cshtml* 파일을 수정하거나 포함된 뷰를 사용하는 경우 값을 `true`로 설정합니다. 기본값은 `false`입니다. |
+| `IncludeRazorContentInPack` | `true`인 경우, 모든 Razor 콘텐츠 항목( *.cshtml* 파일)은 생성된 NuGet 패키지에 포함되도록 표시됩니다. 기본값은 `false`입니다. |
+| `EmbedRazorGenerateSources` | `true`인 경우, 생성된 Razor 어셈블리에 포함된 파일로 RazorGenerate( *.cshtml*) 항목을 추가합니다. 기본값은 `false`입니다. |
+| `UseRazorBuildServer` | `true`인 경우, 영구적 빌드 서버 프로세스를 사용하여 코드 생성 작업을 오프로드합니다. 기본값은 `UseSharedCompilation`입니다. |
+| `GenerateMvcApplicationPartsAssemblyAttributes` | `true`인 경우 SDK는 런타임에 MVC에서 애플리케이션 파트 검색을 수행하는 데 사용되는 추가 특성을 생성합니다. |
+| `DefaultWebContentItemExcludes` | 웹 또는 Razor SDK를 대상으로 하는 프로젝트의 `Content` 항목 그룹에서 제외될 항목 요소에 대한 globbing 패턴입니다. |
+| `ExcludeConfigFilesFromBuildOutput` | `true`인 경우 *.config* 및 *.json* 파일은 빌드 출력 디렉터리에 복사되지 않습니다. |
+| `AddRazorSupportForMvc` | `true`인 경우 MVC 뷰나 Razor Pages를 포함하는 애플리케이션을 빌드할 때 필요한 MVC 구성에 대한 지원을 추가하도록 Razor SDK를 구성합니다. 이 속성은 웹 SDK를 대상으로 하는 .NET Core 3.0 이상 프로젝트용으로 암시적으로 설정됩니다. |
+| `RazorLangVersion` | 대상으로 지정할 Razor 언어의 버전입니다. |
 
 ::: moniker-end
 

@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
+title: 4부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 마이그레이션
 author: rick-anderson
-description: 이 자습서에서는 ASP.NET Core MVC 앱에서 데이터 모델 변경 관리를 위해 EF Core 마이그레이션 기능을 사용하는 것을 시작합니다.
+description: Razor Pages 및 Entity Framework 자습서 시리즈의 4부입니다.
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 86fd83c898fce8e121e4d259aaca12c59591e606
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 74fe8771718647c3adf8288a72b11c30fb097a63
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645555"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652624"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
+# <a name="part-4-razor-pages-with-ef-core-migrations-in-aspnet-core"></a>4부. ASP.NET Core에서 EF Core 마이그레이션을 사용한 Razor Pages
 
 작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -82,7 +88,7 @@ dotnet ef database update
 
 ## <a name="up-and-down-methods"></a>Up 및 Down 메서드
 
-EF Core `migrations add` 명령은 데이터베이스를 만드는 코드를 생성했습니다. 이 마이그레이션 코드는 *마이그레이션\<timestamp>_InitialCreate.cs* 파일에 있습니다. `Up` 클래스의 `InitialCreate` 메서드는 데이터 모델 엔터티 집합에 해당하는 데이터베이스 테이블을 만듭니다. `Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.
+EF Core `migrations add` 명령은 데이터베이스를 만드는 코드를 생성했습니다. 이 마이그레이션 코드는 *Migrations\<timestamp>_InitialCreate.cs* 파일에 있습니다. `InitialCreate` 클래스의 `Up` 메서드는 데이터 모델 엔터티 집합에 해당하는 데이터베이스 테이블을 만듭니다. `Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.
 
 [!code-csharp[](intro/samples/cu30/Migrations/20190731193522_InitialCreate.cs)]
 
@@ -102,7 +108,7 @@ EF Core `migrations add` 명령은 데이터베이스를 만드는 코드를 생
 
 ## <a name="the-data-model-snapshot"></a>데이터 모델 스냅샷
 
-마이그레이션에서는 현재 데이터 모델의 ‘스냅샷’을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다.  마이그레이션을 추가하면 EF가 현재 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.
+마이그레이션에서는 현재 데이터 모델의 ‘스냅샷’을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. 마이그레이션을 추가하면 EF가 현재 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.
 
 스냅샷 파일이 데이터 모델의 상태를 추적하므로 `<timestamp>_<migrationname>.cs` 파일을 삭제하여 마이그레이션을 삭제할 수 없습니다. 가장 최근 마이그레이션을 백업하려면 `migrations remove` 명령을 사용해야 합니다. 이 명령은 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다. 자세한 내용은 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)를 참조하세요.
 
@@ -121,7 +127,7 @@ context.Database.EnsureCreated();
 
 ## <a name="applying-migrations-in-production"></a>프로덕션 환경에서 마이그레이션 적용
 
-프로덕션 앱은 애플리케이션 시작 시 **Database.Migrate**를 호출하지 [않는 것이](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) 좋습니다. `Migrate`는 서버 팜에 배포된 앱에서 호출하면 안 됩니다. 앱이 여러 서버 인스턴스로 확장되는 경우 데이터베이스 스키마 업데이트가 여러 서버에서 발생하거나 읽기/쓰기 권한과 충돌하지 않도록 하는 것이 어렵습니다.
+프로덕션 앱은 애플리케이션 시작 시 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)를 호출하지 **않는 것이** 좋습니다. `Migrate`는 서버 팜에 배포된 앱에서 호출하면 안 됩니다. 앱이 여러 서버 인스턴스로 확장되는 경우 데이터베이스 스키마 업데이트가 여러 서버에서 발생하거나 읽기/쓰기 권한과 충돌하지 않도록 하는 것이 어렵습니다.
 
 데이터베이스 마이그레이션은 배포의 일부로 제어된 방식으로 수행되어야 합니다. 프로덕션 데이터베이스 마이그레이션 방법은 다음과 같습니다.
 
@@ -220,7 +226,7 @@ dotnet ef database update
 
 ### <a name="examine-the-up-and-down-methods"></a>Up 및 Down 메서드 검사
 
-EF Core `migrations add` 명령은 DB를 생성하는 코드를 생성했습니다. 이 마이그레이션 코드는 *마이그레이션\<timestamp>_InitialCreate.cs* 파일에 있습니다. `Up` 클래스dml `InitialCreate` 메서드는 데이터 모델 엔터티 집합에 해당하는 DB 테이블을 만듭니다. `Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.
+EF Core `migrations add` 명령은 DB를 생성하는 코드를 생성했습니다. 이 마이그레이션 코드는 *Migrations\<timestamp>_InitialCreate.cs* 파일에 있습니다. `InitialCreate` 클래스dml `Up` 메서드는 데이터 모델 엔터티 집합에 해당하는 DB 테이블을 만듭니다. `Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
@@ -284,7 +290,7 @@ context.Database.EnsureCreated();
 
 ## <a name="applying-migrations-in-production"></a>프로덕션 환경에서 마이그레이션 적용
 
-프로덕션 앱은 애플리케이션 시작 시 **Database.Migrate**를 호출하지 [않는 것이](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) 좋습니다. 서버 팜의 앱에서 `Migrate`를 호출하면 안됩니다. 예를 들어, 앱이 스케일 아웃으로 클라우드에 배포된 경우(앱의 여러 인스턴스가 실행 중임)
+프로덕션 앱은 애플리케이션 시작 시 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)를 호출하지 **않는 것이** 좋습니다. 서버 팜의 앱에서 `Migrate`를 호출하면 안됩니다. 예를 들어, 앱이 스케일 아웃으로 클라우드에 배포된 경우(앱의 여러 인스턴스가 실행 중임)
 
 데이터베이스 마이그레이션은 배포의 일부로 제어된 방식으로 수행되어야 합니다. 프로덕션 데이터베이스 마이그레이션 방법은 다음과 같습니다.
 
@@ -306,7 +312,7 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-해결 방법: `dotnet ef database update`를 실행합니다.
+해결책: `dotnet ef database update`를 실행합니다.
 
 ### <a name="additional-resources"></a>추가 자료
 

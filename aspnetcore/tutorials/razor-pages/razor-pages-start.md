@@ -1,5 +1,5 @@
 ---
-title: '자습서: ASP.NET Core에서 Razor Pages 시작'
+title: '“자습서: ASP.NET Core에서 Razor Pages 시작”'
 author: rick-anderson
 description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용하는 방법을 보여 줍니다. 모델을 만들고, Razor Pages에 대한 코드를 생성하고, Entity Framework Core 및 SQL Server를 데이터 액세스에 사용하고, 검색 기능을 추가하고, 입력 유효성 검사를 추가하고, 마이그레이션을 사용하여 모델을 업데이트하는 방법을 알아봅니다.
 ms.author: riande
@@ -11,19 +11,19 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 8ed12b1778673962fe0b174e005bd6d8a7f54168
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3b8ccf639bb91234f81c67750fffa170e52d636f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774875"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452350"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
+# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor Pages 시작
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
-이 자습서에서는 ASP.NET Core Razor 페이지 웹앱을 빌드하는 작업의 기본 사항을 설명하는 자습서 시리즈 중 첫 번째입니다.
+ASP.NET Core Razor Pages 웹앱을 빌드하는 작업의 기본 사항을 설명하는 자습서 시리즈 중 첫 번째입니다.
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -34,11 +34,11 @@ ms.locfileid: "82774875"
 이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
-> * Razor Pages 웹앱 만들기
+> * Razor Pages 웹앱을 만듭니다.
 > * 앱을 실행합니다.
 > * 프로젝트 파일을 검사합니다.
 
-이 자습서가 끝나면 나중에 자습서에서 빌드할 Razor Pages 웹앱을 사용할 수 있습니다.
+이 자습서의 내용을 마치면 이후의 자습서에서 빌드할 Razor Pages 웹앱을 사용할 수 있습니다.
 
 ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
 
@@ -58,7 +58,7 @@ ms.locfileid: "82774875"
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Razor 페이지 웹앱 만들기
+## <a name="create-a-razor-pages-web-app"></a>Razor Pages 웹앱 만들기
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -100,19 +100,24 @@ ms.locfileid: "82774875"
 
 * **파일** > **새 솔루션**을 선택합니다.
 
-![macOS 새 솔루션](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
+  ![macOS 새 솔루션](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* **.NET Core** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다.
+* Mac용 Visual Studio 버전 8.6 미만에서 **.NET Core** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다. 버전 8.6 이상에서 **웹 및 콘솔** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다.
 
-  ![macOS 새 프로젝트 대화 상자](razor-pages-start/_static/webapp.png)
+  ![macOS 웹앱 템플릿 선택](razor-pages-start/_static/web_app_template_vsmac.png)
 
-* **새 웹 애플리케이션 구성** 대화 상자에서 **대상 프레임워크**를 **.NET Core 3.1**로 설정합니다.
+* 다음 구성을 확인합니다.
+
+  * **대상 프레임워크**가 **.NET Core 3.1**로 설정되어 있는지
+  * **인증**이 **인증 안 함**으로 설정되어 있는지
+   
+  **새로 만들기**를 선택합니다.
 
   ![macOS .NET Core 3.1 선택](razor-pages-start/_static/targetframework3.png)
 
 * 프로젝트 이름을 **RazorPagesMovie**로 지정하고 **만들기**를 선택합니다.
 
-  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
+  ![macOS 프로젝트 이름 지정](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -128,7 +133,7 @@ ms.locfileid: "82774875"
 
 ### <a name="pages-folder"></a>페이지 폴더
 
-Razor 페이지 및 지원 파일이 들어 있습니다. 각 Razor 페이지는 파일 쌍입니다.
+Razor Pages 및 지원 파일이 들어 있습니다. 각 Razor 페이지는 파일 쌍입니다.
 
 * Razor 구문을 사용하는 C# 코드로 HTML 태그를 포함하는 *.cshtml* 파일.
 * 페이지 이벤트를 처리하는 C# 코드가 포함된 *.cshtml.cs* 파일.
@@ -175,11 +180,11 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
-> * Razor Pages 웹앱 만들기
+> * Razor Pages 웹앱을 만듭니다.
 > * 앱을 실행합니다.
 > * 프로젝트 파일을 검사합니다.
 
-이 자습서가 끝나면 나중에 자습서에서 빌드할 Razor Pages 웹앱을 사용할 수 있습니다.
+이 자습서의 내용을 마치면 이후의 자습서에서 빌드할 Razor Pages 웹앱을 사용할 수 있습니다.
 
 ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
 
@@ -199,7 +204,7 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Razor 페이지 웹앱 만들기
+## <a name="create-a-razor-pages-web-app"></a>Razor Pages 웹앱 만들기
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -247,9 +252,7 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 
 ![macOS 새 솔루션](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* **.NET Core** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다.
-
-  ![macOS 새 프로젝트 대화 상자](razor-pages-start/_static/webapp.png)
+* Mac용 Visual Studio 버전 8.6 미만에서 **.NET Core** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다. 버전 8.6 이상에서 **웹 및 콘솔** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다.
 
 * **새 ASP.NET Core 웹 API 구성** 대화 상자에서 **대상 프레임워크**를 **.NET Core 3.1**로 설정합니다.
 

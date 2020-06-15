@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
+title: 3부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 정렬, 필터, 페이징
 author: rick-anderson
-description: 이 자습서에서는 ASP.NET Core 및 Entity Framework Core를 사용하여 Razor 페이지에 정렬, 필터링 및 페이징 기능을 추가합니다.
+description: Razor Pages 및 Entity Framework 자습서 시리즈의 3부입니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 9563f3ef52ce429eb0a58b468acb8e9cd7b276e2
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 99b14c99cb99d106604f1a4edacf1da0a2d6125c
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645495"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652595"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
+# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>3부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 정렬, 필터, 페이징
 
 작성자: [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -45,7 +51,7 @@ ms.locfileid: "78645495"
 
 인덱스 페이지가 **학생** 링크에서 요청되는 경우 쿼리 문자열이 없습니다. 학생은 성 기준 오름차순으로 표시됩니다. `switch` 문에서 성 기준 오름차순이 기본값(제어 이동 사례)입니다. 사용자가 열 제목 링크를 클릭하면 적절한 `sortOrder` 값이 쿼리 문자열 값에 제공됩니다.
 
-열 제목 하이퍼링크를 적절한 쿼리 문자열 값으로 구성하기 위해 `NameSort` 및 `DateSort`가 사용됩니다.
+Razor Page에서 열 제목 하이퍼링크를 적절한 쿼리 문자열 값으로 구성하기 위해 `NameSort` 및 `DateSort`가 사용됩니다.
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -187,9 +193,9 @@ https://localhost:<port>/Students?SearchString=an
 
 페이징 링크를 클릭하면 페이지 인덱스 변수에 표시할 페이지 번호가 포함됩니다.
 
-`CurrentSort` 속성은 Razor 페이지에 현재 정렬 순서를 제공합니다. 현재 정렬 순서는 페이징하는 동안 정렬 순서를 유지하기 위해 페이징 링크에 포함되어야 합니다.
+`CurrentSort` 속성은 Razor Page에 현재 정렬 순서를 제공합니다. 현재 정렬 순서는 페이징하는 동안 정렬 순서를 유지하기 위해 페이징 링크에 포함되어야 합니다.
 
-`CurrentFilter` 속성은 Razor 페이지에 현재 필터 문자열을 제공합니다. `CurrentFilter` 값은:
+`CurrentFilter` 속성은 Razor Page에 현재 필터 문자열을 제공합니다. `CurrentFilter` 값은:
 
 * 페이징하는 동안 필터 설정을 유지하기 위해 페이징 링크에 포함되어야 합니다.
 * 페이지를 다시 표시하는 경우 텍스트 상자에 복원되어야 합니다.
@@ -203,7 +209,7 @@ https://localhost:<port>/Students?SearchString=an
 
   `PaginatedList.CreateAsync`에서 `pageIndex` 뒤에 있는 두 개의 물음표는 [Null 병합 연산자](/dotnet/csharp/language-reference/operators/null-conditional-operator)를 나타냅니다. Null 병합 연산자는 null 허용 형식에 대한 기본값을 정의합니다. 식 `(pageIndex ?? 1)`은 값이 있는 경우 `pageIndex`의 값을 반환함을 의미합니다. `pageIndex`에 값이 없으면 1을 반환합니다.
 
-### <a name="add-paging-links-to-the-razor-page"></a>Razor 페이지에 페이징 링크 추가
+### <a name="add-paging-links-to-the-razor-page"></a>Razor Page에 페이징 링크 추가
 
 *Students/Index.cshtml*의 코드를 다음 코드로 바꿉니다. 변경 내용이 강조 표시되어 있습니다.
 
@@ -239,7 +245,7 @@ https://localhost:<port>/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Razor 페이지 만들기
+### <a name="create-the-razor-page"></a>Razor Page 만들기
 
 다음 코드로 *Pages/About.cshtml* 파일을 만듭니다.
 
@@ -294,7 +300,7 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 인덱스 페이지가 **학생** 링크에서 요청되는 경우 쿼리 문자열이 없습니다. 학생은 성 기준 오름차순으로 표시됩니다. `switch` 문에서 성 기준 오름차순이 기본값(제어 이동 사례)입니다. 사용자가 열 제목 링크를 클릭하면 적절한 `sortOrder` 값이 쿼리 문자열 값에 제공됩니다.
 
-열 제목 하이퍼링크를 적절한 쿼리 문자열 값으로 구성하기 위해 `NameSort` 및 `DateSort`가 사용됩니다.
+Razor Page에서 열 제목 하이퍼링크를 적절한 쿼리 문자열 값으로 구성하기 위해 `NameSort` 및 `DateSort`가 사용됩니다.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 

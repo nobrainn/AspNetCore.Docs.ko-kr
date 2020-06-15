@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
+title: 8부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 동시성
 author: rick-anderson
-description: 이 자습서에는 여러 사용자가 동시에 같은 엔터티를 업데이트하는 경우 충돌을 처리하는 방법을 보여 줍니다.
+description: Razor Pages 및 Entity Framework 자습서 시리즈의 8부입니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: c4d43f26ba80e7922c3cbd37d9a5f8e1561b11ad
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: fb6a59a11cf31dff4866d5f5294cd9f15b173add
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645879"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652437"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
+# <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>8부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 동시성
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra) 및 [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -272,7 +278,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
-`ModelState`에 이전 `RowVersion` 값이 있으므로 `ModelState.Remove` 문이 필요합니다. Razor 페이지에서 필드에 대한 `ModelState` 값은 모델 속성 값에 우선합니다(모두 있는 경우).
+`ModelState`에 이전 `RowVersion` 값이 있으므로 `ModelState.Remove` 문이 필요합니다. Razor 페이지에서 필드의 `ModelState` 값은 모델 속성 값에 우선합니다(둘 다 있는 경우).
 
 ### <a name="update-the-razor-page"></a>Razor 페이지 업데이트
 
@@ -327,7 +333,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 * DbUpdateConcurrencyException 예외가 throw됩니다.
 * `OnGetAsync`가 `concurrencyError`를 사용하여 호출됩니다.
 
-### <a name="update-the-delete-razor-page"></a>삭제 Razor 페이지 업데이트
+### <a name="update-the-delete-razor-page"></a>Delete Razor 페이지 업데이트
 
 *Pages/Departments/Delete.cshtml*을 다음 코드로 업데이트합니다.
 
@@ -568,7 +574,7 @@ dotnet ef database update
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
-`ModelState`에 이전 `RowVersion` 값이 있으므로 `ModelState.Remove` 문이 필요합니다. Razor 페이지에서 필드에 대한 `ModelState` 값은 모델 속성 값에 우선합니다(모두 있는 경우).
+`ModelState`에 이전 `RowVersion` 값이 있으므로 `ModelState.Remove` 문이 필요합니다. Razor 페이지에서 필드의 `ModelState` 값은 모델 속성 값에 우선합니다(둘 다 있는 경우).
 
 ## <a name="update-the-edit-page"></a>편집 페이지 업데이트
 

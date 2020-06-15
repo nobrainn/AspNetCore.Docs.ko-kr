@@ -5,7 +5,7 @@ description: Blazor WebAssembly를 활용해 ASP.NET Core SignalR을 사용하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,20 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 720f534426cc0e2b32778e49050c7f7d75ecd60d
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773790"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679594"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-이 자습서에서는 Blazor WebAssembly를 활용하여 SignalR을 사용하는 실시간 앱을 빌드하는 방법에 대한 기본 사항을 설명합니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+본 자습서에서는 SignalR 및 Blazor WebAssembly를 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알아봅니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
 
 > [!div class="checklist"]
 > * Blazor WebAssembly 호스팅 앱 프로젝트 만들기
@@ -35,7 +33,7 @@ ms.locfileid: "82773790"
 > * SignalR 서비스 및 SignalR 허브에 대한 엔드포인트 추가
 > * 채팅을 위한 Razor 구성 요소 코드 추가
 
-이 모든 과정을 마치면 채팅 앱을 실행할 수 있습니다.
+이 자습서의 내용을 마치면 채팅 앱을 실행할 수 있습니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -43,7 +41,8 @@ ms.locfileid: "82773790"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
+* [Visual Studio 2019 16.6 이상](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)과 **ASP.NET 및 웹 개발** 워크로드
+* [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -51,7 +50,8 @@ ms.locfileid: "82773790"
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
+* [Mac용 Visual Studio 버전 8.6 이상](https://visualstudio.microsoft.com/vs/mac/)
+* [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -59,21 +59,18 @@ ms.locfileid: "82773790"
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>호스팅된 Blazor WebAssembly 앱 프로젝트 만들기
-
-Visual Studio 버전 16.6 미리 보기 2 이상을 사용하지 않는 경우에는 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치하세요. [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다. 명령 셸에서 다음 명령을 실행합니다.
-
-```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
-```
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>호스트된 Blazor WebAssembly 앱 프로젝트 만들기
 
 선택한 도구의 지침을 따르세요.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
+> [!NOTE]
+> Visual Studio 16.6 이상 및 .NET Core SDK 3.1.300 이상이 필요합니다.
+
 1. 새 프로젝트를 만듭니다.
 
-1. **Blazor 앱**을 선택하고 **다음**을 선택합니다.
+1. **Blazor 앱**를 선택하고 **다음**을 선택합니다.
 
 1. **프로젝트 이름** 필드에 "BlazorSignalRApp"을 입력합니다. **위치** 항목이 올바른지 확인하거나 프로젝트의 위치를 제공합니다. **만들기**를 선택합니다.
 
@@ -100,13 +97,28 @@ dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.2
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-1. 명령 셸에서 다음 명령을 실행합니다.
+1. 최신 버전의 [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/)를 설치하고 다음 단계를 수행합니다.
 
-   ```dotnetcli
-   dotnet new blazorwasm --hosted --output BlazorSignalRApp
-   ```
+1. **파일** > **새 솔루션**을 선택하거나 **시작 창**에서 **새** 프로젝트를 만듭니다.
 
-1. Mac용 Visual Studio에서 프로젝트 폴더로 이동하고 프로젝트의 솔루션 파일( *.sln*)을 열어 프로젝트를 엽니다.
+1. 사이드바에서 **웹 및 콘솔** > **앱**을 선택합니다.
+
+1. **Blazor WebAssembly 앱** 템플릿을 선택합니다. **새로 만들기**를 선택합니다.
+
+   다음 구성을 확인합니다.
+
+   * **대상 프레임워크**가 **.NET Core 3.1**로 설정되어 있는지
+   * **인증**이 **인증 안 함**으로 설정되어 있는지
+
+   **ASP.NET Core에서 호스트** 확인란을 선택합니다.
+
+   **새로 만들기**를 선택합니다.
+
+1. **프로젝트 이름** 필드에서 앱 이름을 `BlazorSignalRApp`로 지정합니다. **만들기**를 선택합니다.
+
+   개발 인증서를 신뢰하라는 메시지가 표시되면 인증서를 신뢰하고 계속합니다. 인증서를 신뢰하려면 사용자 및 키 집합 암호가 필요합니다.
+
+1. 프로젝트 폴더로 이동하고 프로젝트의 솔루션 파일( *.sln*)을 열어 프로젝트를 엽니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -126,9 +138,9 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 1. **NuGet 패키지 관리** 대화 상자에서 **패키지 원본**이 *nuget.org*로 설정되어 있는지 확인합니다.
 
-1. **찾아보기**를 선택한 상태에서 검색 상자에 "Microsoft.AspNetCore.SignalR.Client"를 입력합니다.
+1. **찾아보기**를 선택한 상태에서 검색 상자에 “Microsoft.AspNetCore.SignalR.Client”를 입력합니다.
 
-1. 검색 결과에서 `Microsoft.AspNetCore.SignalR.Client` 패키지를 선택하고 **설치**를 선택합니다.
+1. 검색 결과에서 [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) 패키지를 선택하고 **설치**를 선택합니다.
 
 1. **변경 내용 미리 보기** 대화 상자가 표시되면 **확인**을 선택합니다.
 
@@ -148,9 +160,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. **NuGet 패키지 관리** 대화 상자에서 원본 드롭다운이 *nuget.org*로 설정되어 있는지 확인합니다.
 
-1. **찾아보기**를 선택한 상태에서 검색 상자에 "Microsoft.AspNetCore.SignalR.Client"를 입력합니다.
+1. **찾아보기**를 선택한 상태에서 검색 상자에 “Microsoft.AspNetCore.SignalR.Client”를 입력합니다.
 
-1. 검색 결과에서 `Microsoft.AspNetCore.SignalR.Client` 패키지 옆의 확인란을 선택하고 **패키지 추가**를 선택합니다.
+1. 검색 결과에서 [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) 패키지 옆의 확인란을 선택하고 **패키지 추가**를 선택합니다.
 
 1. **라이선스 승인** 대화 상자가 나타나면 사용 조건에 동의하는 경우 **동의함**을 선택합니다.
 
@@ -185,9 +197,12 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. 컨트롤러와 클라이언트 쪽 대체에 대한 엔드포인트 간의 `Startup.Configure`에서 허브에 대한 엔드포인트를 추가합니다.
+1. `Startup.Configure`의 경우
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
+   * 처리 파이프라인 구성의 위쪽에서 응답 압축 미들웨어를 사용합니다.
+   * 컨트롤러와 클라이언트 쪽 대체에 대한 엔드포인트 사이에 허브에 대한 엔드포인트를 추가합니다.
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
 ## <a name="add-razor-component-code-for-chat"></a>채팅을 위한 Razor 구성 요소 코드 추가
 
@@ -233,7 +248,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-1. **솔루션** 사이드바에서 **BlazorSignalRApp.Server** 프로젝트를 선택합니다. <kbd>⌘</kbd>+<kbd>↩</kbd>**를 눌러 디버깅이 설정된 상태로 앱을 실행하거나 <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd>를 눌러 디버깅 없이 실행합니다.
+1. **솔루션** 사이드바에서 **BlazorSignalRApp.Server** 프로젝트를 선택합니다. <kbd>⌘</kbd>+<kbd>↩</kbd>를 눌러 디버깅이 설정된 상태로 앱을 실행하거나 <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd>를 눌러 디버깅 없이 실행합니다.
 
 1. 주소 표시줄에서 URL을 복사하고, 다른 브라우저 인스턴스 또는 탭을 열고, 주소 표시줄에 URL을 붙여넣습니다.
 
@@ -281,3 +296,4 @@ Blazor 앱 빌드에 대한 자세한 내용은 Blazor 설명서를 참조하세
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:signalr/introduction>
+* [SignalR 인증에 대한 원본 간 협상](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

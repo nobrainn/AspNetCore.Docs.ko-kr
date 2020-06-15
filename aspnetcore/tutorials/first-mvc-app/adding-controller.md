@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC 앱에 컨트롤러 추가
+title: 2부. ASP.NET Core MVC 앱에 컨트롤러 추가
 author: rick-anderson
-description: 간단한 ASP.NET Core MVC 앱에 컨트롤러를 추가하는 방법을 배웁니다.
+description: ASP.NET Core MVC에 대한 자습서 시리즈의 2부입니다.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: ce6248854c738733f75c40ed8ec6100f35ab4971
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1bb2d96d7b58bdd88ce9c2266c33f6e7de9e9209
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776313"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653035"
 ---
-# <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
+# <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>2부. ASP.NET Core MVC 앱에 컨트롤러 추가
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -128,7 +128,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-지금까지의 예제에서는 컨트롤러가 MVC의 “VC” 부분, 즉 **V**iew(보기) 및 **C**ontroller(컨트롤러) 작업을 수행합니다. 컨트롤러가 HTML을 직접 반환하고 있습니다. 코드 및 유지 관리가 매우 복잡해지므로 일반적으로 컨트롤러에서 직접 HTML을 반환하지 않습니다. 대신 별도의 Razor 보기 템플릿 파일을 사용하여 HTML 응답을 생성합니다. 다음 자습서에서는 해당 작업을 수행합니다.
+지금까지의 예제에서는 컨트롤러가 MVC의 “VC” 부분, 즉 **V**iew(보기) 및 **C**ontroller(컨트롤러) 작업을 수행합니다. 컨트롤러가 HTML을 직접 반환하고 있습니다. 코드 및 유지 관리가 매우 복잡해지므로 일반적으로 컨트롤러에서 직접 HTML을 반환하지 않습니다. 대신 일반적으로 별도의 Razor 뷰 템플릿 파일을 사용하여 HTML 응답을 생성합니다. 다음 자습서에서는 해당 작업을 수행합니다.
 
 > [!div class="step-by-step"]
 > [이전](start-mvc.md)
