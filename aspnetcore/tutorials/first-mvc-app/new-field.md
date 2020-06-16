@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 2dfaba166617c5d0a224f4b47028c141e59ce47f
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: d56be93c4dd46b4712fe793ccd453807517a2022
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652918"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724336"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>8부. ASP.NET Core MVC 앱에 새 필드 추가
 
@@ -137,10 +137,7 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-앱을 실행하고 `Rating` 필드를 사용하여 영화를 생성, 편집, 표시할 수 있는지 확인합니다. 앱을 업데이트합니다.
-
-* `Edit`, `Details` 및 `Delete` 뷰 템플릿에 `Rating` 필드를 추가합니다.
-* `MoviesController`의 편집 작업 메서드에서 바인딩을 업데이트합니다.
+앱을 실행하고 `Rating` 필드를 사용하여 영화를 생성, 편집, 표시할 수 있는지 확인합니다.
 
 > [!div class="step-by-step"]
 > [이전](search.md)

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ade2d88c6a2d59e169c9019e871982a74ae46b33
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: c85843c04688beefe7ea87d9e8b281d14ab85bc5
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452319"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776516"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Blazor서버를 사용 하 여 ASP.NET Core weasemboman 호스팅된 앱 보안 Identity
 
@@ -30,7 +30,7 @@ ms.locfileid: "84452319"
 
 Visual Studio에서 다음을 수행합니다.
 
-1. 새 ** Blazor weasembomapp** 을 만듭니다. 자세한 내용은 <xref:blazor/get-started>를 참조하세요.
+1. 새 ** Blazor weasembomapp** 을 만듭니다. 자세한 내용은 <xref:blazor/get-started> 을 참조하세요.
 1. **새 Blazor 앱 만들기** 대화 상자의 **인증** 섹션에서 **변경** 을 선택 합니다.
 1. **개별 사용자 계정** , **확인을**차례로 선택 합니다.
 1. **고급** 섹션에서 **호스팅된 ASP.NET Core** 확인란을 선택 합니다.
@@ -132,7 +132,7 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="app-settings-files"></a>앱 설정 파일
 
-프로젝트 루트의 앱 설정 파일 (*appsettings*)에서 `IdentityServer` 섹션은 구성 된 클라이언트 목록에 대해 설명 합니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성 중인 앱 유형을 나타냅니다. 프로필은 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+프로젝트 루트의 앱 설정 파일 (*appsettings.js*)에서 `IdentityServer` 섹션은 구성 된 클라이언트 목록에 대해 설명 합니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성 중인 앱 유형을 나타냅니다. 프로필은 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
 ```json
 "IdentityServer": {
@@ -143,6 +143,8 @@ dotnet new blazorwasm -au Individual -ho
   }
 }
 ```
+
+자리 표시자는 `{APP ASSEMBLY}` 응용 프로그램의 어셈블리 이름입니다 (예: `BlazorSample.Client` ).
 
 ## <a name="client-app-configuration"></a>클라이언트 앱 구성
 

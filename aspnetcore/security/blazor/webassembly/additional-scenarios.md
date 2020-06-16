@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 35038cb7b96afd7c009f1210251e38273aa4aad8
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: 52ca2cc3187eceb318f6eb38189ed7f408d5a61b
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679659"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776412"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor추가 보안 시나리오 ASP.NET Core
 
@@ -200,6 +200,8 @@ public class WeatherForecastClient
     }
 }
 ```
+
+자리 표시자는 `{APP ASSEMBLY}` 응용 프로그램의 어셈블리 이름입니다 (예: `using static BlazorSample.Data;` ).
 
 `Program.Main`(*Program.cs*):
 
