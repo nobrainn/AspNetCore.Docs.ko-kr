@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: ead9cb8c852ac768c8fe1f9066eb73ac1203c4ce
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454703"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776542"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -56,7 +56,7 @@ ASP.NET Core에서 구성은 하나 이상의 [구성 공급자](#cp)를 사용�
 1. [환경 변수 구성 공급자](#evcp)를 사용하는 환경 변수
 1. [명령줄 구성 공급자](#command-line)를 사용하는 명령줄 인수
 
-나중에 추가된 구성 공급자는 이전 키 설정을 재정의합니다. 예를 들어 `MyKey`가 *appsettings.json*과 환경 모두에서 설정된 경우 환경 값이 사용됩니다. 기본 구성 공급자를 사용하여 [명령줄 구성 공급자](#command-line-configuration-provider)는 다른 모든 공급자를 재정의합니다.
+나중에 추가된 구성 공급자는 이전 키 설정을 재정의합니다. 예를 들어 `MyKey`가 *appsettings.json*과 환경 모두에서 설정된 경우 환경 값이 사용됩니다. 기본 구성 공급자를 사용하여 [명령줄 구성 공급자](#clcp)는 다른 모든 공급자를 재정의합니다.
 
 `CreateDefaultBuilder`에 대한 자세한 내용은 [기본 작성기 설정](xref:fundamentals/host/generic-host#default-builder-settings)을 참조하세요.
 
