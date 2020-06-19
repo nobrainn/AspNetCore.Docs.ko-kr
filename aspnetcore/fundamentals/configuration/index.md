@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 51c86639ef904aae1730a698758cd6b8867a445a
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776542"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074283"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -730,7 +730,7 @@ Index: 5  Value: value5
 [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 경우 기본 구성에 대한 자세한 내용은 [이 항목의 ASP.NET Core 2.2 버전](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2)을 참조하세요.
 
 * 호스트 구성은 다음에 의해 제공됩니다.
-  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)를 사용하는 `DOTNET_` 접두사가 붙은 환경 변수(예: `DOTNET_ENVIRONMENT`). 구성 키-값 쌍이 로드되면 접두사(`DOTNET_`)는 제거됩니다.
+  * [환경 변수 구성 공급자](#environment-variables)를 사용하는 `DOTNET_` 접두사가 붙은 환경 변수(예: `DOTNET_ENVIRONMENT`). 구성 키-값 쌍이 로드되면 접두사(`DOTNET_`)는 제거됩니다.
   * [명령줄 구성 공급자](#command-line-configuration-provider)를 사용하는 명령줄 인수
 * 웹 호스트 기본 구성이 설정됩니다(`ConfigureWebHostDefaults`).
   * Kestrel은 웹 서버로 사용되며 앱의 구성 공급자를 사용하여 구성됩니다.

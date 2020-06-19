@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 6a03e35495e2ae545dc0a3cdd38578b433d8df6b
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507246"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102580"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1의 새로운 기능
 
@@ -25,7 +25,7 @@ ms.locfileid: "84507246"
 
 ## <a name="partial-class-support-for-razor-components"></a>Razor 구성 요소에 대한 partial 클래스 지원
 
-이제 Razor 구성 요소가 partial 클래스로 생성됩니다. 단일 파일에서 구성 요소의 모든 코드를 정의하는 대신 partial 클래스로 정의된 코드 숨김 파일을 사용하여 Razor 구성 요소의 코드를 작성할 수 있습니다. 자세한 내용은 [partial 클래스 지원](xref:blazor/components#partial-class-support)을 참조하세요.
+이제 Razor 구성 요소가 partial 클래스로 생성됩니다. 단일 파일에서 구성 요소의 모든 코드를 정의하는 대신 partial 클래스로 정의된 코드 숨김 파일을 사용하여 Razor 구성 요소의 코드를 작성할 수 있습니다. 자세한 내용은 [partial 클래스 지원](xref:blazor/components/index#partial-class-support)을 참조하세요.
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor 구성 요소 태그 도우미 및 최상위 구성 요소에 매개 변수 전달
 
@@ -46,7 +46,7 @@ Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 �
     param-IncrementAmount="10" />
 ```
 
-자세한 내용은 [구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/integrate-components)을 참조하세요.
+자세한 내용은 [구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps)을 참조하세요.
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>HTTP.sys에서 공유 큐에 대한 지원
 
@@ -66,7 +66,7 @@ SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하�
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-자세한 내용은 [기본 작업 방지](xref:blazor/event-handling#prevent-default-actions)를 참조하세요.
+자세한 내용은 [기본 작업 방지](xref:blazor/components/event-handling#prevent-default-actions)를 참조하세요.
 
 ## <a name="stop-event-propagation-in-blazor-apps"></a>Blazor 앱에서 이벤트 전파 중지
 
@@ -86,7 +86,7 @@ SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하�
 }
 ```
 
-자세한 내용은 [이벤트 전파 중지](xref:blazor/event-handling#stop-event-propagation)를 참조하세요.
+자세한 내용은 [이벤트 전파 중지](xref:blazor/components/event-handling#stop-event-propagation)를 참조하세요.
 
 ## <a name="detailed-errors-during-blazor-app-development"></a>Blazor 앱을 개발 중에 발생한 자세한 오류 정보
 
@@ -95,4 +95,4 @@ Blazor 앱이 개발 중에 올바르게 작동하지 않는 경우 앱에서 �
 * 개발 중에 금색 막대를 누르면 예외를 볼 수 있는 브라우저 콘솔로 연결됩니다.
 * 프로덕션에서, 금색 막대는 오류가 발생했음을 알려주고 브라우저를 새로 고치도록 권장합니다.
 
-자세한 내용은 [개발 중에 발생한 자세한 오류 정보](xref:blazor/handle-errors#detailed-errors-during-development)를 참조하세요.
+자세한 내용은 [개발 중에 발생한 자세한 오류 정보](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development)를 참조하세요.

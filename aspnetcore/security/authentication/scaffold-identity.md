@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724291"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103036"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core 프로젝트의 스 캐 폴드
 
@@ -195,7 +195,7 @@ Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자�
 * 인증 토큰을 프로 비전 하 여 인증 쿠키에 저장 하는 경우 구성 요소에 전달할 수 있습니다.
 * Razor구성 요소 `HttpContext` 는 직접 사용할 수 없으므로의 로그 아웃 끝점에 게시 하기 위해 [XSRF (요청 방지 위조) 토큰](xref:security/anti-request-forgery) 을 얻을 수 있는 방법이 없습니다 Identity `/Identity/Account/Logout` . XSRF 토큰을 구성 요소에 전달할 수 있습니다.
 
-자세한 내용은 <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>를 참조하세요.
+자세한 내용은 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>을 참조하세요.
 
 *Pages/_Host* 파일에서 및 클래스에 토큰을 추가한 후에 토큰을 설정 합니다 `InitialApplicationState` `TokenProvider` .
 
@@ -229,7 +229,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 클래스에서 `Startup` :
 
 * Razor에서 Pages services가 추가 되었는지 확인 `Startup.ConfigureServices` 합니다.
-* [Tokenprovider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)를 사용 하는 경우 서비스를 등록 합니다.
+* [Tokenprovider](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)를 사용 하는 경우 서비스를 등록 합니다.
 * `UseDatabaseErrorPage` `Startup.Configure` 개발 환경에 대 한의 응용 프로그램 작성기에서를 호출 합니다.
 * `UseAuthentication`및 이후를 호출 `UseAuthorization` `UseRouting` 합니다.
 * 페이지에 대 한 끝점을 추가 Razor 합니다.
@@ -253,7 +253,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 }
 ```
 
-`LoginDisplay`앱의 *공유* 폴더에 구성 요소 (*LoginDisplay*)를 추가 합니다. [Tokenprovider 서비스](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) 는 Identity 의 로그 아웃 끝점에 게시 하는 HTML 폼에 XSRF 토큰을 제공 합니다.
+`LoginDisplay`앱의 *공유* 폴더에 구성 요소 (*LoginDisplay*)를 추가 합니다. [Tokenprovider 서비스](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) 는 Identity 의 로그 아웃 끝점에 게시 하는 HTML 폼에 XSRF 토큰을 제공 합니다.
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -404,7 +404,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예:
+* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -470,7 +470,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 정적 Identity 자산을 웹 루트에 게시 하지 않으려면를 참조 하십시오 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 
@@ -649,7 +649,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예:
+* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -711,7 +711,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 

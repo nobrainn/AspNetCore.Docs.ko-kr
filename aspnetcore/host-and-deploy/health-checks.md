@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: cb3ee4f3bf9061d212c1fee85f3f4a22946be097
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105781"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074427"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 
@@ -560,7 +560,7 @@ dotnet run --scenario writer
 
 지정된 포트에 대한 상태 검사 요청을 제한하는 포트를 지정하는 URL 패턴을 사용하여 `MapHealthChecks`에 `RequireHost`를 호출합니다. 이는 일반적으로 컨테이너 환경에서 서비스 모니터링을 위해 포트를 노출하는 데 사용됩니다.
 
-샘플 앱은 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 사용하여 포트를 구성합니다. 포트는 *launchSettings.json* 파일에서 설정되고 환경 변수를 통해 구성 공급자에게 전달됩니다. 또한 관리 포트에서 요청을 수신하도록 서버를 구성해야 합니다.
+샘플 앱은 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables)를 사용하여 포트를 구성합니다. 포트는 *launchSettings.json* 파일에서 설정되고 환경 변수를 통해 구성 공급자에게 전달됩니다. 또한 관리 포트에서 요청을 수신하도록 서버를 구성해야 합니다.
 
 샘플 앱을 사용하여 관리 포트 구성을 보여주려면 *launchSettings.json* 파일을 *Properties* 폴더에 만듭니다.
 
@@ -789,7 +789,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-자세한 내용은 <xref:fundamentals/middleware/index#use-run-and-map>를 참조하세요.
+자세한 내용은 <xref:fundamentals/middleware/index#branch-the-middleware-pipeline>를 참조하세요.
 
 ::: moniker-end
 

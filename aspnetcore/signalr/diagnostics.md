@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755965"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102942"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core의 로깅 및 진단SignalR
 
@@ -100,7 +100,7 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 
 자세한 정도를 구성 하면 로그가 브라우저 콘솔에 기록 되거나 NodeJS 앱의 표준 출력에 기록 됩니다.
 
-로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 예:
+로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 다음은 그 예입니다.
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -111,7 +111,7 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 
 에서 메서드를 사용 하 여 .NET 클라이언트에서 로그를 가져올 수 있습니다 `ConfigureLogging` `HubConnectionBuilder` . 이는 및에서 메서드와 동일한 방식으로 작동 합니다 `ConfigureLogging` `WebHostBuilder` `HostBuilder` . ASP.NET Core에서 사용 하는 것과 동일한 로깅 공급자를 구성할 수 있습니다. 그러나 개별 로깅 공급자에 대 한 NuGet 패키지를 수동으로 설치 하 고 사용 하도록 설정 해야 합니다.
 
-BlazorWeasembomapp에 .net 클라이언트 로깅을 추가 하려면를 참조 <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging> 하세요.
+BlazorWeasembomapp에 .net 클라이언트 로깅을 추가 하려면를 참조 <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 하세요.
 
 ### <a name="console-logging"></a>콘솔 로깅
 
@@ -220,7 +220,7 @@ tcpdump -i [interface] -w trace.pcap
 
 SignalR서버 메트릭은 이벤트 원본에 보고 됩니다 <xref:Microsoft.AspNetCore.Http.Connections> .
 
-| Name                    | Description                 |
+| 속성                    | Description                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 시작 되는 총 연결   |
 | `connections-stopped`   | 중지 된 총 연결   |
@@ -245,7 +245,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

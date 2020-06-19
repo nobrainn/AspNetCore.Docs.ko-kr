@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 720f534426cc0e2b32778e49050c7f7d75ecd60d
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: 8ef029af10f767ae505fddc636bb15f7e7c5e538
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679594"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102702"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
 
@@ -296,4 +296,4 @@ Blazor 앱 빌드에 대한 자세한 내용은 Blazor 설명서를 참조하세
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:signalr/introduction>
-* [SignalR 인증에 대한 원본 간 협상](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR 인증에 대한 원본 간 협상](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

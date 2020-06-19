@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 09866f1fd56a4d0747ef3814c85ab5070cfb8d59
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 809bdc777b6307314a7bcde82ab5e0c6888db99b
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756121"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074459"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 구성
 
@@ -352,6 +352,8 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 옵션 | 기본값 | Description |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
+| `headers` | `null` | 모든 HTTP 요청과 함께 전송 되는 헤더의 사전입니다. 브라우저에서 헤더 보내기가 Websocket 또는 스트림에 대해 작동 하지 않습니다 <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> . |
+| `logMessageContent` | `null` | `true`클라이언트에서 보내고 받은 메시지의 바이트/문자를 기록 하려면로 설정 합니다. |
 | `skipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 | `withCredentials` | `true` | CORS 요청과 함께 자격 증명을 보낼지 여부를 지정 합니다. Azure App Service는 고정 세션에 쿠키를 사용 하며이 옵션이 사용 하도록 설정 되어 있어야 제대로 작동 합니다. CORS에 대 한 자세한 SignalR 내용은을 참조 하십시오 <xref:signalr/security#cross-origin-resource-sharing> . |
 
@@ -398,7 +400,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -738,6 +740,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 옵션 | 기본값 | Description |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
+| `logMessageContent` | `null` | `true`클라이언트에서 보내고 받은 메시지의 바이트/문자를 기록 하려면로 설정 합니다. |
 | `skipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -783,7 +786,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1122,6 +1125,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 옵션 | 기본값 | Description |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
+| `logMessageContent` | `null` | `true`클라이언트에서 보내고 받은 메시지의 바이트/문자를 기록 하려면로 설정 합니다. |
 | `skipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1167,7 +1171,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1470,6 +1474,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 옵션 | 기본값 | Description |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
+| `logMessageContent` | `null` | `true`클라이언트에서 보내고 받은 메시지의 바이트/문자를 기록 하려면로 설정 합니다. |
 | `skipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1515,7 +1520,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1812,6 +1817,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript 옵션 | 기본값 | Description |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
+| `logMessageContent` | `null` | `true`클라이언트에서 보내고 받은 메시지의 바이트/문자를 기록 하려면로 설정 합니다. |
 | `skipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)

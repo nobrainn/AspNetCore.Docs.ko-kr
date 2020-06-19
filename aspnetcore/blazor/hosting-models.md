@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105495"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102265"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -28,7 +28,7 @@ Blazor는 [WebAssembly](https://webassembly.org/) 기반 .NET 런타임( *Blazor
 
 이 문서에서 설명하는 호스팅 모델의 프로젝트를 만들려면 <xref:blazor/get-started>를 참조하세요.
 
-고급 구성의 경우 <xref:blazor/hosting-model-configuration>을 참조하세요.
+고급 구성의 경우 <xref:blazor/fundamentals/configuration>을 참조하세요.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
@@ -116,7 +116,7 @@ Blazor의 UI 업데이트는 다음을 통해 트리거됩니다.
 
 그래프가 다시 렌더링되고, UI *diff*(차이)가 계산됩니다. 이 diff는 클라이언트에서 UI를 업데이트하는 데 필요한 최소한의 DOM 편집 집합입니다. diff는 클라이언트에 이진 형식으로 전송되고 브라우저에서 적용됩니다.
 
-사용자가 클라이언트에서 구성 요소를 벗어나면 구성 요소가 삭제됩니다. 사용자가 구성 요소를 조작하는 동안에는 구성 요소 상태(서비스, 리소스)가 서버 메모리에 유지되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있으므로 메모리 소모는 해결해야 하는 문제입니다. 서버 메모리 사용을 최적화하도록 Blazor 서버 앱을 작성하는 방법에 대한 자세한 내용은 <xref:security/blazor/server/threat-mitigation>를 참조하세요.
+사용자가 클라이언트에서 구성 요소를 벗어나면 구성 요소가 삭제됩니다. 사용자가 구성 요소를 조작하는 동안에는 구성 요소 상태(서비스, 리소스)가 서버 메모리에 유지되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있으므로 메모리 소모는 해결해야 하는 문제입니다. 서버 메모리 사용을 최적화하도록 Blazor 서버 앱을 작성하는 방법에 대한 자세한 내용은 <xref:blazor/security/server/threat-mitigation>를 참조하세요.
 
 ### <a name="circuits"></a>회로
 
@@ -136,10 +136,10 @@ UI 대기 시간은 작업 시작부터 UI가 업데이트되는 시간까지 �
 
 메모리 사용량도 앱 대기 시간에 영향을 줄 수 있습니다. 메모리 사용량이 증가하면 가비지 수집 또는 디스크로 메모리 페이징이 자주 발생하므로 앱 성능이 저하되고 UI 대기 시간이 증가합니다.
 
-네트워크 대기 시간과 메모리 사용량을 줄여 UI 대기 시간을 최소화하기 위해 Blazor 서버 앱을 최적화해야 합니다. 네트워크 대기 시간을 측정하는 방법에 대한 자세한 내용은 <xref:host-and-deploy/blazor/server#measure-network-latency>를 참조하세요. SignalR 및 Blazor에 대한 자세한 내용은 다음을 참조하세요.
+네트워크 대기 시간과 메모리 사용량을 줄여 UI 대기 시간을 최소화하기 위해 Blazor 서버 앱을 최적화해야 합니다. 네트워크 대기 시간을 측정하는 방법에 대한 자세한 내용은 <xref:blazor/host-and-deploy/server#measure-network-latency>를 참조하세요. SignalR 및 Blazor에 대한 자세한 내용은 다음을 참조하세요.
 
-* <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server/threat-mitigation>
+* <xref:blazor/host-and-deploy/server>
+* <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>서버에 연결
 
@@ -147,7 +147,7 @@ Blazor 서버 앱을 사용하려면 서버에 대한 활성 SignalR 연결이 �
 
 Blazor 서버 앱은 첫 번째 클라이언트 요청에 대한 응답으로 미리 렌더링되며, 서버의 UI 상태가 설정됩니다. 클라이언트가 SignalR 연결을 만들려는 경우 동일한 서버에 다시 연결해야 합니다. 둘 이상의 백 엔드 서버를 사용하는 Blazor 서버 앱은 SignalR 연결에 사용할 ‘고정 세션’을 구현해야 합니다.
 
-Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정하여 Azure SignalR Service에 고정 세션을 사용합니다. 자세한 내용은 <xref:host-and-deploy/blazor/server#signalr-configuration>를 참조하세요.
+Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정하여 Azure SignalR Service에 고정 세션을 사용합니다. 자세한 내용은 <xref:blazor/host-and-deploy/server#signalr-configuration>를 참조하세요.
 
 IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 고정 세션을 사용할 수 있습니다. 자세한 내용은 [애플리케이션 요청 라우팅을 사용하여 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조하세요.
 
@@ -155,5 +155,5 @@ IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 �
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
-* <xref:blazor/hosting-model-configuration>
+* <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

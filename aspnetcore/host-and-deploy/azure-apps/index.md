@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 8195702a3de93bafc76dff61939dfc70d4e896b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cc12dc2bc6720652866227dc2bbcbcf4e8af793d
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775247"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074234"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -87,17 +87,20 @@ Azure App Service에 배포된 앱에 대한 자동 로깅 기능을 제공하�
 
 ## <a name="override-app-configuration-using-the-azure-portal"></a>Azure Portal을 사용하여 앱 구성 재정의
 
-Azure Portal의 앱 설정을 사용하면 앱의 환경 변수를 설정할 수 있습니다. 환경 변수는 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)가 사용할 수 있습니다.
+::: moniker range=">= aspnetcore-3.0"
+
+Azure Portal의 앱 설정을 사용하면 앱의 환경 변수를 설정할 수 있습니다. 환경 변수는 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables)가 사용할 수 있습니다.
 
 Azure Portal에서 앱 설정을 만들거나 수정하고**저장** 단추를 선택하면 Azure 앱이 다시 시작됩니다. 서비스를 다시 시작한 후에 환경 변수를 앱에서 사용할 수 있습니다.
 
-::: moniker range=">= aspnetcore-3.0"
-
-앱이 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 경우 호스트를 빌드하기 위해 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>가 호출될 때 환경 변수가 앱의 구성에 로드됩니다. 자세한 내용은 <xref:fundamentals/host/generic-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
+앱이 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 경우 호스트를 빌드하기 위해 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>가 호출될 때 환경 변수가 앱의 구성에 로드됩니다. 자세한 내용은 <xref:fundamentals/host/generic-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables)를 참조하세요.
 
 ::: moniker-end
-
 ::: moniker range="< aspnetcore-3.0"
+
+Azure Portal의 앱 설정을 사용하면 앱의 환경 변수를 설정할 수 있습니다. 환경 변수는 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)가 사용할 수 있습니다.
+
+Azure Portal에서 앱 설정을 만들거나 수정하고**저장** 단추를 선택하면 Azure 앱이 다시 시작됩니다. 서비스를 다시 시작한 후에 환경 변수를 앱에서 사용할 수 있습니다.
 
 앱이 [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 경우 호스트를 빌드하기 위해 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>가 호출될 때 환경 변수가 앱의 구성에 로드됩니다. 자세한 내용은 <xref:fundamentals/host/web-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
 

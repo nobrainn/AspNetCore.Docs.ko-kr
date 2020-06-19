@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 407583533939ec1077af8e1a1511ed187ef9de69
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776788"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103008"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -34,7 +34,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 사용자 지정 필터를 만들어 교차 편집 문제를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
-이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다. 필터는 작동 시 [Razor 구성 요소](xref:blazor/components)에 직접적인 영향을 주지 않습니다. 필터는 다음과 같은 경우에만 간접적으로 구성 요소에 영향을 줄 수 있습니다.
+이 문서 Razor 는 뷰가 있는 페이지, API 컨트롤러 및 컨트롤러에 적용 됩니다. 필터는 [ Razor 구성 요소](xref:blazor/components/index)와 직접 작동 하지 않습니다. 필터는 다음과 같은 경우에만 간접적으로 구성 요소에 영향을 줄 수 있습니다.
 
 * 구성 요소가 페이지 또는 보기에 포함되어 있는 경우
 * 페이지 또는 컨트롤러/보기에서 필터를 사용하는 경우
@@ -64,7 +64,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
   * 작업 메서드가 호출되기 전후에 즉시 코드를 실행합니다.
   * 작업에 전달된 인수를 변경할 수 있습니다.
   * 작업에서 반환된 결과를 변경할 수 있습니다.
-  * Razor Pages에서는 지원되지 **않습니다**.
+  * 는 페이지에서 지원 **되지 않습니다** Razor .
 
 * [예외 필터](#exception-filters)는 응답 본문이 쓰여지기 전에 발생한 처리되지 않은 예외에 대한 전역 정책을 적용합니다.
 
@@ -96,7 +96,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 * 비동기: <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-필터 인터페이스의 동기 또는 비동기 버전 **중 하나만** 구현 합니다. **not** 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
+필터 인터페이스의 동기 또는 비동기 버전을 모두 구현하지 **말고** 그 중 **한 가지**만 구현하세요. 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
 
 ### <a name="built-in-filter-attributes"></a>기본 제공 필터 특성
 
@@ -110,7 +110,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-[브라우저 개발자 도구](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools)와 같은 도구를 사용하여 헤더를 검사합니다. **응답 헤더**아래에 `author: Rick Anderson` 가 표시 됩니다.
+[브라우저 개발자 도구](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) 와 같은 도구를 사용 하 여 헤더를 검사 합니다. **응답 헤더**에 `author: Rick Anderson`이 표시됩니다.
 
 다음 코드는 다음과 같은 작업을 수행하는 `ActionFilterAttribute`를 구현합니다.
 
@@ -138,13 +138,13 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**응답 헤더** `author: Rick Anderson`아래에는 `Sample/Index2` 끝점이 `Editor: Joe Smith` 호출 될 때 및가 표시 됩니다.
+**응답 헤더**아래에는 `author: Rick Anderson` `Editor: Joe Smith` 끝점이 호출 될 때 및가 표시 됩니다 `Sample/Index2` .
 
-다음 코드는 `MyActionFilterAttribute` 및 `AddHeaderAttribute`를 Razor 페이지에 적용합니다.
+다음 코드에서는 `MyActionFilterAttribute` 페이지에 및을 적용 합니다 `AddHeaderAttribute` Razor .
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Pages/Movies/Index.cshtml.cs?name=snippet)]
 
-Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 이러한 메서드는 Razor 페이지 모델 또는 전역적으로 적용할 수 있습니다.
+페이지 처리기 메서드에는 필터를 적용할 수 없습니다 Razor . 이러한 Razor 모델은 페이지 모델 또는 전역적으로 적용할 수 있습니다.
 
 여러 필터 인터페이스에는 사용자 지정 구현에 대한 기본 클래스로 사용할 수 있는 해당 특성이 있습니다.
 
@@ -161,9 +161,9 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 
 다음 세 가지 *범위*중 하나에서 파이프라인에 필터를 추가할 수 있습니다.
 
-* 컨트롤러 작업에서 특성 사용. 필터 특성은 Razor Pages 처리기 메서드에 적용할 수 없습니다.
-* 컨트롤러 또는 Razor 페이지에서 특성 사용.
-* 다음 코드와 같이 모든 컨트롤러, 작업 및 Razor Pages에 전역으로 사용:
+* 컨트롤러 작업에서 특성 사용. 페이지 처리기 메서드에는 필터 특성을 적용할 수 없습니다 Razor .
+* 컨트롤러 또는 페이지에서 특성을 사용 Razor 합니다.
+* 모든 컨트롤러, 작업 및 페이지에 대해 전역적 Razor 으로 다음 코드와 같이 표시 됩니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupOrder.cs?name=snippet)]
 
@@ -174,10 +174,10 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 필터 중첩의 결과로 필터의 *after* 코드는 *before* 코드의 역순으로 실행됩니다. 필터의 순서는 다음과 같습니다.
 
 * 전역 필터의 *before* 코드.
-  * 컨트롤러 및 Razor 페이지 필터의 *before* 코드.
+  * 컨트롤러 및 페이지 필터의 *이전* 코드 Razor 입니다.
     * 작업 메서드 필터의 *before* 코드.
     * 작업 메서드 필터의 *after* 코드.
-  * 컨트롤러 및 Razor 페이지 필터의 *after* 코드.
+  * 컨트롤러 및 페이지 필터의 *이후* 코드 Razor 입니다.
 * 전역 필터의 *after* 코드.
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
@@ -186,8 +186,8 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
-| 3 | 메서드 | `OnActionExecuting` |
-| 4 | 메서드 | `OnActionExecuted` |
+| 3 | 방법 | `OnActionExecuting` |
+| 4 | 방법 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -224,7 +224,7 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 
 컨트롤러 수준 필터는 [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) 속성을 `int.MinValue`로 설정합니다. 컨트롤러 수준 필터는 메서드에 적용된 후에 실행되도록 설정할 수 **없습니다**. 순서는 다음 섹션에 설명되어 있습니다.
 
-Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지 필터 구현](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)을 참조하세요.
+Razor페이지는 [ Razor 필터 메서드를 재정의 하 여 페이지 필터 구현](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)을 참조 하세요.
 
 ### <a name="overriding-the-default-order"></a>기본 순서 재정의
 
@@ -400,7 +400,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 ## <a name="action-filters"></a>작업 필터
 
-작업 필터는 Razor Pages에 **적용되지 않습니다**. Razor Pages는 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>를 지원합니다. 자세한 내용은 [Razor 페이지에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
+작업 필터는 페이지에 적용 **되지** 않습니다 Razor . Razor페이지는 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 및를 지원 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 합니다. 자세한 내용은 [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
 
 작업 필터는:
 
@@ -476,7 +476,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * before 및 after 이벤트가 없습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>를 구현합니다.
-* Razor Page 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생하는 처리되지 않은 예외를 처리합니다.
+* Razor페이지 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생 하는 처리 되지 않은 예외를 처리 합니다.
 * 리소스 필터, 결과 필터 또는 MVC 결과 실행에서 발생 하는 예외를 catch **하지** 마세요.
 
 예외를 처리하려면 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 속성을 `true`로 설정하거나 응답을 작성합니다. 그러면 예외가 전파되지 않습니다. 예외 필터는 예외를 “성공”으로 변환할 수 없습니다. 이는 작업 필터에서만 가능합니다.
@@ -601,7 +601,7 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a>다음 작업
 
-* [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
+* [ Razor 페이지에 대 한 필터 메서드를](xref:razor-pages/filter)참조 하세요.
 * 필터를 실험하려면 [GitHub 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)합니다.
 
 ::: moniker-end
@@ -619,7 +619,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 사용자 지정 필터를 만들어 교차 편집 문제를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
-이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다.
+이 문서 Razor 는 뷰가 있는 페이지, API 컨트롤러 및 컨트롤러에 적용 됩니다.
 
 [예제 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -641,7 +641,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>는 나머지 필터 파이프라인보다 먼저 코드를 실행할 수 있습니다. 예를 들어 `OnResourceExecuting`는 모델 바인딩 전에 코드를 실행할 수 있습니다.
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>는 파이프라인의 나머지 부분이 완료된 후에 코드를 실행할 수 있습니다.
 
-* [작업 필터](#action-filters)는 개별 작업 메서드가 호출된 전후에 즉시 코드를 실행할 수 있습니다. 작업에 전달된 인수 및 작업에서 반환된 결과를 조작하는 데 사용할 수 있습니다. Razor Pages에서는 작업 필터가 지원되지 **않습니다**.
+* [작업 필터](#action-filters)는 개별 작업 메서드가 호출된 전후에 즉시 코드를 실행할 수 있습니다. 작업에 전달된 인수 및 작업에서 반환된 결과를 조작하는 데 사용할 수 있습니다. 작업 필터는 페이지에서 지원 **되지 않습니다** Razor .
 
 * [예외 필터](#exception-filters)는 응답 본문에 무언가 쓰여지기 전에 발생한 처리되지 않은 예외에 전역 정책을 적용하는 데 사용됩니다.
 
@@ -669,7 +669,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 단일 클래스에서 여러 필터 단계에 대한 인터페이스를 구현할 수 있습니다. 예를 들어 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 클래스는 `IActionFilter`, `IResultFilter` 및 해당 비동기 값을 구현합니다.
 
-필터 인터페이스의 동기 또는 비동기 버전 **중 하나만** 구현 합니다. **not** 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
+필터 인터페이스의 동기 또는 비동기 버전을 모두 구현하지 **말고** 그 중 **한 가지**만 구현하세요. 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에 구현된 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
 
 ### <a name="built-in-filter-attributes"></a>기본 제공 필터 특성
 
@@ -727,8 +727,8 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 | `OnActionExecuting` |
-| 3 | 메서드 | `OnActionExecuting` |
-| 4 | 메서드 | `OnActionExecuted` |
+| 3 | 방법 | `OnActionExecuting` |
+| 4 | 방법 | `OnActionExecuted` |
 | 5 | 컨트롤러 | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -737,7 +737,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 * 메서드 필터는 컨트롤러 필터 내에서 중첩됩니다.
 * 컨트롤러 필터는 전역 필터 내에서 중첩됩니다.
 
-### <a name="controller-and-razor-page-level-filters"></a>컨트롤러 및 Razor Page 수준 필터
+### <a name="controller-and-razor-page-level-filters"></a>컨트롤러 및 Razor 페이지 수준 필터
 
 <xref:Microsoft.AspNetCore.Mvc.Controller> 기본 클래스에서 상속되는 모든 컨트롤러에는 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) 및 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted` 메서드가 포함됩니다. 이러한 메서드는: 다음 메서드는
@@ -766,7 +766,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   * `MySampleActionFilter.OnActionExecuted`
 * `TestController.OnActionExecuted`
 
-Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지 필터 구현](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)을 참조하세요.
+Razor페이지는 [ Razor 필터 메서드를 재정의 하 여 페이지 필터 구현](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)을 참조 하세요.
 
 ### <a name="overriding-the-default-order"></a>기본 순서 재정의
 
@@ -785,12 +785,12 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 | 시퀀스 | 필터 범위 | `Order` 속성 | 필터 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 메서드 | 0 | `OnActionExecuting` |
+| 1 | 방법 | 0 | `OnActionExecuting` |
 | 2 | 컨트롤러 | 1  | `OnActionExecuting` |
 | 3 | 전역 | 2  | `OnActionExecuting` |
 | 4 | 전역 | 2  | `OnActionExecuted` |
 | 5 | 컨트롤러 | 1  | `OnActionExecuted` |
-| 6 | 메서드 | 0  | `OnActionExecuted` |
+| 6 | 방법 | 0  | `OnActionExecuted` |
 
 `Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터가 순서에 따라 먼저 정렬된 다음, 범위는 연결을 끊는 데 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
 
@@ -931,7 +931,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 ## <a name="action-filters"></a>작업 필터
 
 > [!IMPORTANT]
-> 작업 필터는 **not** 페이지에 Razor 적용 되지 않습니다. Razor페이지는 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 를 지원 합니다. 자세한 내용은 [페이지의 Razor 필터 메서드](xref:razor-pages/filter)를 참조 하세요.
+> 작업 필터는 페이지에 적용 **되지** 않습니다 Razor . Razor페이지는 <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> 및를 지원 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> 합니다. 자세한 내용은 [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
 
 작업 필터는:
 
@@ -1003,7 +1003,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * before 및 after 이벤트가 없습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>를 구현합니다.
-* Razor 페이지 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생 하는 처리 되지 않은 예외를 처리 합니다.
+* Razor페이지 또는 컨트롤러 생성, [모델 바인딩](xref:mvc/models/model-binding), 작업 필터 또는 작업 메서드에서 발생 하는 처리 되지 않은 예외를 처리 합니다.
 * 리소스 필터, 결과 필터 또는 MVC 결과 실행에서 발생 하는 예외를 catch **하지** 마세요.
 
 예외를 처리하려면 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 속성을 `true`로 설정하거나 응답을 작성합니다. 그러면 예외가 전파되지 않습니다. 예외 필터는 예외를 “성공”으로 변환할 수 없습니다. 이는 작업 필터에서만 가능합니다.
@@ -1124,7 +1124,7 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a>다음 작업
 
-* [페이지에 대 한 Razor 필터 메서드를](xref:razor-pages/filter)참조 하세요.
+* [ Razor 페이지에 대 한 필터 메서드를](xref:razor-pages/filter)참조 하세요.
 * 필터를 실험하려면 [GitHub 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
 
 ::: moniker-end

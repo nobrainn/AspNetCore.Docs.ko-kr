@@ -15,4 +15,4 @@ Blazor 앱에 요청 상태를 전달하려면 앱을 처음 렌더링할 때 �
 * 앱에 전달되는 데이터를 유지할 루트 구성 요소의 매개 변수를 정의합니다.
 * 앱 내에서 사용자 관련 데이터를 사용하거나, 앱 전체에서 사용할 수 있도록 해당 데이터를 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 내의 범위가 지정된 서비스에 복사합니다.
 
-자세한 내용과 예제 코드는 <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>를 참조하십시오.
+자세한 내용과 예제 코드는 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>를 참조하십시오.

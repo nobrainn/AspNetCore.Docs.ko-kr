@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: d37fdc44bb9a603d85818fc72a7a07de67006366
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5439ba449a9ceaa417cf01a45f51009acf098a4e
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776814"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074397"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호 구성
 
@@ -46,7 +46,7 @@ ms.locfileid: "82776814"
 
 ## <a name="protectkeyswithazurekeyvault"></a>ProtectKeysWithAzureKeyVault
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)에 키를 저장 하려면 `Startup` 클래스에서 [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) 를 사용 하 여 시스템을 구성 합니다.
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)에 키를 저장 하려면 클래스에서 [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) 를 사용 하 여 시스템을 구성 합니다 `Startup` .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -57,15 +57,33 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-키 링 저장소 위치 (예: [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage))를 설정 합니다. 를 호출 `ProtectKeysWithAzureKeyVault` 하면 키 링 저장소 위치를 포함 하 여 자동 데이터 보호 설정을 사용 하지 않도록 설정 하는 [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) 을 구현 하기 때문에 위치를 설정 해야 합니다. 앞의 예제에서는 Azure Blob Storage를 사용 하 여 키 링을 유지 합니다. 자세한 내용은 [키 저장소 공급자: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)를 참조 하세요. [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)을 사용 하 여 키 링을 로컬로 유지할 수도 있습니다.
+키 링 저장소 위치 (예: [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage))를 설정 합니다. 를 호출 하면 `ProtectKeysWithAzureKeyVault` 키 링 저장소 위치를 포함 하 여 자동 데이터 보호 설정을 사용 하지 않도록 설정 하는 [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) 을 구현 하기 때문에 위치를 설정 해야 합니다. 앞의 예제에서는 Azure Blob Storage를 사용 하 여 키 링을 유지 합니다. 자세한 내용은 [키 저장소 공급자: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)를 참조 하세요. [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)을 사용 하 여 키 링을 로컬로 유지할 수도 있습니다.
 
-는 `keyIdentifier` 키 암호화에 사용 되는 키 자격 증명 모음 키 식별자입니다. 예를 들어, 키 자격 증명 모음에서 만든 `dataprotection` 키의 `contosokeyvault` 키 식별자 `https://contosokeyvault.vault.azure.net/keys/dataprotection/`는 다음과 같습니다. 키 **래핑** 및 키 자격 증명 모음에 대 한 **키 래핑 권한을** 앱에 제공 합니다.
+는 `keyIdentifier` 키 암호화에 사용 되는 키 자격 증명 모음 키 식별자입니다. 예를 들어, 키 자격 증명 모음에서 만든 키의 키 식별자는 다음과 `dataprotection` `contosokeyvault` 같습니다 `https://contosokeyvault.vault.azure.net/keys/dataprotection/` . 키 **래핑** 및 키 자격 증명 모음에 대 한 **키 래핑 권한을** 앱에 제공 합니다.
 
 `ProtectKeysWithAzureKeyVault`같도록
 
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, KeyVaultClient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) 는 [KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) 를 사용 하 여 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 합니다.
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) 를 사용 하 여 데이터 `ClientId` 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 및 [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) 를 사용할 수 있습니다.
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) 는를 `ClientId` `ClientSecret` 사용 하 여 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 합니다.
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) 를 사용 하 여 `ClientId` 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 및 [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) 를 사용할 수 있습니다.
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) 는를 사용 하 여 `ClientId` `ClientSecret` 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 합니다.
+
+Keyvault와 azure storage의 조합을 사용 하 여 키를 저장 하 고 보호 하는 경우 `System.UriFormatException` 에 키를 저장할 blob이 아직 없는 경우이 throw 됩니다. 이는 응용 프로그램을 실행 하기 전에 수동으로 만들 수도 있고, `.ProtectKeysWithAzureKeyVault()` 첫 번째 실행을 위해 제거 하 여 blob을 만든 다음 후속 실행을 위해 추가할 수도 있습니다. 를 제거 하는 것 `.ProtectKeysWithAzureKeyVault()` 이 좋습니다. 이렇게 하면 적절 한 스키마 및 값을 사용 하 여 파일을 만들 수 있습니다.
+
+```csharp
+var storageAccount = CloudStorageAccount.Parse("<storage account connection string">);
+var client = storageAccount.CreateCloudBlobClient();
+var container = client.GetContainerReference("<key store container name>");
+
+var azureServiceTokenProvider = new AzureServiceTokenProvider();
+var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(
+        azureServiceTokenProvider.KeyVaultTokenCallback));
+
+services.AddDataProtection()
+    //This blob must already exist before the application is run
+    .PersistKeysToAzureBlobStorage(container, "<key store blob name>")
+    //Removing this line below for an initial run will ensure the file is created correctly
+    .ProtectKeysWithAzureKeyVault(keyVaultClient, "<keyIdentifier>");
+```
 
 ::: moniker-end
 
@@ -86,7 +104,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="protectkeyswith"></a>ProtectKeysWith\*
 
-[ProtectKeysWith\* ](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions) 구성 api를 호출 하 여 미사용 키를 보호 하도록 시스템을 구성할 수 있습니다. UNC 공유에 키를 저장 하 고 특정 x.509 인증서를 사용 하 여 미사용 키를 암호화 하는 아래 예제를 살펴보세요.
+[ProtectKeysWith \* ](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions) 구성 api를 호출 하 여 미사용 키를 보호 하도록 시스템을 구성할 수 있습니다. UNC 공유에 키를 저장 하 고 특정 x.509 인증서를 사용 하 여 미사용 키를 암호화 하는 아래 예제를 살펴보세요.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -154,7 +172,7 @@ public void ConfigureServices(IServiceCollection services)
 
 앱 간에 보호 된 페이로드를 공유 하려면:
 
-* 동일한 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> 값을 사용 하 여 각 앱에서를 구성 합니다.
+* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>동일한 값을 사용 하 여 각 앱에서를 구성 합니다.
 * 앱에서 동일한 버전의 데이터 보호 API 스택을 사용 합니다. 앱의 프로젝트 파일에서 다음 중 **하나** 를 수행 합니다.
   * [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)를 통해 동일한 공유 프레임 워크 버전을 참조 합니다.
   * 동일한 [데이터 보호 패키지](xref:security/data-protection/introduction#package-layout) 버전을 참조 합니다.
@@ -169,7 +187,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="disableautomatickeygeneration"></a>Disable자동 Keygeneration
 
-앱에서 만료 방식으로 키를 자동으로 롤 롤 (새 키 생성) 하지 않으려는 시나리오가 있을 수 있습니다. 이에 대 한 한 가지 예로 기본/보조 관계로 설정 된 앱이 있을 수 있습니다. 단, 기본 앱은 주요 관리 문제를 담당 하 고 보조 앱은 단순히 키 링의 읽기 전용 보기를 포함 합니다. 다음을 사용 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*>하 여 시스템을 구성 하 여 키 링을 읽기 전용으로 처리 하도록 보조 앱을 구성할 수 있습니다.
+앱에서 만료 방식으로 키를 자동으로 롤 롤 (새 키 생성) 하지 않으려는 시나리오가 있을 수 있습니다. 이에 대 한 한 가지 예로 기본/보조 관계로 설정 된 앱이 있을 수 있습니다. 단, 기본 앱은 주요 관리 문제를 담당 하 고 보조 앱은 단순히 키 링의 읽기 전용 보기를 포함 합니다. 다음을 사용 하 여 시스템을 구성 하 여 키 링을 읽기 전용으로 처리 하도록 보조 앱을 구성할 수 있습니다 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*> .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -181,14 +199,14 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="per-application-isolation"></a>응용 프로그램별 격리
 
-ASP.NET Core 호스트에서 제공 하는 데이터 보호 시스템은 동일한 작업자 프로세스 계정에서 실행 되 고 동일한 마스터 키 자료를 사용 하는 경우에도 앱을 자동으로 격리 합니다. 이것은 System.web `<machineKey>` 요소의 IsolateApps 한정자와 약간 비슷합니다.
+ASP.NET Core 호스트에서 제공 하는 데이터 보호 시스템은 동일한 작업자 프로세스 계정에서 실행 되 고 동일한 마스터 키 자료를 사용 하는 경우에도 앱을 자동으로 격리 합니다. 이것은 System.web 요소의 IsolateApps 한정자와 약간 비슷합니다 `<machineKey>` .
 
 격리 메커니즘은 로컬 컴퓨터의 각 앱을 고유 테 넌 트로 간주 하 여 작동 하므로 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 지정 된 앱에 대 한 루트에는 자동으로 앱 ID가 판별자로 포함 됩니다. 앱의 고유 ID는 앱의 실제 경로입니다.
 
 * IIS에서 호스트 되는 앱의 경우 고유 ID는 앱의 IIS 실제 경로입니다. 웹 팜 환경에 앱을 배포 하는 경우이 값은 안정적입니다. IIS 환경이 웹 팜의 모든 컴퓨터에서 유사 하 게 구성 되어 있다고 가정 합니다.
 * [Kestrel 서버](xref:fundamentals/servers/index#kestrel)에서 실행 되는 자체 호스트 된 앱의 경우 고유 ID는 디스크의 앱에 대 한 실제 경로입니다.
 
-고유 식별자는 개별 앱과 컴퓨터 자체&mdash;를 모두 다시 설정 합니다.
+고유 식별자는 &mdash; 개별 앱과 컴퓨터 자체를 모두 다시 설정 합니다.
 
 이 격리 메커니즘에서는 앱이 악성이 아닌 것으로 가정 합니다. 악의적인 앱은 항상 동일한 작업자 프로세스 계정에서 실행 되는 다른 앱에 영향을 줄 수 있습니다. 응용 프로그램을 상호 신뢰할 수 없는 공유 호스팅 환경에서는 호스팅 공급자가 앱의 기본 키 리포지토리를 분리 하는 것을 포함 하 여 앱 간의 OS 수준 격리를 보장 하기 위한 단계를 수행 해야 합니다.
 
@@ -226,9 +244,9 @@ services.AddDataProtection()
 
 ::: moniker-end
 
-기본 기본값은 AES-256-CBC이 고, 기본 ValidationAlgorithm은 HMACSHA256입니다. 시스템 관리자는 시스템 수준 [정책을](xref:security/data-protection/configuration/machine-wide-policy)통해 기본 정책을 설정할 수 있지만에 대 `UseCryptographicAlgorithms` 한 명시적 호출은 기본 정책을 재정의 합니다.
+기본 기본값은 AES-256-CBC이 고, 기본 ValidationAlgorithm은 HMACSHA256입니다. 시스템 관리자는 시스템 수준 [정책을](xref:security/data-protection/configuration/machine-wide-policy)통해 기본 정책을 설정할 수 있지만에 대 한 명시적 호출은 `UseCryptographicAlgorithms` 기본 정책을 재정의 합니다.
 
-를 `UseCryptographicAlgorithms` 호출 하면 미리 정의 된 기본 제공 목록에서 원하는 알고리즘을 지정할 수 있습니다. 알고리즘의 구현에 대해 걱정할 필요가 없습니다. 위의 시나리오에서 데이터 보호 시스템은 Windows에서 실행 되는 경우 AES의 CNG 구현을 사용 하려고 시도 합니다. 그렇지 않은 경우에는 관리 되는 [system.web](/dotnet/api/system.security.cryptography.aes) 클래스를 대체 합니다.
+를 호출 하면 `UseCryptographicAlgorithms` 미리 정의 된 기본 제공 목록에서 원하는 알고리즘을 지정할 수 있습니다. 알고리즘의 구현에 대해 걱정할 필요가 없습니다. 위의 시나리오에서 데이터 보호 시스템은 Windows에서 실행 되는 경우 AES의 CNG 구현을 사용 하려고 시도 합니다. 그렇지 않은 경우에는 관리 되는 [system.web](/dotnet/api/system.security.cryptography.aes) 클래스를 대체 합니다.
 
 [UseCustomCryptographicAlgorithms](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.usecustomcryptographicalgorithms)에 대 한 호출을 통해 구현을 수동으로 지정할 수 있습니다.
 
@@ -281,7 +299,7 @@ serviceCollection.AddDataProtection()
 
 ::: moniker-end
 
-일반적으로 \*형식 속성은 [system.security.cryptography.symmetricalgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm) 및 [KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)의 구체적이 고 인스턴스화할 수 있는 (매개 변수가 없는 public ctor를 통해) 구현을 가리켜야 합니다. 단, 시스템 특수 `typeof(Aes)` 한 경우에는 편의를 위해
+일반적으로 \* 형식 속성은 [System.security.cryptography.symmetricalgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm) 및 [KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)의 구체적이 고 인스턴스화할 수 있는 (매개 변수가 없는 public ctor를 통해) 구현을 가리켜야 합니다. 단, 시스템 특수 `typeof(Aes)` 한 경우에는 편의를 위해
 
 > [!NOTE]
 > System.security.cryptography.symmetricalgorithm의 키 길이는 ≥ 128 비트이 고 블록 크기는 ≥ 64 비트 여야 하 고, PKCS #7 패딩에서 CBC 모드 암호화를 지원 해야 합니다. KeyedHashAlgorithm는 >= 128 비트의 다이제스트 크기를 가져야 하며, 해시 알고리즘의 다이제스트 길이와 동일한 길이의 키를 지원 해야 합니다. KeyedHashAlgorithm는 HMAC가 반드시 필요한 것은 아닙니다.
@@ -337,7 +355,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 대칭 블록 암호화 알고리즘의 키 길이는 >= 128 비트이 고, 블록 크기가 >= 64 비트이 고, PKCS #7 패딩을 사용 하는 CBC 모드 암호화를 지원 해야 합니다. 해시 알고리즘의 다이제스트 크기는 >= 128 비트 여야 하며,\_BCRYPT ALG\_핸들\_HMAC\_플래그 플래그를 사용 하 여 열 수 있도록 지원 해야 합니다. 지정 \*된 알고리즘에 대해 기본 공급자를 사용 하도록 공급자 속성을 null로 설정할 수 있습니다. 자세한 내용은 [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) 설명서를 참조 하세요.
+> 대칭 블록 암호화 알고리즘의 키 길이는 >= 128 비트이 고, 블록 크기가 >= 64 비트이 고, PKCS #7 패딩을 사용 하는 CBC 모드 암호화를 지원 해야 합니다. 해시 알고리즘의 다이제스트 크기는 >= 128 비트 여야 하며, BCRYPT \_ ALG \_ 핸들 \_ HMAC \_ 플래그 플래그를 사용 하 여 열 수 있도록 지원 해야 합니다. \*지정 된 알고리즘에 대해 기본 공급자를 사용 하도록 공급자 속성을 null로 설정할 수 있습니다. 자세한 내용은 [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) 설명서를 참조 하세요.
 
 ::: moniker range=">= aspnetcore-2.0"
 

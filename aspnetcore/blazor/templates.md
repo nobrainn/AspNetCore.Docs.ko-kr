@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3a491e43aec8291fcf03696b53240bd33e0deda1
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105534"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102497"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor 템플릿
 
@@ -80,7 +80,7 @@ dotnet new blazorserver --help
 
 * *Shared* 폴더: 앱에서 사용되는 다른 UI 구성 요소( *.razor*)를 포함합니다.
   * `MainLayout`(*MainLayout.razor*): 앱의 레이아웃 구성 요소입니다.
-  * `NavMenu`(*NavMenu.razor*): 사이드바 탐색을 구현합니다. 다른 Razor 구성 요소의 탐색 링크를 렌더링하는 [NavLink 구성 요소](xref:blazor/routing#navlink-component)(<xref:Microsoft.AspNetCore.Components.Routing.NavLink>)가 포함되어 있습니다. <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소는 해당 구성 요소가 로드될 때 선택된 상태를 자동으로 나타내므로 사용자가 현재 표시되는 구성 요소를 파악하는 데 도움이 됩니다.
+  * `NavMenu`(*NavMenu.razor*): 사이드바 탐색을 구현합니다. 다른 Razor 구성 요소의 탐색 링크를 렌더링하는 [NavLink 구성 요소](xref:blazor/fundamentals/routing#navlink-component)(<xref:Microsoft.AspNetCore.Components.Routing.NavLink>)가 포함되어 있습니다. <xref:Microsoft.AspNetCore.Components.Routing.NavLink> 구성 요소는 해당 구성 요소가 로드될 때 선택된 상태를 자동으로 나타내므로 사용자가 현재 표시되는 구성 요소를 파악하는 데 도움이 됩니다.
 
 * *_Imports.razor*: 네임스페이스의 [`@using`](xref:mvc/views/razor#using) 지시문과 같은 앱의 구성 요소( *.razor*)에 포함할 일반적인 Razor 지시문을 포함합니다.
 

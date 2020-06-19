@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 26d371161bf5f926e50cbc141ccfaac40ee96977
-ms.sourcegitcommit: ff5c47beded9264c1395beb9c905f826261f3ba3
+ms.openlocfilehash: 6d9d8cf6ca9ca3afc570c2c68510125200b96c60
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83440180"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074470"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
 ASP.NET Core 3.0 이상에서는 API 권한 부여에 대 한 지원을 사용 하 여 SPAs (단일 페이지 앱)의 인증을 제공 합니다. Identity사용자를 인증 하 고 저장 하는 ASP.NET Core은 OPEN ID Connect 구현에 대 한 [IdentityServer](https://identityserver.io/) 와 결합 됩니다.
 
-인증 매개 변수는 **웹 응용 프로그램 (모델-뷰-컨트롤러)** (MVC) 및 **웹 응용 프로그램** (페이지) 프로젝트 템플릿의 인증 매개 변수와 비슷한 **각도** 및 **반응** 프로젝트 템플릿에 추가 되었습니다 Razor . 허용 되는 매개 변수 값은 **None** 및 **개인용**입니다. 현재 지점 **및 Redux** 프로젝트 템플릿은 인증 매개 변수를 지원 하지 않습니다.
+인증 매개 변수는 **웹 응용 프로그램 (모델-뷰-컨트롤러)** (MVC) 및 **웹 응용 프로그램** (페이지) 프로젝트 템플릿의 인증 매개 변수와 비슷한 **각도** 및 **반응** 프로젝트 템플릿에 추가 되었습니다 Razor . 허용 되는 매개 변수 값은 **None** 및 **개인용**입니다. 현재 **React.js 및 Redux** 프로젝트 템플릿에서 인증 매개 변수를 지원 하지 않습니다.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>API 권한 부여를 지 원하는 앱 만들기
 
@@ -49,6 +49,8 @@ dotnet new react -o <output_directory_name> -au Individual
 다음 섹션에서는 인증 지원을 포함 하는 경우 프로젝트에 대 한 추가 설명입니다.
 
 ### <a name="startup-class"></a>시작 클래스
+
+다음 코드 예제는 [AspNetCore IdentityServer](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet 패키지를 사용 합니다. 이 예제에서는 <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> 및 확장 메서드를 사용 하 여 API 인증 및 권한 부여를 구성 합니다 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> . 인증을 통해 반응 또는 각도 SPA 프로젝트 템플릿을 사용 하는 프로젝트에는이 패키지에 대 한 참조가 포함 됩니다.
 
 클래스에는 `Startup` 다음과 같은 추가 항목이 있습니다.
 
@@ -115,7 +117,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="appsettingsjson"></a>appsettings.json
 
-프로젝트 루트의 *appsettings* 파일에는 `IdentityServer` 구성 된 클라이언트 목록을 설명 하는 새 섹션이 있습니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성 중인 앱 유형을 나타냅니다. 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다. [응용 프로그램 프로필](#application-profiles) 섹션에 설명 된 대로 몇 가지 프로필을 사용할 수 있습니다.
+프로젝트 루트의 *appsettings.js* 파일에는 `IdentityServer` 구성 된 클라이언트 목록을 설명 하는 새 섹션이 있습니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성 중인 앱 유형을 나타냅니다. 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다. [응용 프로그램 프로필](#application-profiles) 섹션에 설명 된 대로 몇 가지 프로필을 사용할 수 있습니다.
 
 ```json
 "IdentityServer": {
@@ -127,9 +129,9 @@ dotnet new react -o <output_directory_name> -au Individual
 }
 ```
 
-### <a name="appsettingsdevelopmentjson"></a>appsettings. 개발. json
+### <a name="appsettingsdevelopmentjson"></a>appsettings.Development.js
 
-Appsettings에 *있습니다. *프로젝트 루트의 Development json 파일에는 `IdentityServer` 토큰에 서명 하는 데 사용 되는 키를 설명 하는 섹션이 있습니다. 프로덕션에 배포 하는 경우 [프로덕션에 배포](#deploy-to-production) 섹션에 설명 된 대로 키를 프로 비전 하 고 앱과 함께 배포 해야 합니다.
+프로젝트 루트의 *appsettings.Development.js* 파일에는 `IdentityServer` 토큰에 서명 하는 데 사용 되는 키를 설명 하는 섹션이 있습니다. 프로덕션에 배포 하는 경우 [프로덕션에 배포](#deploy-to-production) 섹션에 설명 된 대로 키를 프로 비전 하 고 앱과 함께 배포 해야 합니다.
 
 ```json
 "IdentityServer": {
@@ -159,12 +161,12 @@ Appsettings에 *있습니다. *프로젝트 루트의 Development json 파일에
 반응 템플릿에서 인증 및 API 권한 부여에 대 한 지원은 *ClientApp\src\components\api-authorization* 디렉터리에 있습니다. 다음 요소로 구성 됩니다.
 
 * 4 구성 요소:
-  * *Login .js*: 앱의 로그인 흐름을 처리 합니다.
-  * *Logout. js*: 응용 프로그램의 로그 아웃 흐름을 처리 합니다.
-  * *LoginMenu*: 다음 링크 집합 중 하나를 표시 하는 위젯:
+  * *Login.js*: 앱의 로그인 흐름을 처리 합니다.
+  * *Logout.js*: 응용 프로그램의 로그 아웃 흐름을 처리 합니다.
+  * *LoginMenu.js*: 다음 링크 집합 중 하나를 표시 하는 위젯:
     * 사용자가 인증 되 면 사용자 프로필 관리 및 로그 아웃 링크를 사용 합니다.
     * 사용자가 인증 되지 않은 경우 등록 및 로그인 링크.
-  * *AuthorizeRoute*: 매개 변수에 표시 된 구성 요소를 렌더링 하기 전에 사용자를 인증 해야 하는 경로 구성 요소입니다. `Component`
+  * *AuthorizeRoute.js*: 매개 변수에 표시 된 구성 요소를 렌더링 하기 전에 사용자를 인증 해야 하는 경로 구성 요소입니다 `Component` .
 * `authService` `AuthorizeService` 인증 프로세스의 하위 수준 정보를 처리 하 고 인증 된 사용자에 대 한 정보를 사용 하기 위해 나머지 앱에 노출 하는 클래스의 내보낸 인스턴스입니다.
 
 이제 솔루션의 주요 구성 요소를 살펴보았으므로 앱에 대 한 개별 시나리오를 자세히 살펴볼 수 있습니다.
@@ -280,7 +282,7 @@ async populateWeatherData() {
 
 이 섹션에서는 인증서 저장소에 저장 된 인증서를 사용 하 여 Azure App Service에 앱을 배포 하는 방법을 설명 합니다. 인증서 저장소에서 인증서를 로드 하도록 앱을 수정 하려면 이후 단계에서 Azure Portal에서 앱을 구성할 때 표준 계층 서비스 계획 이상이 필요 합니다.
 
-앱의 *appsettings* 파일에서 `IdentityServer` 키 세부 정보를 포함 하도록 섹션을 수정 합니다.
+파일 *의 앱appsettings.js* 에서 섹션을 수정 하 여 `IdentityServer` 키 세부 정보를 포함 합니다.
 
 ```json
 "IdentityServer": {
