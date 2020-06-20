@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 70f5da1dad9b4c0b9526a7688862637291be9a68
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 52c3dc82e51cb4375954a603a1bfde60fd667b56
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652579"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103056"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor Pages 소개
 
@@ -125,7 +125,7 @@ db 컨텍스트는 다음과 같습니다.
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_ALL)]
 
-규칙에 따라 `PageModel` 클래스의 이름은 `<PageName>Model`로 지정하며 페이지와 동일한 네임스페이스에 위치합니다.
+규약에 따라 `PageModel` 클래스의 이름은 `<PageName>Model`로 지정하며 페이지와 동일한 네임스페이스에 위치합니다.
 
 `PageModel` 클래스를 사용하면 페이지의 논리를 페이지의 표현으로부터 분리할 수 있습니다. 이 클래스는 페이지로 전송된 요청에 대한 페이지 처리기와 페이지를 렌더링하기 위해 사용되는 데이터를 정의합니다. 이러한 분리를 통해 다음을 수행할 수 있습니다.
 
@@ -137,7 +137,7 @@ db 컨텍스트는 다음과 같습니다.
 * `OnGet`: 페이지에 필요한 상태를 초기화합니다. 위의 코드에서 `OnGet` 메서드는 *CreateModel.cshtml* Razor Page를 표시합니다.
 * `OnPost`: 양식 제출을 처리합니다.
 
-`Async` 명명 접미사는 선택 사항이지만 비동기 함수에 대한 규칙으로 자주 사용됩니다. 위의 코드는 Razor Pages의 일반적인 코드입니다.
+`Async` 명명 접미사는 선택 사항이지만 비동기 함수에 대한 규약으로 자주 사용됩니다. 위의 코드는 Razor Pages의 일반적인 코드입니다.
 
 컨트롤러 및 뷰를 사용하는 ASP.NET 앱에 대해 잘 알고 있는 경우:
 
@@ -233,7 +233,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 * `asp-route-id` 특성으로 지정된 고객 연락처 ID.
 * `asp-page-handler` 특성으로 지정된 `handler`.
 
-단추를 선택하면 양식의 `POST` 요청이 서버로 전송됩니다. 규칙에 따라 처리기 메서드의 이름은 `handler` 매개 변수의 값을 기반으로 `OnPost[handler]Async` 체계에 의해 선택됩니다.
+단추를 선택하면 양식의 `POST` 요청이 서버로 전송됩니다. 규약에 따라 처리기 메서드의 이름은 `handler` 매개 변수의 값을 기반으로 `OnPost[handler]Async` 체계에 의해 선택됩니다.
 
 이번 예제에서는 `handler`가 `delete`이므로 `POST` 요청을 처리하기 위해 `OnPostDeleteAsync` 처리기 메서드가 사용됩니다. `asp-page-handler`가 `remove` 같은 다른 값으로 설정되면 `OnPostRemoveAsync`라는 이름의 처리기 메서드가 선택됩니다.
 
@@ -608,7 +608,7 @@ URL에서 쿼리 문자열 `?handler=JoinList`를 사용하지 않으려면 경�
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:test/razor-pages-tests>
 * <xref:mvc/views/partial>
-* <xref:blazor/integrate-components>
+* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>
 
 ::: moniker-end
 
@@ -718,7 +718,7 @@ db 컨텍스트는 다음과 같습니다.
 
 [!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_ALL)]
 
-규칙에 따라 `PageModel` 클래스의 이름은 `<PageName>Model`로 지정하며 페이지와 동일한 네임스페이스에 위치합니다.
+규약에 따라 `PageModel` 클래스의 이름은 `<PageName>Model`로 지정하며 페이지와 동일한 네임스페이스에 위치합니다.
 
 `PageModel` 클래스를 사용하면 페이지의 논리를 페이지의 표현으로부터 분리할 수 있습니다. 이 클래스는 페이지로 전송된 요청에 대한 페이지 처리기와 페이지를 렌더링하기 위해 사용되는 데이터를 정의합니다. 이러한 분리를 통해 다음을 수행할 수 있습니다.
 
@@ -730,12 +730,12 @@ db 컨텍스트는 다음과 같습니다.
 * `OnGet`: 페이지에 필요한 상태를 초기화합니다. [OnGet](#OnGet) 예제.
 * `OnPost`: 양식 제출을 처리합니다.
 
-`Async` 명명 접미사는 선택 사항이지만 비동기 함수에 대한 규칙으로 자주 사용됩니다. 위의 코드는 Razor Pages의 일반적인 코드입니다.
+`Async` 명명 접미사는 선택 사항이지만 비동기 함수에 대한 규약으로 자주 사용됩니다. 위의 코드는 Razor Pages의 일반적인 코드입니다.
 
 컨트롤러 및 뷰를 사용하는 ASP.NET 앱에 대해 잘 알고 있는 경우:
 
 * 앞 예제의 `OnPostAsync` 코드는 일반적인 컨트롤러 코드와 비슷합니다.
-* [모델 바인딩](xref:mvc/models/model-binding), [유효성 검사](xref:mvc/models/validation), [유효성 검사](xref:mvc/models/validation) 및 작업 결과와 같은 MVC의 기본적인 기능들이 대부분 공유됩니다.
+* [모델 바인딩](xref:mvc/models/model-binding), [유효성 검사](xref:mvc/models/validation), [유효성 검사](xref:mvc/models/validation) 및 작업 결과 같은 MVC의 기본적인 기능들이 대부분 공유됩니다.
 
 기존 `OnPostAsync` 메서드는 다음과 같습니다.
 
@@ -803,7 +803,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 <button type="submit" formaction="/?id=1&amp;handler=delete">delete</button>
 ```
 
-단추를 선택하면 양식의 `POST` 요청이 서버로 전송됩니다. 규칙에 따라 처리기 메서드의 이름은 `handler` 매개 변수의 값을 기반으로 `OnPost[handler]Async` 체계에 의해 선택됩니다.
+단추를 선택하면 양식의 `POST` 요청이 서버로 전송됩니다. 규약에 따라 처리기 메서드의 이름은 `handler` 매개 변수의 값을 기반으로 `OnPost[handler]Async` 체계에 의해 선택됩니다.
 
 이번 예제에서는 `handler`가 `delete`이므로 `POST` 요청을 처리하기 위해 `OnPostDeleteAsync` 처리기 메서드가 사용됩니다. `asp-page-handler`가 `remove` 같은 다른 값으로 설정되면 `OnPostRemoveAsync`라는 이름의 처리기 메서드가 선택됩니다. 다음은 `OnPostDeleteAsync` 처리기를 보여 주는 코드입니다.
 
@@ -971,7 +971,7 @@ Razor Page의 뷰 검색에는 *Pages* 폴더가 포함됩니다. MVC 컨트롤�
 
 `RedirectToPage("Index")`, `RedirectToPage("./Index")` 및 `RedirectToPage("../Index")`는 *상대적 이름*입니다. `RedirectToPage`의 매개 변수는 현재 페이지의 경로와 *결합*되어 대상 페이지의 이름을 컴퓨팅합니다.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
 
-상대적 이름 연결은 구조가 복잡한 사이트를 만들때 유용합니다. 상대적 이름을 사용하여 한 폴더의 여러 페이지들을 연결하면 해당 폴더의 이름을 바꿀 수 있습니다. 그래도 여전히 모든 링크는 작동합니다(링크에 폴더 이름이 포함되어 있지 않기 때문입니다).
+상대적 이름 연결은 구조가 복잡한 사이트를 만들때 유용합니다. 상대적 이름을 사용하여 한 폴더의 여러 페이지들을 연결하면 해당 폴더의 이름을 바꿀 수 있습니다. 그래도 여전히 모든 링크는 동작합니다(링크에 폴더 이름이 포함되어 있지 않기 때문입니다).
 
 다른 [영역](xref:mvc/controllers/areas)에서 페이지로 리디렉션하려면 영역을 지정하세요.
 
