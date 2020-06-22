@@ -297,94 +297,134 @@
               uid: tutorials/signalr-blazor-webassembly
         - name: 템플릿
           uid: blazor/templates
+        - name: 기본 사항
+          items:
+            - name: 라우팅
+              uid: blazor/fundamentals/routing
+            - name: Configuration
+              uid: blazor/fundamentals/configuration
+            - name: 종속성 주입
+              uid: blazor/fundamentals/dependency-injection
+            - name: 환경
+              uid: blazor/fundamentals/environments
+            - name: 로깅
+              uid: blazor/fundamentals/logging
+            - name: 오류 처리
+              uid: blazor/fundamentals/handle-errors
+            - name: 추가 시나리오
+              uid: blazor/fundamentals/additional-scenarios
         - name: 구성 요소
-          uid: blazor/components
-        - name: 데이터 바인딩
-          uid: blazor/data-binding
-        - name: 이벤트 처리
-          uid: blazor/event-handling
-        - name: 수명 주기
-          uid: blazor/lifecycle
-        - name: 템플릿 기반 구성 요소
-          uid: blazor/templated-components
-        - name: 구성 요소 통합
-          uid: blazor/integrate-components
+          items:
+            - name: 개요
+              uid: blazor/components/index
+            - name: 기본 제공 구성 요소
+              items:
+                - name: 앱
+                  uid: blazor/templates
+                - name: 인증
+                  uid: blazor/security/webassembly/additional-scenarios
+                - name: AuthorizeView
+                  uid: blazor/security/index
+                - name: InputCheckbox
+                  uid: blazor/forms-validation
+                - name: InputDate
+                  uid: blazor/forms-validation
+                - name: InputNumber
+                  uid: blazor/forms-validation
+                - name: InputSelect
+                  uid: blazor/forms-validation
+                - name: InputText
+                  uid: blazor/forms-validation
+                - name: InputTextArea
+                  uid: blazor/forms-validation
+                - name: MainLayout
+                  uid: blazor/layouts
+                - name: NavLink
+                  uid: blazor/fundamentals/routing
+                - name: NavMenu
+                  uid: blazor/fundamentals/routing
+                - name: 라우터
+                  uid: blazor/fundamentals/routing
+            - name: 연계 값 및 매개 변수
+              uid: blazor/components/cascading-values-and-parameters
+            - name: 데이터 바인딩
+              uid: blazor/components/data-binding
+            - name: 이벤트 처리
+              uid: blazor/components/event-handling
+            - name: 수명 주기
+              uid: blazor/components/lifecycle
+            - name: 템플릿 기반 구성 요소
+              uid: blazor/components/templated-components
+            - name: 구성 요소 통합
+              uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
+            - name: 구성 요소 라이브러리
+              uid: blazor/components/class-libraries
         - name: 전역화 및 지역화
           uid: blazor/globalization-localization
         - name: 레이아웃
           uid: blazor/layouts
         - name: 양식 및 유효성 검사
           uid: blazor/forms-validation
-        - name: 종속성 주입
-          uid: blazor/dependency-injection
-        - name: 라우팅
-          uid: blazor/routing
         - name: .NET에서 JavaScript 호출
           uid: blazor/call-javascript-from-dotnet
         - name: JavaScript에서 .NET 호출
           uid: blazor/call-dotnet-from-javascript
-        - name: 호스팅 모델 구성
-          uid: blazor/hosting-model-configuration
-        - name: 구성 요소 라이브러리
-          uid: blazor/class-libraries
         - name: 보안 및 ID
           items:
             - name: 개요
-              uid: security/blazor/index
+              uid: blazor/security/index
             - name: Blazor WebAssembly
               items:
                 - name: 개요
-                  uid: security/blazor/webassembly/index
+                  uid: blazor/security/webassembly/index
                 - name: 인증 라이브러리를 사용하는 독립 실행형
-                  uid: security/blazor/webassembly/standalone-with-authentication-library
+                  uid: blazor/security/webassembly/standalone-with-authentication-library
                 - name: Microsoft 계정을 사용하는 독립 실행형
-                  uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+                  uid: blazor/security/webassembly/standalone-with-microsoft-accounts
                 - name: AAD를 사용하는 독립 실행형
-                  uid: security/blazor/webassembly/standalone-with-azure-active-directory
+                  uid: blazor/security/webassembly/standalone-with-azure-active-directory
                 - name: AAD B2C를 사용하는 독립 실행형
-                  uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+                  uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
                 - name: AAD를 사용하는 호스트형
-                  uid: security/blazor/webassembly/hosted-with-azure-active-directory
+                  uid: blazor/security/webassembly/hosted-with-azure-active-directory
                 - name: AAD B2C를 사용하는 호스트형
-                  uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                  uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
                 - name: ID 서버를 사용하는 호스트형
-                  uid: security/blazor/webassembly/hosted-with-identity-server
+                  uid: blazor/security/webassembly/hosted-with-identity-server
                 - name: 추가 시나리오
-                  uid: security/blazor/webassembly/additional-scenarios
+                  uid: blazor/security/webassembly/additional-scenarios
                 - name: AAD 그룹 및 역할
-                  uid: security/blazor/webassembly/aad-groups-roles
+                  uid: blazor/security/webassembly/aad-groups-roles
             - name: Blazor 서버
               items:
                 - name: 개요
-                  uid: security/blazor/server/index
+                  uid: blazor/security/server/index
                 - name: 위협 해결 방법
-                  uid: security/blazor/server/threat-mitigation
+                  uid: blazor/security/server/threat-mitigation
                 - name: 추가 시나리오
-                  uid: security/blazor/server/additional-scenarios
+                  uid: blazor/security/server/additional-scenarios
             - name: 콘텐츠 보안 정책
-              uid: security/blazor/content-security-policy
+              uid: blazor/security/content-security-policy
         - name: 상태 관리
           uid: blazor/state-management
-        - name: 오류 처리
-          uid: blazor/handle-errors
         - name: WebAssembly 디버그
           uid: blazor/debug
         - name: WebAssembly에서 웹 API 호출
           uid: blazor/call-web-api
         - name: WebAssembly 성능
-          uid: performance/blazor/webassembly-best-practices
+          uid: blazor/webassembly-performance-best-practices
         - name: 프로그레시브 웹 애플리케이션
           uid: blazor/progressive-web-app
         - name: 호스트 및 배포
           items:
             - name: 개요
-              uid: host-and-deploy/blazor/index
+              uid: blazor/host-and-deploy/index
             - name: Blazor WebAssembly
-              uid: host-and-deploy/blazor/webassembly
+              uid: blazor/host-and-deploy/webassembly
             - name: Blazor 서버
-              uid: host-and-deploy/blazor/server
+              uid: blazor/host-and-deploy/server
             - name: 링커 구성
-              uid: host-and-deploy/blazor/configure-linker
+              uid: blazor/host-and-deploy/configure-linker
         - name: 고급 시나리오
           uid: blazor/advanced-scenarios
     - name: 클라이언트 쪽 개발
@@ -445,15 +485,15 @@
             - name: 환경
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
             - name: Form
-              href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
+              href: mvc/views/working-with-forms.md#the-form-tag-helper
             - name: 양식 작업
-              href: 'mvc/views/working-with-forms.md#the-form-action-tag-helper'
+              href: mvc/views/working-with-forms.md#the-form-action-tag-helper
             - name: 이미지
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
             - name: 입력
-              href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
+              href: mvc/views/working-with-forms.md#the-input-tag-helper
             - name: 레이블
-              href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
+              href: mvc/views/working-with-forms.md#the-label-tag-helper
             - name: 링크
               uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
             - name: Partial
@@ -461,13 +501,13 @@
             - name: 스크립트
               uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
             - name: 선택
-              href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
+              href: mvc/views/working-with-forms.md#the-select-tag-helper
             - name: 텍스트 영역
-              href: 'mvc/views/working-with-forms.md#the-textarea-tag-helper'
+              href: mvc/views/working-with-forms.md#the-textarea-tag-helper
             - name: 유효성 검사 메시지
-              href: 'mvc/views/working-with-forms.md#the-validation-message-tag-helper'
+              href: mvc/views/working-with-forms.md#the-validation-message-tag-helper
             - name: 유효성 검사 요약
-              href: 'mvc/views/working-with-forms.md#the-validation-summary-tag-helper'
+              href: mvc/views/working-with-forms.md#the-validation-summary-tag-helper
     - name: 고급
       items:
         - name: 애플리케이션 파트
@@ -640,7 +680,7 @@
       items:
         - name: gRPC 서비스 시작
           uid: tutorials/grpc/grpc-start
-    - name: 'C#을 사용하는 gRPC 서비스'
+    - name: C#을 사용하는 gRPC 서비스
       uid: grpc/basics
     - name: ASP.NET Core를 사용하는 gRPC 서비스
       uid: grpc/aspnetcore
@@ -890,13 +930,13 @@
     - name: Blazor
       items:
         - name: 개요
-          uid: host-and-deploy/blazor/index
+          uid: blazor/host-and-deploy/index
         - name: Blazor WebAssembly
-          uid: host-and-deploy/blazor/webassembly
+          uid: blazor/host-and-deploy/webassembly
         - name: Blazor 서버
-          uid: host-and-deploy/blazor/server
+          uid: blazor/host-and-deploy/server
         - name: 링커 구성
-          uid: host-and-deploy/blazor/configure-linker
+          uid: blazor/host-and-deploy/configure-linker
 - name: 보안 및 ID
   displayName: 'authentication, authorization'
   items:
@@ -1132,39 +1172,39 @@
     - name: Blazor
       items:
         - name: 개요
-          uid: security/blazor/index
+          uid: blazor/security/index
         - name: Blazor WebAssembly
           items:
             - name: 개요
-              uid: security/blazor/webassembly/index
+              uid: blazor/security/webassembly/index
             - name: 인증 라이브러리를 사용하는 독립 실행형
-              uid: security/blazor/webassembly/standalone-with-authentication-library
+              uid: blazor/security/webassembly/standalone-with-authentication-library
             - name: Microsoft 계정을 사용하는 독립 실행형
-              uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+              uid: blazor/security/webassembly/standalone-with-microsoft-accounts
             - name: AAD를 사용하는 독립 실행형
-              uid: security/blazor/webassembly/standalone-with-azure-active-directory
+              uid: blazor/security/webassembly/standalone-with-azure-active-directory
             - name: AAD B2C를 사용하는 독립 실행형
-              uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+              uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
             - name: AAD를 사용하는 호스트형
-              uid: security/blazor/webassembly/hosted-with-azure-active-directory
+              uid: blazor/security/webassembly/hosted-with-azure-active-directory
             - name: AAD B2C를 사용하는 호스트형
-              uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+              uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
             - name: ID 서버를 사용하는 호스트형
-              uid: security/blazor/webassembly/hosted-with-identity-server
+              uid: blazor/security/webassembly/hosted-with-identity-server
             - name: 추가 시나리오
-              uid: security/blazor/webassembly/additional-scenarios
+              uid: blazor/security/webassembly/additional-scenarios
             - name: AAD 그룹 및 역할
-              uid: security/blazor/webassembly/aad-groups-roles
+              uid: blazor/security/webassembly/aad-groups-roles
         - name: Blazor 서버
           items:
             - name: 개요
-              uid: security/blazor/server/index
+              uid: blazor/security/server/index
             - name: 위협 해결 방법
-              uid: security/blazor/server/threat-mitigation
+              uid: blazor/security/server/threat-mitigation
             - name: 추가 시나리오
-              uid: security/blazor/server/additional-scenarios
+              uid: blazor/security/server/additional-scenarios
         - name: 콘텐츠 보안 정책
-          uid: security/blazor/content-security-policy
+          uid: blazor/security/content-security-policy
 - name: 성능
   items:
     - name: 개요
@@ -1190,7 +1230,7 @@
     - name: 로드 및 스트레스 테스트
       uid: test/loadtests
     - name: Blazor WebAssembly
-      uid: performance/blazor/webassembly-best-practices
+      uid: blazor/webassembly-performance-best-practices
 - name: 전역화 및 지역화
   items:
     - name: 개요
