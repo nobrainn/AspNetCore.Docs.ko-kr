@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: f9d2e73f57d69e1eb5039019dc9e64193cf67820
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 61ddcdc75a627fe777fab88b41bdbc4c7f9be9f3
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105794"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84723992"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core용 gRPC의 인증 및 권한 부여
 
@@ -117,7 +117,7 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 클라이언트에서 인증을 위해 클라이언트 인증서를 제공할 수도 있습니다. [인증서 인증](https://tools.ietf.org/html/rfc5246#section-7.4.4)은 ASP.NET Core에 도달하기 훨씬 전에 TLS 수준에서 수행됩니다. 요청이 ASP.NET Core에 도달하면 [클라이언트 인증서 인증 패키지](xref:security/authentication/certauth)를 사용하여 인증서를 `ClaimsPrincipal`로 확인할 수 있습니다.
 
 > [!NOTE]
-> 클라이언트 인증서를 허용하도록 호스트를 구성해야 합니다. Kestrel, IIS 및 Azure에서 클라이언트 인증서를 허용하는 방법에 대한 자세한 내용은 [인증서를 요구하도록 호스트 구성](xref:security/authentication/certauth#configure-your-host-to-require-certificates)을 참조하세요.
+> 클라이언트 인증서를 허용하도록 서버를 구성합니다. Kestrel, IIS 및 Azure에서 클라이언트 인증서를 허용하는 방법에 대한 내용은 <xref:security/authentication/certauth#configure-your-server-to-require-certificates>를 참조하세요.
 
 .NET gRPC 클라이언트에서 클라이언트 인증서는 `HttpClientHandler`에 추가되며, gRPC 클라이언트를 만드는 데 사용됩니다.
 

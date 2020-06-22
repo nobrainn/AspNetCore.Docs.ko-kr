@@ -5,7 +5,7 @@ description: ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 05/19/2020
+ms.date: 06/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 086629f88ad04faed812bd16683e7d073f3e8ede
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102287"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122076"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor 소개
 
@@ -149,7 +149,7 @@ Blazor 서버에서 브라우저와 통신하기 위해 사용하는 연결은 J
 
 ## <a name="code-sharing-and-net-standard"></a>코드 공유 및 .NET Standard
 
-Blazor는 [.NET Standard 2.0](/dotnet/standard/net-standard)을 구현합니다. .NET Standard는 .NET 구현에서 공통적인 .NET API의 공식 사양입니다. .NET Standard 클래스 라이브러리는 Blazor, .NET Framework, .NET Core, Xamarin, Mono, Unity 등 다양한 .NET 플랫폼 간에 공유할 수 있습니다.
+Blazor는 Blazor 프로젝트에서 .NET Standard 2.1 또는 이전 사양을 준수하는 라이브러리를 참조할 수 있도록 하는 [.NET Standard 2.1](/dotnet/standard/net-standard)을 구현합니다. .NET Standard는 .NET 구현에서 공통적인 .NET API의 공식 사양입니다. .NET Standard 클래스 라이브러리는 Blazor, .NET Framework, .NET Core, Xamarin, Mono, Unity 등 다양한 .NET 플랫폼 간에 공유할 수 있습니다.
 
 웹 브라우저 내에서 적용되지 않는 API(예: 파일 시스템 액세스, 소켓 열기 및 스레딩)에서 <xref:System.PlatformNotSupportedException>을 throw합니다.
 

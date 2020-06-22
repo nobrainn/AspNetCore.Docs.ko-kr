@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: ae33218d6944c62a08e677592ac0c66f9026b15f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a54861945d97728336149d5ffb39952c3d61b7bd
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766552"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724265"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 
@@ -189,6 +189,44 @@ public class ValuesController : ControllerBase
     }
 }
 ```
+
+## <a name="make-post-put-and-delete-requests"></a>POST, PUT 및 DELETE 요청 수행
+
+위의 예제에서 모든 HTTP 요청은 GET HTTP 동사를 사용합니다. `HttpClient`는 다음을 비롯한 다른 HTTP 동사도 지원합니다.
+
+* POST
+* PUT
+* Delete
+* 패치
+
+지원되는 HTTP 동사의 전체 목록은 <xref:System.Net.Http.HttpMethod>를 참조하세요.
+
+다음 예제에서는 HTTP POST 요청을 수행하는 방법을 보여 줍니다.
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Models/TodoClient.cs?name=snippet_POST)]
+
+위의 코드에서 `CreateItemAsync` 메서드는 다음을 수행합니다.
+
+* `System.Text.Json`을 사용하여 `TodoItem` 매개 변수를 JSON으로 serialize합니다. <xref:System.Text.Json.JsonSerializerOptions>의 인스턴스를 사용하여 serialization 프로세스를 구성합니다.
+* HTTP 요청의 본문에서 전송하기 위해 serialize된 JSON을 패키지할 <xref:System.Net.Http.StringContent>의 인스턴스를 만듭니다.
+* <xref:System.Net.Http.HttpClient.PostAsync%2A>를 호출하여 JSON 콘텐츠를 지정된 URL로 보냅니다. [HttpClient.BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress)에 추가되는 상대 URL입니다.
+* 응답 상태 코드가 성공을 나타내지 않을 경우 <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A>를 호출하여 예외를 throw합니다.
+
+`HttpClient`는 다른 형식의 콘텐츠도 지원합니다. 예를 들어 <xref:System.Net.Http.MultipartContent> 및 <xref:System.Net.Http.StreamContent>를 지정합니다. 지원되는 콘텐츠의 전체 목록은 <xref:System.Net.Http.HttpContent>를 참조하세요.
+
+다음 예제에서는 HTTP PUT 요청을 보여 줍니다.
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Models/TodoClient.cs?name=snippet_PUT)]
+
+앞의 코드는 POST 예제와 매우 비슷합니다. `SaveItemAsync` 메서드는 `PostAsync` 대신 <xref:System.Net.Http.HttpClient.PutAsync%2A>를 호출합니다.
+
+다음 예제에서는 HTTP DELETE 요청을 보여 줍니다.
+
+[!code-csharp[](http-requests/samples/3.x/HttpRequestsSample/Models/TodoClient.cs?name=snippet_DELETE)]
+
+위의 코드에서 `DeleteItemAsync` 메서드는 <xref:System.Net.Http.HttpClient.DeleteAsync%2A>를 호출합니다. HTTP DELETE 요청은 일반적으로 본문을 포함하지 않기 때문에 `DeleteAsync` 메서드는 `HttpContent`의 인스턴스를 허용하는 오버로드를 제공하지 않습니다.
+
+`HttpClient`에 다른 HTTP 동사를 사용하는 방법에 대한 자세한 내용은 <xref:System.Net.Http.HttpClient>를 참조하세요.
 
 ## <a name="outgoing-request-middleware"></a>나가는 요청 미들웨어
 
