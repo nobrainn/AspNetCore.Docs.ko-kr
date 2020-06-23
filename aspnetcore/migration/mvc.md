@@ -1,9 +1,9 @@
 ---
-title: ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션
-author: ardalis
-description: ASP.NET MVC 프로젝트를 ASP.NET Core MVC로 마이그레이션하는 방법에 대해 알아봅니다.
-ms.author: riande
-ms.date: 04/06/2019
+title: ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션하는 방법 알아보기
+author: wadepickett
+description: ASP.NET MVC 프로젝트를 ASP.NET Core MVC로 마이그레이션하기 시작 하는 방법에 대해 알아봅니다.
+ms.author: wpickett
+ms.date: 06/18/2020
 no-loc:
 - Blazor
 - Identity
@@ -11,167 +11,133 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 59a10c002958e5f719dbd59686f21df69da5f43e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d2b1cce4bf70893f164e77921df8122e0291be18
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777048"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85241025"
 ---
-# <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a><span data-ttu-id="a1da8-103">ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="a1da8-103">Migrate from ASP.NET MVC to ASP.NET Core MVC</span></span>
+# <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a><span data-ttu-id="ac68a-103">ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="ac68a-103">Migrate from ASP.NET MVC to ASP.NET Core MVC</span></span>
 
-<span data-ttu-id="a1da8-104">작성자, [Rick Anderson](https://twitter.com/RickAndMSFT), [Daniel Roth](https://github.com/danroth27), [Steve Smith](https://ardalis.com/)및 [Scott addie](https://scottaddie.com)</span><span class="sxs-lookup"><span data-stu-id="a1da8-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Daniel Roth](https://github.com/danroth27), [Steve Smith](https://ardalis.com/), and [Scott Addie](https://scottaddie.com)</span></span>
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="a1da8-105">이 문서에서는 ASP.NET MVC 프로젝트를 [ASP.NET CORE mvc](../mvc/overview.md)로 마이그레이션하기 시작 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-105">This article shows how to get started migrating an ASP.NET MVC project to [ASP.NET Core MVC](../mvc/overview.md).</span></span> <span data-ttu-id="a1da8-106">이 프로세스에서는 ASP.NET MVC에서 변경 된 많은 사항을 강조 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-106">In the process, it highlights many of the things that have changed from ASP.NET MVC.</span></span> <span data-ttu-id="a1da8-107">ASP.NET MVC에서 마이그레이션은 다중 단계 프로세스 이며,이 문서에서는 초기 설정, 기본 컨트롤러 및 뷰, 정적 콘텐츠 및 클라이언트 쪽 종속성에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-107">Migrating from ASP.NET MVC is a multiple step process and this article covers the initial setup, basic controllers and views, static content, and client-side dependencies.</span></span> <span data-ttu-id="a1da8-108">추가 문서에서는 많은 ASP.NET MVC 프로젝트에 있는 구성 및 id 코드를 마이그레이션하는 방법을 다룹니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-108">Additional articles cover migrating configuration and identity code found in many ASP.NET MVC projects.</span></span>
+<span data-ttu-id="ac68a-104">이 문서에서는 ASP.NET MVC 프로젝트를 [ASP.NET CORE mvc](xref:mvc/overview)로 마이그레이션하기 시작 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-104">This article shows how to start migrating an ASP.NET MVC project to [ASP.NET Core MVC](xref:mvc/overview).</span></span> <span data-ttu-id="ac68a-105">이 프로세스에서는 ASP.NET MVC와 관련 된 변경 내용을 강조 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-105">In the process, it highlights related changes from ASP.NET MVC.</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="a1da8-109">샘플의 버전 번호는 최신 버전이 아닐 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-109">The version numbers in the samples might not be current.</span></span> <span data-ttu-id="a1da8-110">프로젝트를 적절 하 게 업데이트 해야 할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-110">You may need to update your projects accordingly.</span></span>
+<span data-ttu-id="ac68a-106">ASP.NET MVC에서 마이그레이션하는 과정은 여러 단계로 진행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-106">Migrating from ASP.NET MVC is a multi-step process.</span></span> <span data-ttu-id="ac68a-107">이 문서에서는 다음 내용을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-107">This article covers:</span></span>
 
-## <a name="create-the-starter-aspnet-mvc-project"></a><span data-ttu-id="a1da8-111">스타터 ASP.NET MVC 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="a1da8-111">Create the starter ASP.NET MVC project</span></span>
+* <span data-ttu-id="ac68a-108">초기 설정.</span><span class="sxs-lookup"><span data-stu-id="ac68a-108">Initial setup.</span></span>
+* <span data-ttu-id="ac68a-109">기본 컨트롤러 및 뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-109">Basic controllers and views.</span></span>
+* <span data-ttu-id="ac68a-110">정적 콘텐츠.</span><span class="sxs-lookup"><span data-stu-id="ac68a-110">Static content.</span></span>
+* <span data-ttu-id="ac68a-111">클라이언트 쪽 종속성.</span><span class="sxs-lookup"><span data-stu-id="ac68a-111">Client-side dependencies.</span></span>
 
-<span data-ttu-id="a1da8-112">업그레이드를 시연 하기 위해 먼저 ASP.NET MVC 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-112">To demonstrate the upgrade, we'll start by creating a ASP.NET MVC app.</span></span> <span data-ttu-id="a1da8-113">*WebApp1* 이름으로 만듭니다. 그러면 네임 스페이스는 다음 단계에서 만드는 ASP.NET Core 프로젝트와 일치 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-113">Create it with the name *WebApp1* so the namespace matches the ASP.NET Core project we create in the next step.</span></span>
+<span data-ttu-id="ac68a-112">구성 및 코드 마이그레이션에 대 한 자세한 Identity 내용은 [ASP.NET Core 구성 마이그레이션](xref:migration/configuration) 및 [인증 및 Identity ASP.NET Core 마이그레이션](xref:migration/identity)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-112">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
-![Visual Studio 새 프로젝트 대화 상자](mvc/_static/new-project.png)
+## <a name="prerequisites"></a><span data-ttu-id="ac68a-113">필수 구성 요소</span><span class="sxs-lookup"><span data-stu-id="ac68a-113">Prerequisites</span></span>
 
-![새 웹 응용 프로그램 대화 상자: ASP.NET 템플릿 패널에서 선택 된 MVC 프로젝트 템플릿](mvc/_static/new-project-select-mvc-template.png)
+[!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
-<span data-ttu-id="a1da8-116">*선택 사항:* 솔루션 이름을 *WebApp1* 에서 *Mvc5*로 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-116">*Optional:* Change the name of the Solution from *WebApp1* to *Mvc5*.</span></span> <span data-ttu-id="a1da8-117">Visual Studio에서 새 솔루션 이름 (*Mvc5*)을 표시 합니다 .이를 통해 다음 프로젝트에서이 프로젝트를 더 쉽게 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-117">Visual Studio displays the new solution name (*Mvc5*), which makes it easier to tell this project from the next project.</span></span>
+## <a name="create-the-starter-aspnet-mvc-project"></a><span data-ttu-id="ac68a-114">스타터 ASP.NET MVC 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="ac68a-114">Create the starter ASP.NET MVC project</span></span>
 
-## <a name="create-the-aspnet-core-project"></a><span data-ttu-id="a1da8-118">ASP.NET Core 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="a1da8-118">Create the ASP.NET Core project</span></span>
+<span data-ttu-id="ac68a-115">마이그레이션할 Visual Studio의 예제 ASP.NET MVC 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-115">Create an example ASP.NET MVC project in Visual Studio to migrate:</span></span>
 
-<span data-ttu-id="a1da8-119">두 프로젝트의 네임 스페이스가 일치 하도록 이전 프로젝트와 동일한 이름을 사용 하 여 *비어* 있는 ASP.NET Core 웹 앱 (*WebApp1*)을 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-119">Create a new *empty* ASP.NET Core web app with the same name as the previous project (*WebApp1*) so the namespaces in the two projects match.</span></span> <span data-ttu-id="a1da8-120">동일한 네임 스페이스를 사용 하면 두 프로젝트 간에 코드를 쉽게 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-120">Having the same namespace makes it easier to copy code between the two projects.</span></span> <span data-ttu-id="a1da8-121">동일한 이름을 사용 하려면 이전 프로젝트가 아닌 다른 디렉터리에이 프로젝트를 만들어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-121">You'll have to create this project in a different directory than the previous project to use the same name.</span></span>
+1. <span data-ttu-id="ac68a-116">**파일 메뉴**에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-116">From the **File** menu, select **New** > **Project**.</span></span>
+1. <span data-ttu-id="ac68a-117">**ASP.NET 웹 응용 프로그램 (.NET Framework)** 을 선택 하 고 **다음**을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-117">Select **ASP.NET Web Application (.NET Framework)** and then select **Next**.</span></span>
+1. <span data-ttu-id="ac68a-118">다음 단계에서 만든 ASP.NET Core 프로젝트와 네임 스페이스가 일치 하도록 프로젝트 이름을 *WebApp1* 로 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-118">Name the project *WebApp1* so the namespace matches the ASP.NET Core project created in the next step.</span></span> <span data-ttu-id="ac68a-119">**만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-119">Select **Create**.</span></span>
+1. <span data-ttu-id="ac68a-120">**MVC**를 선택 하 고 **만들기**를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-120">Select **MVC**, and then select **Create**.</span></span>
 
-![새 프로젝트 대화 상자](mvc/_static/new_core.png)
+## <a name="create-the-aspnet-core-project"></a><span data-ttu-id="ac68a-121">ASP.NET Core 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="ac68a-121">Create the ASP.NET Core project</span></span>
 
-![New ASP.NET 웹 응용 프로그램 대화 상자: ASP.NET Core 템플릿 패널에서 빈 프로젝트 템플릿을 선택 했습니다.](mvc/_static/new-project-select-empty-aspnet5-template.png)
+<span data-ttu-id="ac68a-122">마이그레이션할 새 ASP.NET Core 프로젝트를 사용 하 여 새 솔루션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-122">Create a new solution with a new ASP.NET Core project to migrate to:</span></span>
 
-* <span data-ttu-id="a1da8-124">*선택 사항:* *웹 응용 프로그램* 프로젝트 템플릿을 사용 하 여 새 ASP.NET Core 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-124">*Optional:* Create a new ASP.NET Core app using the *Web Application* project template.</span></span> <span data-ttu-id="a1da8-125">프로젝트 이름을 *WebApp1*로 하 고 **개별 사용자 계정**에 대 한 인증 옵션을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-125">Name the project *WebApp1*, and select an authentication option of **Individual User Accounts**.</span></span> <span data-ttu-id="a1da8-126">이 앱의 이름을 *FullAspNetCore*로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-126">Rename this app to *FullAspNetCore*.</span></span> <span data-ttu-id="a1da8-127">이 프로젝트를 만들면 변환 시 시간이 절약 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-127">Creating this project saves you time in the conversion.</span></span> <span data-ttu-id="a1da8-128">템플릿 생성 코드를 살펴보면 최종 결과를 보거나 변환 프로젝트에 코드를 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-128">You can look at the template-generated code to see the end result or to copy code to the conversion project.</span></span> <span data-ttu-id="a1da8-129">템플릿 생성 프로젝트와 비교할 변환 단계에서 중단 되는 경우에도 유용 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-129">It's also helpful when you get stuck on a conversion step to compare with the template-generated project.</span></span>
+1. <span data-ttu-id="ac68a-123">Visual Studio의 두 번째 인스턴스를 시작 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-123">Launch a second instance of Visual Studio.</span></span>
+1. <span data-ttu-id="ac68a-124">**파일 메뉴**에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-124">From the **File** menu, select **New** > **Project**.</span></span>
+1. <span data-ttu-id="ac68a-125">**ASP.NET 웹 코어 웹 응용 프로그램** 을 선택 하 고 **다음**을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-125">Select **ASP.NET Web Core Web Application** and then select **Next**.</span></span>
+1. <span data-ttu-id="ac68a-126">**새 프로젝트 구성** 대화 상자에서 프로젝트 이름을 *WebApp1*로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-126">In the **Configure your new project** dialog, Name the project *WebApp1*.</span></span>
+1. <span data-ttu-id="ac68a-127">동일한 프로젝트 이름을 사용 하려면 위치를 이전 프로젝트가 아닌 다른 디렉터리로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-127">Set the location to a different directory than the previous project to use the same project name.</span></span> <span data-ttu-id="ac68a-128">동일한 네임 스페이스를 사용 하면 두 프로젝트 간에 코드를 쉽게 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-128">Using the same namespace makes it easier to copy code between the two projects.</span></span> <span data-ttu-id="ac68a-129">**만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-129">Select **Create**.</span></span>
+1. <span data-ttu-id="ac68a-130">**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.1**이 선택되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-130">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 3.1** are selected.</span></span> <span data-ttu-id="ac68a-131">**웹 응용 프로그램 (모델-뷰-컨트롤러)** 프로젝트 템플릿을 선택 하 고 **만들기**를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-131">Select the **Web Application (Model-View-Controller)** project template, and select **Create**.</span></span>
 
-## <a name="configure-the-site-to-use-mvc"></a><span data-ttu-id="a1da8-130">MVC를 사용 하도록 사이트 구성</span><span class="sxs-lookup"><span data-stu-id="a1da8-130">Configure the site to use MVC</span></span>
+## <a name="configure-the-aspnet-core-site-to-use-mvc"></a><span data-ttu-id="ac68a-132">MVC를 사용 하도록 ASP.NET Core 사이트 구성</span><span class="sxs-lookup"><span data-stu-id="ac68a-132">Configure the ASP.NET Core site to use MVC</span></span>
 
-::: moniker range=">= aspnetcore-2.1"
+<span data-ttu-id="ac68a-133">ASP.NET Core 3.0 이상 프로젝트에서 .NET Framework는 더 이상 지원 되는 대상 프레임 워크가 아닙니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-133">In ASP.NET Core 3.0 and later projects, .NET Framework is no longer a supported target framework.</span></span> <span data-ttu-id="ac68a-134">프로젝트는 .NET Core를 대상으로 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-134">Your project must target .NET Core.</span></span> <span data-ttu-id="ac68a-135">MVC를 포함 하는 ASP.NET Core 공유 프레임 워크는 .NET Core 런타임 설치의 일부입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-135">The ASP.NET Core shared framework, which includes MVC, is part of the .NET Core runtime installation.</span></span> <span data-ttu-id="ac68a-136">프로젝트 파일에서 `Microsoft.NET.Sdk.Web` SDK를 사용할 때 공유 프레임워크가 자동으로 참조됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-136">The shared framework is automatically referenced when using the `Microsoft.NET.Sdk.Web` SDK in the project file:</span></span>
 
-* <span data-ttu-id="a1da8-131">.NET Core를 대상으로 지정 하는 경우 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 가 기본적으로 참조 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-131">When targeting .NET Core, the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) is referenced by default.</span></span> <span data-ttu-id="a1da8-132">이 패키지는 MVC 앱에서 일반적으로 사용 하는 패키지를 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-132">This package contains packages commonly used by MVC apps.</span></span> <span data-ttu-id="a1da8-133">.NET Framework 대상으로 지정 하는 경우 패키지 참조는 프로젝트 파일에 개별적으로 나열 되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-133">If targeting .NET Framework, package references must be listed individually in the project file.</span></span>
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-* <span data-ttu-id="a1da8-134">.NET Core를 대상으로 지정 하는 경우 [AspNetCore 메타 패키지](xref:fundamentals/metapackage) 는 기본적으로 참조 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-134">When targeting .NET Core, the [Microsoft.AspNetCore.All metapackage](xref:fundamentals/metapackage) is referenced by default.</span></span> <span data-ttu-id="a1da8-135">이 패키지는 MVC 앱에서 일반적으로 사용 하는 패키지를 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-135">This package contains packages commonly used packages by MVC apps.</span></span> <span data-ttu-id="a1da8-136">.NET Framework 대상으로 지정 하는 경우 패키지 참조는 프로젝트 파일에 개별적으로 나열 되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-136">If targeting .NET Framework, package references must be listed individually in the project file.</span></span>
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.0"
-
-* <span data-ttu-id="a1da8-137">.NET Core 또는 .NET Framework를 대상으로 지정 하는 경우 MVC 앱에서 자주 사용 하는 패키지는 프로젝트 파일에 개별적으로 나열 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-137">When targeting .NET Core or .NET Framework, packages commonly used packages by MVC apps are listed individually in the project file.</span></span>
-
-::: moniker-end
-
-<span data-ttu-id="a1da8-138">`Microsoft.AspNetCore.Mvc`는 ASP.NET Core MVC 프레임 워크입니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-138">`Microsoft.AspNetCore.Mvc` is the ASP.NET Core MVC framework.</span></span> <span data-ttu-id="a1da8-139">`Microsoft.AspNetCore.StaticFiles`는 정적 파일 처리기입니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-139">`Microsoft.AspNetCore.StaticFiles` is the static file handler.</span></span> <span data-ttu-id="a1da8-140">ASP.NET Core 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다 ( [정적 파일](xref:fundamentals/static-files)참조).</span><span class="sxs-lookup"><span data-stu-id="a1da8-140">The ASP.NET Core runtime is modular, and you must explicitly opt in to serve static files (see [Static files](xref:fundamentals/static-files)).</span></span>
-
-* <span data-ttu-id="a1da8-141">*Startup.cs* 파일을 열고 다음 코드와 일치 하도록 코드를 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-141">Open the *Startup.cs* file and change the code to match the following:</span></span>
-
-  [!code-csharp[](mvc/sample/Startup.cs?highlight=13,26-31)]
-
-<span data-ttu-id="a1da8-142">확장 `UseStaticFiles` 메서드는 정적 파일 처리기를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-142">The `UseStaticFiles` extension method adds the static file handler.</span></span> <span data-ttu-id="a1da8-143">앞서 언급 했 듯이 ASP.NET 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-143">As mentioned previously, the ASP.NET runtime is modular, and you must explicitly opt in to serve static files.</span></span> <span data-ttu-id="a1da8-144">확장 `UseMvc` 메서드는 라우팅을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-144">The `UseMvc` extension method adds routing.</span></span> <span data-ttu-id="a1da8-145">자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="a1da8-145">For more information, see [Application Startup](xref:fundamentals/startup) and [Routing](xref:fundamentals/routing).</span></span>
-
-## <a name="add-a-controller-and-view"></a><span data-ttu-id="a1da8-146">컨트롤러 및 뷰 추가</span><span class="sxs-lookup"><span data-stu-id="a1da8-146">Add a controller and view</span></span>
-
-<span data-ttu-id="a1da8-147">이 섹션에서는 다음 섹션에서 마이그레이션할 ASP.NET MVC 컨트롤러 및 보기에 대 한 자리 표시자 역할을 하는 최소 컨트롤러 및 뷰를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-147">In this section, you'll add a minimal controller and view to serve as placeholders for the ASP.NET MVC controller and views you'll migrate in the next section.</span></span>
-
-* <span data-ttu-id="a1da8-148">*Controllers* 폴더를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-148">Add a *Controllers* folder.</span></span>
-
-* <span data-ttu-id="a1da8-149">*HomeController.cs* 라는 **컨트롤러 클래스** 를 *Controllers* 폴더에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-149">Add a **Controller Class** named *HomeController.cs* to the *Controllers* folder.</span></span>
-
-![새 항목 추가 대화 상자](mvc/_static/add_mvc_ctl.png)
-
-* <span data-ttu-id="a1da8-151">*Views* 폴더를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-151">Add a *Views* folder.</span></span>
-
-* <span data-ttu-id="a1da8-152">*보기/홈* 폴더를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-152">Add a *Views/Home* folder.</span></span>
-
-* <span data-ttu-id="a1da8-153">뷰 */홈* 폴더에 *Index. cshtml* 이라는 \*\* Razor 뷰\*\* 를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-153">Add a **Razor View** named *Index.cshtml* to the *Views/Home* folder.</span></span>
-
-![새 항목 추가 대화 상자](mvc/_static/view.png)
-
-<span data-ttu-id="a1da8-155">프로젝트 구조는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-155">The project structure is shown below:</span></span>
-
-![WebApp1의 파일 및 폴더를 표시 하는 솔루션 탐색기](mvc/_static/project-structure-controller-view.png)
-
-<span data-ttu-id="a1da8-157">*Views/Home/Index. cshtml* 파일의 내용을 다음으로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-157">Replace the contents of the *Views/Home/Index.cshtml* file with the following:</span></span>
-
-```html
-<h1>Hello world!</h1>
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-<span data-ttu-id="a1da8-158">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-158">Run the app.</span></span>
+<span data-ttu-id="ac68a-137">자세한 내용은 [프레임 워크 참조](xref:migration/22-to-30#framework-reference)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-137">For more information, see [Framework reference](xref:migration/22-to-30#framework-reference).</span></span>
 
-![Microsoft Edge에서 웹 앱 열기](mvc/_static/hello-world.png)
+<span data-ttu-id="ac68a-138">ASP.NET Core에서 클래스는 `Startup` 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-138">In ASP.NET Core, the `Startup` class:</span></span>
 
-<span data-ttu-id="a1da8-160">자세한 내용은 [컨트롤러](xref:mvc/controllers/actions) 및 [뷰](xref:mvc/views/overview) 를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="a1da8-160">See [Controllers](xref:mvc/controllers/actions) and [Views](xref:mvc/views/overview) for more information.</span></span>
+* <span data-ttu-id="ac68a-139">*Global.asax*를 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-139">Replaces *Global.asax*.</span></span>
+* <span data-ttu-id="ac68a-140">모든 앱 시작 작업을 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-140">Handles all app startup tasks.</span></span>
 
-<span data-ttu-id="a1da8-161">이제 최소한의 작업 ASP.NET Core 프로젝트가 있으므로 ASP.NET MVC 프로젝트에서 기능 마이그레이션을 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-161">Now that we have a minimal working ASP.NET Core project, we can start migrating functionality from the ASP.NET MVC project.</span></span> <span data-ttu-id="a1da8-162">다음을 이동 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-162">We need to move the following:</span></span>
+<span data-ttu-id="ac68a-141">자세한 내용은 <xref:fundamentals/startup>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-141">For more information, see <xref:fundamentals/startup>.</span></span>
 
-* <span data-ttu-id="a1da8-163">클라이언트 쪽 콘텐츠 (CSS, 글꼴 및 스크립트)</span><span class="sxs-lookup"><span data-stu-id="a1da8-163">client-side content (CSS, fonts, and scripts)</span></span>
+<span data-ttu-id="ac68a-142">ASP.NET Core 프로젝트에서 *Startup.cs* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-142">In the ASP.NET Core project, open the *Startup.cs* file:</span></span>
 
-* <span data-ttu-id="a1da8-164">controllers</span><span class="sxs-lookup"><span data-stu-id="a1da8-164">controllers</span></span>
+[!code-csharp[](mvc/samples/3.x/Startup.cs?highlight=13,30,32&name=snippet)]
 
-* <span data-ttu-id="a1da8-165">뷰</span><span class="sxs-lookup"><span data-stu-id="a1da8-165">views</span></span>
+<span data-ttu-id="ac68a-143">ASP.NET Core 앱은 미들웨어를 사용 하 여 프레임 워크 기능을 옵트인 (opt in) 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-143">ASP.NET Core apps must opt in to framework features with middleware.</span></span> <span data-ttu-id="ac68a-144">이전 템플릿에서 생성 된 코드는 다음 서비스 및 미들웨어를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-144">The previous template-generated code adds the following services and middleware:</span></span>
 
-* <span data-ttu-id="a1da8-166">모델</span><span class="sxs-lookup"><span data-stu-id="a1da8-166">models</span></span>
+* <span data-ttu-id="ac68a-145"><xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A>확장 메서드는 컨트롤러, API 관련 기능 및 뷰에 대 한 MVC 서비스 지원을 등록 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-145">The <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A> extension method registers MVC service support for controllers, API-related features, and views.</span></span> <span data-ttu-id="ac68a-146">MVC 서비스 등록 옵션에 대 한 자세한 내용은 [mvc 서비스 등록](xref:migration/22-to-30#mvc-service-registration) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-146">For more information on MVC service registration options, see [MVC service registration](xref:migration/22-to-30#mvc-service-registration)</span></span>
+* <span data-ttu-id="ac68a-147"><xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>확장 메서드는 정적 파일 처리기를 추가 합니다 `Microsoft.AspNetCore.StaticFiles` .</span><span class="sxs-lookup"><span data-stu-id="ac68a-147">The <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> extension method adds the static file handler `Microsoft.AspNetCore.StaticFiles`.</span></span> <span data-ttu-id="ac68a-148">`UseStaticFiles`확장 메서드는 이전에 호출 해야 합니다 `UseRouting` .</span><span class="sxs-lookup"><span data-stu-id="ac68a-148">The `UseStaticFiles` extension method must be called before `UseRouting`.</span></span> <span data-ttu-id="ac68a-149">자세한 내용은 <xref:fundamentals/static-files>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-149">For more information, see <xref:fundamentals/static-files>.</span></span>
+* <span data-ttu-id="ac68a-150"><xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>확장 메서드는 라우팅을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-150">The <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> extension method adds routing.</span></span> <span data-ttu-id="ac68a-151">자세한 내용은 <xref:fundamentals/routing>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-151">For more information, see <xref:fundamentals/routing>.</span></span>
 
-* <span data-ttu-id="a1da8-167">묶음</span><span class="sxs-lookup"><span data-stu-id="a1da8-167">bundling</span></span>
+<span data-ttu-id="ac68a-152">이 기존 구성에는 예제 ASP.NET MVC 프로젝트를 마이그레이션하는 데 필요한 항목이 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-152">This existing configuration includes what is needed to migrate the example ASP.NET MVC project.</span></span> <span data-ttu-id="ac68a-153">미들웨어 옵션 ASP.NET Core에 대 한 자세한 내용은을 참조 하십시오 <xref:fundamentals/startup> .</span><span class="sxs-lookup"><span data-stu-id="ac68a-153">For more information on ASP.NET Core middleware options, see <xref:fundamentals/startup>.</span></span>
 
-* <span data-ttu-id="a1da8-168">filters</span><span class="sxs-lookup"><span data-stu-id="a1da8-168">filters</span></span>
+## <a name="migrate-controllers-and-views"></a><span data-ttu-id="ac68a-154">컨트롤러 및 뷰 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="ac68a-154">Migrate controllers and views</span></span>
 
-* <span data-ttu-id="a1da8-169">로그인/로그 아웃 합니다 Identity (다음 자습서에서 수행 됨).</span><span class="sxs-lookup"><span data-stu-id="a1da8-169">Log in/out, Identity (This is done in the next tutorial.)</span></span>
+<span data-ttu-id="ac68a-155">ASP.NET Core 프로젝트에서 마이그레이션할 ASP.NET MVC 프로젝트의 컨트롤러 및 뷰 클래스와 동일한 이름을 사용 하 여 자리 표시자 역할을 하는 새로운 빈 컨트롤러 클래스 및 뷰 클래스가 추가 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-155">In the ASP.NET Core project, a new empty controller class and view class would be added to serve as placeholders using the same names as the controller and view classes in any ASP.NET MVC project to migrate from.</span></span>
 
-## <a name="controllers-and-views"></a><span data-ttu-id="a1da8-170">컨트롤러 및 뷰</span><span class="sxs-lookup"><span data-stu-id="a1da8-170">Controllers and views</span></span>
+<span data-ttu-id="ac68a-156">ASP.NET Core *WebApp1* 프로젝트에는 ASP.NET MVC 프로젝트와 동일한 이름의 최소 예제 컨트롤러 및 뷰가 이미 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-156">The ASP.NET Core *WebApp1* project already includes a minimal example controller and view by the same name as the ASP.NET MVC project.</span></span> <span data-ttu-id="ac68a-157">ASP.NET MVC 컨트롤러에 대 한 자리 표시자와 ASP.NET MVC *WebApp1* 프로젝트에서 마이그레이션할 뷰를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-157">So those will serve as placeholders for the ASP.NET MVC controller and views to be migrated from the ASP.NET MVC *WebApp1* project.</span></span>
 
-* <span data-ttu-id="a1da8-171">ASP.NET MVC `HomeController` 의 각 메서드를 새 `HomeController`로 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-171">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="a1da8-172">ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);입니다. ASP.NET Core MVC에서 작업 메서드는 대신을 `IActionResult` 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-172">Note that in ASP.NET MVC, the built-in template's controller action method return type is [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="a1da8-173">`ActionResult`는 `IActionResult`를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-173">`ActionResult` implements `IActionResult`, so there's no need to change the return type of your action methods.</span></span>
+1. <span data-ttu-id="ac68a-158">ASP.NET MVC에서 메서드를 복사 `HomeController` 하 여 새 ASP.NET Core 메서드를 `HomeController` 대체 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-158">Copy the methods from the ASP.NET MVC `HomeController` to replace the new ASP.NET Core `HomeController` methods.</span></span> <span data-ttu-id="ac68a-159">작업 메서드의 반환 형식을 변경할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-159">There's no need to change the return type of the action methods.</span></span> <span data-ttu-id="ac68a-160">ASP.NET MVC 기본 제공 템플릿의 컨트롤러 작업 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);입니다. ASP.NET Core MVC에서 작업 메서드는 대신을 반환 합니다 `IActionResult` .</span><span class="sxs-lookup"><span data-stu-id="ac68a-160">The ASP.NET MVC built-in template's controller action method return type is [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="ac68a-161">`ActionResult`는 `IActionResult`를 구현합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-161">`ActionResult` implements `IActionResult`.</span></span>
+1. <span data-ttu-id="ac68a-162">ASP.NET Core 프로젝트에서 *Views/Home* 디렉터리를 마우스 오른쪽 단추로 클릭 하 고 **Add** > **기존 항목**추가를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-162">In the ASP.NET Core project, right-click the *Views/Home* directory, select **Add** > **Existing Item**.</span></span>
+1. <span data-ttu-id="ac68a-163">**기존 항목 추가** 대화 상자에서 ASP.NET MVC *WebApp1* 프로젝트의 *Views/Home* 디렉터리로 이동 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-163">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project's *Views/Home* directory.</span></span>
+1. <span data-ttu-id="ac68a-164">*About. cshtml*및 *Contact*를 선택 하 고,이 파일을 *인덱스* 를 선택 하 고, Razor **추가**를 선택 하 고 기존 파일을 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-164">Select the *About.cshtml*, *Contact.cshtml*, and *Index.cshtml* Razor view files, then select **Add**, replacing the existing files.</span></span>
 
-* <span data-ttu-id="a1da8-174">ASP.NET MVC 프로젝트에서 MVC ASP.NET Core 프로젝트에 *대 한* Razor *파일을* *복사 합니다.*</span><span class="sxs-lookup"><span data-stu-id="a1da8-174">Copy the *About.cshtml*, *Contact.cshtml*, and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+<span data-ttu-id="ac68a-165">자세한 내용은 <xref:mvc/controllers/actions> 및 <xref:mvc/views/overview>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-165">For more information, see <xref:mvc/controllers/actions> and <xref:mvc/views/overview>.</span></span>
 
-* <span data-ttu-id="a1da8-175">ASP.NET Core 앱을 실행 하 고 각 메서드를 테스트 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-175">Run the ASP.NET Core app and test each method.</span></span> <span data-ttu-id="a1da8-176">레이아웃 파일이 나 스타일을 아직 마이그레이션하지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-176">We haven't migrated the layout file or styles yet, so the rendered views only contain the content in the view files.</span></span> <span data-ttu-id="a1da8-177">및 뷰에 대 한 레이아웃 파일 생성 링크가 없으므로 브라우저에서 호출 해야 합니다 (4492을 프로젝트에서 사용 되는 포트 번호로 대체). **4492** `About` `Contact`</span><span class="sxs-lookup"><span data-stu-id="a1da8-177">You won't have the layout file generated links for the `About` and `Contact` views, so you'll have to invoke them from the browser (replace **4492** with the port number used in your project).</span></span>
+## <a name="test-each-method"></a><span data-ttu-id="ac68a-166">각 메서드 테스트</span><span class="sxs-lookup"><span data-stu-id="ac68a-166">Test each method</span></span>
 
-  * `http://localhost:4492/home/about`
+<span data-ttu-id="ac68a-167">그러나 각 컨트롤러 끝점을 테스트할 수 있지만 레이아웃 및 스타일은 문서의 뒷부분에서 다룹니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-167">Each controller endpoint can be tested, however, layout and styles are covered later in the document.</span></span>
 
-  * `http://localhost:4492/home/contact`
+1. <span data-ttu-id="ac68a-168">ASP.NET Core 앱을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-168">Run the ASP.NET Core app.</span></span>
+1. <span data-ttu-id="ac68a-169">현재 포트 번호를 ASP.NET Core 프로젝트에 사용 되는 포트 번호로 바꿔서 실행 중인 ASP.NET Core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-169">Invoke the rendered views from the browser on the running ASP.NET Core app by replacing the current port number with the port number used in the ASP.NET Core project.</span></span> <span data-ttu-id="ac68a-170">예들 들어 `https://localhost:44375/home/about`입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-170">For example, `https://localhost:44375/home/about`.</span></span>
 
-![연락처 페이지](mvc/_static/contact-page.png)
+## <a name="migrate-static-content"></a><span data-ttu-id="ac68a-171">정적 콘텐츠 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="ac68a-171">Migrate static content</span></span>
 
-<span data-ttu-id="a1da8-179">스타일 지정 및 메뉴 항목이 없다는 점에 유의 하십시오.</span><span class="sxs-lookup"><span data-stu-id="a1da8-179">Note the lack of styling and menu items.</span></span> <span data-ttu-id="a1da8-180">다음 섹션에서 이 문제를 해결합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-180">We'll fix that in the next section.</span></span>
+<span data-ttu-id="ac68a-172">ASP.NET MVC 5 이전 버전에서 정적 콘텐츠는 웹 프로젝트의 루트 디렉터리에서 호스팅되며 서버 쪽 파일과 혼합 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-172">In ASP.NET MVC 5 and earlier, static content was hosted from the web project's root directory and was intermixed with server-side files.</span></span> <span data-ttu-id="ac68a-173">ASP.NET Core에서 정적 파일은 프로젝트의 [웹 루트](xref:fundamentals/index#web-root) 디렉터리에 저장 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-173">In ASP.NET Core, static files are stored within the project's [web root](xref:fundamentals/index#web-root) directory.</span></span> <span data-ttu-id="ac68a-174">기본 디렉터리는 *{content root}/wwwroot*이지만 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-174">The default directory is *{content root}/wwwroot*, but it can be changed.</span></span> <span data-ttu-id="ac68a-175">자세한 내용은 [ASP.NET Core의 정적 파일](xref:fundamentals/static-files#serve-static-files)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-175">For more information, see [Static files in ASP.NET Core](xref:fundamentals/static-files#serve-static-files).</span></span>
 
-## <a name="static-content"></a><span data-ttu-id="a1da8-181">정적 콘텐츠</span><span class="sxs-lookup"><span data-stu-id="a1da8-181">Static content</span></span>
+<span data-ttu-id="ac68a-176">ASP.NET MVC *WebApp1* 프로젝트의 정적 콘텐츠를 ASP.NET Core *WebApp1* 프로젝트의 *wwwroot* 디렉터리에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-176">Copy the static content from the ASP.NET MVC *WebApp1* project to the *wwwroot* directory in the ASP.NET Core *WebApp1* project:</span></span>
 
-<span data-ttu-id="a1da8-182">이전 버전의 ASP.NET MVC에서 정적 콘텐츠는 웹 프로젝트의 루트에서 호스팅되며 서버 쪽 파일과 혼합 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-182">In previous versions of ASP.NET MVC, static content was hosted from the root of the web project and was intermixed with server-side files.</span></span> <span data-ttu-id="a1da8-183">ASP.NET Core에서 정적 콘텐츠는 *wwwroot* 폴더에 호스팅됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-183">In ASP.NET Core, static content is hosted in the *wwwroot* folder.</span></span> <span data-ttu-id="a1da8-184">이전 ASP.NET MVC 앱의 정적 콘텐츠를 ASP.NET Core 프로젝트의 *wwwroot* 폴더로 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-184">You'll want to copy the static content from your old ASP.NET MVC app to the *wwwroot* folder in your ASP.NET Core project.</span></span> <span data-ttu-id="a1da8-185">이 샘플 변환에서:</span><span class="sxs-lookup"><span data-stu-id="a1da8-185">In this sample conversion:</span></span>
+1. <span data-ttu-id="ac68a-177">ASP.NET Core 프로젝트에서 *wwwroot* 디렉터리를 마우스 오른쪽 단추로 클릭 하 고 **Add** > **기존 항목**추가를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-177">In the ASP.NET Core project, right-click the *wwwroot* directory, select **Add** > **Existing Item**.</span></span>
+1. <span data-ttu-id="ac68a-178">**기존 항목 추가** 대화 상자에서 ASP.NET MVC *WebApp1* 프로젝트로 이동 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-178">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project.</span></span>
+1. <span data-ttu-id="ac68a-179">*Favicon* 파일을 선택한 다음 **추가**를 선택 하 고 기존 파일을 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-179">Select the *favicon.ico* file, then select **Add**, replacing the existing file.</span></span>
 
-* <span data-ttu-id="a1da8-186">이전 MVC 프로젝트의 *favicon* 파일을 ASP.NET Core 프로젝트의 *wwwroot* 폴더로 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-186">Copy the *favicon.ico* file from the old MVC project to the *wwwroot* folder in the ASP.NET Core project.</span></span>
+## <a name="migrate-the-layout-files"></a><span data-ttu-id="ac68a-180">레이아웃 파일 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="ac68a-180">Migrate the layout files</span></span>
 
-<span data-ttu-id="a1da8-187">이전 ASP.NET MVC 프로젝트는 해당 스타일에 대해 [부트스트랩](https://getbootstrap.com/) 을 사용 하 고 *Content* 및 *Scripts* 폴더에 부트스트랩 파일을 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-187">The old ASP.NET MVC project uses [Bootstrap](https://getbootstrap.com/) for its styling and stores the Bootstrap files in the *Content* and *Scripts* folders.</span></span> <span data-ttu-id="a1da8-188">이전 ASP.NET MVC 프로젝트를 생성 한 템플릿이 레이아웃 파일 (*Views/Shared/_Layout cshtml*)의 부트스트랩을 참조 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-188">The template, which generated the old ASP.NET MVC project, references Bootstrap in the layout file (*Views/Shared/_Layout.cshtml*).</span></span> <span data-ttu-id="a1da8-189">ASP.NET MVC 프로젝트에서 새 프로젝트의 *wwwroot* 폴더로 *부트스트랩 .js* 및 *부트스트랩 .css* 파일을 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-189">You could copy the *bootstrap.js* and *bootstrap.css* files from the ASP.NET MVC project to the *wwwroot* folder in the new project.</span></span> <span data-ttu-id="a1da8-190">대신, 다음 섹션에서 CDNs를 사용 하 여 부트스트랩 (및 기타 클라이언트 쪽 라이브러리)에 대 한 지원을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-190">Instead, we'll add support for Bootstrap (and other client-side libraries) using CDNs in the next section.</span></span>
+<span data-ttu-id="ac68a-181">ASP.NET MVC 프로젝트 레이아웃 파일을 ASP.NET Core 프로젝트에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-181">Copy the ASP.NET MVC project layout files to the ASP.NET Core project:</span></span>
 
-## <a name="migrate-the-layout-file"></a><span data-ttu-id="a1da8-191">레이아웃 파일 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="a1da8-191">Migrate the layout file</span></span>
+1. <span data-ttu-id="ac68a-182">ASP.NET Core 프로젝트에서 *Views* 디렉터리를 마우스 오른쪽 단추로 클릭 하 고 **Add** > **기존 항목**추가를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-182">In the ASP.NET Core project, right-click the *Views* directory, select **Add** > **Existing Item**.</span></span>
+1. <span data-ttu-id="ac68a-183">**기존 항목 추가** 대화 상자에서 ASP.NET MVC *WebApp1* 프로젝트의 *Views* 디렉터리로 이동 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-183">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project's *Views* directory.</span></span>
+1. <span data-ttu-id="ac68a-184">*_ViewStart* 파일을 선택한 다음 **추가**를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-184">Select the *_ViewStart.cshtml* file then select **Add**.</span></span>
 
-* <span data-ttu-id="a1da8-192">이전 ASP.NET MVC 프로젝트의 *views* 폴더에 있는 *_ViewStart cshtml* 파일을 ASP.NET Core 프로젝트의 *views* 폴더에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-192">Copy the *_ViewStart.cshtml* file from the old ASP.NET MVC project's *Views* folder into the ASP.NET Core project's *Views* folder.</span></span> <span data-ttu-id="a1da8-193">*_ViewStart cshtml* 파일은 ASP.NET Core MVC에서 변경 되지 않았습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-193">The *_ViewStart.cshtml* file has not changed in ASP.NET Core MVC.</span></span>
+<span data-ttu-id="ac68a-185">ASP.NET MVC 프로젝트 공유 레이아웃 파일을 ASP.NET Core 프로젝트에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-185">Copy the ASP.NET MVC project shared layout files to the ASP.NET Core project:</span></span>
 
-* <span data-ttu-id="a1da8-194">*Views/Shared* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-194">Create a *Views/Shared* folder.</span></span>
+1. <span data-ttu-id="ac68a-186">ASP.NET Core 프로젝트에서 *Views/Shared* 디렉터리를 마우스 오른쪽 단추로 클릭 하 고 **Add** > **기존 항목**추가를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-186">In the ASP.NET Core project, right-click the *Views/Shared* directory, select **Add** > **Existing Item**.</span></span>
+1. <span data-ttu-id="ac68a-187">**기존 항목 추가** 대화 상자에서 ASP.NET MVC *WebApp1* 프로젝트의 *Views/Shared* 디렉터리로 이동 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-187">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project's *Views/Shared* directory.</span></span>
+1. <span data-ttu-id="ac68a-188">*_Layout* 파일을 선택한 다음 **추가**를 선택 하 여 기존 파일을 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-188">Select the *_Layout.cshtml* file, then select **Add**, replacing the existing file.</span></span>
 
-* <span data-ttu-id="a1da8-195">*선택 사항:* *FullAspNetCore* MVC 프로젝트의 *views* 폴더에 있는 *_ViewImports* 를 ASP.NET Core 프로젝트의 *views* 폴더에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-195">*Optional:* Copy *_ViewImports.cshtml* from the *FullAspNetCore* MVC project's *Views* folder into the ASP.NET Core project's *Views* folder.</span></span> <span data-ttu-id="a1da8-196">*_ViewImports cshtml* 파일에서 네임 스페이스 선언을 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-196">Remove any namespace declaration in the *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="a1da8-197">*_ViewImports cshtml* 파일은 모든 뷰 파일의 네임 스페이스를 제공 하 고 [태그 도우미](xref:mvc/views/tag-helpers/intro)에 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-197">The *_ViewImports.cshtml* file provides namespaces for all the view files and brings in [Tag Helpers](xref:mvc/views/tag-helpers/intro).</span></span> <span data-ttu-id="a1da8-198">태그 도우미는 새 레이아웃 파일에 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-198">Tag Helpers are used in the new layout file.</span></span> <span data-ttu-id="a1da8-199">*_ViewImports* 파일은 ASP.NET Core의 새로운 파일입니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-199">The *_ViewImports.cshtml* file is new for ASP.NET Core.</span></span>
+<span data-ttu-id="ac68a-189">ASP.NET Core 프로젝트에서 *_Layout* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-189">In the ASP.NET Core project, open the *_Layout.cshtml* file.</span></span> <span data-ttu-id="ac68a-190">아래에 표시 된 완료 된 코드와 일치 하도록 다음과 같이 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-190">Make the following changes to match the completed code shown below:</span></span>
 
-* <span data-ttu-id="a1da8-200">이전 ASP.NET MVC 프로젝트의 *views/shared* 폴더에 있는 *_Layout cshtml* 파일을 ASP.NET Core 프로젝트의 *views/shared* 폴더에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-200">Copy the *_Layout.cshtml* file from the old ASP.NET MVC project's *Views/Shared* folder into the ASP.NET Core project's *Views/Shared* folder.</span></span>
+<span data-ttu-id="ac68a-191">아래 완료 된 코드와 일치 하도록 부트스트랩 CSS 포함을 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-191">Update the Bootstrap CSS inclusion to match the completed code below:</span></span>
 
-<span data-ttu-id="a1da8-201">*_Layout cshtml* 파일을 열고 다음과 같이 변경 합니다 (완성 된 코드는 아래에 표시 됨).</span><span class="sxs-lookup"><span data-stu-id="a1da8-201">Open *_Layout.cshtml* file and make the following changes (the completed code is shown below):</span></span>
+1. <span data-ttu-id="ac68a-192">`@Styles.Render("~/Content/css")` `<link>` *부트스트랩* 을 로드할 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-192">Replace `@Styles.Render("~/Content/css")` with a `<link>` element to load *bootstrap.css* (see below).</span></span>
+1. <span data-ttu-id="ac68a-193">`@Scripts.Render("~/bundles/modernizr")`를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-193">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="a1da8-202">부트스트랩 `@Styles.Render("~/Content/css")` 을 로드할 `<link>` 요소로 대체 합니다 *bootstrap.css* (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="a1da8-202">Replace `@Styles.Render("~/Content/css")` with a `<link>` element to load *bootstrap.css* (see below).</span></span>
-
-* <span data-ttu-id="a1da8-203">`@Scripts.Render("~/bundles/modernizr")`를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-203">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
-
-* <span data-ttu-id="a1da8-204">`@Html.Partial("_LoginPartial")` 줄을 주석으로 `@*...*@`처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-204">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="a1da8-205">자세한 내용은 [인증 및 Identity ASP.NET Core 마이그레이션을](xref:migration/identity) 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="a1da8-205">For more information see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
-
-* <span data-ttu-id="a1da8-206">`<script>` 요소로 대체 `@Scripts.Render("~/bundles/jquery")` 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="a1da8-206">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
-
-* <span data-ttu-id="a1da8-207">`<script>` 요소로 대체 `@Scripts.Render("~/bundles/bootstrap")` 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="a1da8-207">Replace `@Scripts.Render("~/bundles/bootstrap")` with a `<script>` element (see below).</span></span>
-
-<span data-ttu-id="a1da8-208">부트스트랩 CSS 포함에 대 한 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-208">The replacement markup for Bootstrap CSS inclusion:</span></span>
+<span data-ttu-id="ac68a-194">부트스트랩 CSS 포함에 대해 완료 된 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-194">The completed replacement markup for Bootstrap CSS inclusion:</span></span>
 
 ```html
 <link rel="stylesheet"
@@ -180,7 +146,12 @@ ms.locfileid: "82777048"
     crossorigin="anonymous">
 ```
 
-<span data-ttu-id="a1da8-209">JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-209">The replacement markup for jQuery and Bootstrap JavaScript inclusion:</span></span>
+<span data-ttu-id="ac68a-195">다음 완성 된 코드와 일치 하도록 jQuery 및 부트스트랩 JavaScript 포함을 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-195">Update the jQuery and Bootstrap JavaScript inclusion to match the completed code below:</span></span>
+
+1. <span data-ttu-id="ac68a-196">`@Scripts.Render("~/bundles/jquery")` `<script>` 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-196">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
+1. <span data-ttu-id="ac68a-197">`@Scripts.Render("~/bundles/bootstrap")` `<script>` 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-197">Replace `@Scripts.Render("~/bundles/bootstrap")` with a `<script>` element (see below).</span></span>
+
+<span data-ttu-id="ac68a-198">JQuery 및 부트스트랩 JavaScript를 포함 하는 완성 된 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-198">The completed replacement markup for jQuery and Bootstrap JavaScript inclusion:</span></span>
 
 ```html
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -188,27 +159,403 @@ ms.locfileid: "82777048"
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 ```
 
-<span data-ttu-id="a1da8-210">업데이트 된 *_Layout cshtml* 파일은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-210">The updated *_Layout.cshtml* file is shown below:</span></span>
+<span data-ttu-id="ac68a-199">업데이트 된 *_Layout cshtml* 파일은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-199">The updated *_Layout.cshtml* file is shown below:</span></span>
 
-[!code-cshtml[](mvc/sample/Views/Shared/_Layout.cshtml?highlight=7-10,29,41-44)]
+[!code-cshtml[](mvc/samples/3.x/Views/Shared/_Layout.cshtml?highlight=7-10,40-42)]
 
-<span data-ttu-id="a1da8-211">브라우저에서 사이트를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-211">View the site in the browser.</span></span> <span data-ttu-id="a1da8-212">이제 올바른 스타일을 적절히 로드 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-212">It should now load correctly, with the expected styles in place.</span></span>
+<span data-ttu-id="ac68a-200">브라우저에서 사이트를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-200">View the site in the browser.</span></span> <span data-ttu-id="ac68a-201">예상 되는 스타일을 사용 하 여 렌더링 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-201">It should render with the expected styles in place.</span></span>
 
-* <span data-ttu-id="a1da8-213">*선택 사항:* 새 레이아웃 파일을 사용해 볼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-213">*Optional:* You might want to try using the new layout file.</span></span> <span data-ttu-id="a1da8-214">이 프로젝트의 경우 *FullAspNetCore* 프로젝트에서 레이아웃 파일을 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-214">For this project you can copy the layout file from the *FullAspNetCore* project.</span></span> <span data-ttu-id="a1da8-215">새 레이아웃 파일은 [태그 도우미](xref:mvc/views/tag-helpers/intro) 를 사용 하 고 다른 향상 된 기능을 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-215">The new layout file uses [Tag Helpers](xref:mvc/views/tag-helpers/intro) and has other improvements.</span></span>
+## <a name="configure-bundling-and-minification"></a><span data-ttu-id="ac68a-202">번들링 및 축소 구성하기</span><span class="sxs-lookup"><span data-stu-id="ac68a-202">Configure bundling and minification</span></span>
 
-## <a name="configure-bundling-and-minification"></a><span data-ttu-id="a1da8-216">번들링 및 축소 구성하기</span><span class="sxs-lookup"><span data-stu-id="a1da8-216">Configure bundling and minification</span></span>
+<span data-ttu-id="ac68a-203">ASP.NET Core는 [WebOptimizer](https://github.com/ligershark/WebOptimizer) 및 기타 유사한 라이브러리와 같은 여러 오픈 소스 번들 및 축소 솔루션과 호환 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-203">ASP.NET Core is compatible with several open-source bundling and minification solutions such as [WebOptimizer](https://github.com/ligershark/WebOptimizer) and other similar libraries.</span></span> <span data-ttu-id="ac68a-204">ASP.NET Core는 네이티브 묶음 및 축소 솔루션을 제공 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-204">ASP.NET Core doesn't provide a native bundling and minification solution.</span></span> <span data-ttu-id="ac68a-205">묶음 및 축소를 구성 하는 방법에 대 한 자세한 내용은 [묶음 및 축소](xref:client-side/bundling-and-minification)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-205">For information on configuring bundling and minification, see [Bundling and Minification](xref:client-side/bundling-and-minification).</span></span>
 
-<span data-ttu-id="a1da8-217">묶음 및 축소를 구성 하는 방법에 대 한 자세한 내용은 [묶음 및 축소](../client-side/bundling-and-minification.md)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="a1da8-217">For information about how to configure bundling and minification, see [Bundling and Minification](../client-side/bundling-and-minification.md).</span></span>
+## <a name="solve-http-500-errors"></a><span data-ttu-id="ac68a-206">HTTP 500 오류 해결</span><span class="sxs-lookup"><span data-stu-id="ac68a-206">Solve HTTP 500 errors</span></span>
 
-## <a name="solve-http-500-errors"></a><span data-ttu-id="a1da8-218">HTTP 500 오류 해결</span><span class="sxs-lookup"><span data-stu-id="a1da8-218">Solve HTTP 500 errors</span></span>
+<span data-ttu-id="ac68a-207">문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-207">There are many problems that can cause an HTTP 500 error message that contains no information on the source of the problem.</span></span> <span data-ttu-id="ac68a-208">예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 생성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-208">For example, if the *Views/_ViewImports.cshtml* file contains a namespace that doesn't exist in the project, an HTTP 500 error is generated.</span></span> <span data-ttu-id="ac68a-209">기본적으로 ASP.NET Core 앱에서는 확장이에 `UseDeveloperExceptionPage` 추가 되 `IApplicationBuilder` 고 환경에서 *개발*중일 때 실행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-209">By default in ASP.NET Core apps, the `UseDeveloperExceptionPage` extension is added to the `IApplicationBuilder` and executed when the environment is *Development*.</span></span> <span data-ttu-id="ac68a-210">다음 코드에 자세히 설명 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-210">This is detailed in the following code:</span></span>
 
-<span data-ttu-id="a1da8-219">문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-219">There are many problems that can cause a HTTP 500 error message that contain no information on the source of the problem.</span></span> <span data-ttu-id="a1da8-220">예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-220">For example, if the *Views/_ViewImports.cshtml* file contains a namespace that doesn't exist in your project, you'll get a HTTP 500 error.</span></span> <span data-ttu-id="a1da8-221">기본적으로 ASP.NET Core 앱에서는 `UseDeveloperExceptionPage` 확장이에 추가 되 `IApplicationBuilder` 고 구성이 *개발*될 때 실행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-221">By default in ASP.NET Core apps, the `UseDeveloperExceptionPage` extension is added to the `IApplicationBuilder` and executed when the configuration is *Development*.</span></span> <span data-ttu-id="a1da8-222">다음 코드에 자세히 설명 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-222">This is detailed in the following code:</span></span>
+[!code-csharp[](mvc/samples/3.x/Startup.cs?highlight=17-21&name=snippet)]
 
-[!code-csharp[](mvc/sample/Startup.cs?highlight=19-22)]
+<span data-ttu-id="ac68a-211">ASP.NET Core 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-211">ASP.NET Core converts unhandled exceptions into HTTP 500 error responses.</span></span> <span data-ttu-id="ac68a-212">일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-212">Normally, error details aren't included in these responses to prevent disclosure of potentially sensitive information about the server.</span></span> <span data-ttu-id="ac68a-213">자세한 내용은 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-213">For more information, see [Developer Exception Page](xref:fundamentals/error-handling#developer-exception-page).</span></span>
 
-<span data-ttu-id="a1da8-223">ASP.NET Core 웹 앱에서 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-223">ASP.NET Core converts unhandled exceptions in a web app into HTTP 500 error responses.</span></span> <span data-ttu-id="a1da8-224">일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="a1da8-224">Normally, error details aren't included in these responses to prevent disclosure of potentially sensitive information about the server.</span></span> <span data-ttu-id="a1da8-225">자세한 내용은 [오류 처리](../fundamentals/error-handling.md) 에서 **개발자 예외 페이지 사용** 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="a1da8-225">See **Using the Developer Exception Page** in [Handle errors](../fundamentals/error-handling.md) for more information.</span></span>
+## <a name="next-steps"></a><span data-ttu-id="ac68a-214">다음 단계</span><span class="sxs-lookup"><span data-stu-id="ac68a-214">Next steps</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="a1da8-226">추가 자료</span><span class="sxs-lookup"><span data-stu-id="a1da8-226">Additional resources</span></span>
+* <xref:migration/identity>
+
+## <a name="additional-resources"></a><span data-ttu-id="ac68a-215">추가 자료</span><span class="sxs-lookup"><span data-stu-id="ac68a-215">Additional resources</span></span>
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.2"
+
+<span data-ttu-id="ac68a-216">이 문서에서는 ASP.NET MVC 프로젝트를 [ASP.NET CORE mvc](xref:mvc/overview) 2.2로 마이그레이션하기 시작 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-216">This article shows how to start migrating an ASP.NET MVC project to [ASP.NET Core MVC](xref:mvc/overview) 2.2.</span></span> <span data-ttu-id="ac68a-217">이 프로세스에서는 ASP.NET MVC에서 변경 된 많은 사항을 강조 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-217">In the process, it highlights many of the things that have changed from ASP.NET MVC.</span></span> <span data-ttu-id="ac68a-218">ASP.NET MVC에서 마이그레이션하는 과정은 여러 단계로 진행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-218">Migrating from ASP.NET MVC is a multi-step process.</span></span> <span data-ttu-id="ac68a-219">이 문서에서는 다음 내용을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-219">This article covers:</span></span>
+
+* <span data-ttu-id="ac68a-220">초기 설정</span><span class="sxs-lookup"><span data-stu-id="ac68a-220">Initial setup</span></span>
+* <span data-ttu-id="ac68a-221">기본 컨트롤러 및 뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-221">Basic controllers and views</span></span>
+* <span data-ttu-id="ac68a-222">정적 콘텐츠</span><span class="sxs-lookup"><span data-stu-id="ac68a-222">Static content</span></span>
+* <span data-ttu-id="ac68a-223">클라이언트 쪽 종속성.</span><span class="sxs-lookup"><span data-stu-id="ac68a-223">Client-side dependencies.</span></span>
+
+<span data-ttu-id="ac68a-224">구성 및 코드 마이그레이션에 대 한 자세한 Identity 내용은 및을 참조 하십시오 <xref:migration/configuration> <xref:migration/identity> .</span><span class="sxs-lookup"><span data-stu-id="ac68a-224">For migrating configuration and Identity code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="ac68a-225">샘플의 버전 번호가 최신이 아닐 수 있습니다. 프로젝트를 적절 하 게 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-225">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
+
+## <a name="create-the-starter-aspnet-mvc-project"></a><span data-ttu-id="ac68a-226">스타터 ASP.NET MVC 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="ac68a-226">Create the starter ASP.NET MVC project</span></span>
+
+<span data-ttu-id="ac68a-227">업그레이드를 시연 하기 위해 먼저 ASP.NET MVC 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-227">To demonstrate the upgrade, we'll start by creating an ASP.NET MVC app.</span></span> <span data-ttu-id="ac68a-228">*WebApp1* 이름으로 만듭니다. 그러면 네임 스페이스는 다음 단계에서 만든 ASP.NET Core 프로젝트와 일치 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-228">Create it with the name *WebApp1* so the namespace matches the ASP.NET Core project created in the next step.</span></span>
+
+![Visual Studio 새 프로젝트 대화 상자](mvc/_static/new-project.png)
+
+![새 웹 응용 프로그램 대화 상자: ASP.NET 템플릿 패널에서 선택 된 MVC 프로젝트 템플릿](mvc/_static/new-project-select-mvc-template.png)
+
+<span data-ttu-id="ac68a-231">*선택 사항:* 솔루션 이름을 *WebApp1* 에서 *Mvc5*로 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-231">*Optional:* Change the name of the Solution from *WebApp1* to *Mvc5*.</span></span> <span data-ttu-id="ac68a-232">Visual Studio에서 새 솔루션 이름 (*Mvc5*)을 표시 합니다 .이를 통해 다음 프로젝트에서이 프로젝트를 더 쉽게 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-232">Visual Studio displays the new solution name (*Mvc5*), which makes it easier to tell this project from the next project.</span></span>
+
+## <a name="create-the-aspnet-core-project"></a><span data-ttu-id="ac68a-233">ASP.NET Core 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="ac68a-233">Create the ASP.NET Core project</span></span>
+
+<span data-ttu-id="ac68a-234">두 프로젝트의 네임 스페이스가 일치 하도록 이전 프로젝트와 동일한 이름을 사용 하 여 *비어* 있는 ASP.NET Core 웹 앱 (*WebApp1*)을 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-234">Create a new *empty* ASP.NET Core web app with the same name as the previous project (*WebApp1*) so the namespaces in the two projects match.</span></span> <span data-ttu-id="ac68a-235">동일한 네임 스페이스를 사용 하면 두 프로젝트 간에 코드를 쉽게 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-235">Having the same namespace makes it easier to copy code between the two projects.</span></span> <span data-ttu-id="ac68a-236">같은 이름을 사용 하려면 이전 프로젝트가 아닌 다른 디렉터리에이 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-236">Create this project in a different directory than the previous project to use the same name.</span></span>
+
+![새 프로젝트 대화 상자](mvc/_static/new_core.png)
+
+![New ASP.NET 웹 응용 프로그램 대화 상자: ASP.NET Core 템플릿 패널에서 빈 프로젝트 템플릿을 선택 했습니다.](mvc/_static/new-project-select-empty-aspnet5-template.png)
+
+* <span data-ttu-id="ac68a-239">*선택 사항:* *웹 응용 프로그램* 프로젝트 템플릿을 사용 하 여 새 ASP.NET Core 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-239">*Optional:* Create a new ASP.NET Core app using the *Web Application* project template.</span></span> <span data-ttu-id="ac68a-240">프로젝트 이름을 *WebApp1*로 하 고 **개별 사용자 계정**에 대 한 인증 옵션을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-240">Name the project *WebApp1*, and select an authentication option of **Individual User Accounts**.</span></span> <span data-ttu-id="ac68a-241">이 앱의 이름을 *FullAspNetCore*로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-241">Rename this app to *FullAspNetCore*.</span></span> <span data-ttu-id="ac68a-242">이 프로젝트를 만들면 변환 시 시간이 절약 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-242">Creating this project saves time in the conversion.</span></span> <span data-ttu-id="ac68a-243">템플릿 생성 코드에서 최종 결과를 볼 수 있습니다. 변환 프로젝트에 코드를 복사 하거나 템플릿 생성 프로젝트와 비교할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-243">The end result can be viewed in the template-generated code, code can be copied to the conversion project, or compared with the template-generated project.</span></span>
+
+## <a name="configure-the-site-to-use-mvc"></a><span data-ttu-id="ac68a-244">MVC를 사용 하도록 사이트 구성</span><span class="sxs-lookup"><span data-stu-id="ac68a-244">Configure the site to use MVC</span></span>
+
+* <span data-ttu-id="ac68a-245">.NET Core를 대상으로 지정 하는 경우 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 가 기본적으로 참조 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-245">When targeting .NET Core, the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) is referenced by default.</span></span> <span data-ttu-id="ac68a-246">이 패키지는 MVC 앱에서 일반적으로 사용 하는 패키지를 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-246">This package contains packages commonly used by MVC apps.</span></span> <span data-ttu-id="ac68a-247">.NET Framework 대상으로 지정 하는 경우 패키지 참조는 프로젝트 파일에 개별적으로 나열 되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-247">If targeting .NET Framework, package references must be listed individually in the project file.</span></span>
+
+<span data-ttu-id="ac68a-248">`Microsoft.AspNetCore.Mvc`는 ASP.NET Core MVC 프레임 워크입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-248">`Microsoft.AspNetCore.Mvc` is the ASP.NET Core MVC framework.</span></span> <span data-ttu-id="ac68a-249">`Microsoft.AspNetCore.StaticFiles`는 정적 파일 처리기입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-249">`Microsoft.AspNetCore.StaticFiles` is the static file handler.</span></span> <span data-ttu-id="ac68a-250">ASP.NET Core apps는 정적 파일을 제공 하는 등 미들웨어에 대해 명시적으로 옵트인 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-250">ASP.NET Core apps explicitly opt in for middleware, such as for serving static files.</span></span> <span data-ttu-id="ac68a-251">자세한 내용은 [정적 파일](xref:fundamentals/static-files)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-251">For more information, see [Static files](xref:fundamentals/static-files).</span></span>
+
+* <span data-ttu-id="ac68a-252">*Startup.cs* 파일을 열고 다음 코드와 일치 하도록 코드를 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-252">Open the *Startup.cs* file and change the code to match the following:</span></span>
+
+[!code-csharp[](mvc/samples/2.x/Startup.cs?highlight=7,20-25&name=snippet)]
+
+<span data-ttu-id="ac68a-253"><xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>확장 메서드는 정적 파일 처리기를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-253">The <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> extension method adds the static file handler.</span></span> <span data-ttu-id="ac68a-254">자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-254">For more information, see [Application Startup](xref:fundamentals/startup) and [Routing](xref:fundamentals/routing).</span></span>
+
+## <a name="add-a-controller-and-view"></a><span data-ttu-id="ac68a-255">컨트롤러 및 뷰 추가</span><span class="sxs-lookup"><span data-stu-id="ac68a-255">Add a controller and view</span></span>
+
+<span data-ttu-id="ac68a-256">이 섹션에서는 다음 섹션에서 마이그레이션된 ASP.NET MVC 컨트롤러 및 뷰에 대 한 자리 표시자 역할을 하는 최소 컨트롤러 및 뷰를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-256">In this section, a minimal controller and view are added to serve as placeholders for the ASP.NET MVC controller and views migrated in the next section.</span></span>
+
+* <span data-ttu-id="ac68a-257">*Controller* 디렉터리를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-257">Add a *Controllers* directory.</span></span>
+
+* <span data-ttu-id="ac68a-258">*HomeController.cs* 라는 **컨트롤러 클래스** 를 *Controllers* 디렉터리에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-258">Add a **Controller Class** named *HomeController.cs* to the *Controllers* directory.</span></span>
+
+![새 항목 추가 대화 상자](mvc/_static/add_mvc_ctl.png)
+
+* <span data-ttu-id="ac68a-260">*Views* 디렉터리를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-260">Add a *Views* directory.</span></span>
+
+* <span data-ttu-id="ac68a-261">*뷰/홈* 디렉터리를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-261">Add a *Views/Home* directory.</span></span>
+
+* <span data-ttu-id="ac68a-262">뷰 */홈* 디렉터리에 *Index. cshtml* 이라는 \*\* Razor 뷰\*\* 를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-262">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+
+![새 항목 추가 대화 상자](mvc/_static/view.png)
+
+<span data-ttu-id="ac68a-264">프로젝트 구조는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-264">The project structure is shown below:</span></span>
+
+![WebApp1의 파일 및 디렉터리를 표시 하는 솔루션 탐색기](mvc/_static/project-structure-controller-view.png)
+
+<span data-ttu-id="ac68a-266">*Views/Home/Index.cshtml* 파일의 내용을 다음 태그로 대체합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-266">Replace the contents of the *Views/Home/Index.cshtml* file with the following markup:</span></span>
+
+```html
+<h1>Hello world!</h1>
+```
+
+<span data-ttu-id="ac68a-267">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-267">Run the app.</span></span>
+
+![Microsoft Edge에서 웹 앱 열기](mvc/_static/hello-world.png)
+
+<span data-ttu-id="ac68a-269">자세한 내용은 [컨트롤러](xref:mvc/controllers/actions) 및 [뷰](xref:mvc/views/overview)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-269">For more information, see [Controllers](xref:mvc/controllers/actions) and [Views](xref:mvc/views/overview).</span></span>
+
+<span data-ttu-id="ac68a-270">다음 기능을 사용 하려면 예제 ASP.NET MVC 프로젝트에서 ASP.NET Core 프로젝트로 마이그레이션해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-270">The following functionality requires migration from the example ASP.NET MVC project to the ASP.NET Core project:</span></span>
+
+* <span data-ttu-id="ac68a-271">클라이언트 쪽 콘텐츠 (CSS, 글꼴 및 스크립트)</span><span class="sxs-lookup"><span data-stu-id="ac68a-271">client-side content (CSS, fonts, and scripts)</span></span>
+
+* <span data-ttu-id="ac68a-272">controllers</span><span class="sxs-lookup"><span data-stu-id="ac68a-272">controllers</span></span>
+
+* <span data-ttu-id="ac68a-273">뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-273">views</span></span>
+
+* <span data-ttu-id="ac68a-274">모델</span><span class="sxs-lookup"><span data-stu-id="ac68a-274">models</span></span>
+
+* <span data-ttu-id="ac68a-275">묶음</span><span class="sxs-lookup"><span data-stu-id="ac68a-275">bundling</span></span>
+
+* <span data-ttu-id="ac68a-276">filters</span><span class="sxs-lookup"><span data-stu-id="ac68a-276">filters</span></span>
+
+* <span data-ttu-id="ac68a-277">로그인/로그 아웃 합니다 Identity (다음 자습서에서 수행 됨).</span><span class="sxs-lookup"><span data-stu-id="ac68a-277">Log in/out, Identity (This is done in the next tutorial.)</span></span>
+
+## <a name="controllers-and-views"></a><span data-ttu-id="ac68a-278">컨트롤러 및 뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-278">Controllers and views</span></span>
+
+* <span data-ttu-id="ac68a-279">ASP.NET MVC의 각 메서드 `HomeController` 를 새로 복사 `HomeController` 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-279">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="ac68a-280">ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx)입니다. ASP.NET Core MVC에서 작업 메서드는 대신을 반환 합니다 `IActionResult` .</span><span class="sxs-lookup"><span data-stu-id="ac68a-280">In ASP.NET MVC, the built-in template's controller action method return type is [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="ac68a-281">`ActionResult`는 `IActionResult` 를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-281">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
+
+* <span data-ttu-id="ac68a-282">*Contact.cshtml*ASP.NET MVC 프로젝트에서 MVC ASP.NET Core 프로젝트에 *대 한*파일을 *복사 합니다.* Razor</span><span class="sxs-lookup"><span data-stu-id="ac68a-282">Copy the *About.cshtml*, *Contact.cshtml*, and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+
+## <a name="test-each-method"></a><span data-ttu-id="ac68a-283">각 메서드 테스트</span><span class="sxs-lookup"><span data-stu-id="ac68a-283">Test each method</span></span>
+
+<span data-ttu-id="ac68a-284">레이아웃 파일 및 스타일은 아직 마이그레이션되지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-284">The layout file and styles have not been migrated yet, so the rendered views only contain the content in the view files.</span></span> <span data-ttu-id="ac68a-285">및 뷰에 대해 생성 된 레이아웃 파일 링크를 `About` `Contact` 아직 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-285">The layout file generated links for the `About` and `Contact` views will not be available yet.</span></span>
+
+<span data-ttu-id="ac68a-286">현재 포트 번호를 ASP.NET core 프로젝트에서 사용 되는 포트 번호로 바꿔 실행 중인 ASP.NET core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-286">Invoke the rendered views from the browser on the running ASP.NET core app by replacing the current port number with the port number used in the ASP.NET core project.</span></span> <span data-ttu-id="ac68a-287">예: `https://localhost:44375/home/about`</span><span class="sxs-lookup"><span data-stu-id="ac68a-287">For example: `https://localhost:44375/home/about`.</span></span>
+
+![연락처 페이지](mvc/_static/contact-page.png)
+
+<span data-ttu-id="ac68a-289">스타일 지정 및 메뉴 항목이 없다는 점에 유의 하십시오.</span><span class="sxs-lookup"><span data-stu-id="ac68a-289">Note the lack of styling and menu items.</span></span> <span data-ttu-id="ac68a-290">다음 섹션에서 스타일을 수정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-290">The styling will be fixed in the next section.</span></span>
+
+## <a name="static-content"></a><span data-ttu-id="ac68a-291">정적 콘텐츠</span><span class="sxs-lookup"><span data-stu-id="ac68a-291">Static content</span></span>
+
+<span data-ttu-id="ac68a-292">ASP.NET MVC 5 이전 버전에서 정적 콘텐츠는 웹 프로젝트의 루트에서 호스팅되며 서버 쪽 파일과는 결합 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-292">In ASP.NET MVC 5 and earlier, static content was hosted from the root of the web project and was intermixed with server-side files.</span></span> <span data-ttu-id="ac68a-293">ASP.NET Core에서 정적 콘텐츠는 *wwwroot* 디렉터리에서 호스팅됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-293">In ASP.NET Core, static content is hosted in the *wwwroot* directory.</span></span> <span data-ttu-id="ac68a-294">ASP.NET MVC 앱의 정적 콘텐츠를 ASP.NET Core 프로젝트의 *wwwroot* 디렉터리에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-294">Copy the static content from the ASP.NET MVC app to the *wwwroot* directory in the ASP.NET Core project.</span></span> <span data-ttu-id="ac68a-295">이 샘플 변환에서:</span><span class="sxs-lookup"><span data-stu-id="ac68a-295">In this sample conversion:</span></span>
+
+* <span data-ttu-id="ac68a-296">ASP.NET MVC 프로젝트의 *favicon* 파일을 ASP.NET Core 프로젝트의 *wwwroot* 디렉터리에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-296">Copy the *favicon.ico* file from the ASP.NET MVC project to the *wwwroot* directory in the ASP.NET Core project.</span></span>
+
+<span data-ttu-id="ac68a-297">ASP.NET MVC 프로젝트는 해당 스타일에 [부트스트랩](https://getbootstrap.com/) 을 사용 하 여 *콘텐츠* 및 *스크립트* 디렉터리에 부트스트랩 파일을 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-297">The ASP.NET MVC project uses [Bootstrap](https://getbootstrap.com/) for its styling and stores the Bootstrap files in the *Content* and *Scripts* directories.</span></span> <span data-ttu-id="ac68a-298">ASP.NET MVC 프로젝트를 생성 한 템플릿은 레이아웃 파일 (*Views/Shared/_Layout cshtml*)의 부트스트랩을 참조 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-298">The template, which generated the ASP.NET MVC project, references Bootstrap in the layout file (*Views/Shared/_Layout.cshtml*).</span></span> <span data-ttu-id="ac68a-299">*bootstrap.js* 및 *부트스트랩 .css* 파일은 ASP.NET MVC 프로젝트에서 새 프로젝트의 *wwwroot* 디렉터리로 복사 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-299">The *bootstrap.js* and *bootstrap.css* files could be copied from the ASP.NET MVC project to the *wwwroot* directory in the new project.</span></span> <span data-ttu-id="ac68a-300">대신이 문서는 다음 섹션에서 CDNs를 사용 하 여 부트스트랩 (및 기타 클라이언트 쪽 라이브러리)에 대 한 지원을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-300">Instead, this document adds support for Bootstrap (and other client-side libraries) using CDNs, in the next section.</span></span>
+
+## <a name="migrate-the-layout-file"></a><span data-ttu-id="ac68a-301">레이아웃 파일 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="ac68a-301">Migrate the layout file</span></span>
+
+* <span data-ttu-id="ac68a-302">ASP.NET MVC 프로젝트의 *views* 디렉터리에서 ASP.NET Core 프로젝트의 *views* 디렉터리에 *_ViewStart.* s a s 파일을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-302">Copy the *_ViewStart.cshtml* file from the ASP.NET MVC project's *Views* directory into the ASP.NET Core project's *Views* directory.</span></span> <span data-ttu-id="ac68a-303">*_ViewStart cshtml* 파일은 ASP.NET Core MVC에서 변경 되지 않았습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-303">The *_ViewStart.cshtml* file has not changed in ASP.NET Core MVC.</span></span>
+
+* <span data-ttu-id="ac68a-304">*뷰/공유* 디렉터리를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-304">Create a *Views/Shared* directory.</span></span>
+
+* <span data-ttu-id="ac68a-305">*선택 사항:* *FullAspNetCore* MVC 프로젝트의 *views* 디렉터리에서 ASP.NET Core 프로젝트의 *views* 디렉터리에 *_ViewImports* 를 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-305">*Optional:* Copy *_ViewImports.cshtml* from the *FullAspNetCore* MVC project's *Views* directory into the ASP.NET Core project's *Views* directory.</span></span> <span data-ttu-id="ac68a-306">*_ViewImports cshtml* 파일에서 네임 스페이스 선언을 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-306">Remove any namespace declaration in the *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="ac68a-307">*_ViewImports cshtml* 파일은 모든 뷰 파일의 네임 스페이스를 제공 하 고 [태그 도우미](xref:mvc/views/tag-helpers/intro)에 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-307">The *_ViewImports.cshtml* file provides namespaces for all the view files and brings in [Tag Helpers](xref:mvc/views/tag-helpers/intro).</span></span> <span data-ttu-id="ac68a-308">태그 도우미는 새 레이아웃 파일에 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-308">Tag Helpers are used in the new layout file.</span></span> <span data-ttu-id="ac68a-309">*_ViewImports* 파일은 ASP.NET Core의 새로운 파일입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-309">The *_ViewImports.cshtml* file is new for ASP.NET Core.</span></span>
+
+* <span data-ttu-id="ac68a-310">ASP.NET MVC 프로젝트의 *views/shared* 디렉터리에서 ASP.NET Core 프로젝트의 *views/shared* 디렉터리로 *_Layout cshtml* 파일을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-310">Copy the *_Layout.cshtml* file from the ASP.NET MVC project's *Views/Shared* directory into the ASP.NET Core project's *Views/Shared* directory.</span></span>
+
+<span data-ttu-id="ac68a-311">*_Layout cshtml* 파일을 열고 다음과 같이 변경 합니다 (완성 된 코드는 아래에 표시 됨).</span><span class="sxs-lookup"><span data-stu-id="ac68a-311">Open *_Layout.cshtml* file and make the following changes (the completed code is shown below):</span></span>
+
+* <span data-ttu-id="ac68a-312">`@Styles.Render("~/Content/css")` `<link>` *부트스트랩* 을 로드할 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-312">Replace `@Styles.Render("~/Content/css")` with a `<link>` element to load *bootstrap.css* (see below).</span></span>
+
+* <span data-ttu-id="ac68a-313">`@Scripts.Render("~/bundles/modernizr")`를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-313">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
+
+* <span data-ttu-id="ac68a-314">줄을 주석 `@Html.Partial("_LoginPartial")` 으로 처리 `@*...*@` 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="ac68a-315">자세한 내용은 [인증 및 Identity ASP.NET Core 마이그레이션](xref:migration/identity) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-315">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
+
+* <span data-ttu-id="ac68a-316">`@Scripts.Render("~/bundles/jquery")` `<script>` 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-316">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
+
+* <span data-ttu-id="ac68a-317">`@Scripts.Render("~/bundles/bootstrap")` `<script>` 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-317">Replace `@Scripts.Render("~/bundles/bootstrap")` with a `<script>` element (see below).</span></span>
+
+<span data-ttu-id="ac68a-318">부트스트랩 CSS 포함에 대 한 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-318">The replacement markup for Bootstrap CSS inclusion:</span></span>
+
+```html
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+```
+
+<span data-ttu-id="ac68a-319">JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-319">The replacement markup for jQuery and Bootstrap JavaScript inclusion:</span></span>
+
+```html
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+```
+
+<span data-ttu-id="ac68a-320">업데이트 된 *_Layout cshtml* 파일은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-320">The updated *_Layout.cshtml* file is shown below:</span></span>
+
+[!code-cshtml[](mvc/samples/2.x/Views/Shared/_Layout.cshtml?highlight=7-10,29,41-44)]
+
+<span data-ttu-id="ac68a-321">브라우저에서 사이트를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-321">View the site in the browser.</span></span> <span data-ttu-id="ac68a-322">이제 올바른 스타일을 적절히 로드 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-322">It should now load correctly, with the expected styles in place.</span></span>
+
+* <span data-ttu-id="ac68a-323">*선택 사항:* 새 레이아웃 파일을 사용해 보세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-323">*Optional:* Try using the new layout file.</span></span> <span data-ttu-id="ac68a-324">*FullAspNetCore* 프로젝트에서 레이아웃 파일을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-324">Copy the layout file from the *FullAspNetCore* project.</span></span> <span data-ttu-id="ac68a-325">새 레이아웃 파일은 [태그 도우미](xref:mvc/views/tag-helpers/intro) 를 사용 하 고 다른 향상 된 기능을 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-325">The new layout file uses [Tag Helpers](xref:mvc/views/tag-helpers/intro) and has other improvements.</span></span>
+
+## <a name="configure-bundling-and-minification"></a><span data-ttu-id="ac68a-326">번들링 및 축소 구성하기</span><span class="sxs-lookup"><span data-stu-id="ac68a-326">Configure bundling and minification</span></span>
+
+<span data-ttu-id="ac68a-327">묶음 및 축소를 구성 하는 방법에 대 한 자세한 내용은 [묶음 및 축소](xref:client-side/bundling-and-minification)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-327">For information about how to configure bundling and minification, see [Bundling and Minification](xref:client-side/bundling-and-minification).</span></span>
+
+## <a name="solve-http-500-errors"></a><span data-ttu-id="ac68a-328">HTTP 500 오류 해결</span><span class="sxs-lookup"><span data-stu-id="ac68a-328">Solve HTTP 500 errors</span></span>
+
+<span data-ttu-id="ac68a-329">문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-329">There are many problems that can cause an HTTP 500 error messages that contain no information on the source of the problem.</span></span> <span data-ttu-id="ac68a-330">예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 생성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-330">For example, if the *Views/_ViewImports.cshtml* file contains a namespace that doesn't exist in the project, a HTTP 500 error is generated.</span></span> <span data-ttu-id="ac68a-331">기본적으로 ASP.NET Core 앱에서는 확장이에 `UseDeveloperExceptionPage` 추가 되 `IApplicationBuilder` 고 구성이 *개발*될 때 실행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-331">By default in ASP.NET Core apps, the `UseDeveloperExceptionPage` extension is added to the `IApplicationBuilder` and executed when the configuration is *Development*.</span></span> <span data-ttu-id="ac68a-332">다음 코드의 예제를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-332">See an example in the following code:</span></span>
+
+[!code-csharp[](mvc/samples/2.x/Startup.cs?highlight=11-15&name=snippet)]
+
+<span data-ttu-id="ac68a-333">ASP.NET Core 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-333">ASP.NET Core converts unhandled exceptions into HTTP 500 error responses.</span></span> <span data-ttu-id="ac68a-334">일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-334">Normally, error details aren't included in these responses to prevent disclosure of potentially sensitive information about the server.</span></span> <span data-ttu-id="ac68a-335">자세한 내용은 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-335">For more information, see [Developer Exception Page](xref:fundamentals/error-handling#developer-exception-page).</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="ac68a-336">추가 리소스</span><span class="sxs-lookup"><span data-stu-id="ac68a-336">Additional resources</span></span>
+
+* <xref:blazor/index>
+* <xref:mvc/views/tag-helpers/intro>
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.1"
+
+<span data-ttu-id="ac68a-337">이 문서에서는 ASP.NET MVC 프로젝트를 [ASP.NET CORE mvc](xref:mvc/overview) 2.1로 마이그레이션하기 시작 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-337">This article shows how to start migrating an ASP.NET MVC project to [ASP.NET Core MVC](xref:mvc/overview) 2.1.</span></span> <span data-ttu-id="ac68a-338">이 프로세스에서는 ASP.NET MVC에서 변경 된 많은 사항을 강조 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-338">In the process, it highlights many of the things that have changed from ASP.NET MVC.</span></span> <span data-ttu-id="ac68a-339">ASP.NET MVC에서 마이그레이션하는 과정은 여러 단계로 진행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-339">Migrating from ASP.NET MVC is a multi-step process.</span></span> <span data-ttu-id="ac68a-340">이 문서에서는 다음 내용을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-340">This article covers:</span></span>
+
+* <span data-ttu-id="ac68a-341">초기 설정</span><span class="sxs-lookup"><span data-stu-id="ac68a-341">Initial setup</span></span>
+* <span data-ttu-id="ac68a-342">기본 컨트롤러 및 뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-342">Basic controllers and views</span></span>
+* <span data-ttu-id="ac68a-343">정적 콘텐츠</span><span class="sxs-lookup"><span data-stu-id="ac68a-343">Static content</span></span>
+* <span data-ttu-id="ac68a-344">클라이언트 쪽 종속성.</span><span class="sxs-lookup"><span data-stu-id="ac68a-344">Client-side dependencies.</span></span>
+
+<span data-ttu-id="ac68a-345">구성 및 코드 마이그레이션에 대 한 자세한 Identity 내용은 [ASP.NET Core 구성 마이그레이션](xref:migration/configuration) 및 [인증 및 Identity ASP.NET Core 마이그레이션](xref:migration/identity)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-345">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="ac68a-346">샘플의 버전 번호가 최신이 아닐 수 있습니다. 프로젝트를 적절 하 게 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-346">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
+
+## <a name="create-the-starter-aspnet-mvc-project"></a><span data-ttu-id="ac68a-347">스타터 ASP.NET MVC 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="ac68a-347">Create the starter ASP.NET MVC project</span></span>
+
+<span data-ttu-id="ac68a-348">업그레이드를 시연 하기 위해 먼저 ASP.NET MVC 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-348">To demonstrate the upgrade, we'll start by creating a ASP.NET MVC app.</span></span> <span data-ttu-id="ac68a-349">*WebApp1* 이름으로 만듭니다. 그러면 네임 스페이스는 다음 단계에서 만든 ASP.NET Core 프로젝트와 일치 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-349">Create it with the name *WebApp1* so the namespace matches the ASP.NET Core project created in the next step.</span></span>
+
+![Visual Studio 새 프로젝트 대화 상자](mvc/_static/new-project.png)
+
+![새 웹 응용 프로그램 대화 상자: ASP.NET 템플릿 패널에서 선택 된 MVC 프로젝트 템플릿](mvc/_static/new-project-select-mvc-template.png)
+
+<span data-ttu-id="ac68a-352">*선택 사항:* 솔루션 이름을 *WebApp1* 에서 *Mvc5*로 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-352">*Optional:* Change the name of the Solution from *WebApp1* to *Mvc5*.</span></span> <span data-ttu-id="ac68a-353">Visual Studio에서 새 솔루션 이름 (*Mvc5*)을 표시 합니다 .이를 통해 다음 프로젝트에서이 프로젝트를 더 쉽게 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-353">Visual Studio displays the new solution name (*Mvc5*), which makes it easier to tell this project from the next project.</span></span>
+
+## <a name="create-the-aspnet-core-project"></a><span data-ttu-id="ac68a-354">ASP.NET Core 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="ac68a-354">Create the ASP.NET Core project</span></span>
+
+<span data-ttu-id="ac68a-355">두 프로젝트의 네임 스페이스가 일치 하도록 이전 프로젝트와 동일한 이름을 사용 하 여 *비어* 있는 ASP.NET Core 웹 앱 (*WebApp1*)을 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-355">Create a new *empty* ASP.NET Core web app with the same name as the previous project (*WebApp1*) so the namespaces in the two projects match.</span></span> <span data-ttu-id="ac68a-356">동일한 네임 스페이스를 사용 하면 두 프로젝트 간에 코드를 쉽게 복사할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-356">Having the same namespace makes it easier to copy code between the two projects.</span></span> <span data-ttu-id="ac68a-357">같은 이름을 사용 하려면 이전 프로젝트가 아닌 다른 디렉터리에이 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-357">Create this project in a different directory than the previous project to use the same name.</span></span>
+
+![새 프로젝트 대화 상자](mvc/_static/new_core.png)
+
+![New ASP.NET 웹 응용 프로그램 대화 상자: ASP.NET Core 템플릿 패널에서 빈 프로젝트 템플릿을 선택 했습니다.](mvc/_static/new-project-select-empty-aspnet5-template.png)
+
+* <span data-ttu-id="ac68a-360">*선택 사항:* *웹 응용 프로그램* 프로젝트 템플릿을 사용 하 여 새 ASP.NET Core 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-360">*Optional:* Create a new ASP.NET Core app using the *Web Application* project template.</span></span> <span data-ttu-id="ac68a-361">프로젝트 이름을 *WebApp1*로 하 고 **개별 사용자 계정**에 대 한 인증 옵션을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-361">Name the project *WebApp1*, and select an authentication option of **Individual User Accounts**.</span></span> <span data-ttu-id="ac68a-362">이 앱의 이름을 *FullAspNetCore*로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-362">Rename this app to *FullAspNetCore*.</span></span> <span data-ttu-id="ac68a-363">이 프로젝트를 만들면 변환 시 시간이 절약 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-363">Creating this project saves time in the conversion.</span></span> <span data-ttu-id="ac68a-364">템플릿 생성 코드에서 최종 결과를 볼 수 있습니다. 변환 프로젝트에 코드를 복사 하거나 템플릿 생성 프로젝트와 비교할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-364">The end result can be viewed in the template-generated code, code can be copied to the conversion project, or compared with the template-generated project.</span></span>
+
+## <a name="configure-the-site-to-use-mvc"></a><span data-ttu-id="ac68a-365">MVC를 사용 하도록 사이트 구성</span><span class="sxs-lookup"><span data-stu-id="ac68a-365">Configure the site to use MVC</span></span>
+
+* <span data-ttu-id="ac68a-366">.NET Core를 대상으로 지정 하는 경우 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 가 기본적으로 참조 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-366">When targeting .NET Core, the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) is referenced by default.</span></span> <span data-ttu-id="ac68a-367">이 패키지는 MVC 앱에서 일반적으로 사용 하는 패키지를 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-367">This package contains packages commonly used by MVC apps.</span></span> <span data-ttu-id="ac68a-368">.NET Framework 대상으로 지정 하는 경우 패키지 참조는 프로젝트 파일에 개별적으로 나열 되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-368">If targeting .NET Framework, package references must be listed individually in the project file.</span></span>
+
+<span data-ttu-id="ac68a-369">`Microsoft.AspNetCore.Mvc`는 ASP.NET Core MVC 프레임 워크입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-369">`Microsoft.AspNetCore.Mvc` is the ASP.NET Core MVC framework.</span></span> <span data-ttu-id="ac68a-370">`Microsoft.AspNetCore.StaticFiles`는 정적 파일 처리기입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-370">`Microsoft.AspNetCore.StaticFiles` is the static file handler.</span></span> <span data-ttu-id="ac68a-371">ASP.NET Core apps는 정적 파일을 제공 하는 등 미들웨어에 대해 명시적으로 옵트인 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-371">ASP.NET Core apps explicitly opt in for middleware, such as for serving static files.</span></span> <span data-ttu-id="ac68a-372">자세한 내용은 [정적 파일](xref:fundamentals/static-files)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-372">For more information, see [Static files](xref:fundamentals/static-files).</span></span>
+
+* <span data-ttu-id="ac68a-373">*Startup.cs* 파일을 열고 다음 코드와 일치 하도록 코드를 변경 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-373">Open the *Startup.cs* file and change the code to match the following:</span></span>
+
+[!code-csharp[](mvc/samples/2.x/Startup.cs?highlight=7,20-25&name=snippet)]
+
+<span data-ttu-id="ac68a-374"><xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>확장 메서드는 정적 파일 처리기를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-374">The <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> extension method adds the static file handler.</span></span> <span data-ttu-id="ac68a-375">`UseMvc`확장 메서드는 라우팅을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-375">The `UseMvc` extension method adds routing.</span></span> <span data-ttu-id="ac68a-376">자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-376">For more information, see [Application Startup](xref:fundamentals/startup) and [Routing](xref:fundamentals/routing).</span></span>
+
+## <a name="add-a-controller-and-view"></a><span data-ttu-id="ac68a-377">컨트롤러 및 뷰 추가</span><span class="sxs-lookup"><span data-stu-id="ac68a-377">Add a controller and view</span></span>
+
+<span data-ttu-id="ac68a-378">이 섹션에서는 다음 섹션에서 마이그레이션된 ASP.NET MVC 컨트롤러 및 뷰에 대 한 자리 표시자 역할을 하는 최소 컨트롤러 및 뷰를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-378">In this section, a minimal controller and view are added to serve as placeholders for the ASP.NET MVC controller and views migrated in the next section.</span></span>
+
+* <span data-ttu-id="ac68a-379">*Controller* 디렉터리를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-379">Add a *Controllers* directory.</span></span>
+
+* <span data-ttu-id="ac68a-380">*HomeController.cs* 라는 **컨트롤러 클래스** 를 *Controllers* 디렉터리에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-380">Add a **Controller Class** named *HomeController.cs* to the *Controllers* directory.</span></span>
+
+![새 항목 추가 대화 상자](mvc/_static/add_mvc_ctl.png)
+
+* <span data-ttu-id="ac68a-382">*Views* 디렉터리를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-382">Add a *Views* directory.</span></span>
+
+* <span data-ttu-id="ac68a-383">*뷰/홈* 디렉터리를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-383">Add a *Views/Home* directory.</span></span>
+
+* <span data-ttu-id="ac68a-384">뷰 */홈* 디렉터리에 *Index. cshtml* 이라는 \*\* Razor 뷰\*\* 를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-384">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+
+![새 항목 추가 대화 상자](mvc/_static/view.png)
+
+<span data-ttu-id="ac68a-386">프로젝트 구조는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-386">The project structure is shown below:</span></span>
+
+![WebApp1의 파일 및 디렉터리를 표시 하는 솔루션 탐색기](mvc/_static/project-structure-controller-view.png)
+
+<span data-ttu-id="ac68a-388">*Views/Home/Index.cshtml* 파일의 내용을 다음 태그로 대체합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-388">Replace the contents of the *Views/Home/Index.cshtml* file with the following markup:</span></span>
+
+```html
+<h1>Hello world!</h1>
+```
+
+<span data-ttu-id="ac68a-389">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-389">Run the app.</span></span>
+
+![Microsoft Edge에서 웹 앱 열기](mvc/_static/hello-world.png)
+
+<span data-ttu-id="ac68a-391">자세한 내용은 [컨트롤러](xref:mvc/controllers/actions) 및 [뷰](xref:mvc/views/overview)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-391">For more information, see [Controllers](xref:mvc/controllers/actions) and [Views](xref:mvc/views/overview).</span></span>
+
+<span data-ttu-id="ac68a-392">다음 기능을 사용 하려면 예제 ASP.NET MVC 프로젝트에서 ASP.NET Core 프로젝트로 마이그레이션해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-392">The following functionality requires migration from the example ASP.NET MVC project to the ASP.NET Core project:</span></span>
+
+* <span data-ttu-id="ac68a-393">클라이언트 쪽 콘텐츠 (CSS, 글꼴 및 스크립트)</span><span class="sxs-lookup"><span data-stu-id="ac68a-393">client-side content (CSS, fonts, and scripts)</span></span>
+
+* <span data-ttu-id="ac68a-394">controllers</span><span class="sxs-lookup"><span data-stu-id="ac68a-394">controllers</span></span>
+
+* <span data-ttu-id="ac68a-395">뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-395">views</span></span>
+
+* <span data-ttu-id="ac68a-396">모델</span><span class="sxs-lookup"><span data-stu-id="ac68a-396">models</span></span>
+
+* <span data-ttu-id="ac68a-397">묶음</span><span class="sxs-lookup"><span data-stu-id="ac68a-397">bundling</span></span>
+
+* <span data-ttu-id="ac68a-398">filters</span><span class="sxs-lookup"><span data-stu-id="ac68a-398">filters</span></span>
+
+* <span data-ttu-id="ac68a-399">로그인/로그 아웃 합니다 Identity (다음 자습서에서 수행 됨).</span><span class="sxs-lookup"><span data-stu-id="ac68a-399">Log in/out, Identity (This is done in the next tutorial.)</span></span>
+
+## <a name="controllers-and-views"></a><span data-ttu-id="ac68a-400">컨트롤러 및 뷰</span><span class="sxs-lookup"><span data-stu-id="ac68a-400">Controllers and views</span></span>
+
+* <span data-ttu-id="ac68a-401">ASP.NET MVC의 각 메서드 `HomeController` 를 새로 복사 `HomeController` 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-401">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="ac68a-402">ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx)입니다. ASP.NET Core MVC에서 작업 메서드는 대신을 반환 합니다 `IActionResult` .</span><span class="sxs-lookup"><span data-stu-id="ac68a-402">In ASP.NET MVC, the built-in template's controller action method return type is [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="ac68a-403">`ActionResult`는 `IActionResult` 를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-403">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
+
+* <span data-ttu-id="ac68a-404">*Contact.cshtml*ASP.NET MVC 프로젝트에서 MVC ASP.NET Core 프로젝트에 *대 한*파일을 *복사 합니다.* Razor</span><span class="sxs-lookup"><span data-stu-id="ac68a-404">Copy the *About.cshtml*, *Contact.cshtml*, and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+
+## <a name="test-each-method"></a><span data-ttu-id="ac68a-405">각 메서드 테스트</span><span class="sxs-lookup"><span data-stu-id="ac68a-405">Test each method</span></span>
+
+<span data-ttu-id="ac68a-406">레이아웃 파일 및 스타일은 아직 마이그레이션되지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-406">The layout file and styles have not been migrated yet, so the rendered views only contain the content in the view files.</span></span> <span data-ttu-id="ac68a-407">및 뷰에 대해 생성 된 레이아웃 파일 링크를 `About` `Contact` 아직 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-407">The layout file generated links for the `About` and `Contact` views will not be available yet.</span></span>
+
+* <span data-ttu-id="ac68a-408">현재 포트 번호를 ASP.NET core 프로젝트에서 사용 되는 포트 번호로 바꿔 실행 중인 ASP.NET core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-408">Invoke the rendered views from the browser on the running ASP.NET core app by replacing the current port number with the port number used in the ASP.NET core project.</span></span> <span data-ttu-id="ac68a-409">예: `https://localhost:44375/home/about`</span><span class="sxs-lookup"><span data-stu-id="ac68a-409">For example: `https://localhost:44375/home/about`.</span></span>
+
+![연락처 페이지](mvc/_static/contact-page.png)
+
+<span data-ttu-id="ac68a-411">스타일 지정 및 메뉴 항목이 없다는 점에 유의 하십시오.</span><span class="sxs-lookup"><span data-stu-id="ac68a-411">Note the lack of styling and menu items.</span></span> <span data-ttu-id="ac68a-412">다음 섹션에서 스타일을 수정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-412">The styling will be fixed in the next section.</span></span>
+
+## <a name="static-content"></a><span data-ttu-id="ac68a-413">정적 콘텐츠</span><span class="sxs-lookup"><span data-stu-id="ac68a-413">Static content</span></span>
+
+<span data-ttu-id="ac68a-414">ASP.NET MVC 5 이전 버전에서 정적 콘텐츠는 웹 프로젝트의 루트에서 호스팅되며 서버 쪽 파일과는 결합 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-414">In ASP.NET MVC 5 and earlier, static content was hosted from the root of the web project and was intermixed with server-side files.</span></span> <span data-ttu-id="ac68a-415">ASP.NET Core에서 정적 콘텐츠는 *wwwroot* 디렉터리에서 호스팅됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-415">In ASP.NET Core, static content is hosted in the *wwwroot* directory.</span></span> <span data-ttu-id="ac68a-416">ASP.NET MVC 앱의 정적 콘텐츠를 ASP.NET Core 프로젝트의 *wwwroot* 디렉터리에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-416">Copy the static content from the ASP.NET MVC app to the *wwwroot* directory in the ASP.NET Core project.</span></span> <span data-ttu-id="ac68a-417">이 샘플 변환에서:</span><span class="sxs-lookup"><span data-stu-id="ac68a-417">In this sample conversion:</span></span>
+
+* <span data-ttu-id="ac68a-418">ASP.NET MVC 프로젝트의 *favicon* 파일을 ASP.NET Core 프로젝트의 *wwwroot* 디렉터리에 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-418">Copy the *favicon.ico* file from the ASP.NET MVC project to the *wwwroot* directory in the ASP.NET Core project.</span></span>
+
+<span data-ttu-id="ac68a-419">ASP.NET MVC 프로젝트는 해당 스타일에 [부트스트랩](https://getbootstrap.com/) 을 사용 하 여 *콘텐츠* 및 *스크립트* 디렉터리에 부트스트랩 파일을 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-419">The ASP.NET MVC project uses [Bootstrap](https://getbootstrap.com/) for its styling and stores the Bootstrap files in the *Content* and *Scripts* directories.</span></span> <span data-ttu-id="ac68a-420">ASP.NET MVC 프로젝트를 생성 한 템플릿은 레이아웃 파일 (*Views/Shared/_Layout cshtml*)의 부트스트랩을 참조 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-420">The template, which generated the ASP.NET MVC project, references Bootstrap in the layout file (*Views/Shared/_Layout.cshtml*).</span></span> <span data-ttu-id="ac68a-421">*bootstrap.js* 및 *부트스트랩 .css* 파일은 ASP.NET MVC 프로젝트에서 새 프로젝트의 *wwwroot* 디렉터리로 복사 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-421">The *bootstrap.js* and *bootstrap.css* files could be copied from the ASP.NET MVC project to the *wwwroot* directory in the new project.</span></span> <span data-ttu-id="ac68a-422">대신이 문서는 다음 섹션에서 CDNs를 사용 하 여 부트스트랩 (및 기타 클라이언트 쪽 라이브러리)에 대 한 지원을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-422">Instead, this document adds support for Bootstrap (and other client-side libraries) using CDNs, in the next section.</span></span>
+
+## <a name="migrate-the-layout-file"></a><span data-ttu-id="ac68a-423">레이아웃 파일 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="ac68a-423">Migrate the layout file</span></span>
+
+* <span data-ttu-id="ac68a-424">ASP.NET MVC 프로젝트의 *views* 디렉터리에서 ASP.NET Core 프로젝트의 *views* 디렉터리에 *_ViewStart.* s a s 파일을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-424">Copy the *_ViewStart.cshtml* file from the ASP.NET MVC project's *Views* directory into the ASP.NET Core project's *Views* directory.</span></span> <span data-ttu-id="ac68a-425">*_ViewStart cshtml* 파일은 ASP.NET Core MVC에서 변경 되지 않았습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-425">The *_ViewStart.cshtml* file has not changed in ASP.NET Core MVC.</span></span>
+
+* <span data-ttu-id="ac68a-426">*뷰/공유* 디렉터리를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-426">Create a *Views/Shared* directory.</span></span>
+
+* <span data-ttu-id="ac68a-427">*선택 사항:* *FullAspNetCore* MVC 프로젝트의 *views* 디렉터리에서 ASP.NET Core 프로젝트의 *views* 디렉터리에 *_ViewImports* 를 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-427">*Optional:* Copy *_ViewImports.cshtml* from the *FullAspNetCore* MVC project's *Views* directory into the ASP.NET Core project's *Views* directory.</span></span> <span data-ttu-id="ac68a-428">*_ViewImports cshtml* 파일에서 네임 스페이스 선언을 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-428">Remove any namespace declaration in the *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="ac68a-429">*_ViewImports cshtml* 파일은 모든 뷰 파일의 네임 스페이스를 제공 하 고 [태그 도우미](xref:mvc/views/tag-helpers/intro)에 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-429">The *_ViewImports.cshtml* file provides namespaces for all the view files and brings in [Tag Helpers](xref:mvc/views/tag-helpers/intro).</span></span> <span data-ttu-id="ac68a-430">태그 도우미는 새 레이아웃 파일에 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-430">Tag Helpers are used in the new layout file.</span></span> <span data-ttu-id="ac68a-431">*_ViewImports* 파일은 ASP.NET Core의 새로운 파일입니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-431">The *_ViewImports.cshtml* file is new for ASP.NET Core.</span></span>
+
+* <span data-ttu-id="ac68a-432">ASP.NET MVC 프로젝트의 *views/shared* 디렉터리에서 ASP.NET Core 프로젝트의 *views/shared* 디렉터리로 *_Layout cshtml* 파일을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-432">Copy the *_Layout.cshtml* file from the ASP.NET MVC project's *Views/Shared* directory into the ASP.NET Core project's *Views/Shared* directory.</span></span>
+
+<span data-ttu-id="ac68a-433">*_Layout cshtml* 파일을 열고 다음과 같이 변경 합니다 (완성 된 코드는 아래에 표시 됨).</span><span class="sxs-lookup"><span data-stu-id="ac68a-433">Open *_Layout.cshtml* file and make the following changes (the completed code is shown below):</span></span>
+
+* <span data-ttu-id="ac68a-434">`@Styles.Render("~/Content/css")` `<link>` *부트스트랩* 을 로드할 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-434">Replace `@Styles.Render("~/Content/css")` with a `<link>` element to load *bootstrap.css* (see below).</span></span>
+
+* <span data-ttu-id="ac68a-435">`@Scripts.Render("~/bundles/modernizr")`를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-435">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
+
+* <span data-ttu-id="ac68a-436">줄을 주석 `@Html.Partial("_LoginPartial")` 으로 처리 `@*...*@` 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="ac68a-437">자세한 내용은 [인증 및 Identity ASP.NET Core 마이그레이션](xref:migration/identity) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-437">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
+
+* <span data-ttu-id="ac68a-438">`@Scripts.Render("~/bundles/jquery")` `<script>` 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-438">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
+
+* <span data-ttu-id="ac68a-439">`@Scripts.Render("~/bundles/bootstrap")` `<script>` 요소로 대체 합니다 (아래 참조).</span><span class="sxs-lookup"><span data-stu-id="ac68a-439">Replace `@Scripts.Render("~/bundles/bootstrap")` with a `<script>` element (see below).</span></span>
+
+<span data-ttu-id="ac68a-440">부트스트랩 CSS 포함에 대 한 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-440">The replacement markup for Bootstrap CSS inclusion:</span></span>
+
+```html
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+```
+
+<span data-ttu-id="ac68a-441">JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-441">The replacement markup for jQuery and Bootstrap JavaScript inclusion:</span></span>
+
+```html
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+```
+
+<span data-ttu-id="ac68a-442">업데이트 된 *_Layout cshtml* 파일은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-442">The updated *_Layout.cshtml* file is shown below:</span></span>
+
+[!code-cshtml[](mvc/samples/2.x/Views/Shared/_Layout.cshtml?highlight=7-10,29,41-44)]
+
+<span data-ttu-id="ac68a-443">브라우저에서 사이트를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-443">View the site in the browser.</span></span> <span data-ttu-id="ac68a-444">이제 올바른 스타일을 적절히 로드 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-444">It should now load correctly, with the expected styles in place.</span></span>
+
+* <span data-ttu-id="ac68a-445">*선택 사항:* 새 레이아웃 파일을 사용해 보세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-445">*Optional:* Try using the new layout file.</span></span> <span data-ttu-id="ac68a-446">*FullAspNetCore* 프로젝트에서 레이아웃 파일을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-446">Copy the layout file from the *FullAspNetCore* project.</span></span> <span data-ttu-id="ac68a-447">새 레이아웃 파일은 [태그 도우미](xref:mvc/views/tag-helpers/intro) 를 사용 하 고 다른 향상 된 기능을 포함 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-447">The new layout file uses [Tag Helpers](xref:mvc/views/tag-helpers/intro) and has other improvements.</span></span>
+
+## <a name="configure-bundling-and-minification"></a><span data-ttu-id="ac68a-448">번들링 및 축소 구성하기</span><span class="sxs-lookup"><span data-stu-id="ac68a-448">Configure bundling and minification</span></span>
+
+<span data-ttu-id="ac68a-449">묶음 및 축소를 구성 하는 방법에 대 한 자세한 내용은 [묶음 및 축소](xref:client-side/bundling-and-minification)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-449">For information about how to configure bundling and minification, see [Bundling and Minification](xref:client-side/bundling-and-minification).</span></span>
+
+## <a name="solve-http-500-errors"></a><span data-ttu-id="ac68a-450">HTTP 500 오류 해결</span><span class="sxs-lookup"><span data-stu-id="ac68a-450">Solve HTTP 500 errors</span></span>
+
+<span data-ttu-id="ac68a-451">문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-451">There are many problems that can cause an HTTP 500 error messages that contain no information on the source of the problem.</span></span> <span data-ttu-id="ac68a-452">예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 생성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-452">For example, if the *Views/_ViewImports.cshtml* file contains a namespace that doesn't exist in the project, a HTTP 500 error is generated.</span></span> <span data-ttu-id="ac68a-453">기본적으로 ASP.NET Core 앱에서는 확장이에 `UseDeveloperExceptionPage` 추가 되 `IApplicationBuilder` 고 구성이 *개발*될 때 실행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-453">By default in ASP.NET Core apps, the `UseDeveloperExceptionPage` extension is added to the `IApplicationBuilder` and executed when the configuration is *Development*.</span></span> <span data-ttu-id="ac68a-454">다음 코드의 예제를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-454">See an example in the following code:</span></span>
+
+[!code-csharp[](mvc/samples/2.x/Startup.cs?highlight=11-15&name=snippet)]
+
+<span data-ttu-id="ac68a-455">ASP.NET Core 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-455">ASP.NET Core converts unhandled exceptions into HTTP 500 error responses.</span></span> <span data-ttu-id="ac68a-456">일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ac68a-456">Normally, error details aren't included in these responses to prevent disclosure of potentially sensitive information about the server.</span></span> <span data-ttu-id="ac68a-457">자세한 내용은 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ac68a-457">For more information, see [Developer Exception Page](xref:fundamentals/error-handling#developer-exception-page).</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="ac68a-458">추가 자료</span><span class="sxs-lookup"><span data-stu-id="ac68a-458">Additional resources</span></span>
+
+* <xref:blazor/index>
+* <xref:mvc/views/tag-helpers/intro>
+
+::: moniker-end
