@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 74d4a215b81259674fa6c14bdc8f306a3508f71a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 096e679846899fd742fa2a353f1313976c0e11fb
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775130"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240962"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 
@@ -32,7 +32,7 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 
 이 샘플에는 docker [클라이언트](https://www.docker.com/products/docker)의 [docker 17.06](https://docs.docker.com/release-notes/docker-ce) 이상이 필요 합니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 문서의 지침 중 일부에는 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 이상이 필요 합니다.
 
@@ -40,14 +40,14 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 
 도메인에 대 한 [프로덕션 호스팅을](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) 위해서는 [인증 기관의](https://wikipedia.org/wiki/Certificate_authority) 인증서가 필요 합니다. [Let's Encrypt](https://letsencrypt.org/)는 무료 인증서를 제공 하는 인증 기관입니다.
 
-이 문서에서는 미리 빌드된 이미지를 호스트 하기 위해 [자체 서명 된 개발 인증서](https://en.wikipedia.org/wiki/Self-signed_certificate) 를 사용 `localhost`합니다. 지침은 프로덕션 인증서를 사용 하는 것과 유사 합니다.
+이 문서에서는 미리 빌드된 이미지를 호스트 하기 위해 [자체 서명 된 개발 인증서](https://en.wikipedia.org/wiki/Self-signed_certificate) 를 사용 `localhost` 합니다. 지침은 프로덕션 인증서를 사용 하는 것과 유사 합니다.
 
 프로덕션 인증서의 경우:
 
-* 도구 `dotnet dev-certs` 는 필요 하지 않습니다.
+* `dotnet dev-certs`도구는 필요 하지 않습니다.
 * 지침에 사용 되는 위치에 인증서를 저장할 필요가 없습니다. 사이트 디렉터리 내에 인증서를 저장 하지 않는 것이 좋지만 모든 위치는 작동 해야 합니다.
 
-다음 섹션에 포함 된 지침은 Docker의 `-v` 명령줄 옵션을 사용 하 여 컨테이너에 인증서를 탑재 합니다. `COPY` *Dockerfile*의 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있지만 권장 되지는 않습니다. 다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.
+다음 섹션에 포함 된 지침은 Docker의 명령줄 옵션을 사용 하 여 컨테이너에 인증서를 탑재 합니다 `-v` . Dockerfile의 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 `COPY` 있지만 권장 되지는 않습니다. *Dockerfile* 다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.
 
 * 개발자 인증서를 사용 하 여 테스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.
 * 프로덕션 인증서를 사용 하 여 호스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.
@@ -68,12 +68,14 @@ dotnet dev-certs https --trust
 
 위의 명령에서을 암호로 바꿉니다 `{ password here }` .
 
-HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.
+명령 셸에서 HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
+
+[PowerShell](/powershell/scripting/overview)을 사용 하는 경우를 `%USERPROFILE%` 로 바꿉니다 `$env:USERPROFILE` .
 
 암호는 인증서에 사용 된 암호와 일치 해야 합니다.
 
@@ -108,7 +110,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-위의 명령에서을 암호로 바꿉니다 `{ password here }` .
+위의 명령에서을 암호로 바꿉니다 `{ password here }` . [PowerShell](/powershell/scripting/overview)을 사용 하는 경우를 `%USERPROFILE%` 로 바꿉니다 `$env:USERPROFILE` .
 
 HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.
 
@@ -117,4 +119,4 @@ docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=\https\aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:C:\https\ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-암호는 인증서에 사용 된 암호와 일치 해야 합니다.
+암호는 인증서에 사용 된 암호와 일치 해야 합니다. [PowerShell](/powershell/scripting/overview)을 사용 하는 경우를 `%USERPROFILE%` 로 바꿉니다 `$env:USERPROFILE` .

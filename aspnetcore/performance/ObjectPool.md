@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: f29d15fc1e2d2ad84526598be14638110f08614e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774784"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85241001"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core ObjectPool에서 개체 다시 사용
 
@@ -31,7 +31,7 @@ ms.locfileid: "82774784"
 - 제한 된 리소스를 나타냅니다.
 - 예측 가능 하 고 자주 사용 됩니다.
 
-예를 들어 ASP.NET Core 프레임 워크는 일부 위치에서 개체 풀을 사용 하 <xref:System.Text.StringBuilder> 여 인스턴스를 다시 사용 합니다. `StringBuilder`문자 데이터를 저장 하기 위해 자체 버퍼를 할당 하 고 관리 합니다. 정기적으로를 `StringBuilder` 사용 하 여 기능을 구현 하 고 재사용 하면 성능상의 이점을 얻을 수 있습니다. ASP.NET Core
+예를 들어 ASP.NET Core 프레임 워크는 일부 위치에서 개체 풀을 사용 하 여 인스턴스를 다시 사용 합니다 <xref:System.Text.StringBuilder> . `StringBuilder`문자 데이터를 저장 하기 위해 자체 버퍼를 할당 하 고 관리 합니다. 정기적으로를 사용 하 여 `StringBuilder` 기능을 구현 하 고 재사용 하면 성능상의 이점을 얻을 수 있습니다. ASP.NET Core
 
 개체 풀링은 항상 성능을 향상 시 키 지 않습니다.
 
@@ -40,7 +40,7 @@ ms.locfileid: "82774784"
 
 응용 프로그램 또는 라이브러리에 대해 현실적인 시나리오를 사용 하 여 성능 데이터를 수집한 후에만 개체 풀링을 사용 합니다.
 
-**경고:가 `ObjectPool` 를 구현 `IDisposable`하지 않습니다. 삭제 해야 하는 형식으로는 사용 하지 않는 것이 좋습니다.**
+**경고:가를 `ObjectPool` 구현 하지 않습니다 `IDisposable` . 삭제 해야 하는 형식으로는 사용 하지 않는 것이 좋습니다.**
 
 **참고: ObjectPool은 할당할 개체 수에 대 한 제한을 두지 않습니다. 그러면 개체 수에 대 한 제한이 유지 됩니다.**
 
@@ -57,22 +57,24 @@ ObjectPool은 여러 가지 방법으로 앱에서 사용할 수 있습니다.
 
 * 풀 인스턴스화.
 * DI ( [종속성 주입](xref:fundamentals/dependency-injection) )의 풀을 인스턴스로 등록 하는 중입니다.
-* DI에 `ObjectPoolProvider<>` 를 등록 하 고 팩터리로 사용 합니다.
+* `ObjectPoolProvider<>`DI에를 등록 하 고 팩터리로 사용 합니다.
 
 ## <a name="how-to-use-objectpool"></a>ObjectPool 사용 방법
 
-를 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> 호출 하 여 개체 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 를 가져오고 개체를 반환 합니다.  모든 개체를 반환 하는 요구 사항은 없습니다. 개체를 반환 하지 않으면 가비지 수집 됩니다.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>를 호출 하 여 개체를 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 가져오고 개체를 반환 합니다.  모든 개체를 반환 하는 요구 사항은 없습니다. 개체를 반환 하지 않으면 가비지 수집 됩니다.
 
 ## <a name="objectpool-sample"></a>ObjectPool 샘플
 
 코드는 다음과 같습니다.
 
-* DI `ObjectPoolProvider` ( [종속성 주입](xref:fundamentals/dependency-injection) ) 컨테이너에를 추가 합니다.
-* DI 컨테이너에 `ObjectPool<StringBuilder>` 를 추가 하 고 구성 합니다.
-* 를 `BirthdayMiddleware`추가 합니다.
+* `ObjectPoolProvider`DI ( [종속성 주입](xref:fundamentals/dependency-injection) ) 컨테이너에를 추가 합니다.
+* `ObjectPool<StringBuilder>`DI 컨테이너에를 추가 하 고 구성 합니다.
+* 를 추가 `BirthdayMiddleware` 합니다.
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
 다음 코드에서는을 구현 합니다.`BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
