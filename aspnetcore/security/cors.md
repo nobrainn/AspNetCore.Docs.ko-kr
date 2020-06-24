@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: a78aff2d2e16f36ed034e6af110d7ed763271583
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 1a52a2425eeba2bc62253e96fe6d2465562c154e
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105755"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292765"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core에서 CORS (원본 간 요청) 사용
 
@@ -64,6 +64,9 @@ CORS를 사용 하도록 설정 하는 방법에는 세 가지가 있습니다.
 
 명명 된 정책에서 [[EnableCors]](#attr) 특성을 사용 하면 CORS를 지 원하는 끝점을 제한 하는 가장 세밀 한 제어를 제공 합니다.
 
+> [!WARNING]
+> <xref:Owin.CorsExtensions.UseCors%2A><xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A>을 사용 하는 경우 먼저 `UseResponseCaching` 를 호출 해야 합니다.
+
 각 접근 방식은 다음 섹션에 자세히 설명 되어 있습니다.
 
 <a name="np"></a>
@@ -72,7 +75,7 @@ CORS를 사용 하도록 설정 하는 방법에는 세 가지가 있습니다.
 
 CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드는 지정 된 원본을 사용 하 여 모든 앱의 끝점에 CORS 정책을 적용 합니다.
 
-[!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,31)]
+[!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,32)]
 
 위의 코드는
 
@@ -80,6 +83,7 @@ CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드�
 * <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>확장 메서드를 호출 하 고 `_myAllowSpecificOrigins` CORS 정책을 지정 합니다. `UseCors`CORS 미들웨어를 추가 합니다. 에 대 `UseCors` 한 호출은 앞에 배치 해야 `UseRouting` `UseAuthorization` 합니다. 자세한 내용은 [미들웨어 순서](xref:fundamentals/middleware/index#middleware-order)를 참조 하세요.
 * <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> [람다 식을](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)사용 하 여를 호출 합니다. 람다는 개체를 사용 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 합니다. 등의 [구성 옵션](#cors-policy-options)에 `WithOrigins` 대해서는이 문서의 뒷부분에서 설명 합니다.
 * `_myAllowSpecificOrigins`모든 컨트롤러 끝점에 대해 CORS 정책을 사용 하도록 설정 합니다. 특정 끝점에 CORS 정책을 적용 하려면 [끝점 라우팅](#ecors) 을 참조 하세요.
+* [응답 캐싱 미들웨어](xref:performance/caching/middleware)를 사용 하는 경우 앞에서를 호출 <xref:Owin.CorsExtensions.UseCors%2A> <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> 합니다.
 
 끝점 라우팅을 사용 하 여 및에 대 한 호출 사이에 CORS 미들웨어를 실행 하도록 구성 **해야 합니다** `UseRouting` `UseEndpoints` .
 
@@ -551,7 +555,7 @@ IIS에 배포할 때 서버에서 익명 액세스를 허용 하도록 구성 �
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet)]
 
-[MyDisplayRouteInfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) 는 [Rick RouteInfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet 패키지를 통해 제공 되며 경로 정보를 표시 합니다.
+[MyDisplayRouteInfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) 는 RouteInfo NuGet 패키지 [Rick.Doc](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) 에서 제공 하며 경로 정보를 표시 합니다.
 
 다음 방법 중 하나를 사용 하 여 앞의 샘플 코드를 테스트 합니다.
 

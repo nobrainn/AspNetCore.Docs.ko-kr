@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: fede3887ad7dacd40cf3bb5d1b785392a9bc1480
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: 62b8e33d8b7eb17a65a7a54df2a9aa298acdfe36
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850463"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292820"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core에서 WS-FEDERATION을 사용 하 여 사용자 인증
 
@@ -27,12 +27,12 @@ ASP.NET Core 앱의 경우 [WsFederation](https://www.nuget.org/packages/Microso
 
 기본적으로 새 미들웨어는 다음과 같습니다.
 
-* 임의로 로그인을 허용 하지 않습니다. WS-FEDERATION 프로토콜의이 기능은 XSRF 공격에 취약 합니다. 그러나 `AllowUnsolicitedLogins` 옵션을 사용 하 여 사용 하도록 설정할 수 있습니다.
-* 로그인 메시지의 모든 폼 게시를 확인 하지 않습니다. 로그인에 대 한 `CallbackPath` 요청만 확인 됩니다 `CallbackPath` . 기본값은 `/signin-wsfed` 로 설정 되지만 상속 된 [Remoteauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) 클래스의 callbackpath 속성을 통해 변경할 수 있습니다. 이 경로는 [SkipUnrecognizedRequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) 옵션을 사용 하도록 설정 하 여 다른 인증 공급자와 공유할 수 있습니다.
+* 임의로 로그인을 허용 하지 않습니다. WS-FEDERATION 프로토콜의이 기능은 XSRF 공격에 취약 합니다. 그러나 옵션을 사용 하 여 사용 하도록 설정할 수 있습니다 `AllowUnsolicitedLogins` .
+* 로그인 메시지의 모든 폼 게시를 확인 하지 않습니다. `CallbackPath`로그인에 대 한 요청만 확인 됩니다. `CallbackPath` 기본값은로 설정 `/signin-wsfed` 되지만 상속 된 [remoteauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) 클래스의 callbackpath 속성을 통해 변경할 수 있습니다. 이 경로는 [SkipUnrecognizedRequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) 옵션을 사용 하도록 설정 하 여 다른 인증 공급자와 공유할 수 있습니다.
 
 ## <a name="register-the-app-with-active-directory"></a>Active Directory에 앱 등록
 
-### <a name="active-directory-federation-services"></a>ADFS(Active Directory Federation Services)
+### <a name="active-directory-federation-services"></a>Active Directory Federation Services
 
 * ADFS 관리 콘솔에서 서버의 **신뢰 당사자 트러스트 추가 마법사** 를 엽니다.
 
@@ -65,7 +65,7 @@ ASP.NET Core 앱의 경우 [WsFederation](https://www.nuget.org/packages/Microso
 
 ![변환 클레임 규칙 추가 마법사: 클레임 규칙 구성](ws-federation/_static/AddTransformClaimRule.png)
 
-* **클레임 규칙 편집** 창에서 확인 **마침** > **을** 클릭 합니다.
+* **Finish**  >  **클레임 규칙 편집** 창에서**확인 마침을** 클릭 합니다.
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
 
@@ -78,17 +78,17 @@ ASP.NET Core 앱의 경우 [WsFederation](https://www.nuget.org/packages/Microso
 
 ![Azure Active Directory: 앱 등록 만들기](ws-federation/_static/AadCreateAppRegistration.png)
 
-* **끝점** 을 클릭 하 고 **페더레이션 메타 데이터 문서** URL을 확인 합니다. WS-FEDERATION 미들웨어는 `MetadataAddress`다음과 같습니다.
+* **끝점** 을 클릭 하 고 **페더레이션 메타 데이터 문서** URL을 확인 합니다. WS-FEDERATION 미들웨어는 `MetadataAddress` 다음과 같습니다.
 
 ![Azure Active Directory: 끝점](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* 새 앱 등록으로 이동 합니다. **설정** > **속성** 을 클릭 하 고 **앱 ID URI**를 적어 둡니다. WS-FEDERATION 미들웨어는 `Wtrealm`다음과 같습니다.
+* 새 앱 등록으로 이동 합니다. **API 노출**을 클릭 합니다. 응용 프로그램 ID URI **설정**  >  **저장**을 클릭 합니다. **응용 프로그램 ID URI**를 적어 둡니다. WS-FEDERATION 미들웨어는 `Wtrealm` 다음과 같습니다.
 
 ![Azure Active Directory: 앱 등록 속성](ws-federation/_static/AadAppIdUri.png)
 
 ## <a name="use-ws-federation-without-aspnet-core-identity"></a>ASP.NET Core 없이 WS-FEDERATION 사용Identity
 
-WS-FEDERATION 미들웨어는 없이 Identity사용할 수 있습니다. 예를 들어:
+WS-FEDERATION 미들웨어는 없이 사용할 수 있습니다 Identity . 예를 들면 다음과 같습니다.
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -100,7 +100,7 @@ WS-FEDERATION 미들웨어는 없이 Identity사용할 수 있습니다. 예를 
 ## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>WS-FEDERATION을 ASP.NET Core의 외부 로그인 공급자로 추가 합니다.Identity
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) 에 대 한 종속성을 프로젝트에 추가 합니다.
-* WS-FEDERATION을에 추가 합니다 `Startup.ConfigureServices`.
+* WS-FEDERATION을에 추가 합니다 `Startup.ConfigureServices` .
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -114,10 +114,10 @@ WS-FEDERATION 미들웨어는 없이 Identity사용할 수 있습니다. 예를 
 
 ### <a name="log-in-with-ws-federation"></a>WS-FEDERATION을 사용 하 여 로그인
 
-앱으로 이동 하 고 nav 헤더의 **로그인** 링크를 클릭 합니다. WsFederation: 로그인 페이지를 사용 하 여 로그인 할 ![수 있는 옵션이 있습니다.](ws-federation/_static/WsFederationButton.png)
+앱으로 이동 하 고 nav 헤더의 **로그인** 링크를 클릭 합니다. WsFederation: 로그인 페이지를 사용 하 여 로그인 할 수 있는 옵션이 있습니다. ![](ws-federation/_static/WsFederationButton.png)
 
-Adfs를 공급자로 사용 하 여이 단추는 adfs 로그인 페이지로 리디렉션됩니다. ![](ws-federation/_static/AdfsLoginPage.png)
+Adfs를 공급자로 사용 하 여이 단추는 ![ adfs 로그인 페이지로 리디렉션됩니다.](ws-federation/_static/AdfsLoginPage.png)
 
-Azure Active Directory 공급자 인 경우 단추는 aad 로그인 페이지로 리디렉션됩니다. ![aad 로그인 페이지](ws-federation/_static/AadSignIn.png)
+Azure Active Directory 공급자 인 경우 단추는 aad 로그인 페이지로 리디렉션됩니다. ![ aad 로그인 페이지](ws-federation/_static/AadSignIn.png)
 
-새 사용자에 대 한 로그인이 성공 하면 앱의 사용자 등록 페이지로 리디렉션됩니다. ![페이지 등록](ws-federation/_static/Register.png)
+새 사용자에 대 한 로그인이 성공 하면 앱의 사용자 등록 페이지로 리디렉션됩니다. ![ 페이지 등록](ws-federation/_static/Register.png)
