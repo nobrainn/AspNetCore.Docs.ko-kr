@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core 프로젝트 Identity 에서 사용자 데이터 추가, 다운로드 및 삭제
+title: ASP.NET Core 프로젝트에서 사용자 데이터 추가, 다운로드 및 삭제 Identity
 author: rick-anderson
-description: ASP.NET Core 프로젝트에서에 Identity 사용자 지정 사용자 데이터를 추가 하는 방법에 대해 알아봅니다. GDPR 당 데이터를 삭제 합니다.
+description: ASP.NET Core 프로젝트에서에 사용자 지정 사용자 데이터를 추가 하는 방법에 대해 알아봅니다 Identity . GDPR 당 데이터를 삭제 합니다.
 ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
@@ -12,23 +12,23 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 29c23e10d11eb1042b64fc071c221a9ead857fcc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6b4de0a47cd7882852512040a08832942f20aa4c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777334"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347114"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터 추가, 다운로드 및 삭제
+# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>ASP.NET Core 프로젝트에서 사용자 지정 사용자 데이터 추가, 다운로드 및 삭제 Identity
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 이 문서는 다음 방법을 안내합니다.
 
 * ASP.NET Core 웹 앱에 사용자 지정 사용자 데이터를 추가 합니다.
-* 사용자 지정 사용자 데이터 모델을 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 특성으로 표시 하 여 자동으로 다운로드 및 삭제에 사용할 수 있도록 합니다. 데이터를 다운로드 하 고 삭제할 수 있도록 하는 것은 [Gdpr](xref:security/gdpr) 요구 사항을 충족 하는 데 도움이 됩니다.
+* 사용자 지정 사용자 데이터 모델을 특성으로 표시 하 여 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 자동으로 다운로드 및 삭제에 사용할 수 있도록 합니다. 데이터를 다운로드 하 고 삭제할 수 있도록 하는 것은 [Gdpr](xref:security/gdpr) 요구 사항을 충족 하는 데 도움이 됩니다.
 
-프로젝트 샘플은 Razor Pages 웹 앱에서 만들지만 ASP.NET Core MVC 웹 앱에 대 한 지침과 비슷합니다.
+프로젝트 샘플은 Razor 페이지 웹 앱에서 생성 되지만 지침은 ASP.NET CORE MVC 웹 앱과 유사 합니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -46,7 +46,7 @@ ms.locfileid: "82777334"
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a>Razor 웹앱 만들기
+## <a name="create-a-razor-web-app"></a>Razor웹 앱 만들기
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -79,19 +79,19 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a>Id 스 캐 폴더 실행
+## <a name="run-the-identity-scaffolder"></a>스 캐 폴더 실행 Identity
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 > **Add** > **새 스 캐 폴드 항목**추가를 클릭 합니다.
-* **스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 **id** > **추가**를 선택 합니다.
-* **Id 추가** 대화 상자에서 다음 옵션을 선택 합니다.
+* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 > **Add**  >  **새 스 캐 폴드 항목**추가를 클릭 합니다.
+* **스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 추가를 선택 **Identity**  >  **Add**합니다.
+* **추가 Identity ** 대화 상자에서 다음 옵션을 선택 합니다.
   * 기존 레이아웃 파일 *~/Pages/Shared/_Layout를 선택 합니다.*
   * 재정의할 다음 파일 선택:
     * **계정/등록**
     * **계정/관리/인덱스**
-  * 단추를 **+** 선택 하 여 새 **데이터 컨텍스트 클래스**를 만듭니다. 프로젝트 이름이 **WebApp1**인 경우 형식 (**WebApp1. WebApp1Context** )을 적용 합니다.
-  * 단추를 **+** 선택 하 여 새 **사용자 클래스**를 만듭니다. 형식 (프로젝트 이름이 **WebApp1**인 경우**WebApp1User** )을 적용 > **추가**합니다.
+  * 단추를 선택 **+** 하 여 새 **데이터 컨텍스트 클래스**를 만듭니다. 프로젝트 이름이 **WebApp1**인 경우 형식 (**WebApp1. WebApp1Context** )을 적용 합니다.
+  * 단추를 선택 **+** 하 여 새 **사용자 클래스**를 만듭니다. 형식 (프로젝트 이름이 **WebApp1**인 경우**WebApp1User** )을 적용 > **추가**합니다.
 * **추가**를 선택합니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -109,13 +109,13 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-다음 명령을 실행 하 여 Identity 스 캐 폴더 옵션을 나열 합니다.
+다음 명령을 실행 하 여 스 캐 폴더 옵션을 나열 합니다 Identity .
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-프로젝트 폴더에서 Id 스 캐 폴더를 실행 합니다.
+프로젝트 폴더에서 스 캐 폴더를 실행 합니다 Identity .
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
@@ -127,17 +127,17 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 * 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 * `UseAuthentication`를 `Startup.Configure`에 추가합니다.
-* 레이아웃 `<partial name="_LoginPartial" />` 파일에를 추가 합니다.
+* `<partial name="_LoginPartial" />`레이아웃 파일에를 추가 합니다.
 * 앱을 테스트합니다.
   * 사용자 등록
   * 새 사용자 이름 ( **로그 아웃** 링크 옆에 있는)을 선택 합니다. 창을 확장 하거나 탐색 모음 아이콘을 선택 하 여 사용자 이름 및 기타 링크를 표시 해야 할 수도 있습니다.
   * **개인 데이터** 탭을 선택 합니다.
-  * **다운로드** 단추를 선택 하 고 *PersonalData* 파일을 검사 합니다.
+  * **다운로드** 단추를 선택 하 고 파일 *의PersonalData.js* 를 검사 합니다.
   * 로그온 한 사용자를 삭제 하는 **삭제** 단추를 테스트 합니다.
 
-## <a name="add-custom-user-data-to-the-identity-db"></a>Id DB에 사용자 지정 사용자 데이터 추가
+## <a name="add-custom-user-data-to-the-identity-db"></a>DB에 사용자 지정 사용자 데이터 추가 Identity
 
-사용자 지정 `IdentityUser` 속성을 사용 하 여 파생 클래스를 업데이트 합니다. WebApp1 프로젝트의 이름을 지정 하는 경우 파일의 이름은 *Areas/Identity/Data/WebApp1User*입니다. 다음 코드를 사용 하 여 파일을 업데이트 합니다.
+`IdentityUser`사용자 지정 속성을 사용 하 여 파생 클래스를 업데이트 합니다. WebApp1 프로젝트의 이름을 지정 하는 경우 파일의 이름은 *Areas/ Identity /Data/WebApp1User.cs*입니다. 다음 코드를 사용 하 여 파일을 업데이트 합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -153,18 +153,18 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [PersonalData](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) 특성이 있는 속성은 다음과 같습니다.
 
-* *영역/i d/페이지/계정/관리/DeletePersonalData* Razor 페이지에서를 호출 `UserManager.Delete`하면 삭제 됩니다.
-* *영역/i d/페이지/계정/관리/DownloadPersonalData* Razor 페이지를 통해 다운로드 한 데이터에 포함 됩니다.
+* *Areas/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml* Razor 페이지가 호출 하면 삭제 `UserManager.Delete` 됩니다.
+* *영역/ Identity /Pages/Account/Manage/DownloadPersonalData.cshtml* 페이지에서 다운로드 한 데이터에 포함 Razor 됩니다.
 
 ### <a name="update-the-accountmanageindexcshtml-page"></a>계정/관리/인덱스를 업데이트 합니다. cshtml 페이지
 
-다음 강조 `InputModel` 표시 된 코드를 사용 하 여 *영역/i d/페이지/계정/관리/인덱스* 의을 업데이트 합니다.
+`InputModel`다음 강조 표시 된 코드를 사용 하 여 *영역/ Identity /Pages/Account/Manage/Index.cshtml.cs* 의를 업데이트 합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-다음 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/관리/인덱스를 업데이트 합니다.*
+다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Manage/Index.cshtml* 를 업데이트 합니다.
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
@@ -174,7 +174,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-다음 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/관리/인덱스를 업데이트 합니다.*
+다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Manage/Index.cshtml* 를 업데이트 합니다.
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
@@ -182,13 +182,13 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ### <a name="update-the-accountregistercshtml-page"></a>계정/레지스터를 업데이트 합니다. cshtml 페이지
 
-다음 강조 `InputModel` 표시 된 코드를 사용 하 여 *영역/i d/페이지/계정/등록* 에서를 업데이트 합니다.
+`InputModel`다음 강조 표시 된 코드를 사용 하 여 *영역/ Identity /Pages/Account/Register.cshtml.cs* 의를 업데이트 합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-다음과 같이 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/레지스터* 를 업데이트 합니다.
+다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Register.cshtml* 를 업데이트 합니다.
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -198,7 +198,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-다음과 같이 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/레지스터* 를 업데이트 합니다.
+다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Register.cshtml* 를 업데이트 합니다.
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -232,12 +232,15 @@ dotnet ef database update
 앱을 테스트합니다.
 
 * 새 사용자를 등록 합니다.
-* `/Identity/Account/Manage` 페이지에서 사용자 지정 사용자 데이터를 봅니다.
-* `/Identity/Account/Manage/PersonalData` 페이지에서 사용자 개인 데이터를 다운로드 하 여 봅니다.
+* 페이지에서 사용자 지정 사용자 데이터를 봅니다 `/Identity/Account/Manage` .
+* 페이지에서 사용자 개인 데이터를 다운로드 하 여 봅니다 `/Identity/Account/Manage/PersonalData` .
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>IUserClaimsPrincipalFactory를 Identity 사용 하 여 클레임 추가<ApplicationUser>
+## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>IUserClaimsPrincipalFactory를 사용 하 여 클레임 추가 Identity<ApplicationUser>
 
-인터페이스를 Identity `IUserClaimsPrincipalFactory<T>` 사용 하 여 ASP.NET Core에 추가 클레임을 추가할 수 있습니다. 이 클래스는 `Startup.ConfigureServices` 메서드의 응용 프로그램에 추가할 수 있습니다. 다음과 같이 클래스의 사용자 지정 구현을 추가 합니다.
+> [!NOTE]
+> 이 섹션은 이전 자습서의 확장이 아닙니다. 자습서를 사용 하 여 빌드한 앱에 다음 단계를 적용 하려면 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/18797)를 참조 하세요.
+
+인터페이스를 사용 하 여 ASP.NET Core에 추가 클레임을 추가할 수 있습니다 Identity `IUserClaimsPrincipalFactory<T>` . 이 클래스는 메서드의 응용 프로그램에 추가할 수 있습니다 `Startup.ConfigureServices` . 다음과 같이 클래스의 사용자 지정 구현을 추가 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -250,7 +253,7 @@ public void ConfigureServices(IServiceCollection services)
         AdditionalUserClaimsPrincipalFactory>();
 ```
 
-데모 코드는 클래스를 `ApplicationUser` 사용 합니다. 이 클래스는 추가 `IsAdmin` 클레임을 추가 하는 데 사용 되는 속성을 추가 합니다.
+데모 코드는 클래스를 사용 합니다 `ApplicationUser` . 이 클래스는 `IsAdmin` 추가 클레임을 추가 하는 데 사용 되는 속성을 추가 합니다.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -259,7 +262,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-`AdditionalUserClaimsPrincipalFactory`는 `UserClaimsPrincipalFactory` 인터페이스를 구현합니다. 새 역할 클레임이에 추가 됩니다 `ClaimsPrincipal`.
+`AdditionalUserClaimsPrincipalFactory`는 `UserClaimsPrincipalFactory` 인터페이스를 구현합니다. 새 역할 클레임이에 추가 됩니다 `ClaimsPrincipal` .
 
 ```csharp
 public class AdditionalUserClaimsPrincipalFactory 
@@ -293,7 +296,7 @@ public class AdditionalUserClaimsPrincipalFactory
 }
 ```
 
-그러면 앱에서 추가 클레임을 사용할 수 있습니다. Razor 페이지에서 `IAuthorizationService` 인스턴스를 사용 하 여 클레임 값에 액세스할 수 있습니다.
+그러면 앱에서 추가 클레임을 사용할 수 있습니다. 페이지에서 Razor `IAuthorizationService` 인스턴스를 사용 하 여 클레임 값에 액세스할 수 있습니다.
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization

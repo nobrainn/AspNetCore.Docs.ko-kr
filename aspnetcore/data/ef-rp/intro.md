@@ -1,31 +1,37 @@
 ---
-title: ASP.NET Core에서 Entity Framework Core를 사용한 Razor 페이지 - 자습서 1/8
+title: ASP.NET Core에서 Entity Framework Core를 사용한 Razor Pages - 자습서 1/8
 author: rick-anderson
-description: Entity Framework Core를 사용하여 Razor 페이지 앱을 만드는 방법을 보여 줍니다.
+description: Entity Framework Core를 사용하여 Razor Pages 앱을 만드는 방법을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: a6915da23124b7ed4bfaa982692635f9fc75f96a
+ms.sourcegitcommit: 726b8c5cf92e6f6a4d0205787b19307e889d6240
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661623"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "82967517"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core에서 Entity Framework Core를 사용한 Razor 페이지 - 자습서 1/8
+# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core에서 Entity Framework Core를 사용한 Razor Pages - 자습서 1/8
 
 작성자: [Tom Dykstra](https://github.com/tdykstra) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[ASP.NET Core Razor Pages](xref:razor-pages/index) 앱에서 EF(Entity Framework) Core를 사용하는 방법을 보여 주는 일련의 자습서 중 첫 번째 자습서입니다. 이 자습서에서는 가상 Contoso 대학의 웹 사이트를 빌드합니다. 이 사이트에는 학생 입학, 강좌 개설 및 강사 할당과 같은 기능이 있습니다. 이 자습서에서는 Code First 방법을 사용합니다. Database First 방법을 사용하여 이 자습서를 수행하는 데 대한 정보는 [이 Github 문제](https://github.com/dotnet/AspNetCore.Docs/issues/16897)를 참조하세요.
+[ASP.NET Core Razor Pages](xref:razor-pages/index) 앱에서 EF(Entity Framework) Core를 사용하는 방법을 보여 주는 자습서 시리즈 중 첫 번째 자습서입니다. 이 자습서에서는 가상 Contoso 대학의 웹 사이트를 빌드합니다. 이 사이트에는 학생 입학, 강좌 개설 및 강사 할당과 같은 기능이 있습니다. 이 자습서에서는 Code First 방법을 사용합니다. Database First 방법을 사용하여 이 자습서를 수행하는 데 대한 정보는 [이 Github 문제](https://github.com/dotnet/AspNetCore.Docs/issues/16897)를 참조하세요.
 
 [완성된 앱을 다운로드하거나 확인하세요.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-* Razor Pages를 처음 사용하는 경우 이 자습서를 시작하기 전에 [Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start) 자습서 시리즈를 진행하세요.
+* Razor Pages를 처음 사용한다면 이 자습서를 시작하기 전에 Razor [Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start) 자습서 시리즈를 진행하세요.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -65,7 +71,6 @@ SQLite를 사용하도록 선택하는 경우 [SQLite용 DB 브라우저](https:
 
 완료된 프로젝트를 다운로드한 후 앱을 실행하려면 다음을 수행합니다.
 
-* 이름에 *SQLite*가 있는 파일 3개 및 폴더 1개를 삭제합니다.
 * 프로젝트를 빌드합니다.
 * PMC(패키지 관리자 콘솔)에서 다음 명령을 실행합니다.
 
@@ -83,6 +88,7 @@ SQLite를 사용하도록 선택하는 경우 [SQLite용 DB 브라우저](https:
 * *Startup.cs*를 삭제하고 *StartupSQLite.cs*의 이름을 *Startup.cs*로 바꿉니다.
 * *appSettings.json*을 삭제하고 *appSettingsSQLite.json*의 이름을 *appSettings.json*으로 바꿉니다.
 * *Migrations* 폴더를 삭제하고 *MigrationsSQL*의 이름을 *Migrations*로 바꿉니다.
+* `#if SQLiteVersion`에 대한 전체 검색을 수행하고 `#if SQLiteVersion` 및 관련된 `#endif` 문을 제거합니다.
 * 프로젝트를 빌드합니다.
 * 프로젝트 폴더의 명령 프롬프트에서 다음 명령을 실행합니다.
 
@@ -163,7 +169,7 @@ SQLite를 사용하도록 선택하는 경우 [SQLite용 DB 브라우저](https:
 
 `Enrollments` 속성은 [탐색 속성](/ef/core/modeling/relationships)입니다. 탐색 속성은 이 엔터티와 관련된 다른 엔터티를 포함합니다. 이 경우 `Student` 엔터티의 `Enrollments` 속성은 해당 Student에 관련된 모든 `Enrollment` 엔터티를 포함합니다. 예를 데이터베이스의 Student 행에 두 개의 관련 Enrollment 행이 있는 경우 `Enrollments` 탐색 속성은 그 두 Enrollment 엔터티를 포함합니다. 
 
-데이터베이스에서 StudentID 열에 학생 ID 값이 포함된 경우 Enrollment 행은 Student 행과 관련됩니다. 예를 들어 Student 행에 ID=1이 있다고 가정합니다. 관련 Enrollment 행에는 StudentID=1이 포함됩니다. StudentID는 Enrollment 테이블의 ‘외래 키’입니다.  
+데이터베이스에서 StudentID 열에 학생 ID 값이 포함된 경우 Enrollment 행은 Student 행과 관련됩니다. 예를 들어 Student 행에 ID=1이 있다고 가정합니다. 관련 Enrollment 행에는 StudentID=1이 포함됩니다. StudentID는 Enrollment 테이블의 ‘외래 키’입니다. 
 
 관련 Enrollment 엔터티가 여러 개 있을 수 있으므로 `Enrollments` 속성은 `ICollection<Enrollment>`로 정의됩니다. `List<Enrollment>` 또는`HashSet<Enrollment>`와 같은 다른 컬렉션 형식을 사용할 수 있습니다. `ICollection<Enrollment>`가 사용되는 경우 EF Core는 기본적으로 `HashSet<Enrollment>` 컬렉션을 만듭니다.
 
@@ -203,7 +209,7 @@ EF Core는 속성 이름이 `<navigation property name><primary key property nam
 
 이 섹션에서는 ASP.NET Core 스캐폴딩 도구를 사용하여 다음을 생성합니다.
 
-* EF Core ‘컨텍스트’ 클래스.  컨텍스트는 특정 데이터 모델에 맞게 Entity Framework 기능을 조정하는 주 클래스입니다. 이 클래스는 `Microsoft.EntityFrameworkCore.DbContext` 클래스에서 파생됩니다.
+* EF Core ‘컨텍스트’ 클래스. 컨텍스트는 특정 데이터 모델에 맞게 Entity Framework 기능을 조정하는 주 클래스입니다. 이 클래스는 `Microsoft.EntityFrameworkCore.DbContext` 클래스에서 파생됩니다.
 * `Student` 엔터티에 대한 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 처리하는 Razor 페이지.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -211,7 +217,7 @@ EF Core는 속성 이름이 `<navigation property name><primary key property nam
 * *Pages* 폴더에 *Students* 폴더를 만듭니다.
 * **솔루션 탐색기**에서 *Pages/Students* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **스캐폴드 항목 새로 만들기**를 선택합니다.
 * **스캐폴드 추가** 대화 상자에서 **Entity Framework를 사용한 Razor Pages(CRUD)** > **추가**를 선택합니다.
-* **Entity Framework(CRUD)를 사용하여 Razor Pages 추가** 대화 상자에서 다음을 수행합니다.
+* **Entity Framework(CRUD)를 사용한 Razor Pages 추가** 대화 상자에서 다음 작업을 수행합니다.
   * **모델 클래스** 드롭다운에서 **학생(ContosoUniversity.Models)** 을 선택합니다.
   * **데이터 컨텍스트 클래스** 행에서 **+** (더하기) 기호를 선택합니다.
   * 데이터 컨텍스트 이름을 *ContosoUniversity.Models.ContosoUniversityContext*에서 *ContosoUniversity.Data.SchoolContext*로 변경합니다.
@@ -313,13 +319,13 @@ LocalDB는 프로덕션 사용이 아닌 앱 개발용으로 고안된 SQL Serve
 
 엔터티 집합은 여러 엔터티를 포함하므로 DBSet 속성은 복수형 이름이어야 합니다. 스캐폴딩 도구로 `Student` DBSet를 만들었으므로 이 단계에서는 이 DBSet를 복수형 `Students`로 변경합니다. 
 
-Razor Pages 코드가 새 DBSet 이름과 일치하게 만들려면 전체 프로젝트에서 `_context.Student`를 `_context.Students`로 전역으로 변경합니다.  8개 발생 항목이 있습니다.
+Razor Pages 코드가 새 DBSet 이름과 일치하게 만들려면 전체 프로젝트에서 `_context.Student`를 `_context.Students`로 전체 변경합니다.  8개 발생 항목이 있습니다.
 
 프로젝트를 빌드하여 컴파일러 오류가 없는지 확인합니다.
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 빌드됩니다. 서비스(예: EF Core 데이터베이스 컨텍스트)는 애플리케이션 시작 중에 종속성 주입에 등록됩니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. 데이터베이스 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
+ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 빌드됩니다. 서비스(예: EF Core 데이터베이스 컨텍스트)는 애플리케이션 시작 중에 종속성 주입에 등록됩니다. 이러한 서비스(예: Razor Pages)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. 데이터베이스 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
 
 스캐폴딩 도구는 종속성 주입 컨테이너에 컨텍스트 클래스를 자동으로 등록합니다.
 
@@ -367,7 +373,7 @@ ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 �
 `EnsureCreated` 메서드는 빈 데이터베이스를 만듭니다. 이 섹션에서는 테스트 데이터로 데이터베이스를 채우는 코드를 추가합니다.
 
 다음 코드로 *Data/DbInitializer.cs*를 만듭니다.
-
+<!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
   이 코드는 데이터베이스에 학생이 있는지 확인합니다. 학생이 없는 경우 테스트 데이터를 데이터베이스에 추가합니다. `List<T>` 컬렉션이 아닌 배열에 테스트 데이터를 만들어 성능을 최적화합니다.
@@ -472,7 +478,7 @@ Contoso University 샘플 웹앱은 EF(Entity Framework) Core를 사용하여 AS
 
 ---
 
-[Razor 페이지](xref:razor-pages/index)에 익숙함. 신규 프로그래머는 이 시리즈를 시작하기 전에 [Razor 페이지 시작하기](xref:tutorials/razor-pages/razor-pages-start)를 완료해야 합니다.
+[Razor Pages](xref:razor-pages/index) 숙련도. 신규 프로그래머는 이 시리즈를 시작하기 전에 [Razor 페이지 시작하기](xref:tutorials/razor-pages/razor-pages-start)를 먼저 완료해야 합니다.
 
 ## <a name="troubleshooting"></a>문제 해결
 
@@ -488,7 +494,7 @@ Contoso University 샘플 웹앱은 EF(Entity Framework) Core를 사용하여 AS
 
 ![학생 편집 페이지](intro/_static/student-edit.png)
 
-이 사이트의 UI 스타일은 기본 제공 템플릿에서 생성된 것과 가깝습니다. 자습서는 UI가 아닌 Razor 페이지를 사용한 EF Core 자습서 위주로 설명됩니다.
+이 사이트의 UI 스타일은 기본 제공 템플릿에서 생성된 것과 가깝습니다. 이 자습서에서는 UI가 아닌 Razor 페이지를 사용한 EF Core를 중점적으로 다룹니다.
 
 ## <a name="create-the-contosouniversity-razor-pages-web-app"></a>ContosoUniversity Razor Pages 웹앱 만들기
 
@@ -630,7 +636,7 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>종속성 주입을 사용하여 등록된 컨텍스트 확인
 
-ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 빌드됩니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 종속성 주입에 등록됩니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소에는 생성자 매개 변수를 통해 이러한 서비스가 제공됩니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
+ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 빌드됩니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 종속성 주입에 등록됩니다. 이러한 서비스(예: Razor Pages)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
 
 스캐폴딩 도구는 자동으로 DB 컨텍스트를 생성하고 종속성 주입 컨테이너에 등록했습니다.
 

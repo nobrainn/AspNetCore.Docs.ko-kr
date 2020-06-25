@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776489"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103019"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>클래스 라이브러리에서 ASP.NET Core API 사용
 
@@ -48,11 +48,11 @@ ASP.NET Core를 참조하려면 프로젝트 파일에 다음 `<FrameworkReferen
 
 ## <a name="include-blazor-extensibility"></a>Blazor 확장성 포함
 
-Blazor는 WASM(WebAssembly) 및 서버 [호스팅 모델](xref:blazor/hosting-models)을 지원합니다. 특별한 이유가 없는 한 [Razor 구성 요소](xref:blazor/components) 라이브러리에서 두 호스팅 모델을 모두 지원해야 합니다. Razor 구성 요소 라이브러리는 [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk)를 사용해야 합니다.
+Blazor는 WASM(WebAssembly) 및 Server [호스팅 모델](xref:blazor/hosting-models)을 지원합니다. 특별한 이유가 없는 한 [Razor 구성 요소](xref:blazor/components/index) 라이브러리에서 두 호스팅 모델을 모두 지원해야 합니다. Razor 구성 요소 라이브러리는 [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk)를 사용해야 합니다.
 
 ### <a name="support-both-hosting-models"></a>두 호스팅 모델 모두 지원
 
-[Blazor 서버](xref:blazor/hosting-models#blazor-server) 및 [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) 프로젝트 모두에서 Razor 구성 요소 사용을 지원하려면 편집기에 대해 다음 지침을 사용합니다.
+[Blazor Server](xref:blazor/hosting-models#blazor-server) 및 [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) 프로젝트 모두에서 Razor 구성 요소를 사용하도록 지원하려면 편집기에 대해 다음 지침을 사용합니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -86,7 +86,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a>특정 호스팅 모델 지원
 
-단일 Blazor 호스팅 모델을 지원하는 것은 일반적이지 않습니다. 예를 들어 [Blazor 서버](xref:blazor/hosting-models#blazor-server) 프로젝트에서만 Razor 구성 요소 사용을 지원하려면 다음을 수행합니다.
+단일 Blazor 호스팅 모델을 지원하는 것은 일반적이지 않습니다. 예를 들어 [Blazor Server](xref:blazor/hosting-models#blazor-server) 프로젝트에서만 Razor 구성 요소를 사용하도록 지원하려면 다음을 수행합니다.
 
 * .NET Core 3.x를 대상으로 합니다.
 * 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다.
@@ -95,7 +95,7 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-Razor 구성 요소가 포함된 라이브러리에 대한 자세한 내용은 [ASP.NET Core Razor 구성 요소 클래스 라이브러리](xref:blazor/class-libraries)를 참조하세요.
+Razor 구성 요소가 포함된 라이브러리에 대한 자세한 내용은 [ASP.NET Core Razor 구성 요소 클래스 라이브러리](xref:blazor/components/class-libraries)를 참조하세요.
 
 ## <a name="include-mvc-extensibility"></a>MVC 확장성 포함
 
@@ -286,6 +286,6 @@ public class ScriptInliningTagHelper : TagHelper
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:razor-pages/ui-class>
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>
 * [.NET 구현 지원](/dotnet/standard/net-standard#net-implementation-support)
 * [.NET 지원 정책](https://dotnet.microsoft.com/platform/support/policy)

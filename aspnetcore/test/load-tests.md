@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/loadtests
-ms.openlocfilehash: f0c930a7689c7288a58cfc3ca630d3cd324bf2cd
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 0ec69ad783a4e545ea95ddcb928d03ba6a2e0050
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106808"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074381"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 부하/스트레스 테스트
 
@@ -29,15 +29,7 @@ ms.locfileid: "84106808"
 
 스트레스 테스트는 스트레스 상태의 앱이 오류를 복구하고 정상적으로 예상 동작으로 돌아올 수 있는지를 확인합니다. 스트레스 상태에서는 정상 조건으로 앱을 실행하지 않습니다.
 
-Visual Studio 2019는 부하 테스트 기능이 있는 마지막 Visual Studio 버전입니다. 이후에 부하 테스트 도구가 필요한 고객은 Apache JMeter, Akamai CloudTest, BlazeMeter와 같은 대체 도구를 사용하는 것이 좋습니다. 자세한 내용은 [Visual Studio 2019 릴리스 정보](/visualstudio/releases/2019/release-notes-v16.0#test-tools)를 참조하세요.
-
-## <a name="visual-studio-tools"></a>Visual Studio Tools
-
-Visual Studio에서는 사용자가 웹 성능 및 부하 테스트를 생성, 개발, 디버그할 수 있습니다. 웹 브라우저에서 작업을 기록하여 테스트를 만드는 옵션이 제공됩니다.
-
-Visual Studio 2017을 사용하여 부하 테스트 프로젝트를 생성, 구성, 실행하는 방법에 대한 자세한 내용은 [빠른 시작: 부하 테스트 프로젝트 만들기](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017)를 참조하세요.
-
-온-프레미스로 실행되거나 Azure DevOps를 사용하여 클라우드에서 실행되도록 부하 테스트를 구성할 수 있습니다.
+Visual Studio 2019는 [부하 테스트 사용 중단](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/) 계획을 발표했습니다. 해당하는 Azure DevOps 클라우드 기반 부하 테스트 서비스가 중지되었습니다.
 
 ## <a name="third-party-tools"></a>타사 도구
 
@@ -51,4 +43,3 @@ Visual Studio 2017을 사용하여 부하 테스트 프로젝트를 생성, 구�
 * [West Wind WebSurge](https://websurge.west-wind.com/)
 * [Netling](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
-

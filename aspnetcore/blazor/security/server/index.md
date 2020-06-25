@@ -13,16 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: a8604ca6ea60386bb3c54c950205ee695d37c689
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2811e08fd2f6c66112ffa0bb40f474158f4c7a59
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103140"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292687"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor 서버 앱 보호
 
 [Luke Latham](https://github.com/guardrex)으로
+
+Blazor 서버 앱은 ASP.NET Core 앱과 동일한 방식으로 보안을 위해 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요. 이 개요의 항목은 Blazor 서버에만 적용됩니다. 
 
 ## <a name="blazor-server-project-template"></a>Blazor 서버 프로젝트 템플릿
 
@@ -67,7 +69,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 * 프로젝트의 폴더를 만듭니다.
 * 프로젝트의 이름을 지정합니다.
 
-자세한 내용은 .NET Core 가이드의 [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.
+자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
@@ -101,13 +103,9 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 * 프로젝트의 폴더를 만듭니다.
 * 프로젝트의 이름을 지정합니다.
 
-자세한 내용은 .NET Core 가이드의 [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.
+자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.
 
 ---
-
-## <a name="secure-an-existing-app"></a>기존 앱 보호
-
-Blazor 서버 앱은 ASP.NET Core 앱과 동일한 방식으로 보안을 위해 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요.
 
 ## <a name="scaffold-identity"></a>스캐폴드 Identity
 

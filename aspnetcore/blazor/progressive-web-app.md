@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679619"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102309"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly를 사용하여 프로그레시브 웹 애플리케이션 빌드
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-PWA(프로그레시브 웹 애플리케이션)는 최신 브라우저 API 및 기능을 사용하여 데스크톱 앱처럼 동작하는 SPA(단일 페이지 애플리케이션)입니다. Blazor WebAssembly는 표준 기반 클라이언트 쪽 웹앱 플랫폼이므로 다음 기능에 필요한 PWA API를 비롯한 모든 브라우저 API를 사용할 수 있습니다.
+일반적으로 PWA(프로그레시브 웹 애플리케이션)는 최신 브라우저 API 및 기능을 사용하여 데스크톱 앱처럼 동작하는 SPA(단일 페이지 애플리케이션)입니다. Blazor WebAssembly는 표준 기반 클라이언트 쪽 웹앱 플랫폼이므로 다음 기능에 필요한 PWA API를 비롯한 모든 브라우저 API를 사용할 수 있습니다.
 
 * 네트워크 속도와 상관없이 오프라인으로 작동하고 항상 즉시 로드
 * 브라우저 창뿐만 아니라 자체 앱 창에서 실행
@@ -89,7 +89,7 @@ iOS에서 방문자는 Safari의 **‘공유’** 단추 및 **‘홈 화면에 
 
 오프라인 지원의 작동 방식을 확인하려면 다음을 수행합니다.
 
-1. 앱을 게시합니다. 자세한 내용은 <xref:host-and-deploy/blazor/index#publish-the-app>를 참조하세요.
+1. 앱을 게시합니다. 자세한 내용은 <xref:blazor/host-and-deploy/index#publish-the-app>를 참조하세요.
 1. HTTPS를 지원하는 서버에 앱을 배포하고 보안 HTTPS 주소를 사용하여 브라우저에서 앱에 액세스합니다.
 1. 브라우저의 개발자 도구를 열고 **애플리케이션** 탭에서 호스트에 대한 ‘서비스 작업자’가 등록되었는지 확인합니다.
 
@@ -295,4 +295,4 @@ PWA 템플릿은 인증과 함께 사용할 수 있습니다. 사용자가 초�
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [SignalR 인증에 대한 원본 간 협상](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR 인증에 대한 원본 간 협상](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
