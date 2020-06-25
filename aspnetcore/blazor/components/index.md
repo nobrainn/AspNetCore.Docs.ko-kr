@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a97fbe07251a61b30985695e3d207f0e3c3a777b
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103158"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242437"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -30,7 +30,7 @@ Blazor 앱은 *구성 요소*를 사용하여 빌드됩니다. 구성 요소는 
 
 ## <a name="component-classes"></a>구성 요소 클래스
 
-구성 요소는 C# 및 HTML 태그 조합을 사용하여 [Razor](xref:mvc/views/razor) 구성 요소 파일( *.razor*)에서 구현됩니다. Blazor의 구성 요소는 공식적으로 ‘Razor 구성 요소’라고 합니다.
+구성 요소는 C# 및 HTML 태그 조합을 사용하여 [Razor](xref:mvc/views/razor) 구성 요소 파일(`.razor`)에서 구현됩니다. Blazor의 구성 요소는 공식적으로 ‘Razor 구성 요소’라고 합니다.
 
 ### <a name="razor-syntax"></a>Razor 구문
 
@@ -43,7 +43,7 @@ Razor 구문에서 콘텐츠에 액세스하는 경우 다음 섹션에 특히 �
 
 ### <a name="names"></a>이름
 
-구성 요소의 이름은 대문자로 시작해야 합니다. 예를 들어, *MyCoolComponent.razor*는 유효하고 *myCoolComponent*는 유효하지 않습니다.
+구성 요소의 이름은 대문자로 시작해야 합니다. 예를 들어, `MyCoolComponent.razor`는 유효하고 `myCoolComponent.razor`는 유효하지 않습니다.
 
 ### <a name="routing"></a>라우팅
 
@@ -77,16 +77,16 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 구성 요소가 처음 렌더링되면 구성 요소는 이벤트에 대한 응답으로 렌더링 트리를 다시 생성합니다. 그런 후 Blazor는 새로운 렌더링 트리를 이전 렌터링 트리와 비교하여 수정 사항을 브라우저 DOM(문서 개체 모델)에 적용합니다.
 
-구성 요소는 일반 C# 클래스이며 프로젝트 내의 어느 위치에나 배치할 수 있습니다. 웹 페이지를 생성하는 구성 요소는 일반적으로 *Pages* 폴더에 있습니다. 페이지가 아닌 구성 요소는 *Shared* 폴더 또는 프로젝트에 추가된 사용자 지정 폴더에 자주 배치됩니다.
+구성 요소는 일반 C# 클래스이며 프로젝트 내의 어느 위치에나 배치할 수 있습니다. 웹 페이지를 생성하는 구성 요소는 일반적으로 `Pages` 폴더에 있습니다. 페이지와 무관한 구성 요소는 `Shared` 폴더 또는 프로젝트에 추가된 사용자 지정 폴더에 자주 배치됩니다.
 
 ### <a name="namespaces"></a>네임스페이스
 
-일반적으로 구성 요소의 네임스페이스는 앱의 루트 네임스페이스와 앱 내의 구성 요소 위치(폴더)에서 파생됩니다. 앱의 루트 네임스페이스가 `BlazorApp`이고 `Counter` 구성 요소가 *Pages* 폴더에 있는 경우 다음이 적용됩니다.
+일반적으로 구성 요소의 네임스페이스는 앱의 루트 네임스페이스와 앱 내의 구성 요소 위치(폴더)에서 파생됩니다. 앱의 루트 네임스페이스가 `BlazorApp`이고 `Counter` 구성 요소가 `Pages` 폴더에 있다면 다음이 적용됩니다.
 
 * `Counter` 구성 요소의 네임스페이스는 `BlazorApp.Pages`입니다.
 * 구성 요소의 정규화된 형식 이름은 `BlazorApp.Pages.Counter`입니다.
 
-구성 요소를 포함하는 사용자 지정 폴더의 경우 부모 구성 요소 또는 앱의 *_Imports.razor* 파일에 [`@using`][2] 지시문을 추가합니다. 다음 예에서는 ‘구성 요소’ 폴더의 구성 요소를 사용할 수 있도록 만듭니다.
+구성 요소를 포함하는 사용자 지정 폴더의 경우 부모 구성 요소 또는 앱의 `_Imports.razor` 파일에 [`@using`][2] 지시문을 추가합니다. 다음 예에서는 `Components` 폴더의 구성 요소를 사용할 수 있도록 만듭니다.
 
 ```razor
 @using BlazorApp.Components
@@ -100,16 +100,16 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 Razor로 작성된 구성 요소의 네임스페이스는 다음을 기준으로 합니다(우선 순위에 따름).
 
-* Razor 파일( *.razor*) 태그(`@namespace BlazorSample.MyNamespace`)의 [`@namespace`][8] 지정
+* Razor 파일(`.razor`) 태그(`@namespace BlazorSample.MyNamespace`)의 [`@namespace`][8] 지정
 * 프로젝트 파일(`<RootNamespace>BlazorSample</RootNamespace>`)에서 프로젝트의 `RootNamespace`
-* 프로젝트 파일의 파일 이름( *.csproj*)에서 가져온 프로젝트 이름, 프로젝트 루트에서 구성 요소로의 경로. 예를 들어, 이 프레임워크는 *{PROJECT ROOT}/Pages/Index.razor*(*BlazorSample.csproj*)를 네임스페이스 `BlazorSample.Pages`로 확인합니다. 구성 요소는 C# 이름 바인딩 규칙을 따릅니다. 이 예의 `Index` 구성 요소에서는 범위의 구성 요소가 모든 구성 요소입니다.
-  * 동일한 폴더의 *Pages*.
+* 프로젝트 파일의 파일 이름(`.csproj`)에서 가져온 프로젝트 이름, 프로젝트 루트에서 구성 요소로의 경로. 예를 들어 프레임워크는 `{PROJECT ROOT}/Pages/Index.razor`(`BlazorSample.csproj`)를 `BlazorSample.Pages` 네임스페이스로 확인합니다. 구성 요소는 C# 이름 바인딩 규칙을 따릅니다. 이 예의 `Index` 구성 요소에서는 범위의 구성 요소가 모든 구성 요소입니다.
+  * 동일한 폴더의 `Pages`.
   * 다른 네임스페이스를 명시적으로 지정하지 않는 프로젝트 루트의 구성 요소
 
 > [!NOTE]
 > `global::` 한정자는 지원되지 않습니다.
 >
-> 별칭이 지정된 [using](/dotnet/csharp/language-reference/keywords/using-statement) 문(예: `@using Foo = Bar`)을 사용하여 구성 요소를 가져오는 것은 지원되지 않습니다.
+> 별칭이 지정된 [`using`](/dotnet/csharp/language-reference/keywords/using-statement) 문(예: `@using Foo = Bar`)을 사용하여 구성 요소를 가져오는 것은 지원되지 않습니다.
 >
 > 부분적으로 정규화된 이름은 지원되지 않습니다. 예를 들어 `<Shared.NavMenu></Shared.NavMenu>`를 사용하여 `@using BlazorSample`을 추가하고 `NavMenu` 구성 요소(`NavMenu.razor`)를 참조하는 것은 지원되지 않습니다.
 
@@ -122,7 +122,7 @@ Razor 구성 요소가 partial 클래스로 생성됩니다. Razor 구성 요소
 
 다음 예제에서는 Blazor 템플릿에서 생성된 앱에서 [`@code`][1] 블록을 포함하는 기본 `Counter` 구성 요소를 보여 줍니다. HTML 태그, Razor 코드 및 C# 코드는 다음과 같은 동일한 파일에 있습니다.
 
-*Counter.razor*:
+`Pages/Counter.razor`:
 
 ```razor
 @page "/counter"
@@ -145,7 +145,7 @@ Razor 구성 요소가 partial 클래스로 생성됩니다. Razor 구성 요소
 
 Partial 클래스에서 코드 숨김 파일을 사용하여 `Counter` 구성 요소를 만들 수도 있습니다.
 
-*Counter.razor*:
+`Pages/Counter.razor`:
 
 ```razor
 @page "/counter"
@@ -157,7 +157,7 @@ Partial 클래스에서 코드 숨김 파일을 사용하여 `Counter` 구성 �
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
 
-*Counter.razor.cs*:
+`Counter.razor.cs`:
 
 ```csharp
 namespace BlazorApp.Pages
@@ -189,7 +189,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 [`@inherits`][6] 지시어를 사용하여 구성 요소에 대한 기본 클래스를 지정할 수 있습니다. 다음 예제에서는 구성 요소가 기본 클래스 `BlazorRocksBase`를 상속하여 구성 요소의 속성과 메서드를 제공하는 방법을 보여 줍니다. 기본 클래스는 <xref:Microsoft.AspNetCore.Components.ComponentBase>에서 파생되어야 합니다.
 
-*Pages/BlazorRocks.razor*:
+`Pages/BlazorRocks.razor`:
 
 ```razor
 @page "/BlazorRocks"
@@ -198,7 +198,7 @@ using Microsoft.AspNetCore.Components.Web;
 <h1>@BlazorRocksText</h1>
 ```
 
-*BlazorRocksBase.cs*:
+`BlazorRocksBase.cs`:
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -217,13 +217,13 @@ namespace BlazorSample
 
 구성 요소는 HTML 요소 구문을 사용하여 선언함으로써 다른 구성 요소를 포함할 수 있습니다. 구성 요소 사용을 위한 태그는 태그 이름이 구성 요소 유형인 HTML 태그처럼 보입니다.
 
-*Index.razor*의 다음 태그는 `HeadingComponent` 인스턴스를 렌더링합니다.
+`Pages/Index.razor`의 다음 태그는 `HeadingComponent` 인스턴스를 렌더링합니다.
 
 ```razor
 <HeadingComponent />
 ```
 
-*Components/HeadingComponent.razor*:
+`Components/HeadingComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/HeadingComponent.razor)]
 
@@ -235,25 +235,25 @@ namespace BlazorSample
 
 구성 요소는 [`@page`][9] 지시문에 제공된 경로 템플릿에서 경로 매개 변수를 받을 수 있습니다. 라우터는 경로 매개 변수를 사용하여 해당하는 구성 요소 매개 변수를 채웁니다.
 
-*Pages/RouteParameter.razor*:
+`Pages/RouteParameter.razor`:
 
 [!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
 선택적 매개 변수는 지원되지 않으므로 앞의 예제에서 두 개의 [`@page`][9] 지시문이 적용됩니다. 첫 번째 지시문은 매개 변수 없이 구성 요소 탐색을 허용합니다. 두 번째 [`@page`][9] 지시문은 `{text}` 경로 매개 변수를 받고 `Text` 속성에 값을 할당합니다.
 
-여러 폴더 경계에서 경로를 캡처하는 *catch-all* 매개 변수 구문(`*`/`**`)은 Razor 구성 요소( *.razor*)에서 지원되지 **않습니다**.
+여러 폴더 경계에서 경로를 캡처하는 *catch-all* 매개 변수 구문(`*`/`**`)은 Razor 구성 요소(`.razor`)에서 지원되지 **않습니다**.
 
 ### <a name="component-parameters"></a>구성 요소 매개 변수
 
 구성 요소에는 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성을 사용하여 구성 요소 클래스의 퍼블릭 속성을 사용하여 정의되는 구성 요소 매개 변수가 있을 수 있습니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
-*Components/ChildComponent.razor*:
+`Components/ChildComponent.razor`:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
 샘플 앱의 다음 예제에서는 `ParentComponent`는 `ChildComponent`의 `Title` 속성 값을 설정합니다.
 
-*Pages/ParentComponent.razor*:
+`Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
@@ -266,7 +266,7 @@ namespace BlazorSample
 
 다음 예제에서 `ChildComponent`에는 렌더링할 UI의 세그먼트를 나타내는 <xref:Microsoft.AspNetCore.Components.RenderFragment>를 나타내는 `ChildContent` 속성이 있습니다. `ChildContent`의 값은 콘텐츠를 렌더링해야 하는 구성 요소의 태그에 배치됩니다. `ChildContent` 값은 부모 구성 요소에서 수신되고 부트스트랩 패널의 `panel-body` 내에서 렌더링됩니다.
 
-*Components/ChildComponent.razor*:
+`Components/ChildComponent.razor`:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
@@ -275,7 +275,7 @@ namespace BlazorSample
 
 샘플 앱의 `ParentComponent`는 콘텐츠를 `<ChildComponent>` 태그 안에 배치하여 `ChildComponent`를 렌더링하기 위한 콘텐츠를 제공할 수 있습니다.
 
-*Pages/ParentComponent.razor*:
+`Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=7-8)]
 
@@ -351,13 +351,13 @@ namespace BlazorSample
 
 요소 특성의 위치에 상대적인 [`@attributes`][3]의 위치는 중요합니다. 요소에 [`@attributes`][3]가 스플래팅되면 오른쪽에서 왼쪽으로(마지막에 도달하면 처음으로) 특성이 처리됩니다. `Child` 구성 요소를 사용하는 구성 요소의 다음 예를 살펴보세요.
 
-*ParentComponent.razor*:
+`ParentComponent.razor`:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent.razor*:
+`ChildComponent.razor`:
 
 ```razor
 <div @attributes="AdditionalAttributes" extra="5" />
@@ -374,13 +374,13 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 다음 예에서는 `Child` 구성 요소의 `<div>`에서 `extra`와 [`@attributes`][3]의 순서가 반대로 바뀝니다.
 
-*ParentComponent.razor*:
+`ParentComponent.razor`:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent.razor*:
+`ChildComponent.razor`:
 
 ```razor
 <div extra="5" @attributes="AdditionalAttributes" />
@@ -418,7 +418,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 구성 요소가 렌더링되면 `loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음, 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
 
 > [!IMPORTANT]
-> `loginDialog` 변수는 구성 요소가 렌더링된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료한 후에 구성 요소 참조를 조작하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](xref:blazor/components/lifecycle#after-component-render)를 사용합니다.
+> `loginDialog` 변수는 구성 요소가 렌더링된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료한 후에 구성 요소 참조를 조작하려면 [`OnAfterRenderAsync` 또는 `OnAfterRender` 메서드](xref:blazor/components/lifecycle#after-component-render)를 사용합니다.
 
 루프의 구성 요소를 참조하려면 [Capture references to multiple similar child-components(dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358)(여러 비슷한 자식 구성 요소에 대한 참조 캡처)를 참조하세요.
 
@@ -706,7 +706,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링됩니다. 값이
 자세한 내용은 <xref:mvc/views/razor>를 참조하세요.
 
 > [!WARNING]
-> [aria-pressed](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)와 같은 일부 HTML 특성은 .NET 형식이 `bool`일 경우 제대로 작동하지 않습니다. 이러한 경우 `bool` 대신 `string` 형식을 사용합니다.
+> [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) 같은 일부 HTML 특성은 .NET 형식이 `bool`일 경우 제대로 작동하지 않습니다. 이러한 경우 `bool` 대신 `string` 형식을 사용합니다.
 
 ## <a name="raw-html"></a>원시 HTML
 
@@ -762,9 +762,9 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링됩니다. 값이
 
 ## <a name="static-assets"></a>정적 자산
 
-Blazor는 프로젝트의 [웹 루트(wwwroot) 폴더](xref:fundamentals/index#web-root) 아래에 정적 자산을 배치하는 ASP.NET Core 앱의 규칙을 따릅니다.
+Blazor는 프로젝트의 [`web root (wwwroot)` 폴더](xref:fundamentals/index#web-root) 아래에 정적 자산을 배치하는 ASP.NET Core 앱의 규칙을 따릅니다.
 
-기본 상대 경로(`/`)를 사용하여 정적 자산의 웹 루트를 참조합니다. 다음 예제에서 *logo.png*는 실제로 *{PROJECT ROOT}/wwwroot/images* 폴더에 있습니다.
+기본 상대 경로(`/`)를 사용하여 정적 자산의 웹 루트를 참조합니다. 다음 예제에서 `logo.png`는 실제로 `{PROJECT ROOT}/wwwroot/images` 폴더에 있습니다.
 
 ```razor
 <img alt="Company logo" src="/images/logo.png" />
@@ -776,17 +776,17 @@ Razor 구성 요소는 물결표-슬래시 표기법(`~/`)을 지원하지 **않
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>태그 도우미는 구성 요소에서 지원되지 않습니다.
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)는 Razor 구성 요소( *.razor* 파일)에서 지원되지 않습니다. Blazor에서 태그 도우미와 유사한 기능을 제공하려면 대신, 태그 도우미와 동일한 기능을 포함하는 구성 요소를 만들고 해당 구성 요소를 사용합니다.
+[`Tag Helpers`](xref:mvc/views/tag-helpers/intro)는 Razor 구성 요소(`.razor` 파일)에서 지원되지 않습니다. Blazor에서 태그 도우미와 유사한 기능을 제공하려면 대신, 태그 도우미와 동일한 기능을 포함하는 구성 요소를 만들고 해당 구성 요소를 사용합니다.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>SVG(Scalable Vector Graphics) 이미지
 
-Blazor는 HTML을 렌더링하므로 SVG(Scalable Vector Graphics) 이미지( *.svg*)를 포함하는 브라우저 지원 이미지는 `<img>` 태그를 통해 지원됩니다.
+Blazor는 HTML을 렌더링하므로 SVG(Scalable Vector Graphics) 이미지(`.svg`)를 포함하는 브라우저 지원 이미지는 `<img>` 태그를 통해 지원됩니다.
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-마찬가지로, 스타일시트 파일( *.css*)의 CSS 규칙에서는 SVG 이미지가 지원됩니다.
+마찬가지로, 스타일시트 파일(`.css`)의 CSS 규칙에서는 SVG 이미지가 지원됩니다.
 
 ```css
 .my-element {
@@ -794,7 +794,7 @@ Blazor는 HTML을 렌더링하므로 SVG(Scalable Vector Graphics) 이미지( *.
 }
 ```
 
-그러나 인라인 SVG 태그는 일부 시나리오에서 지원되지 않습니다. `<svg>` 태그를 구성 요소 파일(*razor*)에 직접 배치하면 기본 이미지 렌더링이 지원되지만 많은 고급 시나리오는 아직 지원되지 않습니다. 예를 들어, `<use>` 태그는 현재 적용되지 않으며 [`@bind`][10]를 일부 SVG 태그에서는 사용할 수 없습니다. 자세한 내용은 [Blazor(dotnet/aspnetcore #18271)에서 SVG 지원](https://github.com/dotnet/aspnetcore/issues/18271)을 참조하세요.
+그러나 인라인 SVG 태그는 일부 시나리오에서 지원되지 않습니다. `<svg>` 태그를 구성 요소 파일(`.razor`)에 직접 배치하면 기본 이미지 렌더링이 지원되지만 고급 시나리오 중 아직 지원되지 않는 시나리오가 많습니다. 예를 들어, `<use>` 태그는 현재 적용되지 않으며 [`@bind`][10]를 일부 SVG 태그에서는 사용할 수 없습니다. 자세한 내용은 [Blazor(dotnet/aspnetcore #18271)에서 SVG 지원](https://github.com/dotnet/aspnetcore/issues/18271)을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
