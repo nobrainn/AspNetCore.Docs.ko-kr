@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core 프로젝트 Identity 에서 사용자 데이터 추가, 다운로드 및 삭제
+title: ASP.NET Core 프로젝트에서 사용자 데이터 추가, 다운로드 및 삭제 Identity
 author: rick-anderson
-description: ASP.NET Core 프로젝트에서에 Identity 사용자 지정 사용자 데이터를 추가 하는 방법에 대해 알아봅니다. GDPR 당 데이터를 삭제 합니다.
+description: ASP.NET Core 프로젝트에서에 사용자 지정 사용자 데이터를 추가 하는 방법에 대해 알아봅니다 Identity . GDPR 당 데이터를 삭제 합니다.
 ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
@@ -12,27 +12,27 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 29c23e10d11eb1042b64fc071c221a9ead857fcc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6b4de0a47cd7882852512040a08832942f20aa4c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777334"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347114"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a><span data-ttu-id="3da02-104">ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터 추가, 다운로드 및 삭제</span><span class="sxs-lookup"><span data-stu-id="3da02-104">Add, download, and delete custom user data to Identity in an ASP.NET Core project</span></span>
+# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a><span data-ttu-id="bbd0a-104">ASP.NET Core 프로젝트에서 사용자 지정 사용자 데이터 추가, 다운로드 및 삭제 Identity</span><span class="sxs-lookup"><span data-stu-id="bbd0a-104">Add, download, and delete custom user data to Identity in an ASP.NET Core project</span></span>
 
-<span data-ttu-id="3da02-105">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="3da02-105">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="bbd0a-105">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="bbd0a-105">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="3da02-106">이 문서는 다음 방법을 안내합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-106">This article shows how to:</span></span>
+<span data-ttu-id="bbd0a-106">이 문서는 다음 방법을 안내합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-106">This article shows how to:</span></span>
 
-* <span data-ttu-id="3da02-107">ASP.NET Core 웹 앱에 사용자 지정 사용자 데이터를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-107">Add custom user data to an ASP.NET Core web app.</span></span>
-* <span data-ttu-id="3da02-108">사용자 지정 사용자 데이터 모델을 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 특성으로 표시 하 여 자동으로 다운로드 및 삭제에 사용할 수 있도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-108">Mark the custom user data model with the <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> attribute so it's automatically available for download and deletion.</span></span> <span data-ttu-id="3da02-109">데이터를 다운로드 하 고 삭제할 수 있도록 하는 것은 [Gdpr](xref:security/gdpr) 요구 사항을 충족 하는 데 도움이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-109">Making the data able to be downloaded and deleted helps meet [GDPR](xref:security/gdpr) requirements.</span></span>
+* <span data-ttu-id="bbd0a-107">ASP.NET Core 웹 앱에 사용자 지정 사용자 데이터를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-107">Add custom user data to an ASP.NET Core web app.</span></span>
+* <span data-ttu-id="bbd0a-108">사용자 지정 사용자 데이터 모델을 특성으로 표시 하 여 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 자동으로 다운로드 및 삭제에 사용할 수 있도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-108">Mark the custom user data model with the <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> attribute so it's automatically available for download and deletion.</span></span> <span data-ttu-id="bbd0a-109">데이터를 다운로드 하 고 삭제할 수 있도록 하는 것은 [Gdpr](xref:security/gdpr) 요구 사항을 충족 하는 데 도움이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-109">Making the data able to be downloaded and deleted helps meet [GDPR](xref:security/gdpr) requirements.</span></span>
 
-<span data-ttu-id="3da02-110">프로젝트 샘플은 Razor Pages 웹 앱에서 만들지만 ASP.NET Core MVC 웹 앱에 대 한 지침과 비슷합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-110">The project sample is created from a Razor Pages web app, but the instructions are similar for a ASP.NET Core MVC web app.</span></span>
+<span data-ttu-id="bbd0a-110">프로젝트 샘플은 Razor 페이지 웹 앱에서 생성 되지만 지침은 ASP.NET CORE MVC 웹 앱과 유사 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-110">The project sample is created from a Razor Pages web app, but the instructions are similar for a ASP.NET Core MVC web app.</span></span>
 
-<span data-ttu-id="3da02-111">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="3da02-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="bbd0a-111">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="bbd0a-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="3da02-112">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="3da02-112">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="bbd0a-112">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="bbd0a-112">Prerequisites</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -46,32 +46,32 @@ ms.locfileid: "82777334"
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a><span data-ttu-id="3da02-113">Razor 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="3da02-113">Create a Razor web app</span></span>
+## <a name="create-a-razor-web-app"></a><span data-ttu-id="bbd0a-113">Razor웹 앱 만들기</span><span class="sxs-lookup"><span data-stu-id="bbd0a-113">Create a Razor web app</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="3da02-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3da02-114">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="bbd0a-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="bbd0a-114">Visual Studio</span></span>](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* <span data-ttu-id="3da02-115">Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-115">From the Visual Studio **File** menu, select **New** > **Project**.</span></span> <span data-ttu-id="3da02-116">[다운로드 샘플](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) 코드의 네임 스페이스와 일치 시키려는 경우 프로젝트 이름을 **WebApp1** 로 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-116">Name the project **WebApp1** if you want to it match the namespace of the [download sample](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) code.</span></span>
-* <span data-ttu-id="3da02-117">**ASP.NET Core 웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-117">Select **ASP.NET Core Web Application** > **OK**</span></span>
-* <span data-ttu-id="3da02-118">드롭다운에서 **ASP.NET Core 3.0** 을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-118">Select **ASP.NET Core 3.0** in the dropdown</span></span>
-* <span data-ttu-id="3da02-119">**웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-119">Select **Web Application** > **OK**</span></span>
-* <span data-ttu-id="3da02-120">프로젝트를 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-120">Build and run the project.</span></span>
+* <span data-ttu-id="bbd0a-115">Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-115">From the Visual Studio **File** menu, select **New** > **Project**.</span></span> <span data-ttu-id="bbd0a-116">[다운로드 샘플](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) 코드의 네임 스페이스와 일치 시키려는 경우 프로젝트 이름을 **WebApp1** 로 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-116">Name the project **WebApp1** if you want to it match the namespace of the [download sample](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) code.</span></span>
+* <span data-ttu-id="bbd0a-117">**ASP.NET Core 웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-117">Select **ASP.NET Core Web Application** > **OK**</span></span>
+* <span data-ttu-id="bbd0a-118">드롭다운에서 **ASP.NET Core 3.0** 을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-118">Select **ASP.NET Core 3.0** in the dropdown</span></span>
+* <span data-ttu-id="bbd0a-119">**웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-119">Select **Web Application** > **OK**</span></span>
+* <span data-ttu-id="bbd0a-120">프로젝트를 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-120">Build and run the project.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-* <span data-ttu-id="3da02-121">Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-121">From the Visual Studio **File** menu, select **New** > **Project**.</span></span> <span data-ttu-id="3da02-122">[다운로드 샘플](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) 코드의 네임 스페이스와 일치 시키려는 경우 프로젝트 이름을 **WebApp1** 로 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-122">Name the project **WebApp1** if you want to it match the namespace of the [download sample](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) code.</span></span>
-* <span data-ttu-id="3da02-123">**ASP.NET Core 웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-123">Select **ASP.NET Core Web Application** > **OK**</span></span>
-* <span data-ttu-id="3da02-124">드롭다운에서 **ASP.NET Core 2.2** 을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-124">Select **ASP.NET Core 2.2** in the dropdown</span></span>
-* <span data-ttu-id="3da02-125">**웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-125">Select **Web Application** > **OK**</span></span>
-* <span data-ttu-id="3da02-126">프로젝트를 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-126">Build and run the project.</span></span>
+* <span data-ttu-id="bbd0a-121">Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-121">From the Visual Studio **File** menu, select **New** > **Project**.</span></span> <span data-ttu-id="bbd0a-122">[다운로드 샘플](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) 코드의 네임 스페이스와 일치 시키려는 경우 프로젝트 이름을 **WebApp1** 로 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-122">Name the project **WebApp1** if you want to it match the namespace of the [download sample](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) code.</span></span>
+* <span data-ttu-id="bbd0a-123">**ASP.NET Core 웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-123">Select **ASP.NET Core Web Application** > **OK**</span></span>
+* <span data-ttu-id="bbd0a-124">드롭다운에서 **ASP.NET Core 2.2** 을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-124">Select **ASP.NET Core 2.2** in the dropdown</span></span>
+* <span data-ttu-id="bbd0a-125">**웹 응용 프로그램** > **확인을** 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-125">Select **Web Application** > **OK**</span></span>
+* <span data-ttu-id="bbd0a-126">프로젝트를 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-126">Build and run the project.</span></span>
 
 ::: moniker-end
 
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="3da02-127">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="3da02-127">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="bbd0a-127">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="bbd0a-127">.NET Core CLI</span></span>](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp -o WebApp1
@@ -79,43 +79,43 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a><span data-ttu-id="3da02-128">Id 스 캐 폴더 실행</span><span class="sxs-lookup"><span data-stu-id="3da02-128">Run the Identity scaffolder</span></span>
+## <a name="run-the-identity-scaffolder"></a><span data-ttu-id="bbd0a-128">스 캐 폴더 실행 Identity</span><span class="sxs-lookup"><span data-stu-id="bbd0a-128">Run the Identity scaffolder</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="3da02-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3da02-129">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="bbd0a-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="bbd0a-129">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="3da02-130">**솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 > **Add** > **새 스 캐 폴드 항목**추가를 클릭 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-130">From **Solution Explorer**, right-click on the project > **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="3da02-131">**스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 **id** > **추가**를 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-131">From the left pane of the **Add Scaffold** dialog, select **Identity** > **Add**.</span></span>
-* <span data-ttu-id="3da02-132">**Id 추가** 대화 상자에서 다음 옵션을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-132">In the **Add Identity** dialog, the following options:</span></span>
-  * <span data-ttu-id="3da02-133">기존 레이아웃 파일 *~/Pages/Shared/_Layout를 선택 합니다.*</span><span class="sxs-lookup"><span data-stu-id="3da02-133">Select the existing layout  file  *~/Pages/Shared/_Layout.cshtml*</span></span>
-  * <span data-ttu-id="3da02-134">재정의할 다음 파일 선택:</span><span class="sxs-lookup"><span data-stu-id="3da02-134">Select the following files to override:</span></span>
-    * <span data-ttu-id="3da02-135">**계정/등록**</span><span class="sxs-lookup"><span data-stu-id="3da02-135">**Account/Register**</span></span>
-    * <span data-ttu-id="3da02-136">**계정/관리/인덱스**</span><span class="sxs-lookup"><span data-stu-id="3da02-136">**Account/Manage/Index**</span></span>
-  * <span data-ttu-id="3da02-137">단추를 **+** 선택 하 여 새 **데이터 컨텍스트 클래스**를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-137">Select the **+** button to create a new **Data context class**.</span></span> <span data-ttu-id="3da02-138">프로젝트 이름이 **WebApp1**인 경우 형식 (**WebApp1. WebApp1Context** )을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-138">Accept the type (**WebApp1.Models.WebApp1Context** if the project is named **WebApp1**).</span></span>
-  * <span data-ttu-id="3da02-139">단추를 **+** 선택 하 여 새 **사용자 클래스**를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-139">Select the **+** button to create a new **User class**.</span></span> <span data-ttu-id="3da02-140">형식 (프로젝트 이름이 **WebApp1**인 경우**WebApp1User** )을 적용 > **추가**합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-140">Accept the type (**WebApp1User** if the project is named **WebApp1**) > **Add**.</span></span>
-* <span data-ttu-id="3da02-141">**추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-141">Select **Add**.</span></span>
+* <span data-ttu-id="bbd0a-130">**솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 > **Add**  >  **새 스 캐 폴드 항목**추가를 클릭 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-130">From **Solution Explorer**, right-click on the project > **Add** > **New Scaffolded Item**.</span></span>
+* <span data-ttu-id="bbd0a-131">**스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 추가를 선택 **Identity**  >  **Add**합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-131">From the left pane of the **Add Scaffold** dialog, select **Identity** > **Add**.</span></span>
+* <span data-ttu-id="bbd0a-132">\*\*추가 Identity \*\* 대화 상자에서 다음 옵션을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-132">In the **Add Identity** dialog, the following options:</span></span>
+  * <span data-ttu-id="bbd0a-133">기존 레이아웃 파일 *~/Pages/Shared/_Layout를 선택 합니다.*</span><span class="sxs-lookup"><span data-stu-id="bbd0a-133">Select the existing layout  file  *~/Pages/Shared/_Layout.cshtml*</span></span>
+  * <span data-ttu-id="bbd0a-134">재정의할 다음 파일 선택:</span><span class="sxs-lookup"><span data-stu-id="bbd0a-134">Select the following files to override:</span></span>
+    * <span data-ttu-id="bbd0a-135">**계정/등록**</span><span class="sxs-lookup"><span data-stu-id="bbd0a-135">**Account/Register**</span></span>
+    * <span data-ttu-id="bbd0a-136">**계정/관리/인덱스**</span><span class="sxs-lookup"><span data-stu-id="bbd0a-136">**Account/Manage/Index**</span></span>
+  * <span data-ttu-id="bbd0a-137">단추를 선택 **+** 하 여 새 **데이터 컨텍스트 클래스**를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-137">Select the **+** button to create a new **Data context class**.</span></span> <span data-ttu-id="bbd0a-138">프로젝트 이름이 **WebApp1**인 경우 형식 (**WebApp1. WebApp1Context** )을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-138">Accept the type (**WebApp1.Models.WebApp1Context** if the project is named **WebApp1**).</span></span>
+  * <span data-ttu-id="bbd0a-139">단추를 선택 **+** 하 여 새 **사용자 클래스**를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-139">Select the **+** button to create a new **User class**.</span></span> <span data-ttu-id="bbd0a-140">형식 (프로젝트 이름이 **WebApp1**인 경우**WebApp1User** )을 적용 > **추가**합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-140">Accept the type (**WebApp1User** if the project is named **WebApp1**) > **Add**.</span></span>
+* <span data-ttu-id="bbd0a-141">**추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-141">Select **Add**.</span></span>
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="3da02-142">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="3da02-142">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="bbd0a-142">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="bbd0a-142">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="3da02-143">이전에 ASP.NET Core 스 캐 폴더를 설치 하지 않은 경우 지금 설치 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-143">If you have not previously installed the ASP.NET Core scaffolder, install it now:</span></span>
+<span data-ttu-id="bbd0a-143">이전에 ASP.NET Core 스 캐 폴더를 설치 하지 않은 경우 지금 설치 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-143">If you have not previously installed the ASP.NET Core scaffolder, install it now:</span></span>
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-<span data-ttu-id="3da02-144">프로젝트 (.csproj) 파일에 [VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) 에 대 한 패키지 참조를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-144">Add a package reference to [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) to the project (.csproj) file.</span></span> <span data-ttu-id="3da02-145">프로젝트 디렉터리에서 다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-145">Run the following command in the project directory:</span></span>
+<span data-ttu-id="bbd0a-144">프로젝트 (.csproj) 파일에 [VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) 에 대 한 패키지 참조를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-144">Add a package reference to [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) to the project (.csproj) file.</span></span> <span data-ttu-id="bbd0a-145">프로젝트 디렉터리에서 다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-145">Run the following command in the project directory:</span></span>
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-<span data-ttu-id="3da02-146">다음 명령을 실행 하 여 Identity 스 캐 폴더 옵션을 나열 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-146">Run the following command to list the Identity scaffolder options:</span></span>
+<span data-ttu-id="bbd0a-146">다음 명령을 실행 하 여 스 캐 폴더 옵션을 나열 합니다 Identity .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-146">Run the following command to list the Identity scaffolder options:</span></span>
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-<span data-ttu-id="3da02-147">프로젝트 폴더에서 Id 스 캐 폴더를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-147">In the project folder, run the Identity scaffolder:</span></span>
+<span data-ttu-id="bbd0a-147">프로젝트 폴더에서 스 캐 폴더를 실행 합니다 Identity .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-147">In the project folder, run the Identity scaffolder:</span></span>
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
@@ -123,21 +123,21 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ---
 
-<span data-ttu-id="3da02-148">[마이그레이션, UseAuthentication 및 레이아웃](xref:security/authentication/scaffold-identity#efm) 의 지침에 따라 다음 단계를 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-148">Follow the instruction in [Migrations, UseAuthentication, and layout](xref:security/authentication/scaffold-identity#efm) to perform the following steps:</span></span>
+<span data-ttu-id="bbd0a-148">[마이그레이션, UseAuthentication 및 레이아웃](xref:security/authentication/scaffold-identity#efm) 의 지침에 따라 다음 단계를 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-148">Follow the instruction in [Migrations, UseAuthentication, and layout](xref:security/authentication/scaffold-identity#efm) to perform the following steps:</span></span>
 
-* <span data-ttu-id="3da02-149">마이그레이션을 만들고 데이터베이스를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-149">Create a migration and update the database.</span></span>
-* <span data-ttu-id="3da02-150">`UseAuthentication`를 `Startup.Configure`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-150">Add `UseAuthentication` to `Startup.Configure`.</span></span>
-* <span data-ttu-id="3da02-151">레이아웃 `<partial name="_LoginPartial" />` 파일에를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-151">Add `<partial name="_LoginPartial" />` to the layout file.</span></span>
-* <span data-ttu-id="3da02-152">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-152">Test the app:</span></span>
-  * <span data-ttu-id="3da02-153">사용자 등록</span><span class="sxs-lookup"><span data-stu-id="3da02-153">Register a user</span></span>
-  * <span data-ttu-id="3da02-154">새 사용자 이름 ( **로그 아웃** 링크 옆에 있는)을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-154">Select the new user name (next to the **Logout** link).</span></span> <span data-ttu-id="3da02-155">창을 확장 하거나 탐색 모음 아이콘을 선택 하 여 사용자 이름 및 기타 링크를 표시 해야 할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-155">You might need to expand the window or select the navigation bar icon to show the user name and other links.</span></span>
-  * <span data-ttu-id="3da02-156">**개인 데이터** 탭을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-156">Select the **Personal Data** tab.</span></span>
-  * <span data-ttu-id="3da02-157">**다운로드** 단추를 선택 하 고 *PersonalData* 파일을 검사 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-157">Select the **Download** button and examined the *PersonalData.json* file.</span></span>
-  * <span data-ttu-id="3da02-158">로그온 한 사용자를 삭제 하는 **삭제** 단추를 테스트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-158">Test the **Delete** button, which deletes the logged on user.</span></span>
+* <span data-ttu-id="bbd0a-149">마이그레이션을 만들고 데이터베이스를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-149">Create a migration and update the database.</span></span>
+* <span data-ttu-id="bbd0a-150">`UseAuthentication`를 `Startup.Configure`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-150">Add `UseAuthentication` to `Startup.Configure`.</span></span>
+* <span data-ttu-id="bbd0a-151">`<partial name="_LoginPartial" />`레이아웃 파일에를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-151">Add `<partial name="_LoginPartial" />` to the layout file.</span></span>
+* <span data-ttu-id="bbd0a-152">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-152">Test the app:</span></span>
+  * <span data-ttu-id="bbd0a-153">사용자 등록</span><span class="sxs-lookup"><span data-stu-id="bbd0a-153">Register a user</span></span>
+  * <span data-ttu-id="bbd0a-154">새 사용자 이름 ( **로그 아웃** 링크 옆에 있는)을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-154">Select the new user name (next to the **Logout** link).</span></span> <span data-ttu-id="bbd0a-155">창을 확장 하거나 탐색 모음 아이콘을 선택 하 여 사용자 이름 및 기타 링크를 표시 해야 할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-155">You might need to expand the window or select the navigation bar icon to show the user name and other links.</span></span>
+  * <span data-ttu-id="bbd0a-156">**개인 데이터** 탭을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-156">Select the **Personal Data** tab.</span></span>
+  * <span data-ttu-id="bbd0a-157">**다운로드** 단추를 선택 하 고 파일 *의PersonalData.js* 를 검사 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-157">Select the **Download** button and examined the *PersonalData.json* file.</span></span>
+  * <span data-ttu-id="bbd0a-158">로그온 한 사용자를 삭제 하는 **삭제** 단추를 테스트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-158">Test the **Delete** button, which deletes the logged on user.</span></span>
 
-## <a name="add-custom-user-data-to-the-identity-db"></a><span data-ttu-id="3da02-159">Id DB에 사용자 지정 사용자 데이터 추가</span><span class="sxs-lookup"><span data-stu-id="3da02-159">Add custom user data to the Identity DB</span></span>
+## <a name="add-custom-user-data-to-the-identity-db"></a><span data-ttu-id="bbd0a-159">DB에 사용자 지정 사용자 데이터 추가 Identity</span><span class="sxs-lookup"><span data-stu-id="bbd0a-159">Add custom user data to the Identity DB</span></span>
 
-<span data-ttu-id="3da02-160">사용자 지정 `IdentityUser` 속성을 사용 하 여 파생 클래스를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-160">Update the `IdentityUser` derived class with custom properties.</span></span> <span data-ttu-id="3da02-161">WebApp1 프로젝트의 이름을 지정 하는 경우 파일의 이름은 *Areas/Identity/Data/WebApp1User*입니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-161">If you named the project WebApp1, the file is named *Areas/Identity/Data/WebApp1User.cs*.</span></span> <span data-ttu-id="3da02-162">다음 코드를 사용 하 여 파일을 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-162">Update the file with the following code:</span></span>
+<span data-ttu-id="bbd0a-160">`IdentityUser`사용자 지정 속성을 사용 하 여 파생 클래스를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-160">Update the `IdentityUser` derived class with custom properties.</span></span> <span data-ttu-id="bbd0a-161">WebApp1 프로젝트의 이름을 지정 하는 경우 파일의 이름은 *Areas/ Identity /Data/WebApp1User.cs*입니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-161">If you named the project WebApp1, the file is named *Areas/Identity/Data/WebApp1User.cs*.</span></span> <span data-ttu-id="bbd0a-162">다음 코드를 사용 하 여 파일을 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-162">Update the file with the following code:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -151,20 +151,20 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ::: moniker-end
 
-<span data-ttu-id="3da02-163">[PersonalData](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) 특성이 있는 속성은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-163">Properties with the [PersonalData](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) attribute are:</span></span>
+<span data-ttu-id="bbd0a-163">[PersonalData](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) 특성이 있는 속성은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-163">Properties with the [PersonalData](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) attribute are:</span></span>
 
-* <span data-ttu-id="3da02-164">*영역/i d/페이지/계정/관리/DeletePersonalData* Razor 페이지에서를 호출 `UserManager.Delete`하면 삭제 됩니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-164">Deleted when the *Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml* Razor Page calls `UserManager.Delete`.</span></span>
-* <span data-ttu-id="3da02-165">*영역/i d/페이지/계정/관리/DownloadPersonalData* Razor 페이지를 통해 다운로드 한 데이터에 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-165">Included in the downloaded data by the *Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml* Razor Page.</span></span>
+* <span data-ttu-id="bbd0a-164">*Areas/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml* Razor 페이지가 호출 하면 삭제 `UserManager.Delete` 됩니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-164">Deleted when the *Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml* Razor Page calls `UserManager.Delete`.</span></span>
+* <span data-ttu-id="bbd0a-165">*영역/ Identity /Pages/Account/Manage/DownloadPersonalData.cshtml* 페이지에서 다운로드 한 데이터에 포함 Razor 됩니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-165">Included in the downloaded data by the *Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml* Razor Page.</span></span>
 
-### <a name="update-the-accountmanageindexcshtml-page"></a><span data-ttu-id="3da02-166">계정/관리/인덱스를 업데이트 합니다. cshtml 페이지</span><span class="sxs-lookup"><span data-stu-id="3da02-166">Update the Account/Manage/Index.cshtml page</span></span>
+### <a name="update-the-accountmanageindexcshtml-page"></a><span data-ttu-id="bbd0a-166">계정/관리/인덱스를 업데이트 합니다. cshtml 페이지</span><span class="sxs-lookup"><span data-stu-id="bbd0a-166">Update the Account/Manage/Index.cshtml page</span></span>
 
-<span data-ttu-id="3da02-167">다음 강조 `InputModel` 표시 된 코드를 사용 하 여 *영역/i d/페이지/계정/관리/인덱스* 의을 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-167">Update the `InputModel` in *Areas/Identity/Pages/Account/Manage/Index.cshtml.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="bbd0a-167">`InputModel`다음 강조 표시 된 코드를 사용 하 여 *영역/ Identity /Pages/Account/Manage/Index.cshtml.cs* 의를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-167">Update the `InputModel` in *Areas/Identity/Pages/Account/Manage/Index.cshtml.cs* with the following highlighted code:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-<span data-ttu-id="3da02-168">다음 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/관리/인덱스를 업데이트 합니다.*</span><span class="sxs-lookup"><span data-stu-id="3da02-168">Update the *Areas/Identity/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="bbd0a-168">다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Manage/Index.cshtml* 를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-168">Update the *Areas/Identity/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
@@ -174,21 +174,21 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-<span data-ttu-id="3da02-169">다음 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/관리/인덱스를 업데이트 합니다.*</span><span class="sxs-lookup"><span data-stu-id="3da02-169">Update the *Areas/Identity/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="bbd0a-169">다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Manage/Index.cshtml* 를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-169">Update the *Areas/Identity/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
 ::: moniker-end
 
-### <a name="update-the-accountregistercshtml-page"></a><span data-ttu-id="3da02-170">계정/레지스터를 업데이트 합니다. cshtml 페이지</span><span class="sxs-lookup"><span data-stu-id="3da02-170">Update the Account/Register.cshtml page</span></span>
+### <a name="update-the-accountregistercshtml-page"></a><span data-ttu-id="bbd0a-170">계정/레지스터를 업데이트 합니다. cshtml 페이지</span><span class="sxs-lookup"><span data-stu-id="bbd0a-170">Update the Account/Register.cshtml page</span></span>
 
-<span data-ttu-id="3da02-171">다음 강조 `InputModel` 표시 된 코드를 사용 하 여 *영역/i d/페이지/계정/등록* 에서를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-171">Update the `InputModel` in *Areas/Identity/Pages/Account/Register.cshtml.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="bbd0a-171">`InputModel`다음 강조 표시 된 코드를 사용 하 여 *영역/ Identity /Pages/Account/Register.cshtml.cs* 의를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-171">Update the `InputModel` in *Areas/Identity/Pages/Account/Register.cshtml.cs* with the following highlighted code:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-<span data-ttu-id="3da02-172">다음과 같이 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/레지스터* 를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-172">Update the *Areas/Identity/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="bbd0a-172">다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Register.cshtml* 를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-172">Update the *Areas/Identity/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -198,27 +198,27 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-<span data-ttu-id="3da02-173">다음과 같이 강조 표시 된 태그를 사용 하 여 *영역/i d/페이지/계정/레지스터* 를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-173">Update the *Areas/Identity/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="bbd0a-173">다음 강조 표시 된 태그를 사용 하 여 *영역/ Identity /Pages/Account/Register.cshtml* 를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-173">Update the *Areas/Identity/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
 ::: moniker-end
 
 
-<span data-ttu-id="3da02-174">프로젝트를 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-174">Build the project.</span></span>
+<span data-ttu-id="bbd0a-174">프로젝트를 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-174">Build the project.</span></span>
 
-### <a name="add-a-migration-for-the-custom-user-data"></a><span data-ttu-id="3da02-175">사용자 지정 사용자 데이터에 대 한 마이그레이션 추가</span><span class="sxs-lookup"><span data-stu-id="3da02-175">Add a migration for the custom user data</span></span>
+### <a name="add-a-migration-for-the-custom-user-data"></a><span data-ttu-id="bbd0a-175">사용자 지정 사용자 데이터에 대 한 마이그레이션 추가</span><span class="sxs-lookup"><span data-stu-id="bbd0a-175">Add a migration for the custom user data</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="3da02-176">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3da02-176">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="bbd0a-176">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="bbd0a-176">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="3da02-177">Visual Studio **패키지 관리자 콘솔**에서 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-177">In the Visual Studio **Package Manager Console**:</span></span>
+<span data-ttu-id="bbd0a-177">Visual Studio **패키지 관리자 콘솔**에서 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-177">In the Visual Studio **Package Manager Console**:</span></span>
 
 ```powershell
 Add-Migration CustomUserData
 Update-Database
 ```
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="3da02-178">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="3da02-178">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="bbd0a-178">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="bbd0a-178">.NET Core CLI</span></span>](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef migrations add CustomUserData
@@ -227,17 +227,20 @@ dotnet ef database update
 
 ---
 
-## <a name="test-create-view-download-delete-custom-user-data"></a><span data-ttu-id="3da02-179">사용자 지정 사용자 데이터 만들기, 보기, 다운로드, 삭제 테스트</span><span class="sxs-lookup"><span data-stu-id="3da02-179">Test create, view, download, delete custom user data</span></span>
+## <a name="test-create-view-download-delete-custom-user-data"></a><span data-ttu-id="bbd0a-179">사용자 지정 사용자 데이터 만들기, 보기, 다운로드, 삭제 테스트</span><span class="sxs-lookup"><span data-stu-id="bbd0a-179">Test create, view, download, delete custom user data</span></span>
 
-<span data-ttu-id="3da02-180">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-180">Test the app:</span></span>
+<span data-ttu-id="bbd0a-180">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-180">Test the app:</span></span>
 
-* <span data-ttu-id="3da02-181">새 사용자를 등록 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-181">Register a new user.</span></span>
-* <span data-ttu-id="3da02-182">`/Identity/Account/Manage` 페이지에서 사용자 지정 사용자 데이터를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-182">View the custom user data on the `/Identity/Account/Manage` page.</span></span>
-* <span data-ttu-id="3da02-183">`/Identity/Account/Manage/PersonalData` 페이지에서 사용자 개인 데이터를 다운로드 하 여 봅니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-183">Download and view the users personal data from the `/Identity/Account/Manage/PersonalData` page.</span></span>
+* <span data-ttu-id="bbd0a-181">새 사용자를 등록 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-181">Register a new user.</span></span>
+* <span data-ttu-id="bbd0a-182">페이지에서 사용자 지정 사용자 데이터를 봅니다 `/Identity/Account/Manage` .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-182">View the custom user data on the `/Identity/Account/Manage` page.</span></span>
+* <span data-ttu-id="bbd0a-183">페이지에서 사용자 개인 데이터를 다운로드 하 여 봅니다 `/Identity/Account/Manage/PersonalData` .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-183">Download and view the users personal data from the `/Identity/Account/Manage/PersonalData` page.</span></span>
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a><span data-ttu-id="3da02-184">IUserClaimsPrincipalFactory를 Identity 사용 하 여 클레임 추가<ApplicationUser></span><span class="sxs-lookup"><span data-stu-id="3da02-184">Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser></span></span>
+## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a><span data-ttu-id="bbd0a-184">IUserClaimsPrincipalFactory를 사용 하 여 클레임 추가 Identity<ApplicationUser></span><span class="sxs-lookup"><span data-stu-id="bbd0a-184">Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser></span></span>
 
-<span data-ttu-id="3da02-185">인터페이스를 Identity `IUserClaimsPrincipalFactory<T>` 사용 하 여 ASP.NET Core에 추가 클레임을 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-185">Additional claims can be added to ASP.NET Core Identity by using the `IUserClaimsPrincipalFactory<T>` interface.</span></span> <span data-ttu-id="3da02-186">이 클래스는 `Startup.ConfigureServices` 메서드의 응용 프로그램에 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-186">This class can be added to the app in the `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="3da02-187">다음과 같이 클래스의 사용자 지정 구현을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-187">Add the custom implementation of the class as follows:</span></span>
+> [!NOTE]
+> <span data-ttu-id="bbd0a-185">이 섹션은 이전 자습서의 확장이 아닙니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-185">This section isn't an extension of the previous tutorial.</span></span> <span data-ttu-id="bbd0a-186">자습서를 사용 하 여 빌드한 앱에 다음 단계를 적용 하려면 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/18797)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-186">To apply the following steps to the app built using the tutorial, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/18797).</span></span>
+
+<span data-ttu-id="bbd0a-187">인터페이스를 사용 하 여 ASP.NET Core에 추가 클레임을 추가할 수 있습니다 Identity `IUserClaimsPrincipalFactory<T>` .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-187">Additional claims can be added to ASP.NET Core Identity by using the `IUserClaimsPrincipalFactory<T>` interface.</span></span> <span data-ttu-id="bbd0a-188">이 클래스는 메서드의 응용 프로그램에 추가할 수 있습니다 `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-188">This class can be added to the app in the `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="bbd0a-189">다음과 같이 클래스의 사용자 지정 구현을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-189">Add the custom implementation of the class as follows:</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -250,7 +253,7 @@ public void ConfigureServices(IServiceCollection services)
         AdditionalUserClaimsPrincipalFactory>();
 ```
 
-<span data-ttu-id="3da02-188">데모 코드는 클래스를 `ApplicationUser` 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-188">The demo code uses the `ApplicationUser` class.</span></span> <span data-ttu-id="3da02-189">이 클래스는 추가 `IsAdmin` 클레임을 추가 하는 데 사용 되는 속성을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-189">This class adds an `IsAdmin` property which is used to add the additional claim.</span></span>
+<span data-ttu-id="bbd0a-190">데모 코드는 클래스를 사용 합니다 `ApplicationUser` .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-190">The demo code uses the `ApplicationUser` class.</span></span> <span data-ttu-id="bbd0a-191">이 클래스는 `IsAdmin` 추가 클레임을 추가 하는 데 사용 되는 속성을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-191">This class adds an `IsAdmin` property which is used to add the additional claim.</span></span>
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -259,7 +262,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-<span data-ttu-id="3da02-190">`AdditionalUserClaimsPrincipalFactory`는 `UserClaimsPrincipalFactory` 인터페이스를 구현합니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-190">The `AdditionalUserClaimsPrincipalFactory` implements the `UserClaimsPrincipalFactory` interface.</span></span> <span data-ttu-id="3da02-191">새 역할 클레임이에 추가 됩니다 `ClaimsPrincipal`.</span><span class="sxs-lookup"><span data-stu-id="3da02-191">A new role claim is added to the `ClaimsPrincipal`.</span></span>
+<span data-ttu-id="bbd0a-192">`AdditionalUserClaimsPrincipalFactory`는 `UserClaimsPrincipalFactory` 인터페이스를 구현합니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-192">The `AdditionalUserClaimsPrincipalFactory` implements the `UserClaimsPrincipalFactory` interface.</span></span> <span data-ttu-id="bbd0a-193">새 역할 클레임이에 추가 됩니다 `ClaimsPrincipal` .</span><span class="sxs-lookup"><span data-stu-id="bbd0a-193">A new role claim is added to the `ClaimsPrincipal`.</span></span>
 
 ```csharp
 public class AdditionalUserClaimsPrincipalFactory 
@@ -293,7 +296,7 @@ public class AdditionalUserClaimsPrincipalFactory
 }
 ```
 
-<span data-ttu-id="3da02-192">그러면 앱에서 추가 클레임을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-192">The additional claim can then be used in the app.</span></span> <span data-ttu-id="3da02-193">Razor 페이지에서 `IAuthorizationService` 인스턴스를 사용 하 여 클레임 값에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="3da02-193">In a Razor Page, the `IAuthorizationService` instance can be used to access the claim value.</span></span>
+<span data-ttu-id="bbd0a-194">그러면 앱에서 추가 클레임을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-194">The additional claim can then be used in the app.</span></span> <span data-ttu-id="bbd0a-195">페이지에서 Razor `IAuthorizationService` 인스턴스를 사용 하 여 클레임 값에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="bbd0a-195">In a Razor Page, the `IAuthorizationService` instance can be used to access the claim value.</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
