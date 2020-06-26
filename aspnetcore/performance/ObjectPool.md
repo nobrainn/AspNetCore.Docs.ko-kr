@@ -7,73 +7,75 @@ ms.author: riande
 ms.date: 04/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 8244acb39a345875d80c5528a822de23f78b6e38
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85241001"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403549"
 ---
-# <a name="object-reuse-with-objectpool-in-aspnet-core"></a><span data-ttu-id="12365-103">ASP.NET Core ObjectPool에서 개체 다시 사용</span><span class="sxs-lookup"><span data-stu-id="12365-103">Object reuse with ObjectPool in ASP.NET Core</span></span>
+# <a name="object-reuse-with-objectpool-in-aspnet-core"></a><span data-ttu-id="c6808-103">ASP.NET Core ObjectPool에서 개체 다시 사용</span><span class="sxs-lookup"><span data-stu-id="c6808-103">Object reuse with ObjectPool in ASP.NET Core</span></span>
 
-<span data-ttu-id="12365-104">작성자, [Steve Gordon](https://twitter.com/stevejgordon), [Ryan nowak](https://github.com/rynowak)및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="12365-104">By [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="c6808-104">작성자, [Steve Gordon](https://twitter.com/stevejgordon), [Ryan nowak](https://github.com/rynowak)및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="c6808-104">By [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="12365-105"><xref:Microsoft.Extensions.ObjectPool>는 개체의 가비지 수집을 허용 하는 대신 다시 사용 하기 위해 메모리의 개체 그룹을 유지 하는 것을 지 원하는 ASP.NET Core 인프라의 일부입니다.</span><span class="sxs-lookup"><span data-stu-id="12365-105"><xref:Microsoft.Extensions.ObjectPool> is part of the ASP.NET Core infrastructure that supports keeping a group of objects in memory for reuse rather than allowing the objects to be garbage collected.</span></span>
+<span data-ttu-id="c6808-105"><xref:Microsoft.Extensions.ObjectPool>는 개체의 가비지 수집을 허용 하는 대신 다시 사용 하기 위해 메모리의 개체 그룹을 유지 하는 것을 지 원하는 ASP.NET Core 인프라의 일부입니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-105"><xref:Microsoft.Extensions.ObjectPool> is part of the ASP.NET Core infrastructure that supports keeping a group of objects in memory for reuse rather than allowing the objects to be garbage collected.</span></span>
 
-<span data-ttu-id="12365-106">관리 중인 개체가 다음과 같은 경우 개체 풀을 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="12365-106">You might want to use the object pool if the objects that are being managed are:</span></span>
+<span data-ttu-id="c6808-106">관리 중인 개체가 다음과 같은 경우 개체 풀을 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-106">You might want to use the object pool if the objects that are being managed are:</span></span>
 
-- <span data-ttu-id="12365-107">할당/초기화 비용이 많이 듭니다.</span><span class="sxs-lookup"><span data-stu-id="12365-107">Expensive to allocate/initialize.</span></span>
-- <span data-ttu-id="12365-108">제한 된 리소스를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="12365-108">Represent some limited resource.</span></span>
-- <span data-ttu-id="12365-109">예측 가능 하 고 자주 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="12365-109">Used predictably and frequently.</span></span>
+- <span data-ttu-id="c6808-107">할당/초기화 비용이 많이 듭니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-107">Expensive to allocate/initialize.</span></span>
+- <span data-ttu-id="c6808-108">제한 된 리소스를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-108">Represent some limited resource.</span></span>
+- <span data-ttu-id="c6808-109">예측 가능 하 고 자주 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-109">Used predictably and frequently.</span></span>
 
-<span data-ttu-id="12365-110">예를 들어 ASP.NET Core 프레임 워크는 일부 위치에서 개체 풀을 사용 하 여 인스턴스를 다시 사용 합니다 <xref:System.Text.StringBuilder> .</span><span class="sxs-lookup"><span data-stu-id="12365-110">For example, the ASP.NET Core framework uses the object pool in some places to reuse <xref:System.Text.StringBuilder> instances.</span></span> <span data-ttu-id="12365-111">`StringBuilder`문자 데이터를 저장 하기 위해 자체 버퍼를 할당 하 고 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-111">`StringBuilder` allocates and manages its own buffers to hold character data.</span></span> <span data-ttu-id="12365-112">정기적으로를 사용 하 여 `StringBuilder` 기능을 구현 하 고 재사용 하면 성능상의 이점을 얻을 수 있습니다. ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="12365-112">ASP.NET Core regularly uses `StringBuilder` to implement features, and reusing them provides a performance benefit.</span></span>
+<span data-ttu-id="c6808-110">예를 들어 ASP.NET Core 프레임 워크는 일부 위치에서 개체 풀을 사용 하 여 인스턴스를 다시 사용 합니다 <xref:System.Text.StringBuilder> .</span><span class="sxs-lookup"><span data-stu-id="c6808-110">For example, the ASP.NET Core framework uses the object pool in some places to reuse <xref:System.Text.StringBuilder> instances.</span></span> <span data-ttu-id="c6808-111">`StringBuilder`문자 데이터를 저장 하기 위해 자체 버퍼를 할당 하 고 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-111">`StringBuilder` allocates and manages its own buffers to hold character data.</span></span> <span data-ttu-id="c6808-112">정기적으로를 사용 하 여 `StringBuilder` 기능을 구현 하 고 재사용 하면 성능상의 이점을 얻을 수 있습니다. ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="c6808-112">ASP.NET Core regularly uses `StringBuilder` to implement features, and reusing them provides a performance benefit.</span></span>
 
-<span data-ttu-id="12365-113">개체 풀링은 항상 성능을 향상 시 키 지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="12365-113">Object pooling doesn't always improve performance:</span></span>
+<span data-ttu-id="c6808-113">개체 풀링은 항상 성능을 향상 시 키 지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-113">Object pooling doesn't always improve performance:</span></span>
 
-- <span data-ttu-id="12365-114">개체의 초기화 비용이 높을 때를 제외 하 고는 일반적으로 풀에서 개체를 가져오는 속도가 느립니다.</span><span class="sxs-lookup"><span data-stu-id="12365-114">Unless the initialization cost of an object is high, it's usually slower to get the object from the pool.</span></span>
-- <span data-ttu-id="12365-115">풀에서 관리 하는 개체는 풀이 할당 취소 될 때까지 할당 취소 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="12365-115">Objects managed by the pool aren't de-allocated until the pool is de-allocated.</span></span>
+- <span data-ttu-id="c6808-114">개체의 초기화 비용이 높을 때를 제외 하 고는 일반적으로 풀에서 개체를 가져오는 속도가 느립니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-114">Unless the initialization cost of an object is high, it's usually slower to get the object from the pool.</span></span>
+- <span data-ttu-id="c6808-115">풀에서 관리 하는 개체는 풀이 할당 취소 될 때까지 할당 취소 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-115">Objects managed by the pool aren't de-allocated until the pool is de-allocated.</span></span>
 
-<span data-ttu-id="12365-116">응용 프로그램 또는 라이브러리에 대해 현실적인 시나리오를 사용 하 여 성능 데이터를 수집한 후에만 개체 풀링을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-116">Use object pooling only after collecting performance data using realistic scenarios for your app or library.</span></span>
+<span data-ttu-id="c6808-116">응용 프로그램 또는 라이브러리에 대해 현실적인 시나리오를 사용 하 여 성능 데이터를 수집한 후에만 개체 풀링을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-116">Use object pooling only after collecting performance data using realistic scenarios for your app or library.</span></span>
 
-<span data-ttu-id="12365-117">**경고:가를 `ObjectPool` 구현 하지 않습니다 `IDisposable` . 삭제 해야 하는 형식으로는 사용 하지 않는 것이 좋습니다.**</span><span class="sxs-lookup"><span data-stu-id="12365-117">**WARNING: The `ObjectPool` doesn't implement `IDisposable`. We don't recommend using it with types that need disposal.**</span></span>
+<span data-ttu-id="c6808-117">**경고:가를 `ObjectPool` 구현 하지 않습니다 `IDisposable` . 삭제 해야 하는 형식으로는 사용 하지 않는 것이 좋습니다.**</span><span class="sxs-lookup"><span data-stu-id="c6808-117">**WARNING: The `ObjectPool` doesn't implement `IDisposable`. We don't recommend using it with types that need disposal.**</span></span>
 
-<span data-ttu-id="12365-118">**참고: ObjectPool은 할당할 개체 수에 대 한 제한을 두지 않습니다. 그러면 개체 수에 대 한 제한이 유지 됩니다.**</span><span class="sxs-lookup"><span data-stu-id="12365-118">**NOTE: The ObjectPool doesn't place a limit on the number of objects that it will allocate, it places a limit on the number of objects it will retain.**</span></span>
+<span data-ttu-id="c6808-118">**참고: ObjectPool은 할당할 개체 수에 대 한 제한을 두지 않습니다. 그러면 개체 수에 대 한 제한이 유지 됩니다.**</span><span class="sxs-lookup"><span data-stu-id="c6808-118">**NOTE: The ObjectPool doesn't place a limit on the number of objects that it will allocate, it places a limit on the number of objects it will retain.**</span></span>
 
-## <a name="concepts"></a><span data-ttu-id="12365-119">개념</span><span class="sxs-lookup"><span data-stu-id="12365-119">Concepts</span></span>
+## <a name="concepts"></a><span data-ttu-id="c6808-119">개념</span><span class="sxs-lookup"><span data-stu-id="c6808-119">Concepts</span></span>
 
-<span data-ttu-id="12365-120"><xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>-기본 개체 풀 추상화.</span><span class="sxs-lookup"><span data-stu-id="12365-120"><xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> - the basic object pool abstraction.</span></span> <span data-ttu-id="12365-121">개체를 가져오고 반환 하는 데 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="12365-121">Used to get and return objects.</span></span>
+<span data-ttu-id="c6808-120"><xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>-기본 개체 풀 추상화.</span><span class="sxs-lookup"><span data-stu-id="c6808-120"><xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> - the basic object pool abstraction.</span></span> <span data-ttu-id="c6808-121">개체를 가져오고 반환 하는 데 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-121">Used to get and return objects.</span></span>
 
-<span data-ttu-id="12365-122"><xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601>-개체가 만들어지는 방법과 풀로 반환 될 때 *다시 설정* 되는 방법을 사용자 지정 하려면이 메서드를 구현 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-122"><xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> - implement this to customize how an object is created and how it is *reset* when returned to the pool.</span></span> <span data-ttu-id="12365-123">직접 생성 하는 개체 풀에 전달할 수 있습니다. 디스크나</span><span class="sxs-lookup"><span data-stu-id="12365-123">This can be passed into an object pool that you construct directly.... OR</span></span>
+<span data-ttu-id="c6808-122"><xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601>-개체가 만들어지는 방법과 풀로 반환 될 때 *다시 설정* 되는 방법을 사용자 지정 하려면이 메서드를 구현 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-122"><xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> - implement this to customize how an object is created and how it is *reset* when returned to the pool.</span></span> <span data-ttu-id="c6808-123">직접 생성 하는 개체 풀에 전달할 수 있습니다. 디스크나</span><span class="sxs-lookup"><span data-stu-id="c6808-123">This can be passed into an object pool that you construct directly.... OR</span></span>
 
-<span data-ttu-id="12365-124"><xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*>개체 풀을 만들기 위한 팩터리 역할을 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-124"><xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> acts as a factory for creating object pools.</span></span>
+<span data-ttu-id="c6808-124"><xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*>개체 풀을 만들기 위한 팩터리 역할을 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-124"><xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> acts as a factory for creating object pools.</span></span>
 <!-- REview, there is no ObjectPoolProvider<T> -->
 
-<span data-ttu-id="12365-125">ObjectPool은 여러 가지 방법으로 앱에서 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="12365-125">The ObjectPool can be used in an app in multiple ways:</span></span>
+<span data-ttu-id="c6808-125">ObjectPool은 여러 가지 방법으로 앱에서 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-125">The ObjectPool can be used in an app in multiple ways:</span></span>
 
-* <span data-ttu-id="12365-126">풀 인스턴스화.</span><span class="sxs-lookup"><span data-stu-id="12365-126">Instantiating a pool.</span></span>
-* <span data-ttu-id="12365-127">DI ( [종속성 주입](xref:fundamentals/dependency-injection) )의 풀을 인스턴스로 등록 하는 중입니다.</span><span class="sxs-lookup"><span data-stu-id="12365-127">Registering a pool in [Dependency injection](xref:fundamentals/dependency-injection) (DI) as an instance.</span></span>
-* <span data-ttu-id="12365-128">`ObjectPoolProvider<>`DI에를 등록 하 고 팩터리로 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-128">Registering the `ObjectPoolProvider<>` in DI and using it as a factory.</span></span>
+* <span data-ttu-id="c6808-126">풀 인스턴스화.</span><span class="sxs-lookup"><span data-stu-id="c6808-126">Instantiating a pool.</span></span>
+* <span data-ttu-id="c6808-127">DI ( [종속성 주입](xref:fundamentals/dependency-injection) )의 풀을 인스턴스로 등록 하는 중입니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-127">Registering a pool in [Dependency injection](xref:fundamentals/dependency-injection) (DI) as an instance.</span></span>
+* <span data-ttu-id="c6808-128">`ObjectPoolProvider<>`DI에를 등록 하 고 팩터리로 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-128">Registering the `ObjectPoolProvider<>` in DI and using it as a factory.</span></span>
 
-## <a name="how-to-use-objectpool"></a><span data-ttu-id="12365-129">ObjectPool 사용 방법</span><span class="sxs-lookup"><span data-stu-id="12365-129">How to use ObjectPool</span></span>
+## <a name="how-to-use-objectpool"></a><span data-ttu-id="c6808-129">ObjectPool 사용 방법</span><span class="sxs-lookup"><span data-stu-id="c6808-129">How to use ObjectPool</span></span>
 
-<span data-ttu-id="12365-130"><xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>를 호출 하 여 개체를 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 가져오고 개체를 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-130">Call <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> to get an object and <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> to return the object.</span></span>  <span data-ttu-id="12365-131">모든 개체를 반환 하는 요구 사항은 없습니다.</span><span class="sxs-lookup"><span data-stu-id="12365-131">There's no requirement that you return every object.</span></span> <span data-ttu-id="12365-132">개체를 반환 하지 않으면 가비지 수집 됩니다.</span><span class="sxs-lookup"><span data-stu-id="12365-132">If you don't return an object, it will be garbage collected.</span></span>
+<span data-ttu-id="c6808-130"><xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>를 호출 하 여 개체를 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 가져오고 개체를 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-130">Call <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> to get an object and <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> to return the object.</span></span>  <span data-ttu-id="c6808-131">모든 개체를 반환 하는 요구 사항은 없습니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-131">There's no requirement that you return every object.</span></span> <span data-ttu-id="c6808-132">개체를 반환 하지 않으면 가비지 수집 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-132">If you don't return an object, it will be garbage collected.</span></span>
 
-## <a name="objectpool-sample"></a><span data-ttu-id="12365-133">ObjectPool 샘플</span><span class="sxs-lookup"><span data-stu-id="12365-133">ObjectPool sample</span></span>
+## <a name="objectpool-sample"></a><span data-ttu-id="c6808-133">ObjectPool 샘플</span><span class="sxs-lookup"><span data-stu-id="c6808-133">ObjectPool sample</span></span>
 
-<span data-ttu-id="12365-134">코드는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="12365-134">The following code:</span></span>
+<span data-ttu-id="c6808-134">코드는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-134">The following code:</span></span>
 
-* <span data-ttu-id="12365-135">`ObjectPoolProvider`DI ( [종속성 주입](xref:fundamentals/dependency-injection) ) 컨테이너에를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-135">Adds `ObjectPoolProvider` to the [Dependency injection](xref:fundamentals/dependency-injection) (DI) container.</span></span>
-* <span data-ttu-id="12365-136">`ObjectPool<StringBuilder>`DI 컨테이너에를 추가 하 고 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-136">Adds and configures `ObjectPool<StringBuilder>` to the DI container.</span></span>
-* <span data-ttu-id="12365-137">를 추가 `BirthdayMiddleware` 합니다.</span><span class="sxs-lookup"><span data-stu-id="12365-137">Adds the `BirthdayMiddleware`.</span></span>
+* <span data-ttu-id="c6808-135">`ObjectPoolProvider`DI ( [종속성 주입](xref:fundamentals/dependency-injection) ) 컨테이너에를 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-135">Adds `ObjectPoolProvider` to the [Dependency injection](xref:fundamentals/dependency-injection) (DI) container.</span></span>
+* <span data-ttu-id="c6808-136">`ObjectPool<StringBuilder>`DI 컨테이너에를 추가 하 고 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-136">Adds and configures `ObjectPool<StringBuilder>` to the DI container.</span></span>
+* <span data-ttu-id="c6808-137">를 추가 `BirthdayMiddleware` 합니다.</span><span class="sxs-lookup"><span data-stu-id="c6808-137">Adds the `BirthdayMiddleware`.</span></span>
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
-<span data-ttu-id="12365-138">다음 코드에서는을 구현 합니다.`BirthdayMiddleware`</span><span class="sxs-lookup"><span data-stu-id="12365-138">The following code implements `BirthdayMiddleware`</span></span>
+<span data-ttu-id="c6808-138">다음 코드에서는을 구현 합니다.`BirthdayMiddleware`</span><span class="sxs-lookup"><span data-stu-id="c6808-138">The following code implements `BirthdayMiddleware`</span></span>
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
 
