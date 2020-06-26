@@ -6,37 +6,39 @@ ms.author: riande
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/using-data-protection
-ms.openlocfilehash: d5e9e61db39a67e8ccb7b345dfa4c97353312857
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1b0dc6756de55d9ce35eb08ca037e4d4b1fede75
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774264"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405616"
 ---
-# <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a><span data-ttu-id="c97af-103">ASP.NET Core에서 데이터 보호 Api 시작</span><span class="sxs-lookup"><span data-stu-id="c97af-103">Get started with the Data Protection APIs in ASP.NET Core</span></span>
+# <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a><span data-ttu-id="98298-103">ASP.NET Core에서 데이터 보호 Api 시작</span><span class="sxs-lookup"><span data-stu-id="98298-103">Get started with the Data Protection APIs in ASP.NET Core</span></span>
 
 <a name="security-data-protection-getting-started"></a>
 
-<span data-ttu-id="c97af-104">가장 간단 하 게 데이터를 보호 하는 과정은 다음 단계로 구성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-104">At its simplest, protecting data consists of the following steps:</span></span>
+<span data-ttu-id="98298-104">가장 간단 하 게 데이터를 보호 하는 과정은 다음 단계로 구성 됩니다.</span><span class="sxs-lookup"><span data-stu-id="98298-104">At its simplest, protecting data consists of the following steps:</span></span>
 
-1. <span data-ttu-id="c97af-105">데이터 보호 공급자에서 데이터 보호기를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-105">Create a data protector from a data protection provider.</span></span>
+1. <span data-ttu-id="98298-105">데이터 보호 공급자에서 데이터 보호기를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="98298-105">Create a data protector from a data protection provider.</span></span>
 
-2. <span data-ttu-id="c97af-106">보호 하려는 `Protect` 데이터를 사용 하 여 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-106">Call the `Protect` method with the data you want to protect.</span></span>
+2. <span data-ttu-id="98298-106">보호 하려는 데이터를 사용 하 여 메서드를 호출 합니다 `Protect` .</span><span class="sxs-lookup"><span data-stu-id="98298-106">Call the `Protect` method with the data you want to protect.</span></span>
 
-3. <span data-ttu-id="c97af-107">일반 텍스트로 `Unprotect` 다시 변환 하려는 데이터를 사용 하 여 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-107">Call the `Unprotect` method with the data you want to turn back into plain text.</span></span>
+3. <span data-ttu-id="98298-107">`Unprotect`일반 텍스트로 다시 변환 하려는 데이터를 사용 하 여 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="98298-107">Call the `Unprotect` method with the data you want to turn back into plain text.</span></span>
 
-<span data-ttu-id="c97af-108">ASP.NET Core 또는 SignalR와 같은 대부분의 프레임 워크와 앱 모델은 이미 데이터 보호 시스템을 구성 하 고 종속성 주입을 통해 액세스 하는 서비스 컨테이너에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-108">Most frameworks and app models, such as ASP.NET Core or SignalR, already configure the data protection system and add it to a service container you access via dependency injection.</span></span> <span data-ttu-id="c97af-109">다음 샘플에서는 종속성 주입에 대 한 서비스 컨테이너를 구성 하 고, 데이터 보호 스택을 등록 하 고, DI를 통해 데이터 보호 공급자를 수신 하 고, 보호기를 만들고, 보호 해제 데이터를 보호 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-109">The following sample demonstrates configuring a service container for dependency injection and registering the data protection stack, receiving the data protection provider via DI, creating a protector and protecting then unprotecting data.</span></span>
+<span data-ttu-id="98298-108">ASP.NET Core 또는와 같은 대부분의 프레임 워크와 앱 모델 SignalR 은 이미 데이터 보호 시스템을 구성 하 고 종속성 주입을 통해 액세스 하는 서비스 컨테이너에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="98298-108">Most frameworks and app models, such as ASP.NET Core or SignalR, already configure the data protection system and add it to a service container you access via dependency injection.</span></span> <span data-ttu-id="98298-109">다음 샘플에서는 종속성 주입에 대 한 서비스 컨테이너를 구성 하 고, 데이터 보호 스택을 등록 하 고, DI를 통해 데이터 보호 공급자를 수신 하 고, 보호기를 만들고, 보호 해제 데이터를 보호 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="98298-109">The following sample demonstrates configuring a service container for dependency injection and registering the data protection stack, receiving the data protection provider via DI, creating a protector and protecting then unprotecting data.</span></span>
 
 [!code-csharp[](../../security/data-protection/using-data-protection/samples/protectunprotect.cs?highlight=26,34,35,36,37,38,39,40)]
 
-<span data-ttu-id="c97af-110">보호기를 만들 때 하나 이상의 [용도 문자열](xref:security/data-protection/consumer-apis/purpose-strings)을 제공 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-110">When you create a protector you must provide one or more [Purpose Strings](xref:security/data-protection/consumer-apis/purpose-strings).</span></span> <span data-ttu-id="c97af-111">목적 문자열은 소비자 간의 격리를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-111">A purpose string provides isolation between consumers.</span></span> <span data-ttu-id="c97af-112">예를 들어 용도 문자열이 "녹색"으로 만들어진 보호기는 "자주색"의 용도를 사용 하 여 보호기에서 제공 되는 데이터의 보호를 해제할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-112">For example, a protector created with a purpose string of "green" wouldn't be able to unprotect data provided by a protector with a purpose of "purple".</span></span>
+<span data-ttu-id="98298-110">보호기를 만들 때 하나 이상의 [용도 문자열](xref:security/data-protection/consumer-apis/purpose-strings)을 제공 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="98298-110">When you create a protector you must provide one or more [Purpose Strings](xref:security/data-protection/consumer-apis/purpose-strings).</span></span> <span data-ttu-id="98298-111">목적 문자열은 소비자 간의 격리를 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="98298-111">A purpose string provides isolation between consumers.</span></span> <span data-ttu-id="98298-112">예를 들어 용도 문자열이 "녹색"으로 만들어진 보호기는 "자주색"의 용도를 사용 하 여 보호기에서 제공 되는 데이터의 보호를 해제할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="98298-112">For example, a protector created with a purpose string of "green" wouldn't be able to unprotect data provided by a protector with a purpose of "purple".</span></span>
 
 >[!TIP]
-> <span data-ttu-id="c97af-113">`IDataProtectionProvider` 및 인스턴스는 `IDataProtector` 여러 호출자가 스레드로부터 안전 하 게 보호 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-113">Instances of `IDataProtectionProvider` and `IDataProtector` are thread-safe for multiple callers.</span></span> <span data-ttu-id="c97af-114">구성 `IDataProtector` 요소가 호출 `CreateProtector`을 통해에 대 한 참조를 가져온 후에는 및 `Protect` `Unprotect`에 대 한 여러 호출에 해당 참조를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-114">It's intended that once a component gets a reference to an `IDataProtector` via a call to `CreateProtector`, it will use that reference for multiple calls to `Protect` and `Unprotect`.</span></span>
+> <span data-ttu-id="98298-113">및 인스턴스 `IDataProtectionProvider` `IDataProtector` 는 여러 호출자가 스레드로부터 안전 하 게 보호 됩니다.</span><span class="sxs-lookup"><span data-stu-id="98298-113">Instances of `IDataProtectionProvider` and `IDataProtector` are thread-safe for multiple callers.</span></span> <span data-ttu-id="98298-114">구성 요소가 호출을 통해에 대 한 참조를 가져온 후에 `IDataProtector` `CreateProtector` 는 및에 대 한 여러 호출에 해당 참조를 사용 합니다 `Protect` `Unprotect` .</span><span class="sxs-lookup"><span data-stu-id="98298-114">It's intended that once a component gets a reference to an `IDataProtector` via a call to `CreateProtector`, it will use that reference for multiple calls to `Protect` and `Unprotect`.</span></span>
 >
-><span data-ttu-id="c97af-115">보호 된 페이로드 `Unprotect` 를 확인 하거나 해독할 수 없는 경우에 대 한 호출은 system.security.cryptography.cryptographicexception을 throw 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-115">A call to `Unprotect` will throw CryptographicException if the protected payload cannot be verified or deciphered.</span></span> <span data-ttu-id="c97af-116">일부 구성 요소는 보호 되지 않는 작업 중에 오류를 무시 하려고 할 수 있습니다. 인증 쿠키를 읽는 구성 요소가이 오류를 처리 하 고 요청을 완전히 실패 하는 대신 쿠키가 없는 것 처럼 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-116">Some components may wish to ignore errors during unprotect operations; a component which reads authentication cookies might handle this error and treat the request as if it had no cookie at all rather than fail the request outright.</span></span> <span data-ttu-id="c97af-117">이 동작을 원하는 구성 요소는 모든 예외를 swallowing 하는 대신 System.security.cryptography.cryptographicexception를 명확 하 게 catch 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="c97af-117">Components which want this behavior should specifically catch CryptographicException instead of swallowing all exceptions.</span></span>
+><span data-ttu-id="98298-115">`Unprotect`보호 된 페이로드를 확인 하거나 해독할 수 없는 경우에 대 한 호출은 system.security.cryptography.cryptographicexception을 throw 합니다.</span><span class="sxs-lookup"><span data-stu-id="98298-115">A call to `Unprotect` will throw CryptographicException if the protected payload cannot be verified or deciphered.</span></span> <span data-ttu-id="98298-116">일부 구성 요소는 보호 되지 않는 작업 중에 오류를 무시 하려고 할 수 있습니다. 인증 쿠키를 읽는 구성 요소가이 오류를 처리 하 고 요청을 완전히 실패 하는 대신 쿠키가 없는 것 처럼 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="98298-116">Some components may wish to ignore errors during unprotect operations; a component which reads authentication cookies might handle this error and treat the request as if it had no cookie at all rather than fail the request outright.</span></span> <span data-ttu-id="98298-117">이 동작을 원하는 구성 요소는 모든 예외를 swallowing 하는 대신 System.security.cryptography.cryptographicexception를 명확 하 게 catch 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="98298-117">Components which want this behavior should specifically catch CryptographicException instead of swallowing all exceptions.</span></span>
