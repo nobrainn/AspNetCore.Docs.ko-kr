@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: b7c4d61c4a71939e84bdea180a2f77b6438b15d5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0c91edc947b1a17f2dd36b281afe348aa8611bd7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774199"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406916"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 컨트롤러를 사용한 요청 처리
 
@@ -71,7 +73,7 @@ ms.locfileid: "82774199"
 
     이 형식은 HTTP 상태 코드를 반환합니다. 이러한 형식의 몇 가지 도우미 메서드는 `BadRequest`, `NotFound` 및 `Ok`입니다. 예를 들어 `return BadRequest();`가 실행되면 400 상태 코드를 생성합니다. `BadRequest`, `NotFound` 및 `Ok`와 같은 메서드가 오버로드되는 경우 콘텐츠 협상이 수행되므로 더 이상 HTTP 상태 코드 응답자로서의 자격이 없습니다.
 
-* **재지정**
+* **리디렉션**
 
     이 형식은 작업 또는 대상에 리디렉션을 반환합니다(`Redirect`, `LocalRedirect`, `RedirectToAction` 또는 `RedirectToRoute` 를 사용하여). 예를 들어 `return RedirectToAction("Complete", new {id = 123});`은 `Complete`로 리디렉션하고 익명 개체를 전달합니다.
 

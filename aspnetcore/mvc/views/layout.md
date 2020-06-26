@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/30/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766487"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406656"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core의 레이아웃
 
@@ -28,7 +30,7 @@ ms.locfileid: "82766487"
 * 지시문 공유.
 * 페이지 또는 보기를 렌더링하기 전에 일반적인 코드 실행.
 
-이 문서에서는 MVC: Razor 페이지와 뷰를 사용 하 ASP.NET Core 하는 두 가지 방법에 대 한 레이아웃을 설명 합니다. 이 항목에서는 차이점이 최소화되어 있습니다.
+이 문서에서는 MVC: 페이지와 뷰를 사용 하 ASP.NET Core 하는 두 가지 방법에 대 한 레이아웃을 설명 Razor 합니다. 이 항목에서는 차이점이 최소화되어 있습니다.
 
 * Razor페이지는 *pages* 폴더에 있습니다.
 * 보기를 사용하는 컨트롤러는 *Views* 폴더의 보기를 사용합니다.
@@ -63,7 +65,7 @@ Razor뷰에는 `Layout` 속성이 있습니다. 이 속성을 설정하여 레�
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-지정된 레이아웃은 전체 경로(예: */Pages/Shared/_Layout.cshtml* 또는 */Views/Shared/_Layout.cshtml*) 또는 부분적인 이름(예: `_Layout`)을 사용할 수 있습니다. 부분 이름이 제공 되 면 뷰 엔진은 Razor 표준 검색 프로세스를 사용 하 여 레이아웃 파일을 검색 합니다. 처리기 메서드(또는 컨트롤러)가 있는 폴더가 먼저 검색된 후 *공유* 폴더가 검색됩니다. 이 검색 프로세스는 [부분 뷰](xref:mvc/views/partial#partial-view-discovery)를 검색하는 데 사용된 프로세스와 동일합니다.
+지정된 레이아웃은 전체 경로(예: */Pages/Shared/_Layout.cshtml* 또는 */Views/Shared/_Layout.cshtml*) 또는 부분적인 이름(예: `_Layout`)을 사용할 수 있습니다. 부분 이름이 제공 되 면 Razor 뷰 엔진은 표준 검색 프로세스를 사용 하 여 레이아웃 파일을 검색 합니다. 처리기 메서드(또는 컨트롤러)가 있는 폴더가 먼저 검색된 후 *공유* 폴더가 검색됩니다. 이 검색 프로세스는 [부분 뷰](xref:mvc/views/partial#partial-view-discovery)를 검색하는 데 사용된 프로세스와 동일합니다.
 
 기본적으로 모든 레이아웃에서 `RenderBody`를 호출해야 합니다. `RenderBody` 호출이 배치될 때마다 뷰의 내용이 렌더링됩니다.
 
@@ -79,9 +81,9 @@ Razor뷰에는 `Layout` 속성이 있습니다. 이 속성을 설정하여 레�
 @RenderSection("Scripts", required: false)
 ```
 
-필수 섹션이 없는 경우 예외가 throw됩니다. 개별 뷰는 `@section` Razor 구문을 사용 하 여 섹션 내에서 렌더링할 콘텐츠를 지정 합니다. 페이지 또는 보기에서 섹션을 정의하는 경우 렌더링되어야 합니다(그렇지 않은 경우 오류 발생).
+필수 섹션이 없는 경우 예외가 throw됩니다. 개별 뷰는 구문을 사용 하 여 섹션 내에서 렌더링할 콘텐츠를 지정 합니다 `@section` Razor . 페이지 또는 보기에서 섹션을 정의하는 경우 렌더링되어야 합니다(그렇지 않은 경우 오류 발생).
 
-페이지 보기 `@section` 의 Razor 예제 정의는 다음과 같습니다.
+`@section`페이지 보기의 예제 정의는 Razor 다음과 같습니다.
 
 ```html
 @section Scripts {
@@ -105,17 +107,17 @@ Razor뷰에는 `Layout` 속성이 있습니다. 이 속성을 설정하여 레�
 
 ### <a name="ignoring-sections"></a>섹션 무시
 
-기본적으로 콘텐츠 페이지 본문 및 모든 섹션은 레이아웃 페이지에서 모두 렌더링되어야 합니다. 뷰 Razor 엔진은 본문과 각 섹션이 렌더링 되었는지 여부를 추적 하 여이를 적용 합니다.
+기본적으로 콘텐츠 페이지 본문 및 모든 섹션은 레이아웃 페이지에서 모두 렌더링되어야 합니다. Razor뷰 엔진은 본문과 각 섹션이 렌더링 되었는지 여부를 추적 하 여이를 적용 합니다.
 
 뷰 엔진이 본문 또는 섹션을 무시하도록 지시하려면 `IgnoreBody` 및 `IgnoreSection` 메서드를 호출합니다.
 
-Razor 페이지의 본문 및 모든 섹션은 렌더링 되거나 무시 되어야 합니다.
+페이지의 본문 및 모든 섹션은 Razor 렌더링 되거나 무시 되어야 합니다.
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a>공유 지시문 가져오기
 
-뷰 및 페이지는 지시문 Razor 을 사용 하 여 네임 스페이스를 가져오고 [종속성 주입](dependency-injection.md)을 사용할 수 있습니다. 여러 보기에서 공유하는 지시문을 공용 *_ViewImports.cshtml* 파일에 지정할 수 있습니다. `_ViewImports` 파일은 다음 지시문을 지원합니다.
+뷰 및 페이지는 Razor 지시문을 사용 하 여 네임 스페이스를 가져오고 [종속성 주입](dependency-injection.md)을 사용할 수 있습니다. 여러 보기에서 공유하는 지시문을 공용 *_ViewImports.cshtml* 파일에 지정할 수 있습니다. `_ViewImports` 파일은 다음 지시문을 지원합니다.
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -125,7 +127,7 @@ Razor 페이지의 본문 및 모든 섹션은 렌더링 되거나 무시 되어
 * `@inherits`
 * `@inject`
 
-이 파일은 함수 및 Razor 섹션 정의와 같은 다른 기능을 지원 하지 않습니다.
+이 파일은 Razor 함수 및 섹션 정의와 같은 다른 기능을 지원 하지 않습니다.
 
 샘플 `_ViewImports.cshtml` 파일:
 

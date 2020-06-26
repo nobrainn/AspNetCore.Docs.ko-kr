@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/using-data-protection
-ms.openlocfilehash: d5e9e61db39a67e8ccb7b345dfa4c97353312857
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1b0dc6756de55d9ce35eb08ca037e4d4b1fede75
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774264"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405616"
 ---
 # <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a>ASP.NET Core에서 데이터 보호 Api 시작
 
@@ -26,17 +28,17 @@ ms.locfileid: "82774264"
 
 1. 데이터 보호 공급자에서 데이터 보호기를 만듭니다.
 
-2. 보호 하려는 `Protect` 데이터를 사용 하 여 메서드를 호출 합니다.
+2. 보호 하려는 데이터를 사용 하 여 메서드를 호출 합니다 `Protect` .
 
-3. 일반 텍스트로 `Unprotect` 다시 변환 하려는 데이터를 사용 하 여 메서드를 호출 합니다.
+3. `Unprotect`일반 텍스트로 다시 변환 하려는 데이터를 사용 하 여 메서드를 호출 합니다.
 
-ASP.NET Core 또는 SignalR와 같은 대부분의 프레임 워크와 앱 모델은 이미 데이터 보호 시스템을 구성 하 고 종속성 주입을 통해 액세스 하는 서비스 컨테이너에 추가 합니다. 다음 샘플에서는 종속성 주입에 대 한 서비스 컨테이너를 구성 하 고, 데이터 보호 스택을 등록 하 고, DI를 통해 데이터 보호 공급자를 수신 하 고, 보호기를 만들고, 보호 해제 데이터를 보호 하는 방법을 보여 줍니다.
+ASP.NET Core 또는와 같은 대부분의 프레임 워크와 앱 모델 SignalR 은 이미 데이터 보호 시스템을 구성 하 고 종속성 주입을 통해 액세스 하는 서비스 컨테이너에 추가 합니다. 다음 샘플에서는 종속성 주입에 대 한 서비스 컨테이너를 구성 하 고, 데이터 보호 스택을 등록 하 고, DI를 통해 데이터 보호 공급자를 수신 하 고, 보호기를 만들고, 보호 해제 데이터를 보호 하는 방법을 보여 줍니다.
 
 [!code-csharp[](../../security/data-protection/using-data-protection/samples/protectunprotect.cs?highlight=26,34,35,36,37,38,39,40)]
 
 보호기를 만들 때 하나 이상의 [용도 문자열](xref:security/data-protection/consumer-apis/purpose-strings)을 제공 해야 합니다. 목적 문자열은 소비자 간의 격리를 제공 합니다. 예를 들어 용도 문자열이 "녹색"으로 만들어진 보호기는 "자주색"의 용도를 사용 하 여 보호기에서 제공 되는 데이터의 보호를 해제할 수 없습니다.
 
 >[!TIP]
-> `IDataProtectionProvider` 및 인스턴스는 `IDataProtector` 여러 호출자가 스레드로부터 안전 하 게 보호 됩니다. 구성 `IDataProtector` 요소가 호출 `CreateProtector`을 통해에 대 한 참조를 가져온 후에는 및 `Protect` `Unprotect`에 대 한 여러 호출에 해당 참조를 사용 합니다.
+> 및 인스턴스 `IDataProtectionProvider` `IDataProtector` 는 여러 호출자가 스레드로부터 안전 하 게 보호 됩니다. 구성 요소가 호출을 통해에 대 한 참조를 가져온 후에 `IDataProtector` `CreateProtector` 는 및에 대 한 여러 호출에 해당 참조를 사용 합니다 `Protect` `Unprotect` .
 >
->보호 된 페이로드 `Unprotect` 를 확인 하거나 해독할 수 없는 경우에 대 한 호출은 system.security.cryptography.cryptographicexception을 throw 합니다. 일부 구성 요소는 보호 되지 않는 작업 중에 오류를 무시 하려고 할 수 있습니다. 인증 쿠키를 읽는 구성 요소가이 오류를 처리 하 고 요청을 완전히 실패 하는 대신 쿠키가 없는 것 처럼 처리할 수 있습니다. 이 동작을 원하는 구성 요소는 모든 예외를 swallowing 하는 대신 System.security.cryptography.cryptographicexception를 명확 하 게 catch 해야 합니다.
+>`Unprotect`보호 된 페이로드를 확인 하거나 해독할 수 없는 경우에 대 한 호출은 system.security.cryptography.cryptographicexception을 throw 합니다. 일부 구성 요소는 보호 되지 않는 작업 중에 오류를 무시 하려고 할 수 있습니다. 인증 쿠키를 읽는 구성 요소가이 오류를 처리 하 고 요청을 완전히 실패 하는 대신 쿠키가 없는 것 처럼 처리할 수 있습니다. 이 동작을 원하는 구성 요소는 모든 예외를 swallowing 하는 대신 System.security.cryptography.cryptographicexception를 명확 하 게 catch 해야 합니다.

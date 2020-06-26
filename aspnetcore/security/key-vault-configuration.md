@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106678"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406877"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
@@ -35,7 +37,7 @@ ms.locfileid: "84106678"
 
 ## <a name="packages"></a>패키지
 
-패키지 참조를 [Microsoft 확장명. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) 패키지에 추가 합니다.
+Microsoft.Extensions.Configuration에 패키지 참조를 추가 [합니다. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) 패키지입니다.
 
 ## <a name="sample-app"></a>샘플 앱
 
@@ -129,11 +131,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. Azure AD에서 앱을 선택 합니다.
    1. **인증서 & 암호**로 이동 합니다.
    1. **인증서 업로드** 를 선택 하 여 공개 키가 포함 된 인증서를 업로드 합니다. *.Cer*, *pem*또는 *.crt* 인증서를 사용할 수 있습니다.
-1. 앱의 *appsettings* 파일에 키 자격 증명 모음 이름, 응용 프로그램 ID 및 인증서 지문을 저장 합니다.
+1. 응용 프로그램의 *appsettings.js* 파일에 키 자격 증명 모음 이름, 응용 프로그램 ID 및 인증서 지문을 저장 합니다.
 1. Azure Portal에서 **키 자격 증명 모음** 으로 이동 합니다.
 1. [Azure Key Vault를 사용 하 여 프로덕션 환경에서 암호 저장소](#secret-storage-in-the-production-environment-with-azure-key-vault) 에 만든 key vault를 선택 합니다.
-1. **액세스 정책**을 선택 합니다.
-1. **액세스 정책 추가**를 선택 합니다.
+1. **액세스 정책**을 선택합니다.
+1. **액세스 정책 추가**를 선택합니다.
 1. **비밀 권한을** 열고 **Get** 및 **List** 권한을 사용 하 여 앱을 제공 합니다.
 1. **보안 주체 선택** 을 선택 하 고 이름으로 등록 된 앱을 선택 합니다. **선택** 단추를 누릅니다.
 1. **확인**을 선택합니다.
@@ -147,7 +149,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X.509 인증서는 OS를 통해 관리 됩니다. 응용 프로그램은 <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings* 파일에서 제공 하는 값을 사용 하 여를 호출 합니다.
+X.509 인증서는 OS를 통해 관리 됩니다. 앱은 <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 파일 *의appsettings.js* 에서 제공 하는 값으로을 호출 합니다.
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -169,7 +171,7 @@ X.509 인증서는 OS를 통해 관리 됩니다. 응용 프로그램은 <xref:M
 
 샘플 앱은 `#define` *Program.cs* 파일의 맨 위에 있는 문이로 설정 된 경우 Azure 리소스에 대해 관리 id를 사용 `Managed` 합니다.
 
-앱의 *appsettings json* 파일에 자격 증명 모음 이름을 입력 합니다. 샘플 앱에는 버전으로 설정 된 경우 응용 프로그램 ID 및 암호 (클라이언트 암호)가 필요 하지 `Managed` 않으므로 이러한 구성 항목을 무시할 수 있습니다. 앱이 Azure에 배포 되 고 Azure는 *appsettings* 파일에 저장 된 자격 증명 모음 이름을 사용 하 여 Azure Key Vault에만 액세스 하도록 앱을 인증 합니다.
+응용 프로그램의 *appsettings.js파일에* 자격 증명 모음 이름을 입력 합니다. 샘플 앱에는 버전으로 설정 된 경우 응용 프로그램 ID 및 암호 (클라이언트 암호)가 필요 하지 `Managed` 않으므로 이러한 구성 항목을 무시할 수 있습니다. 앱이 Azure에 배포 되 고 Azure는 *appsettings.js* 파일에 저장 된 자격 증명 모음 이름만 사용 하 여 Azure Key Vault에 액세스 하도록 앱을 인증 합니다.
 
 Azure App Service에 샘플 앱을 배포 합니다.
 
@@ -219,7 +221,7 @@ config.AddAzureKeyVault(
     });
 ```
 
-| 속성         | Description |
+| 속성         | 설명 |
 | ---------------- | ----------- |
 | `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>값을 검색 하는 데 사용할입니다. |
 | `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>비밀 로드를 제어 하는 데 사용 되는 인스턴스입니다. |
@@ -358,7 +360,7 @@ Configuration.Reload();
 * 로드 하려는 값에 대 한 앱의 구성 키 (이름)가 잘못 되었습니다.
 * 키 자격 증명 모음에 앱에 대 한 액세스 정책을 추가 하는 경우 정책이 만들어졌지만 **액세스 정책** UI에서 **저장** 단추가 선택 되지 않았습니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
@@ -381,7 +383,7 @@ Configuration.Reload();
 
 ## <a name="packages"></a>패키지
 
-패키지 참조를 [Microsoft 확장명. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) 패키지에 추가 합니다.
+Microsoft.Extensions.Configuration에 패키지 참조를 추가 [합니다. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) 패키지입니다.
 
 ## <a name="sample-app"></a>샘플 앱
 
@@ -475,11 +477,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. Azure AD에서 앱을 선택 합니다.
    1. **인증서 & 암호**로 이동 합니다.
    1. **인증서 업로드** 를 선택 하 여 공개 키가 포함 된 인증서를 업로드 합니다. *.Cer*, *pem*또는 *.crt* 인증서를 사용할 수 있습니다.
-1. 앱의 *appsettings* 파일에 키 자격 증명 모음 이름, 응용 프로그램 ID 및 인증서 지문을 저장 합니다.
+1. 응용 프로그램의 *appsettings.js* 파일에 키 자격 증명 모음 이름, 응용 프로그램 ID 및 인증서 지문을 저장 합니다.
 1. Azure Portal에서 **키 자격 증명 모음** 으로 이동 합니다.
 1. [Azure Key Vault를 사용 하 여 프로덕션 환경에서 암호 저장소](#secret-storage-in-the-production-environment-with-azure-key-vault) 에 만든 key vault를 선택 합니다.
-1. **액세스 정책**을 선택 합니다.
-1. **액세스 정책 추가**를 선택 합니다.
+1. **액세스 정책**을 선택합니다.
+1. **액세스 정책 추가**를 선택합니다.
 1. **비밀 권한을** 열고 **Get** 및 **List** 권한을 사용 하 여 앱을 제공 합니다.
 1. **보안 주체 선택** 을 선택 하 고 이름으로 등록 된 앱을 선택 합니다. **선택** 단추를 누릅니다.
 1. **확인**을 선택합니다.
@@ -493,7 +495,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X.509 인증서는 OS를 통해 관리 됩니다. 응용 프로그램은 <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings* 파일에서 제공 하는 값을 사용 하 여를 호출 합니다.
+X.509 인증서는 OS를 통해 관리 됩니다. 앱은 <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 파일 *의appsettings.js* 에서 제공 하는 값으로을 호출 합니다.
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -515,7 +517,7 @@ X.509 인증서는 OS를 통해 관리 됩니다. 응용 프로그램은 <xref:M
 
 샘플 앱은 `#define` *Program.cs* 파일의 맨 위에 있는 문이로 설정 된 경우 Azure 리소스에 대해 관리 id를 사용 `Managed` 합니다.
 
-앱의 *appsettings json* 파일에 자격 증명 모음 이름을 입력 합니다. 샘플 앱에는 버전으로 설정 된 경우 응용 프로그램 ID 및 암호 (클라이언트 암호)가 필요 하지 `Managed` 않으므로 이러한 구성 항목을 무시할 수 있습니다. 앱이 Azure에 배포 되 고 Azure는 *appsettings* 파일에 저장 된 자격 증명 모음 이름을 사용 하 여 Azure Key Vault에만 액세스 하도록 앱을 인증 합니다.
+응용 프로그램의 *appsettings.js파일에* 자격 증명 모음 이름을 입력 합니다. 샘플 앱에는 버전으로 설정 된 경우 응용 프로그램 ID 및 암호 (클라이언트 암호)가 필요 하지 `Managed` 않으므로 이러한 구성 항목을 무시할 수 있습니다. 앱이 Azure에 배포 되 고 Azure는 *appsettings.js* 파일에 저장 된 자격 증명 모음 이름만 사용 하 여 Azure Key Vault에 액세스 하도록 앱을 인증 합니다.
 
 Azure App Service에 샘플 앱을 배포 합니다.
 
@@ -685,7 +687,7 @@ Configuration.Reload();
 * 로드 하려는 값에 대 한 앱의 구성 키 (이름)가 잘못 되었습니다.
 * 키 자격 증명 모음에 앱에 대 한 액세스 정책을 추가 하는 경우 정책이 만들어졌지만 **액세스 정책** UI에서 **저장** 단추가 선택 되지 않았습니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)

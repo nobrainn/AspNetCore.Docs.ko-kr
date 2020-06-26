@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: fcd81544385702ce72ff5fc8ae2de34d0f7afb37
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 68a0b14eb0897f6ff6e24e74b1fe5536bee1adfe
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103002"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405850"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -74,7 +76,7 @@ ASP.NET Core MVC는 다음과 같은 기능을 포함하고 있습니다.
 * [Web API](#web-apis)
 * [테스트 가능성](#testability)
 * [Razor뷰 엔진](#razor-view-engine)
-* [강력한 형식의 보기](#strongly-typed-views)
+* [강력한 형식의 뷰](#strongly-typed-views)
 * [태그 도우미](#tag-helpers)
 * [구성 요소 보기](#view-components)
 

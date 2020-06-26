@@ -7,17 +7,19 @@ ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: df118cdc8346b99e4e5c60c9f0441c963543f4b4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 58781880764b26a67d71e70c225ab4ed4e5da109
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767514"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406708"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core의 태그 도우미 구성 요소
 
@@ -25,7 +27,7 @@ ms.locfileid: "82767514"
 
 태그 도우미 구성 요소는 서버 쪽 코드에서 HTML 요소를 조건부로 수정하거나 추가할 수 있도록 하는 태그 도우미입니다. 이 기능은 ASP.NET Core 2.0 이상에서 사용할 수 있습니다.
 
-ASP.NET Core에는 두 개의 기본 제공 태그 도우미 구성 요소, 즉 `head` 및 `body`가 포함되어 있습니다. 네임 스페이스는 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> 네임 스페이스에 있으며 MVC와 Razor 페이지에서 모두 사용할 수 있습니다. 태그 도우미 구성 요소는 *_ViewImports.cshtml*에서 앱을 등록할 필요가 없습니다.
+ASP.NET Core에는 두 개의 기본 제공 태그 도우미 구성 요소, 즉 `head` 및 `body`가 포함되어 있습니다. <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers>네임 스페이스는 네임 스페이스에 있으며 MVC와 페이지에서 모두 사용할 수 있습니다 Razor . 태그 도우미 구성 요소는 *_ViewImports.cshtml*에서 앱을 등록할 필요가 없습니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -33,8 +35,8 @@ ASP.NET Core에는 두 개의 기본 제공 태그 도우미 구성 요소, 즉 
 
 태그 도우미 구성 요소의 두 가지 일반적인 사용 사례는 다음과 같습니다.
 
-1. [에를 `<link>` 삽입 `<head>`합니다.](#inject-into-html-head-element)
-1. [에를 `<script>` 삽입 `<body>`합니다.](#inject-into-html-body-element)
+1. [에를 삽입 `<link>` `<head>` 합니다.](#inject-into-html-head-element)
+1. [에를 삽입 `<script>` `<body>` 합니다.](#inject-into-html-body-element)
 
 다음 섹션에서는 이 사용 사례를 설명합니다.
 
@@ -69,7 +71,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 태그 도우미 구성 요소를 앱의 태그 도우미 구성 요소 컬렉션에 추가해야 합니다. 컬렉션에 추가하는 세 가지 방법이 있습니다.
 
 * [서비스 컨테이너를 통한 등록](#registration-via-services-container)
-* [File via Razor 등록](#registration-via-razor-file)
+* [File via 등록 Razor](#registration-via-razor-file)
 * [페이지 모델 또는 컨트롤러를 통한 등록](#registration-via-page-model-or-controller)
 
 ### <a name="registration-via-services-container"></a>서비스 컨테이너를 통한 등록
@@ -78,9 +80,9 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>File via Razor 등록
+### <a name="registration-via-razor-file"></a>File via 등록 Razor
 
-태그 도우미 구성 요소가 DI를 사용 하 여 등록 되지 않은 경우 Razor 페이지 페이지나 MVC 뷰에서 등록할 수 있습니다. 이 기법은 Razor 파일에서 삽입 된 태그와 구성 요소 실행 순서를 제어 하는 데 사용 됩니다.
+태그 도우미 구성 요소가 DI를 사용 하 여 등록 되지 않은 경우 Razor 페이지 페이지나 MVC 뷰에서 등록할 수 있습니다. 이 기법은 파일에서 삽입 된 태그와 구성 요소 실행 순서를 제어 하는 데 사용 됩니다 Razor .
 
 `ITagHelperComponentManager`는 태그 도우미 구성 요소를 추가하거나 앱에서 제거하는 데 사용됩니다. 다음 코드에서는 `AddressTagHelperComponent`를 사용한 이 기술을 보여 줍니다.
 
@@ -88,7 +90,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 위의 코드에서
 
-* `@inject` 지시문은 `ITagHelperComponentManager`의 인스턴스를 제공합니다. 인스턴스는 Razor 파일의 access 다운스트림에 대해 `manager` 라는 변수에 할당 됩니다.
+* `@inject` 지시문은 `ITagHelperComponentManager`의 인스턴스를 제공합니다. 인스턴스는 `manager` 파일의 access 다운스트림에 대해 라는 변수에 할당 됩니다 Razor .
 * `AddressTagHelperComponent` 인스턴스가 앱의 태그 도우미 구성 요소 컬렉션에 추가됩니다.
 
 `AddressTagHelperComponent`는 `markup` 및 `order` 매개 변수를 허용하는 생성자를 수용하도록 수정됩니다.
@@ -101,9 +103,9 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 ### <a name="registration-via-page-model-or-controller"></a>페이지 모델 또는 컨트롤러를 통한 등록
 
-태그 도우미 구성 요소가 DI를 사용 하 여 등록 되지 않은 경우 Razor 페이지 페이지 모델 또는 MVC 컨트롤러에서 등록할 수 있습니다. 이 기법은 c # 논리를 파일에서 Razor 분리 하는 데 유용 합니다.
+태그 도우미 구성 요소가 DI를 사용 하 여 등록 되지 않은 경우 Razor 페이지 페이지 모델 또는 MVC 컨트롤러에서 등록할 수 있습니다. 이 기법은 c # 논리를 파일에서 분리 하는 데 유용 Razor 합니다.
 
-생성자 주입은 `ITagHelperComponentManager`의 인스턴스에 액세스하는 데 사용됩니다. 태그 도우미 구성 요소를 인스턴스의 태그 도우미 구성 요소 컬렉션에 추가합니다. 다음 Razor 페이지 페이지 모델에서는이 기법을 `AddressTagHelperComponent`보여 줍니다.
+생성자 주입은 `ITagHelperComponentManager`의 인스턴스에 액세스하는 데 사용됩니다. 태그 도우미 구성 요소를 인스턴스의 태그 도우미 구성 요소 컬렉션에 추가합니다. 다음 페이지 Razor 페이지 모델에서는이 기법을 보여 줍니다 `AddressTagHelperComponent` .
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 
@@ -117,8 +119,8 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 사용자 지정 태그 도우미 구성 요소를 만들려면 다음을 수행합니다.
 
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper>에서 파생된 공용 클래스를 만듭니다.
-* 클래스에 [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) 특성을 적용 합니다. 대상 HTML 요소의 이름을 지정합니다.
-* *선택 사항*: 클래스 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 에 특성을 적용 하 여 IntelliSense에서 형식의 표시를 표시 하지 않습니다.
+* [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute)클래스에 특성을 적용 합니다. 대상 HTML 요소의 이름을 지정합니다.
+* *선택 사항*: [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 클래스에 특성을 적용 하 여 IntelliSense에서 형식의 표시를 표시 하지 않습니다.
 
 다음 코드는 `<address>` HTML 요소를 대상으로 하는 사용자 지정 태그 도우미 구성 요소를 만듭니다.
 

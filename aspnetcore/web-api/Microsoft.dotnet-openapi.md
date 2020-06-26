@@ -7,17 +7,19 @@ ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 1924fb8ee5ac1ba8dc31d2175a336c8333c81fb2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eb8d6a1dc70b2aabf495bdb359e243c91e94289f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775715"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404797"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>OpenAPI 도구를 사용한 ASP.NET Core 앱 개발
 
@@ -70,7 +72,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 #### <a name="arguments"></a>인수
 
-|  인수  | 설명 | 예제 |
+|  인수  | Description | 예제 |
 |-------------|-------------|---------|
 | source-file | 참조를 만들 원본입니다. OpenAPI 파일이어야 합니다. |dotnet openapi add file *.\OpenAPI.json* |
 
@@ -87,7 +89,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 #### <a name="arguments"></a>인수
 
-|  인수  | 설명 | 예제 |
+|  인수  | Description | 예제 |
 |-------------|-------------|---------|
 | 원본-URL | 참조를 만들 원본입니다. URL이어야 합니다. |dotnet openapi add url `https://contoso.com/openapi.json` |
 
@@ -104,7 +106,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="arguments"></a>인수
 
-|  인수  | 설명| 예제 |
+|  인수  | Description| 예제 |
 | ------------|------------|---------|
 | source-file | 참조를 제거할 속성입니다. |dotnet openapi remove *.\OpenAPI.json* |
 

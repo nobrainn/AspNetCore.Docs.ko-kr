@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: c6498704214de5e805c9bf57033529d4acc5fd3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 61c983de33b91a16ad207d8a350daf4859c89eaf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775793"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406097"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>ASP.NET Core로 Twitter 외부 로그인 설정
 
@@ -30,7 +32,7 @@ ms.locfileid: "82775793"
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Twitter/3.0.0) NuGet 패키지를 프로젝트에 추가 합니다.
 
-* 으로 [https://apps.twitter.com/](https://apps.twitter.com/) 이동 하 여 로그인 합니다. Twitter 계정이 아직 없는 경우 **[지금 등록](https://twitter.com/signup)** 링크를 사용 하 여 계정을 만드세요.
+* 으로 이동 하 여 [https://apps.twitter.com/](https://apps.twitter.com/) 로그인 합니다. Twitter 계정이 아직 없는 경우 **[지금 등록](https://twitter.com/signup)** 링크를 사용 하 여 계정을 만드세요.
 
 * **앱 만들기**를 선택 합니다. **앱 이름**, **응용 프로그램 설명** 및 공개 **웹 사이트** URI를 입력 합니다 (도메인 이름을 등록할 때까지 임시 일 수 있음).
 
@@ -38,10 +40,10 @@ ms.locfileid: "82775793"
 
 * AspNetCore.Identity 기본적으로 사용자에 게 전자 메일 주소가 있어야 합니다. **권한** 탭으로 이동 하 고 **편집** 단추를 클릭 한 다음 **사용자에 게 전자 메일 주소 요청**옆의 확인란을 선택 합니다.
 
-* **콜백 url** 필드에를 `/signin-twitter` 추가 하 여 개발 URI를 입력 합니다 (예 `https://webapp128.azurewebsites.net/signin-twitter`:). 이 샘플의 뒷부분에서 구성 된 Twitter 인증 체계는 OAuth 흐름을 `/signin-twitter` 구현 하는 경로에서 요청을 자동으로 처리 합니다.
+* `/signin-twitter` **콜백 url** 필드에를 추가 하 여 개발 URI를 입력 합니다 (예: `https://webapp128.azurewebsites.net/signin-twitter` ). 이 샘플의 뒷부분에서 구성 된 Twitter 인증 체계는 OAuth 흐름을 구현 하는 경로에서 요청을 자동으로 처리 합니다 `/signin-twitter` .
 
   > [!NOTE]
-  > URI 세그먼트 `/signin-twitter` 는 Twitter 인증 공급자의 기본 콜백으로 설정 됩니다. [Twitteroptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Twitter 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
+  > URI 세그먼트는 `/signin-twitter` Twitter 인증 공급자의 기본 콜백으로 설정 됩니다. [Twitteroptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Twitter 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
 
 * 양식의 나머지를 입력 하 고 **만들기**를 선택 합니다. 새 응용 프로그램 세부 정보가 표시 됩니다.
 
@@ -50,7 +52,7 @@ ms.locfileid: "82775793"
 [암호 관리자](xref:security/app-secrets)를 사용 하 여 TWITTER 소비자 API 키 및 암호와 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
 1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
-1. 비밀 키 `Authentication:Twitter:ConsumerKey` 및 `Authentication:Twitter:ConsumerSecret`를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다.
+1. 비밀 키 및를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다 `Authentication:Twitter:ConsumerKey` `Authentication:Twitter:ConsumerSecret` .
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Twitter:ConsumerAPIKey" "<consumer-api-key>"
@@ -93,13 +95,13 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a>문제 해결
 
-* **ASP.NET Core 2.x에만 해당:** 에서 Identity `ConfigureServices`를 호출 `services.AddIdentity` 하 여가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
+* **ASP.NET Core 2.x에만 해당:** Identity에서를 호출 하 여가 구성 되지 않은 경우 `services.AddIdentity` `ConfigureServices` 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
 * 초기 마이그레이션을 적용 하 여 사이트 데이터베이스를 만들지 않은 경우 요청 오류를 *처리 하는 동안 데이터베이스 작업이 실패* 하 게 됩니다. **마이그레이션 적용** 을 탭 하 여 데이터베이스를 만들고 새로 고쳐 오류를 계속 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 * 이 문서에서는 Twitter를 사용 하 여 인증할 수 있는 방법을 살펴보았습니다. [위의 페이지](xref:security/authentication/social/index)에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다.
 
-* Azure 웹 앱에 웹 사이트를 게시 한 후에는 Twitter 개발자 포털 `ConsumerSecret` 에서를 다시 설정 해야 합니다.
+* Azure 웹 앱에 웹 사이트를 게시 한 후에는 `ConsumerSecret` Twitter 개발자 포털에서를 다시 설정 해야 합니다.
 
-* Azure Portal에서 `Authentication:Twitter:ConsumerKey` 및 `Authentication:Twitter:ConsumerSecret` 을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.
+* `Authentication:Twitter:ConsumerKey` `Authentication:Twitter:ConsumerSecret` Azure Portal에서 및을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.

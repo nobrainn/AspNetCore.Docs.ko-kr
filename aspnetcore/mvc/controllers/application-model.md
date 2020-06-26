@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 5e31d2e6611321bec7442534ce41350de10478e0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 61503a1a87b5d5eea36586108b65304236cf799a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768665"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405642"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core에서 애플리케이션 모델 작업
 
@@ -69,7 +71,7 @@ Then(`Order=-990`):
 * 컨텍스트에 작업 메서드 매개 변수 추가
 * 경로 및 기타 특성 적용
 
-일부 기본 제공 동작은 `DefaultApplicationModelProvider`에 의해 구현됩니다. 이 공급자는을 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)생성 하 고, 및 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) 인스턴스를 참조 합니다. `DefaultApplicationModelProvider` 클래스는 향후 변경될 수 있는 내부 프레임워크 구현 세부 사항입니다. 
+일부 기본 제공 동작은 `DefaultApplicationModelProvider`에 의해 구현됩니다. 이 공급자는을 생성 하 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) 고, 및 인스턴스를 참조 합니다 [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) . `DefaultApplicationModelProvider` 클래스는 향후 변경될 수 있는 내부 프레임워크 구현 세부 사항입니다. 
 
 `AuthorizationApplicationModelProvider`는 `AuthorizeFilter` 및 `AllowAnonymousFilter` 특성과 관련된 동작의 적용을 담당합니다. [이 특성들에 대해 자세히 알아보세요](xref:security/authorization/simple).
 
@@ -86,7 +88,7 @@ Then(`Order=-990`):
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-규칙은 MVC 옵션에 추가 하거나를 `Attribute` [`Filters`](xref:mvc/controllers/filters)구현 하 고 컨트롤러, 작업 또는 작업 매개 변수에 적용 하 여 적용 됩니다 (과 유사). 필터와 달리 각 요청의 일부가 아니라 앱을 시작하는 경우에만 규칙이 실행됩니다.
+규칙은 MVC 옵션에 추가 하거나를 구현 하 `Attribute` 고 컨트롤러, 작업 또는 작업 매개 변수에 적용 하 여 적용 됩니다 (과 유사 [`Filters`](xref:mvc/controllers/filters) ). 필터와 달리 각 요청의 일부가 아니라 앱을 시작하는 경우에만 규칙이 실행됩니다.
 
 ### <a name="sample-modifying-the-applicationmodel"></a>샘플: ApplicationModel 수정
 
@@ -206,7 +208,7 @@ shim에서 제공하는 규칙은 특정 특성이 적용된 앱의 일부에만
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>ApiExplorer를 사용하여 앱 문서화
 
-응용 프로그램 모델은 응용 [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) 프로그램의 구조를 트래버스하는 데 사용할 수 있는 속성을 각 수준에서 노출 합니다. 이를 [Swagger와 같은 도구를 사용하여 Web API용 도움말 페이지를 생성](xref:tutorials/web-api-help-pages-using-swagger)하는 데 사용할 수 있습니다. `ApiExplorer` 속성은 앱의 모델이 노출해야 하는 부분을 지정하도록 설정할 수 있는 `IsVisible` 속성을 노출합니다. 규칙을 사용하여 이 설정을 구성할 수 있습니다.
+응용 프로그램 모델은 응용 프로그램 [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) 의 구조를 트래버스하는 데 사용할 수 있는 속성을 각 수준에서 노출 합니다. 이를 [Swagger와 같은 도구를 사용하여 Web API용 도움말 페이지를 생성](xref:tutorials/web-api-help-pages-using-swagger)하는 데 사용할 수 있습니다. `ApiExplorer` 속성은 앱의 모델이 노출해야 하는 부분을 지정하도록 설정할 수 있는 `IsVisible` 속성을 노출합니다. 규칙을 사용하여 이 설정을 구성할 수 있습니다.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

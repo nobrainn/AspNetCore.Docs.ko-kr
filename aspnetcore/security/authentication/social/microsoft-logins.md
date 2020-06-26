@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 731a17085a1fd01852bb3fe2f0fc9f3e7a9ac30f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: df3e738880902e3005221c6047b6be9e924f2929
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775663"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406136"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
@@ -34,10 +36,10 @@ ms.locfileid: "82775663"
 Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 하면 **앱 등록** 페이지로 리디렉션됩니다.
 
 * **새 등록** 선택
-* **이름을**입력 합니다.
+* **이름**을 입력합니다.
 * **지원 되는 계정 유형에**대 한 옵션을 선택 합니다.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
-* **URI 리디렉션**에서 추가 된로 `/signin-microsoft` 개발 URL을 입력 합니다. `https://localhost:5001/signin-microsoft`)을 입력합니다. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 `/signin-microsoft` 구현 하는 경로에서 요청을 자동으로 처리 합니다.
-* **등록** 선택
+* **URI 리디렉션**에서 추가 된로 개발 URL을 입력 `/signin-microsoft` 합니다. 예: `https://localhost:5001/signin-microsoft`. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 구현 하는 경로에서 요청을 자동으로 처리 합니다 `/signin-microsoft` .
+* **등록**을 선택합니다.
 
 ### <a name="create-client-secret"></a>클라이언트 암호 만들기
 
@@ -56,7 +58,7 @@ URI 세그먼트가 `/signin-microsoft` Microsoft 인증 공급자의 기본 콜
 기밀 [관리자](xref:security/app-secrets)를 사용 하 여 MICROSOFT 클라이언트 ID 및 비밀 값과 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
 1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
-1. 비밀 키 `Authentication:Microsoft:ClientId` 및 `Authentication:Microsoft:ClientSecret`를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다.
+1. 비밀 키 및를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다 `Authentication:Microsoft:ClientId` `Authentication:Microsoft:ClientSecret` .
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Microsoft:ClientId" "<client-id>"
@@ -67,7 +69,7 @@ URI 세그먼트가 `/signin-microsoft` Microsoft 인증 공급자의 기본 콜
 
 ## <a name="configure-microsoft-account-authentication"></a>Microsoft 계정 인증 구성
 
-Microsoft 계정 서비스를에 추가 합니다 `Startup.ConfigureServices`.
+Microsoft 계정 서비스를에 추가 합니다 `Startup.ConfigureServices` .
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupMS3x.cs?name=snippet&highlight=10-14)]
 
@@ -89,10 +91,10 @@ Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 �
 
 ## <a name="troubleshooting"></a>문제 해결
 
-* Microsoft 계정 공급자가 로그인 오류 페이지로 리디렉션되는 경우 Uri에서 `#` (해시 태그) 바로 다음에 나오는 오류 제목 및 설명 쿼리 문자열 매개 변수를 확인 합니다.
+* Microsoft 계정 공급자가 로그인 오류 페이지로 리디렉션되는 경우 `#` Uri에서 (해시 태그) 바로 다음에 나오는 오류 제목 및 설명 쿼리 문자열 매개 변수를 확인 합니다.
 
   오류 메시지가 Microsoft 인증 문제를 나타내는 것 처럼 보이지만 가장 일반적인 원인은 **웹** 플랫폼에 지정 된 **리디렉션 uri** 와 일치 하지 않는 응용 프로그램 uri입니다.
-* 에서 Identity `ConfigureServices`를 호출 `services.AddIdentity` 하 여가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
+* Identity에서를 호출 하 여가 구성 되지 않은 경우 `services.AddIdentity` `ConfigureServices` 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
 * 초기 마이그레이션을 적용 하 여 사이트 데이터베이스를 만들지 않은 경우 요청 오류를 *처리 하는 동안 데이터베이스 작업이 실패* 하 게 됩니다. **마이그레이션 적용** 을 탭 하 여 데이터베이스를 만들고 새로 고쳐 오류를 계속 합니다.
 
 ## <a name="next-steps"></a>다음 단계
@@ -101,4 +103,4 @@ Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 �
 
 * Azure 웹 앱에 웹 사이트를 게시 한 후에는 Microsoft 개발자 포털에서 새 클라이언트 암호를 만듭니다.
 
-* Azure Portal에서 `Authentication:Microsoft:ClientId` 및 `Authentication:Microsoft:ClientSecret` 을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.
+* `Authentication:Microsoft:ClientId` `Authentication:Microsoft:ClientSecret` Azure Portal에서 및을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.

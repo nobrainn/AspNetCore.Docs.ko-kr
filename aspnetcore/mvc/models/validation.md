@@ -1,31 +1,33 @@
 ---
 title: ASP.NET Core MVC의 모델 유효성 검사
 author: rick-anderson
-description: MVC 및 Razor 페이지 ASP.NET Core의 모델 유효성 검사에 대해 알아봅니다.
+description: MVC 및 페이지 ASP.NET Core의 모델 유효성 검사에 대해 알아봅니다 Razor .
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 56c8d799b98cc09b8cfff12744c6eeb46af4f8e6
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: e76ddad795237991c49bf2a3b1ca840795989260
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003174"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404914"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC 및 Razor 페이지 ASP.NET Core의 모델 유효성 검사
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC 및 페이지 ASP.NET Core의 모델 유효성 검사 Razor
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [Kirk Larkin](https://github.com/serpent5)
 
-이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사 하는 방법을 설명 합니다.
+이 문서에서는 ASP.NET Core MVC 또는 Pages 앱에서 사용자 입력의 유효성을 검사 하는 방법을 설명 합니다 Razor .
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 
@@ -33,7 +35,7 @@ ms.locfileid: "83003174"
 
 모델 상태는 모델 바인딩 및 모델 유효성 검사 두 하위 시스템에서 발생하는 오류를 나타냅니다. [모델 바인딩](model-binding.md)에서 발생하는 오류는 일반적으로 데이터 변환 오류입니다. 예를 들어 정수 필드에 “x”가 입력됩니다. 모델 유효성 검사는 모델 바인딩 후에 발생하며 데이터가 비즈니스 규칙에 맞지 않으면 오류를 보고합니다. 예를 들어 1에서 5 사이의 등급을 필요한 필드에 0이 입력됩니다.
 
-모델 바인딩 및 모델 유효성 검사는 모두 컨트롤러 작업 또는 Razor 페이지 처리기 메서드를 실행 하기 전에 수행 됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
+모델 바인딩 및 모델 유효성 검사는 모두 컨트롤러 작업 또는 페이지 처리기 메서드를 실행 하기 전에 수행 Razor 됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -70,13 +72,13 @@ ms.locfileid: "83003174"
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 다음은 그 예입니다. 
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 다음은 그 예입니다. 
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -100,7 +102,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 
 그러나 Null을 허용하지 않는 속성에 대한 모델 바인딩이 실패하여 `The value '' is invalid`와 같은 오류 메시지가 표시될 수 있습니다. Null을 허용하지 않는 형식의 서버 쪽 유효성 검사에 대한 사용자 지정 오류 메시지를 지정하려는 경우 다음과 같은 방법이 있습니다.
 
-* 필드를 Null 허용으로 만듭니다(예: `decimal` 대신에 `decimal?`). [Null을 허용하는 \<T>](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 Nul을 허용 형식처럼 처리됩니다.
+* 필드를 Null 허용으로 만듭니다(예: `decimal` 대신에 `decimal?`). [Nullable \<T> ](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 nullable 형식 처럼 처리 됩니다.
 * 다음 예제에서와 같이 모델 바인딩에 의해 사용할 기본 오류 메시지를 지정합니다.
 
   [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_Configuration&highlight=5-6)]
@@ -248,7 +250,7 @@ public string MiddleName { get; set; }
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Views/Shared/_ValidationScriptsPartial.cshtml?name=snippet_Scripts)]
 
-Jquery가 없는 [유효성 검사](https://github.com/aspnet/jquery-validation-unobtrusive) 스크립트는 널리 사용 되는 [jquery 유효성 검사](https://jqueryvalidation.org/) 플러그 인을 기반으로 하는 사용자 지정 Microsoft 프런트 엔드 라이브러리입니다. jQuery 비간섭 유효성 검사를 사용하지 않을 경우 두 위치(모델 속성에 대한 서버 쪽 유효성 검사 특성에서 한 번 및 클라이언트 쪽 스크립트에서 다시 한 번)에서 동일한 유효성 검사 논리를 코딩해야 할 수 있습니다. 그 대신 [태그 도우미](xref:mvc/views/tag-helpers/intro) 및 [HTML 도우미 ](xref:mvc/views/overview)는 유효성 검사가 필요한 양식 요소에 대해 모델 특성의 유효성 검사 특성 및 형식 메타데이터를 사용하여 HTML 5 `data-` 특성을 렌더링합니다. jQuery를 방해 하지 않는 `data-` 유효성 검사는 특성을 구문 분석 하 고이 논리를 JQuery 유효성 검사에 전달 하 여 서버 쪽 유효성 검사 논리를 클라이언트에 효과적으로 "복사" 합니다. 다음과 같이 태그 도우미를 사용하여 클라이언트에서 유효성 검사 오류를 표시할 수 있습니다.
+Jquery가 없는 [유효성 검사](https://github.com/aspnet/jquery-validation-unobtrusive) 스크립트는 널리 사용 되는 [jquery 유효성 검사](https://jqueryvalidation.org/) 플러그 인을 기반으로 하는 사용자 지정 Microsoft 프런트 엔드 라이브러리입니다. jQuery 비간섭 유효성 검사를 사용하지 않을 경우 두 위치(모델 속성에 대한 서버 쪽 유효성 검사 특성에서 한 번 및 클라이언트 쪽 스크립트에서 다시 한 번)에서 동일한 유효성 검사 논리를 코딩해야 할 수 있습니다. 그 대신 [태그 도우미](xref:mvc/views/tag-helpers/intro) 및 [HTML 도우미 ](xref:mvc/views/overview)는 유효성 검사가 필요한 양식 요소에 대해 모델 특성의 유효성 검사 특성 및 형식 메타데이터를 사용하여 HTML 5 `data-` 특성을 렌더링합니다. jQuery를 방해 하지 않는 유효성 검사는 특성을 구문 분석 하 `data-` 고이 논리를 JQuery 유효성 검사에 전달 하 여 서버 쪽 유효성 검사 논리를 클라이언트에 효과적으로 "복사" 합니다. 다음과 같이 태그 도우미를 사용하여 클라이언트에서 유효성 검사 오류를 표시할 수 있습니다.
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml?name=snippet_ReleaseDate&highlight=3-4)]
 
@@ -265,7 +267,7 @@ Jquery가 없는 [유효성 검사](https://github.com/aspnet/jquery-validation-
 </div>
 ```
 
-HTML의 `data-` 특성 출력은 `Movie.ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jquery를 사용할 수 없는 유효성 검사는이 값을 jquery validation [required ()](https://jqueryvalidation.org/required-method/) 메서드에 전달 하 여 해당 메시지를 해당 ** \<범위>** 요소에 표시 합니다.
+HTML의 `data-` 특성 출력은 `Movie.ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery를 사용할 수 없는 유효성 검사는이 값을 jQuery Validation [required ()](https://jqueryvalidation.org/required-method/) 메서드에 전달 하 여 해당 메시지를 해당 요소에 표시 **\<span>** 합니다.
 
 데이터 형식 유효성 검사는 `[DataType]` 특성에 의해 재정의되지 않은 한, 속성의 .NET 형식을 기반으로 합니다. 브라우저는 고유한 기본 오류 메시지를 가지고 있지만 jQuery유효성 검사의 비간섭 유효성 검사 패키지는 해당 메시지를 재정의할 수 있습니다. `[DataType]` 특성 및 `[EmailAddress]`와 같은 서브클래스를 사용하여 오류 메시지를 지정할 수 있습니다.
 
@@ -319,7 +321,7 @@ $.get({
 
 ## <a name="custom-client-side-validation"></a>사용자 지정 클라이언트 쪽 유효성 검사
 
-사용자 지정 클라이언트 쪽 유효성 검사는 사용자 지정 `data-` JQuery 유효성 검사 어댑터에서 작동 하는 HTML 특성을 생성 하 여 수행 됩니다. 다음 샘플 어댑터 코드는 이 문서에서 이전에 소개한 `[ClassicMovie]` 및 `[ClassicMovieWithClientValidator]` 특성용으로 작성되었습니다.
+사용자 지정 클라이언트 쪽 유효성 검사는 `data-` 사용자 지정 JQuery 유효성 검사 어댑터에서 작동 하는 HTML 특성을 생성 하 여 수행 됩니다. 다음 샘플 어댑터 코드는 이 문서에서 이전에 소개한 `[ClassicMovie]` 및 `[ClassicMovieWithClientValidator]` 특성용으로 작성되었습니다.
 
 [!code-javascript[](validation/samples/3.x/ValidationSample/wwwroot/js/classicMovieValidator.js)]
 
@@ -351,7 +353,7 @@ $.get({
 
 이 HTML `data-` 특성 렌더링 방법은 샘플 앱의 `ClassicMovie` 특성에 사용됩니다. 이 방법을 사용하여 클라이언트 유효성 검사를 추가하려면:
 
-1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생합니다. 이 예제와 같이 렌더링된 출력에 `data-` 특성을 추가하는 `AddValidation` 메서드를 생성합니다.
+1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [Attributeadapterbase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생 시킵니다. 이 예제와 같이 렌더링된 출력에 `data-` 특성을 추가하는 `AddValidation` 메서드를 생성합니다.
 
    [!code-csharp[](validation/samples/3.x/ValidationSample/Validation/ClassicMovieAttributeAdapter.cs?name=snippet_Class)]
 
@@ -373,7 +375,7 @@ $.get({
 
 ## <a name="disable-client-side-validation"></a>클라이언트 쪽 유효성 검사를 사용하지 않도록 설정
 
-다음 코드에서는 페이지에서 Razor 클라이언트 유효성 검사를 사용 하지 않도록 설정 합니다.
+다음 코드에서는 페이지에서 클라이언트 유효성 검사를 사용 하지 않도록 설정 합니다 Razor .
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -382,7 +384,7 @@ $.get({
 * 모든 *.cshtml* 파일의 `_ValidationScriptsPartial`에 대한 참조를 주석으로 처리합니다.
 * *Pages\Shared\_ValidationScriptsPartial* 파일의 콘텐츠를 제거합니다.
 
-위의 방법으로는 ASP.NET Core Identity Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 수행할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>를 참조하세요.
+위의 방법으로는 ASP.NET Core 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 수행할 수 없습니다 Identity Razor . 자세한 내용은 <xref:security/authentication/scaffold-identity>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -393,7 +395,7 @@ $.get({
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사 하는 방법을 설명 합니다.
+이 문서에서는 ASP.NET Core MVC 또는 Pages 앱에서 사용자 입력의 유효성을 검사 하는 방법을 설명 합니다 Razor .
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 
@@ -401,7 +403,7 @@ $.get({
 
 모델 상태는 모델 바인딩 및 모델 유효성 검사 두 하위 시스템에서 발생하는 오류를 나타냅니다. [모델 바인딩](model-binding.md)에서 발생하는 오류는 일반적으로 데이터 변환 오류입니다(예를 들어 정수를 입력해야 하는 필드에 "x"를 입력하는 오류). 모델 유효성 검사는 모델 바인딩 후에 실행되며 데이터가 비즈니스 규칙을 준수하지 않는 경우(예를 들어 1에서 5 사이의등급을 입력해야 하는 필드에 0을 입력) 오류를 보고합니다.
 
-모델 바인딩 및 유효성 검사는 모두 컨트롤러 작업 또는 Razor 페이지 처리기 메서드를 실행 하기 전에 수행 됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
+모델 바인딩 및 유효성 검사는 모두 컨트롤러 작업 또는 페이지 처리기 메서드를 실행 하기 전에 수행 Razor 됩니다. 웹앱의 경우 `ModelState.IsValid`를 검사하고 적절히 반응하는 기능은 앱에서 실행합니다. 일반적으로 웹앱은 페이지를 오류 메시지와 함께 다시 표시합니다.
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -440,13 +442,13 @@ $.get({
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 다음은 그 예입니다. 
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 다음은 그 예입니다. 
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -466,7 +468,7 @@ $.get({
 
 그러나 Null을 허용하지 않는 속성에 대한 모델 바인딩이 실패하여 `The value '' is invalid`와 같은 오류 메시지가 표시될 수 있습니다. Null을 허용하지 않는 형식의 서버 쪽 유효성 검사에 대한 사용자 지정 오류 메시지를 지정하려는 경우 다음과 같은 방법이 있습니다.
 
-* 필드를 Null 허용으로 만듭니다(예: `decimal` 대신에 `decimal?`). [Null을 허용하는 \<T>](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 Nul을 허용 형식처럼 처리됩니다.
+* 필드를 Null 허용으로 만듭니다(예: `decimal` 대신에 `decimal?`). [Nullable \<T> ](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 nullable 형식 처럼 처리 됩니다.
 * 다음 예제에서와 같이 모델 바인딩에 의해 사용할 기본 오류 메시지를 지정합니다.
 
   [!code-csharp[](validation/samples/2.x/ValidationSample/Startup.cs?name=snippet_MaxModelValidationErrors&highlight=4-5)]
@@ -640,7 +642,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-HTML의 `data-` 특성 출력은 `ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery 비간섭 유효성 검사는 jQuery 유효성 검사 [required()](https://jqueryvalidation.org/required-method/) 메서드에 이 값을 전달합니다. 그러면 **\<span>** 요소와 함께 해당 메시지를 표시합니다.
+HTML의 `data-` 특성 출력은 `ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery를 사용할 수 없는 유효성 검사는이 값을 jQuery Validate [required ()](https://jqueryvalidation.org/required-method/) 메서드에 전달 하 여 해당 메시지를 해당 요소에 표시 **\<span>** 합니다.
 
 데이터 형식 유효성 검사는 `[DataType]` 특성에 의해 재정의되지 않은 한, 속성의 .NET 형식을 기반으로 합니다. 브라우저는 고유한 기본 오류 메시지를 가지고 있지만 jQuery유효성 검사의 비간섭 유효성 검사 패키지는 해당 메시지를 재정의할 수 있습니다. `[DataType]` 특성 및 `[EmailAddress]`와 같은 서브클래스를 사용하여 오류 메시지를 지정할 수 있습니다.
 
@@ -722,7 +724,7 @@ $.get({
 
 이 HTML `data-` 특성 렌더링 방법은 샘플 앱의 `ClassicMovie` 특성에 사용됩니다. 이 방법을 사용하여 클라이언트 유효성 검사를 추가하려면:
 
-1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생합니다. 이 예제와 같이 렌더링된 출력에 `data-` 특성을 추가하는 `AddValidation` 메서드를 생성합니다.
+1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [Attributeadapterbase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생 시킵니다. 이 예제와 같이 렌더링된 출력에 `data-` 특성을 추가하는 `AddValidation` 메서드를 생성합니다.
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttributeAdapter.cs?name=snippet_ClassicMovieAttributeAdapter)]
 
@@ -754,7 +756,7 @@ $.get({
 
 클라이언트 유효성 검사를 사용하지 않도록 설정하는 또 다른 방법은 사용자의 *.cshtml* 파일에서 `_ValidationScriptsPartial` 참조를 주석으로 처리하는 것입니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [System.ComponentModel.DataAnnotations 네임스페이스](xref:System.ComponentModel.DataAnnotations)
 * [모델 바인딩](model-binding.md)

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: db6f8e867fc83a211170aa59f5bad604d9c2730d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776118"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406396"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
@@ -135,7 +137,7 @@ public ActionResult<string> GetBigString()
 * **워크스테이션 GC**: 데스크톱에 최적화 되어 있습니다.
 * **서버 GC**. ASP.NET Core 앱에 대 한 기본 GC입니다. 서버에 최적화 되어 있습니다.
 
-Json 모드는 프로젝트 파일이 나 게시 된 앱의 *runtimeconfig.template.json* 파일에서 명시적으로 설정할 수 있습니다. 다음 태그는 프로젝트 파일 `ServerGarbageCollection` 의 설정을 보여 줍니다.
+GC 모드는 프로젝트 파일이 나 게시 된 앱의 파일에 있는 *runtimeconfig.js* 에서 명시적으로 설정할 수 있습니다. 다음 태그는 `ServerGarbageCollection` 프로젝트 파일의 설정을 보여 줍니다.
 
 ```xml
 <PropertyGroup>
@@ -143,7 +145,7 @@ Json 모드는 프로젝트 파일이 나 게시 된 앱의 *runtimeconfig.templ
 </PropertyGroup>
 ```
 
-프로젝트 `ServerGarbageCollection` 파일에서 변경 하려면 앱을 다시 빌드해야 합니다.
+`ServerGarbageCollection`프로젝트 파일에서 변경 하려면 앱을 다시 빌드해야 합니다.
 
 **참고:** 단일 코어가 있는 컴퓨터에서는 서버 가비지 수집을 사용할 수 **없습니다** . 자세한 내용은 <xref:System.Runtime.GCSettings.IsServerGC>를 참조하세요.
 
@@ -186,23 +188,23 @@ public ActionResult<string> GetStaticString()
 위의 코드는
 
 * 는 일반적인 메모리 누수의 한 예입니다.
-* 를 자주 호출 하면 `OutOfMemory` 예외가 발생 하 여 프로세스가 중단 될 때까지 응용 프로그램 메모리가 늘어납니다.
+* 를 자주 호출 하면 예외가 발생 하 여 프로세스가 중단 될 때까지 응용 프로그램 메모리가 늘어납니다 `OutOfMemory` .
 
 ![이전 차트](memory/_static/eternal.png)
 
 이전 이미지에서 다음을 수행 합니다.
 
-* 끝점의 `/api/staticstring` 부하 테스트를 수행 하면 메모리가 선형적으로 증가 합니다.
+* 끝점의 부하 테스트 `/api/staticstring` 를 수행 하면 메모리가 선형적으로 증가 합니다.
 * GC는 2 세대 컬렉션을 호출 하 여 메모리 압력이 증가 함에 따라 메모리를 해제 하려고 시도 합니다.
 * GC에서 누수 된 메모리를 해제할 수 없습니다. 할당 된 작업과 작업 집합이 시간에 의해 증가 합니다.
 
-캐싱과 같은 일부 시나리오에서는 메모리가 중이 강제로 해제 될 때까지 개체 참조를 유지 해야 합니다. 이 <xref:System.WeakReference> 유형의 캐싱 코드에 클래스를 사용할 수 있습니다. 개체 `WeakReference` 는 memory pressures에서 수집 됩니다. 의 <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> 기본 구현에서는를 `WeakReference`사용 합니다.
+캐싱과 같은 일부 시나리오에서는 메모리가 중이 강제로 해제 될 때까지 개체 참조를 유지 해야 합니다. <xref:System.WeakReference>이 유형의 캐싱 코드에 클래스를 사용할 수 있습니다. `WeakReference`개체는 memory pressures에서 수집 됩니다. 의 기본 구현에서는를 <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> 사용 `WeakReference` 합니다.
 
 ### <a name="native-memory"></a>기본 메모리
 
 일부 .NET Core 개체는 네이티브 메모리를 사용 합니다. Native memory는 GC에서 수집할 수 **없습니다** . 네이티브 메모리를 사용 하는 .NET 개체는 네이티브 코드를 사용 하 여 해제 해야 합니다.
 
-.NET에서는 개발자 <xref:System.IDisposable> 가 네이티브 메모리를 릴리스할 수 있는 인터페이스를 제공 합니다. <xref:System.IDisposable.Dispose*> 가 호출 되지 않더라도 올바르게 구현 된 클래스는 [종료 자가](/dotnet/csharp/programming-guide/classes-and-structs/destructors) 실행 될 때를 호출 `Dispose` 합니다.
+.NET에서는 <xref:System.IDisposable> 개발자가 네이티브 메모리를 릴리스할 수 있는 인터페이스를 제공 합니다. <xref:System.IDisposable.Dispose*>가 호출 되지 않더라도 올바르게 구현 `Dispose` 된 클래스는 [종료 자가](/dotnet/csharp/programming-guide/classes-and-structs/destructors) 실행 될 때를 호출 합니다.
 
 다음 코드를 살펴보세요.
 
@@ -217,7 +219,7 @@ public void GetFileProvider()
 
 실제 [Fileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) 는 관리 되는 클래스 이므로 인스턴스가 요청 끝에서 수집 됩니다.
 
-다음 이미지는 API를 `fileprovider` 계속 호출 하는 동안 메모리 프로필을 보여 줍니다.
+다음 이미지는 API를 계속 호출 하는 동안 메모리 프로필을 보여 줍니다 `fileprovider` .
 
 ![이전 차트](memory/_static/fileprovider.png)
 
@@ -226,7 +228,7 @@ public void GetFileProvider()
 사용자 코드에서 다음 중 하나를 사용 하 여 동일한 누수를 발생 시킬 수 있습니다.
 
 * 클래스를 올바르게 해제 하지 않습니다.
-* 삭제 해야 하는 `Dispose`종속 개체의 메서드를 호출 하지 않습니다.
+* `Dispose`삭제 해야 하는 종속 개체의 메서드를 호출 하지 않습니다.
 
 ### <a name="large-objects-heap"></a>Large objects 힙
 
@@ -248,7 +250,7 @@ GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.Compa
 GC.Collect();
 ```
 
-LOH <xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode> 를 압축 하는 방법에 대 한 자세한 내용은을 참조 하세요.
+<xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode>LOH를 압축 하는 방법에 대 한 자세한 내용은을 참조 하세요.
 
 .NET Core 3.0 이상 버전을 사용 하는 컨테이너에서는 LOH가 자동으로 압축 됩니다.
 
@@ -262,15 +264,15 @@ public int GetLOH1(int size)
 }
 ```
 
-다음 차트는 최대 부하 상태에서 `/api/loh/84975` 끝점을 호출 하는 메모리 프로필을 보여 줍니다.
+다음 차트는 `/api/loh/84975` 최대 부하 상태에서 끝점을 호출 하는 메모리 프로필을 보여 줍니다.
 
 ![이전 차트](memory/_static/loh1.png)
 
-다음 차트에서는 `/api/loh/84976` 끝점을 호출 하는 메모리 프로필을 보여 주며 *바이트를 하나 더*할당 합니다.
+다음 차트에서는 끝점을 호출 하는 메모리 프로필 `/api/loh/84976` 을 보여 주며 *바이트를 하나 더*할당 합니다.
 
 ![이전 차트](memory/_static/loh2.png)
 
-참고: 구조 `byte[]` 에 오버 헤드 바이트가 있습니다. 84976 바이트가 85000 제한을 트리거하는 이유입니다.
+참고: `byte[]` 구조에 오버 헤드 바이트가 있습니다. 84976 바이트가 85000 제한을 트리거하는 이유입니다.
 
 위의 두 차트 비교:
 
@@ -294,16 +296,16 @@ public int GetLOH1(int size)
 
 ### <a name="httpclient"></a>HttpClient
 
-를 잘못 <xref:System.Net.Http.HttpClient> 사용 하면 리소스 누수가 발생할 수 있습니다. 데이터베이스 연결, 소켓, 파일 핸들 등의 시스템 리소스:
+를 잘못 사용 <xref:System.Net.Http.HttpClient> 하면 리소스 누수가 발생할 수 있습니다. 데이터베이스 연결, 소켓, 파일 핸들 등의 시스템 리소스:
 
 * 메모리 보다 부족 합니다.
 * 는 메모리 보다 누수 될 때 더 문제가 됩니다.
 
-숙련 된 .NET 개발자는을 <xref:System.IDisposable.Dispose*> 구현 <xref:System.IDisposable>하는 개체에 대해를 호출 해야 합니다. 일반적으로를 구현 `IDisposable` 하는 개체를 삭제 하지 않으면 메모리 누수가 발생 하거나 시스템 리소스가 누수 됩니다.
+숙련 된 .NET 개발자는을 <xref:System.IDisposable.Dispose*> 구현 하는 개체에 대해를 호출 해야 <xref:System.IDisposable> 합니다. 일반적으로를 구현 하는 개체를 삭제 하지 않으면 `IDisposable` 메모리 누수가 발생 하거나 시스템 리소스가 누수 됩니다.
 
-`HttpClient`는 `IDisposable`를 구현 하지만 모든 호출에서 **삭제 하면 안 됩니다.** 대신를 `HttpClient` 다시 사용 해야 합니다.
+`HttpClient``IDisposable`는를 구현 하지만 모든 호출에서 삭제 하면 **안 됩니다** . 대신를 `HttpClient` 다시 사용 해야 합니다.
 
-다음 끝점은 모든 요청에 새 `HttpClient` 인스턴스를 만들고 삭제 합니다.
+다음 끝점은 모든 요청에 새 인스턴스를 만들고 삭제 합니다 `HttpClient` .
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -331,9 +333,9 @@ System.Net.Http.HttpRequestException: Only one usage of each socket address
     CancellationToken cancellationToken)
 ```
 
-`HttpClient` 인스턴스가 삭제 된 경우에도 운영 체제에서 실제 네트워크 연결을 해제 하는 데 약간의 시간이 걸립니다. 계속 해 서 새 연결을 만들면 _포트 고갈_ 가 발생 합니다. 각 클라이언트 연결에는 자체 클라이언트 포트가 필요 합니다.
+`HttpClient`인스턴스가 삭제 된 경우에도 운영 체제에서 실제 네트워크 연결을 해제 하는 데 약간의 시간이 걸립니다. 계속 해 서 새 연결을 만들면 _포트 고갈_ 가 발생 합니다. 각 클라이언트 연결에는 자체 클라이언트 포트가 필요 합니다.
 
-포트 소모를 방지 하는 한 가지 방법은 동일한 `HttpClient` 인스턴스를 다시 사용 하는 것입니다.
+포트 소모를 방지 하는 한 가지 방법은 동일한 인스턴스를 다시 사용 하는 것입니다 `HttpClient` .
 
 ```csharp
 private static readonly HttpClient _httpClient = new HttpClient();
@@ -346,16 +348,16 @@ public async Task<int> GetHttpClient2(string url)
 }
 ```
 
-앱 `HttpClient` 이 중지 되 면 인스턴스가 해제 됩니다. 이 예제에서는 각 사용 후 삭제 가능한 모든 리소스를 삭제 해야 함을 보여 줍니다.
+`HttpClient`앱이 중지 되 면 인스턴스가 해제 됩니다. 이 예제에서는 각 사용 후 삭제 가능한 모든 리소스를 삭제 해야 함을 보여 줍니다.
 
-`HttpClient` 인스턴스의 수명을 처리 하는 더 좋은 방법은 다음을 참조 하십시오.
+인스턴스의 수명을 처리 하는 더 좋은 방법은 다음을 참조 하십시오 `HttpClient` .
 
 * [HttpClient 및 수명 관리](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
 * [HTTPClient 팩터리 블로그](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
 ### <a name="object-pooling"></a>개체 풀링
 
-이전 예제에서는 인스턴스를 `HttpClient` 정적으로 설정 하 고 모든 요청에서 다시 사용할 수 있는 방법을 보여 주었습니다. 다시 사용 하면 리소스가 부족 하지 않습니다.
+이전 예제에서는 `HttpClient` 인스턴스를 정적으로 설정 하 고 모든 요청에서 다시 사용할 수 있는 방법을 보여 주었습니다. 다시 사용 하면 리소스가 부족 하지 않습니다.
 
 개체 풀링:
 
@@ -366,7 +368,7 @@ public async Task<int> GetHttpClient2(string url)
 
 NuGet 패키지의 경우 이러한 풀을 관리 하는 데 도움이 되는 클래스가 포함 되어 [있습니다.](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/)
 
-다음 API 끝점은 각 요청 `byte` 에서 임의 숫자로 채워진 버퍼를 인스턴스화합니다.
+다음 API 끝점은 `byte` 각 요청에서 임의 숫자로 채워진 버퍼를 인스턴스화합니다.
 
 ```csharp
         [HttpGet("array/{size}")]
@@ -386,7 +388,7 @@ NuGet 패키지의 경우 이러한 풀을 관리 하는 데 도움이 되는 �
 
 위의 차트에서 0 세대 수집은 초당 한 번 수행 됩니다.
 
-위의 코드는 [ArrayPool\<T>](xref:System.Buffers.ArrayPool`1)를 사용 하 `byte` 여 버퍼를 풀링 하 여 최적화할 수 있습니다. 정적 인스턴스는 요청에서 재사용 됩니다.
+이전 코드는 `byte` [ArrayPool \<T> ](xref:System.Buffers.ArrayPool`1)를 사용 하 여 버퍼를 풀링 하 여 최적화할 수 있습니다. 정적 인스턴스는 요청에서 재사용 됩니다.
 
 이 방법의 다른 기능은 풀링된 개체가 API에서 반환 된다는 것입니다. 즉, 다음을 의미 합니다.
 
@@ -398,7 +400,7 @@ NuGet 패키지의 경우 이러한 풀을 관리 하는 데 도움이 되는 �
 * 삭제 가능한 개체에 풀링된 배열을 캡슐화 합니다.
 * 풀링된 개체를 [HttpContext](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)로 등록 합니다.
 
-`RegisterForDispose`는 HTTP 요청이 완료 된 `Dispose`경우에만 해제 되도록 대상 개체에 대 한 호출을 처리 합니다.
+`RegisterForDispose`는 `Dispose` HTTP 요청이 완료 된 경우에만 해제 되도록 대상 개체에 대 한 호출을 처리 합니다.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();

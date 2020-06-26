@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652987"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404745"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core에 대 한 사용자 지정 저장소 공급자Identity
 
@@ -221,7 +223,7 @@ public class UserStore : IUserStore<IdentityUser>,
 1. 역할을 사용 하는 경우 `RoleManager` 클래스를 사용 하도록를 업데이트 합니다 `RoleStore` .
 1. 응용 프로그램의 구성에 대 한 연결 문자열 및 자격 증명을 업데이트 합니다.
 
-예제:
+예:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

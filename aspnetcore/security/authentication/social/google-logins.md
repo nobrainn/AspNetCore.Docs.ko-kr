@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: 8b1eee7ff088fb1229ec1d2dd538ea4f01e094c3
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: ba0b9a0da30f761f12f6015dace5ba8046535761
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003103"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405421"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core의 Google 외부 로그인 설정
 
@@ -39,7 +41,7 @@ ms.locfileid: "83003103"
 [암호 관리자](xref:security/app-secrets)를 사용 하 여 GOOGLE 클라이언트 ID 및 비밀 값과 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
 1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
-1. 비밀 키 `Authentication:Google:ClientId` 및 `Authentication:Google:ClientSecret`를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다.
+1. 비밀 키 및를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다 `Authentication:Google:ClientId` `Authentication:Google:ClientSecret` .
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
@@ -52,7 +54,7 @@ Api [콘솔](https://console.developers.google.com/apis/dashboard)에서 api 자
 
 ## <a name="configure-google-authentication"></a>Google 인증 구성
 
-다음에 Google 서비스를 `Startup.ConfigureServices`추가 합니다.
+다음에 Google 서비스를 추가 합니다 `Startup.ConfigureServices` .
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupGoogle3x.cs?highlight=11-19)]
 
@@ -68,20 +70,20 @@ Api [콘솔](https://console.developers.google.com/apis/dashboard)에서 api 자
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-Google 인증 <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> 에서 지 원하는 구성 옵션에 대 한 자세한 내용은 API 참조를 참조 하세요. 사용자에 대 한 다른 정보를 요청 하는 데 사용할 수 있습니다.
+<xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>Google 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 API 참조를 참조 하세요. 사용자에 대 한 다른 정보를 요청 하는 데 사용할 수 있습니다.
 
 ## <a name="change-the-default-callback-uri"></a>기본 콜백 URI 변경
 
-URI 세그먼트 `/signin-google` 는 Google 인증 공급자의 기본 콜백으로 설정 됩니다. [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Google 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
+URI 세그먼트는 `/signin-google` Google 인증 공급자의 기본 콜백으로 설정 됩니다. [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Google 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
 
 ## <a name="troubleshooting"></a>문제 해결
 
 * 로그인이 작동 하지 않고 오류가 발생 하지 않는 경우 개발 모드로 전환 하 여 문제를 더 쉽게 디버깅할 수 있도록 합니다.
-* 에서 Identity `ConfigureServices`를 호출 `services.AddIdentity` 하 여를 구성 하지 않은 경우 ArgumentException에서 결과를 인증 하려고 하면 *' SignInScheme ' 옵션을 제공 해야*합니다. 이 자습서에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
+* Identity에서를 호출 하 여를 구성 하지 않은 경우 `services.AddIdentity` `ConfigureServices` ArgumentException에서 결과를 인증 하려고 하면 *' SignInScheme ' 옵션을 제공 해야*합니다. 이 자습서에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
 * 초기 마이그레이션을 적용 하 여 사이트 데이터베이스를 만들지 않은 경우 *요청 오류를 처리 하는 동안 데이터베이스 작업이 실패 했습니다* . **마이그레이션 적용** 을 선택 하 여 데이터베이스를 만들고 페이지를 새로 고쳐 오류를 계속 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 * 이 문서에서는 Google을 사용 하 여 인증할 수 있는 방법을 살펴보았습니다. [위의 페이지](xref:security/authentication/social/index)에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다.
-* Azure에 앱을 게시 한 후에는 Google `ClientSecret` API 콘솔에서를 다시 설정 합니다.
-* Azure Portal에서 `Authentication:Google:ClientId` 및 `Authentication:Google:ClientSecret` 을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.
+* Azure에 앱을 게시 한 후에는 `ClientSecret` GOOGLE API 콘솔에서를 다시 설정 합니다.
+* `Authentication:Google:ClientId` `Authentication:Google:ClientSecret` Azure Portal에서 및을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.

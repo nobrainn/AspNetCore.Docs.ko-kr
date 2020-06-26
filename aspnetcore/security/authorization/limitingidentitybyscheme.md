@@ -7,23 +7,25 @@ ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 69b6412f249355573faa785743b124a67ecb8b9e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777516"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406019"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>ASP.NET Core에서 특정 체계를 사용 하 여 권한 부여
 
 SPAs (단일 페이지 응용 프로그램)와 같은 일부 시나리오에서는 여러 인증 방법을 사용 하는 것이 일반적입니다. 예를 들어 앱은 쿠키 기반 인증을 사용 하 여 JavaScript 요청에 대해 로그인 및 JWT 전달자 인증을 사용할 수 있습니다. 경우에 따라 앱에 인증 처리기의 인스턴스가 여러 개 있을 수 있습니다. 예를 들어, 하나는 기본 id를 포함 하 고 다른 하나는 MFA (multi-factor authentication)가 트리거될 때 생성 되는 두 개의 쿠키 처리기입니다. 사용자가 추가 보안이 필요한 작업을 요청 하 여 MFA를 트리거할 수 있습니다. 사용자가 MFA를 요구 하는 리소스를 요청할 때 MFA를 적용 하는 방법에 대 한 자세한 내용은 MFA를 사용 하 여 GitHub 문제 [보호 섹션](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)을 참조 하세요.
 
-인증 체계는 인증 중에 인증 서비스가 구성 될 때 이름이 지정 됩니다. 예를 들어:
+인증 체계는 인증 중에 인증 서비스가 구성 될 때 이름이 지정 됩니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -44,11 +46,11 @@ public void ConfigureServices(IServiceCollection services)
 위의 코드에서 두 개의 인증 처리기가 추가 되었습니다. 하나는 쿠키이 고 하나는 전달자 용입니다.
 
 >[!NOTE]
->기본 스키마를 지정 하면 `HttpContext.User` 속성이 해당 id로 설정 됩니다. 해당 동작이 필요 하지 않은 경우에는 매개 변수가 없는 형식을 호출 하 `AddAuthentication`여 사용 하지 않도록 설정 합니다.
+>기본 스키마를 지정 하면 `HttpContext.User` 속성이 해당 id로 설정 됩니다. 해당 동작이 필요 하지 않은 경우에는 매개 변수가 없는 형식을 호출 하 여 사용 하지 않도록 설정 `AddAuthentication` 합니다.
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>권한 부여 특성이 있는 체계 선택
 
-권한 부여 시점에서 앱은 사용할 처리기를 나타냅니다. 쉼표로 구분 된 인증 체계 목록을에 `[Authorize]`전달 하 여 앱에 권한을 부여 하는 처리기를 선택 합니다. 특성 `[Authorize]` 은 기본값이 구성 되어 있는지 여부에 관계 없이 사용할 인증 체계 또는 체계를 지정 합니다. 예를 들어:
+권한 부여 시점에서 앱은 사용할 처리기를 나타냅니다. 쉼표로 구분 된 인증 체계 목록을에 전달 하 여 앱에 권한을 부여 하는 처리기를 선택 `[Authorize]` 합니다. `[Authorize]`특성은 기본값이 구성 되어 있는지 여부에 관계 없이 사용할 인증 체계 또는 체계를 지정 합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -73,7 +75,7 @@ public class MixedController : Controller
 
 ## <a name="selecting-the-scheme-with-policies"></a>정책을 사용 하 여 체계 선택
 
-[정책](xref:security/authorization/policies)에서 원하는 스키마를 지정 하려는 경우 정책을 추가할 때 컬렉션을 `AuthenticationSchemes` 설정할 수 있습니다.
+[정책](xref:security/authorization/policies)에서 원하는 스키마를 지정 하려는 경우 `AuthenticationSchemes` 정책을 추가할 때 컬렉션을 설정할 수 있습니다.
 
 ```csharp
 services.AddAuthorization(options =>
@@ -87,7 +89,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-위의 예제에서 "Over18" 정책은 "전달자" 처리기에서 만든 id에 대해서만 실행 됩니다. 특성의 `[Authorize]` `Policy` 속성을 설정 하 여 정책을 사용 합니다.
+위의 예제에서 "Over18" 정책은 "전달자" 처리기에서 만든 id에 대해서만 실행 됩니다. 특성의 속성을 설정 하 여 정책을 사용 합니다 `[Authorize]` `Policy` .
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -100,7 +102,7 @@ public class RegistrationController : Controller
 
 일부 앱은 여러 유형의 인증을 지원 해야 할 수 있습니다. 예를 들어 앱이 사용자 데이터베이스에서 Azure Active Directory 사용자를 인증할 수 있습니다. 또 다른 예로 Active Directory Federation Services 및 Azure Active Directory B2C에서 사용자를 인증 하는 앱이 있습니다. 이 경우 앱은 여러 발급자의 JWT 전달자 토큰을 수락 해야 합니다.
 
-수락 하려는 모든 인증 스키마를 추가 합니다. 예를 들어의 `Startup.ConfigureServices` 다음 코드는 발급자가 서로 다른 두 개의 JWT 전달자 인증 체계를 추가 합니다.
+수락 하려는 모든 인증 스키마를 추가 합니다. 예를 들어의 다음 코드는 `Startup.ConfigureServices` 발급자가 서로 다른 두 개의 JWT 전달자 인증 체계를 추가 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -122,9 +124,9 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> 기본 인증 체계 `JwtBearerDefaults.AuthenticationScheme`에는 하나의 JWT 전달자 인증만 등록 됩니다. 추가 인증은 고유한 인증 체계를 사용 하 여 등록 해야 합니다.
+> 기본 인증 체계에는 하나의 JWT 전달자 인증만 등록 됩니다 `JwtBearerDefaults.AuthenticationScheme` . 추가 인증은 고유한 인증 체계를 사용 하 여 등록 해야 합니다.
 
-다음 단계는 두 인증 체계를 모두 허용 하도록 기본 권한 부여 정책을 업데이트 하는 것입니다. 예를 들어:
+다음 단계는 두 인증 체계를 모두 허용 하도록 기본 권한 부여 정책을 업데이트 하는 것입니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -143,6 +145,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-기본 권한 부여 정책이 재정의 되 면 컨트롤러에서 `[Authorize]` 특성을 사용할 수 있습니다. 그러면 컨트롤러는 첫 번째 또는 두 번째 발급자가 발급 한 JWT를 사용 하 여 요청을 수락 합니다.
+기본 권한 부여 정책이 재정의 되 면 `[Authorize]` 컨트롤러에서 특성을 사용할 수 있습니다. 그러면 컨트롤러는 첫 번째 또는 두 번째 발급자가 발급 한 JWT를 사용 하 여 요청을 수락 합니다.
 
 ::: moniker-end

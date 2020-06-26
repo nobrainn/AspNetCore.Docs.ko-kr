@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 84f54b37dfff3112ea5ca84f931103624cfde90a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1bde6d90a52ab8873777b5320540251170eaade6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776840"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404888"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>ASP.NET Core의 데이터 보호 컴퓨터 전체 정책 지원
 
@@ -37,39 +39,39 @@ Windows에서 실행 하는 경우 데이터 보호 시스템은 ASP.NET Core �
 
 지원 되는 값은 다음과 같습니다.
 
-| 값              | Type   | 설명 |
+| 값              | 형식   | 설명 |
 | ------------------ | :----: | ----------- |
-| EncryptionType     | string | 데이터 보호에 사용할 알고리즘을 지정 합니다. 이 값은 CNG CBC, CNG-GCM 또는 관리 되는 값 이어야 하며 아래에 자세히 설명 되어 있습니다. |
+| EncryptionType     | 문자열 | 데이터 보호에 사용할 알고리즘을 지정 합니다. 이 값은 CNG CBC, CNG-GCM 또는 관리 되는 값 이어야 하며 아래에 자세히 설명 되어 있습니다. |
 | DefaultKeyLifetime | DWORD  | 새로 생성 된 키의 수명을 지정 합니다. 값은 일 단위로 지정 되며 >= 7 이어야 합니다. |
-| KeyEscrowSinks     | string | 키 에스크로에 사용 되는 형식을 지정 합니다. 값은 세미콜론으로 구분 된 주요 에스크로 목록으로, 목록의 각 요소는 [IKeyEscrowSink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink)를 구현 하는 형식의 어셈블리로 한정 된 이름입니다. |
+| KeyEscrowSinks     | 문자열 | 키 에스크로에 사용 되는 형식을 지정 합니다. 값은 세미콜론으로 구분 된 주요 에스크로 목록으로, 목록의 각 요소는 [IKeyEscrowSink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink)를 구현 하는 형식의 어셈블리로 한정 된 이름입니다. |
 
 ## <a name="encryption-types"></a>암호화 유형
 
 EncryptionType이 CNG 인 경우 시스템은 Windows CNG에서 제공 하는 서비스를 사용 하 여 기밀성 및 HMAC에 대해 CBC의 대칭 블록 암호를 사용 하도록 구성 됩니다 (자세한 내용은 [사용자 지정 WINDOWS CNG 알고리즘 지정](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) 참조). CngCbcAuthenticatedEncryptionSettings 형식의 속성에 해당 하는 다음과 같은 추가 값이 지원 됩니다.
 
-| 값                       | Type   | 설명 |
+| 값                       | 형식   | 설명 |
 | --------------------------- | :----: | ----------- |
-| EncryptionAlgorithm         | string | CNG에서 인식 하는 대칭 블록 암호화 알고리즘의 이름입니다. 이 알고리즘은 CBC 모드에서 열립니다. |
-| EncryptionAlgorithmProvider | string | 알고리즘 이름 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
+| EncryptionAlgorithm         | 문자열 | CNG에서 인식 하는 대칭 블록 암호화 알고리즘의 이름입니다. 이 알고리즘은 CBC 모드에서 열립니다. |
+| EncryptionAlgorithmProvider | 문자열 | 알고리즘 이름 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
 | EncryptionAlgorithmKeySize  | DWORD  | 대칭 블록 암호화 알고리즘에 대해 파생할 키의 길이 (비트)입니다. |
-| HashAlgorithm               | string | CNG에서 인식 하는 해시 알고리즘의 이름입니다. 이 알고리즘은 HMAC 모드에서 열립니다. |
-| HashAlgorithmProvider       | string | HashAlgorithm 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
+| HashAlgorithm               | 문자열 | CNG에서 인식 하는 해시 알고리즘의 이름입니다. 이 알고리즘은 HMAC 모드에서 열립니다. |
+| HashAlgorithmProvider       | 문자열 | HashAlgorithm 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
 
 EncryptionType이 CNG 인 경우 시스템은 Windows CNG에서 제공 하는 서비스와의 기밀성 및 신뢰성을 위해 Galois/Counter 모드 대칭 블록 암호를 사용 하도록 구성 됩니다 (자세한 내용은 [사용자 지정 WINDOWS CNG 알고리즘 지정](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) 참조). CngGcmAuthenticatedEncryptionSettings 형식의 속성에 해당 하는 다음과 같은 추가 값이 지원 됩니다.
 
-| 값                       | Type   | 설명 |
+| 값                       | 형식   | 설명 |
 | --------------------------- | :----: | ----------- |
-| EncryptionAlgorithm         | string | CNG에서 인식 하는 대칭 블록 암호화 알고리즘의 이름입니다. 이 알고리즘은 Galois/카운터 모드에서 열립니다. |
-| EncryptionAlgorithmProvider | string | 알고리즘 이름 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
+| EncryptionAlgorithm         | 문자열 | CNG에서 인식 하는 대칭 블록 암호화 알고리즘의 이름입니다. 이 알고리즘은 Galois/카운터 모드에서 열립니다. |
+| EncryptionAlgorithmProvider | 문자열 | 알고리즘 이름 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
 | EncryptionAlgorithmKeySize  | DWORD  | 대칭 블록 암호화 알고리즘에 대해 파생할 키의 길이 (비트)입니다. |
 
 EncryptionType가 관리 되는 경우 시스템은 기밀성 및 KeyedHashAlgorithm에 대 한 관리 되는 System.security.cryptography.symmetricalgorithm를 사용 하도록 구성 됩니다 (자세한 내용은 [사용자 지정 관리 알고리즘 지정](xref:security/data-protection/configuration/overview#specifying-custom-managed-algorithms) 참조). ManagedAuthenticatedEncryptionSettings 형식의 속성에 해당 하는 다음과 같은 추가 값이 지원 됩니다.
 
-| 값                      | Type   | 설명 |
+| 값                      | 형식   | 설명 |
 | -------------------------- | :----: | ----------- |
-| EncryptionAlgorithmType    | string | System.security.cryptography.symmetricalgorithm을 구현 하는 형식의 정규화 된 어셈블리 이름입니다. |
+| EncryptionAlgorithmType    | 문자열 | System.security.cryptography.symmetricalgorithm을 구현 하는 형식의 정규화 된 어셈블리 이름입니다. |
 | EncryptionAlgorithmKeySize | DWORD  | 대칭 암호화 알고리즘에 대해 파생할 키의 길이 (비트)입니다. |
-| ValidationAlgorithmType    | string | KeyedHashAlgorithm을 구현 하는 형식의 정규화 된 어셈블리 이름입니다. |
+| ValidationAlgorithmType    | 문자열 | KeyedHashAlgorithm을 구현 하는 형식의 정규화 된 어셈블리 이름입니다. |
 
 EncryptionType에 null이 아닌 다른 값이 있거나 비어 있는 경우 데이터 보호 시스템은 시작할 때 예외를 throw 합니다.
 

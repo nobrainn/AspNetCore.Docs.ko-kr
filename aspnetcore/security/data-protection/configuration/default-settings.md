@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777451"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407098"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core에서 데이터 보호 키 관리 및 수명
 
@@ -44,7 +46,7 @@ ms.locfileid: "82777451"
 
 1. 이러한 조건에 일치 하는 항목이 없는 경우 키는 현재 프로세스 외부에서 유지 되지 않습니다. 프로세스가 종료 되 면 생성 된 모든 키가 손실 됩니다.
 
-개발자는 항상 모든 권한을 가지 며, 키가 저장 되는 방법과 위치를 재정의할 수 있습니다. 위의 처음 세 옵션은 ASP.NET ** \<machineKey>** 자동 생성 루틴이 과거에 작업 하는 방식과 유사한 대부분의 앱에 대해 좋은 기본값을 제공 해야 합니다. 최종, 대체 (fallback) 옵션은 개발자가 키 지 속성을 원할 경우 [구성을](xref:security/data-protection/configuration/overview) 사전에 지정 해야 하는 유일한 시나리오 이지만 이러한 대체는 드문 경우에만 발생 합니다.
+개발자는 항상 모든 권한을 가지 며, 키가 저장 되는 방법과 위치를 재정의할 수 있습니다. 위의 처음 세 옵션은 ASP.NET **\<machineKey>** 자동 생성 루틴이 과거에 작업 하는 방식과 유사한 대부분의 앱에 대해 좋은 기본값을 제공 해야 합니다. 최종, 대체 (fallback) 옵션은 개발자가 키 지 속성을 원할 경우 [구성을](xref:security/data-protection/configuration/overview) 사전에 지정 해야 하는 유일한 시나리오 이지만 이러한 대체는 드문 경우에만 발생 합니다.
 
 Docker 컨테이너에서 호스트 하는 경우 키는 Docker 볼륨 (컨테이너의 수명 이상으로 지속 되는 공유 볼륨 또는 호스트에서 탑재 된 볼륨) 또는 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) 또는 [Redis](https://redis.io/)와 같은 외부 공급자에 있는 폴더에 유지 되어야 합니다. 외부 공급자는 앱이 공유 네트워크 볼륨에 액세스할 수 없는 경우 웹 팜 시나리오에도 유용 합니다 (자세한 내용은 [Persistkeystofilesystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) 참조).
 

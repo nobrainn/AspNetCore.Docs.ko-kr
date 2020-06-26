@@ -1,30 +1,32 @@
 ---
-title: 지원 SignalR 되는 플랫폼 ASP.NET Core
+title: ASP.NET Core SignalR 지원 플랫폼
 author: bradygaster
-description: ASP.NET Core SignalR에 대해 지원 되는 플랫폼에 대해 알아봅니다.
+description: ASP.NET Core SignalR 지원 플랫폼에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 70a05dabb95aaf561aa78d5c8b24b430c51bd973
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d7dd946ae5cf83b76a83ba1faeed0bb3fc31cef
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772607"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405824"
 ---
 # <a name="aspnet-core-signalr-supported-platforms"></a>ASP.NET Core SignalR 지원 플랫폼
 
 ## <a name="server-system-requirements"></a>서버 시스템 요구 사항
 
-ASP.NET Core에 대 한 SignalR는 ASP.NET Core에서 지원 되는 모든 서버 플랫폼을 지원 합니다.
+SignalRASP.NET Core은 ASP.NET Core에서 지 원하는 모든 서버 플랫폼을 지원 합니다.
 
 ## <a name="javascript-client"></a>JavaScript 클라이언트
 
@@ -42,7 +44,7 @@ ASP.NET Core에 대 한 SignalR는 ASP.NET Core에서 지원 되는 모든 서�
 
 ## <a name="net-client"></a>.NET 클라이언트
 
-[.Net 클라이언트](xref:signalr/dotnet-client) 는 ASP.NET Core에서 지 원하는 모든 플랫폼에서 실행 됩니다. 예를 들어 xamarin 개발자는 xamarin.ios 11.14.0.4 이상을 사용 하 여 8.4.0.1 이상 및 iOS 앱을 사용 하 여 android 앱을 빌드하는 [데 사용할 SignalR 수 있습니다](https://github.com/aspnet/Announcements/issues/305) .
+[.Net 클라이언트](xref:signalr/dotnet-client) 는 ASP.NET Core에서 지 원하는 모든 플랫폼에서 실행 됩니다. 예를 들어 xamarin 개발자는 xamarin.ios 11.14.0.4 이상을 사용 하 여 8.4.0.1 이상 및 iOS 앱을 사용 하 여 Android 앱을 빌드하는 [데 사용할 SignalR 수 있습니다](https://github.com/aspnet/Announcements/issues/305) .
 
 서버에서 IIS를 실행 하는 경우 Websocket 전송에는 Windows Server 2012 이상에서 IIS 8.0 이상이 필요 합니다. 다른 전송은 모든 플랫폼에서 지원 됩니다.
 

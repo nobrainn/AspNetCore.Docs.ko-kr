@@ -8,25 +8,27 @@ ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 4e968659d23330c4b1403ab998dda9c9e6ebe080
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775780"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404953"
 ---
 # <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core SignalR 소개
 
-## <a name="what-is-signalr"></a>무엇 SignalR인가요?
+## <a name="what-is-signalr"></a>SignalR란?
 
 ASP.NET Core SignalR 는 응용 프로그램에 실시간 웹 기능 추가를 간소화 하는 오픈 소스 라이브러리입니다. 실시간 웹 기능을 사용 하면 서버측 코드에서 클라이언트에 콘텐츠를 즉시 푸시할 수 있습니다.
 
-적합 한 SignalR후보:
+적합 한 후보 SignalR :
 
 * 서버에서 자주 업데이트해야 하는 앱. 예를 들어 게임, 소셜 네트워크, 투표, 경매, 지도 및 GPS 앱이 있습니다.
 * 대시보드 및 모니터링 앱. 예를 들어 회사 대시보드, 즉석 판매 업데이트 또는 여행 경고가 있습니다.
@@ -35,7 +37,7 @@ ASP.NET Core SignalR 는 응용 프로그램에 실시간 웹 기능 추가를 �
 
 SignalR는 서버-클라이언트 [원격 프로시저 호출 (RPC)](https://wikipedia.org/wiki/Remote_procedure_call)을 만들기 위한 API를 제공 합니다. Rpc는 서버 쪽 .NET Core 코드에서 클라이언트에 대 한 JavaScript 함수를 호출 합니다.
 
-ASP.NET Core SignalR 에 대 한 몇 가지 기능은 다음과 같습니다.
+SignalRASP.NET Core에 대 한 몇 가지 기능은 다음과 같습니다.
 
 * 연결 관리를 자동으로 처리 합니다.
 * 모든 연결 된 클라이언트에 동시에 메시지를 보냅니다. 예를 들어 대화방입니다.
@@ -48,7 +50,7 @@ ASP.NET Core SignalR 에 대 한 몇 가지 기능은 다음과 같습니다.
 
 SignalR에서는 실시간 통신을 처리 하는 다음과 같은 기술을 지원 합니다 (정상적인 대체 순서).
 
-* [Websocket](https://tools.ietf.org/html/rfc7118)
+* [WebSockets](https://tools.ietf.org/html/rfc7118)
 * 서버에서 보낸 이벤트
 * 긴 폴링
 
@@ -64,7 +66,7 @@ SignalR*허브* 를 사용 하 여 클라이언트와 서버 간에 통신 합�
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [ASP.NET Core SignalR 에 대 한 시작](xref:tutorials/signalr)
+* [SignalRASP.NET Core에 대 한 시작](xref:tutorials/signalr)
 * [지원 되는 플랫폼](xref:signalr/supported-platforms)
 * [허브](xref:signalr/hubs)
 * [JavaScript 클라이언트](xref:signalr/javascript-client)
