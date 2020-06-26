@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 1967fb1942b4003d498800f6cf4c9dd280aca24e
-ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
+ms.openlocfilehash: 8eec361efbc3c7dca6c0bef65b6f6b40b3b46798
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83393860"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404615"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 메모리 내 캐시
 
@@ -116,7 +118,7 @@ ASP.NET Core는 여러 캐시를 지원 합니다. 가장 간단한 캐시는 [I
 
 `MemoryCache`인스턴스는 필요에 따라 크기 제한을 지정 하 고 적용할 수 있습니다. 캐시 크기 제한에는 항목의 크기를 측정 하는 메커니즘이 없기 때문에 정의 된 측정 단위가 없습니다. 캐시 크기 제한이 설정 된 경우 모든 항목의 크기를 지정 해야 합니다. ASP.NET Core 런타임은 메모리 압력에 따라 캐시 크기를 제한 하지 않습니다. 캐시 크기를 제한 하는 것은 개발자에 게 있습니다. 지정 된 크기는 개발자가 선택 하는 단위입니다.
 
-예를 들어:
+예를 들면 다음과 같습니다.
 
 * 웹 앱이 주로 문자열을 캐싱하는 경우 각 캐시 엔트리 크기는 문자열 길이가 될 수 있습니다.
 * 앱은 모든 항목의 크기를 1로 지정 하 고, 크기 제한은 항목 수를 지정 합니다.
@@ -292,7 +294,7 @@ ASP.NET Core는 여러 캐시를 지원 합니다. 가장 간단한 캐시는 �
 
 `MemoryCache`인스턴스는 필요에 따라 크기 제한을 지정 하 고 적용할 수 있습니다. 캐시 크기 제한에는 항목의 크기를 측정 하는 메커니즘이 없기 때문에 정의 된 측정 단위가 없습니다. 캐시 크기 제한이 설정 된 경우 모든 항목의 크기를 지정 해야 합니다. ASP.NET Core 런타임은 메모리 압력에 따라 캐시 크기를 제한 하지 않습니다. 캐시 크기를 제한 하는 것은 개발자에 게 있습니다. 지정 된 크기는 개발자가 선택 하는 단위입니다.
 
-예를 들어:
+예를 들면 다음과 같습니다.
 
 * 웹 앱이 주로 문자열을 캐싱하는 경우 각 캐시 엔트리 크기는 문자열 길이가 될 수 있습니다.
 * 앱은 모든 항목의 크기를 1로 지정 하 고, 크기 제한은 항목 수를 지정 합니다.

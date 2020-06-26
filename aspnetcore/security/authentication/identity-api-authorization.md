@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 6d9d8cf6ca9ca3afc570c2c68510125200b96c60
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 86f9b0a3efea5315092d1c6435a1b764fbec0a1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074470"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402990"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
@@ -73,7 +75,7 @@ dotnet new react -o <output_directory_name> -au Individual
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * `AddIdentityServerJwt`IdentityServer에서 생성 한 JWT 토큰의 유효성을 검사 하도록 앱을 구성 하는 추가 도우미 메서드를 사용 하 여 인증 합니다.
+  * IdentityServer에 의해 생성된 JWT 토큰의 유효성을 검사하도록 앱을 구성하는 추가 `AddIdentityServerJwt` 도우미 메서드를 사용한 인증:
 
     ```csharp
     services.AddAuthentication()
@@ -95,11 +97,11 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
 
-이 도우미 메서드는 지원 되는 구성을 사용 하도록 IdentityServer를 구성 합니다. IdentityServer는 앱 보안 문제를 처리 하기 위한 강력 하 고 확장 가능한 프레임 워크입니다. 이와 동시에는 가장 일반적인 시나리오에 대 한 불필요 한 복잡성을 노출 합니다. 따라서 규칙 집합 및 구성 옵션이 적절 한 시작 지점으로 간주 되는 사용자에 게 제공 됩니다. 인증을 변경 해야 하는 경우에는 요구 사항에 맞게 인증을 사용자 지정할 수 있는 IdentityServer의 모든 기능을 계속 사용할 수 있습니다.
+이 도우미 메서드는 지원 되는 구성을 사용 하도록 IdentityServer를 구성 합니다. IdentityServer는 앱 보안 문제를 처리하는 강력하고 확장성 있는 프레임워크입니다. 이와 동시에는 가장 일반적인 시나리오에 대 한 불필요 한 복잡성을 노출 합니다. 따라서 규칙 집합 및 구성 옵션이 적절 한 시작 지점으로 간주 되는 사용자에 게 제공 됩니다. 인증을 변경 해야 하는 경우에는 요구 사항에 맞게 인증을 사용자 지정할 수 있는 IdentityServer의 모든 기능을 계속 사용할 수 있습니다.
 
 ### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
-이 도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. 이 정책은 Identity Identity URL 공간 "/"에서 모든 하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다 Identity . 는 `JwtBearerHandler` 다른 모든 요청을 처리 합니다. 또한이 메서드는 `<<ApplicationName>>API` 기본 범위를 사용 하 여 IdentityServer를 사용 하 여 API 리소스를 등록 `<<ApplicationName>>API` 하 고 JWT 전달자 토큰 미들웨어를 구성 하 여 앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 합니다.
+이 도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. 이 정책은 Identity Identity URL 공간 "/"에서 모든 하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다 Identity . `JwtBearerHandler`는 다른 모든 요청을 처리합니다. 또한이 메서드는 `<<ApplicationName>>API` 기본 범위를 사용 하 여 IdentityServer를 사용 하 여 API 리소스를 등록 `<<ApplicationName>>API` 하 고 JWT 전달자 토큰 미들웨어를 구성 하 여 앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 합니다.
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
@@ -117,7 +119,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="appsettingsjson"></a>appsettings.json
 
-프로젝트 루트의 *appsettings.js* 파일에는 `IdentityServer` 구성 된 클라이언트 목록을 설명 하는 새 섹션이 있습니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 해당 하며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성 중인 앱 유형을 나타냅니다. 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다. [응용 프로그램 프로필](#application-profiles) 섹션에 설명 된 대로 몇 가지 프로필을 사용할 수 있습니다.
+프로젝트 루트의 *appsettings.js* 파일에는 `IdentityServer` 구성 된 클라이언트 목록을 설명 하는 새 섹션이 있습니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 대응되며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성되는 앱 유형을 나타냅니다. 서버에 대 한 구성 프로세스를 간소화 하는 규칙을 구동 하기 위해 내부적으로 사용 됩니다. [응용 프로그램 프로필](#application-profiles) 섹션에 설명 된 대로 몇 가지 프로필을 사용할 수 있습니다.
 
 ```json
 "IdentityServer": {
@@ -193,7 +195,7 @@ services.Configure<JwtBearerOptions>(
 
 API의 JWT 처리기는를 사용 하 여 인증 프로세스를 제어할 수 있는 이벤트를 발생 시킵니다 `JwtBearerEvents` . API 권한 부여에 대 한 지원을 제공 하기 위해는 `AddIdentityServerJwt` 자체 이벤트 처리기를 등록 합니다.
 
-이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 다음은 그 예입니다.
+이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 services.Configure<JwtBearerOptions>(

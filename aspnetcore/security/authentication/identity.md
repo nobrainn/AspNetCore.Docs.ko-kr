@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 6d9532ed8ff89735f41c362b27826436c37c6cb5
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 97cbc5f68d20c06e92a56ead85c8377d4e8ef582
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452137"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404589"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core 소개 Identity
 
@@ -24,7 +26,7 @@ ms.locfileid: "84452137"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core Identity :
+ASP.NET Core Identity:
 
 * 는 UI (사용자 인터페이스) 로그인 기능을 지 원하는 API입니다.
 * 사용자, 암호, 프로필 데이터, 역할, 클레임, 토큰, 전자 메일 확인 등을 관리 합니다.
@@ -73,7 +75,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 다음은 그 예입니다.
+생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들면 다음과 같습니다.
 
 * /Identity/Account/Login
 * /Identity/계정/로그 아웃
@@ -238,8 +240,9 @@ IdentityUI에 대 한 정적 자산 (스타일 시트 및 JavaScript 파일 Iden
 
 ## <a name="next-steps"></a>다음 단계
 
+* [Identity소스 코드 ASP.NET Core](https://github.com/dotnet/aspnetcore/tree/master/src/Identity)
 * SQLite를 사용 하 여 구성 하는 방법에 대 한 자세한 내용은 [GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/5131) 를 참조 하세요 Identity .
-* [구성이Identity](xref:security/authentication/identity-configuration)
+* [Identity 구성](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>
@@ -293,7 +296,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 다음은 그 예입니다.
+생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들면 다음과 같습니다.
 
 * /Identity/Account/Login
 * /Identity/계정/로그 아웃
@@ -429,7 +432,7 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 ## <a name="next-steps"></a>다음 단계
 
 * SQLite를 사용 하 여 구성 하는 방법에 대 한 자세한 내용은 [GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/5131) 를 참조 하세요 Identity .
-* [구성이Identity](xref:security/authentication/identity-configuration)
+* [Identity 구성](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

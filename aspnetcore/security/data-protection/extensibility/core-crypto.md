@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/11/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de34968f21eec28cf375ee9f75d3cb8b212c7e70
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776424"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404277"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core의 핵심 암호화 확장성
 
@@ -126,10 +128,10 @@ IAuthenticatedEncryptor와 IAuthenticatedEncryptorDescriptor 간의 주요 차�
 
 ExportToXml 루틴을 통해 설명자를 직렬화 할 수 있습니다. 이 루틴은 두 개의 속성을 포함 하는 XmlSerializedDescriptorInfo를 반환 합니다. 설명자의 XElement 표현과 해당 XElement에서이 설명자를 교체 하는 데 사용할 수 있는 [IAuthenticatedEncryptorDescriptorDeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) 를 나타내는 형식입니다.
 
-직렬화 된 설명자에는 암호화 키 자료와 같은 중요 한 정보가 포함 될 수 있습니다. 데이터 보호 시스템에는 저장소에 유지 되기 전에 정보를 암호화 하는 기능이 기본적으로 제공 됩니다. 이를 활용 하기 위해 설명자는 특성 이름이 "requiresEncryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>")이 고 값이 "true" 인 중요 한 정보를 포함 하는 요소를 표시 해야 합니다.
+직렬화 된 설명자에는 암호화 키 자료와 같은 중요 한 정보가 포함 될 수 있습니다. 데이터 보호 시스템에는 저장소에 유지 되기 전에 정보를 암호화 하는 기능이 기본적으로 제공 됩니다. 이를 활용 하기 위해 설명자는 특성 이름이 "requiresEncryption" (xmlns " <http://schemas.asp.net/2015/03/dataProtection> ")이 고 값이 "true" 인 중요 한 정보를 포함 하는 요소를 표시 해야 합니다.
 
 >[!TIP]
-> 이 특성을 설정 하기 위한 도우미 API가 있습니다. MarkAsRequiresEncryption () 네임 스페이스 AspNetCore에 있는 확장 메서드 XElement ()를 호출 합니다.
+> 이 특성을 설정 하기 위한 도우미 API가 있습니다. XElement 네임 스페이스 Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel에 있는 확장 메서드 MarkAsRequiresEncryption ()를 호출 합니다.
 
 Serialize 된 설명자가 중요 한 정보를 포함 하지 않는 경우도 있습니다. HSM에 저장 된 암호화 키의 경우 다시 고려 합니다. HSM은 일반 텍스트 형식으로 자료를 노출 하지 않으므로 설명자는 자신을 serialize 할 때 키 자료를 쓸 수 없습니다. 대신, 설명자는 키의 키 래핑 버전 (HSM이 이런 방식으로 내보내기를 허용 하는 경우) 또는 키에 대 한 HSM의 고유 식별자를 작성할 수 있습니다.
 

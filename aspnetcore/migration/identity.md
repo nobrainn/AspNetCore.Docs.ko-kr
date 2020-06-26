@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 3/22/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 0474d0d4f430d587acac5fdd8f391220f825ccee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 995de894bc77c4db5e5683b36e691b0c5a3463d3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775533"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403757"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core"></a>인증 및 Identity ASP.NET Core로 마이그레이션
 
@@ -26,7 +28,7 @@ ms.locfileid: "82775533"
 
 ## <a name="configure-identity-and-membership"></a>구성 Identity 및 멤버 자격
 
-ASP.NET MVC Identity 에서 인증 및 id 기능은 *App_Start* 폴더에 있는 *Startup.Auth.cs* 및 *IdentityConfig.cs*의 ASP.NET를 사용 하 여 구성 됩니다. ASP.NET Core MVC에서 이러한 기능은 *Startup.cs*에서 구성 됩니다.
+ASP.NET MVC에서 인증 및 id 기능은 Identity *App_Start* 폴더에 있는 *Startup.Auth.cs* 및 *IdentityConfig.cs*의 ASP.NET를 사용 하 여 구성 됩니다. ASP.NET Core MVC에서 이러한 기능은 *Startup.cs*에서 구성 됩니다.
 
 다음 NuGet 패키지를 설치 합니다.
 
@@ -34,7 +36,7 @@ ASP.NET MVC Identity 에서 인증 및 id 기능은 *App_Start* 폴더에 있는
 * `Microsoft.AspNetCore.Authentication.Cookies`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 
-*Startup.cs*에서 메서드를 업데이트 `Startup.ConfigureServices` 하 여 Entity Framework 및 Identity 서비스를 사용 합니다.
+*Startup.cs*에서 메서드를 업데이트 `Startup.ConfigureServices` 하 여 Entity Framework 및 서비스를 사용 합니다 Identity .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -51,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-이 시점에서 ASP.NET MVC 프로젝트에서 아직 마이그레이션하지 않은 두 가지 형식이 위의 코드에서 참조 되었습니다. `ApplicationDbContext` 및. `ApplicationUser` ASP.NET Core 프로젝트에서 새 *모델* 폴더를 만들고 이러한 형식에 해당 하는 두 개의 클래스를 추가 합니다. */Models/IdentityModels.cs*에서 이러한 클래스의 ASP.NET MVC 버전을 찾을 수 있지만 마이그레이션된 프로젝트에서 클래스 당 파일 하나를 사용 하는 것이 더 명확 하기 때문입니다.
+이 시점에서 ASP.NET MVC 프로젝트에서 아직 마이그레이션하지 않은 두 가지 형식이 위의 코드에서 참조 되었습니다. `ApplicationDbContext` 및 `ApplicationUser` . ASP.NET Core 프로젝트에서 새 *모델* 폴더를 만들고 이러한 형식에 해당 하는 두 개의 클래스를 추가 합니다. */Models/IdentityModels.cs*에서 이러한 클래스의 ASP.NET MVC 버전을 찾을 수 있지만 마이그레이션된 프로젝트에서 클래스 당 파일 하나를 사용 하는 것이 더 명확 하기 때문입니다.
 
 *ApplicationUser.cs*:
 
@@ -92,9 +94,9 @@ namespace NewMvcProject.Models
 }
 ```
 
-ASP.NET Core MVC 스타터 웹 프로젝트에는 사용자의 사용자 지정 또는가 포함 되어 `ApplicationDbContext`있지 않습니다. 실제 앱을 마이그레이션할 때 앱이 사용 하는 다른 모델 클래스 뿐만 아니라 앱의 사용자 및 `DbContext` 클래스의 사용자 지정 속성 및 메서드도 모두 마이그레이션해야 합니다. 예를 들어에 `DbContext` 가 `DbSet<Album>`있으면 `Album` 클래스를 마이그레이션해야 합니다.
+ASP.NET Core MVC 스타터 웹 프로젝트에는 사용자의 사용자 지정 또는가 포함 되어 있지 않습니다 `ApplicationDbContext` . 실제 앱을 마이그레이션할 때 앱이 사용 하는 다른 모델 클래스 뿐만 아니라 앱의 사용자 및 클래스의 사용자 지정 속성 및 메서드도 모두 마이그레이션해야 `DbContext` 합니다. 예를 들어에 `DbContext` 가 있으면 `DbSet<Album>` 클래스를 마이그레이션해야 `Album` 합니다.
 
-이러한 파일이 준비 되 면 해당 `using` 문을 업데이트 하 여 *Startup.cs* 파일을 컴파일할 수 있습니다.
+이러한 파일이 준비 되 면 해당 문을 업데이트 하 여 *Startup.cs* 파일을 컴파일할 수 있습니다 `using` .
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
@@ -105,13 +107,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 ```
 
-이제 앱이 인증 및 Identity 서비스를 지원할 준비가 되었습니다. 이러한 기능은 사용자에 게 노출 되어야 합니다.
+이제 앱이 인증 및 서비스를 지원할 준비가 되었습니다 Identity . 이러한 기능은 사용자에 게 노출 되어야 합니다.
 
 ## <a name="migrate-registration-and-login-logic"></a>등록 및 로그인 논리 마이그레이션
 
-앱 Identity 에 대해 구성 된 서비스 및 Entity Framework 및 SQL Server를 사용 하 여 구성 된 데이터 액세스를 사용 하 여 등록에 대 한 지원을 추가 하 고 앱에 로그인 할 준비가 되었습니다. [마이그레이션 프로세스의 이전 단계에서는](xref:migration/mvc#migrate-the-layout-file) *_Layout*의 *_LoginPartial* 에 대 한 참조를 주석으로 처리 했습니다. 이제 해당 코드로 돌아와서, 주석 처리를 제거 하 고, 필요한 컨트롤러 및 뷰를 추가 하 여 로그인 기능을 지원할 때입니다.
+Identity앱에 대해 구성 된 서비스 및 Entity Framework 및 SQL Server를 사용 하 여 구성 된 데이터 액세스를 사용 하 여 등록에 대 한 지원을 추가 하 고 앱에 로그인 할 준비가 되었습니다. [마이그레이션 프로세스의 이전 단계에서는](xref:migration/mvc#migrate-the-layout-file) *_Layout*의 *_LoginPartial* 에 대 한 참조를 주석으로 처리 했습니다. 이제 해당 코드로 돌아와서, 주석 처리를 제거 하 고, 필요한 컨트롤러 및 뷰를 추가 하 여 로그인 기능을 지원할 때입니다.
 
-_Layout에서 `@Html.Partial` 줄의 주석 처리를 제거 *합니다.*
+_Layout에서 줄의 주석 처리를 제거 `@Html.Partial` *합니다.*
 
 ```cshtml
       <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -121,7 +123,7 @@ _Layout에서 `@Html.Partial` 줄의 주석 처리를 제거 *합니다.*
 </div>
 ```
 
-이제 *Views/Shared* 폴더 Razor 에 *_LoginPartial* 라는 새 뷰를 추가 합니다.
+이제 Razor *Views/Shared* 폴더에 *_LoginPartial* 라는 새 뷰를 추가 합니다.
 
 다음 코드를 사용 하 여 _LoginPartial를 업데이트 *합니다* (모든 내용 바꾸기).
 
@@ -155,4 +157,4 @@ else
 
 ## <a name="summary"></a>요약
 
-ASP.NET Core ASP.NET Identity 기능에 대 한 변경 사항을 소개 합니다. 이 문서에서는 ASP.NET Identity 의 인증 및 사용자 관리 기능을 ASP.NET Core로 마이그레이션하는 방법에 대해 살펴보았습니다.
+ASP.NET Core ASP.NET 기능에 대 한 변경 사항을 소개 Identity 합니다. 이 문서에서는 ASP.NET의 인증 및 사용자 관리 기능을 ASP.NET Core로 마이그레이션하는 방법에 대해 살펴보았습니다 Identity .

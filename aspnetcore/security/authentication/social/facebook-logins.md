@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 11ddc7314a694446d488da6ef1b2e3423bf7241a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: df91b6f324de70b8492ccf0aef74c9264c3e9711
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777035"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403952"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core의 Facebook 외부 로그인 설정
 
@@ -55,16 +57,16 @@ ms.locfileid: "82777035"
 
   ![클라이언트 OAuth 설정 페이지](index/_static/FBOAuthSetup.png)
 
-* **유효한 OAuth 리디렉션 uri** 필드에 */signin-facebook* 를 추가 하 여 개발 URI를 입력 합니다 (예 `https://localhost:44320/signin-facebook`:). 이 자습서의 뒷부분에서 구성 된 Facebook 인증은 */signin-facebook* 경로에서 요청을 자동으로 처리 하 여 OAuth 흐름을 구현 합니다.
+* **유효한 OAuth 리디렉션 uri** 필드에 */signin-facebook* 를 추가 하 여 개발 URI를 입력 합니다 (예: `https://localhost:44320/signin-facebook` ). 이 자습서의 뒷부분에서 구성 된 Facebook 인증은 */signin-facebook* 경로에서 요청을 자동으로 처리 하 여 OAuth 흐름을 구현 합니다.
 
 > [!NOTE]
 > URI */signin-facebook* 는 facebook 인증 공급자의 기본 콜백으로 설정 됩니다. [FacebookOptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Facebook 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
 
 * **변경 내용 저장**을 클릭합니다.
 
-* 왼쪽 탐색 영역에서 **설정** > **기본** 링크를 클릭 합니다.
+* 왼쪽 탐색 영역에서 **설정**  >  **기본** 링크를 클릭 합니다.
 
-  이 페이지에서 `App ID` 및을 기록해 둡니다 `App Secret`. 다음 섹션의 ASP.NET Core 응용 프로그램에 둘 다 추가 합니다.
+  이 페이지에서 및을 기록해 둡니다 `App ID` `App Secret` . 다음 섹션의 ASP.NET Core 응용 프로그램에 둘 다 추가 합니다.
 
 * 사이트를 배포할 때 **Facebook 로그인** 설정 페이지를 다시 방문 하 여 새 공용 URI를 등록 해야 합니다.
 
@@ -73,7 +75,7 @@ ms.locfileid: "82777035"
 [비밀 관리자](xref:security/app-secrets)를 사용 하 여 FACEBOOK 앱 ID 및 비밀 값과 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
 1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
-1. 비밀 키 `Authentication:Facebook:AppId` 및 `Authentication:Facebook:AppSecret`를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다.
+1. 비밀 키 및를 사용 하 여 로컬 비밀 저장소에 중요 한 설정을 저장 합니다 `Authentication:Facebook:AppId` `Authentication:Facebook:AppSecret` .
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Facebook:AppId" "<app-id>"
@@ -112,11 +114,11 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 
 <xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath>사용자가 요청 된 권한 부여 요청을 승인 하지 않은 경우에서 사용자 에이전트에 대 한 리디렉션 경로를 제공할 수 있습니다.
 
-다음 코드에서는 `AccessDeniedPath` 를로 `"/AccessDeniedPathInfo"`설정 합니다.
+다음 코드에서는 `AccessDeniedPath` 를로 설정 합니다 `"/AccessDeniedPathInfo"` .
 
 [!code-csharp[](~/security/authentication/social/social-code/StartupAccessDeniedPath.cs?name=snippetFB)]
 
-페이지에 다음 `AccessDeniedPath` 정보를 포함 하는 것이 좋습니다.
+`AccessDeniedPath`페이지에 다음 정보를 포함 하는 것이 좋습니다.
 
 *  원격 인증을 취소 했습니다.
 * 이 앱에는 인증이 필요 합니다.
@@ -127,7 +129,7 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 * [Facebook.com](https://www.facebook.com/) 로 이동 합니다.
 * 로그인 한 경우 로그 아웃 해야 합니다.
 * 앱을 실행 하 고 Facebook 로그인을 선택 합니다.
-* **지금 안 함**을 선택 합니다. 지정 `AccessDeniedPath` 된 페이지로 리디렉션됩니다.
+* **지금 안 함**을 선택 합니다. 지정 된 `AccessDeniedPath` 페이지로 리디렉션됩니다.
 
 <!-- End of React  -->
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -141,13 +143,13 @@ Facebook 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은
 
 ## <a name="troubleshooting"></a>문제 해결
 
-* **ASP.NET Core 2.x에만 해당:** 에서 Identity `ConfigureServices`를 호출 `services.AddIdentity` 하 여가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 자습서에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
+* **ASP.NET Core 2.x에만 해당:** Identity에서를 호출 하 여가 구성 되지 않은 경우 `services.AddIdentity` `ConfigureServices` 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 자습서에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
 * 초기 마이그레이션을 적용 하 여 사이트 데이터베이스를 만들지 않은 경우 *요청 오류를 처리 하는 동안 데이터베이스 작업이 실패 했습니다* . **마이그레이션 적용** 을 탭 하 여 데이터베이스를 만들고 새로 고쳐 오류를 계속 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 * 이 문서에서는 Facebook을 사용 하 여 인증 하는 방법을 살펴보았습니다. [위의 페이지](xref:security/authentication/social/index)에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다.
 
-* Azure 웹 앱에 웹 사이트를 게시 한 후에는 Facebook 개발자 포털 `AppSecret` 에서를 다시 설정 해야 합니다.
+* Azure 웹 앱에 웹 사이트를 게시 한 후에는 `AppSecret` Facebook 개발자 포털에서를 다시 설정 해야 합니다.
 
-* Azure Portal에서 `Authentication:Facebook:AppId` 및 `Authentication:Facebook:AppSecret` 을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.
+* `Authentication:Facebook:AppId` `Authentication:Facebook:AppSecret` Azure Portal에서 및을 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.

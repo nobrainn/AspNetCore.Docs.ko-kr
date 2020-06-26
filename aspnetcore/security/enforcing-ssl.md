@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 26e6fb38cf31b5a2d5c88c19347c867641eb55df
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8247d66900a0c15b3b386dca021c5c5922d26e71
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451734"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404564"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -108,7 +110,7 @@ API가 없으면 클라이언트가 첫 번째 요청에서 중요 한 데이터
 
   * 호스트 구성에서.
   * `ASPNETCORE_HTTPS_PORT`환경 변수를 설정 합니다.
-  * Appsettings에서 최상위 항목을 추가 *합니다. json*:
+  * appsettings.js에서 최상위 항목을 추가 하 여 다음 *을*수행 합니다.
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -122,7 +124,7 @@ API가 없으면 클라이언트가 첫 번째 요청에서 중요 한 데이터
 
   * 호스트 구성에서.
   * `ASPNETCORE_HTTPS_PORT`환경 변수를 설정 합니다.
-  * Appsettings에서 최상위 항목을 추가 *합니다. json*:
+  * appsettings.js에서 최상위 항목을 추가 하 여 다음 *을*수행 합니다.
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -130,16 +132,16 @@ API가 없으면 클라이언트가 첫 번째 요청에서 중요 한 데이터
 
 ::: moniker-end
 
-* 개발에서 *launchsettings. json*에 HTTPS URL을 설정 합니다. IIS Express 사용 하는 경우 HTTPS를 사용 하도록 설정 합니다.
+* 개발에서 *launchsettings.js*의 HTTPS URL을 설정 합니다. IIS Express 사용 하는 경우 HTTPS를 사용 하도록 설정 합니다.
 
-* [Kestrel](xref:fundamentals/servers/kestrel) 서버 또는 [http.sys](xref:fundamentals/servers/httpsys) 서버의 공용에 지 배포에 대 한 HTTPS URL 끝점을 구성 합니다. 앱에서 **HTTPS 포트** 를 하나만 사용 합니다. 미들웨어는를 통해 포트를 검색 합니다 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
+* [Kestrel](xref:fundamentals/servers/kestrel) 서버 또는 [HTTP.sys](xref:fundamentals/servers/httpsys) 서버의 공용에 지 배포에 대 한 HTTPS URL 끝점을 구성 합니다. 앱에서 **HTTPS 포트** 를 하나만 사용 합니다. 미들웨어는를 통해 포트를 검색 합니다 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
 > [!NOTE]
 > 앱이 역방향 프록시 구성에서 실행 되는 경우에는를 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 사용할 수 없습니다. 이 섹션에 설명 된 다른 방법 중 하나를 사용 하 여 포트를 설정 합니다.
 
 ### <a name="edge-deployments"></a>Edge 배포 
 
-Kestrel 또는 HTTP.SYS를 공용에 지 서버로 사용 하는 경우 Kestrel 또는 HTTP.SYS를 모두 수신 하도록 구성 해야 합니다.
+Kestrel 또는 HTTP.sys를 공용에 지 서버로 사용 하는 경우 Kestrel 또는 HTTP.sys는 둘 모두를 수신 하도록 구성 되어야 합니다.
 
 * 클라이언트가 리디렉션되는 보안 포트 (일반적으로 프로덕션의 경우 443, 개발 중인 경우 5001)
 * 안전 하지 않은 포트 (일반적으로 프로덕션의 경우 80, 개발에서 5000)
@@ -319,7 +321,7 @@ HTTPS/HSTS를 옵트아웃 (opt out) 하려면:
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-`--no-https` 옵션을 사용합니다. 예를 들면 다음과 같습니다.
+`--no-https` 옵션을 사용합니다. 예
 
 ```dotnetcli
 dotnet new webapp --no-https

@@ -6,25 +6,27 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/purpose-strings-multitenancy
-ms.openlocfilehash: 73edb8082d2df263bc1e6d73fee1360fa6840514
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8f069da500e7bc06e4b8712fbf7b86d90a815758
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776775"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404381"
 ---
 # <a name="purpose-hierarchy-and-multi-tenancy-in-aspnet-core"></a>ASP.NET Core의 용도 계층 구조 및 다중 테 넌 트
 
-`IDataProtector` 는 또한 암시적 이므로 용도 `IDataProtectionProvider`를 함께 연결할 수 있습니다. 이 의미에서 `provider.CreateProtector([ "purpose1", "purpose2" ])` 는와 같습니다 `provider.CreateProtector("purpose1").CreateProtector("purpose2")`.
+는 `IDataProtector` 또한 암시적 이므로 `IDataProtectionProvider` 용도를 함께 연결할 수 있습니다. 이 의미에서 `provider.CreateProtector([ "purpose1", "purpose2" ])` 는와 같습니다 `provider.CreateProtector("purpose1").CreateProtector("purpose2")` .
 
-이를 통해 데이터 보호 시스템을 통해 일부 흥미로운 계층 관계가 가능 합니다. 이전 예의 [contoso.com](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose)메시지에서 securemessage 구성 요소는 한 번만 호출 `provider.CreateProtector("Contoso.Messaging.SecureMessage")` 하 고 결과를 전용 `_myProvider` 필드에 캐시할 수 있습니다. 그런 다음에 대 `_myProvider.CreateProtector("User: username")`한 호출을 통해 향후 보호기를 만들 수 있으며, 이러한 보호기는 개별 메시지를 보호 하는 데 사용 됩니다.
+이를 통해 데이터 보호 시스템을 통해 일부 흥미로운 계층 관계가 가능 합니다. 이전 예의 [contoso.com](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose)메시지에서 securemessage 구성 요소는 `provider.CreateProtector("Contoso.Messaging.SecureMessage")` 한 번만 호출 하 고 결과를 전용 필드에 캐시할 수 있습니다. `_myProvider` 그런 다음에 대 한 호출을 통해 향후 보호기를 만들 수 `_myProvider.CreateProtector("User: username")` 있으며, 이러한 보호기는 개별 메시지를 보호 하는 데 사용 됩니다.
 
-이를 대칭 이동할 수도 있습니다. 여러 테 넌 트를 호스팅하는 단일 논리적 응용 프로그램 (CMS가 적절 한 것 같음)을 고려 하 고 각 테 넌 트는 자체 인증 및 상태 관리 시스템을 사용 하 여 구성할 수 있습니다. 파라솔 응용 프로그램에는 단일 마스터 공급자가 있으며 및 `provider.CreateProtector("Tenant 1")` `provider.CreateProtector("Tenant 2")` 를 호출 하 여 각 테 넌 트에 데이터 보호 시스템의 고유한 격리 조각을 제공 합니다. 그런 다음 테 넌 트는 자체 요구 사항에 따라 자체의 개별 보호기를 파생 시킬 수 있지만, 시스템의 다른 테 넌 트와 충돌 하는 보호기를 만들 수는 없습니다. 그래픽으로 표시 되는이는 아래와 같습니다.
+이를 대칭 이동할 수도 있습니다. 여러 테 넌 트를 호스팅하는 단일 논리적 응용 프로그램 (CMS가 적절 한 것 같음)을 고려 하 고 각 테 넌 트는 자체 인증 및 상태 관리 시스템을 사용 하 여 구성할 수 있습니다. 파라솔 응용 프로그램에는 단일 마스터 공급자가 있으며 `provider.CreateProtector("Tenant 1")` 및를 호출 `provider.CreateProtector("Tenant 2")` 하 여 각 테 넌 트에 데이터 보호 시스템의 고유한 격리 조각을 제공 합니다. 그런 다음 테 넌 트는 자체 요구 사항에 따라 자체의 개별 보호기를 파생 시킬 수 있지만, 시스템의 다른 테 넌 트와 충돌 하는 보호기를 만들 수는 없습니다. 그래픽으로 표시 되는이는 아래와 같습니다.
 
 ![다중 테 넌 시 목적](purpose-strings-multitenancy/_static/purposes-multi-tenancy.png)
 
