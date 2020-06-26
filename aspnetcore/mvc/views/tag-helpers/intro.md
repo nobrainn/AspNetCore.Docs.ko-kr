@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 7298e514938e8285a1e42afad0f2f71375e2781d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 36d8c3dd42ac9d0acdb93bba4bc39ab18ad5c52f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776476"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400897"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core의 태그 도우미
 
@@ -25,17 +27,17 @@ ms.locfileid: "82776476"
 
 ## <a name="what-are-tag-helpers"></a>태그 도우미란?
 
-태그 도우미를 사용 하면 서버 쪽 코드에서 파일에 Razor HTML 요소를 만들고 렌더링 하는 데 참여할 수 있습니다. 예를 들어 기본 제공 `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있습니다. 이미지가 변경될 때마다 서버에서 이미지에 대한 고유 버전을 새로 생성하므로 클라이언트는 항상 최신 이미지를 가져옵니다(오래된 캐시된 이미지 대신). 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지로도 사용할 수 있습니다. 태그 도우미는 C#에서 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 `LabelTagHelper`는 `LabelTagHelper` 특성이 적용될 때 HTML `<label>` 요소를 대상으로 할 수 있습니다. [Html 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)에 대해 잘 알고 있는 경우 태그 도우미는 Razor 뷰에서 html과 c # 간의 명시적 전환을 축소 합니다. 많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다.
+태그 도우미를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다. 예를 들어 기본 제공 `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있습니다. 이미지가 변경될 때마다 서버에서 이미지에 대한 고유 버전을 새로 생성하므로 클라이언트는 항상 최신 이미지를 가져옵니다(오래된 캐시된 이미지 대신). 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지로도 사용할 수 있습니다. 태그 도우미는 C#에서 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 `LabelTagHelper`는 `LabelTagHelper` 특성이 적용될 때 HTML `<label>` 요소를 대상으로 할 수 있습니다. [Html 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)에 대해 잘 알고 있는 경우 태그 도우미는 뷰에서 Html과 c # 간의 명시적 전환을 축소 Razor 합니다. 많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다.
 
 ## <a name="what-tag-helpers-provide"></a>태그 도우미가 제공하는 기능
 
-**HTML에 친숙 한 개발 환경** 대부분의 경우 태그 도우미 Razor 를 사용 하는 태그는 표준 HTML 처럼 보입니다. HTML/CSS/JavaScript로 관련 지식이 필요 하는 프런트 엔드 디자이너는 Razor c # Razor 구문을 학습 하지 않고 편집할 수 있습니다.
+**HTML에 친숙 한 개발 환경** 대부분의 경우 Razor 태그 도우미를 사용 하는 태그는 표준 HTML 처럼 보입니다. HTML/CSS/JavaScript로 관련 지식이 필요 하는 프런트 엔드 디자이너는 Razor c # 구문을 학습 하지 않고 편집할 수 있습니다 Razor .
 
-**HTML 및 Razor 태그를 만들기 위한 풍부한 IntelliSense 환경은** 뷰에서 태그를 서버 쪽에서 Razor 만드는 이전 방법인 html 도우미와 선명 하 게 대조 됩니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다. [태그 도우미에 IntelliSense 지원](#intellisense-support-for-tag-helpers)을 보시면 IntelliSense 환경에 대해 설명되어 있습니다. C # 구문을 사용 Razor 하는 개발자는 c # Razor 태그를 작성 하는 것 보다 태그 도우미를 사용 하 여 생산성이 향상 됩니다.
+**Html 및 Razor 태그를 만들기 위한 풍부한 IntelliSense 환경은** 뷰에서 태그를 서버 쪽에서 만드는 이전 방법인 html 도우미와 선명 하 게 대조 됩니다 Razor . [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다. [태그 도우미에 IntelliSense 지원](#intellisense-support-for-tag-helpers)을 보시면 IntelliSense 환경에 대해 설명되어 있습니다. C # Razor 구문을 사용 하는 개발자는 c # 태그를 작성 하는 것 보다 태그 도우미를 사용 하 여 생산성이 향상 됩니다 Razor .
 
 **생산성을 높이고 서버에만 제공되는 정보를 사용하여 보다 강력하고 안정적이고 유지 가능한 코드를 작성하는 방법** 예를 들어 지금까지는 이미지를 변경하면 이미지 이름도 변경하는 것이 이미지 업데이트의 원칙이었습니다. 성능상의 이유로 이미지를 적극적으로 캐시해야 하며, 이미지 이름을 변경하지 않는 한 클라이언트가 오래된 복사본으로 전락할 위험이 있습니다. 지금까지는 이미지가 편집되면 이름을 변경하고 웹앱의 이미지에 대한 각 참조를 업데이트해야 했습니다. 이는 매우 많은 노력을 발생 시킬 뿐만 아니라 오류가 발생 하기 쉽습니다 (참조를 누락 했거나 실수로 잘못 된 문자열을 입력 하는 등). 기본 제공에서 `ImageTagHelper` 자동으로이 작업을 수행할 수 있습니다. `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있으며, 따라서 이미지가 변경될 때마다 서버에서 자동으로 이미지의 새 고유 버전을 생성합니다. 클라이언트는 항상 최신 이미지를 가져오게 됩니다. `ImageTagHelper`를 사용하면 이와 같은 견고함과 노동력 절감 효과를 근본적으로 무료로 얻을 수 있습니다.
 
-대부분의 기본 제공 태그 도우미는 표준 HTML 요소를 대상으로 하며 요소에 대한 서버 쪽 특성을 제공합니다. 예를 들어 *보기/계정* 폴더의 여러 보기에서 사용되는 `<input>` 요소에는 `asp-for` 특성이 있습니다. 이 특성은 지정된 모델 속성의 이름을 렌더링된 HTML로 추출합니다. 다음 모델 Razor 을 사용 하는 뷰를 생각해 보세요.
+대부분의 기본 제공 태그 도우미는 표준 HTML 요소를 대상으로 하며 요소에 대한 서버 쪽 특성을 제공합니다. 예를 들어 *보기/계정* 폴더의 여러 보기에서 사용되는 `<input>` 요소에는 `asp-for` 특성이 있습니다. 이 특성은 지정된 모델 속성의 이름을 렌더링된 HTML로 추출합니다. Razor다음 모델을 사용 하는 뷰를 생각해 보세요.
 
 ```csharp
 public class Movie
@@ -48,13 +50,13 @@ public class Movie
 }
 ```
 
-Razor 태그는 다음과 같습니다.
+태그는 다음과 Razor 같습니다.
 
 ```cshtml
 <label asp-for="Movie.Title"></label>
 ```
 
-다음과 같은 HTML을 생성합니다.
+다음 HTML을 생성합니다.
 
 ```html
 <label for="Movie_Title">Title</label>
@@ -74,7 +76,7 @@ Razor 태그는 다음과 같습니다.
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-`@addTagHelper` 지시문은 태그 도우미를 보기에 사용할 수 있게 해줍니다. 이 경우 뷰 파일은 pages */_ViewImports입니다.* 이 파일은 기본적으로 *pages* 폴더와 하위 폴더의 모든 파일에 상속 됩니다. 태그 도우미를 사용할 수 있도록 합니다. 위의 코드는 와일드 카드 구문 ("\*")을 사용 하 여 지정 된 어셈블리의 모든 태그 도우미 (*AspNetCore. TagHelpers*)를 *Views* 디렉터리 또는 하위 디렉터리의 모든 뷰 파일에 사용할 수 있도록 지정 합니다. `@addTagHelper` 뒤에 나오는 첫 번째 매개 변수는 로드할 태그 도우미를 지정하고(여기서는 모든 태그 도우미에 "\*" 사용), 두 번째 매개 변수 "Microsoft.AspNetCore.Mvc.TagHelpers"는 태그 도우미를 포함하는 어셈블리를 지정합니다. *Microsoft.AspNetCore.Mvc.TagHelpers*는 기본 제공 ASP.NET Core 태그 도우미에 대한 어셈블리입니다.
+`@addTagHelper` 지시문은 태그 도우미를 보기에 사용할 수 있게 해줍니다. 이 경우 뷰 파일은 pages */_ViewImports입니다.* 이 파일은 기본적으로 *pages* 폴더와 하위 폴더의 모든 파일에 상속 됩니다. 태그 도우미를 사용할 수 있도록 합니다. 위의 코드는 와일드 카드 구문 (" \* ")을 사용 하 여 지정 된 어셈블리의 모든 태그 도우미 (*AspNetCore. TagHelpers*)를 *Views* 디렉터리 또는 하위 디렉터리의 모든 뷰 파일에 사용할 수 있도록 지정 합니다. `@addTagHelper` 뒤에 나오는 첫 번째 매개 변수는 로드할 태그 도우미를 지정하고(여기서는 모든 태그 도우미에 "\*" 사용), 두 번째 매개 변수 "Microsoft.AspNetCore.Mvc.TagHelpers"는 태그 도우미를 포함하는 어셈블리를 지정합니다. *Microsoft.AspNetCore.Mvc.TagHelpers*는 기본 제공 ASP.NET Core 태그 도우미에 대한 어셈블리입니다.
 
 이 프로젝트의 모든 태그 도우미(*AuthoringTagHelpers*라는 어셈블리를 만드는)를 노출하려면 다음을 사용합니다.
 
@@ -157,7 +159,7 @@ FQN을 사용하여 보기에 태그 도우미를 추가하려면 먼저 FQN(`Au
 
 ## <a name="intellisense-support-for-tag-helpers"></a>태그 도우미에 대한 IntelliSense 지원
 
-Visual Studio에서 새 ASP.NET Core 웹 앱을 만들면 NuGet 패키지 "AspNetCore"가 추가 됩니다. Razor. 도구 ". 이 패키지는 태그 도우미 도구를 추가하는 패키지입니다.
+Visual Studio에서 새 ASP.NET Core 웹 앱을 만들면 NuGet 패키지 "AspNetCore"가 Razor 추가 됩니다. 도구 ". 이 패키지는 태그 도우미 도구를 추가하는 패키지입니다.
 
 HTML `<label>` 요소를 작성하는 방안을 고려해 보세요. Visual Studio 편집기에서 `<l`를 입력하는 즉시 IntelliSense는 일치하는 요소를 표시합니다.
 
@@ -197,19 +199,19 @@ IntelliSense는 페이지에서 모델에 사용할 수 있는 속성과 메서�
 
 ## <a name="tag-helpers-compared-to-html-helpers"></a>HTML 도우미와 비교한 태그 도우미
 
-태그 도우미는 Razor 뷰에서 html 요소에 연결 하는 반면 [html 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) 는 Razor 뷰에서 html로 포함 된 메서드로 호출 됩니다. CSS 클래스 " Razor caption"을 사용 하 여 HTML 레이블을 만드는 다음 태그를 고려 합니다.
+태그 도우미는 뷰에서 HTML 요소에 연결 Razor 하는 반면 [html 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) 는 뷰에서 html로 포함 된 메서드로 호출 됩니다 Razor . RazorCSS 클래스 "caption"을 사용 하 여 HTML 레이블을 만드는 다음 태그를 고려 합니다.
 
 ```cshtml
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
 ```
 
-At (`@`) 기호는 코드 Razor 의 시작 임을 나타냅니다. 다음 두 매개 변수("FirstName" 및 "First Name:")는 문자열이므로 [IntelliSense](/visualstudio/ide/using-intellisense)가 도움이 되지 않습니다. 마지막 인수:
+At ( `@` ) 기호는 Razor 코드의 시작 임을 나타냅니다. 다음 두 매개 변수("FirstName" 및 "First Name:")는 문자열이므로 [IntelliSense](/visualstudio/ide/using-intellisense)가 도움이 되지 않습니다. 마지막 인수:
 
 ```cshtml
 new {@class="caption"}
 ```
 
-특성을 표시하는 데 사용되는 익명 개체입니다. `class`는 C#에서 예약된 키워드이므로 `@` 기호를 사용하여 C#이 `@class=`를 기호(속성 이름)로 해석하게 합니다. 프런트 엔드 디자이너 (HTML/CSS/JavaScript 및 기타 클라이언트 기술에 대해 잘 알고 있지만 c # 및 Razor)에 익숙하지 않은 사용자의 경우 대부분의 줄은 외부에 있습니다. IntelliSense의 도움 없이 전체 줄을 작성해야 합니다.
+특성을 표시하는 데 사용되는 익명 개체입니다. `class`는 C#에서 예약된 키워드이므로 `@` 기호를 사용하여 C#이 `@class=`를 기호(속성 이름)로 해석하게 합니다. 프런트 엔드 디자이너 (HTML/CSS/JavaScript 및 기타 클라이언트 기술에 대해 잘 알고 있지만 c # 및)에 익숙하지 않은 사용자의 경우 Razor 대부분의 줄은 외부에 있습니다. IntelliSense의 도움 없이 전체 줄을 작성해야 합니다.
 
 `LabelTagHelper`를 사용하면 동일한 태그를 작성할 수 있습니다.
 
@@ -223,7 +225,7 @@ new {@class="caption"}
 
 IntelliSense의 도움을 받아 전체 줄을 작성할 수 있습니다.
 
-다음 코드 이미지는 Visual Studio에 포함 된 ASP.NET 4.5. x MVC 템플릿에서 생성 된 *Views/Account/Register* Razor 의 Form 부분을 보여 줍니다.
+다음 코드 이미지는 Visual Studio에 포함 된 ASP.NET 4.5. x MVC 템플릿에서 생성 된 *Views/Account/Register* 의 Form 부분을 보여 줍니다. Razor
 
 ![이미지](intro/_static/regCS.png)
 
@@ -267,7 +269,7 @@ Visual Studio 편집기를 사용하면 레지스터 양식의 태그 도우미 
 
 ## <a name="customizing-the-tag-helper-element-font"></a>태그 도우미 요소 글꼴 사용자 지정
 
-**도구** > **Options**옵션 > **Environment**환경 > **글꼴 및 색**에서 글꼴 및 색 지정을 사용자 지정할 수 있습니다.
+**도구**  >  **옵션**  >  **환경**  >  **글꼴 및 색**에서 글꼴 및 색 지정을 사용자 지정할 수 있습니다.
 
 ![이미지](intro/_static/fontoptions2.png)
 
@@ -276,5 +278,5 @@ Visual Studio 편집기를 사용하면 레지스터 양식의 태그 도우미 
 ## <a name="additional-resources"></a>추가 자료
 
 * [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)
-* [양식 작업](xref:mvc/views/working-with-forms)
+* [양식 사용](xref:mvc/views/working-with-forms)
 * [GitHub의 TagHelperSamples](https://github.com/dpaquette/TagHelperSamples)에는 [부트스트랩](https://getbootstrap.com/)을 사용하기 위한 태그 도우미 샘플이 포함되어 있습니다.

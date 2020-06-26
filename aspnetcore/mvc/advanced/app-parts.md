@@ -1,24 +1,26 @@
 ---
-title: ASP.NET Core의 응용 프로그램 부분과 Razor 컨트롤러, 뷰, 페이지 등을 공유 합니다.
+title: ASP.NET Core의 응용 프로그램 부분과 컨트롤러, 뷰, 페이지 등을 공유 합니다. Razor
 author: rick-anderson
-description: ASP.NET Core의 응용 프로그램 부분 Razor 을 사용 하 여 컨트롤러, 뷰, 페이지 등 공유
+description: RazorASP.NET Core의 응용 프로그램 부분을 사용 하 여 컨트롤러, 뷰, 페이지 등 공유
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 68991a3df5e09b63dc52bdadae55f055a721ad3c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774407"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399753"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>응용 프로그램 파트를 사용 Razor 하 여 컨트롤러, 뷰, 페이지 등 공유
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Razor응용 프로그램 파트를 사용 하 여 컨트롤러, 뷰, 페이지 등 공유
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -26,7 +28,7 @@ ms.locfileid: "82774407"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 응용 프로그램 파트를 사용 하 여 컨트롤러 검색, 구성 요소 보기, Razor 태그 도우미, 페이지, razor 컴파일 소스 등을 ASP.NET Core 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
+*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 응용 프로그램 파트를 사용 하 여 컨트롤러 검색, 구성 요소 보기, 태그 도우미, Razor 페이지, razor 컴파일 소스 등을 ASP.NET Core 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
 
 [기능 공급자](#fp)는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다. 예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다. 응용 프로그램 파트를 사용 하 여 여러 앱에서 컨트롤러, 뷰, Razor 페이지, razor 컴파일 소스, 태그 도우미 등을 포함 하는 어셈블리 (DLL)를 공유할 수 있습니다. 여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.
 
@@ -46,7 +48,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="include-views"></a>보기 포함
 
-클래스 라이브러리를 사용 하 여 어셈블리에 뷰를 포함 합니다. [ Razor ](xref:razor-pages/ui-class)
+[ Razor 클래스 라이브러리](xref:razor-pages/ui-class) 를 사용 하 여 어셈블리에 뷰를 포함 합니다.
 
 ### <a name="prevent-loading-resources"></a>리소스 로드 방지
 
@@ -116,7 +118,7 @@ HTTP 404 오류는 애플리케이션 파트를 사용하여 개발할 때 일�
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 응용 프로그램 파트를 사용 하 여 컨트롤러 검색, 구성 요소 보기, Razor 태그 도우미, 페이지, razor 컴파일 소스 등을 ASP.NET Core 수 있습니다. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
+*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 응용 프로그램 파트를 사용 하 여 컨트롤러 검색, 구성 요소 보기, 태그 도우미, Razor 페이지, razor 컴파일 소스 등을 ASP.NET Core 수 있습니다. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
 
 *기능 공급자*는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다. 예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다. 응용 프로그램 파트를 사용 하 여 여러 앱에서 컨트롤러, 뷰, Razor 페이지, razor 컴파일 소스, 태그 도우미 등을 포함 하는 어셈블리 (DLL)를 공유할 수 있습니다. 여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.
 
@@ -136,7 +138,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="include-views"></a>보기 포함
 
-클래스 라이브러리를 사용 하 여 어셈블리에 뷰를 포함 합니다. [ Razor ](xref:razor-pages/ui-class)
+[ Razor 클래스 라이브러리](xref:razor-pages/ui-class) 를 사용 하 여 어셈블리에 뷰를 포함 합니다.
 
 ### <a name="prevent-loading-resources"></a>리소스 로드 방지
 
@@ -154,7 +156,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 애플리케이션 기능 공급자는 애플리케이션 파트를 검사하고 해당 파트에 대한 기능을 제공합니다. 다음 ASP.NET Core 기능에는 기본으로 제공되는 기능 공급자가 있습니다.
 
-* [Controllers](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
+* [컨트롤러](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
 * [태그 도우미](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
 * [구성 요소 보기](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 

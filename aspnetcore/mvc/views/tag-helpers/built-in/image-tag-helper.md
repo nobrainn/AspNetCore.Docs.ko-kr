@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
-ms.openlocfilehash: e1e3566f09c44d70650fa1f21e1921e76e46d384
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4d8981b8bdf2e1341b5943745b901efd867d2e5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777412"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399363"
 ---
 # <a name="image-tag-helper-in-aspnet-core"></a>ASP.NET Core의 이미지 태그 도우미
 
@@ -32,7 +34,7 @@ ms.locfileid: "82777412"
 * 이미지 원본에 고유한 캐시 버스팅 문자열이 쿼리 매개 변수로 추가됩니다.
 * 호스트 웹 서버의 파일이 변경되면 갱신된 요청 매개 변수를 포함하는 고유한 요청 URL이 생성됩니다.
 
-태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>을 참조하세요.
+태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
 ## <a name="image-tag-helper-attributes"></a>이미지 태그 도우미 특성
 

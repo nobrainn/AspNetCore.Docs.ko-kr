@@ -6,27 +6,29 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: bda00a416ac34883e0a70a265156fa3ddcde3c6f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b646908c070a51aac2e376c2acaa8e0e091790b0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777139"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400468"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 보기
 
 작성자: [Steve Smith](https://ardalis.com/)
 
-이 항목에서는 ASP.NET Core MVC 애플리케이션에서 사용되는 보기에 대해 설명합니다. Razor 페이지에 대한 자세한 내용은 [Razor 페이지 소개](xref:razor-pages/index)를 참조하세요.
+이 항목에서는 ASP.NET Core MVC 애플리케이션에서 사용되는 보기에 대해 설명합니다. 페이지에 대 한 자세한 내용은 Razor [ Razor 페이지 소개](xref:razor-pages/index)를 참조 하세요.
 
-MVC(Model-View-Controller) 패턴에서 *보기*는 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리합니다. 뷰는 [Razor 태그](xref:mvc/views/razor)가 포함된 HTML 템플릿입니다. Razor 태그는 클라이언트로 전송되는 웹 페이지를 생성하기 위해 HTML과 상호 작용하는 코드입니다.
+MVC(Model-View-Controller) 패턴에서 *보기*는 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리합니다. 뷰는 포함 된 [ Razor 태그가](xref:mvc/views/razor)있는 HTML 템플릿입니다. Razor태그는 HTML 태그와 상호 작용 하 여 클라이언트에 전송 되는 웹 페이지를 생성 하는 코드입니다.
 
-ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/dotnet/csharp/)를 사용하는 *.cshtml* 파일입니다. 일반적으로 보기 파일은 앱의 [컨트롤러](xref:mvc/controllers/actions) 각각에 대해 명명된 폴더로 그룹화됩니다. 이 폴더는 앱 루트의 *Views* 폴더에 저장됩니다.
+MVC ASP.NET Core 뷰는 태그에서 [c # 프로그래밍 언어](/dotnet/csharp/) 를 사용 하는 *. cshtml* 파일입니다. Razor 일반적으로 보기 파일은 앱의 [컨트롤러](xref:mvc/controllers/actions) 각각에 대해 명명된 폴더로 그룹화됩니다. 이 폴더는 앱 루트의 *Views* 폴더에 저장됩니다.
 
 ![Visual Studio의 솔루션 탐색기에 About.cshtml, Contact.cshtml 및 Index.cshtml 파일을 표시하도록 Home 폴더가 열린 상태로 Views 폴더가 열려 있습니다.](overview/_static/views_solution_explorer.png)
 
@@ -53,7 +55,7 @@ ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/do
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
-*Razor* 태그는 `@` 기호로 시작됩니다. C# 코드를 중괄호(`{ ... }`)로 설정된 [Razor 코드 블록](xref:mvc/views/razor#razor-code-blocks) 내에 배치하여 C# 문을 실행합니다. 예를 들어 위에 표시된 `ViewData["Title"]`에 "About"을 할당하는 부분을 참조하세요. `@` 기호로 값을 참조하기만 하면 HTML 내에서 이 값을 표시할 수 있습니다. 위의 `<h2>` 및 `<h3>` 요소의 내용을 참조하세요.
+*Razor* 태그는 기호로 시작 `@` 합니다. C # 코드를 중괄호 ()로 설정 된 [ Razor 코드 블록](xref:mvc/views/razor#razor-code-blocks) 내에 배치 하 여 c # 문을 실행 `{ ... }` 합니다. 예를 들어 위에 표시된 `ViewData["Title"]`에 "About"을 할당하는 부분을 참조하세요. `@` 기호로 값을 참조하기만 하면 HTML 내에서 이 값을 표시할 수 있습니다. 위의 `<h2>` 및 `<h3>` 요소의 내용을 참조하세요.
 
 위에 표시된 보기 콘텐츠는 사용자에게 렌더링되는 전체 웹 페이지의 일부분일 뿐입니다. 페이지 레이아웃의 나머지 부분 및 보기의 다른 일반적인 측면은 다른 보기 파일에 지정됩니다. 자세한 내용은 [레이아웃 항목](xref:mvc/views/layout)을 참조하세요.
 
@@ -198,17 +200,17 @@ Viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 
 ### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a>약한 형식의 데이터(ViewData, ViewData 특성 및 ViewBag)
 
-`ViewBag` *은 Razor 페이지에서 사용할 수 없습니다.*
+`ViewBag`*에서 Razor 사용할 수 없음 페이지.*
 
 강력한 형식의 뷰 외에도, 뷰는 *약한 형식*(*느슨한 형식*이라고도 함) 데이터 컬렉션에 액세스할 수 있습니다. 강력한 형식과 달리, *약한 형식*(또는 *느슨한 형식*)은 사용 중인 데이터 형식을 명시적으로 선언하지 않는 것을 의미합니다. 컨트롤러 및 뷰 간에 적은 양의 데이터를 전달하기 위해 약한 형식의 데이터 컬렉션을 사용할 수 있습니다.
 
 | 다음 사이에 데이터 전달 ...                        | 예제                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | 컨트롤러 및 뷰                             | 드롭다운 목록을 데이터로 채웁니다.                                          |
-| 보기 및 [레이아웃 보기](xref:mvc/views/layout)   | 뷰 파일의 레이아웃 뷰에서 ** \<제목>** 요소 내용 설정  |
+| 보기 및 [레이아웃 보기](xref:mvc/views/layout)   | **\<title>** 뷰 파일의 레이아웃 뷰에서 요소 콘텐츠를 설정 합니다.  |
 | [부분 보기](xref:mvc/views/partial) 및 보기 | 사용자가 요청한 웹 페이지에 따라 데이터를 표시하는 위젯입니다.      |
 
-이 컬렉션은 컨트롤러 및 뷰의 `ViewData` 또는 `ViewBag` 속성을 통해 참조할 수 있습니다. `ViewData` 속성은 약한 형식 개체의 사전입니다. `ViewBag` 속성은 기본 `ViewData` 컬렉션에 대해 동적 속성을 제공하는 `ViewData` 주변의 래퍼입니다. 참고: 키 조회는 `ViewData` 및 `ViewBag`에 대 한 대/소문자를 구분 하지 않습니다.
+이 컬렉션은 컨트롤러 및 뷰의 `ViewData` 또는 `ViewBag` 속성을 통해 참조할 수 있습니다. `ViewData` 속성은 약한 형식 개체의 사전입니다. `ViewBag` 속성은 기본 `ViewData` 컬렉션에 대해 동적 속성을 제공하는 `ViewData` 주변의 래퍼입니다. 참고: 키 조회는 및에 대 한 대/소문자를 구분 하지 않습니다 `ViewData` `ViewBag` .
 
 `ViewData` 및 `ViewBag`은 런타임에 동적으로 확인됩니다. 컴파일 시간 형식 검사를 제공하지 않으므로 일반적으로 둘 다 viewmodel을 사용하는 것보다 오류가 발생하기 더 쉽습니다. 이러한 이유로, 일부 개발자는 `ViewData` 및 `ViewBag`을 최소한으로 사용하거나 아예 사용하지 않습니다.
 
@@ -258,7 +260,7 @@ public IActionResult SomeAction()
 
 **ViewData 특성**
 
-[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 사용하는 또 다른 방법은 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)입니다. 특성으로 표시 된 Razor 컨트롤러나 페이지 모델의 속성에는 해당 값이 사전에 저장 되 고 로드 됩니다. `[ViewData]`
+[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 사용하는 또 다른 방법은 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)입니다. 특성으로 표시 된 컨트롤러나 페이지 모델의 속성에는 Razor `[ViewData]` 해당 값이 사전에 저장 되 고 로드 됩니다.
 
 다음 예제에서 홈 컨트롤러에는 `[ViewData]`로 표시된 `Title` 속성이 있습니다. `About` 메서드는 정보 보기에 대한 제목을 설정합니다.
 
@@ -278,7 +280,7 @@ public class HomeController : Controller
 }
 ```
 
-레이아웃에서 제목은 ViewData 사전에서 읽습니다.
+레이아웃에서는 ViewData 사전으로부터 이 제목을 읽습니다.
 
 ```cshtml
 <!DOCTYPE html>
@@ -292,7 +294,7 @@ public class HomeController : Controller
 
 **ViewBag**
 
-`ViewBag`*페이지에서 Razor 사용할 수 없습니다.*
+`ViewBag`*에서 Razor 사용할 수 없음 페이지.*
 
 `ViewBag`은 `ViewData`에 저장된 개체에 대한 동적 액세스를 제공하는 [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) 개체입니다. 캐스팅이 필요하지 않으므로 `ViewBag`이 작업하기 더 편리할 수 있습니다. 다음 예제에서는 `ViewData`를 사용할 때와 동일한 결과를 보여주는 `ViewBag`을 사용하는 방법을 보여 줍니다.
 
@@ -325,7 +327,7 @@ public IActionResult SomeAction()
 
 **ViewData 및 ViewBag을 동시에 사용**
 
-`ViewBag`*페이지에서 Razor 사용할 수 없습니다.*
+`ViewBag`*에서 Razor 사용할 수 없음 페이지.*
 
 `ViewData` 및 `ViewBag`은 동일한 기본 `ViewData` 컬렉션을 사용하므로 `ViewData` 및 `ViewBag`을 모두 사용하고 값을 읽고 쓸 때 이들을 혼합 및 일치시킬 수 있습니다.
 
@@ -365,10 +367,10 @@ public IActionResult SomeAction()
 
 **ViewData 및 ViewBag 간의 차이점 요약**
 
- `ViewBag`Razor 페이지에서 사용할 수 없습니다.
+ `ViewBag`페이지에서 사용할 수 없습니다 Razor .
 
 * `ViewData`
-  * 는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) `ContainsKey`에서 파생 되므로 `Add`, `Remove`, 및 `Clear`와 같이 유용할 수 있는 사전 속성이 있습니다.
+  * 는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)에서 파생 되므로,, 및와 같이 유용할 수 있는 사전 속성이 있습니다 `ContainsKey` `Add` `Remove` `Clear` .
   * 사전의 키는 문자열이므로 공백을 사용할 수 있습니다. 예: `ViewData["Some Key With Whitespace"]`
   * `string` 이외의 모든 형식을 뷰에서 `ViewData`를 사용하도록 캐스트해야 합니다.
 * `ViewBag`

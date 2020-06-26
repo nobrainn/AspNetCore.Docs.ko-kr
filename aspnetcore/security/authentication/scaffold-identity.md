@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103036"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400819"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core 프로젝트의 스 캐 폴드
 
@@ -178,7 +180,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor 기존 권한 부여를 사용 하지 않고 서버 프로젝트로 스 캐 폴드
+## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Server 기존 권한 부여 없이 프로젝트에 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -195,7 +197,7 @@ Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자�
 * 인증 토큰을 프로 비전 하 여 인증 쿠키에 저장 하는 경우 구성 요소에 전달할 수 있습니다.
 * Razor구성 요소 `HttpContext` 는 직접 사용할 수 없으므로의 로그 아웃 끝점에 게시 하기 위해 [XSRF (요청 방지 위조) 토큰](xref:security/anti-request-forgery) 을 얻을 수 있는 방법이 없습니다 Identity `/Identity/Account/Logout` . XSRF 토큰을 구성 요소에 전달할 수 있습니다.
 
-자세한 내용은 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>을 참조하세요.
+자세한 내용은 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>를 참조하세요.
 
 *Pages/_Host* 파일에서 및 클래스에 토큰을 추가한 후에 토큰을 설정 합니다 `InitialApplicationState` `TokenProvider` .
 
@@ -289,11 +291,11 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 ### <a name="style-authentication-endpoints"></a>스타일 인증 끝점
 
-Blazor서버에서는 페이지 Razor Identity 페이지를 사용 하므로 방문자가 페이지와 구성 요소 간을 탐색할 때 UI의 스타일이 변경 Identity 됩니다. Incongruous 스타일을 해결 하는 두 가지 옵션이 있습니다.
+Blazor Server에서는 페이지 Razor 페이지를 사용 하므로 Identity 방문자가 Identity 페이지와 구성 요소 간을 탐색할 때 UI의 스타일이 변경 됩니다. Incongruous 스타일을 해결 하는 두 가지 옵션이 있습니다.
 
 #### <a name="build-identity-components"></a>빌드 Identity 구성 요소
 
-페이지 대신 구성 요소를 사용 하는 방법은 Identity 구성 요소를 빌드하는 것입니다 Identity . `SignInManager`및 `UserManager` 는 구성 요소에서 지원 되지 않기 때문에 Razor 서버 앱에서 API 끝점을 사용 Blazor 하 여 사용자 계정 작업을 처리 합니다.
+페이지 대신 구성 요소를 사용 하는 방법은 Identity 구성 요소를 빌드하는 것입니다 Identity . `SignInManager`및 `UserManager` 는 구성 요소에서 지원 되지 않으므로 Razor 앱에서 API 끝점을 사용 Blazor Server 하 여 사용자 계정 작업을 처리 합니다.
 
 #### <a name="use-a-custom-layout-with-blazor-app-styles"></a>앱 스타일을 사용 하 여 사용자 지정 레이아웃 사용 Blazor
 
@@ -360,7 +362,7 @@ Identity페이지 레이아웃 및 스타일을 수정 하 여 기본 테마를 
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor 권한 부여를 사용 하 여 서버 프로젝트로 스 캐 폴드
+## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Server 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -404,7 +406,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
+* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들면 다음과 같습니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -470,7 +472,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 정적 Identity 자산을 웹 루트에 게시 하지 않으려면를 참조 하십시오 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 
@@ -649,7 +651,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
+* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들면 다음과 같습니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -711,7 +713,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 

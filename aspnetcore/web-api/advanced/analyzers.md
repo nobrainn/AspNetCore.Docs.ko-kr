@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 530ce2d2a7f67f549f6d188a0c571a5d58518377
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1f44fd65836cc42ffb2303890eefb053b61c4c30
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776248"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399467"
 ---
 # <a name="use-web-api-analyzers"></a>웹 API 분석기 사용
 
@@ -54,9 +56,9 @@ ASP.NET Core 3.0 이상에서 분석기는 .NET Core SDK에 포함되어 있습�
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **패키지 관리자 콘솔** 창에서:
-  * **보기** > **다른 창** > **패키지 관리자 콘솔**로 이동합니다.
+  * **View** > **다른 Windows** > **패키지 관리자 콘솔**보기로 이동 합니다.
   * *ApiConventions.csproj* 파일이 위치한 디렉터리로 이동합니다.
-  * 다음 명령을 실행하십시오.
+  * 다음 명령을 실행합니다.
 
     ```powershell
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -64,7 +66,7 @@ ASP.NET Core 3.0 이상에서 분석기는 .NET Core SDK에 포함되어 있습�
 
 ### <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-* **패키지 추가** **Solution Pad** > 에서 *패키지* 폴더를 마우스 오른쪽 단추로 클릭 합니다.
+* *Packages* **Solution Pad** > **패키지 추가**Solution Pad에서 패키지 폴더를 마우스 오른쪽 단추로 클릭 합니다.
 * **패키지 추가** 창의 **원본** 드롭다운을 "nuget.org"로 설정 합니다.
 * 검색 상자에 "Microsoft.AspNetCore.Mvc.Api.Analyzers"를 입력합니다.
 * 결과 창에서 "Microsoft.AspNetCore.Mvc.Api.Analyzers" 패키지를 선택하고 **패키지 추가**를 클릭합니다.
@@ -79,7 +81,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ### <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-다음 명령 실행:
+다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers

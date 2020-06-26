@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 12/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 2e604cd1869ea077fc0465df91ec083b9db83763
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768972"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400156"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -32,7 +34,7 @@ ms.locfileid: "82768972"
 컨트롤러와 Razor 페이지는 HTTP 요청에서 가져온 데이터로 작동 합니다. 예를 들어 경로 데이터는 레코드 키를 제공할 수 있으며, 게시된 양식 필드는 모델의 속성에 대한 값을 제공할 수 있습니다. 이러한 각 값을 검색하고 문자열에서 .NET 형식으로 변환하도록 코드를 작성하는 것은 번거롭고 오류가 발생하기 쉽습니다. 모델 바인딩은 이 프로세스를 자동화합니다. 모델 바인딩 시스템:
 
 * 경로 데이터, 양식 필드 및 쿼리 문자열과 같은 다양한 원본의 데이터를 검색합니다.
-* 메서드 매개 변수 및 공용 속성 Razor 의 컨트롤러 및 페이지에 데이터를 제공 합니다.
+* Razor메서드 매개 변수 및 공용 속성의 컨트롤러 및 페이지에 데이터를 제공 합니다.
 * 문자열 데이터를 .NET 형식으로 변환합니다.
 * 복합 형식의 속성을 업데이트합니다.
 
@@ -66,7 +68,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 모델 바인딩은 다음 종류의 대상에 대한 값을 찾으려고 합니다.
 
 * 요청이 라우팅되는 컨트롤러 작업 메서드의 매개 변수
-* 요청이 라우팅되는 Razor 페이지 처리기 메서드의 매개 변수입니다. 
+* Razor요청이 라우팅되는 페이지 처리기 메서드의 매개 변수입니다. 
 * 특성으로 지정되는 경우 컨트롤러 또는 `PageModel` 클래스의 공용 속성
 
 ### <a name="bindproperty-attribute"></a>[BindProperty] 특성
@@ -93,7 +95,7 @@ ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 �
 
 1. 양식 필드
 1. 요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)
-1. 데이터 라우팅
+1. 경로 데이터
 1. 쿼리 문자열 매개 변수
 1. 업로드된 파일
 
@@ -174,7 +176,7 @@ public class Pet
 * 복합 형식의 경우 모델 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 인스턴스를 만듭니다.
 * 배열은 `byte[]` 배열이 `null`로 설정되는 점을 제외하고 `Array.Empty<T>()`로 설정됩니다.
 
-모델 속성의 폼 필드에 아무 것도 없는 경우 모델 상태가 무효화 되어야 하면 [`[BindRequired]`](#bindrequired-attribute) 특성을 사용 합니다.
+모델 속성의 폼 필드에 아무 것도 없는 경우 모델 상태가 무효화 되어야 하면 특성을 사용 [`[BindRequired]`](#bindrequired-attribute) 합니다.
 
 이 `[BindRequired]` 동작은 요청 본문의 JSON 또는 XML 데이터가 아니라 게시된 양식 데이터의 모델 바인딩에 적용됩니다. 요청 본문 데이터는 [입력 포맷터](#input-formatters)에서 처리됩니다.
 
@@ -184,11 +186,11 @@ public class Pet
 
 `[ApiController]` 특성이 있는 API 컨트롤러에서 잘못된 모델 상태로 자동 HTTP 400 응답이 발생합니다.
 
-Razor 페이지에서 오류 메시지를 표시 하 고 페이지를 다시 표시 합니다.
+페이지에서 오류 메시지를 표시 하 고 페이지를 다시 표시 Razor 합니다.
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-클라이언트 쪽 유효성 검사는 Razor 페이지 형태로 전송 될 수 있는 대부분의 잘못 된 데이터를 catch 합니다. 이 유효성 검사는 위의 강조 표시된 코드를 트리거하기 어렵게 만듭니다. 샘플 앱은 **Hire Date** 필드에 잘못된 데이터를 배치하고 양식을 제출하는 **잘못된 데이터로 제출** 단추를 포함합니다. 이 단추는 데이터 변환 오류가 발생하는 경우 페이지를 다시 표시하기 위해 코드가 작동하는 방식을 보여 줍니다.
+클라이언트 쪽 유효성 검사는 페이지 형태로 전송 될 수 있는 대부분의 잘못 된 데이터를 catch Razor 합니다. 이 유효성 검사는 위의 강조 표시된 코드를 트리거하기 어렵게 만듭니다. 샘플 앱은 **Hire Date** 필드에 잘못된 데이터를 배치하고 양식을 제출하는 **잘못된 데이터로 제출** 단추를 포함합니다. 이 단추는 데이터 변환 오류가 발생하는 경우 페이지를 다시 표시하기 위해 코드가 작동하는 방식을 보여 줍니다.
 
 위의 코드로 페이지가 다시 표시될 때 잘못된 입력은 양식 필드에 표시되지 않습니다. 이는 모델 속성이 Null 또는 기본값으로 설정되었기 때문입니다. 잘못된 입력은 오류 메시지에 표시됩니다. 그러나 양식 필드에 잘못된 데이터를 다시 표시하려는 경우 모델 속성을 문자열로 만들고 데이터 변환을 수동으로 수행하는 것이 좋습니다.
 
@@ -201,18 +203,18 @@ Razor 페이지에서 오류 메시지를 표시 하 고 페이지를 다시 표
 * [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
-* [날짜](xref:System.ComponentModel.DateTimeConverter)
+* [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [10진수](xref:System.ComponentModel.DecimalConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [double](xref:System.ComponentModel.DoubleConverter)
 * [열거형](xref:System.ComponentModel.EnumConverter)
-* [GUID](xref:System.ComponentModel.GuidConverter)
+* [Eid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
-* [URI](xref:System.UriTypeConverter)
-* [Version](xref:System.ComponentModel.VersionConverter)
+* [Uri](xref:System.UriTypeConverter)
+* [버전](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>복합 형식
 
@@ -312,7 +314,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>컬렉션
 
-단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들어:
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
 
 * 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
 
@@ -357,7 +359,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>사전
 
-`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들어:
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
 
 * 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
 
@@ -518,7 +520,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 컨트롤러와 Razor 페이지는 HTTP 요청에서 가져온 데이터로 작동 합니다. 예를 들어 경로 데이터는 레코드 키를 제공할 수 있으며, 게시된 양식 필드는 모델의 속성에 대한 값을 제공할 수 있습니다. 이러한 각 값을 검색하고 문자열에서 .NET 형식으로 변환하도록 코드를 작성하는 것은 번거롭고 오류가 발생하기 쉽습니다. 모델 바인딩은 이 프로세스를 자동화합니다. 모델 바인딩 시스템:
 
 * 경로 데이터, 양식 필드 및 쿼리 문자열과 같은 다양한 원본의 데이터를 검색합니다.
-* 메서드 매개 변수 및 공용 속성 Razor 의 컨트롤러 및 페이지에 데이터를 제공 합니다.
+* Razor메서드 매개 변수 및 공용 속성의 컨트롤러 및 페이지에 데이터를 제공 합니다.
 * 문자열 데이터를 .NET 형식으로 변환합니다.
 * 복합 형식의 속성을 업데이트합니다.
 
@@ -552,7 +554,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 모델 바인딩은 다음 종류의 대상에 대한 값을 찾으려고 합니다.
 
 * 요청이 라우팅되는 컨트롤러 작업 메서드의 매개 변수
-* 요청이 라우팅되는 Razor 페이지 처리기 메서드의 매개 변수입니다. 
+* Razor요청이 라우팅되는 페이지 처리기 메서드의 매개 변수입니다. 
 * 특성으로 지정되는 경우 컨트롤러 또는 `PageModel` 클래스의 공용 속성
 
 ### <a name="bindproperty-attribute"></a>[BindProperty] 특성
@@ -579,7 +581,7 @@ ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 �
 
 1. 양식 필드
 1. 요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)
-1. 데이터 라우팅
+1. 경로 데이터
 1. 쿼리 문자열 매개 변수
 1. 업로드된 파일
 
@@ -660,7 +662,7 @@ public class Pet
 * 복합 형식의 경우 모델 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 인스턴스를 만듭니다.
 * 배열은 `byte[]` 배열이 `null`로 설정되는 점을 제외하고 `Array.Empty<T>()`로 설정됩니다.
 
-모델 속성의 폼 필드에 아무 것도 없는 경우 모델 상태가 무효화 되어야 하면 [`[BindRequired]`](#bindrequired-attribute) 특성을 사용 합니다.
+모델 속성의 폼 필드에 아무 것도 없는 경우 모델 상태가 무효화 되어야 하면 특성을 사용 [`[BindRequired]`](#bindrequired-attribute) 합니다.
 
 이 `[BindRequired]` 동작은 요청 본문의 JSON 또는 XML 데이터가 아니라 게시된 양식 데이터의 모델 바인딩에 적용됩니다. 요청 본문 데이터는 [입력 포맷터](#input-formatters)에서 처리됩니다.
 
@@ -670,11 +672,11 @@ public class Pet
 
 `[ApiController]` 특성이 있는 API 컨트롤러에서 잘못된 모델 상태로 자동 HTTP 400 응답이 발생합니다.
 
-Razor 페이지에서 오류 메시지를 표시 하 고 페이지를 다시 표시 합니다.
+페이지에서 오류 메시지를 표시 하 고 페이지를 다시 표시 Razor 합니다.
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-클라이언트 쪽 유효성 검사는 Razor 페이지 형태로 전송 될 수 있는 대부분의 잘못 된 데이터를 catch 합니다. 이 유효성 검사는 위의 강조 표시된 코드를 트리거하기 어렵게 만듭니다. 샘플 앱은 **Hire Date** 필드에 잘못된 데이터를 배치하고 양식을 제출하는 **잘못된 데이터로 제출** 단추를 포함합니다. 이 단추는 데이터 변환 오류가 발생하는 경우 페이지를 다시 표시하기 위해 코드가 작동하는 방식을 보여 줍니다.
+클라이언트 쪽 유효성 검사는 페이지 형태로 전송 될 수 있는 대부분의 잘못 된 데이터를 catch Razor 합니다. 이 유효성 검사는 위의 강조 표시된 코드를 트리거하기 어렵게 만듭니다. 샘플 앱은 **Hire Date** 필드에 잘못된 데이터를 배치하고 양식을 제출하는 **잘못된 데이터로 제출** 단추를 포함합니다. 이 단추는 데이터 변환 오류가 발생하는 경우 페이지를 다시 표시하기 위해 코드가 작동하는 방식을 보여 줍니다.
 
 위의 코드로 페이지가 다시 표시될 때 잘못된 입력은 양식 필드에 표시되지 않습니다. 이는 모델 속성이 Null 또는 기본값으로 설정되었기 때문입니다. 잘못된 입력은 오류 메시지에 표시됩니다. 그러나 양식 필드에 잘못된 데이터를 다시 표시하려는 경우 모델 속성을 문자열로 만들고 데이터 변환을 수동으로 수행하는 것이 좋습니다.
 
@@ -687,18 +689,18 @@ Razor 페이지에서 오류 메시지를 표시 하 고 페이지를 다시 표
 * [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
-* [날짜](xref:System.ComponentModel.DateTimeConverter)
+* [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [10진수](xref:System.ComponentModel.DecimalConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [double](xref:System.ComponentModel.DoubleConverter)
 * [열거형](xref:System.ComponentModel.EnumConverter)
-* [GUID](xref:System.ComponentModel.GuidConverter)
+* [Eid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
-* [URI](xref:System.UriTypeConverter)
-* [Version](xref:System.ComponentModel.VersionConverter)
+* [Uri](xref:System.UriTypeConverter)
+* [버전](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>복합 형식
 
@@ -798,7 +800,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>컬렉션
 
-단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들어:
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
 
 * 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
 
@@ -843,7 +845,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>사전
 
-`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들어:
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
 
 * 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
 

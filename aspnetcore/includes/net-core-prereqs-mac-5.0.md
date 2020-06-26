@@ -1,1 +1,2 @@
-ASP.NET Core 5.0는 Mac용 Visual Studio에서 아직 지원 되지 않습니다.
+* [Mac용 Visual Studio 미리 보기](https://visualstudio.microsoft.com/vs/mac/)
+* [!INCLUDE [.NET 5.0 SDK](~/includes/5.0-SDK.md)]

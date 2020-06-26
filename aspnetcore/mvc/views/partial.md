@@ -7,27 +7,29 @@ ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 1bce6b9cdc876062b050eae6eb3c4acf0127ce92
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777126"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399714"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core의 부분 보기
 
 작성자: [Steve Smith](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Scott Sauber](https://twitter.com/scottsauber)
 
-부분 보기는 다른 태그 [Razor](xref:mvc/views/razor) 파일의 렌더링 된 출력 *내에서* HTML 출력을 렌더링 하는 태그 파일 (*cshtml*)입니다.
+부분 보기는 [Razor](xref:mvc/views/razor) 다른 태그 파일의 렌더링 된 출력 *내에서* HTML 출력을 렌더링 하는 태그 파일 (*cshtml*)입니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-용어 *부분 보기* 는 태그 파일을 *뷰*라고 하는 MVC 앱 이나 태그 파일을 Razor *페이지*라고 하는 pages 앱을 개발할 때 사용 됩니다. 이 항목에서는 일반적으로 MVC 뷰 및 Razor 페이지 페이지를 *태그 파일로*나타냅니다.
+용어 *부분 보기* 는 태그 파일을 *뷰*라고 하는 MVC 앱 이나 Razor 태그 파일을 *페이지*라고 하는 pages 앱을 개발할 때 사용 됩니다. 이 항목에서는 일반적으로 MVC 뷰 및 Razor 페이지 페이지를 *태그 파일로*나타냅니다.
 
 ::: moniker-end
 
@@ -52,9 +54,9 @@ ms.locfileid: "82777126"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-부분 보기는 *Views* 폴더 (MVC) 또는 *pages* 폴더 (Razor 페이지) 내에서 유지 관리 되는 *cshtml* 태그 파일입니다.
+부분 보기는 *Views* 폴더 (MVC) 또는 *pages* 폴더 (페이지) 내에서 유지 관리 되는 *cshtml* 태그 파일입니다 Razor .
 
-ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. 페이지 Razor 에서는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 개체로 표시 된 부분 뷰를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
+ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. Razor페이지에서는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 개체로 표시 된 부분 뷰를 반환할 수 있습니다 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> . 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
 
 MVC 보기 또는 페이지 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하지 않습니다. *_ViewStart.cshtml*에 대한 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
 
@@ -78,9 +80,9 @@ MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>PageModel Razor 페이지에서 부분 보기 사용
+### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>PageModel 페이지에서 부분 보기 사용 Razor
 
-ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드 * \_* 는 응답에 대 한 다음과 같은 작업을 수행 합니다.
+ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드는 응답에 대 한 다음과 같은 작업을 수행 * \_ 합니다.*
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -207,7 +209,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 @await Html.PartialAsync("../Account/_LoginPartial.cshtml")
 ```
 
-또는 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartialAsync*>를 사용하여 부분 보기를 렌더링할 수 있습니다. 이 메서드는 <xref:Microsoft.AspNetCore.Html.IHtmlContent>를 반환하지 않습니다. 렌더링된 출력을 응답에 직접 스트리밍합니다. 이 메서드는 결과를 반환 하지 않으므로 Razor 코드 블록 내에서 호출 해야 합니다.
+또는 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartialAsync*>를 사용하여 부분 보기를 렌더링할 수 있습니다. 이 메서드는 <xref:Microsoft.AspNetCore.Html.IHtmlContent>를 반환하지 않습니다. 렌더링된 출력을 응답에 직접 스트리밍합니다. 이 메서드는 결과를 반환 하지 않으므로 코드 블록 내에서 호출 해야 합니다 Razor .
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Home/Discovery.cshtml?name=snippet_RenderPartialAsync)]
 
@@ -269,10 +271,10 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 * 부분 보기가 다른 폴더에 존재할 경우 파일 이름이 같은 다른 부분 보기가 허용됩니다.
 * 파일 확장명 없이 이름으로 부분 보기를 참조하면서 부분 보기가 호출자의 폴더와 *Shared* 폴더 모두에 존재할 경우 호출자 폴더에 위치해 있는 부분 보기가 부분 보기를 제공합니다. 호출자의 폴더에 부분 보기가 존재하지 않으면 부분 보기는 *Shared* 폴더에서 제공됩니다. *Shared* 폴더의 부분 보기를 *공유 부분 보기* 또는 *기본 부분 보기*라고 합니다.
-* 부분 뷰&mdash;를 연결할 *수 있습니다*. 순환 참조가 호출로 구성 되지 않은 경우 부분 보기는 다른 부분 뷰를 호출할 수 있습니다. 상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
+* 부분 뷰를 연결할 *수*있습니다 &mdash; . 순환 참조가 호출로 구성 되지 않은 경우 부분 보기는 다른 부분 뷰를 호출할 수 있습니다. 상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
 
 > [!NOTE]
-> 부분 [Razor](xref:mvc/views/razor) `section` 보기에 정의 된는 부모 태그 파일에 표시 되지 않습니다. `section`만 정의되어 있는 부분 보기에 표시됩니다.
+> [Razor](xref:mvc/views/razor) `section` 부분 보기에 정의 된는 부모 태그 파일에 표시 되지 않습니다. `section`만 정의되어 있는 부분 보기에 표시됩니다.
 
 ## <a name="access-data-from-partial-views"></a>부분 보기에서 데이터 액세스
 

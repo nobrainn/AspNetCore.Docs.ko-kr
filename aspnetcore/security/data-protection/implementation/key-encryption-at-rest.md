@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/16/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: c927c926212aeb1263d15fd3fdc753c377b2e305
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
+ms.openlocfilehash: eaa855d48437f80ab912780205530843a9c56476
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153565"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399701"
 ---
 # <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>ASP.NET Core를 사용 하 여 Windows 및 Azure에서 휴지 상태의 키 암호화
 

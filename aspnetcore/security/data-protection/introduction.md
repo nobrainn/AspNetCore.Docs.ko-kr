@@ -7,23 +7,25 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: db2c22454fc6c7e663ca603e9d70b6c12ce31af4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775806"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399532"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호
 
 웹 응용 프로그램은 보안에 중요 한 데이터를 저장 해야 하는 경우가 많습니다. Windows에서는 데스크톱 응용 프로그램에 대해 DPAPI를 제공 하지만 웹 응용 프로그램에는 적합 하지 않습니다. ASP.NET Core 데이터 보호 스택은 개발자가 키 관리 및 순환을 포함 하 여 데이터를 보호 하는 데 사용할 수 있는 간단 하 고 사용 하기 쉬운 암호화 API를 제공 합니다.
 
-ASP.NET Core data protection stack은 ASP.NET 1.x-4.x. x에서 &lt;machineKey&gt; 요소에 대 한 장기 대체 역할을 하도록 디자인 되었습니다. 최신 응용 프로그램에서 발생할 수 있는 대부분의 사용 사례에 대 한 기본 제공 솔루션을 제공 하는 동시에 이전 암호화 스택의 많은 단점을 해결 하도록 설계 되었습니다.
+ASP.NET Core data protection stack은 ASP.NET 1.x-4.x. &lt; x에서 machineKey 요소에 대 한 장기 대체 역할을 하도록 디자인 되었습니다. &gt; 최신 응용 프로그램에서 발생할 수 있는 대부분의 사용 사례에 대 한 기본 제공 솔루션을 제공 하는 동시에 이전 암호화 스택의 많은 단점을 해결 하도록 설계 되었습니다.
 
 ## <a name="problem-statement"></a>문제 설명
 
@@ -73,13 +75,13 @@ ASP.NET Core 데이터 보호 Api는 주로 기밀 페이로드의 무한 지 �
 
 데이터 보호 스택은 5 개의 패키지로 구성 됩니다.
 
-* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) 는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> 데이터 보호 서비스를 만들기 위한 및 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 인터페이스를 포함 합니다. 또한 이러한 형식 (예: [IDataProtector](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*))으로 작업 하는 데 유용한 확장 메서드가 포함 되어 있습니다. 데이터 보호 시스템이 다른 곳에서 인스턴스화되고 API를 사용 하는 경우 참조 `Microsoft.AspNetCore.DataProtection.Abstractions`합니다.
+* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) 는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 데이터 보호 서비스를 만들기 위한 및 인터페이스를 포함 합니다. 또한 이러한 형식 (예: [IDataProtector](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*))으로 작업 하는 데 유용한 확장 메서드가 포함 되어 있습니다. 데이터 보호 시스템이 다른 곳에서 인스턴스화되고 API를 사용 하는 경우 참조 `Microsoft.AspNetCore.DataProtection.Abstractions` 합니다.
 
-* [AspNetCore 보호](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) 는 핵심 암호화 작업, 키 관리, 구성 및 확장성을 포함 하 여 데이터 보호 시스템의 핵심 구현을 포함 합니다. 데이터 보호 시스템을 (예:에 추가 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) 인스턴스화하거나 해당 동작을 수정 하거나 확장 하려면를 참조 `Microsoft.AspNetCore.DataProtection`합니다.
+* [AspNetCore 보호](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) 는 핵심 암호화 작업, 키 관리, 구성 및 확장성을 포함 하 여 데이터 보호 시스템의 핵심 구현을 포함 합니다. 데이터 보호 시스템을 (예:에 추가 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> ) 인스턴스화하거나 해당 동작을 수정 하거나 확장 하려면를 참조 `Microsoft.AspNetCore.DataProtection` 합니다.
 
-* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 에는 개발자가 유용 하지만 핵심 패키지에 속하지 않는 추가 api가 포함 되어 있습니다. 예를 들어이 패키지에는 데이터 보호 시스템을 인스턴스화하여 종속성 주입 없이 파일 시스템의 위치에 키를 저장 하는 팩터리 메서드가 포함 되어 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>있습니다 (참조). 또한 보호 된 페이로드의 수명을 제한 하는 확장 메서드도 포함 되어 있습니다 ( <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>참조).
+* [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 에는 개발자가 유용 하지만 핵심 패키지에 속하지 않는 추가 api가 포함 되어 있습니다. 예를 들어이 패키지에는 데이터 보호 시스템을 인스턴스화하여 종속성 주입 없이 파일 시스템의 위치에 키를 저장 하는 팩터리 메서드가 포함 되어 있습니다 (참조 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> ). 또한 보호 된 페이로드의 수명을 제한 하는 확장 메서드도 포함 되어 있습니다 (참조 <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector> ).
 
-* [AspNetCore 웹](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) 은 기존 ASP.NET 4.x 앱에 설치 하 여 새 ASP.NET Core 데이터 보호 스택을 사용 하도록 `<machineKey>` 작업을 리디렉션할 수 있습니다. 자세한 내용은 <xref:security/data-protection/compatibility/replacing-machinekey>를 참조하세요.
+* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) 를 기존 ASP.NET 4.x 앱에 설치 하 여 `<machineKey>` 새 ASP.NET Core 데이터 보호 스택을 사용 하도록 작업을 리디렉션할 수 있습니다. 자세한 내용은 <xref:security/data-protection/compatibility/replacing-machinekey>를 참조하세요.
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) 는 PBKDF2 암호 해시 루틴의 구현을 제공 하며, 사용자 암호를 안전 하 게 처리 해야 하는 시스템에서 사용할 수 있습니다. 자세한 내용은 <xref:security/data-protection/consumer-apis/password-hashing>를 참조하세요.
 

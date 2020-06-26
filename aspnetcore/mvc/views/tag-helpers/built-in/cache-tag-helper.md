@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773944"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399285"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC의 캐시 태그 도우미
 
@@ -25,9 +27,9 @@ ms.locfileid: "82773944"
 
 캐시 태그 도우미는 ASP.NET Core 앱의 콘텐츠를 내부 ASP.NET Core 캐시 공급자에 캐시하여 성능을 개선하는 기능을 제공합니다.
 
-태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>을 참조하세요.
+태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
-다음 Razor 태그는 현재 날짜를 캐시합니다.
+Razor현재 날짜를 캐시 하는 태그는 다음과 같습니다.
 
 ```cshtml
 <cache>@DateTime.Now</cache>
@@ -39,9 +41,9 @@ ms.locfileid: "82773944"
 
 ### <a name="enabled"></a>사용
 
-| 특성 유형  | 예        | 기본값 |
+| 특성 유형  | 예제        | 기본값 |
 | --------------- | --------------- | ------- |
-| Boolean         | `true`, `false` | `true`  |
+| 부울         | `true`, `false` | `true`  |
 
 `enabled`는 캐시 태그 도우미로 묶인 콘텐츠를 캐시할지 여부를 결정합니다. 기본값은 `true`입니다. `false`로 설정하면 렌더링된 출력이 캐시되지 **않습니다**.
 
@@ -85,7 +87,7 @@ ms.locfileid: "82773944"
 </cache>
 ```
 
-Razor 보기 엔진은 기본 `expires-after` 값을 20분으로 설정합니다.
+Razor뷰 엔진은 기본값 `expires-after` 을 20 분으로 설정 합니다.
 
 ### <a name="expires-sliding"></a>expires-sliding
 
@@ -105,7 +107,7 @@ Razor 보기 엔진은 기본 `expires-after` 값을 20분으로 설정합니다
 
 ### <a name="vary-by-header"></a>vary-by-header
 
-| 특성 유형 | 예                                    |
+| 특성 유형 | 예제                                    |
 | -------------- | ------------------------------------------- |
 | String         | `User-Agent`, `User-Agent,content-encoding` |
 
@@ -121,7 +123,7 @@ Razor 보기 엔진은 기본 `expires-after` 값을 20분으로 설정합니다
 
 ### <a name="vary-by-query"></a>vary-by-query
 
-| 특성 유형 | 예             |
+| 특성 유형 | 예제             |
 | -------------- | -------------------- |
 | String         | `Make`, `Make,Model` |
 
@@ -137,7 +139,7 @@ Razor 보기 엔진은 기본 `expires-after` 값을 20분으로 설정합니다
 
 ### <a name="vary-by-route"></a>vary-by-route
 
-| 특성 유형 | 예             |
+| 특성 유형 | 예제             |
 | -------------- | -------------------- |
 | String         | `Make`, `Make,Model` |
 
@@ -163,13 +165,13 @@ routes.MapRoute(
 
 ### <a name="vary-by-cookie"></a>vary-by-cookie
 
-| 특성 유형 | 예                                                                         |
+| 특성 유형 | 예제                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
 | String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
 `vary-by-cookie`는 쿠키 값이 변경될 때 캐시 새로 고침을 트리거할 쉼표로 구분된 쿠키 이름 목록을 허용합니다.
 
-다음 예제는 ASP.NET Core Identity와 관련된 쿠키를 모니터링합니다. 사용자가 인증되면 Identity 쿠키의 변경으로 인해 캐시 새로 고침이 트리거됩니다.
+다음 예제에서는 ASP.NET Core와 연결 된 쿠키를 모니터링 합니다 Identity . 사용자가 인증 되 면 쿠키를 변경 하 여 Identity 캐시 새로 고침을 트리거합니다.
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -179,11 +181,11 @@ routes.MapRoute(
 
 ### <a name="vary-by-user"></a>vary-by-user
 
-| 특성 유형  | 예        | 기본값 |
+| 특성 유형  | 예제        | 기본값 |
 | --------------- | --------------- | ------- |
-| Boolean         | `true`, `false` | `true`  |
+| 부울         | `true`, `false` | `true`  |
 
-`vary-by-user`는 로그인한 사용자(또는 컨텍스트 보안 주체)가 변경될 때 캐시를 다시 설정할지 여부를 지정합니다. 현재 사용자를 요청 컨텍스트 보안 주체라고도 하며 `@User.Identity.Name`을 참조하여 Razor 보기에서 확인할 수 있습니다.
+`vary-by-user`는 로그인한 사용자(또는 컨텍스트 보안 주체)가 변경될 때 캐시를 다시 설정할지 여부를 지정합니다. 현재 사용자를 요청 컨텍스트 보안 주체 라고도 하며를 Razor 참조 하 여 뷰에서 볼 수 있습니다 `@User.Identity.Name` .
 
 다음 예제는 현재 로그인한 사용자를 모니터링하여 캐시 새로 고침을 트리거합니다.
 
@@ -228,7 +230,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| 특성 유형      | 예                               | 기본값  |
+| 특성 유형      | 예제                               | 기본값  |
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 
