@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 01ee18bf9b55b197c5ec03967d898f37bff43151
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 7f92f82d6e78771494b9f2358ee19153502f8dcb
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103299"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243046"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor 서버 추가 보안 시나리오
 
@@ -76,7 +76,7 @@ services.AddHttpClient();
 services.AddScoped<TokenProvider>();
 ```
 
-*_Host.cshtml* 파일에서 `InitialApplicationState`의 인스턴스를 만들어서 앱에 매개 변수로 전달합니다.
+`_Host.cshtml` 파일에서 `InitialApplicationState`의 인스턴스를 만들어 앱에 매개 변수로 전달합니다.
 
 ```cshtml
 @using Microsoft.AspNetCore.Authentication
@@ -97,7 +97,7 @@ services.AddScoped<TokenProvider>();
 </app>
 ```
 
-`App` 구성 요소(*App.razor*)에서 서비스를 확인하고 매개 변수로 받은 데이터를 사용하여 초기화합니다.
+`App` 구성 요소(`App.razor`)에서 서비스를 확인하고 매개 변수로 받은 데이터를 사용하여 초기화합니다.
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -172,7 +172,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-또는 앱 설정(*appsettings.json*) 파일에서 설정을 적용할 수도 있습니다.
+또는 앱 설정(`appsettings.json`) 파일에서 설정을 수행할 수 있습니다.
 
 ```json
 {
@@ -203,11 +203,11 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 
 ### App ID URI
 
-* When using v2.0 endpoints, APIs define an *App ID URI*, which is meant to represent a unique identifier for the API.
+* When using v2.0 endpoints, APIs define an *`App ID URI`*, which is meant to represent a unique identifier for the API.
 * All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
 * When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
 
-*appsettings.json*:
+`appsettings.json`:
 
 ```json
 {

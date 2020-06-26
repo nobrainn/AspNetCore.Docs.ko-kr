@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 073a2a85369a100352a163693c5cba907203059e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a94dcd818c3f4e19ace57fad6390a84e704192bd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103300"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242968"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor 서버를 위한 위협 완화 지침
 
@@ -134,7 +134,7 @@ DoS(서비스 거부) 공격에서는 클라이언트가 서버로 하여금 하
 
 위와 같은 시나리오를 방지하려면 다음과 같은 예방 조치를 수행하세요.
 
-* 호출 중에 발생할 수 있는 오류를 고려하여 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문 내에서 JS interop 호출을 래핑합니다. 자세한 내용은 <xref:blazor/fundamentals/handle-errors#javascript-interop>를 참조하세요.
+* 호출 중에 발생할 수 있는 오류를 고려하여 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문 내에 JS interop 호출을 래핑합니다. 자세한 내용은 <xref:blazor/fundamentals/handle-errors#javascript-interop>를 참조하세요.
 * 다른 동작을 수행하기 전에 JS interop 호출에서 반환된 데이터(오류 메시지 포함)의 유효성을 검사합니다.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>브라우저에서 호출된 .NET 메서드
@@ -302,7 +302,7 @@ ASP.NET Core 앱을 보호하기 위한 지침은 Blazor 서버 앱에도 적용
 JavaScript에서 다음을 사용하여 세부 오류를 사용하도록 설정합니다.
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
-* `DetailedErrors` 구성 키를 `true`로 설정합니다. 구성 키는 앱 설정 파일(*appsettings.json*)에서 설정할 수 있습니다. `ASPNETCORE_DETAILEDERRORS` 환경 변수의 값을 `true`로 설정하여 키를 설정할 수도 있습니다.
+* `DetailedErrors` 구성 키를 `true`로 설정합니다. 구성 키는 앱 설정 파일(`appsettings.json`)에서 설정할 수 있습니다. `ASPNETCORE_DETAILEDERRORS` 환경 변수의 값을 `true`로 설정하여 키를 설정할 수도 있습니다.
 
 > [!WARNING]
 > 인터넷에서 사용되는 클라이언트로 오류 정보를 노출하는 것은 항상 피해야 하는 보안 위험입니다.
@@ -348,7 +348,7 @@ Blazor 서버 프레임워크는 위와 같은 위협으로부터 보호하기 �
 * JavaScript와 .NET 메서드 사이의 두 방향 모두에서 JS interop 호출의 입력을 신뢰하지 않습니다.
 * 앱은 인수나 결과가 올바르지 역직렬화되는 경우에도 인수와 결과의 내용이 올바른지 확인하기 위해 유효성을 검사할 책임이 있습니다.
 
-XSS 취약성이 존재하기 위해서는 앱이 렌더링된 페이지에 사용자 입력을 포함해야 합니다. Blazor 서버 구성 요소는 *.razor* 파일의 마크업이 절차적 C# 논리로 변환되는 컴파일 시간 단계를 실행합니다. C# 논리는 런타임에 요소, 텍스트 및 자식 구성 요소를 설명하는 ‘렌더링 트리’를 빌드합니다. 이는 JavaScript 명령 시퀀스를 통해 브라우저의 DOM에 적용됩니다(또는 사전 렌더링의 경우 HTML로 직렬화됩니다).
+XSS 취약성이 존재하기 위해서는 앱이 렌더링된 페이지에 사용자 입력을 포함해야 합니다. Blazor 서버 구성 요소는 `.razor` 파일의 마크업이 절차적 C# 논리로 변환되는 컴파일 시간 단계를 실행합니다. C# 논리는 런타임에 요소, 텍스트 및 자식 구성 요소를 설명하는 ‘렌더링 트리’를 빌드합니다. 이는 JavaScript 명령 시퀀스를 통해 브라우저의 DOM에 적용됩니다(또는 사전 렌더링의 경우 HTML로 직렬화됩니다).
 
 * Razor 구문은 텍스트만 쓸 수 있는 명령을 통해 DOM에 추가되기 때문에 일반적인 Razor 구문을 통해 렌더링된 사용자 입력(예: `@someStringValue`)은 XSS 취약성을 노출하지 않습니다. 값에 HTML 마크업이 포함된 경우에도 이 값은 정적 텍스트로 표시됩니다. 사전 렌더링을 수행하는 경우 출력은 HTML로 인코딩되며 이 또한 콘텐츠를 정적 텍스트로 표시합니다.
 * 스크립트 태그는 허용되지 않으며 앱의 구성 요소 렌더링 트리에 포함해서는 안 됩니다. 스크립트 태그가 구성 요소의 마크업에 포함된 경우 컴파일 시간 오류가 생성됩니다.

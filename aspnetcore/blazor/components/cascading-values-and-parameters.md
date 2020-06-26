@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 70f379b3b0e48dbb340f319f3346bbbf44588740
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 43fbaa6284fa45dee46a693ed858ed06130600b6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103371"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242383"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor 연계 값 및 매개 변수
 
@@ -30,7 +30,7 @@ ms.locfileid: "85103371"
 
 샘플 앱의 다음 예제에서 `ThemeInfo` 클래스는 앱의 지정된 부분 내에 있는 모든 단추가 동일한 스타일을 공유할 수 있도록 구성 요소 계층 구조의 아래로 테마 정보가 흐르도록 지정합니다.
 
-*UIThemeClasses/ThemeInfo.cs*:
+`UIThemeClasses/ThemeInfo.cs`:
 
 ```csharp
 public class ThemeInfo
@@ -144,7 +144,7 @@ public class ThemeInfo
 
 ### <a name="tabset-example"></a>TabSet 예제
 
-연계 매개 변수를 사용하면 여러 구성 요소가 구성 요소 계층 구조 전체에서 공동으로 작용할 수 있습니다. 예를 들어, 샘플 앱에서 다음 *TabSet* 예제를 고려합니다.
+연계 매개 변수를 사용하면 여러 구성 요소가 구성 요소 계층 구조 전체에서 공동으로 작용할 수 있습니다. 예를 들어 샘플 앱에서 다음 `TabSet` 예제를 고려합니다.
 
 샘플 앱에는 탭이 구현하는 `ITab` 인터페이스가 있습니다.
 

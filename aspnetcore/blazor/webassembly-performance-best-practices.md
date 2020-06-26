@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: c5169231eec67a43830f761bff7585deff774613
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103384"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243033"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 성능 모범 사례
 
@@ -76,10 +76,10 @@ Blazor의 diff 알고리즘은 알고리즘에서 구성 요소가 변경되지 
 
 구성 요소는 코드와 태그의 재사용 가능한 조각을 생성하는 편리한 방법을 제공합니다. 일반적으로 앱의 요구 사항에 가장 잘 맞는 개별 구성 요소를 작성하는 것이 좋습니다. 한 가지 주의할 점은 각 추가 자식 구성 요소가 부모 구성 요소를 렌더링하는 데 소요되는 총 시간에 기여한다는 것입니다. 대부분의 앱에서 추가 오버헤드는 무시해도 되는 정도입니다. 많은 수의 구성 요소를 생성하는 앱은 렌더링된 구성 요소의 수를 제한하는 등 처리 오버헤드를 줄이기 위한 전략을 고려해야 합니다.
 
-예를 들어 구성 요소를 포함하는 수백 개의 행을 렌더링하는 그리드 또는 목록은 렌더링할 때 프로세서를 많이 사용합니다. 어떤 시점에도 구성 요소의 하위 집합만 렌더링되도록 그리드 또는 목록 레이아웃을 가상화하는 것이 좋습니다. 구성 요소 하위 집합 렌더링 예제는 [가상화 샘플 앱(aspnet/samples GitHub 리포지토리)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization)에서 다음 구성 요소를 참조하세요.
+예를 들어 구성 요소를 포함하는 수백 개의 행을 렌더링하는 그리드 또는 목록은 렌더링할 때 프로세서를 많이 사용합니다. 어떤 시점에도 구성 요소의 하위 집합만 렌더링되도록 그리드 또는 목록 레이아웃을 가상화하는 것이 좋습니다. 구성 요소 하위 집합 렌더링 예제는 [`Virtualization` 샘플 앱(aspnet/samples GitHub 리포지토리)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization)에서 다음 구성 요소를 참조하세요.
 
-* `Virtualize` 구성 요소([Shared/Virtualize.razor](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)): <xref:Microsoft.AspNetCore.Components.ComponentBase>를 구현하는 C#으로 작성된 구성 요소로, 사용자 스크롤을 기준으로 날씨 데이터 행 세트를 렌더링합니다.
-* `FetchData` 구성 요소([Pages/FetchData.razor](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)): `Virtualize` 구성 요소를 사용하여 한 번에 25개의 날씨 데이터 행을 표시합니다.
+* `Virtualize` 구성 요소([`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)): <xref:Microsoft.AspNetCore.Components.ComponentBase>를 구현하는 C#으로 작성된 구성 요소로, 사용자 스크롤을 기준으로 날씨 데이터 행 세트를 렌더링합니다.
+* `FetchData` 구성 요소([`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)): `Virtualize` 구성 요소를 사용하여 한 번에 25개의 날씨 데이터 행을 표시합니다.
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>JavaScript interop의 데이터 마샬링 방지
 
@@ -89,7 +89,7 @@ Blazor WebAssembly에서 JS(JavaScript) interop 호출은 WebAssembly-JS 경계�
 
 Blazor의 JS interop 구현은 메모리 할당이 작은 고성능 JSON serialization 라이브러리인 <xref:System.Text.Json>에 의존합니다. <xref:System.Text.Json>을 사용해도 하나 이상의 대체 JSON 라이브러리를 추가하는 것에 비해 추가 앱 페이로드 크기가 발생하지 않습니다.
 
-마이그레이션 지침은 [Newtonsoft.Json에서 System.Text.Json으로 마이그레이션하는 방법](/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to)을 참조하세요.
+마이그레이션 지침은 [`Newtonsoft.Json`에서 `System.Text.Json`으로 마이그레이션하는 방법](/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to)을 참조하세요.
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>가능한 경우 동기식 및 역 마샬링된 JS interop API 사용
 
@@ -138,7 +138,7 @@ Blazor WebAssembly는 Blazor 서버 앱에서 사용 가능한 단일 버전에 
 
 ### <a name="intermediate-language-il-linking"></a>IL(중간 언어) 연결
 
-[Blazor WebAssembly 앱을 연결](xref:blazor/host-and-deploy/configure-linker)하면 앱의 이진 파일에서 사용되지 않는 코드를 잘라내어 앱 크기를 줄일 수 있습니다. 기본적으로 링커는 `Release` 구성에서 빌드할 때만 사용하도록 설정됩니다. 이 기능의 이점을 활용하려면 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령에서 [-c|--configuration](/dotnet/core/tools/dotnet-publish#options) 옵션을 `Release`로 설정하여 배포를 위해 앱을 게시합니다.
+[Blazor WebAssembly 앱을 연결](xref:blazor/host-and-deploy/configure-linker)하면 앱의 이진 파일에서 사용되지 않는 코드를 잘라내어 앱 크기를 줄일 수 있습니다. 기본적으로 링커는 `Release` 구성에서 빌드할 때만 사용하도록 설정됩니다. 이 기능의 이점을 활용하려면 [`dotnet publish`](/dotnet/core/tools/dotnet-publish) 명령에서 [-c|--configuration](/dotnet/core/tools/dotnet-publish#options) 옵션을 `Release`로 설정하여 배포를 위해 앱을 게시합니다.
 
 ```dotnetcli
 dotnet publish -c Release

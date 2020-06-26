@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 63359260766846ccf14ececfae82bf02cc598cf9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103296"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242981"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core Blazor에 콘텐츠 보안 정책 적용
 
@@ -85,7 +85,7 @@ CSP는 Chrome, Edge, Firefox, Opera, Safari를 비롯한 대부분의 최신 데
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-*wwwroot/index.html* 호스트 페이지의 `<head>` 콘텐츠에서, [정책 지시문](#policy-directives) 섹션에서 설명하는 지시문을 적용합니다.
+`wwwroot/index.html` 호스트 페이지의 `<head>` 콘텐츠에서 [정책 지시문](#policy-directives) 섹션에 설명된 지시문을 적용합니다.
 
 ```html
 <meta http-equiv="Content-Security-Policy" 
@@ -108,7 +108,7 @@ CSP는 Chrome, Edge, Firefox, Opera, Safari를 비롯한 대부분의 최신 데
 
 ### <a name="blazor-server"></a>Blazor 서버
 
-*Pages/_Host.cshtml* 호스트 페이지의 `<head>` 콘텐츠에서, [정책 지시문](#policy-directives) 섹션에서 설명하는 지시문을 적용합니다.
+`Pages/_Host.cshtml` 호스트 페이지의 `<head>` 콘텐츠에서 [정책 지시문](#policy-directives) 섹션에 설명된 지시문을 적용합니다.
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 

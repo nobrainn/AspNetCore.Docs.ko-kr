@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 0fdc88e8e50856fcc4da0beb74f03925ae24401e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 8251658a2bb99ec17424ec26b8a44171082fab05
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103400"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243480"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Identity 서버를 사용하여 ASP.NET Core Blazor WebAssembly 호스트형 앱 보호
 
@@ -118,21 +118,21 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
-`WeatherForecastController`(*Controllers/WeatherForecastController.cs*)에서 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성이 클래스에 적용됩니다. 이 특성은 사용자가 리소스에 액세스하려면 기본 정책을 기준으로 인증되어야 함을 나타냅니다. 기본 인증 정책은 기본 인증 체계를 사용하도록 구성되었으며, 기본 인증 체계는 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>에 의해 설정됩니다. 도우미 메서드는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler>를 앱에 대한 요청의 기본 처리기로 구성합니다.
+`WeatherForecastController`(`Controllers/WeatherForecastController.cs`)에서 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성이 클래스에 적용됩니다. 이 특성은 사용자가 리소스에 액세스하려면 기본 정책을 기준으로 인증되어야 함을 나타냅니다. 기본 인증 정책은 기본 인증 체계를 사용하도록 구성되었으며, 기본 인증 체계는 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>에 의해 설정됩니다. 도우미 메서드는 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler>를 앱에 대한 요청의 기본 처리기로 구성합니다.
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-`ApplicationDbContext`(*Data/ApplicationDbContext.cs*)에서 <xref:Microsoft.EntityFrameworkCore.DbContext>는 IdentityServer에 대한 스키마를 포함하도록 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>를 확장합니다. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>에서 파생됩니다.
+`ApplicationDbContext`(`Data/ApplicationDbContext.cs`)에서 <xref:Microsoft.EntityFrameworkCore.DbContext>는 IdentityServer에 대한 스키마를 포함하도록 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>를 확장합니다. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>에서 파생됩니다.
 
 데이터베이스 스키마에 대한 모든 권한을 얻으려면 사용 가능한 Identity <xref:Microsoft.EntityFrameworkCore.DbContext> 클래스 중 하나에서 상속하고 <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> 메서드에서 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)`를 호출하여 Identity 스키마를 포함하도록 컨텍스트를 구성합니다.
 
 ### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
 
-`OidcConfigurationController`(*Controllers/OidcConfigurationController.cs*)에서 클라이언트 엔드포인트는 OIDC 매개 변수를 제공하도록 프로비저닝됩니다.
+`OidcConfigurationController`(`Controllers/OidcConfigurationController.cs`)에서 클라이언트 엔드포인트가 OIDC 매개 변수를 제공하도록 프로비저닝됩니다.
 
 ### <a name="app-settings-files"></a>앱 설정 파일
 
-프로젝트 루트에 있는 앱 설정 파일(*appsettings.json*)의 `IdentityServer` 섹션은 구성된 클라이언트 목록을 설명합니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 대응되며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성되는 앱 유형을 나타냅니다. 프로필은 서버에 대한 구성 프로세스를 간소화하는 규칙을 구현하기 위해 내부적으로 사용됩니다. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+프로젝트 루트에 있는 앱 설정 파일(`appsettings.json`)의 `IdentityServer` 섹션은 구성된 클라이언트 목록을 설명합니다. 다음 예제에는 단일 클라이언트가 있습니다. 클라이언트 이름은 앱 이름에 대응되며 규칙에 따라 OAuth `ClientId` 매개 변수에 매핑됩니다. 프로필은 구성되는 앱 유형을 나타냅니다. 프로필은 서버에 대한 구성 프로세스를 간소화하는 규칙을 구현하기 위해 내부적으로 사용됩니다. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
 ```json
 "IdentityServer": {
@@ -150,7 +150,7 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="authentication-package"></a>인증 패키지
 
-앱이 개별 사용자 계정을 사용하도록 만들어진 경우(`Individual`) 해당 앱은 앱의 프로젝트 파일에서 자동으로 [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에 대한 패키지 참조를 받습니다. 패키지는 앱이 사용자를 인증하고 보호된 API를 호출하는 데 사용할 토큰을 가져올 수 있도록 지원하는 기본 형식 세트를 제공합니다.
+앱이 개별 사용자 계정을 사용하도록 만들어진 경우(`Individual`) 해당 앱은 앱의 프로젝트 파일에서 자동으로 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에 대한 패키지 참조를 받습니다. 패키지는 앱이 사용자를 인증하고 보호된 API를 호출하는 데 사용할 토큰을 가져올 수 있도록 지원하는 기본 형식 세트를 제공합니다.
 
 앱에 인증을 추가하는 경우에는 패키지를 앱의 프로젝트 파일에 수동으로 추가합니다.
 
@@ -162,7 +162,7 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="api-authorization-support"></a>API 권한 부여 지원
 
-사용자 인증에 대한 지원은 [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지 내에서 제공하는 확장 메서드를 통해 서비스 컨테이너에 플러그인되어 있습니다. 이 메서드는 앱이 기존 인증 시스템과 상호 작용하는 데 필요한 서비스를 설정합니다.
+사용자 인증에 대한 지원은 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지 내에서 제공하는 확장 메서드를 통해 서비스 컨테이너에 연결되어 있습니다. 이 메서드는 앱이 기존 인증 시스템과 상호 작용하는 데 필요한 서비스를 설정합니다.
 
 ```csharp
 builder.Services.AddApiAuthorization();
@@ -188,7 +188,7 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="logindisplay-component"></a>LoginDisplay 구성 요소
 
-`LoginDisplay` 구성 요소(*Shared/LoginDisplay.razor*)는 `MainLayout` 구성 요소(*Shared/MainLayout.razor*)에서 렌더링되며 다음 동작을 관리합니다.
+`LoginDisplay` 구성 요소(`Shared/LoginDisplay.razor`)는 `MainLayout` 구성 요소(`Shared/MainLayout.razor`)에서 렌더링되고 다음 동작을 관리합니다.
 
 * 인증된 사용자의 경우:
   * 현재 사용자 이름을 표시합니다.
@@ -247,7 +247,7 @@ builder.Services.AddApiAuthorization();
 
 클라이언트 앱에서 사용자 지정 사용자 팩터리를 만듭니다. Identity 서버가 단일 `role` 클레임에서 여러 역할을 JSON 배열로 보냅니다. 클레임에서 단일 역할이 문자열 값으로 전송됩니다. 팩터리가 각 사용자 역할에 대해 개별 `role` 클레임을 만듭니다.
 
-*CustomUserFactory.cs*:
+`CustomUserFactory.cs`:
 
 ```csharp
 using System.Linq;
@@ -307,7 +307,7 @@ public class CustomUserFactory
 }
 ```
 
-클라이언트 앱에서 `Program.Main`(*Program.cs*)에 팩터리를 등록합니다.
+클라이언트 앱에서 `Program.Main`(`Program.cs`)에 팩터리를 등록합니다.
 
 ```csharp
 builder.Services.AddApiAuthorization()
@@ -362,7 +362,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
 서버 앱에서 `ProfileService` 구현을 만듭니다.
 
-*ProfileService.cs*:
+`ProfileService.cs`:
 
 ```csharp
 using IdentityModel;
@@ -408,7 +408,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
 이 시점에서는 클라이언트 앱의 구성 요소 권한 부여 방식이 작동합니다. 구성 요소의 모든 권한 부여 메커니즘에서 역할을 사용하여 사용자에게 권한을 부여할 수 있습니다.
 
-* [AuthorizeView 구성 요소](xref:blazor/security/index#authorizeview-component)(예: `<AuthorizeView Roles="admin">`)
+* [`AuthorizeView` 구성 요소](xref:blazor/security/index#authorizeview-component)(예: `<AuthorizeView Roles="admin">`)
 * [`[Authorize]` 특성 지시문](xref:blazor/security/index#authorize-attribute)(<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>)(예: `@attribute [Authorize(Roles = "admin")]`)
 * [절차적 논리](xref:blazor/security/index#procedural-logic)(예: `if (user.IsInRole("admin")) { ... }`)
 

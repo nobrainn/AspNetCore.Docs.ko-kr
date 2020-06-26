@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 99ebe43da191153aa98cce6bae8fe98035bc7d6f
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: ed49ba13842f2b5805250d8c12535397c542cfd4
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103408"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242877"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD 그룹, 관리 역할 및 사용자 정의 역할
 
@@ -45,7 +45,7 @@ AAD(Azure Active Directory)는 ASP.NET Core Identity와 결합할 수 있는 몇
 Azure Portal에서 `groups` 멤버 자격 클레임을 제공하도록 앱을 구성하려면 다음 Azure 문서를 참조하세요. 사용자를 사용자 정의 AAD 그룹 및 기본 제공 관리 역할에 할당합니다.
 
 * [Azure AD 보안 그룹을 사용하는 역할](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
-* [groupMembershipClaims 특성](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
+* [`groupMembershipClaims` 특성](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 다음 예제에서는 사용자가 AAD 기본 제공 ‘대금 청구 관리자’ 역할에 할당되었다고 가정합니다.
 
@@ -53,7 +53,7 @@ AAD에서 보낸 단일 `groups` 클레임은 사용자의 그룹 및 역할을 
 
 그룹 및 역할의 배열 속성을 포함하도록 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>를 확장합니다.
 
-*CustomUserAccount.cs*:
+`CustomUserAccount.cs`:
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -115,7 +115,7 @@ public class CustomUserFactory
 
 원래 `groups` 클레임은 프레임워크에 의해 자동으로 제거되므로 이를 제거하는 코드를 제공할 필요는 없습니다.
 
-호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱의 `Program.Main`(*Program.cs*)에 팩터리를 등록합니다.
+호스트형 솔루션의 독립 실행형 앱 또는 클라이언트 앱의 `Program.Main`(`Program.cs`)에 팩터리를 등록합니다.
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -145,7 +145,7 @@ AAD 역할 개체 ID의 전체 목록은 [AAD 관리 역할 그룹 ID](#aad-admi
 
 다음 예제에서 앱은 앞에 나온 정책을 사용하여 사용자에게 권한을 부여합니다.
 
-[AuthorizeView 구성 요소](xref:blazor/security/index#authorizeview-component)는 이 정책을 준수합니다.
+[`AuthorizeView` 구성 요소](xref:blazor/security/index#authorizeview-component)는 이 정책을 준수합니다.
 
 ```razor
 <AuthorizeView Policy="BillingAdministrator">
@@ -230,9 +230,9 @@ Azure Portal에서 `roles` 멤버 자격 클레임을 제공하도록 앱을 구
 
 AAD에서 보낸 단일 `roles` 클레임은 사용자 정의 역할을 JSON 배열의 `appRoles`의 `value`로 표시합니다. 앱은 역할의 JSON 배열을 개별 `role` 클레임으로 변환해야 합니다.
 
-[사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 표시된 `CustomUserFactory`는 JSON 배열 값을 사용하여 `roles` 클레임에 대해 작동하도록 설정되었습니다. [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 나와 있는 것처럼 호스팅형 솔루션의 독립 실행형 앱 또는 클라이언트 앱에 `CustomUserFactory`를 추가하고 등록합니다. 원래 `roles` 클레임은 프레임워크에 의해 자동으로 제거되므로 이를 제거하는 코드를 제공할 필요는 없습니다.
+[사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 표시된 `CustomUserFactory`는 JSON 배열 값을 사용하여 `roles` 클레임에 대해 작동하도록 설정되었습니다. [사용자 정의 그룹 및 AAD 기본 제공 관리 역할](#user-defined-groups-and-built-in-administrative-roles) 섹션에 나와 있는 것처럼 호스트형 솔루션의 독립 실행형 앱 또는 클라이언트 앱에 `CustomUserFactory`를 추가하고 등록합니다. 원래 `roles` 클레임은 프레임워크에 의해 자동으로 제거되므로 이를 제거하는 코드를 제공할 필요는 없습니다.
 
-호스팅된 솔루션의 독립 실행형 앱 또는 클라이언트 앱의 `Program.Main`에서 “`role`”이라는 클레임을 역할 클레임으로 지정합니다.
+호스트형 솔루션의 독립 실행형 앱 또는 클라이언트 앱의 `Program.Main`에서 “`role`”이라는 클레임을 역할 클레임으로 지정합니다.
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -245,7 +245,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 이 시점에서는 구성 요소 권한 부여 방식이 작동합니다. 구성 요소의 모든 권한 부여 메커니즘에서 `admin` 역할을 사용하여 사용자에게 권한을 부여할 수 있습니다.
 
-* [AuthorizeView 구성 요소](xref:blazor/security/index#authorizeview-component)(예: `<AuthorizeView Roles="admin">`)
+* [`AuthorizeView` 구성 요소](xref:blazor/security/index#authorizeview-component)(예: `<AuthorizeView Roles="admin">`)
 * [`[Authorize]` 특성 지시문](xref:blazor/security/index#authorize-attribute)(<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>)(예: `@attribute [Authorize(Roles = "admin")]`)
 * [절차적 논리](xref:blazor/security/index#procedural-logic)(예: `if (user.IsInRole("admin")) { ... }`)
 

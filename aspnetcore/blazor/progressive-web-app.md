@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102309"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242812"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly를 사용하여 프로그레시브 웹 애플리케이션 빌드
 
@@ -75,7 +75,7 @@ iOS에서 방문자는 Safari의 **‘공유’** 단추 및 **‘홈 화면에 
 
 ![‘MyBlazorPwa’ 앱은 주소 표시줄 없이 Google Chrome에서 실행됩니다.](progressive-web-app/_static/image3.png)
 
-창의 제목, 색 구성표, 아이콘 또는 기타 세부 정보를 사용자 지정하려면 프로젝트의 *wwwroot* 디렉터리에서 *manifest.json* 파일을 참조하세요. 이 파일의 스키마는 웹 표준에 의해 정의됩니다. 자세한 내용은 [MDN 웹 문서: 웹앱 매니페스트](https://developer.mozilla.org/docs/Web/Manifest)를 참조하세요.
+창의 제목, 색 구성표, 아이콘 또는 기타 세부 정보를 사용자 지정하려면 프로젝트의 `wwwroot` 디렉터리에서 `manifest.json` 파일을 참조하세요. 이 파일의 스키마는 웹 표준에 의해 정의됩니다. 자세한 내용은 [MDN 웹 문서: 웹앱 매니페스트](https://developer.mozilla.org/docs/Web/Manifest)를 참조하세요.
 
 ## <a name="offline-support"></a>오프라인 지원
 
@@ -110,17 +110,17 @@ iOS에서 방문자는 Safari의 **‘공유’** 단추 및 **‘홈 화면에 
 
 Blazor의 PWA 템플릿은 다음 두 개의 서비스 작업자 파일을 생성합니다.
 
-* *wwwroot/service-worker.js*: 개발 중에 사용됩니다.
-* *wwwroot/service-worker.published.js*: 앱이 게시된 후 사용됩니다.
+* 개발 중에 사용되는 `wwwroot/service-worker.js`
+* 앱이 게시된 후에 사용되는 `wwwroot/service-worker.published.js`
 
 두 서비스 작업자 파일 간의 논리를 공유하려면 다음 방법을 고려하세요.
 
 * 공통 논리를 보관할 세 번째 JavaScript 파일을 추가합니다.
-* [self.importScripts](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts)를 사용하여 두 서비스 작업자 파일에 공통 논리를 로드합니다.
+* [`self.importScripts`](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts)를 사용하여 두 서비스 작업자 파일에 공통 논리를 로드합니다.
 
 ### <a name="cache-first-fetch-strategy"></a>캐시 우선 인출 전략
 
-기본 제공 *service-worker* 서비스 작업자는 ‘캐시 우선’ 전략을 사용하여 요청을 확인합니다. 즉, 사용자가 네트워크에 액세스할 수 있는지 또는 서버에서 최신 콘텐츠를 사용할 수 있는지와 관계없이 캐시된 콘텐츠를 반환하는 것이 항상 선호됩니다.
+기본 제공 `service-worker.published.js` 서비스 작업자는 ‘캐시 우선’ 전략을 사용하여 요청을 확인합니다. 즉, 사용자가 네트워크에 액세스할 수 있는지 또는 서버에서 최신 콘텐츠를 사용할 수 있는지와 관계없이 캐시된 콘텐츠를 반환하는 것이 항상 선호됩니다.
 
 캐시 우선 전략은 다음 이유로 유용합니다.
 
@@ -139,9 +139,9 @@ Blazor의 PWA 템플릿은 다음 두 개의 서비스 작업자 파일을 생�
 
 Blazor PWA 템플릿은 사용자가 방문하여 네트워크에 연결되어 있을 때마다 백그라운드에서 자동으로 업데이트를 시도하는 앱을 생성합니다. 이렇게 작동하는 방법은 다음과 같습니다.
 
-* 컴파일하는 동안 프로젝트는 ‘서비스 작업자 자산 매니페스트’를 생성합니다. 기본적으로 이를 *service-worker-assets.js*라고 합니다. 앱에서 콘텐츠 해시를 포함하여 .NET 어셈블리, JavaScript 파일, CSS 등이 오프라인에서 기능하는 데 필요한 모든 정적 리소스를 매니페스트에서 나열합니다. 이 리소스 목록은 캐시할 리소스를 알 수 있도록 서비스 작업자에 의해 로드됩니다.
-* 사용자가 앱을 방문할 때마다 브라우저는 백그라운드에서 *service-worker.js* 및 *service-worker-assets.js*를 다시 요청합니다. 이 파일은 설치된 기존 서비스 작업자와 바이트 단위로 비교됩니다. 서버에서 이러한 파일 중 하나에 대해 변경된 콘텐츠를 반환하는 경우 서비스 작업자는 새 버전의 파일을 설치하려고 합니다.
-* 새 버전을 설치하는 경우 서비스 작업자는 오프라인 리소스에 대한 별도의 캐시를 새로 만들고 *service-worker-asset.js*에 나열된 리소스로 채우기 시작합니다. 이 논리는 *service-worker.published.js* 내의 `onInstall` 함수에서 구현됩니다.
+* 컴파일하는 동안 프로젝트는 ‘서비스 작업자 자산 매니페스트’를 생성합니다. 기본적으로 `service-worker-assets.js`라고 합니다. 앱에서 콘텐츠 해시를 포함하여 .NET 어셈블리, JavaScript 파일, CSS 등이 오프라인에서 기능하는 데 필요한 모든 정적 리소스를 매니페스트에서 나열합니다. 이 리소스 목록은 캐시할 리소스를 알 수 있도록 서비스 작업자에 의해 로드됩니다.
+* 사용자가 앱을 방문할 때마다 브라우저는 백그라운드에서 `service-worker.js` 및 `service-worker-assets.js`를 다시 요청합니다. 이 파일은 설치된 기존 서비스 작업자와 바이트 단위로 비교됩니다. 서버에서 이러한 파일 중 하나에 대해 변경된 콘텐츠를 반환하는 경우 서비스 작업자는 새 버전의 파일을 설치하려고 합니다.
+* 새 버전을 설치하는 경우 서비스 작업자는 오프라인 리소스에 대한 별도의 캐시를 새로 만들고 `service-worker-assets.js`에 나열된 리소스로 캐시를 채우기 시작합니다. 이 논리는 `service-worker.published.js` 내의 `onInstall` 함수에서 구현됩니다.
 * 모든 리소스가 오류 없이 로드되고 모든 콘텐츠 해시가 일치하면 프로세스가 성공적으로 완료됩니다. 성공하면 새 서비스 작업자는 ‘활성화 대기’ 상태로 전환됩니다. 사용자가 앱을 닫으면(남아 있는 앱 탭 또는 창 없음) 새 서비스 작업자는 ‘활성’ 상태가 되며 이후 앱 방문에 사용됩니다. 이전 서비스 작업자 및 해당 캐시가 삭제됩니다.
 * 프로세스가 성공적으로 완료되지 않으면 새 서비스 작업자 인스턴스가 삭제됩니다. 클라이언트에서 요청을 완료할 수 있는 더 나은 네트워크 연결을 사용할 수 있게 되면 사용자의 다음 방문에서 업데이트 프로세스가 다시 시도됩니다.
 
@@ -149,7 +149,7 @@ Blazor PWA 템플릿은 사용자가 방문하여 네트워크에 연결되어 �
 
 ### <a name="how-requests-are-resolved"></a>요청을 해결하는 방법
 
-[캐시 우선 페치 전략](#cache-first-fetch-strategy) 단원에서 설명한 대로 기본 서비스 작업자는 ‘캐시 우선’ 전략을 사용합니다. 즉, 사용 가능한 경우 캐시된 콘텐츠를 제공하려고 시도합니다. 백엔드 API에서 데이터를 요청하는 경우와 같이 특정 URL에 대해 캐시된 콘텐츠가 없는 경우 서비스 작업자는 일반 네트워크 요청으로 대체합니다. 서버에 연결할 수 있는 경우 네트워크 요청이 성공합니다. 이 논리는 *service-worker.published.js* 내의 `onFetch` 기능에서 구현됩니다.
+[캐시 우선 페치 전략](#cache-first-fetch-strategy) 단원에서 설명한 대로 기본 서비스 작업자는 ‘캐시 우선’ 전략을 사용합니다. 즉, 사용 가능한 경우 캐시된 콘텐츠를 제공하려고 시도합니다. 백엔드 API에서 데이터를 요청하는 경우와 같이 특정 URL에 대해 캐시된 콘텐츠가 없는 경우 서비스 작업자는 일반 네트워크 요청으로 대체합니다. 서버에 연결할 수 있는 경우 네트워크 요청이 성공합니다. 이 논리는 `service-worker.published.js` 내의 `onFetch` 함수 안에서 구현됩니다.
 
 앱의 Razor 구성 요소가 백엔드 API의 데이터 요청에 의존하며 네트워크 사용 불가로 인해 실패한 요청에 대해 친숙한 사용자 환경을 제공하려는 경우에는 앱의 구성 요소 내에서 논리를 구현해야 합니다. 예를 들어 <xref:System.Net.Http.HttpClient> 요청에 대해 `try/catch`를 사용합니다.
 
@@ -157,12 +157,12 @@ Blazor PWA 템플릿은 사용자가 방문하여 네트워크에 연결되어 �
 
 사용자가 `/counter`와 같은 URL 또는 앱의 기타 딥 링크로 처음 이동할 때 발생하는 상황을 고려합니다. 해당 경우에는 `/counter`로 캐시된 콘텐츠를 반환하지 않고 대신 Blazor WebAssembly 앱을 시작하기 위해 `/index.html`로 캐시된 콘텐츠를 로드하는 브라우저가 필요합니다. 이러한 초기 요청은 다음과 달리 ‘탐색’ 요청이라고 합니다.
 
-* ‘하위 리소스는’ 이미지, 스타일시트 또는 기타 파일을 요청합니다.
-* API 데이터에 대한 ‘페치/XHR’ 요청.
+* 이미지, 스타일시트 또는 기타 파일에 대한 `subresource` 요청
+* API 데이터에 대한 `fetch/XHR` 요청
 
-기본 서비스 작업자는 탐색 요청에 대한 특별 사례 논리를 포함합니다. 서비스 작업자는 요청한 URL과 관계없이 `/index.html`에 대해 캐시된 콘텐츠를 반환하여 요청을 확인합니다. 이 논리는 *service-worker.published.js* 내의 `onFetch` 함수에서 구현됩니다.
+기본 서비스 작업자는 탐색 요청에 대한 특별 사례 논리를 포함합니다. 서비스 작업자는 요청한 URL과 관계없이 `/index.html`에 대해 캐시된 콘텐츠를 반환하여 요청을 확인합니다. 이 논리는 `service-worker.published.js` 내의 `onFetch` 함수에서 구현됩니다.
 
-앱에 서버에서 렌더링된 HTML을 반환해야 하고 캐시에서 `/index.html`을 제공하지 않는 특정 URL이 있는 경우 서비스 작업자에서 논리를 편집해야 합니다. `/Identity/`를 포함하는 모든 URL을 서버에 대한 일반 온라인 전용 요청으로 처리해야 하는 경우 *service-worker.published.js* `onFetch` 논리를 수정합니다. 다음 코드를 찾습니다.
+앱에 서버에서 렌더링된 HTML을 반환해야 하고 캐시에서 `/index.html`을 제공하지 않는 특정 URL이 있는 경우 서비스 작업자에서 논리를 편집해야 합니다. `/Identity/`를 포함하는 모든 URL을 서버에 대한 일반 온라인 전용 요청으로 처리해야 하는 경우 `service-worker.published.js` `onFetch` 논리를 수정합니다. 다음 코드를 찾습니다.
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -185,16 +185,16 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-파일은 *wwwroot* 출력 디렉터리에 배치되므로 브라우저는 `/service-worker-assets.js`를 요청하여 이 파일을 검색할 수 있습니다. 이 파일의 콘텐츠를 보려면 텍스트 편집기에서 */bin/Debug/{TARGET FRAMEWORK}/wwwroot/service-worker-assets.js*를 엽니다. 그러나 파일은 각 빌드에서 다시 생성되므로 편집하지 마세요.
+파일은 `wwwroot` 출력 디렉터리에 배치되므로 브라우저는 `/service-worker-assets.js`를 요청하여 이 파일을 검색할 수 있습니다. 이 파일의 콘텐츠를 보려면 텍스트 편집기에서 `/bin/Debug/{TARGET FRAMEWORK}/wwwroot/service-worker-assets.js`를 엽니다. 그러나 파일은 각 빌드에서 다시 생성되므로 편집하지 마세요.
 
 기본적으로 이 매니페스트는 다음을 나열합니다.
 
 * 오프라인에서 작동하는 데 필요한 .NET 어셈블리 및 .NET WebAssembly 런타임 파일 등의 Blazor 관리되는 리소스
-* 외부 프로젝트 및 NuGet 패키지에서 제공하는 정적 웹 자산을 비롯하여 앱의 *wwwroot* 디렉터리에 게시하기 위한 모든 리소스(예: 이미지, 스타일시트 및 JavaScript 파일)
+* 외부 프로젝트 및 NuGet 패키지에서 제공하는 정적 웹 자산을 비롯하여 앱의 `wwwroot` 디렉터리에 게시하기 위한 모든 리소스(예: 이미지, 스타일시트 및 JavaScript 파일)
 
-*service-worker.published.js*의 `onInstall`에서 논리를 편집하여 서비스 작업자에서 어떤 리소스를 페치하고 캐시하도록 할지 제어할 수 있습니다. 기본적으로 서비스 작업자는 *.html*, *.css*, *.js*, and *.wasm* 및 Blazor WebAssembly 고유의 파일 형식( *.dll*, *.pdb*)과 같은 일반적인 웹 파일 이름 확장명과 일치하는 파일을 페치 및 캐시합니다.
+`service-worker.published.js`의 `onInstall`에서 논리를 편집하여 서비스 작업자에서 이 리소스 중 어떤 항목을 페치하고 캐시하도록 할지 제어할 수 있습니다. 기본적으로 서비스 작업자는 일반적인 웹 파일 이름 확장명(예: `.html`, `.css`, `.js`, `.wasm`) 및 Blazor WebAssembly 고유의 파일 형식(`.dll`, `.pdb`)과 일치하는 파일을 페치 및 캐시합니다.
 
-앱의 *wwwroot* 디렉터리에 없는 추가 리소스를 포함하려면 다음 예제와 같이 추가 MSBuild `ItemGroup` 항목을 정의합니다.
+앱의 `wwwroot` 디렉터리에 없는 추가 리소스를 포함하려면 다음 예제와 같이 추가 MSBuild `ItemGroup` 항목을 정의합니다.
 
 ```xml
 <ItemGroup>
@@ -206,7 +206,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 `AssetUrl` 메타데이터는 브라우저가 캐시할 리소스를 인출할 때 사용해야 할 기본적인 상대 URL을 지정합니다. 이는 디스크의 원래 원본 파일 이름과 무관할 수 있습니다.
 
 > [!IMPORTANT]
-> `ServiceWorkerAssetsManifestItem`을 추가하면 파일이 앱의 *wwwroot* 디렉터리에 게시되지 않습니다. 게시 출력은 개별적으로 제어해야 합니다. `ServiceWorkerAssetsManifestItem`으로 인해서만 서비스 작업자 자산 매니페스트에 추가 항목이 표시됩니다.
+> `ServiceWorkerAssetsManifestItem`을 추가한다고 해서 파일이 앱의 `wwwroot` 디렉터리에 게시되지는 않습니다. 게시 출력은 개별적으로 제어해야 합니다. `ServiceWorkerAssetsManifestItem`으로 인해서만 서비스 작업자 자산 매니페스트에 추가 항목이 표시됩니다.
 
 ## <a name="push-notifications"></a>푸시 알림
 
@@ -264,11 +264,11 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>모든 서비스 작업자 자산 매니페스트 콘텐츠는 기본적으로 캐시됩니다.
 
-[자원 캐싱 제어](#control-asset-caching) 단원에서 설명한 대로 *service-worker-assets.js* 파일이 빌드 중에 생성되며 서비스 작업자가 페치하고 캐시해야 하는 모든 자산을 표시합니다.
+[자산 캐싱 제어](#control-asset-caching) 섹션에 설명된 대로 `service-worker-assets.js` 파일이 빌드 중에 생성되며 서비스 작업자가 페치 및 캐시해야 하는 모든 자산을 나열합니다.
 
-이 목록에는 기본적으로 *wwwroot*(외부 패키지 및 프로젝트에서 제공하는 콘텐츠 포함)로 내보내지는 모든 항목이 포함되므로 너무 많은 콘텐츠를 포함하지 않도록 주의해야 합니다. *wwwroot* 디렉터리에 수백만 개의 이미지가 포함된 경우 서비스 작업자는 모든 이미지를 페치 및 캐시하기 위해 과도한 대역폭을 사용하므로 성공적으로 완료되지 않을 가능성이 큽니다.
+이 목록에는 기본적으로 `wwwroot`(외부 패키지 및 프로젝트에서 제공하는 콘텐츠 포함)로 내보내지는 모든 항목이 포함되므로 너무 많은 콘텐츠를 포함하지 않도록 주의해야 합니다. `wwwroot` 디렉터리에 수백만 개의 이미지가 포함된 경우 서비스 작업자는 모든 이미지를 페치 및 캐시하기 위해 과도한 대역폭을 사용하므로 성공적으로 완료되지 않을 가능성이 큽니다.
 
-임의의 논리를 구현하여 *service-worker.published.js*에서 `onInstall` 함수를 편집하여 페치 및 캐시할 매니페스트 콘텐츠의 하위 집합을 제어합니다.
+`service-worker.published.js`의 `onInstall` 함수를 편집하여 페치 및 캐시할 매니페스트 콘텐츠의 하위 집합을 제어하기 위한 임의 논리를 구현합니다.
 
 ### <a name="interaction-with-authentication"></a>인증과의 상호 작용
 
@@ -287,11 +287,11 @@ PWA 템플릿은 인증과 함께 사용할 수 있습니다. 사용자가 초�
 * 앱이 오프라인 상태인 동안 작업을 큐에 추가한 후 앱이 온라인으로 전환되면 작업을 적용합니다.
 * 로그아웃하는 동안 저장된 사용자를 지웁니다.
 
-[CarChecker](https://github.com/SteveSandersonMS/CarChecker) 샘플 앱은 위의 방법을 보여 줍니다. 앱의 다음 부분을 참조하세요.
+[`CarChecker`](https://github.com/SteveSandersonMS/CarChecker) 샘플 앱은 위의 방법을 보여 줍니다. 앱의 다음 부분을 참조하세요.
 
-* `OfflineAccountClaimsPrincipalFactory`(*Client/Data/OfflineAccountClaimsPrincipalFactory.cs*)
-* `LocalVehiclesStore`(*Client/Data/LocalVehiclesStore.cs*)
-* `LoginStatus` 구성 요소(*Client/Shared/LoginStatus.razor*)
+* `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
+* `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
+* `LoginStatus` 구성 요소(`Client/Shared/LoginStatus.razor`)
 
 ## <a name="additional-resources"></a>추가 자료
 

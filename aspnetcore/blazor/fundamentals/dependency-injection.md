@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: b4ac0dbc6dabdeff4689544f2e11278b8302c553
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103339"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242799"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -47,7 +47,7 @@ DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입�
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-*Program.cs*의 `Main` 메서드에서 앱의 서비스 컬렉션용 서비스를 구성합니다. 다음 예제에서는 `MyDependency` 구현을 `IMyDependency`에 등록합니다.
+`Program.cs`의 `Main` 메서드에서 앱의 서비스 컬렉션용 서비스를 구성합니다. 다음 예제에서는 `MyDependency` 구현을 `IMyDependency`에 등록합니다.
 
 ```csharp
 public class Program
@@ -84,7 +84,7 @@ public class Program
 }
 ```
 
-또한 호스트는 앱에 대한 중앙 구성 인스턴스도 제공합니다. 이전 예제를 기준으로 작성한 날씨 서비스 URL은 기본 구성 원본(예: *appsettings*)에서 `InitializeWeatherAsync`로 전달됩니다.
+또한 호스트는 앱에 대한 중앙 구성 인스턴스도 제공합니다. 이전 예제를 기준으로 작성한 날씨 서비스 URL은 기본 구성 원본(예: `appsettings.json`)에서 `InitializeWeatherAsync`로 전달됩니다.
 
 ```csharp
 public class Program
@@ -193,7 +193,7 @@ public class DataAccess : IDataAccess
 생성자 주입의 필수 조건:
 
 * 모든 인수를 DI에서 처리할 수 있는 생성자가 하나 있어야 합니다. DI에서 다루지 않는 추가 매개 변수는 기본값이 지정되면 허용됩니다.
-* 적용 가능한 생성자는 *public*이어야 합니다.
+* 적용 가능한 생성자는 `public`이어야 합니다.
 * 적용 가능한 생성자가 하나 있어야 합니다. 모호한 경우 시 DI는 예외를 throw합니다.
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>DI 범위를 관리 하는 유틸리티 기본 구성 요소 클래스
@@ -346,5 +346,5 @@ Blazor 앱에서 서비스 수명을 제한하는 방법은 <xref:Microsoft.AspN
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/dependency-injection>
-* [임시 및 공유 인스턴스에 대한 IDisposable 지침](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
+* [임시 및 공유 인스턴스에 대한 `IDisposable` 지침](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
 * <xref:mvc/views/dependency-injection>

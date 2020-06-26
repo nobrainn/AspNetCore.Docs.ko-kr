@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: b43eae03c71cabbaafa2bc0d704765e89f743279
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0e36b81d771b07e85158724c02210ee50a3ab118
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103336"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242682"
 ---
 # <a name="aspnet-core-blazor-configuration"></a>ASP.NET Core Blazor 구성
 
@@ -28,8 +28,8 @@ ms.locfileid: "85103336"
 Blazor WebAssembly는 다음에서 구성을 로드합니다.
 
 * 기본적인 앱 설정 파일:
-  * *wwwroot/appsettings.json*
-  * *wwwroot/appsettings.{ENVIRONMENT}.json*
+  * `wwwroot/appsettings.json`
+  * `wwwroot/appsettings.{ENVIRONMENT}.json`
 * 앱에 등록된 다른 [구성 공급자](xref:fundamentals/configuration/index). 일부 공급자는 Blazor WebAssembly 앱에 적합하지 않습니다. Blazor WebAssembly를 지원하는 공급자에 관한 설명은 [Blazor WASM의 구성 공급자 설명(dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134)에서 추적됩니다.
 
 > [!WARNING]
@@ -39,7 +39,7 @@ Blazor WebAssembly는 다음에서 구성을 로드합니다.
 
 ## <a name="app-settings-configuration"></a>앱 설정 구성
 
-*wwwroot/appsettings.json*:
+`wwwroot/appsettings.json`:
 
 ```json
 {
@@ -112,9 +112,9 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-*wwwroot* 폴더에서 구성으로 다른 구성 파일을 읽으려면 <xref:System.Net.Http.HttpClient>를 사용하여 파일 콘텐츠를 가져옵니다. 이 방법을 사용하는 경우 다음 예제와 같이 기존 <xref:System.Net.Http.HttpClient> 서비스 등록은 생성된 로컬 클라이언트를 사용하여 파일을 읽을 수 있습니다.
+`wwwroot` 폴더에서 구성으로 다른 구성 파일을 읽으려면 <xref:System.Net.Http.HttpClient>를 사용하여 파일 콘텐츠를 가져옵니다. 이 방법을 사용하는 경우 다음 예제와 같이 기존 <xref:System.Net.Http.HttpClient> 서비스 등록은 생성된 로컬 클라이언트를 사용하여 파일을 읽을 수 있습니다.
 
-*wwwroot/cars.json*:
+`wwwroot/cars.json`:
 
 ```json
 {
@@ -144,7 +144,7 @@ builder.Configuration.AddJsonStream(stream);
 
 ## <a name="authentication-configuration"></a>인증 구성
 
-*wwwroot/appsettings.json*:
+`wwwroot/appsettings.json`:
 
 ```json
 {
@@ -164,13 +164,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logging-configuration"></a>로깅 구성
 
-[Microsoft.Extensions.Logging.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/)에 대한 패키지 참조를 추가합니다.
+[`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/)에 대한 패키지 참조를 추가합니다.
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-*wwwroot/appsettings.json*:
+`wwwroot/appsettings.json`:
 
 ```json
 {
@@ -208,6 +208,6 @@ var hostname = builder.Configuration["HostName"];
 구성 파일은 오프라인으로 사용할 수 있도록 캐시됩니다. [PWA(프로그레시브 웹 애플리케이션)](xref:blazor/progressive-web-app)의 경우 새 배포를 만들 때만 구성 파일을 업데이트할 수 있습니다. 여러 배포 간에 구성 파일을 편집하는 것은 다음과 같은 이유로 인해 적용되지 않습니다.
 
 * 사용자에게 계속해서 사용할 수 있는 캐시된 버전의 파일이 있습니다.
-* 사용자가 다음번에 온라인으로 방문할 때 앱이 다시 배포되었음을 앱에 알려 주는 PWA의 *service-worker.js* 파일과 *service-worker-assets.js* 파일은 컴파일 시 다시 빌드되어야 합니다.
+* 사용자가 다음번에 온라인으로 방문할 때 앱이 다시 배포되었음을 앱에 알려 주는 PWA의 `service-worker.js` 및 `service-worker-assets.js` 파일은 컴파일 시 다시 빌드되어야 합니다.
 
 PWA가 백그라운드 업데이트를 처리하는 방식에 대한 자세한 내용은 <xref:blazor/progressive-web-app#background-updates> 문서를 참조하세요.

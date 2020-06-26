@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 726aafd2bf5d3469c30ebce1e4eea8ed8ec8d58e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 72a8b59b06e40f6f85abe41217ae564f82c8d89c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103355"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347075"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor 호스팅 모델 구성
 
@@ -32,10 +32,10 @@ ms.locfileid: "85103355"
 
 쿠키 또는 HTTP 인증 헤더와 같은 자격 증명을 보내도록 SignalR의 기본 클라이언트를 구성하려면 다음을 수행합니다.
 
-* <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A>를 사용하여 원본 간 [fetch](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 요청에 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include>를 설정합니다.
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A>를 사용하여 원본 간 [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 요청에 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include>를 설정합니다.
 
   ```csharp
-  public class IncludeRequestCredentialsMessagHandler : DelegatingHandler
+  public class IncludeRequestCredentialsMessageHandler : DelegatingHandler
   {
       protected override Task<HttpResponseMessage> SendAsync(
           HttpRequestMessage request, CancellationToken cancellationToken)
@@ -53,7 +53,7 @@ ms.locfileid: "85103355"
       .WithUrl(new Uri("http://signalr.example.com"), options =>
       {
           options.HttpMessageHandlerFactory = innerHandler => 
-              new IncludeRequestCredentialsMessagHandler { InnerHandler = innerHandler };
+              new IncludeRequestCredentialsMessageHandler { InnerHandler = innerHandler };
       }).Build();
   ```
 
@@ -65,7 +65,7 @@ ms.locfileid: "85103355"
 
 클라이언트에서 연결이 끊어진 것을 감지하면, 클라이언트가 다시 연결하는 동안 기본 UI가 사용자에게 표시됩니다. 다시 연결하지 못한 경우 사용자에게 다시 시도 옵션이 제공됩니다.
 
-UI를 사용자 지정하려면 *_Host.cshtml* Razor 페이지의 `<body>`에서 `components-reconnect-modal`의 `id`를 사용하여 요소를 정의합니다.
+UI를 사용자 지정하려면 `_Host.cshtml` Razor 페이지의 `<body>`에서 `components-reconnect-modal`의 `id`를 사용하여 요소를 정의합니다.
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -86,7 +86,7 @@ UI를 사용자 지정하려면 *_Host.cshtml* Razor 페이지의 `<body>`에서
 
 ‘이 섹션은 Blazor Server에 적용됩니다.’
 
-Blazor 서버 앱은 기본적으로 클라이언트가 서버에 연결되기 전에 서버에서 UI를 미리 렌더링하도록 설정되어 있습니다. 이 옵션은 *_Host.cshtml* Razor 페이지에서 설정합니다.
+Blazor 서버 앱은 기본적으로 클라이언트가 서버에 연결되기 전에 서버에서 UI를 미리 렌더링하도록 설정되어 있습니다. 이는 `_Host.cshtml` Razor 페이지에서 설정합니다.
 
 ```cshtml
 <body>
@@ -117,7 +117,7 @@ Blazor 서버 앱은 기본적으로 클라이언트가 서버에 연결되기 �
 
 Blazor 서버 앱에서 사용하는 SignalR 클라이언트를 구성해야 할 수도 있습니다. 예를 들어 연결 문제를 진단하기 위해 SignalR 클라이언트에서 로깅을 구성하는 것이 좋습니다.
 
-*Pages/_Host.cshtml* 파일에서 SignalR 클라이언트를 구성하려면 다음을 수행합니다.
+`Pages/_Host.cshtml` 파일에서 SignalR 클라이언트를 구성하려면:
 
 * `blazor.server.js` 스크립트의 `<script>` 태그에 `autostart="false"` 특성을 추가합니다.
 * `Blazor.start`를 호출하고 SignalR 작성기를 지정하는 구성 개체를 전달합니다.

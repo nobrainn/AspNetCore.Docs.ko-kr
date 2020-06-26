@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: c67903809de60b4b0ce7a98455b6917192512b5d
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 61c1dc383728f42c5dac6742fd19d1d22c988913
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103359"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242695"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
@@ -45,9 +45,9 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A>의 기본 구현에서는 <xref:Microsoft.AspNetCore.Components.ParameterView>에 해당 값이 있는 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 또는 [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 특성을 사용하여 각 속성의 값을 설정합니다. <xref:Microsoft.AspNetCore.Components.ParameterView>에 해당 값이 없는 매개 변수는 변경되지 않고 그대로 유지됩니다.
 
-[base.SetParametersAync](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A)를 호출하지 않은 경우, 사용자 지정 코드는 들어오는 매개 변수 값을 필요한 방식으로 해석할 수 있습니다. 예를 들어 들어오는 매개 변수를 클래스의 속성에 할당해야 하는 요구 사항이 없습니다.
+[`base.SetParametersAync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A)를 호출하지 않은 경우, 사용자 지정 코드는 들어오는 매개 변수 값을 필요한 방식으로 해석할 수 있습니다. 예를 들어 들어오는 매개 변수를 클래스의 속성에 할당해야 하는 요구 사항이 없습니다.
 
-이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [`IDisposable`을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 섹션을 참조하세요.
 
 ### <a name="component-initialization-methods"></a>구성 요소 초기화 메서드
 
@@ -64,7 +64,7 @@ protected override void OnInitialized()
 }
 ```
 
-비동기 작업을 수행하려면 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>를 재정의하고, 작업에 [await](/dotnet/csharp/language-reference/operators/await) 연산자를 사용합니다.
+비동기 작업을 수행하려면 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>를 재정의하고 작업에 [`await`](/dotnet/csharp/language-reference/operators/await) 연산자를 사용합니다.
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -82,7 +82,7 @@ protected override async Task OnInitializedAsync()
 
 Blazor 서버 앱을 미리 렌더링 중이면 브라우저에 연결되어 있지 않으므로 JavaScript 호출 등의 특정 작업을 수행할 수 없습니다. 미리 렌더링된 경우, 구성 요소를 다르게 렌더링해야 할 수도 있습니다. 자세한 내용은 [앱을 미리 렌더링 중인 경우 검색](#detect-when-the-app-is-prerendering) 섹션을 참조하세요.
 
-이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [`IDisposable`을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 섹션을 참조하세요.
 
 ### <a name="after-parameters-are-set"></a>매개 변수를 설정한 후
 
@@ -110,7 +110,7 @@ protected override void OnParametersSet()
 }
 ```
 
-이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [`IDisposable`을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 섹션을 참조하세요.
 
 ### <a name="after-component-render"></a>구성 요소 렌더링 후
 
@@ -148,7 +148,7 @@ protected override void OnAfterRender(bool firstRender)
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>‘는 서버에서 미리 렌더링되는 경우 호출되지 않습니다.’
 
-이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [`IDisposable`을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 섹션을 참조하세요.
 
 ### <a name="suppress-ui-refreshing"></a>UI 새로 고침 표시 안 함
 
@@ -179,13 +179,13 @@ protected override bool ShouldRender()
 
 Blazor 템플릿의 `FetchData` 구성 요소에서 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>는 예측 데이터(`forecasts`)를 비동기적으로 수신하도록 재정의되었습니다. `forecasts`가 `null`인 경우 사용자에게 로드 메시지가 표시됩니다. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>에서 반환된 `Task`가 완료되면 구성 요소가 업데이트된 상태로 다시 렌더링됩니다.
 
-Blazor 서버 템플릿의 *Pages/FetchData.razor*:
+Blazor 서버 템플릿의 `Pages/FetchData.razor`:
 
 [!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="component-disposal-with-idisposable"></a>IDisposable을 사용한 구성 요소 삭제
 
-구성 요소가 <xref:System.IDisposable>을 구현하는 경우, UI에서 구성 요소를 제거할 때 [Dispose 메서드](/dotnet/standard/garbage-collection/implementing-dispose)가 호출됩니다. 다음 구성 요소는 `@implements IDisposable` 및 `Dispose` 메서드를 사용합니다.
+구성 요소가 <xref:System.IDisposable>을 구현하는 경우 UI에서 구성 요소가 제거될 때 [`Dispose` 메서드](/dotnet/standard/garbage-collection/implementing-dispose)가 호출됩니다. 다음 구성 요소는 `@implements IDisposable` 및 `Dispose` 메서드를 사용합니다.
 
 ```razor
 @using System
@@ -220,7 +220,7 @@ Blazor 서버 템플릿의 *Pages/FetchData.razor*:
 
 ## <a name="stateful-reconnection-after-prerendering"></a>미리 렌더링 후의 상태 저장 다시 연결
 
-Blazor 서버 앱에서 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>가 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered>인 경우, 구성 요소는 처음에 페이지 일부로 정적 렌더링됩니다. 브라우저가 서버에 다시 연결하면 구성 요소가 ‘다시’ 렌더링되고, 이제 대화형 구성 요소가 됩니다. 구성 요소를 초기화하기 위한 [OnInitialized{Async}](#component-initialization-methods) 수명 주기 메서드가 있는 경우 메서드가 다음과 같이 ‘두 번’ 실행됩니다.
+Blazor 서버 앱에서 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>가 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered>인 경우, 구성 요소는 처음에 페이지 일부로 정적 렌더링됩니다. 브라우저가 서버에 다시 연결하면 구성 요소가 ‘다시’ 렌더링되고, 이제 대화형 구성 요소가 됩니다. 구성 요소를 초기화하기 위한 [`OnInitialized{Async}`](#component-initialization-methods) 수명 주기 메서드가 있는 경우 메서드가 다음과 같이 ‘두 번’ 실행됩니다.
 
 * 구성 요소를 정적으로 미리 렌더링할 때
 * 서버 연결이 설정된 후
@@ -297,7 +297,7 @@ public class WeatherForecastService
 구성 요소에서 취소할 수 있는 백그라운드 작업 패턴을 구현하는 방법은 다음과 같습니다.
 
 * <xref:System.Threading.CancellationTokenSource> 및 <xref:System.Threading.CancellationToken>을 사용합니다.
-* [구성 요소를 삭제](#component-disposal-with-idisposable)할 때 그리고 토큰을 수동으로 취소할 필요가 있을 때, [CancellationTokenSource.Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A)을 호출하여 백그라운드 작업을 취소해야 한다는 신호를 보냅니다.
+* [구성 요소 삭제](#component-disposal-with-idisposable) 시 및 토큰을 수동으로 취소하여 언제든지 취소가 필요할 때 [`CancellationTokenSource.Cancel`](xref:System.Threading.CancellationTokenSource.Cancel%2A)을 호출하여 백그라운드 작업을 취소해야 한다고 알립니다.
 * 비동기 호출이 반환된 후에는 토큰에서 <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A>를 호출합니다.
 
 다음 예제에서는

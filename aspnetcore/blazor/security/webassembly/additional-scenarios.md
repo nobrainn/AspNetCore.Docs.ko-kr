@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 2020b422ad48a9c4c52f2670fd3b5054aa4d60c5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 13007df4ddddd31dd0508e9526775a6d33e0fd97
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103411"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242916"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly 추가 보안 시나리오
 
@@ -30,8 +30,8 @@ ms.locfileid: "85103411"
 
 다음 방법 중 하나를 사용하여 보내는 요청에 대한 메시지 처리기를 구성합니다.
 
-* [사용자 지정 AuthorizationMessageHandler 클래스](#custom-authorizationmessagehandler-class)(권장)
-* [AuthorizationMessageHandler 구성](#configure-authorizationmessagehandler)
+* [사용자 지정 `AuthorizationMessageHandler` 클래스](#custom-authorizationmessagehandler-class)(‘권장’)
+* [`AuthorizationMessageHandler` 구성](#configure-authorizationmessagehandler)
 
 ### <a name="custom-authorizationmessagehandler-class"></a>사용자 지정 AuthorizationMessageHandler 클래스
 
@@ -54,7 +54,7 @@ public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-`Program.Main`(*Program.cs*)에서 사용자 지정 권한 부여 메시지 처리기를 사용하여 <xref:System.Net.Http.HttpClient>가 구성됩니다.
+`Program.Main`(`Program.cs`)에서 사용자 지정 권한 부여 메시지 처리기를 사용하여 <xref:System.Net.Http.HttpClient>가 구성됩니다.
 
 ```csharp
 builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
@@ -64,7 +64,7 @@ builder.Services.AddHttpClient("ServerAPI",
         .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-구성된 <xref:System.Net.Http.HttpClient>는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다. 클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 API로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.
+구성된 <xref:System.Net.Http.HttpClient>는 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다. 클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 API로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -96,7 +96,7 @@ builder.Services.AddHttpClient("ServerAPI",
 
 ### <a name="configure-authorizationmessagehandler"></a>AuthorizationMessageHandler 구성
 
-다음 예제에서는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>가 `Program.Main`(*Program.cs*)에서 <xref:System.Net.Http.HttpClient>를 구성합니다.
+다음 예제에서는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>가 `Program.Main`(`Program.cs`)에서 <xref:System.Net.Http.HttpClient>를 구성합니다.
 
 ```csharp
 using System.Net.Http;
@@ -116,7 +116,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-편의를 위해, 앱 기준 주소로 구성된 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>가 권한이 부여된 URL로 포함되어 있습니다. 인증이 사용하도록 설정된 Blazor WebAssembly 템플릿은 이제 서버 API 프로젝트에서 <xref:System.Net.Http.IHttpClientFactory>([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>로 <xref:System.Net.Http.HttpClient>를 설정합니다.
+편의를 위해, 앱 기준 주소로 구성된 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>가 권한이 부여된 URL로 포함되어 있습니다. 인증이 사용하도록 설정된 Blazor WebAssembly 템플릿은 이제 서버 API 프로젝트에서 <xref:System.Net.Http.IHttpClientFactory>([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>로 <xref:System.Net.Http.HttpClient>를 설정합니다.
 
 ```csharp
 using System.Net.Http;
@@ -134,7 +134,7 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 앞에 나온 예제에서 클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 프로젝트로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.
 
-구성된 <xref:System.Net.Http.HttpClient>는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다.
+구성된 <xref:System.Net.Http.HttpClient>는 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다.
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -164,7 +164,7 @@ protected override async Task OnInitializedAsync()
 
 단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리하는 형식화된 클라이언트를 정의할 수 있습니다.
 
-*WeatherForecastClient.cs*:
+`WeatherForecastClient.cs`:
 
 ```csharp
 using System.Net.Http;
@@ -203,7 +203,7 @@ public class WeatherForecastClient
 
 자리 표시자 `{APP ASSEMBLY}`는 앱의 어셈블리 이름입니다(예: `using static BlazorSample.Data;`).
 
-`Program.Main`(*Program.cs*):
+`Program.Main`(`Program.cs`):
 
 ```csharp
 using System.Net.Http;
@@ -216,7 +216,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-`FetchData` 구성 요소(*Pages/FetchData.razor*):
+`FetchData` 구성 요소(`Pages/FetchData.razor`):
 
 ```razor
 @inject WeatherForecastClient Client
@@ -233,7 +233,7 @@ protected override async Task OnInitializedAsync()
 
 처리기는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>를 사용하여 아웃바운드 HTTP 요청에 대해 추가로 구성될 수 있습니다.
 
-`Program.Main`(*Program.cs*):
+`Program.Main`(`Program.cs`):
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -246,7 +246,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
 
 Blazor WebAssembly 앱이 일반적으로 보안 기본 <xref:System.Net.Http.HttpClient>를 사용하는 경우, 이 앱은 명명된 <xref:System.Net.Http.HttpClient>를 구성하여 인증되지 않은 또는 권한 부여되지 않은 웹 API 요청을 수행할 수도 있습니다.
 
-`Program.Main`(*Program.cs*):
+`Program.Main`(`Program.cs`):
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
@@ -255,7 +255,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 앞에 나온 등록은 기존의 보안 기본 <xref:System.Net.Http.HttpClient> 등록에 더해 이루어집니다.
 
-구성 요소는 <xref:System.Net.Http.IHttpClientFactory>([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)에서 <xref:System.Net.Http.HttpClient>를 만들어서 인증되지 않은 또는 권한 부여되지 않은 요청을 만듭니다.
+구성 요소는 <xref:System.Net.Http.IHttpClientFactory>([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)에서 <xref:System.Net.Http.HttpClient>를 만들어 인증되지 않거나 권한이 부여되지 않은 요청을 만듭니다.
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -284,7 +284,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 추가 AAD(Azure Active Directory) Microsoft Graph API 범위가 필요합니다. Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후에 클라이언트 앱에서 추가 범위가 구성됩니다.
 
-`Program.Main`(*Program.cs*):
+`Program.Main`(`Program.cs`):
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -328,7 +328,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage
 
-Blazor WebAssembly 앱의 WebAssembly에서 실행될 경우 [HttpClient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 요청을 사용자 지정할 수 있습니다. 예를 들어, HTTP 메서드 및 요청 헤더를 지정할 수 있습니다. 다음 구성 요소는 서버에서 To Do List API 엔드포인트에 대한 `POST` 요청을 만들고 응답 본문을 표시합니다.
+Blazor WebAssembly 앱의 WebAssembly에서 실행될 경우 [`HttpClient`](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 요청을 사용자 지정할 수 있습니다. 예를 들어, HTTP 메서드 및 요청 헤더를 지정할 수 있습니다. 다음 구성 요소는 서버에서 To Do List API 엔드포인트에 대한 `POST` 요청을 만들고 응답 본문을 표시합니다.
 
 ```razor
 @page "/todorequest"
@@ -396,10 +396,10 @@ HTTP 페치 요청 옵션은 다음 표에 표시된 <xref:System.Net.Http.HttpR
 
 | 확장 메서드 | Fetch 요청 속성 |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [캐시](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [무결성](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [`credentials`](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [`cache`](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [`mode`](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [`integrity`](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
 보다 일반적인 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.
  
@@ -430,7 +430,7 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소(*Components/HTTPRequestTester.razor*)를 참조하세요.
+자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소(`Components/HTTPRequestTester.razor`)를 참조하세요.
 
 ## <a name="handle-token-request-errors"></a>토큰 요청 오류 처리
 
@@ -454,7 +454,7 @@ SPA(단일 페이지 애플리케이션)가 OIDC(Open ID Connect)를 사용하�
 
 토큰 요청이 실패할 경우 리디렉션을 수행하기 전에 현재 상태를 저장할 것인지 여부를 결정해야 합니다. 여기에는 다양한 접근 방식이 있으며, 아래로 갈수록 복잡도가 증가합니다.
 
-* 세션 스토리지에 현재 페이지 상태를 저장합니다. [OnInitializedAsync 수명 주기 이벤트를](xref:blazor/components/lifecycle#component-initialization-methods)(<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 중에 계속하기 전에 상태를 복원할 수 있는지 확인합니다.
+* 세션 스토리지에 현재 페이지 상태를 저장합니다. [`OnInitializedAsync` 수명 주기 이벤트](xref:blazor/components/lifecycle#component-initialization-methods)(<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 중에 계속하기 전에 상태를 복원할 수 있는지 확인합니다.
 * 쿼리 문자열 매개 변수를 추가하고 이 매개 변수를 이전에 저장된 상태를 다시 하이드레이션해야 한다는 사실을 앱에 알리는 용도로 사용합니다.
 * 고유 식별자를 갖는 쿼리 문자열 매개 변수를 추가하여 다른 항목과의 충돌이 발생할 가능성 없이 세션 스토리지에 데이터를 저장합니다.
 
@@ -526,7 +526,7 @@ SPA(단일 페이지 애플리케이션)가 OIDC(Open ID Connect)를 사용하�
 
 인증 작업을 수행하는 동안 브라우저가 IP로 리디렉션되기 전에 앱 상태를 저장해야 하는 경우가 있습니다. 상태 컨테이너를 사용하고 있으며 인증에 성공한 후에 상태를 복원하려는 경우가 여기에 해당할 수 있습니다. 이때 사용자 지정 인증 상태 개체를 사용하여 앱의 상태를 보존하거나 참조하고 인증 작업이 성공적으로 완료된 후에 해당 상태를 복원할 수 있습니다. 다음 예제에서는 이 접근 방식을 보여 줍니다.
 
-앱의 상태 값을 저장하는 속성이 있는 상태 컨테이너 클래스가 앱 안에 만들어집니다. 다음 예제에서는 기본 템플릿의 `Counter` 구성 요소의 카운터 값을 유지하기 위해 컨테이너가 사용됩니다(*Pages/Counter.razor*). 컨테이너를 직렬화 및 역직렬화하는 메서드는 <xref:System.Text.Json>을 기반으로 합니다.
+앱의 상태 값을 저장하는 속성이 있는 상태 컨테이너 클래스가 앱 안에 만들어집니다. 다음 예제에서는 기본 템플릿의 `Counter` 구성 요소(`Pages/Counter.razor`)의 카운터 값을 유지하기 위해 컨테이너가 사용됩니다. 컨테이너를 직렬화 및 역직렬화하는 메서드는 <xref:System.Text.Json>을 기반으로 합니다.
 
 ```csharp
 using System.Text.Json;
@@ -583,7 +583,7 @@ public class StateContainer
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState>에서 `ApplicationAuthenticationState`를 만듭니다. 로컬로 저장된 상태의 식별자로 기능하는 `Id` 속성을 제공합니다.
 
-*ApplicationAuthenticationState.cs*:
+`ApplicationAuthenticationState.cs`:
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -594,7 +594,7 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-`Authentication` 구성 요소(*Pages/Authentication.razor*)는 `StateContainer` serialization 및 deserialization 메서드인 `GetStateForLocalStorage` 및 `SetStateFromLocalStorage`로 로컬 세션 스토리지를 사용하여 앱의 상태를 저장하고 복원합니다.
+`Authentication` 구성 요소(`Pages/Authentication.razor`)는 `StateContainer` serialization 및 deserialization 메서드인 `GetStateForLocalStorage` 및 `SetStateFromLocalStorage`로 로컬 세션 스토리지를 사용하여 앱의 상태를 저장하고 복원합니다.
 
 ```razor
 @page "/authentication/{action}"
@@ -646,7 +646,7 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-이 예제에서는 인증을 위해 AAD(Azure Active Directory)를 사용합니다. `Program.Main`(*Program.cs*)에서:
+이 예제에서는 인증을 위해 AAD(Azure Active Directory)를 사용합니다. `Program.Main`(`Program.cs`)에서:
 
 * `ApplicationAuthenticationState`는 MSAL(Microsoft 인증 라이브러리) `RemoteAuthenticationState` 유형으로 구성됩니다.
 * 상태 컨테이너는 서비스 컨테이너에 등록됩니다.
@@ -662,7 +662,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 ## <a name="customize-app-routes"></a>앱 경로 사용자 지정
 
-기본적으로 [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리는 다음 표에 나와 있는 경로를 사용하여 여러 인증 상태를 나타냅니다.
+기본적으로 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리는 다음 표에 나와 있는 경로를 사용하여 다양한 인증 상태를 나타냅니다.
 
 | 경로                            | 용도 |
 | -------------------------------- | ------- |
@@ -680,7 +680,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 다음 예제에서는 모든 경로에 `/security` 접두사가 붙습니다.
 
-`Authentication` 구성 요소(*Pages/Authentication.razor*):
+`Authentication` 구성 요소(`Pages/Authentication.razor`):
 
 ```razor
 @page "/security/{action}"
@@ -694,7 +694,7 @@ builder.Services.AddSingleton<StateContainer>();
 }
 ```
 
-`Program.Main`(*Program.cs*):
+`Program.Main`(`Program.cs`):
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -724,7 +724,7 @@ builder.Services.AddApiAuthorization(options => {
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>에는 각 인증 상태에 대한 기본 UI 조각 집합이 포함되어 있습니다. 사용자 지정 <xref:Microsoft.AspNetCore.Components.RenderFragment>를 전달하여 각 상태를 사용자 지정할 수 있습니다. 초기 로그인 프로세스 중에 표시되는 텍스트를 사용자 지정하려면 다음과 같이 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>를 변경할 수 있습니다.
 
-`Authentication` 구성 요소(*Pages/Authentication.razor*):
+`Authentication` 구성 요소(`Pages/Authentication.razor`):
 
 ```razor
 @page "/security/{action}"
@@ -866,7 +866,7 @@ public class CustomAccountFactory
 * 인증이 필요하지 않은 경로를 미리 렌더링합니다.
 * 인증이 필요한 경로를 미리 렌더링하지 않습니다.
 
-클라이언트 앱의 `Program` 클래스(*Program.cs*)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.
+클라이언트 앱의 `Program` 클래스(`Program.cs`)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.
 
 ```csharp
 public class Program
@@ -915,7 +915,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-서버 앱의 `Startup.Configure` 메서드에서 [endpoints.MapFallbackToFile("index.html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A)을 [endpoints.MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A)로 바꿉니다.
+서버 앱의 `Startup.Configure` 메서드에서 [`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A)을 [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A)로 바꿉니다.
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -925,7 +925,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-서버 앱에서 *Pages* 폴더가 없으면 이 폴더를 만듭니다. 서버 앱의 *Pages* 폴더 안에 *_Host.cshtml* 페이지를 만듭니다. 클라이언트 앱의 *wwwroot/index.html* 파일 콘텐츠를 *Pages/_Host.cshtml* 파일에 붙여넣습니다. 다음과 같이 파일 콘텐츠를 업데이트합니다.
+서버 앱에서 `Pages` 폴더가 없으면 이 폴더를 만듭니다. 서버 앱의 `Pages` 폴더 안에 `_Host.cshtml` 페이지를 만듭니다. 클라이언트 앱의 `wwwroot/index.html` 파일 콘텐츠를 `Pages/_Host.cshtml` 파일에 붙여넣습니다. 다음과 같이 파일 콘텐츠를 업데이트합니다.
 
 * `@page "_Host"`를 파일의 맨 위에 추가합니다.
 * `<app>Loading...</app>` 태그를 다음으로 바꿉니다.
@@ -1001,7 +1001,7 @@ builder.Services.Configure<JwtBearerOptions>(
     });
 ```
 
-또는 앱 설정(*appsettings.json*) 파일에서 설정을 적용할 수도 있습니다.
+또는 앱 설정(`appsettings.json`) 파일에서 설정을 수행할 수 있습니다.
 
 ```json
 {
@@ -1012,6 +1012,6 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-인증 기관에 대한 세그먼트의 추적이 앱의 OIDC 공급자에 적합하지 않은 경우(예: 비 AAD 공급자) <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정합니다. <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> 또는 앱 설정 파일(*appsettings.json*)에서 `Authority` 키를 사용하여 속성을 설정합니다.
+인증 기관에 대한 세그먼트의 추적이 앱의 OIDC 공급자에 적합하지 않은 경우(예: 비 AAD 공급자) <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정합니다. <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> 또는 앱 설정 파일(`appsettings.json`)에서 `Authority` 키를 사용하여 속성을 설정합니다.
 
 ID 토큰의 클레임 목록은 v2.0 엔드포인트의 경우 변경됩니다. 자세한 내용은 [Microsoft ID 플랫폼(v2.0)으로 업데이트해야 하는 이유](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)를 참조하세요.

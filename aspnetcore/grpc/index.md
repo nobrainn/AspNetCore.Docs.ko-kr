@@ -1,11 +1,25 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: .NET Core에서 gRPC 소개
+author: juntaoluo
+description: Kestrel 서버 및 ASP.NET Core 스택을 사용하는 gRPC 서비스에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: johluo
+ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/index
+ms.openlocfilehash: 9f3a2041059c1d890ce72ce5f2a88151253d9bd9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404186"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core에서 gRPC 소개
 

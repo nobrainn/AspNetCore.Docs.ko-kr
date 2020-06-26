@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 203f29ce606a313463e416b068177ce02acd6231
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a527e04cf97dd2d2b88dcc6e866475835498545d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103331"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243618"
 ---
 # <a name="aspnet-core-blazor-environments"></a>ASP.NET Core Blazor 환경
 
@@ -31,7 +31,7 @@ ms.locfileid: "85103331"
 
 로컬에서 실행되는 독립 실행형 앱의 경우 개발 서버는 `blazor-environment` 헤더를 추가하여 개발 환경을 지정합니다. 다른 호스팅 환경을 위한 환경을 지정하려면 `blazor-environment` 헤더를 추가합니다.
 
-다음 IIS 예제에서는 게시된 *web.config* 파일에 사용자 지정 헤더를 추가합니다. *web.config* 파일은 *bin/Release/{대상 프레임워크}/publish* 폴더에 있습니다.
+다음 IIS 예제에서는 게시된 `web.config` 파일에 사용자 지정 헤더를 추가합니다. `web.config` 파일은 `bin/Release/{TARGET FRAMEWORK}/publish` 폴더에 있습니다.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +50,7 @@ ms.locfileid: "85103331"
 ```
 
 > [!NOTE]
-> 앱이 *publish* 폴더에 게시될 때 덮어쓰지 않는 IIS용 사용자 지정 *web.config* 파일을 사용하려면 <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig>를 참조하세요.
+> 앱이 `publish` 폴더에 게시될 때 덮어쓰지 않는 IIS용 사용자 지정 `web.config` 파일을 사용하려면 <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig>를 참조하세요.
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment>를 삽입하고 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> 속성을 읽어 구성 요소에서 앱의 환경을 가져옵니다.
 

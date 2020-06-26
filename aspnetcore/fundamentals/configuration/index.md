@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 91200a7a4396d91bec3cfe6ce4b787839f30c72f
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5e413fad090ff2cb5e1379bf7311caf159a57a4b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102672"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408593"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -49,7 +51,7 @@ ASP.NET Core에서 구성은 하나 이상의 [구성 공급자](#cp)를 사용�
 
  <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>는 다음 순서로 앱에 대한 기본 구성을 제공합니다.
 
-1. [ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource):  기존 `IConfiguration`을 소스로 추가합니다. 기본 구성 사례에서는 [호스트](#hvac) 구성을 추가하고 앱 구성의 첫 번째 소스로 설정합니다.
+1. [ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource):  기존 `IConfiguration`을 소스로 추가합니다. 기본 구성 사례에서는 [호스트](#hvac) 구성을 추가하고 앱 구성의 첫 번째 소스로 설정합니다.__
 1. [JSON 구성 공급자](#file-configuration-provider)를 사용하는 [appsettings.json](#appsettingsjson)
 1. [JSON 구성 공급자](#file-configuration-provider)를 사용하는 *appsettings.* `Environment` *.json*. 예: *appsettings*.***Production***.*json* 및 *appsettings*.***Development***.*json*
 1. 앱이 `Development` 환경에서 실행되는 경우 [앱 비밀](xref:security/app-secrets)
@@ -765,7 +767,7 @@ Index: 5  Value: value5
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다. 구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
+ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다.** 구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
 
 * Azure Key Vault
 * Azure App Configuration
@@ -784,7 +786,7 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 using Microsoft.Extensions.Configuration;
 ```
 
-‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다. 옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
+‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다.** 옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -927,7 +929,7 @@ public class HomeController : Controller
 
 | 공급자 | 다음에서 구성 제공&hellip; |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목) | Azure Key Vault |
+| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목)** | Azure Key Vault |
 | [Azure App Configuration 공급자](/azure/azure-app-configuration/quickstart-aspnet-core-app)(Azure 설명서) | Azure App Configuration |
 | [명령줄 구성 공급자](#command-line-configuration-provider) | 명령줄 매개 변수 |
 | [사용자 지정 구성 공급자](#custom-configuration-provider) | 사용자 지정 소스 |
@@ -935,7 +937,7 @@ public class HomeController : Controller
 | [파일 구성 공급자](#file-configuration-provider) | 파일(INI, JSON, XML) |
 | [파일별 키 구성 공급자](#key-per-file-configuration-provider) | 디렉터리 파일 |
 | [메모리 구성 공급자](#memory-configuration-provider) | 메모리 내 컬렉션 |
-| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목) | 사용자 프로필 디렉터리의 파일 |
+| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목)** | 사용자 프로필 디렉터리의 파일 |
 
 시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다. 이 항목의 구성 공급자는 코드에서 정렬하는 순서가 아니라 사전 순으로 설명되어 있습니다. 앱에 필요한 기본 구성 소스에 대한 우선 순위에 맞게 구성 공급자를 코드에 정렬하세요.
 
@@ -1606,7 +1608,7 @@ TvShow = tvShow;
 
 ## <a name="bind-an-array-to-a-class"></a>클래스에 배열 바인딩
 
-다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다.
+다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다.**
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>는 구성 키에 배열 인덱스를 사용하여 배열을 개체에 바인딩하는 것을 지원합니다. 숫자 키 세그먼트(`:0:`, `:1:`, &hellip; `:{n}:`)를 노출하는 모든 배열 형식은 POCO 클래스 배열에 배열 바인딩할 수 있습니다.
 

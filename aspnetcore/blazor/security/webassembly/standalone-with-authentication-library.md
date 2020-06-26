@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: ba6b3a333a021184ad8a42d6292915e908cc6eb7
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5a05543c77f1ebaebadc27236aa8f7634e84f1fd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103392"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243418"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>인증 라이브러리를 사용하여 ASP.NET Core Blazor WebAssembly 독립 실행형 앱 보호
 
@@ -26,7 +26,7 @@ ms.locfileid: "85103392"
 
 ‘AAD(Azure Active Directory) 및 AAD B2C(Azure Active Directory B2C)의 경우에는 이 항목의 지침을 따르지 않습니다. 목차 노드 테이블에서 AAD 및 AAD B2C 항목을 참조하세요.’
 
-[Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리를 사용하는 Blazor WebAssembly 독립 실행형 앱을 만들려면 명령 셸에서 다음 명령을 실행합니다.
+[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리를 사용하는 Blazor WebAssembly 독립 실행형 앱을 만들려면 명령 셸에서 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
@@ -38,7 +38,7 @@ Visual Studio에서 [Blazor WebAssembly 앱을 만듭니다](xref:blazor/get-sta
 
 ## <a name="authentication-package"></a>인증 패키지
 
-앱이 개별 사용자 계정을 사용하도록 만들어진 경우 해당 앱은 앱의 프로젝트 파일에서 자동으로 [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에 대한 패키지 참조를 받습니다. 패키지는 앱이 사용자를 인증하고 보호된 API를 호출하는 데 사용할 토큰을 가져올 수 있도록 지원하는 기본 형식 세트를 제공합니다.
+앱이 개별 사용자 계정을 사용하도록 만들어진 경우 해당 앱은 앱의 프로젝트 파일에서 자동으로 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에 대한 패키지 참조를 받습니다. 패키지는 앱이 사용자를 인증하고 보호된 API를 호출하는 데 사용할 토큰을 가져올 수 있도록 지원하는 기본 형식 세트를 제공합니다.
 
 앱에 인증을 추가하는 경우에는 패키지를 앱의 프로젝트 파일에 수동으로 추가합니다.
 
@@ -50,9 +50,9 @@ Visual Studio에서 [Blazor WebAssembly 앱을 만듭니다](xref:blazor/get-sta
 
 ## <a name="authentication-service-support"></a>인증 서비스 지원
 
-사용자 인증에 대한 지원은 [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에서 제공하는 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> 확장 메서드를 통해 서비스 컨테이너에 등록되어 있습니다. 이 메서드는 앱이 IP(Identity 공급자)와 상호 작용하는 데 필요한 서비스를 설정합니다.
+사용자 인증에 대한 지원은 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 패키지에서 제공하는 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> 확장 메서드를 통해 서비스 컨테이너에 등록됩니다. 이 메서드는 앱이 IP(Identity 공급자)와 상호 작용하는 데 필요한 서비스를 설정합니다.
 
-*Program.cs*:
+`Program.cs`:
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -61,7 +61,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-구성은 *wwwroot/appsettings.json* 파일을 통해 제공됩니다.
+구성은 `wwwroot/appsettings.json` 파일에서 제공합니다.
 
 ```json
 {
@@ -111,7 +111,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logindisplay-component"></a>LoginDisplay 구성 요소
 
-`LoginDisplay` 구성 요소(*Shared/LoginDisplay.razor*)는 `MainLayout` 구성 요소(*Shared/MainLayout.razor*)에서 렌더링되며 다음 동작을 관리합니다.
+`LoginDisplay` 구성 요소(`Shared/LoginDisplay.razor`)는 `MainLayout` 구성 요소(`Shared/MainLayout.razor`)에서 렌더링되고 다음 동작을 관리합니다.
 
 * 인증된 사용자의 경우:
   * 현재 사용자 이름을 표시합니다.
