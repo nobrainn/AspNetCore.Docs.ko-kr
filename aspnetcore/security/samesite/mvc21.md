@@ -8,21 +8,23 @@ ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 6a53c0d3c0a314c4137f071cf50062182b654658
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4239321531f3a7696a15b1dea164450ea0860c2b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777308"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409061"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie 샘플
 
-ASP.NET Core 2.1는 [SameSite](https://www.owasp.org/index.php/SameSite) 특성에 대 한 기본 제공 지원을 제공 하지만 원래 표준에 기록 되었습니다. [패치 된 동작이](https://github.com/dotnet/aspnetcore/issues/8212) 의 `SameSite.None` 의미를 변경 하 여 값을 전혀 내보내지 않고 sameSite 특성 `None`을 값으로 내보냅니다. 값을 내보내지 않으려면 쿠키에 대 한 `SameSite` 속성을-1로 설정할 수 있습니다.
+ASP.NET Core 2.1는 [SameSite](https://www.owasp.org/index.php/SameSite) 특성에 대 한 기본 제공 지원을 제공 하지만 원래 표준에 기록 되었습니다. [패치 된 동작이](https://github.com/dotnet/aspnetcore/issues/8212) 의 의미를 변경 `SameSite.None` 하 여 값을 `None` 전혀 내보내지 않고 sameSite 특성을 값으로 내보냅니다. 값을 내보내지 않으려면 `SameSite` 쿠키에 대 한 속성을-1로 설정할 수 있습니다.
 
 ## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a>SameSite 특성 작성
 
@@ -69,21 +71,21 @@ services.AddSession(options =>
 });
 ```
 
-위의 코드에서 쿠키 인증과 세션 상태는 모두 sameSite 특성을로 `None`설정 하 고, 특성을 `None` 값으로 내보내고, 보안 특성을 true로 설정 합니다.
+위의 코드에서 쿠키 인증과 세션 상태는 모두 sameSite 특성을로 설정 하 `None` 고, 특성을 값으로 내보내고, `None` 보안 특성을 true로 설정 합니다.
 
 ### <a name="run-the-sample"></a>샘플 실행
 
-[샘플 프로젝트](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)를 실행 하는 경우에는 초기 페이지에서 브라우저 디버거를 로드 하 고 사이트에 대 한 쿠키 컬렉션을 보는 데 사용 합니다. Edge 및 `F12` Chrome에서이 작업을 수행 `Application` 하려면 탭을 선택 하 고 `Cookies` `Storage` 섹션의 옵션 아래에서 사이트 URL을 클릭 합니다.
+[샘플 프로젝트](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)를 실행 하는 경우에는 초기 페이지에서 브라우저 디버거를 로드 하 고 사이트에 대 한 쿠키 컬렉션을 보는 데 사용 합니다. Edge 및 Chrome에서이 작업을 수행 하려면 `F12` 탭을 선택 하 `Application` 고 섹션의 옵션 아래에서 사이트 URL을 클릭 `Cookies` `Storage` 합니다.
 
 ![브라우저 디버거 쿠키 목록](BrowserDebugger.png)
 
-위의 이미지에서 볼 수 있습니다. 예를 들어 "SameSite 쿠키 만들기" 단추를 클릭 하면 샘플 [코드](#sampleCode)에 설정 된 값과 일치 하는 SameSite `Lax`특성 값이 포함 됩니다.
+위의 이미지에서 볼 수 있습니다. 예를 들어 "SameSite 쿠키 만들기" 단추를 클릭 하면 샘플 `Lax` [코드](#sampleCode)에 설정 된 값과 일치 하는 SameSite 특성 값이 포함 됩니다.
 
 ## <a name="intercepting-cookies"></a><a name="interception"></a>쿠키 가로채기
 
-쿠키를 가로채 고 사용자의 브라우저 에이전트에서 지원에 따라 없음 값을 조정 하려면 `CookiePolicy` 미들웨어를 사용 해야 합니다. 쿠키를 작성 하 고 내에서 `ConfigureServices()`구성 된 구성 요소 **보다 먼저** http 요청 파이프라인에 배치 해야 합니다.
+쿠키를 가로채 고 사용자의 브라우저 에이전트에서 지원에 따라 없음 값을 조정 하려면 미들웨어를 사용 해야 합니다 `CookiePolicy` . 쿠키를 작성 하 고 내에서 구성 된 구성 요소 **보다 먼저** http 요청 파이프라인에 배치 해야 합니다 `ConfigureServices()` .
 
-`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)의 메서드에서 파이프라인 사용에 삽입 합니다. 다음은 그 예입니다. 
+`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)의 메서드에서 파이프라인 사용에 삽입 합니다. 예를 들면 다음과 같습니다.
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -113,7 +115,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-그런 다음 쿠키가 `ConfigureServices(IServiceCollection services)` 추가 되거나 삭제 될 때 도우미 클래스를 호출 하도록 쿠키 정책을 구성 합니다. 다음은 그 예입니다. 
+그런 다음 쿠키가 `ConfigureServices(IServiceCollection services)` 추가 되거나 삭제 될 때 도우미 클래스를 호출 하도록 쿠키 정책을 구성 합니다. 예를 들면 다음과 같습니다.
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -142,12 +144,12 @@ private void CheckSameSite(HttpContext httpContext, CookieOptions options)
 }
 ```
 
-도우미 함수 `CheckSameSite(HttpContext, CookieOptions)`:
+도우미 함수 `CheckSameSite(HttpContext, CookieOptions)` :
 
 * 쿠키가 요청에 추가 되거나 요청에서 삭제 될 때 호출 됩니다.
-* `SameSite` 속성이로 `None`설정 되어 있는지 확인 합니다.
-* 가 `SameSite` 로 `None` 설정 되어 있고 현재 사용자 에이전트가 none 특성 값을 지원 하지 않는 것으로 알려진 경우 확인은 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) 클래스를 사용 하 여 수행 됩니다.
-  * 속성 `SameSite` 을로 설정 하 여 값을 내보내지 않도록 설정 합니다.`(SameSiteMode)(-1)`
+* `SameSite`속성이로 설정 되어 있는지 확인 `None` 합니다.
+* `SameSite`가로 설정 되어 `None` 있고 현재 사용자 에이전트가 none 특성 값을 지원 하지 않는 것으로 알려진 경우 확인은 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) 클래스를 사용 하 여 수행 됩니다.
+  * `SameSite`속성을로 설정 하 여 값을 내보내지 않도록 설정 합니다.`(SameSiteMode)(-1)`
 
 ## <a name="targeting-net-framework"></a>대상 지정 .NET Framework
 
@@ -164,6 +166,6 @@ ASP.NET Core 및 System.web (ASP.NET 클래식)에는 SameSite의 독립적인 �
 
 ### <a name="more-information"></a>추가 정보
  
-[Chrome 업데이트](https://www.chromium.org/updates/same-site)
-[ASP.NET Core SameSite 설명서](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1)
-[ASP.NET Core 2.1 SameSite 변경 공지](https://github.com/dotnet/aspnetcore/issues/8212)
+[Chrome 업데이트](https://www.chromium.org/updates/same-site) 
+ [ASP.NET Core SameSite 설명서](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) 
+ [ASP.NET Core 2.1 SameSite 변경 공지](https://github.com/dotnet/aspnetcore/issues/8212)

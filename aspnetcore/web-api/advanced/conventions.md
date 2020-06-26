@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: f74327cd5bb6a5794c90ffdd3896f2b343e175a6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eece8130c152fdada1e1d86cf3c94932c5ee9f63
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774888"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408450"
 ---
 # <a name="use-web-api-conventions"></a>웹 API 규칙 사용
 
 작성자: [Pranav Krishnamoorthy](https://github.com/pranavkm) 및 [Scott Addie](https://github.com/scottaddie)
 
-ASP.NET Core 2.2 이상에는 일반적인 [API 설명서](xref:tutorials/web-api-help-pages-using-swagger)를 추출하여 여러 작업, 컨트롤러 또는 어셈블리 내 모든 컨트롤러에 적용하는 방법이 포함되어 있습니다. Web API 규칙은 개별 작업을로 [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)데코레이팅하는 대체 방법입니다.
+ASP.NET Core 2.2 이상에는 일반적인 [API 설명서](xref:tutorials/web-api-help-pages-using-swagger)를 추출하여 여러 작업, 컨트롤러 또는 어셈블리 내 모든 컨트롤러에 적용하는 방법이 포함되어 있습니다. Web API 규칙은 개별 작업을로 데코레이팅하는 대체 방법 [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 입니다.
 
 규칙을 통해 다음을 사용할 수 있습니다.
 
@@ -41,7 +43,7 @@ ASP.NET Core MVC 2.2 이상에는 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConve
 
 규칙이 구성되지 않으면 각 작업은 정확히 하나의 규칙과 연결될 수 있습니다. 더 구체적인 규칙은 덜 구체적인 규칙보다 우선합니다. 동일한 우선순위의 둘 이상의 규칙이 작업에 적용되는 경우 선택은 명확하지 않습니다. 다음 옵션은 가장 구체적인 것에서 가장 덜 구체적인 것까지 작업에 규칙을 적용할 수 있습니다.
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash; 개별 작업에 적용 되며, 적용 되는 규칙 형식 및 규칙 메서드를 지정 합니다.
+1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash;개별 작업에 적용 되며, 적용 되는 규칙 형식 및 규칙 메서드를 지정 합니다.
 
     다음 예제에서는 기본 규칙 유형의 `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` 규칙 메서드가 `Update` 작업에 적용됩니다.
 
@@ -79,7 +81,7 @@ ASP.NET Core MVC 2.2 이상에는 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConve
 
 ### <a name="response-types"></a>응답 형식
 
-이러한 메서드에는 `[ProducesResponseType]` 또는 `[ProducesDefaultResponseType]` 특성으로 주석이 추가됩니다. 예를 들어:
+이러한 메서드에는 `[ProducesResponseType]` 또는 `[ProducesDefaultResponseType]` 특성으로 주석이 추가됩니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 public static class MyAppConventions
@@ -99,7 +101,7 @@ public static class MyAppConventions
 
 ### <a name="naming-requirements"></a>명명 요구 사항
 
-`[ApiConventionNameMatch]` 및 `[ApiConventionTypeMatch]` 특성은 적용할 작업을 결정하는 규칙 메서드에 적용될 수 있습니다. 예를 들어:
+`[ApiConventionNameMatch]` 및 `[ApiConventionTypeMatch]` 특성은 적용할 작업을 결정하는 규칙 메서드에 적용될 수 있습니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]

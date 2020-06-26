@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: d3207969dfbeb9a81e0da88f38a38c6889bbfba9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d92707ff06125a4b65f1ec18e402f5fe86547b5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775871"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407917"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core의 부분 태그 도우미
 
@@ -30,7 +32,7 @@ ms.locfileid: "82775871"
 
 ## <a name="overview"></a>개요
 
-부분 태그 도우미는 페이지 및 MVC 앱 Razor 에서 [부분 뷰](xref:mvc/views/partial) 를 렌더링 하는 데 사용 됩니다. 고려 사항은 다음과 같습니다.
+부분 태그 도우미는 페이지 및 MVC 앱에서 [부분 뷰](xref:mvc/views/partial) 를 렌더링 하는 데 사용 됩니다 Razor . 고려 사항은 다음과 같습니다.
 
 * ASP.NET Core 2.1 이상이 필요합니다.
 * [HTML 도우미 구문](xref:mvc/views/partial#reference-a-partial-view) 대신 사용할 수 있습니다.
@@ -49,7 +51,7 @@ ms.locfileid: "82775871"
 
 부분 태그 도우미 특성의 인벤토리는 다음과 같습니다.
 
-## <a name="name"></a>이름
+## <a name="name"></a>name
 
 `name` 특성은 필수입니다. 이 특성은 렌더링할 부분 보기의 이름 또는 경로를 나타냅니다. 부분 보기의 이름을 지정할 경우 [보기 검색](xref:mvc/views/overview#view-discovery) 과정이 시작됩니다. 명시적인 경로가 지정되면 이 과정이 생략됩니다. 허용되는 모든 `name` 값은 [부분 보기 검색](xref:mvc/views/partial#partial-view-discovery)을 참조하세요.
 
@@ -57,7 +59,7 @@ ms.locfileid: "82775871"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
-## <a name="for"></a>for
+## <a name="for"></a>-
 
 `for` 특성은 현재 모델과 비교 평가할 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)을 할당합니다. `ModelExpression`은 `@Model.` 구문을 추론합니다. 예를 들어 `for="@Model.Product"` 대신 `for="Product"`를 사용할 수 있습니다. 이 기본 추론 동작은 인라인 식을 정의하는 `@` 기호를 사용하여 재정의됩니다.
 

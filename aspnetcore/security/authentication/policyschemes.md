@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: ddedf62c5e8363bd93c9948fd2d3418abc566539
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767319"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408762"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core의 정책 스키마
 
@@ -25,14 +27,14 @@ ms.locfileid: "82767319"
 * 다른 체계에 인증 작업을 쉽게 전달할 수 있습니다.
 * 요청에 따라 동적으로 전달 합니다.
 
-파생 <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> 된 및 연결 된 [\<authenticationhandler toptions ](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)를 사용 하는 모든 인증 스키마>:
+파생 된 <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> [authenticationhandler \<TOptions> ](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)를 사용 하는 모든 인증 스키마는 다음과 같습니다.
 
 * 는 ASP.NET Core 2.1 이상에서 자동으로 정책 스키마를 구성 합니다.
 * 구성표의 옵션을 구성 하 여 사용할 수 있습니다.
 
 [!code-csharp[sample](policyschemes/samples/AuthenticationSchemeOptions.cs?name=snippet)]
 
-## <a name="examples"></a>예
+## <a name="examples"></a>예제
 
 다음 예에서는 하위 수준 스키마를 조합 하는 더 높은 수준의 스키마를 보여 줍니다. Google 인증은 챌린지에 사용 되며 쿠키 인증은 다른 모든 항목에 사용 됩니다.
 

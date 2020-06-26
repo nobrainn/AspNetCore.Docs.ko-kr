@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/07/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: ad4c9806146567b6ef1f5e78eaeca96cb649c1af
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eb18c599d84fd08ffe97867b67a837303af188db
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774394"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408151"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core에서 열기 리디렉션 공격 방지
 
@@ -32,18 +34,18 @@ Querystring 또는 양식 데이터와 같은 요청을 통해 지정 된 URL로
 
 ### <a name="an-example-attack"></a>예제 공격
 
-악의적인 사용자는 악의적인 사용자가 사용자의 자격 증명이 나 중요 한 정보에 액세스할 수 있도록 하는 공격을 개발할 수 있습니다. 공격을 시작 하기 위해 악의적인 사용자는 URL에 추가 된 `returnUrl` querystring 값을 사용 하 여 사이트의 로그인 페이지에 대 한 링크를 클릭 하도록 사용자를 유도 합니다. 예를 들어에서 로그인 페이지가 포함 `contoso.com` 된 앱이 있다고 가정 `http://contoso.com/Account/LogOn?returnUrl=/Home/About`합니다. 이 공격은 다음 단계를 따릅니다.
+악의적인 사용자는 악의적인 사용자가 사용자의 자격 증명이 나 중요 한 정보에 액세스할 수 있도록 하는 공격을 개발할 수 있습니다. 공격을 시작 하기 위해 악의적인 사용자는 `returnUrl` URL에 추가 된 querystring 값을 사용 하 여 사이트의 로그인 페이지에 대 한 링크를 클릭 하도록 사용자를 유도 합니다. 예를 들어에서 `contoso.com` 로그인 페이지가 포함 된 앱이 있다고 가정 `http://contoso.com/Account/LogOn?returnUrl=/Home/About` 합니다. 이 공격은 다음 단계를 따릅니다.
 
-1. 사용자가에 대 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` 한 악의적인 링크를 클릭 합니다 (두 번째 URL은 "contoso.com"이 아닌 "contoso**1**.com").
+1. 사용자가에 대 한 악의적인 링크를 클릭 합니다 `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (두 번째 URL은 "contoso.com"이 아닌 "contoso**1**.com").
 2. 사용자가 로그인 했습니다.
-3. 사용자가 (사이트에서)로 `http://contoso1.com/Account/LogOn` 리디렉션됩니다 (실제 사이트와 똑같이 보이는 악의적인 사이트).
+3. 사용자가 (사이트에서)로 리디렉션됩니다 `http://contoso1.com/Account/LogOn` (실제 사이트와 똑같이 보이는 악의적인 사이트).
 4. 사용자가 다시 로그인 하 여 악의적인 사이트에 자격 증명을 제공 하 고 실제 사이트로 다시 리디렉션됩니다.
 
 사용자는 첫 번째 로그인 시도가 실패 하 고 두 번째 시도가 성공 했음을 판단할 수 있습니다. 사용자는 자격 증명이 손상 되었음을 인식 하지 못할 가능성이 높습니다.
 
 ![리디렉션 공격 프로세스 열기](preventing-open-redirects/_static/open-redirection-attack-process.png)
 
-로그인 페이지 외에도 일부 사이트는 리디렉션 페이지 또는 끝점을 제공 합니다. 응용 프로그램에 열린 리디렉션이 있는 페이지가 있다고 가정 `/Home/Redirect`합니다. 예를 들어 공격자는로 `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login`이동 하는 전자 메일에 링크를 만들 수 있습니다. 일반 사용자는 URL을 확인 하 고 사이트 이름으로 시작 하는 것을 확인 합니다. 이를 신뢰 하면 링크를 클릭 합니다. 그러면 열린 리디렉션이 사용자를 피싱 사이트로 보내고,이 사이트는 사용자와 동일 하 게 표시 되 고 사용자는 사용자가 생각 하는 사이트에 로그인 할 가능성이 높습니다.
+로그인 페이지 외에도 일부 사이트는 리디렉션 페이지 또는 끝점을 제공 합니다. 응용 프로그램에 열린 리디렉션이 있는 페이지가 있다고 가정 `/Home/Redirect` 합니다. 예를 들어 공격자는로 이동 하는 전자 메일에 링크를 만들 수 있습니다 `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login` . 일반 사용자는 URL을 확인 하 고 사이트 이름으로 시작 하는 것을 확인 합니다. 이를 신뢰 하면 링크를 클릭 합니다. 그러면 열린 리디렉션이 사용자를 피싱 사이트로 보내고,이 사이트는 사용자와 동일 하 게 표시 되 고 사용자는 사용자가 생각 하는 사이트에 로그인 할 가능성이 높습니다.
 
 ## <a name="protecting-against-open-redirect-attacks"></a>오픈 리디렉션 공격 으로부터 보호
 
@@ -51,7 +53,7 @@ Querystring 또는 양식 데이터와 같은 요청을 통해 지정 된 URL로
 
 ### <a name="localredirect"></a>LocalRedirect
 
-기본 `Controller` 클래스 `LocalRedirect` 의 도우미 메서드를 사용 합니다.
+`LocalRedirect`기본 클래스의 도우미 메서드를 사용 합니다 `Controller` .
 
 ```csharp
 public IActionResult SomeAction(string redirectUrl)
@@ -60,7 +62,7 @@ public IActionResult SomeAction(string redirectUrl)
 }
 ```
 
-`LocalRedirect`로컬이 아닌 URL을 지정 하면에서 예외를 throw 합니다. 그렇지 않으면 `Redirect` 메서드와 마찬가지로 동작 합니다.
+`LocalRedirect`로컬이 아닌 URL을 지정 하면에서 예외를 throw 합니다. 그렇지 않으면 메서드와 마찬가지로 동작 `Redirect` 합니다.
 
 ### <a name="islocalurl"></a>IsLocalUrl
 
@@ -82,4 +84,4 @@ private IActionResult RedirectToLocal(string returnUrl)
 }
 ```
 
-메서드 `IsLocalUrl` 는 사용자가 실수로 악의적인 사이트로 리디렉션되는 것을 방지 합니다. 로컬 URL이 필요한 상황에서 로컬이 아닌 URL을 제공 하는 경우 제공 된 URL의 세부 정보를 기록할 수 있습니다. 리디렉션 Url 로깅은 리디렉션 공격을 진단 하는 데 도움이 될 수 있습니다.
+`IsLocalUrl`메서드는 사용자가 실수로 악의적인 사이트로 리디렉션되는 것을 방지 합니다. 로컬 URL이 필요한 상황에서 로컬이 아닌 URL을 제공 하는 경우 제공 된 URL의 세부 정보를 기록할 수 있습니다. 리디렉션 Url 로깅은 리디렉션 공격을 진단 하는 데 도움이 될 수 있습니다.

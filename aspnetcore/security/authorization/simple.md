@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 497103a14591476f3167602631b6b011264f5086
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652956"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408333"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core의 단순 권한 부여
 
@@ -82,9 +84,9 @@ public class AccountController : Controller
 
 <a name="aarp"></a>
 
-## <a name="authorize-attribute-and-razor-pages"></a>특성 및 페이지 권한 부여 Razor
+## <a name="authorize-attribute-and-razor-pages"></a>특성 및 Razor Pages 권한 부여
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>페이지 처리기에는를 적용할 수 ***없습니다*** Razor . 예를 들어,, `[Authorize]` `OnGet` `OnPost` 또는 다른 페이지 처리기에는를 적용할 수 없습니다.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>페이지 처리기에는를 적용할 수 ***없습니다*** Razor . 예를 들어,, `[Authorize]` `OnGet` `OnPost` 또는 다른 페이지 처리기에는를 적용할 수 없습니다. 다른 처리기에 대 한 권한 부여 요구 사항이 서로 다른 페이지에는 ASP.NET Core MVC 컨트롤러를 사용 하는 것이 좋습니다.
 
 다음 두 가지 방법을 사용 하 여 페이지 처리기 메서드에 권한 부여를 적용할 수 있습니다 Razor .
 

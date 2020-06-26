@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 4f7fa2deee9111823f60e344f46c54036779ae53
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 487e054675e40c158250fff5d38fc0e6930a68a8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106717"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408645"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core에서 컨트롤러 논리 단위 테스트
 
@@ -350,7 +352,7 @@ ASP.NET Core 2.1 이상에서 [ \<T> actionresult](xref:web-api/action-return-ty
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:test/integration-tests>
 * [Visual Studio를 사용 하 여 단위 테스트 만들기 및 실행](/visualstudio/test/unit-test-your-code)

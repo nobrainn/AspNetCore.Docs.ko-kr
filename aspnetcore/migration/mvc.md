@@ -6,17 +6,19 @@ ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: d2b1cce4bf70893f164e77921df8122e0291be18
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 6a645d0e5959b4301ee7d2bcfc692f7499574dc4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85241025"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407325"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션
 
@@ -33,7 +35,7 @@ ASP.NET MVC에서 마이그레이션하는 과정은 여러 단계로 진행 됩
 
 구성 및 코드 마이그레이션에 대 한 자세한 Identity 내용은 [ASP.NET Core 구성 마이그레이션](xref:migration/configuration) 및 [인증 및 Identity ASP.NET Core 마이그레이션](xref:migration/identity)을 참조 하세요.
 
-## <a name="prerequisites"></a>필수 구성 요소
+## <a name="prerequisites"></a>필수 조건
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -104,7 +106,7 @@ ASP.NET Core *WebApp1* 프로젝트에는 ASP.NET MVC 프로젝트와 동일한 
 그러나 각 컨트롤러 끝점을 테스트할 수 있지만 레이아웃 및 스타일은 문서의 뒷부분에서 다룹니다.
 
 1. ASP.NET Core 앱을 실행 합니다.
-1. 현재 포트 번호를 ASP.NET Core 프로젝트에 사용 되는 포트 번호로 바꿔서 실행 중인 ASP.NET Core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다. 예들 들어 `https://localhost:44375/home/about`입니다.
+1. 현재 포트 번호를 ASP.NET Core 프로젝트에 사용 되는 포트 번호로 바꿔서 실행 중인 ASP.NET Core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다. 예: `https://localhost:44375/home/about`.
 
 ## <a name="migrate-static-content"></a>정적 콘텐츠 마이그레이션
 
@@ -294,7 +296,7 @@ ASP.NET Core 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 
 
 레이아웃 파일 및 스타일은 아직 마이그레이션되지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다. 및 뷰에 대해 생성 된 레이아웃 파일 링크를 `About` `Contact` 아직 사용할 수 없습니다.
 
-현재 포트 번호를 ASP.NET core 프로젝트에서 사용 되는 포트 번호로 바꿔 실행 중인 ASP.NET core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다. 예: `https://localhost:44375/home/about`
+현재 포트 번호를 ASP.NET core 프로젝트에서 사용 되는 포트 번호로 바꿔 실행 중인 ASP.NET core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다. 예를 들어 `https://localhost:44375/home/about`을 참조하십시오.
 
 ![연락처 페이지](mvc/_static/contact-page.png)
 
@@ -367,7 +369,7 @@ JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음�
 
 ASP.NET Core 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다. 일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다. 자세한 내용은 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 참조 하세요.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -480,7 +482,7 @@ ASP.NET Core 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 
 
 레이아웃 파일 및 스타일은 아직 마이그레이션되지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다. 및 뷰에 대해 생성 된 레이아웃 파일 링크를 `About` `Contact` 아직 사용할 수 없습니다.
 
-* 현재 포트 번호를 ASP.NET core 프로젝트에서 사용 되는 포트 번호로 바꿔 실행 중인 ASP.NET core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다. 예: `https://localhost:44375/home/about`
+* 현재 포트 번호를 ASP.NET core 프로젝트에서 사용 되는 포트 번호로 바꿔 실행 중인 ASP.NET core 앱의 브라우저에서 렌더링 된 뷰를 호출 합니다. 예를 들어 `https://localhost:44375/home/about`을 참조하십시오.
 
 ![연락처 페이지](mvc/_static/contact-page.png)
 

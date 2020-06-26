@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: cdf10cd26f3eb9af386f782475eeabbda50f0df9
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
+ms.openlocfilehash: 1bbea6f16d57d5cc107c95293e2788271bfce601
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153343"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408047"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core의 키 저장소 공급자
 
@@ -126,7 +128,7 @@ public void ConfigureServices(IServiceCollection services)
 
 **Windows 배포에만 적용 됩니다.**
 
-응용 프로그램에 파일 시스템에 대 한 쓰기 권한이 없을 수도 있습니다. 앱이 가상 서비스 계정 (예: w3wp.exe의 응용 프로그램 풀 id *)으로 실행*되는 시나리오를 고려해 보세요. 이러한 경우 관리자는 서비스 계정 id로 액세스할 수 있는 레지스트리 키를 프로 비전 할 수 있습니다. 아래와 같이 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) 확장 메서드를 호출 합니다. 암호화 키를 저장 해야 하는 위치를 가리키는 [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) 를 제공 합니다.
+응용 프로그램에 파일 시스템에 대 한 쓰기 권한이 없을 수도 있습니다. 앱이 가상 서비스 계정 (예: *w3wp.exe*의 응용 프로그램 풀 id)으로 실행 되는 시나리오를 고려해 보세요. 이러한 경우 관리자는 서비스 계정 id로 액세스할 수 있는 레지스트리 키를 프로 비전 할 수 있습니다. 아래와 같이 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) 확장 메서드를 호출 합니다. 암호화 키를 저장 해야 하는 위치를 가리키는 [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) 를 제공 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -147,7 +149,7 @@ public void ConfigureServices(IServiceCollection services)
 
 이 패키지를 사용 하면 웹 앱의 여러 인스턴스 간에 키를 공유할 수 있습니다.
 
-EF Core 공급자를 구성 하려면 [PersistKeysToDbContext \< tcontext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) 메서드를 호출 합니다.
+EF Core 공급자를 구성 하려면 [PersistKeysToDbContext \<TContext> ](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) 메서드를 호출 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 

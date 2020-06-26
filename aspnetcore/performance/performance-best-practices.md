@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 04/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: e83019a0f905fa9cd0f0c39960b787bc5b13b64f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775390"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408177"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -49,9 +51,9 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 * [핫 코드 경로](#understand-hot-code-paths) 를 비동기식으로 만듭니다.
 * 비동기 API를 사용할 수 있는 경우 데이터 액세스, i/o 및 장기 실행 작업 Api를 비동기적으로 호출 합니다. [작업을 실행](/dotnet/api/system.threading.tasks.task.run) **하 여 synchronus** API를 비동기로 만듭니다.
-* 컨트롤러/Razor 페이지 작업을 비동기식으로 만듭니다. 비동기 [/](/dotnet/csharp/programming-guide/concepts/async/) 대기 패턴을 활용 하기 위해 전체 호출 스택은 비동기입니다.
+* 컨트롤러/ Razor 페이지 작업을 비동기식으로 만듭니다. 비동기 [/](/dotnet/csharp/programming-guide/concepts/async/) 대기 패턴을 활용 하기 위해 전체 호출 스택은 비동기입니다.
 
-[Perfview](https://github.com/Microsoft/perfview)와 같은 프로파일러를 사용 하 여 [스레드 풀](/windows/desktop/procthread/thread-pools)에 자주 추가 되는 스레드를 찾을 수 있습니다. 이벤트 `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 는 스레드 풀에 추가 된 스레드를 나타냅니다. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+[Perfview](https://github.com/Microsoft/perfview)와 같은 프로파일러를 사용 하 여 [스레드 풀](/windows/desktop/procthread/thread-pools)에 자주 추가 되는 스레드를 찾을 수 있습니다. 이벤트는 스레드 `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 풀에 추가 된 스레드를 나타냅니다. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
 ## <a name="minimize-large-object-allocations"></a>대량 개체 할당 최소화
 
@@ -60,7 +62,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 권장 사항:
 
 * 자주 사용 되는 많은 개체를 캐싱하는 **것이 좋습니다** . 큰 개체를 캐시 하면 비용이 많이 드는 할당이 방지 됩니다.
-* [ArrayPool\<T>](/dotnet/api/system.buffers.arraypool-1) 를 사용 하 여 대량 배열을 저장 하 여 풀 버퍼를 **수행** 합니다.
+* [ArrayPool \<T> ](/dotnet/api/system.buffers.arraypool-1) 를 사용 하 여 대량 배열을 저장 함으로써 풀 버퍼를 **수행** 합니다.
 * [핫 코드 경로](#understand-hot-code-paths)에 단기 수명이 많은 개체를 할당 **하지 마세요** .
 
 [Perfview](https://github.com/Microsoft/perfview) 및 검사에서 GC (가비지 수집) 통계를 검토 하 여 위와 같은 메모리 문제를 진단할 수 있습니다.
@@ -82,7 +84,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 * 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
 * 네트워크 왕복 **을 최소화 합니다** . 목표는 여러 호출이 아닌 단일 호출에서 필요한 데이터를 검색 하는 것입니다.
 * 읽기 전용 용도로 데이터에 액세스할 때 Entity Framework Core에서 [추적 안 함 쿼리](/ef/core/querying/tracking#no-tracking-queries) **를 사용 합니다** . EF Core 추적 되지 않는 쿼리 결과를 보다 효율적으로 반환할 수 있습니다.
-* LINQ 쿼리 (예:, 또는 `.Sum` 문 `.Where`포함 `.Select`) **를 필터링 하** 고 집계 하 여 데이터베이스에서 필터링을 수행 하도록 합니다.
+* LINQ 쿼리 (예:, 또는 문 포함) **를 필터링 하** 고 집계 `.Where` 하 여 `.Select` `.Sum` 데이터베이스에서 필터링을 수행 하도록 합니다.
 * EF Core에서 클라이언트의 일부 쿼리 연산자를 확인 하므로 비효율적인 쿼리 **실행이 발생할** 수 있습니다. 자세한 내용은 [클라이언트 평가 성능 문제](/ef/core/querying/client-eval#client-evaluation-performance-issues)를 참조 하세요.
 * 컬렉션에 대해 프로젝션 쿼리를 사용 **하지 마십시오. 이렇게** 하면 "N + 1" SQL 쿼리가 실행 될 수 있습니다. 자세한 내용은 [상관 하위 쿼리 최적화](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries)를 참조 하세요.
 
@@ -97,12 +99,12 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 ## <a name="pool-http-connections-with-httpclientfactory"></a>HttpClientFactory를 사용 하 여 HTTP 연결 풀
 
-[Httpclient](/dotnet/api/system.net.http.httpclient) 는 `IDisposable` 인터페이스를 구현 하지만 다시 사용 하도록 설계 되었습니다. 닫힌 `HttpClient` 인스턴스는 짧은 시간 동안 소켓 `TIME_WAIT` 을 열린 상태로 둡니다. `HttpClient` 개체를 만들고 삭제 하는 코드 경로가 자주 사용 되는 경우 앱에서 사용 가능한 소켓이 고갈 될 수 있습니다. [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) 는이 문제에 대 한 솔루션으로 ASP.NET Core 2.1에서 도입 되었습니다. 성능 및 안정성을 최적화 하기 위해 풀링 HTTP 연결을 처리 합니다.
+[Httpclient](/dotnet/api/system.net.http.httpclient) 는 인터페이스를 구현 하지만 `IDisposable` 다시 사용 하도록 설계 되었습니다. 닫힌 `HttpClient` 인스턴스 `TIME_WAIT` 는 짧은 시간 동안 소켓을 열린 상태로 둡니다. 개체를 만들고 삭제 하는 코드 경로가 `HttpClient` 자주 사용 되는 경우 앱에서 사용 가능한 소켓이 고갈 될 수 있습니다. [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) 는이 문제에 대 한 솔루션으로 ASP.NET Core 2.1에서 도입 되었습니다. 성능 및 안정성을 최적화 하기 위해 풀링 HTTP 연결을 처리 합니다.
 
 권장 사항:
 
-* 인스턴스를 `HttpClient` 직접 만들고 삭제 **하지 마십시오** .
-* [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) `HttpClient` **를 사용 하 여 인스턴스** 를 검색 합니다. 자세한 내용은 [HttpClientFactory를 사용 하 여 복원 력 있는 HTTP 요청 구현](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)을 참조 하세요.
+* 인스턴스를 직접 만들고 삭제 **하지 마십시오** `HttpClient` .
+* [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) **를 사용 하 여** 인스턴스를 검색 `HttpClient` 합니다. 자세한 내용은 [HttpClientFactory를 사용 하 여 복원 력 있는 HTTP 요청 구현](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)을 참조 하세요.
 
 ## <a name="keep-common-code-paths-fast"></a>자주 공용 코드 경로 유지
 
@@ -124,7 +126,7 @@ ASP.NET Core 앱에 대 한 대부분의 요청은 컨트롤러 또는 페이지
 
 * 일반 HTTP 요청 처리의 일부로 장기 실행 작업이 완료 될 때까지 기다리지 **마세요** .
 * [백그라운드 서비스](xref:fundamentals/host/hosted-services) 를 사용 하 여 장기 실행 요청을 처리 하거나 [Azure 함수](/azure/azure-functions/)를 사용 하 여 out-of-process를 처리 하는 **것이 좋습니다** . Out-of-process 작업을 완료 하는 작업은 특히 CPU를 많이 사용 하는 작업에 유용 합니다.
-* 와 [SignalR](xref:signalr/introduction)같은 실시간 통신 옵션 **을 사용 하 여 비동기적** 으로 클라이언트와 통신 합니다.
+* 와 같은 실시간 통신 옵션 **을 사용** 하 여 [SignalR](xref:signalr/introduction) 비동기적으로 클라이언트와 통신 합니다.
 
 ## <a name="minify-client-assets"></a>클라이언트 자산 축소
 
@@ -144,7 +146,7 @@ ASP.NET Core 앱에 대 한 대부분의 요청은 컨트롤러 또는 페이지
 
 ## <a name="use-the-latest-aspnet-core-release"></a>최신 ASP.NET Core 릴리스 사용
 
-ASP.NET Core의 새 릴리스에는 성능 향상이 포함 되어 있습니다. .NET Core 및 ASP.NET Core의 최적화는 일반적으로 최신 버전이 이전 버전을 내지만 것을 의미 합니다. 예를 들어 .NET Core 2.1은 [>범위\< ](https://msdn.microsoft.com/magazine/mt814808.aspx)에서 컴파일된 정규식 및 benefitted에 대 한 지원을 추가 했습니다. ASP.NET Core 2.2에는 HTTP/2에 대 한 지원이 추가 되었습니다. [ASP.NET Core 3.0](xref:aspnetcore-3.0) 은 메모리 사용을 줄이고 처리량을 향상 시키는 많은 향상 된 기능을 추가 합니다. 성능이 우선 되는 경우 ASP.NET Core의 현재 버전으로 업그레이드 하는 것이 좋습니다.
+ASP.NET Core의 새 릴리스에는 성능 향상이 포함 되어 있습니다. .NET Core 및 ASP.NET Core의 최적화는 일반적으로 최신 버전이 이전 버전을 내지만 것을 의미 합니다. 예를 들어 .NET Core 2.1에는 컴파일된 정규식에 대 한 지원과 [범위 \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)에서의 benefitted 추가 되었습니다. ASP.NET Core 2.2에는 HTTP/2에 대 한 지원이 추가 되었습니다. [ASP.NET Core 3.0](xref:aspnetcore-3.0) 은 메모리 사용을 줄이고 처리량을 향상 시키는 많은 향상 된 기능을 추가 합니다. 성능이 우선 되는 경우 ASP.NET Core의 현재 버전으로 업그레이드 하는 것이 좋습니다.
 
 ## <a name="minimize-exceptions"></a>예외 최소화
 
@@ -164,16 +166,16 @@ Application Insights와 같은 앱 진단 도구는 응용 프로그램에서 �
 
 ## <a name="avoid-synchronous-read-or-write-on-httprequesthttpresponse-body"></a>HttpRequest/Httpresponse.cache 본문에서 동기 읽기 또는 쓰기 방지
 
-ASP.NET Core의 모든 i/o는 비동기입니다. 서버는 동기 `Stream` 및 비동기 오버 로드를 모두 포함 하는 인터페이스를 구현 합니다. 스레드 풀 스레드를 차단 하지 않도록 비동기를 사용 하는 것이 좋습니다. 스레드를 차단 하면 스레드 풀이 고갈 될 수 있습니다.
+ASP.NET Core의 모든 i/o는 비동기입니다. 서버는 `Stream` 동기 및 비동기 오버 로드를 모두 포함 하는 인터페이스를 구현 합니다. 스레드 풀 스레드를 차단 하지 않도록 비동기를 사용 하는 것이 좋습니다. 스레드를 차단 하면 스레드 풀이 고갈 될 수 있습니다.
 
-**이 작업을 수행 하지 마십시오.** 다음 예제에서는를 <xref:System.IO.StreamReader.ReadToEnd*>사용 합니다. 결과를 대기 하는 현재 스레드를 차단 합니다. 이는 [async를 통한 동기화](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**이 작업을 수행 하지 마십시오.** 다음 예제에서는를 사용 합니다 <xref:System.IO.StreamReader.ReadToEnd*> . 결과를 대기 하는 현재 스레드를 차단 합니다. 이는 [async를 통한 동기화](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 )의 예입니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet1)]
 
-위의 코드에서는 전체 `Get` HTTP 요청 본문을 메모리에 동기적으로 읽습니다. 클라이언트에 느린 업로드가 있으면 앱이 비동기를 통해 동기화 됩니다. Kestrel은 동기 읽기를 지원 **하지** 않기 때문에 앱은 async를 통해 동기화 됩니다.
+위의 코드에서는 `Get` 전체 HTTP 요청 본문을 메모리에 동기적으로 읽습니다. 클라이언트에 느린 업로드가 있으면 앱이 비동기를 통해 동기화 됩니다. Kestrel은 동기 읽기를 지원 **하지** 않기 때문에 앱은 async를 통해 동기화 됩니다.
 
-**다음 작업을 수행 합니다.** 다음 예제에서는를 <xref:System.IO.StreamReader.ReadToEndAsync*> 사용 하 고 읽는 동안 스레드를 차단 하지 않습니다.
+**다음 작업을 수행 합니다.** 다음 예제에서는를 사용 하 <xref:System.IO.StreamReader.ReadToEndAsync*> 고 읽는 동안 스레드를 차단 하지 않습니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet2)]
 
@@ -193,15 +195,15 @@ ASP.NET Core의 모든 i/o는 비동기입니다. 서버는 동기 `Stream` 및 
 `HttpContext.Request.ReadFormAsync` 대신 `HttpContext.Request.Form`를 사용합니다.
 `HttpContext.Request.Form`는 다음과 같은 경우에만 안전 하 게 읽을 수 있습니다.
 
-* 을 호출 하 여 폼을 읽은 `ReadFormAsync`경우
+* 을 호출 하 여 폼을 읽은 `ReadFormAsync` 경우
 * 캐시 된 형식 값을 사용 하 여 읽고 있습니다.`HttpContext.Request.Form`
 
-**이 작업을 수행 하지 마십시오.** 다음 예에서는를 `HttpContext.Request.Form`사용 합니다.  `HttpContext.Request.Form`[비동기를 통한 동기화](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**이 작업을 수행 하지 마십시오.** 다음 예에서는를 사용 `HttpContext.Request.Form` 합니다.  `HttpContext.Request.Form`[비동기를 통한 동기화](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) 를 사용 하 고 스레드 풀 고갈를 발생 시킬 수 있습니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
 
-**다음 작업을 수행 합니다.** 다음 예제에서는를 `HttpContext.Request.ReadFormAsync` 사용 하 여 양식 본문을 비동기식으로 읽습니다.
+**다음 작업을 수행 합니다.** 다음 예제에서는 `HttpContext.Request.ReadFormAsync` 를 사용 하 여 양식 본문을 비동기식으로 읽습니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet2)]
 
@@ -218,7 +220,7 @@ ASP.NET Core의 모든 i/o는 비동기입니다. 서버는 동기 `Stream` 및 
 
 > 많은 개체가 할당 되 면 Gen 2 개체로 표시 됩니다. 작은 개체의 경우에는 Gen 0이 아닙니다. LOH에서 메모리가 부족 한 경우 GC는 LOH 뿐만 아니라 전체 관리 되는 힙을 정리 합니다. 따라서 LOH를 포함 하 여 Gen 0, Gen 1 및 Gen 2를 정리 합니다. 이를 전체 가비지 수집 이라고 하며 가장 시간이 많이 걸리는 가비지 수집입니다. 많은 응용 프로그램의 경우 허용할 수 있습니다. 하지만, 평균 웹 요청을 처리 하는 데 큰 메모리 버퍼가 거의 필요 하지 않은 고성능 웹 서버에 대해서는 명확 하지 않습니다 (소켓에서 읽기, 압축 풀기, JSON & 추가).
 
-단일 `byte[]` 또는 `string`에 대량 요청 또는 응답 본문을 저장 하는 Naively.
+단일 또는에 대량 요청 또는 응답 본문을 저장 하는 Naively `byte[]` `string` .
 
 * LOH의 공간이 빠르게 부족 해질 수 있습니다.
 * 전체 Gc를 실행 하 여 앱에 대 한 성능 문제를 일으킬 수 있습니다.
@@ -240,24 +242,24 @@ ASP.NET Core 3.0는 <xref:System.Text.Json> 기본적으로 JSON serialization�
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>IHttpContextAccessor를 필드에 저장 하지 마십시오.
 
-[IHttpContextAccessor](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) 는 요청 스레드에서 액세스 될 `HttpContext` 때 활성 요청의를 반환 합니다. 는 `IHttpContextAccessor.HttpContext` 필드 또는 변수에 저장 **하면 안 됩니다** .
+[IHttpContextAccessor](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) 는 `HttpContext` 요청 스레드에서 액세스 될 때 활성 요청의를 반환 합니다. 는 `IHttpContextAccessor.HttpContext` 필드 또는 변수에 저장 **하면 안 됩니다** .
 
 **이 작업을 수행 하지 마십시오.** 다음 예에서는를 `HttpContext` 필드에 저장 한 다음 나중에 사용 하려고 시도 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet1)]
 
-위의 코드는 생성자에서 null 또는 잘못 `HttpContext` 된를 캡처하는 경우가 많습니다.
+위의 코드는 생성자에서 null 또는 잘못 된를 캡처하는 경우가 많습니다 `HttpContext` .
 
 **다음 작업을 수행 합니다.** 다음 예제를 수행 합니다.
 
 * 를 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 필드에 저장 합니다.
-* 는 필드 `HttpContext` 를 올바른 시간에 사용 하 고를 `null`확인 합니다.
+* `HttpContext`는 필드를 올바른 시간에 사용 하 고를 확인 `null` 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet2)]
 
 ## <a name="do-not-access-httpcontext-from-multiple-threads"></a>여러 스레드에서 HttpContext에 액세스 하지 않음
 
-`HttpContext`는 스레드로부터 안전 *하지 않습니다* . 여러 `HttpContext` 스레드에서 병렬로 액세스 하면 중단, 충돌 및 데이터 손상과 같은 정의 되지 않은 동작이 발생할 수 있습니다.
+`HttpContext`는 스레드로부터 안전 *하지 않습니다* . `HttpContext`여러 스레드에서 병렬로 액세스 하면 중단, 충돌 및 데이터 손상과 같은 정의 되지 않은 동작이 발생할 수 있습니다.
 
 **이 작업을 수행 하지 마십시오.** 다음 예제에서는 세 개의 병렬 요청을 만들고 나가는 HTTP 요청 전후에 들어오는 요청 경로를 로깅합니다. 요청 경로는 여러 스레드에서 동시에 액세스할 수 있습니다.
 
@@ -269,26 +271,26 @@ ASP.NET Core 3.0는 <xref:System.Text.Json> 기본적으로 JSON serialization�
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>요청이 완료 된 후에 HttpContext를 사용 하지 마십시오.
 
-`HttpContext`는 ASP.NET Core 파이프라인에 활성 HTTP 요청이 있는 경우에만 유효 합니다. 전체 ASP.NET Core 파이프라인은 모든 요청을 실행 하는 대리자의 비동기 체인입니다. 이 체인 `Task` 에서 반환 된이 완료 `HttpContext` 되 면이 재활용 됩니다.
+`HttpContext`는 ASP.NET Core 파이프라인에 활성 HTTP 요청이 있는 경우에만 유효 합니다. 전체 ASP.NET Core 파이프라인은 모든 요청을 실행 하는 대리자의 비동기 체인입니다. `Task`이 체인에서 반환 된이 완료 되 면이 `HttpContext` 재활용 됩니다.
 
-**이 작업을 수행 하지 마십시오.** 다음 예에서는를 `async void` 사용 하 여 첫 번째 `await` 에 도달할 때 HTTP 요청이 완료 되도록 합니다.
+**이 작업을 수행 하지 마십시오.** 다음 예에서는를 사용 하 여 `async void` 첫 번째에 도달할 때 HTTP 요청이 완료 되도록 합니다 `await` .
 
 * ASP.NET Core 앱에서 **항상** 잘못 된 관행입니다.
-* HTTP 요청이 `HttpResponse` 완료 된 후에에 액세스 합니다.
+* HTTP 요청이 완료 된 후에에 액세스 합니다 `HttpResponse` .
 * 프로세스를 중단 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncBadVoidController.cs?name=snippet1)]
 
-**다음 작업을 수행 합니다.** 다음 예제에서는 프레임 워크 `Task` 에 대해를 반환 하므로 작업이 완료 될 때까지 HTTP 요청이 완료 되지 않습니다.
+**다음 작업을 수행 합니다.** 다음 예제에서는 `Task` 프레임 워크에 대해를 반환 하므로 작업이 완료 될 때까지 HTTP 요청이 완료 되지 않습니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncSecondController.cs?name=snippet1)]
 
 ## <a name="do-not-capture-the-httpcontext-in-background-threads"></a>백그라운드 스레드에서 HttpContext를 캡처하지 마십시오.
 
-**이 작업을 수행 하지 마십시오.** 다음 예제에서는 `HttpContext` `Controller` 속성에서를 캡처하는 방법을 보여 줍니다. 작업 항목에서 다음을 수행할 수 있기 때문에 잘못 된 사례입니다.
+**이 작업을 수행 하지 마십시오.** 다음 예제에서는 속성에서를 캡처하는 방법을 보여 줍니다 `HttpContext` `Controller` . 작업 항목에서 다음을 수행할 수 있기 때문에 잘못 된 사례입니다.
 
 * 요청 범위 외부에서를 실행 합니다.
-* 잘못 `HttpContext`된를 읽으려고 했습니다.
+* 잘못 된를 읽으려고 했습니다 `HttpContext` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetFirstController.cs?name=snippet1)]
 
@@ -303,23 +305,23 @@ ASP.NET Core 3.0는 <xref:System.Text.Json> 기본적으로 JSON serialization�
 
 ## <a name="do-not-capture-services-injected-into-the-controllers-on-background-threads"></a>백그라운드 스레드에서 컨트롤러에 삽입 된 서비스를 캡처하지 마십시오.
 
-**이 작업을 수행 하지 마십시오.** 다음 예제에서는 `DbContext` `Controller` 작업 매개 변수에서를 캡처하는 방법을 보여 줍니다. 이는 잘못 된 방법입니다.  작업 항목은 요청 범위 외부에서 실행 될 수 있습니다. `ContosoDbContext` 이 요청으로 범위가 지정 되 면이 발생 `ObjectDisposedException`합니다.
+**이 작업을 수행 하지 마십시오.** 다음 예제에서는 `DbContext` 작업 매개 변수에서를 캡처하는 방법을 보여 줍니다 `Controller` . 이는 잘못 된 방법입니다.  작업 항목은 요청 범위 외부에서 실행 될 수 있습니다. `ContosoDbContext`이 요청으로 범위가 지정 되 면이 발생 `ObjectDisposedException` 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet1)]
 
 **다음 작업을 수행 합니다.** 다음 예제를 수행 합니다.
 
-* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> 백그라운드 작업 항목에서 범위를 만들기 위해를 삽입 합니다. `IServiceScopeFactory`는 단일 항목입니다.
+* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>백그라운드 작업 항목에서 범위를 만들기 위해를 삽입 합니다. `IServiceScopeFactory`는 단일 항목입니다.
 * 백그라운드 스레드에서 새 종속성 주입 범위를 만듭니다.
 * 는 컨트롤러에서 아무것도 참조 하지 않습니다.
-* 들어오는 요청에서 `ContosoDbContext` 를 캡처하지 않습니다.
+* `ContosoDbContext`들어오는 요청에서를 캡처하지 않습니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2)]
 
 강조 표시 된 코드는 다음과 같습니다.
 
 * 백그라운드 작업의 수명 범위를 만들고 해당 작업에서 서비스를 확인 합니다.
-* 는 `ContosoDbContext` 올바른 범위에서를 사용 합니다.
+* `ContosoDbContext`는 올바른 범위에서를 사용 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2&highlight=9-16)]
 
@@ -334,13 +336,13 @@ ASP.NET Core는 HTTP 응답 본문을 버퍼링 하지 않습니다. 처음 응�
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet1)]
 
-위의 코드에서가 응답 `context.Response.Headers["test"] = "test value";` 에 기록 되는 경우 `next()` 에서 예외를 throw 합니다.
+위의 코드에서 `context.Response.Headers["test"] = "test value";` 가 응답에 기록 되는 경우에서 예외를 throw `next()` 합니다.
 
 **다음 작업을 수행 합니다.** 다음 예에서는 헤더를 수정 하기 전에 HTTP 응답이 시작 되었는지 확인 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet2)]
 
-**다음 작업을 수행 합니다.** 다음 예제에서는를 `HttpResponse.OnStarting` 사용 하 여 응답 헤더가 클라이언트에 플러시될 때까지 헤더를 설정 합니다.
+**다음 작업을 수행 합니다.** 다음 예제에서는를 사용 하 여 `HttpResponse.OnStarting` 응답 헤더가 클라이언트에 플러시될 때까지 헤더를 설정 합니다.
 
 응답을 시작 하지 않은 경우 응답 헤더를 쓰기 직전에 호출 되는 콜백을 등록할 수 있는지 확인 합니다. 응답이 시작 되지 않은 경우를 확인 하는 중:
 

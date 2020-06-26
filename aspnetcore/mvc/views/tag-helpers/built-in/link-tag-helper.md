@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 09/24/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: 1efd7c1a63baea4312a4a01cd9cd9c7582375d97
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c767ff4c2a1e0d5d10ccb3ff855126f541c04f64
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777356"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408242"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core의 링크 태그 도우미
 
@@ -29,7 +31,7 @@ ms.locfileid: "82777356"
 
 링크 태그 도우미를 사용하면 CSS 파일에 CDN 및 CDN을 사용할 수 없는 경우를 대비한 대체를 지정할 수 있습니다. 링크 태그 도우미는 로컬 호스팅의 견고성과 함께 CDN의 성능 이점을 제공합니다.
 
-다음 Razor 태그는 ASP.NET Core 웹 `head` 앱 템플릿으로 만든 레이아웃 파일의 요소를 보여 줍니다.
+다음 Razor 태그는 `head` ASP.NET Core 웹 앱 템플릿으로 만든 레이아웃 파일의 요소를 보여 줍니다.
 
 [!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/14/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 42ddddeaa329ac5ff5b2b40cbf9ebffa68f6d4cf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4ed5a550b5d3ca00179ae0492bf61e7fe91e324c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774433"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408775"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>ASP.NET Core에서 TOTP authenticator 앱에 대 한 QR 코드 생성 사용
 
@@ -36,22 +38,22 @@ ASP.NET Core 웹 앱 템플릿은 인증자을 지원 하지만 QRCode 생성에
 
 ## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a>2FA 구성 페이지에 QR 코드 추가
 
-이러한 지침은 https://davidshimjs.github.io/qrcodejs/ 리포지토리의 *qrcode* 를 사용 합니다.
+이러한 지침은 리포지토리의 *qrcode.js* 를 사용 https://davidshimjs.github.io/qrcodejs/ 합니다.
 
-* [Qrcode javascript 라이브러리](https://davidshimjs.github.io/qrcodejs/) 를 프로젝트의 `wwwroot\lib` 폴더에 다운로드 합니다.
+* 프로젝트의 폴더에 [qrcode.js javascript 라이브러리](https://davidshimjs.github.io/qrcodejs/) 를 다운로드 합니다 `wwwroot\lib` .
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* [스 캐 폴드 Identity ](xref:security/authentication/scaffold-identity) 의 지침에 따라 */areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*을 생성 합니다.
-* */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*에서 파일 끝에 `Scripts` 있는 섹션을 찾습니다.
+* [스 캐 폴드 Identity ](xref:security/authentication/scaffold-identity) 의 지침에 따라 */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml*을 생성 합니다.
+* */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml*에서 파일 끝에 있는 섹션을 찾습니다 `Scripts` .
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-* *페이지/계정/관리/* o s s. cshtml (Razor 페이지) 또는 *Views/manage/enableauthenticator* (MVC)에서 파일의 끝 부분 `Scripts` 에 있는 섹션을 찾습니다.
+* *페이지/계정/관리/* o s s. cshtml ( Razor 페이지) 또는 *Views/manage/enableauthenticator* (MVC)에서 파일의 끝 부분에 있는 섹션을 찾습니다 `Scripts` .
 
 ::: moniker-end
 
@@ -63,7 +65,7 @@ ASP.NET Core 웹 앱 템플릿은 인증자을 지원 하지만 QRCode 생성에
 }
 ```
 
-* 섹션을 `Scripts` 업데이트 하 여 추가 된 `qrcodejs` 라이브러리에 대 한 참조 및 QR 코드를 생성 하는 호출을 추가 합니다. 다음과 같이 표시 됩니다.
+* 섹션을 업데이트 `Scripts` 하 여 추가 된 라이브러리에 대 `qrcodejs` 한 참조 및 QR 코드를 생성 하는 호출을 추가 합니다. 다음과 같이 표시 됩니다.
 
 ```cshtml
 @section Scripts {
@@ -91,13 +93,13 @@ ASP.NET Core 웹 앱 템플릿은 인증자을 지원 하지만 QRCode 생성에
 
 ::: moniker range=">= aspnetcore-2.1"
 
-QR 코드의 사이트 이름은 처음 프로젝트를 만들 때 선택한 프로젝트 이름에서 가져옵니다. `GenerateQrCodeUri(string email, string unformattedKey)` */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs*에서 메서드를 검색 하 여 변경할 수 있습니다.
+QR 코드의 사이트 이름은 처음 프로젝트를 만들 때 선택한 프로젝트 이름에서 가져옵니다. `GenerateQrCodeUri(string email, string unformattedKey)` */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs*에서 메서드를 검색 하 여 변경할 수 있습니다.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-QR 코드의 사이트 이름은 처음 프로젝트를 만들 때 선택한 프로젝트 이름에서 가져옵니다. `GenerateQrCodeUri(string email, string unformattedKey)` *Pages/Account/Manage/enableauthenticator. cshtml* (Razor pages) 파일 또는 *Controllers/ManageController* (MVC) 파일에서 메서드를 검색 하 여이를 변경할 수 있습니다.
+QR 코드의 사이트 이름은 처음 프로젝트를 만들 때 선택한 프로젝트 이름에서 가져옵니다. `GenerateQrCodeUri(string email, string unformattedKey)` *Pages/Account/Manage/enableauthenticator. cshtml* ( Razor Pages) 파일 또는 *Controllers/ManageController* (MVC) 파일에서 메서드를 검색 하 여이를 변경할 수 있습니다.
 
 ::: moniker-end
 
@@ -120,12 +122,12 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 
 ## <a name="using-a-different-qr-code-library"></a>다른 QR 코드 라이브러리 사용
 
-QR 코드 라이브러리를 원하는 라이브러리로 바꿀 수 있습니다. HTML에는 라이브러리 `qrCode` 에서 제공 하는 메커니즘에 따라 QR 코드를 넣을 수 있는 요소가 포함 되어 있습니다.
+QR 코드 라이브러리를 원하는 라이브러리로 바꿀 수 있습니다. HTML에는 라이브러리에서 제공 하는 `qrCode` 메커니즘에 따라 QR 코드를 넣을 수 있는 요소가 포함 되어 있습니다.
 
 QR 코드에 대해 올바른 형식의 URL은에서 사용할 수 있습니다.
 
 * `AuthenticatorUri`모델의 속성입니다.
-* `data-url``qrCodeData` 요소의 속성입니다.
+* `data-url``qrCodeData`요소의 속성입니다.
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP 클라이언트 및 서버 시간 오차
 

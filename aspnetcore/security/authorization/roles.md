@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 01d4239377b128f711a110a821e1afea58ca14a7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5d2ea6b9be0c993d62fa75fb8b471b5923747bac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776541"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407865"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 역할 기반 권한 부여
 
@@ -26,9 +28,9 @@ Id가 생성 되 면 하나 이상의 역할에 속할 수 있습니다. 예를 
 
 ## <a name="adding-role-checks"></a>역할 검사 추가
 
-역할 기반 권한 부여 검사는&mdash;개발자가 코드 내에이를 포함 하 여 컨트롤러 또는 컨트롤러 내의 작업에 대 한 작업을 포함 하 여 요청 된 리소스에 액세스 하기 위해 현재 사용자가 멤버 여야 하는 역할을 지정 합니다.
+역할 기반 권한 부여 검사는 개발자가 코드 내에이를 포함 하 여 컨트롤러 &mdash; 또는 컨트롤러 내의 작업에 대 한 작업을 포함 하 여 요청 된 리소스에 액세스 하기 위해 현재 사용자가 멤버 여야 하는 역할을 지정 합니다.
 
-예를 들어 다음 코드는 `AdministrationController` `Administrator` 역할의 멤버인 사용자에 대 한 작업에 대 한 액세스를 제한 합니다.
+예를 들어 다음 코드는 `AdministrationController` 역할의 멤버인 사용자에 대 한 작업에 대 한 액세스를 제한 합니다 `Administrator` .
 
 ```csharp
 [Authorize(Roles = "Administrator")]
@@ -46,9 +48,9 @@ public class SalaryController : Controller
 }
 ```
 
-이 컨트롤러는 `HRManager` 역할 또는 `Finance` 역할의 멤버인 사용자만 액세스할 수 있습니다.
+이 컨트롤러는 역할 또는 역할의 멤버인 사용자만 액세스할 수 있습니다 `HRManager` `Finance` .
 
-여러 특성을 적용 하는 경우 액세스 하는 사용자는 지정 된 모든 역할의 멤버 여야 합니다. 다음 샘플을 사용 하려면 사용자가 `PowerUser` 및 `ControlPanelUser` 역할의 멤버 여야 합니다.
+여러 특성을 적용 하는 경우 액세스 하는 사용자는 지정 된 모든 역할의 멤버 여야 합니다. 다음 샘플을 사용 하려면 사용자가 및 역할의 멤버 여야 합니다 `PowerUser` `ControlPanelUser` .
 
 ```csharp
 [Authorize(Roles = "PowerUser")]
@@ -75,7 +77,7 @@ public class ControlPanelController : Controller
 }
 ```
 
-위의 코드 `Administrator` 조각에서 역할 또는 `PowerUser` 역할의 멤버는 컨트롤러 및 `SetTime` 작업에 액세스할 수 있지만 `Administrator` 역할의 멤버만이 `ShutDown` 작업에 액세스할 수 있습니다.
+위의 코드 조각에서 `Administrator` 역할 또는 역할의 멤버는 `PowerUser` 컨트롤러 및 작업에 액세스할 수 `SetTime` 있지만 역할의 멤버만이 `Administrator` 작업에 액세스할 수 있습니다 `ShutDown` .
 
 또한 컨트롤러를 잠그고 개별 작업에 대 한 익명의 인증 되지 않은 액세스를 허용할 수 있습니다.
 
@@ -96,10 +98,10 @@ public class ControlPanelController : Controller
 
 ::: moniker range=">= aspnetcore-2.0"
 
-페이지 Razor 의 경우 다음 `AuthorizeAttribute` 중 하나를 수행 하 여을 적용할 수 있습니다.
+페이지의 경우 Razor `AuthorizeAttribute` 다음 중 하나를 수행 하 여을 적용할 수 있습니다.
 
 * [규칙](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)사용 또는
-* `PageModel` 인스턴스에를 적용 `AuthorizeAttribute` 하는 중입니다.
+* 인스턴스에를 적용 `AuthorizeAttribute` 하는 `PageModel` 중입니다.
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -112,7 +114,7 @@ public class UpdateModel : PageModel
 ```
 
 > [!IMPORTANT]
-> 을 포함 하 여 `AuthorizeAttribute`필터 특성은 PageModel에만 적용 될 수 있으며 특정 페이지 처리기 메서드에 적용할 수 없습니다.
+> 을 포함 하 여 필터 특성은 `AuthorizeAttribute` PageModel에만 적용 될 수 있으며 특정 페이지 처리기 메서드에 적용할 수 없습니다.
 ::: moniker-end
 
 <a name="security-authorization-role-policy"></a>
@@ -152,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 ::: moniker-end
 
-`AuthorizeAttribute` 특성의 속성을 `Policy` 사용 하 여 정책을 적용 합니다.
+특성의 속성을 사용 하 여 정책을 적용 합니다 `Policy` `AuthorizeAttribute` .
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -162,14 +164,14 @@ public IActionResult Shutdown()
 }
 ```
 
-요구 사항에서 허용 되는 역할을 여러 개 지정 하려는 경우에는 `RequireRole` 메서드에 대 한 매개 변수로 지정할 수 있습니다.
+요구 사항에서 허용 되는 역할을 여러 개 지정 하려는 경우에는 메서드에 대 한 매개 변수로 지정할 수 있습니다 `RequireRole` .
 
 ```csharp
 options.AddPolicy("ElevatedRights", policy =>
                   policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
 ```
 
-이 예제에서는 `Administrator` `PowerUser` 또는 `BackupAdministrator` 역할에 속한 사용자에 게 권한을 부여 합니다.
+이 예제에서는 또는 역할에 속한 사용자에 게 권한을 부여 `Administrator` `PowerUser` `BackupAdministrator` 합니다.
 
 ### <a name="add-role-services-to-identity"></a>역할 서비스 추가Identity
 

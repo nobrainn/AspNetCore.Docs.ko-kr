@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 68913d13c97ba6be73dabf79e03c146a37388ad3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776905"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408944"
 ---
 # <a name="key-management-in-aspnet-core"></a>ASP.NET Core의 키 관리
 
@@ -65,7 +67,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-에 대 `SetDefaultKeyLifetime` 한 명시적 호출이 시스템 차원의 정책을 재정의 하더라도 관리자는 기본 시스템 전체를 변경할 수도 있습니다. 기본 키 수명은 7 일 보다 짧을 수 없습니다.
+에 대 한 명시적 호출이 `SetDefaultKeyLifetime` 시스템 차원의 정책을 재정의 하더라도 관리자는 기본 시스템 전체를 변경할 수도 있습니다. 기본 키 수명은 7 일 보다 짧을 수 없습니다.
 
 ## <a name="automatic-key-ring-refresh"></a>자동 키 링 새로 고침
 
@@ -74,17 +76,17 @@ services.AddDataProtection()
 >[!WARNING]
 > 개발자는 키 관리 Api를 직접 사용 해야 하는 경우는 거의 없습니다. 데이터 보호 시스템은 위에서 설명한 대로 자동 키 관리를 수행 합니다.
 
-데이터 보호 시스템은 키 링을 `IKeyManager` 검사 하 고 변경 하는 데 사용할 수 있는 인터페이스를 노출 합니다. 인스턴스를 제공한 DI 시스템은 사용 `IDataProtectionProvider` `IKeyManager` 에 대 한 인스턴스를 제공할 수도 있습니다. 또는 아래 예제 `IServiceProvider` 와 같이에서 `IKeyManager` 직접를 끌어올 수 있습니다.
+데이터 보호 시스템은 `IKeyManager` 키 링을 검사 하 고 변경 하는 데 사용할 수 있는 인터페이스를 노출 합니다. 인스턴스를 제공한 DI 시스템은 사용 `IDataProtectionProvider` 에 대 한 인스턴스를 제공할 수도 있습니다 `IKeyManager` . 또는 `IKeyManager` `IServiceProvider` 아래 예제와 같이에서 직접를 끌어올 수 있습니다.
 
-키 링을 수정 하는 모든 작업 (명시적으로 또는 해지를 수행 하는 새 키를 만드는 작업)은 메모리 내 캐시를 무효화 합니다. 또는 `Protect` `Unprotect` 에 대 한 다음 호출로 인해 데이터 보호 시스템이 키 링을 다시 읽고 캐시를 다시 만듭니다.
+키 링을 수정 하는 모든 작업 (명시적으로 또는 해지를 수행 하는 새 키를 만드는 작업)은 메모리 내 캐시를 무효화 합니다. 또는에 대 한 다음 호출로 `Protect` `Unprotect` 인해 데이터 보호 시스템이 키 링을 다시 읽고 캐시를 다시 만듭니다.
 
-아래 샘플에서는 기존 키를 `IKeyManager` 취소 하 고 수동으로 새 키를 생성 하는 등의 방법으로 인터페이스를 사용 하 여 키 링을 검사 및 조작 하는 방법을 보여 줍니다.
+아래 샘플에서는 기존 키를 취소 하 `IKeyManager` 고 수동으로 새 키를 생성 하는 등의 방법으로 인터페이스를 사용 하 여 키 링을 검사 및 조작 하는 방법을 보여 줍니다.
 
 [!code-csharp[](key-management/samples/key-management.cs)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-## <a name="key-storage"></a>키 저장소
+## <a name="key-storage"></a>키 스토리지
 
 데이터 보호 시스템에는 적절 한 키 저장소 위치 및 암호화 미사용 메커니즘이 자동으로 추론 되도록 하는 추론 기능이 있습니다. 키 지 속성 메커니즘은 앱 개발자도 구성할 수 있습니다. 다음 문서에서는 이러한 메커니즘의 기본 구현에 대해 설명 합니다.
 

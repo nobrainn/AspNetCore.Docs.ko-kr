@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 02/24/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: a7df6a5fa2d49efc332c4684ea8192f143cdebf5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 67861b2cdb946f7cd630770507181ee853b7fbfd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775702"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408424"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core의 컨트롤러에 종속성 주입
 
@@ -60,7 +62,7 @@ ASP.NET Core MVC 컨트롤러는 생성자를 통해 명시적으로 종속성�
 
 컨트롤러 내에서 앱 또는 구성 설정에 액세스하는 것은 일반적인 패턴입니다. <xref:fundamentals/configuration/options>에 설명된 *옵션 패턴*은 설정을 관리하기 위해 선호되는 방법입니다. 일반적으로 컨트롤러에 <xref:Microsoft.Extensions.Configuration.IConfiguration>을 직접 주입하지 마세요.
 
-옵션을 나타내는 클래스를 만듭니다. 예를 들어:
+옵션을 나타내는 클래스를 만듭니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

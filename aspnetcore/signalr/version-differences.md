@@ -7,17 +7,19 @@ ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: b5899f816dc5a5f8ff4c3f05c8e2c54ded5fc47b
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: d63e9077ba23c3783d7ce1ceb9c9683bcb0d3a29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756043"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408892"
 ---
 # <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR 와 ASP.NET Core 간의 차이점SignalR
 
@@ -145,7 +147,7 @@ ASP.NET Core에서는 SignalR 연결 모델이 간소화 되었습니다. 여러
 
 ASP.NET Core는 SignalR 이제 허브에서 클라이언트로의 [스트리밍 데이터](xref:signalr/streaming) 를 지원 합니다.
 
-### <a name="state"></a>주
+### <a name="state"></a>시스템 상태
 
 클라이언트와 허브 (라고도 함) 간에 임의의 상태를 전달 하는 기능이 `HubState` 제거 되었으며 진행 메시지를 지원 합니다. 현재 허브 프록시의 대응 항목이 없습니다.
 
@@ -289,4 +291,4 @@ ASP.NET는 SignalR SQL Server 및 Redis를 지원 합니다. ASP.NET Core는 Sig
 * [허브](xref:signalr/hubs)
 * [JavaScript 클라이언트](xref:signalr/javascript-client)
 * [.NET 클라이언트](xref:signalr/dotnet-client)
-* [지원 되는 플랫폼](xref:signalr/supported-platforms)
+* [지원되는 플랫폼](xref:signalr/supported-platforms)

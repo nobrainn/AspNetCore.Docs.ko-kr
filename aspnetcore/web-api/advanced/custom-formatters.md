@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 02/08/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 89fbb9d52d99d0eff6656eb6a5a9b4e1c01bc65c
-ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
+ms.openlocfilehash: 27819f77cf86c946ab0415d3583dfbab80a24cf5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85347088"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408866"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
@@ -127,7 +129,7 @@ Deserialization 또는 serialization은 또는에서 수행 됩니다 `ReadReque
 
 [!code-csharp[](custom-formatters/3.1sample/Formatters/VcardInputFormatter.cs?name=snippet)]
 
-## <a name="test-the-app"></a>앱을 테스트합니다.
+## <a name="test-the-app"></a>앱 테스트
 
 기본 vCard 입력 및 출력 포맷터를 구현 하는 [이 문서에 대 한 샘플 앱을 실행](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)합니다. 앱은 다음과 유사 하 게 Vcard를 읽고 씁니다.
 

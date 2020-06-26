@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/misc-apis
-ms.openlocfilehash: a07ccc3645a9a8132fd5290e7c43f353f74aca05
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e9de92233468e9e07791df608b1c37ffb3b29949
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776983"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408502"
 ---
 # <a name="miscellaneous-aspnet-core-data-protection-apis"></a>기타 ASP.NET Core 데이터 보호 Api
 
@@ -27,7 +29,7 @@ ms.locfileid: "82776983"
 
 ## <a name="isecret"></a>ISecret
 
-인터페이스 `ISecret` 는 암호화 키 자료와 같은 비밀 값을 나타냅니다. 다음 API 화면을 포함 합니다.
+`ISecret`인터페이스는 암호화 키 자료와 같은 비밀 값을 나타냅니다. 다음 API 화면을 포함 합니다.
 
 * `Length`: `int`
 
@@ -35,6 +37,6 @@ ms.locfileid: "82776983"
 
 * `WriteSecretIntoBuffer(ArraySegment<byte> buffer)`: `void`
 
-메서드 `WriteSecretIntoBuffer` 는 제공 된 버퍼를 원시 비밀 값으로 채웁니다. 이 API는을 `byte[]` 직접 반환 하지 않고 버퍼를 매개 변수로 사용 하는 이유는 호출자에 게 버퍼 개체를 고정 하 여 관리 되는 가비지 수집기에 대 한 비밀 노출을 제한 하는 기회를 제공 하는 것입니다.
+`WriteSecretIntoBuffer`메서드는 제공 된 버퍼를 원시 비밀 값으로 채웁니다. 이 API는을 직접 반환 하지 않고 버퍼를 매개 변수로 사용 하는 이유는 `byte[]` 호출자에 게 버퍼 개체를 고정 하 여 관리 되는 가비지 수집기에 대 한 비밀 노출을 제한 하는 기회를 제공 하는 것입니다.
 
-이 `Secret` 형식은 비밀 값이 in-process 메모리 `ISecret` 에 저장 되는의 구체적 구현입니다. Windows 플랫폼에서 비밀 값은 [CryptProtectMemory](https://msdn.microsoft.com/library/windows/desktop/aa380262(v=vs.85).aspx)를 통해 암호화 됩니다.
+`Secret`이 형식은 `ISecret` 비밀 값이 in-process 메모리에 저장 되는의 구체적 구현입니다. Windows 플랫폼에서 비밀 값은 [CryptProtectMemory](https://msdn.microsoft.com/library/windows/desktop/aa380262(v=vs.85).aspx)를 통해 암호화 됩니다.

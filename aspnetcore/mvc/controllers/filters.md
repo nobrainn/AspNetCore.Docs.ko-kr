@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 068b471c1f5fa5f0ca87dd7b028badf70f8c1b67
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122167"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408294"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -186,8 +188,8 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
-| 3 | 방법 | `OnActionExecuting` |
-| 4 | 방법 | `OnActionExecuted` |
+| 3 | 메서드 | `OnActionExecuting` |
+| 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -730,8 +732,8 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 | `OnActionExecuting` |
-| 3 | 방법 | `OnActionExecuting` |
-| 4 | 방법 | `OnActionExecuted` |
+| 3 | 메서드 | `OnActionExecuting` |
+| 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -788,12 +790,12 @@ Razor페이지는 [ Razor 필터 메서드를 재정의 하 여 페이지 필터
 
 | 시퀀스 | 필터 범위 | `Order` 속성 | 필터 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 방법 | 0 | `OnActionExecuting` |
+| 1 | 메서드 | 0 | `OnActionExecuting` |
 | 2 | 컨트롤러 | 1  | `OnActionExecuting` |
 | 3 | 전역 | 2  | `OnActionExecuting` |
 | 4 | 전역 | 2  | `OnActionExecuted` |
 | 5 | 컨트롤러 | 1  | `OnActionExecuted` |
-| 6 | 방법 | 0  | `OnActionExecuted` |
+| 6 | 메서드 | 0  | `OnActionExecuted` |
 
 `Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터가 순서에 따라 먼저 정렬된 다음, 범위는 연결을 끊는 데 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
 

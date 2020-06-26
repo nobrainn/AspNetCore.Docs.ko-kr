@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/22/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/hub-filters
-ms.openlocfilehash: afdb52039c0eff53a421038518c687c78e1d509b
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: c7ba0fff8bca53e2d6d12add693ee391ffa789ca
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756069"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408567"
 ---
 # <a name="use-hub-filters-in-aspnet-core-signalr"></a>ASP.NET Core에서 허브 필터 사용SignalR
 
@@ -191,7 +193,7 @@ public class CustomFilter : IHubFilter
 
 에는 `HubInvocationContext` 현재 허브 메서드 호출에 대 한 정보가 포함 되어 있습니다.
 
-| 속성 | Description | 형식 |
+| 속성 | 설명 | 형식 |
 | ------ | ------ | ----------- |
 | `Context ` | 에는 `HubCallerContext` 연결에 대 한 정보가 포함 되어 있습니다. | `HubCallerContext` |
 | `Hub` | 이 허브 메서드 호출에 사용 되는 허브의 인스턴스입니다. | `Hub` |
@@ -204,7 +206,7 @@ public class CustomFilter : IHubFilter
 
 에는 `HubLifetimeContext` `OnConnectedAsync` 및 허브 메서드에 대 한 정보가 포함 되어 있습니다 `OnDisconnectedAsync` .
 
-| 속성 | Description | 형식 |
+| 속성 | 설명 | 형식 |
 | ------ | ------ | ----------- |
 | `Context ` | 에는 `HubCallerContext` 연결에 대 한 정보가 포함 되어 있습니다. | `HubCallerContext` |
 | `Hub` | 이 허브 메서드 호출에 사용 되는 허브의 인스턴스입니다. | `Hub` |

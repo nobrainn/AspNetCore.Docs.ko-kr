@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 533bddc9c4499dad99cfdb3089045ea10aed4548
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 8c68f2a15d07909d4576a2426d92f9beaa91fbb7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074161"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408073"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 정책 기반 권한 부여
 
@@ -117,17 +119,19 @@ public void ConfigureServices(IServiceCollection services)
 
 페이지를 사용 하 Razor 는 경우이 문서의 [ Razor 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.
 
-정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` . 다음은 그 예입니다.
+정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` . 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-razor-pages"></a>페이지에 정책 적용 Razor
 
-정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 다음은 그 예입니다.
+정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수도 있습니다.
+정책은 페이지 처리기 수준에서 적용할 수 ***없으며*** Razor 페이지에 적용 되어야 합니다.
+
+Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수 있습니다.
 
 ## <a name="requirements"></a>요구 사항
 
@@ -170,7 +174,7 @@ Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorizati
 
 ### <a name="handler-registration"></a>처리기 등록
 
-처리기는 구성 하는 동안 서비스 컬렉션에 등록 됩니다. 다음은 그 예입니다.
+처리기는 구성 하는 동안 서비스 컬렉션에 등록 됩니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -223,7 +227,7 @@ Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorizati
 
 `HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다. MVC 또는와 같은 프레임 워크 SignalR `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.
 
-끝점 라우팅을 사용 하는 경우 권한 부여는 일반적으로 권한 부여 미들웨어에 의해 처리 됩니다. 이 경우 `Resource` 속성은의 인스턴스입니다 <xref:Microsoft.AspNetCore.Http.Endpoint> . 끝점을 사용 하 여 라우팅하는 기본 리소스를 검색할 수 있습니다. 다음은 그 예입니다.
+끝점 라우팅을 사용 하는 경우 권한 부여는 일반적으로 권한 부여 미들웨어에 의해 처리 됩니다. 이 경우 `Resource` 속성은의 인스턴스입니다 <xref:Microsoft.AspNetCore.Http.Endpoint> . 끝점을 사용 하 여 라우팅하는 기본 리소스를 검색할 수 있습니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -348,13 +352,13 @@ public void ConfigureServices(IServiceCollection services)
 
 페이지를 사용 하 Razor 는 경우이 문서의 [ Razor 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.
 
-정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` . 다음은 그 예입니다.
+정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` . 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-razor-pages"></a>페이지에 정책 적용 Razor
 
-정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 다음은 그 예입니다.
+정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -401,7 +405,7 @@ Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorizati
 
 ### <a name="handler-registration"></a>처리기 등록
 
-처리기는 구성 하는 동안 서비스 컬렉션에 등록 됩니다. 다음은 그 예입니다.
+처리기는 구성 하는 동안 서비스 컬렉션에 등록 됩니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 

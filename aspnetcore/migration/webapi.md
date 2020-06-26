@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84145553"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407228"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API에서 ASP.NET Core로 마이그레이션
 
@@ -73,7 +75,7 @@ Visual Studio에서 비어 있는 새 솔루션을 만들고 마이그레이션�
 
 ## <a name="migrate-configuration"></a>구성 마이그레이션
 
-ASP.NET Core *App_Start* 폴더 또는 *global.asax* 파일을 사용 하지 않습니다. 또한 *web.config 파일은* 게시 시간에 추가 됩니다.
+ASP.NET Core *App_Start* 폴더 또는 *global.asax* 파일을 사용 하지 않습니다. 또한 *web.config* 파일은 게시할 때 추가 됩니다.
 
 `Startup` 클래스는:
 
@@ -140,9 +142,9 @@ ASP.NET Core *API* 프로젝트 템플릿에는 생성 된 코드의 끝점 라�
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)작업에 특성을 적용 `GetAllProducts` 합니다.
     * `[HttpGet("{id}")]`작업에 특성을 적용 `GetProduct` 합니다.
 
-마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1`) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
+마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1` ) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -151,7 +153,7 @@ ASP.NET Core *API* 프로젝트 템플릿에는 생성 된 코드의 끝점 라�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 조건
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -253,7 +255,7 @@ ASP.NET Core에는 다음 구성 요소가 없습니다.
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)작업에 특성을 적용 `GetAllProducts` 합니다.
     * `[HttpGet("{id}")]`작업에 특성을 적용 `GetProduct` 합니다.
 
-마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1`) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
+마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1` ) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
 
 ## <a name="compatibility-shim"></a>호환성 shim
 

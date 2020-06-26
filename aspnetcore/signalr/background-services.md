@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 7bc3b9535055e3fccf23ffa4638bd29676910348
-ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
+ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382571"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409087"
 ---
 # <a name="host-aspnet-core-signalr-in-background-services"></a>SignalR백그라운드 서비스의 호스트 ASP.NET Core
 
@@ -31,12 +33,12 @@ ms.locfileid: "83382571"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x)[(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2)[(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ::: moniker-end
 
@@ -62,7 +64,7 @@ SignalR백그라운드 작업자 프로세스의 컨텍스트에서 ASP.NET Core
 강력한 형식의 허브에 대 한 자세한 내용은 [ SignalR ASP.NET Core에 대해 허브 사용](xref:signalr/hubs#strongly-typed-hubs)을 참조 하세요.
 
 > [!NOTE]
-> 이 기능은 [허브 \< t>](xref:Microsoft.AspNetCore.SignalR.Hub`1) 클래스로 제한 되지 않습니다. [Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)와 같이 [허브](xref:Microsoft.AspNetCore.SignalR.Hub)에서 상속 되는 모든 클래스는 작동 합니다.
+> 이 기능은 [허브 \<T> ](xref:Microsoft.AspNetCore.SignalR.Hub`1) 클래스로 제한 되지 않습니다. [Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)와 같이 [허브](xref:Microsoft.AspNetCore.SignalR.Hub)에서 상속 되는 모든 클래스는 작동 합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 

@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 11/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 87ff2633ded612eba2c996583b4a6cf997fe8e18
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84105768"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408190"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱
 
@@ -49,7 +51,7 @@ HTTP 1.1 캐싱 사양을 따르는 서버 쪽 캐싱의 경우 [응답 캐싱 �
 
 | 헤더                                                     | 함수 |
 | ---------------------------------------------------------- | -------- |
-| [발전할](https://tools.ietf.org/html/rfc7234#section-5.1)     | 응답을 생성 하거나 원본 서버에서 유효성을 검사 한 이후의 시간 (초)입니다. |
+| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 응답을 생성 하거나 원본 서버에서 유효성을 검사 한 이후의 시간 (초)입니다. |
 | [기간이](https://tools.ietf.org/html/rfc7234#section-5.3) | 응답이 오래 된 것으로 간주 되는 시간입니다. |
 | [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | 동작 설정에 대 한 HTTP/1.0 캐시와의 이전 버전과의 호환성을 위해 존재 `no-cache` 합니다. 헤더가 있으면 `Cache-Control` `Pragma` 헤더가 무시 됩니다. |
 | [날](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | 캐시 된 응답의 `Vary` 원래 요청과 새 요청 모두에서 헤더 필드가 모두 일치 하지 않는 경우 캐시 된 응답을 보내지 않도록 지정 합니다. |
@@ -192,7 +194,7 @@ Cache-Control: public,max-age=10
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [캐시에 응답 저장](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

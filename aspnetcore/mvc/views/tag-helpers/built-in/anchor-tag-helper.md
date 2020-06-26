@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af0f07a0f50a79f25b6a14459402f9dd8b59dae2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773967"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408255"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core의 앵커 태그 도우미
 
@@ -25,7 +27,7 @@ ms.locfileid: "82773967"
 
 [앵커 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper)는 표준 HTML 앵커(`<a ... ></a>`) 태그에 새로운 특성을 추가하여 향상시킵니다. 규칙에 따라 해당 특성들의 이름은 `asp-` 접두사로 시작합니다. 렌더링 되는 앵커 요소의 `href` 특성 값은 `asp-` 특성들의 값에 따라 결정됩니다.
 
-태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>을 참조하세요.
+태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -145,7 +147,7 @@ ms.locfileid: "82773967"
 
 [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성은 키-값 쌍 사전을 만들 수 있도록 지원합니다. 키는 매개 변수 이름이고, 값은 매개 변수 값입니다.
 
-다음 예제에서는 사전이 초기화 되어 Razor 뷰에 전달 됩니다. 또는 모델을 사용하여 데이터를 전달할 수도 있습니다.
+다음 예제에서는 사전이 초기화 되어 뷰에 전달 됩니다 Razor . 또는 모델을 사용하여 데이터를 전달할 수도 있습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -179,23 +181,23 @@ ms.locfileid: "82773967"
 
 [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 특성은 적절한 경로를 설정하는 데 사용되는 영역 이름을 설정합니다. 이어지는 예제는 `asp-area` 특성이 경로를 다시 매핑하는 방법을 보여줍니다.
 
-#### <a name="usage-in-razor-pages"></a>페이지에서 Razor 사용
+#### <a name="usage-in-razor-pages"></a>페이지에서 사용 Razor
 
 Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 
 다음 디렉터리 계층 구조를 고려해보세요.
 
 * **{프로젝트 이름}**
-  * **디렉터리인**
+  * **wwwroot**
   * **Areas**
     * **세션**
-      * **마주보**
+      * **페이지**
         * *\_ViewStart. cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
-  * **마주보**
+  * **페이지**
 
-*세션* 영역 *인덱스* Razor 페이지를 참조할 태그는 다음과 같습니다.
+*세션* 영역 *인덱스* 페이지를 참조할 태그는 Razor 다음과 같습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -206,7 +208,7 @@ Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 ```
 
 > [!TIP]
-> Razor 페이지 앱에서 영역을 지원 하려면에서 `Startup.ConfigureServices`다음 중 하나를 수행 합니다.
+> 페이지 앱에서 영역을 지원 하려면 Razor 에서 다음 중 하나를 수행 합니다 `Startup.ConfigureServices` .
 >
 > * [호환성 버전](xref:mvc/compatibility-version)을 2.1 이상으로 설정합니다.
 > * [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) 속성을 `true`로 설정합니다.
@@ -218,17 +220,17 @@ Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 다음 디렉터리 계층 구조를 고려해보세요.
 
 * **{프로젝트 이름}**
-  * **디렉터리인**
+  * **wwwroot**
   * **Areas**
     * **블로그**
-      * **Controllers**
+      * **컨트롤러**
         * *HomeController.cs*
-      * **레이아웃**
+      * **뷰**
         * **홈**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
         * *\_ViewStart. cshtml*
-  * **Controllers**
+  * **컨트롤러**
 
 `asp-area`를 "Blogs"로 설정하면 해당 앵커 태그에 연결된 컨트롤러 및 보기의 경로에 *Areas/Blogs* 디렉터리가 접두사로 추가됩니다. *AboutBlog* 보기를 참조하는 태그는 다음과 같습니다.
 
@@ -247,7 +249,7 @@ Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 
 ### <a name="asp-protocol"></a>asp-protocol
 
-[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 특성은 URL에서 프로토콜(예: `https`)을 지정하는 데 사용됩니다. 예를 들어:
+[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 특성은 URL에서 프로토콜(예: `https`)을 지정하는 데 사용됩니다. 예를 들면 다음과 같습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -261,7 +263,7 @@ Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 
 ### <a name="asp-host"></a>asp-host
 
-[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 특성은 URL에 호스트 이름을 지정하는 데 사용됩니다. 예를 들어:
+[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 특성은 URL에 호스트 이름을 지정하는 데 사용됩니다. 예를 들면 다음과 같습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 
@@ -273,9 +275,9 @@ Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 
 ### <a name="asp-page"></a>asp-page
 
-[Asp 페이지](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) 특성은 페이지와 함께 Razor 사용 됩니다. 이 특성은 앵커 태그의 `href` 특성 값을 특정 페이지로 설정하는 데 사용됩니다. 페이지 이름 앞에 슬래시("/")를 접두사로 사용해서 URL을 생성합니다.
+[Asp 페이지](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) 특성은 페이지와 함께 사용 됩니다 Razor . 이 특성은 앵커 태그의 `href` 특성 값을 특정 페이지로 설정하는 데 사용됩니다. 페이지 이름 앞에 슬래시("/")를 접두사로 사용해서 URL을 생성합니다.
 
-다음 샘플에서는 참석자 Razor 페이지를 가리킵니다.
+다음 샘플에서는 참석자 페이지를 가리킵니다 Razor .
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -297,7 +299,7 @@ Razor페이지 영역은 ASP.NET Core 2.1 이상에서 지원 됩니다.
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-[Asp-페이지 처리기](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) 특성은 페이지와 함께 Razor 사용 됩니다. 이 특성은 특정 페이지 처리기에 연결하기 위한 것입니다.
+[Asp-페이지 처리기](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) 특성은 페이지와 함께 사용 됩니다 Razor . 이 특성은 특정 페이지 처리기에 연결하기 위한 것입니다.
 
 다음 페이지 처리기를 고려해보세요.
 

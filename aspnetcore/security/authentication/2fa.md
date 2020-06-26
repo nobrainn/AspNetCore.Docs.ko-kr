@@ -8,17 +8,19 @@ ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e33f22356de983c8c4e0211822d5027a33b48de6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775832"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408580"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core SMS를 사용 하는 2 단계 인증
 
@@ -33,7 +35,7 @@ ms.locfileid: "82775832"
 
 ## <a name="create-a-new-aspnet-core-project"></a>새 ASP.NET Core 프로젝트 만들기
 
-개별 사용자 계정을 사용 하 여 라는 `Web2FA` 새 ASP.NET Core 웹 앱을 만듭니다. 의 <xref:security/enforcing-ssl> 지침에 따라 HTTPS를 설정 및 요구 합니다.
+`Web2FA`개별 사용자 계정을 사용 하 여 라는 새 ASP.NET Core 웹 앱을 만듭니다. 의 지침에 따라 <xref:security/enforcing-ssl> HTTPS를 설정 및 요구 합니다.
 
 ### <a name="create-an-sms-account"></a>SMS 계정 만들기
 
@@ -49,7 +51,7 @@ Twilio 계정의 대시보드 탭에서 **계정 SID** 및 **인증 토큰**을 
 
 계정 설정에서 **Userkey** 로 이동 하 여 **암호**와 함께 복사 합니다.
 
-이러한 값은 나중에 키 `SMSAccountIdentification` 및 `SMSAccountPassword`의 비밀 manager 도구를 사용 하 여에 저장 합니다.
+이러한 값은 나중에 키 및의 비밀 manager 도구를 사용 하 여에 저장 합니다 `SMSAccountIdentification` `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>SenderID/송신자 지정
 
@@ -57,17 +59,17 @@ Twilio 계정의 대시보드 탭에서 **계정 SID** 및 **인증 토큰**을 
 
 **다음 sms:** 보낸 사람 잠금 해제 메뉴 내에서 하나 이상의 발신자의 잠금을 해제 하거나 영숫자 송신자 (모든 네트워크에서 지원 되지 않음)를 선택 합니다.
 
-나중에이 값을 키 `SMSAccountFrom`내의 비밀 관리자 도구와 함께 저장 합니다.
+나중에이 값을 키 내의 비밀 관리자 도구와 함께 저장 `SMSAccountFrom` 합니다.
 
 ### <a name="provide-credentials-for-the-sms-service"></a>SMS 서비스에 대 한 자격 증명 제공
 
 [옵션 패턴](xref:fundamentals/configuration/options) 을 사용 하 여 사용자 계정 및 키 설정에 액세스 합니다.
 
-* 보안 SMS 키를 인출 하는 클래스를 만듭니다. 이 샘플의 경우 클래스 `SMSoptions` 는 *Services/smsoptions .cs* 파일에서 만들어집니다.
+* 보안 SMS 키를 인출 하는 클래스를 만듭니다. 이 샘플의 경우 `SMSoptions` 클래스는 *Services/smsoptions .cs* 파일에서 만들어집니다.
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-`SMSAccountIdentification`을 (를 `SMSAccountPassword` [) 암호 관리자 도구](xref:security/app-secrets)를 `SMSAccountFrom` 사용 하 여 설정 합니다. 예를 들어:
+을 ( `SMSAccountIdentification` 를 `SMSAccountPassword` `SMSAccountFrom` [) 암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 설정 합니다. 예를 들면 다음과 같습니다.
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -94,7 +96,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>사용할 시작 구성`SMSoptions`
 
-Startup.cs `SMSoptions` 의 `ConfigureServices` 메서드에서 서비스 컨테이너에를 추가 합니다. *Startup.cs*
+`SMSoptions` `ConfigureServices` *Startup.cs*의 메서드에서 서비스 컨테이너에를 추가 합니다.
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
@@ -108,7 +110,7 @@ Startup.cs `SMSoptions` 의 `ConfigureServices` 메서드에서 서비스 컨테
 
 ![Microsoft Edge에서 열린 웹 응용 프로그램 등록 보기](2fa/_static/login2fa1.png)
 
-* 컨트롤러 관리에서 `Index` 작업 메서드를 활성화 하는 사용자 이름을 누릅니다. 전화 번호 **추가** 링크를 탭 합니다.
+* 컨트롤러 관리에서 작업 메서드를 활성화 하는 사용자 이름을 누릅니다 `Index` . 전화 번호 **추가** 링크를 탭 합니다.
 
 ![뷰 관리-"추가" 링크를 누릅니다.](2fa/_static/login2fa2.png)
 
@@ -152,7 +154,7 @@ Startup.cs `SMSoptions` 의 `ConfigureServices` 메서드에서 서비스 컨테
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
-[PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) 가 다음을 `lockoutOnFailure` 으로 `true`설정 하는지 확인 합니다.
+[PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) 가 `lockoutOnFailure` 다음을으로 설정 하는지 확인 합니다 `true` .
 
 ```csharp
 var result = await _signInManager.PasswordSignInAsync(
