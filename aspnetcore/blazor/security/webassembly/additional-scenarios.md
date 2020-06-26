@@ -13,29 +13,29 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 2020b422ad48a9c4c52f2670fd3b5054aa4d60c5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 13007df4ddddd31dd0508e9526775a6d33e0fd97
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103411"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242916"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="7af15-103">ASP.NET Core Blazor WebAssembly 추가 보안 시나리오</span><span class="sxs-lookup"><span data-stu-id="7af15-103">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="8bc43-103">ASP.NET Core Blazor WebAssembly 추가 보안 시나리오</span><span class="sxs-lookup"><span data-stu-id="8bc43-103">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
 
-<span data-ttu-id="7af15-104">작성자: [Javier Calvarro Nelson](https://github.com/javiercn) 및 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="7af15-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="8bc43-104">작성자: [Javier Calvarro Nelson](https://github.com/javiercn) 및 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="8bc43-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="7af15-105">나가는 요청에 토큰 연결</span><span class="sxs-lookup"><span data-stu-id="7af15-105">Attach tokens to outgoing requests</span></span>
+## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="8bc43-105">나가는 요청에 토큰 연결</span><span class="sxs-lookup"><span data-stu-id="8bc43-105">Attach tokens to outgoing requests</span></span>
 
-<span data-ttu-id="7af15-106"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 서비스를 <xref:System.Net.Http.HttpClient>와 함께 사용하여 나가는 요청에 액세스 토큰을 연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-106">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> service can be used with <xref:System.Net.Http.HttpClient> to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="7af15-107">토큰은 기존 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> 서비스를 사용하여 획득됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-107">Tokens are acquired using the existing <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service.</span></span> <span data-ttu-id="7af15-108">토큰을 획득할 수 없는 경우 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>이 throw됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-108">If a token can't be acquired, an <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> is thrown.</span></span> <span data-ttu-id="7af15-109"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>에는 사용자가 ID 공급자로 이동하여 새 토큰을 획득하는 데 사용할 수 있는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 메서드가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-109"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> has a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="7af15-110"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>는 권한 있는 URL을 사용하여 구성되고 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> 메서드를 사용하여 URL을 반환할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-110">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> can be configured with the authorized URLs, scopes, and return URL using the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> method.</span></span>
+<span data-ttu-id="8bc43-106"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 서비스를 <xref:System.Net.Http.HttpClient>와 함께 사용하여 나가는 요청에 액세스 토큰을 연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-106">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> service can be used with <xref:System.Net.Http.HttpClient> to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="8bc43-107">토큰은 기존 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> 서비스를 사용하여 획득됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-107">Tokens are acquired using the existing <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service.</span></span> <span data-ttu-id="8bc43-108">토큰을 획득할 수 없는 경우 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>이 throw됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-108">If a token can't be acquired, an <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> is thrown.</span></span> <span data-ttu-id="8bc43-109"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>에는 사용자가 ID 공급자로 이동하여 새 토큰을 획득하는 데 사용할 수 있는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> 메서드가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-109"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> has a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="8bc43-110"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>는 권한 있는 URL을 사용하여 구성되고 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> 메서드를 사용하여 URL을 반환할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-110">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> can be configured with the authorized URLs, scopes, and return URL using the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> method.</span></span>
 
-<span data-ttu-id="7af15-111">다음 방법 중 하나를 사용하여 보내는 요청에 대한 메시지 처리기를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-111">Use either of the following approaches to configure a message handler for outgoing requests:</span></span>
+<span data-ttu-id="8bc43-111">다음 방법 중 하나를 사용하여 보내는 요청에 대한 메시지 처리기를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-111">Use either of the following approaches to configure a message handler for outgoing requests:</span></span>
 
-* <span data-ttu-id="7af15-112">[사용자 지정 AuthorizationMessageHandler 클래스](#custom-authorizationmessagehandler-class)(권장)</span><span class="sxs-lookup"><span data-stu-id="7af15-112">[Custom AuthorizationMessageHandler class](#custom-authorizationmessagehandler-class) (*Recommended*)</span></span>
-* [<span data-ttu-id="7af15-113">AuthorizationMessageHandler 구성</span><span class="sxs-lookup"><span data-stu-id="7af15-113">Configure AuthorizationMessageHandler</span></span>](#configure-authorizationmessagehandler)
+* <span data-ttu-id="8bc43-112">[사용자 지정 `AuthorizationMessageHandler` 클래스](#custom-authorizationmessagehandler-class)(‘권장’)</span><span class="sxs-lookup"><span data-stu-id="8bc43-112">[Custom `AuthorizationMessageHandler` class](#custom-authorizationmessagehandler-class) (*Recommended*)</span></span>
+* [<span data-ttu-id="8bc43-113">`AuthorizationMessageHandler` 구성</span><span class="sxs-lookup"><span data-stu-id="8bc43-113">Configure `AuthorizationMessageHandler`</span></span>](#configure-authorizationmessagehandler)
 
-### <a name="custom-authorizationmessagehandler-class"></a><span data-ttu-id="7af15-114">사용자 지정 AuthorizationMessageHandler 클래스</span><span class="sxs-lookup"><span data-stu-id="7af15-114">Custom AuthorizationMessageHandler class</span></span>
+### <a name="custom-authorizationmessagehandler-class"></a><span data-ttu-id="8bc43-114">사용자 지정 AuthorizationMessageHandler 클래스</span><span class="sxs-lookup"><span data-stu-id="8bc43-114">Custom AuthorizationMessageHandler class</span></span>
 
-<span data-ttu-id="7af15-115">다음 예제에서는 사용자 지정 클래스가 <xref:System.Net.Http.HttpClient>를 구성하는 데 사용할 수 있는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>를 확장합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-115">In the following example, a custom class extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> that can be used to configure an <xref:System.Net.Http.HttpClient>:</span></span>
+<span data-ttu-id="8bc43-115">다음 예제에서는 사용자 지정 클래스가 <xref:System.Net.Http.HttpClient>를 구성하는 데 사용할 수 있는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>를 확장합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-115">In the following example, a custom class extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> that can be used to configure an <xref:System.Net.Http.HttpClient>:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -54,7 +54,7 @@ public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-<span data-ttu-id="7af15-116">`Program.Main`(*Program.cs*)에서 사용자 지정 권한 부여 메시지 처리기를 사용하여 <xref:System.Net.Http.HttpClient>가 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-116">In `Program.Main` (*Program.cs*), an <xref:System.Net.Http.HttpClient> is configured with the custom authorization message handler:</span></span>
+<span data-ttu-id="8bc43-116">`Program.Main`(`Program.cs`)에서 사용자 지정 권한 부여 메시지 처리기를 사용하여 <xref:System.Net.Http.HttpClient>가 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-116">In `Program.Main` (`Program.cs`), an <xref:System.Net.Http.HttpClient> is configured with the custom authorization message handler:</span></span>
 
 ```csharp
 builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
@@ -64,7 +64,7 @@ builder.Services.AddHttpClient("ServerAPI",
         .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="7af15-117">구성된 <xref:System.Net.Http.HttpClient>는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-117">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pattern.</span></span> <span data-ttu-id="7af15-118">클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 API로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-118">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package), the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server API:</span></span>
+<span data-ttu-id="8bc43-117">구성된 <xref:System.Net.Http.HttpClient>는 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-117">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) pattern.</span></span> <span data-ttu-id="8bc43-118">클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 API로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-118">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package), the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server API:</span></span>
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -94,9 +94,9 @@ builder.Services.AddHttpClient("ServerAPI",
 }
 ```
 
-### <a name="configure-authorizationmessagehandler"></a><span data-ttu-id="7af15-119">AuthorizationMessageHandler 구성</span><span class="sxs-lookup"><span data-stu-id="7af15-119">Configure AuthorizationMessageHandler</span></span>
+### <a name="configure-authorizationmessagehandler"></a><span data-ttu-id="8bc43-119">AuthorizationMessageHandler 구성</span><span class="sxs-lookup"><span data-stu-id="8bc43-119">Configure AuthorizationMessageHandler</span></span>
 
-<span data-ttu-id="7af15-120">다음 예제에서는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>가 `Program.Main`(*Program.cs*)에서 <xref:System.Net.Http.HttpClient>를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-120">In the following example, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configures an <xref:System.Net.Http.HttpClient> in `Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-120">다음 예제에서는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>가 `Program.Main`(`Program.cs`)에서 <xref:System.Net.Http.HttpClient>를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-120">In the following example, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configures an <xref:System.Net.Http.HttpClient> in `Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -116,7 +116,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-<span data-ttu-id="7af15-121">편의를 위해, 앱 기준 주소로 구성된 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>가 권한이 부여된 URL로 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-121">For convenience, a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="7af15-122">인증이 사용하도록 설정된 Blazor WebAssembly 템플릿은 이제 서버 API 프로젝트에서 <xref:System.Net.Http.IHttpClientFactory>([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>로 <xref:System.Net.Http.HttpClient>를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-122">The authentication-enabled Blazor WebAssembly templates now use <xref:System.Net.Http.IHttpClientFactory> ([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package) in the Server API project to set up an <xref:System.Net.Http.HttpClient> with the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>:</span></span>
+<span data-ttu-id="8bc43-121">편의를 위해, 앱 기준 주소로 구성된 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>가 권한이 부여된 URL로 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-121">For convenience, a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="8bc43-122">인증이 사용하도록 설정된 Blazor WebAssembly 템플릿은 이제 서버 API 프로젝트에서 <xref:System.Net.Http.IHttpClientFactory>([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)를 사용하여 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>로 <xref:System.Net.Http.HttpClient>를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-122">The authentication-enabled Blazor WebAssembly templates now use <xref:System.Net.Http.IHttpClientFactory> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package) in the Server API project to set up an <xref:System.Net.Http.HttpClient> with the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -132,9 +132,9 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("ServerAPI"));
 ```
 
-<span data-ttu-id="7af15-123">앞에 나온 예제에서 클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 프로젝트로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-123">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> in the preceding example, the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server project.</span></span>
+<span data-ttu-id="8bc43-123">앞에 나온 예제에서 클라이언트가 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A>를 사용하여 만들어진 경우, <xref:System.Net.Http.HttpClient>에는 서버 프로젝트로 요청을 전송할 때 액세스 토큰을 포함하는 인스턴스가 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-123">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> in the preceding example, the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server project.</span></span>
 
-<span data-ttu-id="7af15-124">구성된 <xref:System.Net.Http.HttpClient>는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-124">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pattern:</span></span>
+<span data-ttu-id="8bc43-124">구성된 <xref:System.Net.Http.HttpClient>는 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 패턴을 사용하여 권한이 부여된 요청을 수행하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-124">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) pattern:</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -160,11 +160,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="typed-httpclient"></a><span data-ttu-id="7af15-125">형식화된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="7af15-125">Typed HttpClient</span></span>
+## <a name="typed-httpclient"></a><span data-ttu-id="8bc43-125">형식화된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="8bc43-125">Typed HttpClient</span></span>
 
-<span data-ttu-id="7af15-126">단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리하는 형식화된 클라이언트를 정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-126">A typed client can be defined that handles all of the HTTP and token acquisition concerns within a single class.</span></span>
+<span data-ttu-id="8bc43-126">단일 클래스 내에서 모든 HTTP 및 토큰 획득 문제를 처리하는 형식화된 클라이언트를 정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-126">A typed client can be defined that handles all of the HTTP and token acquisition concerns within a single class.</span></span>
 
-<span data-ttu-id="7af15-127">*WeatherForecastClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="7af15-127">*WeatherForecastClient.cs*:</span></span>
+<span data-ttu-id="8bc43-127">`WeatherForecastClient.cs`:</span><span class="sxs-lookup"><span data-stu-id="8bc43-127">`WeatherForecastClient.cs`:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -201,9 +201,9 @@ public class WeatherForecastClient
 }
 ```
 
-<span data-ttu-id="7af15-128">자리 표시자 `{APP ASSEMBLY}`는 앱의 어셈블리 이름입니다(예: `using static BlazorSample.Data;`).</span><span class="sxs-lookup"><span data-stu-id="7af15-128">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `using static BlazorSample.Data;`).</span></span>
+<span data-ttu-id="8bc43-128">자리 표시자 `{APP ASSEMBLY}`는 앱의 어셈블리 이름입니다(예: `using static BlazorSample.Data;`).</span><span class="sxs-lookup"><span data-stu-id="8bc43-128">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `using static BlazorSample.Data;`).</span></span>
 
-<span data-ttu-id="7af15-129">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="7af15-129">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-129">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-129">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -216,7 +216,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="7af15-130">`FetchData` 구성 요소(*Pages/FetchData.razor*):</span><span class="sxs-lookup"><span data-stu-id="7af15-130">`FetchData` component (*Pages/FetchData.razor*):</span></span>
+<span data-ttu-id="8bc43-130">`FetchData` 구성 요소(`Pages/FetchData.razor`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-130">`FetchData` component (`Pages/FetchData.razor`):</span></span>
 
 ```razor
 @inject WeatherForecastClient Client
@@ -229,11 +229,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="configure-the-httpclient-handler"></a><span data-ttu-id="7af15-131">HttpClient 처리기 구성</span><span class="sxs-lookup"><span data-stu-id="7af15-131">Configure the HttpClient handler</span></span>
+## <a name="configure-the-httpclient-handler"></a><span data-ttu-id="8bc43-131">HttpClient 처리기 구성</span><span class="sxs-lookup"><span data-stu-id="8bc43-131">Configure the HttpClient handler</span></span>
 
-<span data-ttu-id="7af15-132">처리기는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>를 사용하여 아웃바운드 HTTP 요청에 대해 추가로 구성될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-132">The handler can be further configured with <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> for outbound HTTP requests.</span></span>
+<span data-ttu-id="8bc43-132">처리기는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>를 사용하여 아웃바운드 HTTP 요청에 대해 추가로 구성될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-132">The handler can be further configured with <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> for outbound HTTP requests.</span></span>
 
-<span data-ttu-id="7af15-133">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="7af15-133">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-133">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-133">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -242,20 +242,20 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="7af15-134">보안 기본 클라이언트가 있는 앱의 인증되지 않거나 권한이 부여되지 않은 웹 API 요청</span><span class="sxs-lookup"><span data-stu-id="7af15-134">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
+## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="8bc43-134">보안 기본 클라이언트가 있는 앱의 인증되지 않거나 권한이 부여되지 않은 웹 API 요청</span><span class="sxs-lookup"><span data-stu-id="8bc43-134">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
 
-<span data-ttu-id="7af15-135">Blazor WebAssembly 앱이 일반적으로 보안 기본 <xref:System.Net.Http.HttpClient>를 사용하는 경우, 이 앱은 명명된 <xref:System.Net.Http.HttpClient>를 구성하여 인증되지 않은 또는 권한 부여되지 않은 웹 API 요청을 수행할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-135">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
+<span data-ttu-id="8bc43-135">Blazor WebAssembly 앱이 일반적으로 보안 기본 <xref:System.Net.Http.HttpClient>를 사용하는 경우, 이 앱은 명명된 <xref:System.Net.Http.HttpClient>를 구성하여 인증되지 않은 또는 권한 부여되지 않은 웹 API 요청을 수행할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-135">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
 
-<span data-ttu-id="7af15-136">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="7af15-136">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-136">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-136">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-<span data-ttu-id="7af15-137">앞에 나온 등록은 기존의 보안 기본 <xref:System.Net.Http.HttpClient> 등록에 더해 이루어집니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-137">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
+<span data-ttu-id="8bc43-137">앞에 나온 등록은 기존의 보안 기본 <xref:System.Net.Http.HttpClient> 등록에 더해 이루어집니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-137">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
 
-<span data-ttu-id="7af15-138">구성 요소는 <xref:System.Net.Http.IHttpClientFactory>([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)에서 <xref:System.Net.Http.HttpClient>를 만들어서 인증되지 않은 또는 권한 부여되지 않은 요청을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-138">A component creates the <xref:System.Net.Http.HttpClient> from the <xref:System.Net.Http.IHttpClientFactory> ([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package) to make unauthenticated or unauthorized requests:</span></span>
+<span data-ttu-id="8bc43-138">구성 요소는 <xref:System.Net.Http.IHttpClientFactory>([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) 패키지)에서 <xref:System.Net.Http.HttpClient>를 만들어 인증되지 않거나 권한이 부여되지 않은 요청을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-138">A component creates the <xref:System.Net.Http.HttpClient> from the <xref:System.Net.Http.IHttpClientFactory> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package) to make unauthenticated or unauthorized requests:</span></span>
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -276,15 +276,15 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 ```
 
 > [!NOTE]
-> <span data-ttu-id="7af15-139">앞에 나온 예제의 서버 API의 컨트롤러는 `WeatherForecastNoAuthenticationController`는 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성으로 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-139">The controller in the server API, `WeatherForecastNoAuthenticationController` for the preceding example, isn't marked with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute.</span></span>
+> <span data-ttu-id="8bc43-139">앞에 나온 예제의 서버 API의 컨트롤러는 `WeatherForecastNoAuthenticationController`는 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성으로 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-139">The controller in the server API, `WeatherForecastNoAuthenticationController` for the preceding example, isn't marked with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute.</span></span>
 
-## <a name="request-additional-access-tokens"></a><span data-ttu-id="7af15-140">추가 액세스 토큰 요청</span><span class="sxs-lookup"><span data-stu-id="7af15-140">Request additional access tokens</span></span>
+## <a name="request-additional-access-tokens"></a><span data-ttu-id="8bc43-140">추가 액세스 토큰 요청</span><span class="sxs-lookup"><span data-stu-id="8bc43-140">Request additional access tokens</span></span>
 
-<span data-ttu-id="7af15-141">`IAccessTokenProvider.RequestAccessToken`을 호출하여 액세스 토큰을 수동으로 획득할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-141">Access tokens can be manually obtained by calling `IAccessTokenProvider.RequestAccessToken`.</span></span>
+<span data-ttu-id="8bc43-141">`IAccessTokenProvider.RequestAccessToken`을 호출하여 액세스 토큰을 수동으로 획득할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-141">Access tokens can be manually obtained by calling `IAccessTokenProvider.RequestAccessToken`.</span></span>
 
-<span data-ttu-id="7af15-142">다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 추가 AAD(Azure Active Directory) Microsoft Graph API 범위가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-142">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="7af15-143">Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후에 클라이언트 앱에서 추가 범위가 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-143">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app.</span></span>
+<span data-ttu-id="8bc43-142">다음 예제에서는 앱에서 사용자 데이터를 읽고 메일을 보내기 위해 추가 AAD(Azure Active Directory) Microsoft Graph API 범위가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-142">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="8bc43-143">Azure AAD 포털에서 Microsoft Graph API 사용 권한을 추가한 후에 클라이언트 앱에서 추가 범위가 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-143">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app.</span></span>
 
-<span data-ttu-id="7af15-144">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="7af15-144">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-144">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-144">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -298,9 +298,9 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="7af15-145">`IAccessTokenProvider.RequestToken` 메서드는 앱이 지정된 범위 세트를 사용하여 액세스 토큰을 프로비저닝할 수 있도록 지원하는 오버로드를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-145">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
+<span data-ttu-id="8bc43-145">`IAccessTokenProvider.RequestToken` 메서드는 앱이 지정된 범위 세트를 사용하여 액세스 토큰을 프로비저닝할 수 있도록 지원하는 오버로드를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-145">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
 
-<span data-ttu-id="7af15-146">Razor 구성 요소에서:</span><span class="sxs-lookup"><span data-stu-id="7af15-146">In a Razor component:</span></span>
+<span data-ttu-id="8bc43-146">Razor 구성 요소에서:</span><span class="sxs-lookup"><span data-stu-id="8bc43-146">In a Razor component:</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -321,14 +321,14 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="7af15-147"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>은 다음을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-147"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> returns:</span></span>
+<span data-ttu-id="8bc43-147"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>은 다음을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-147"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> returns:</span></span>
 
-* <span data-ttu-id="7af15-148">`token`이 사용할 수 있도록 `true`.</span><span class="sxs-lookup"><span data-stu-id="7af15-148">`true` with the `token` for use.</span></span>
-* <span data-ttu-id="7af15-149">토큰이 검색되지 않은 경우 `false`.</span><span class="sxs-lookup"><span data-stu-id="7af15-149">`false` if the token isn't retrieved.</span></span>
+* <span data-ttu-id="8bc43-148">`token`이 사용할 수 있도록 `true`.</span><span class="sxs-lookup"><span data-stu-id="8bc43-148">`true` with the `token` for use.</span></span>
+* <span data-ttu-id="8bc43-149">토큰이 검색되지 않은 경우 `false`.</span><span class="sxs-lookup"><span data-stu-id="8bc43-149">`false` if the token isn't retrieved.</span></span>
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a><span data-ttu-id="7af15-150">Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage</span><span class="sxs-lookup"><span data-stu-id="7af15-150">HttpClient and HttpRequestMessage with Fetch API request options</span></span>
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a><span data-ttu-id="8bc43-150">Fetch API 요청 옵션이 포함된 HttpClient 및 HttpRequestMessage</span><span class="sxs-lookup"><span data-stu-id="8bc43-150">HttpClient and HttpRequestMessage with Fetch API request options</span></span>
 
-<span data-ttu-id="7af15-151">Blazor WebAssembly 앱의 WebAssembly에서 실행될 경우 [HttpClient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 요청을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-151">When running on WebAssembly in a Blazor WebAssembly app, [HttpClient](xref:fundamentals/http-requests) and <xref:System.Net.Http.HttpRequestMessage> can be used to customize requests.</span></span> <span data-ttu-id="7af15-152">예를 들어, HTTP 메서드 및 요청 헤더를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-152">For example, you can specify the HTTP method and request headers.</span></span> <span data-ttu-id="7af15-153">다음 구성 요소는 서버에서 To Do List API 엔드포인트에 대한 `POST` 요청을 만들고 응답 본문을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-153">The following component makes a `POST` request to a To Do List API endpoint on the server and shows the response body:</span></span>
+<span data-ttu-id="8bc43-151">Blazor WebAssembly 앱의 WebAssembly에서 실행될 경우 [`HttpClient`](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 요청을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-151">When running on WebAssembly in a Blazor WebAssembly app, [`HttpClient`](xref:fundamentals/http-requests) and <xref:System.Net.Http.HttpRequestMessage> can be used to customize requests.</span></span> <span data-ttu-id="8bc43-152">예를 들어, HTTP 메서드 및 요청 헤더를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-152">For example, you can specify the HTTP method and request headers.</span></span> <span data-ttu-id="8bc43-153">다음 구성 요소는 서버에서 To Do List API 엔드포인트에 대한 `POST` 요청을 만들고 응답 본문을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-153">The following component makes a `POST` request to a To Do List API endpoint on the server and shows the response body:</span></span>
 
 ```razor
 @page "/todorequest"
@@ -390,37 +390,37 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="7af15-154">.NET WebAssembly의 <xref:System.Net.Http.HttpClient> 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-154">.NET WebAssembly's implementation of <xref:System.Net.Http.HttpClient> uses [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span></span> <span data-ttu-id="7af15-155">Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-155">Fetch allows configuring several [request-specific options](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span> 
+<span data-ttu-id="8bc43-154">.NET WebAssembly의 <xref:System.Net.Http.HttpClient> 구현은 [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-154">.NET WebAssembly's implementation of <xref:System.Net.Http.HttpClient> uses [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span></span> <span data-ttu-id="8bc43-155">Fetch를 사용하면 여러 [요청 관련 옵션](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-155">Fetch allows configuring several [request-specific options](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span> 
 
-<span data-ttu-id="7af15-156">HTTP 페치 요청 옵션은 다음 표에 표시된 <xref:System.Net.Http.HttpRequestMessage> 확장 메서드로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-156">HTTP fetch request options can be configured with <xref:System.Net.Http.HttpRequestMessage> extension methods shown in the following table.</span></span>
+<span data-ttu-id="8bc43-156">HTTP 페치 요청 옵션은 다음 표에 표시된 <xref:System.Net.Http.HttpRequestMessage> 확장 메서드로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-156">HTTP fetch request options can be configured with <xref:System.Net.Http.HttpRequestMessage> extension methods shown in the following table.</span></span>
 
-| <span data-ttu-id="7af15-157">확장 메서드</span><span class="sxs-lookup"><span data-stu-id="7af15-157">Extension method</span></span> | <span data-ttu-id="7af15-158">Fetch 요청 속성</span><span class="sxs-lookup"><span data-stu-id="7af15-158">Fetch request property</span></span> |
+| <span data-ttu-id="8bc43-157">확장 메서드</span><span class="sxs-lookup"><span data-stu-id="8bc43-157">Extension method</span></span> | <span data-ttu-id="8bc43-158">Fetch 요청 속성</span><span class="sxs-lookup"><span data-stu-id="8bc43-158">Fetch request property</span></span> |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [<span data-ttu-id="7af15-159">credentials</span><span class="sxs-lookup"><span data-stu-id="7af15-159">credentials</span></span>](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [<span data-ttu-id="7af15-160">캐시</span><span class="sxs-lookup"><span data-stu-id="7af15-160">cache</span></span>](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [<span data-ttu-id="7af15-161">mode</span><span class="sxs-lookup"><span data-stu-id="7af15-161">mode</span></span>](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [<span data-ttu-id="7af15-162">무결성</span><span class="sxs-lookup"><span data-stu-id="7af15-162">integrity</span></span>](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [`credentials`](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [`cache`](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [`mode`](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [`integrity`](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
-<span data-ttu-id="7af15-163">보다 일반적인 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-163">You can set additional options using the more generic <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> extension method.</span></span>
+<span data-ttu-id="8bc43-159">보다 일반적인 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> 확장 메서드를 사용하여 추가 옵션을 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-159">You can set additional options using the more generic <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> extension method.</span></span>
  
-<span data-ttu-id="7af15-164">HTTP 응답은 일반적으로 응답 콘텐츠에서 동기화 읽기를 지원할 수 있도록 Blazor WebAssembly 앱에서 버퍼링됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-164">The HTTP response is typically buffered in a Blazor WebAssembly app to enable support for sync reads on the response content.</span></span> <span data-ttu-id="7af15-165">응답 스트리밍을 지원하도록 설정하려면 요청에서 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-165">To enable support for response streaming, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> extension method on the request.</span></span>
+<span data-ttu-id="8bc43-160">HTTP 응답은 일반적으로 응답 콘텐츠에서 동기화 읽기를 지원할 수 있도록 Blazor WebAssembly 앱에서 버퍼링됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-160">The HTTP response is typically buffered in a Blazor WebAssembly app to enable support for sync reads on the response content.</span></span> <span data-ttu-id="8bc43-161">응답 스트리밍을 지원하도록 설정하려면 요청에서 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-161">To enable support for response streaming, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> extension method on the request.</span></span>
 
-<span data-ttu-id="7af15-166">원본 간 요청에 자격 증명을 포함하려면 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-166">To include credentials in a cross-origin request, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> extension method:</span></span>
+<span data-ttu-id="8bc43-162">원본 간 요청에 자격 증명을 포함하려면 <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-162">To include credentials in a cross-origin request, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> extension method:</span></span>
 
 ```csharp
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 ```
 
-<span data-ttu-id="7af15-167">Fetch API 옵션에 대한 자세한 내용은 [MDN 웹 설명서: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="7af15-167">For more information on Fetch API options, see [MDN web docs: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span>
+<span data-ttu-id="8bc43-163">Fetch API 옵션에 대한 자세한 내용은 [MDN 웹 설명서: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8bc43-163">For more information on Fetch API options, see [MDN web docs: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span>
 
-<span data-ttu-id="7af15-168">CORS 요청에 대한 자격 증명(권한 부여 쿠키/헤더)을 보낼 때 CORS 정책에서 `Authorization` 헤더를 허용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-168">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
+<span data-ttu-id="8bc43-164">CORS 요청에 대한 자격 증명(권한 부여 쿠키/헤더)을 보낼 때 CORS 정책에서 `Authorization` 헤더를 허용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-164">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
 
-<span data-ttu-id="7af15-169">다음 정책에는 해당 구성이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-169">The following policy includes configuration for:</span></span>
+<span data-ttu-id="8bc43-165">다음 정책에는 해당 구성이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-165">The following policy includes configuration for:</span></span>
 
-* <span data-ttu-id="7af15-170">요청 원본(`http://localhost:5000`, `https://localhost:5001`).</span><span class="sxs-lookup"><span data-stu-id="7af15-170">Request origins (`http://localhost:5000`, `https://localhost:5001`).</span></span>
-* <span data-ttu-id="7af15-171">임의 메서드(동사)</span><span class="sxs-lookup"><span data-stu-id="7af15-171">Any method (verb).</span></span>
-* <span data-ttu-id="7af15-172">`Content-Type` 및 `Authorization` 헤더.</span><span class="sxs-lookup"><span data-stu-id="7af15-172">`Content-Type` and `Authorization` headers.</span></span> <span data-ttu-id="7af15-173">사용자 지정 헤더(예: `x-custom-header`)를 허용하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-173">To allow a custom header (for example, `x-custom-header`), list the header when calling <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.</span></span>
-* <span data-ttu-id="7af15-174">클라이언트 쪽 JavaScript 코드에 의해 설정된 자격 증명(`credentials` 속성이 `include`로 설정됨).</span><span class="sxs-lookup"><span data-stu-id="7af15-174">Credentials set by client-side JavaScript code (`credentials` property set to `include`).</span></span>
+* <span data-ttu-id="8bc43-166">요청 원본(`http://localhost:5000`, `https://localhost:5001`).</span><span class="sxs-lookup"><span data-stu-id="8bc43-166">Request origins (`http://localhost:5000`, `https://localhost:5001`).</span></span>
+* <span data-ttu-id="8bc43-167">임의 메서드(동사)</span><span class="sxs-lookup"><span data-stu-id="8bc43-167">Any method (verb).</span></span>
+* <span data-ttu-id="8bc43-168">`Content-Type` 및 `Authorization` 헤더.</span><span class="sxs-lookup"><span data-stu-id="8bc43-168">`Content-Type` and `Authorization` headers.</span></span> <span data-ttu-id="8bc43-169">사용자 지정 헤더(예: `x-custom-header`)를 허용하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-169">To allow a custom header (for example, `x-custom-header`), list the header when calling <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.</span></span>
+* <span data-ttu-id="8bc43-170">클라이언트 쪽 JavaScript 코드에 의해 설정된 자격 증명(`credentials` 속성이 `include`로 설정됨).</span><span class="sxs-lookup"><span data-stu-id="8bc43-170">Credentials set by client-side JavaScript code (`credentials` property set to `include`).</span></span>
 
 ```csharp
 app.UseCors(policy => 
@@ -430,38 +430,38 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-<span data-ttu-id="7af15-175">자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소(*Components/HTTPRequestTester.razor*)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="7af15-175">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (*Components/HTTPRequestTester.razor*).</span></span>
+<span data-ttu-id="8bc43-171">자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소(`Components/HTTPRequestTester.razor`)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8bc43-171">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (`Components/HTTPRequestTester.razor`).</span></span>
 
-## <a name="handle-token-request-errors"></a><span data-ttu-id="7af15-176">토큰 요청 오류 처리</span><span class="sxs-lookup"><span data-stu-id="7af15-176">Handle token request errors</span></span>
+## <a name="handle-token-request-errors"></a><span data-ttu-id="8bc43-172">토큰 요청 오류 처리</span><span class="sxs-lookup"><span data-stu-id="8bc43-172">Handle token request errors</span></span>
 
-<span data-ttu-id="7af15-177">SPA(단일 페이지 애플리케이션)가 OIDC(Open ID Connect)를 사용하여 사용자를 인증하는 경우 인증 상태는 SPA 내에서 로컬로 유지 관리되는 동시에 IP(Identity 공급자)에서 사용자가 자격 증명을 제공한 결과 설정된 세션 쿠키 형식으로 유지 관리됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-177">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
+<span data-ttu-id="8bc43-173">SPA(단일 페이지 애플리케이션)가 OIDC(Open ID Connect)를 사용하여 사용자를 인증하는 경우 인증 상태는 SPA 내에서 로컬로 유지 관리되는 동시에 IP(Identity 공급자)에서 사용자가 자격 증명을 제공한 결과 설정된 세션 쿠키 형식으로 유지 관리됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-173">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
 
-<span data-ttu-id="7af15-178">일반적으로 사용자에 대해 IP가 내보내는 토큰은 짧은 시간 동안(보통 1시간 동안) 유효하므로 클라이언트 앱이 정기적으로 새 토큰을 페치해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-178">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="7af15-179">그러지 않으면 부여된 토큰이 만료된 후에 사용자가 로그아웃됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-179">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="7af15-180">대부분의 경우 OIDC 클라이언트는 IP 내에 유지되는 인증 상태 또는 “세션” 덕분에 사용자에게 다시 인증하도록 요구하지 않고 새 토큰을 프로비저닝할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-180">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
+<span data-ttu-id="8bc43-174">일반적으로 사용자에 대해 IP가 내보내는 토큰은 짧은 시간 동안(보통 1시간 동안) 유효하므로 클라이언트 앱이 정기적으로 새 토큰을 페치해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-174">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="8bc43-175">그러지 않으면 부여된 토큰이 만료된 후에 사용자가 로그아웃됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-175">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="8bc43-176">대부분의 경우 OIDC 클라이언트는 IP 내에 유지되는 인증 상태 또는 “세션” 덕분에 사용자에게 다시 인증하도록 요구하지 않고 새 토큰을 프로비저닝할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-176">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
 
-<span data-ttu-id="7af15-181">클라이언트가 사용자 조작 없이는 토큰을 가져올 수 없는 경우도 있습니다. 사용자가 어떤 이유로든 IP에서 명시적으로 로그아웃하는 경우가 그 예입니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-181">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="7af15-182">이 시나리오는 사용자가 `https://login.microsoftonline.com`을 방문한 후 로그아웃하는 경우에 발생합니다. 이러한 시나리오에서 앱은 사용자가 로그아웃했다는 사실을 즉시 인식하지 못합니다. 이때 클라이언트가 보유하고 있는 토큰은 모두 더 이상 유효하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-182">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="7af15-183">또한 클라이언트는 현재 토큰이 만료된 후 사용자 조작 없이는 새 토큰을 프로비저닝할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-183">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
+<span data-ttu-id="8bc43-177">클라이언트가 사용자 조작 없이는 토큰을 가져올 수 없는 경우도 있습니다. 사용자가 어떤 이유로든 IP에서 명시적으로 로그아웃하는 경우가 그 예입니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-177">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="8bc43-178">이 시나리오는 사용자가 `https://login.microsoftonline.com`을 방문한 후 로그아웃하는 경우에 발생합니다. 이러한 시나리오에서 앱은 사용자가 로그아웃했다는 사실을 즉시 인식하지 못합니다. 이때 클라이언트가 보유하고 있는 토큰은 모두 더 이상 유효하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-178">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="8bc43-179">또한 클라이언트는 현재 토큰이 만료된 후 사용자 조작 없이는 새 토큰을 프로비저닝할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-179">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
 
-<span data-ttu-id="7af15-184">이러한 시나리오는 토큰 기반 인증에만 국한되지 않으며,</span><span class="sxs-lookup"><span data-stu-id="7af15-184">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="7af15-185">SPA의 특성에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-185">They are part of the nature of SPAs.</span></span> <span data-ttu-id="7af15-186">쿠키를 사용하는 SPA도 인증 쿠키가 제거된 경우 서버 API를 호출하지 못합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-186">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
+<span data-ttu-id="8bc43-180">이러한 시나리오는 토큰 기반 인증에만 국한되지 않으며,</span><span class="sxs-lookup"><span data-stu-id="8bc43-180">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="8bc43-181">SPA의 특성에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-181">They are part of the nature of SPAs.</span></span> <span data-ttu-id="8bc43-182">쿠키를 사용하는 SPA도 인증 쿠키가 제거된 경우 서버 API를 호출하지 못합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-182">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
 
-<span data-ttu-id="7af15-187">앱에서 보호된 리소스에 대해 API 호출을 수행하는 경우에는 다음 사항에 유의해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-187">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
+<span data-ttu-id="8bc43-183">앱에서 보호된 리소스에 대해 API 호출을 수행하는 경우에는 다음 사항에 유의해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-183">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
 
-* <span data-ttu-id="7af15-188">새 액세스 토큰을 프로비저닝하여 API를 호출하려면 사용자가 다시 인증해야 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-188">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
-* <span data-ttu-id="7af15-189">클라이언트에 유효한 것으로 보이는 토큰이 있는 경우에도 사용자가 토큰을 해지했기 때문에 서버에 대한 호출이 실패할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-189">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
+* <span data-ttu-id="8bc43-184">새 액세스 토큰을 프로비저닝하여 API를 호출하려면 사용자가 다시 인증해야 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-184">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
+* <span data-ttu-id="8bc43-185">클라이언트에 유효한 것으로 보이는 토큰이 있는 경우에도 사용자가 토큰을 해지했기 때문에 서버에 대한 호출이 실패할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-185">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
 
-<span data-ttu-id="7af15-190">앱에서 토큰을 요청하는 경우 다음과 같은 두 가지 가능한 결과가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-190">When the app requests a token, there are two possible outcomes:</span></span>
+<span data-ttu-id="8bc43-186">앱에서 토큰을 요청하는 경우 다음과 같은 두 가지 가능한 결과가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-186">When the app requests a token, there are two possible outcomes:</span></span>
 
-* <span data-ttu-id="7af15-191">요청이 성공하고 앱이 유효한 토큰을 보유합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-191">The request succeeds, and the app has a valid token.</span></span>
-* <span data-ttu-id="7af15-192">요청이 실패하고 앱이 사용자를 다시 인증하여 새 토큰을 획득해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-192">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
+* <span data-ttu-id="8bc43-187">요청이 성공하고 앱이 유효한 토큰을 보유합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-187">The request succeeds, and the app has a valid token.</span></span>
+* <span data-ttu-id="8bc43-188">요청이 실패하고 앱이 사용자를 다시 인증하여 새 토큰을 획득해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-188">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
 
-<span data-ttu-id="7af15-193">토큰 요청이 실패할 경우 리디렉션을 수행하기 전에 현재 상태를 저장할 것인지 여부를 결정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-193">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="7af15-194">여기에는 다양한 접근 방식이 있으며, 아래로 갈수록 복잡도가 증가합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-194">Several approaches exist with increasing levels of complexity:</span></span>
+<span data-ttu-id="8bc43-189">토큰 요청이 실패할 경우 리디렉션을 수행하기 전에 현재 상태를 저장할 것인지 여부를 결정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-189">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="8bc43-190">여기에는 다양한 접근 방식이 있으며, 아래로 갈수록 복잡도가 증가합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-190">Several approaches exist with increasing levels of complexity:</span></span>
 
-* <span data-ttu-id="7af15-195">세션 스토리지에 현재 페이지 상태를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-195">Store the current page state in session storage.</span></span> <span data-ttu-id="7af15-196">[OnInitializedAsync 수명 주기 이벤트를](xref:blazor/components/lifecycle#component-initialization-methods)(<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 중에 계속하기 전에 상태를 복원할 수 있는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-196">During the [OnInitializedAsync lifecycle event](xref:blazor/components/lifecycle#component-initialization-methods) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>), check if state can be restored before continuing.</span></span>
-* <span data-ttu-id="7af15-197">쿼리 문자열 매개 변수를 추가하고 이 매개 변수를 이전에 저장된 상태를 다시 하이드레이션해야 한다는 사실을 앱에 알리는 용도로 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-197">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
-* <span data-ttu-id="7af15-198">고유 식별자를 갖는 쿼리 문자열 매개 변수를 추가하여 다른 항목과의 충돌이 발생할 가능성 없이 세션 스토리지에 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-198">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
+* <span data-ttu-id="8bc43-191">세션 스토리지에 현재 페이지 상태를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-191">Store the current page state in session storage.</span></span> <span data-ttu-id="8bc43-192">[`OnInitializedAsync` 수명 주기 이벤트](xref:blazor/components/lifecycle#component-initialization-methods)(<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>) 중에 계속하기 전에 상태를 복원할 수 있는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-192">During the [`OnInitializedAsync` lifecycle event](xref:blazor/components/lifecycle#component-initialization-methods) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>), check if state can be restored before continuing.</span></span>
+* <span data-ttu-id="8bc43-193">쿼리 문자열 매개 변수를 추가하고 이 매개 변수를 이전에 저장된 상태를 다시 하이드레이션해야 한다는 사실을 앱에 알리는 용도로 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-193">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
+* <span data-ttu-id="8bc43-194">고유 식별자를 갖는 쿼리 문자열 매개 변수를 추가하여 다른 항목과의 충돌이 발생할 가능성 없이 세션 스토리지에 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-194">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
 
-<span data-ttu-id="7af15-199">아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-199">The following example shows how to:</span></span>
+<span data-ttu-id="8bc43-195">아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-195">The following example shows how to:</span></span>
 
-* <span data-ttu-id="7af15-200">로그인 페이지로 리디렉션하기 전에 상태를 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-200">Preserve state before redirecting to the login page.</span></span>
-* <span data-ttu-id="7af15-201">인증 후에 쿼리 문자열 매개 변수를 사용하여 이전 상태를 복구합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-201">Recover the previous state afterward authentication using the query string parameter.</span></span>
+* <span data-ttu-id="8bc43-196">로그인 페이지로 리디렉션하기 전에 상태를 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-196">Preserve state before redirecting to the login page.</span></span>
+* <span data-ttu-id="8bc43-197">인증 후에 쿼리 문자열 매개 변수를 사용하여 이전 상태를 복구합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-197">Recover the previous state afterward authentication using the query string parameter.</span></span>
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -522,11 +522,11 @@ app.UseCors(policy =>
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="7af15-202">인증 작업 전에 앱 상태 저장</span><span class="sxs-lookup"><span data-stu-id="7af15-202">Save app state before an authentication operation</span></span>
+## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="8bc43-198">인증 작업 전에 앱 상태 저장</span><span class="sxs-lookup"><span data-stu-id="8bc43-198">Save app state before an authentication operation</span></span>
 
-<span data-ttu-id="7af15-203">인증 작업을 수행하는 동안 브라우저가 IP로 리디렉션되기 전에 앱 상태를 저장해야 하는 경우가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-203">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="7af15-204">상태 컨테이너를 사용하고 있으며 인증에 성공한 후에 상태를 복원하려는 경우가 여기에 해당할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-204">This can be the case when you're using a state container and want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="7af15-205">이때 사용자 지정 인증 상태 개체를 사용하여 앱의 상태를 보존하거나 참조하고 인증 작업이 성공적으로 완료된 후에 해당 상태를 복원할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-205">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state after the authentication operation successfully completes.</span></span> <span data-ttu-id="7af15-206">다음 예제에서는 이 접근 방식을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-206">The following example demonstrates the approach.</span></span>
+<span data-ttu-id="8bc43-199">인증 작업을 수행하는 동안 브라우저가 IP로 리디렉션되기 전에 앱 상태를 저장해야 하는 경우가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-199">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="8bc43-200">상태 컨테이너를 사용하고 있으며 인증에 성공한 후에 상태를 복원하려는 경우가 여기에 해당할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-200">This can be the case when you're using a state container and want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="8bc43-201">이때 사용자 지정 인증 상태 개체를 사용하여 앱의 상태를 보존하거나 참조하고 인증 작업이 성공적으로 완료된 후에 해당 상태를 복원할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-201">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state after the authentication operation successfully completes.</span></span> <span data-ttu-id="8bc43-202">다음 예제에서는 이 접근 방식을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-202">The following example demonstrates the approach.</span></span>
 
-<span data-ttu-id="7af15-207">앱의 상태 값을 저장하는 속성이 있는 상태 컨테이너 클래스가 앱 안에 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-207">A state container class is created in the app with properties to hold the app's state values.</span></span> <span data-ttu-id="7af15-208">다음 예제에서는 기본 템플릿의 `Counter` 구성 요소의 카운터 값을 유지하기 위해 컨테이너가 사용됩니다(*Pages/Counter.razor*).</span><span class="sxs-lookup"><span data-stu-id="7af15-208">In the following example, the container is used to maintain the counter value of the default template's `Counter` component (*Pages/Counter.razor*).</span></span> <span data-ttu-id="7af15-209">컨테이너를 직렬화 및 역직렬화하는 메서드는 <xref:System.Text.Json>을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-209">Methods for serializing and deserializing the container are based on <xref:System.Text.Json>.</span></span>
+<span data-ttu-id="8bc43-203">앱의 상태 값을 저장하는 속성이 있는 상태 컨테이너 클래스가 앱 안에 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-203">A state container class is created in the app with properties to hold the app's state values.</span></span> <span data-ttu-id="8bc43-204">다음 예제에서는 기본 템플릿의 `Counter` 구성 요소(`Pages/Counter.razor`)의 카운터 값을 유지하기 위해 컨테이너가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-204">In the following example, the container is used to maintain the counter value of the default template's `Counter` component (`Pages/Counter.razor`).</span></span> <span data-ttu-id="8bc43-205">컨테이너를 직렬화 및 역직렬화하는 메서드는 <xref:System.Text.Json>을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-205">Methods for serializing and deserializing the container are based on <xref:System.Text.Json>.</span></span>
 
 ```csharp
 using System.Text.Json;
@@ -550,7 +550,7 @@ public class StateContainer
 }
 ```
 
-<span data-ttu-id="7af15-210">`Counter` 구성 요소는 상태 컨테이너를 사용하여 구성 요소 밖에서 `currentCount` 값을 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-210">The `Counter` component uses the state container to maintain the `currentCount` value outside of the component:</span></span>
+<span data-ttu-id="8bc43-206">`Counter` 구성 요소는 상태 컨테이너를 사용하여 구성 요소 밖에서 `currentCount` 값을 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-206">The `Counter` component uses the state container to maintain the `currentCount` value outside of the component:</span></span>
 
 ```razor
 @page "/counter"
@@ -581,9 +581,9 @@ public class StateContainer
 }
 ```
 
-<span data-ttu-id="7af15-211"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState>에서 `ApplicationAuthenticationState`를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-211">Create an `ApplicationAuthenticationState` from <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState>.</span></span> <span data-ttu-id="7af15-212">로컬로 저장된 상태의 식별자로 기능하는 `Id` 속성을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-212">Provide an `Id` property, which serves as an identifier for the locally-stored state.</span></span>
+<span data-ttu-id="8bc43-207"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState>에서 `ApplicationAuthenticationState`를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-207">Create an `ApplicationAuthenticationState` from <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState>.</span></span> <span data-ttu-id="8bc43-208">로컬로 저장된 상태의 식별자로 기능하는 `Id` 속성을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-208">Provide an `Id` property, which serves as an identifier for the locally-stored state.</span></span>
 
-<span data-ttu-id="7af15-213">*ApplicationAuthenticationState.cs*:</span><span class="sxs-lookup"><span data-stu-id="7af15-213">*ApplicationAuthenticationState.cs*:</span></span>
+<span data-ttu-id="8bc43-209">`ApplicationAuthenticationState.cs`:</span><span class="sxs-lookup"><span data-stu-id="8bc43-209">`ApplicationAuthenticationState.cs`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -594,7 +594,7 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-<span data-ttu-id="7af15-214">`Authentication` 구성 요소(*Pages/Authentication.razor*)는 `StateContainer` serialization 및 deserialization 메서드인 `GetStateForLocalStorage` 및 `SetStateFromLocalStorage`로 로컬 세션 스토리지를 사용하여 앱의 상태를 저장하고 복원합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-214">The `Authentication` component (*Pages/Authentication.razor*) saves and restores the app's state using local session storage with the `StateContainer` serialization and deserialization methods, `GetStateForLocalStorage` and `SetStateFromLocalStorage`:</span></span>
+<span data-ttu-id="8bc43-210">`Authentication` 구성 요소(`Pages/Authentication.razor`)는 `StateContainer` serialization 및 deserialization 메서드인 `GetStateForLocalStorage` 및 `SetStateFromLocalStorage`로 로컬 세션 스토리지를 사용하여 앱의 상태를 저장하고 복원합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-210">The `Authentication` component (`Pages/Authentication.razor`) saves and restores the app's state using local session storage with the `StateContainer` serialization and deserialization methods, `GetStateForLocalStorage` and `SetStateFromLocalStorage`:</span></span>
 
 ```razor
 @page "/authentication/{action}"
@@ -646,10 +646,10 @@ public class ApplicationAuthenticationState : RemoteAuthenticationState
 }
 ```
 
-<span data-ttu-id="7af15-215">이 예제에서는 인증을 위해 AAD(Azure Active Directory)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-215">This example uses Azure Active Directory (AAD) for authentication.</span></span> <span data-ttu-id="7af15-216">`Program.Main`(*Program.cs*)에서:</span><span class="sxs-lookup"><span data-stu-id="7af15-216">In `Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-211">이 예제에서는 인증을 위해 AAD(Azure Active Directory)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-211">This example uses Azure Active Directory (AAD) for authentication.</span></span> <span data-ttu-id="8bc43-212">`Program.Main`(`Program.cs`)에서:</span><span class="sxs-lookup"><span data-stu-id="8bc43-212">In `Program.Main` (`Program.cs`):</span></span>
 
-* <span data-ttu-id="7af15-217">`ApplicationAuthenticationState`는 MSAL(Microsoft 인증 라이브러리) `RemoteAuthenticationState` 유형으로 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-217">The `ApplicationAuthenticationState` is configured as the Microsoft Autentication Library (MSAL) `RemoteAuthenticationState` type.</span></span>
-* <span data-ttu-id="7af15-218">상태 컨테이너는 서비스 컨테이너에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-218">The state container is registered in the service container.</span></span>
+* <span data-ttu-id="8bc43-213">`ApplicationAuthenticationState`는 MSAL(Microsoft 인증 라이브러리) `RemoteAuthenticationState` 유형으로 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-213">The `ApplicationAuthenticationState` is configured as the Microsoft Autentication Library (MSAL) `RemoteAuthenticationState` type.</span></span>
+* <span data-ttu-id="8bc43-214">상태 컨테이너는 서비스 컨테이너에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-214">The state container is registered in the service container.</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication<ApplicationAuthenticationState>(options =>
@@ -660,27 +660,27 @@ builder.Services.AddMsalAuthentication<ApplicationAuthenticationState>(options =
 builder.Services.AddSingleton<StateContainer>();
 ```
 
-## <a name="customize-app-routes"></a><span data-ttu-id="7af15-219">앱 경로 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="7af15-219">Customize app routes</span></span>
+## <a name="customize-app-routes"></a><span data-ttu-id="8bc43-215">앱 경로 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="8bc43-215">Customize app routes</span></span>
 
-<span data-ttu-id="7af15-220">기본적으로 [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리는 다음 표에 나와 있는 경로를 사용하여 여러 인증 상태를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-220">By default, the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) library uses the routes shown in the following table for representing different authentication states.</span></span>
+<span data-ttu-id="8bc43-216">기본적으로 [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) 라이브러리는 다음 표에 나와 있는 경로를 사용하여 다양한 인증 상태를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-216">By default, the [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) library uses the routes shown in the following table for representing different authentication states.</span></span>
 
-| <span data-ttu-id="7af15-221">경로</span><span class="sxs-lookup"><span data-stu-id="7af15-221">Route</span></span>                            | <span data-ttu-id="7af15-222">용도</span><span class="sxs-lookup"><span data-stu-id="7af15-222">Purpose</span></span> |
+| <span data-ttu-id="8bc43-217">경로</span><span class="sxs-lookup"><span data-stu-id="8bc43-217">Route</span></span>                            | <span data-ttu-id="8bc43-218">용도</span><span class="sxs-lookup"><span data-stu-id="8bc43-218">Purpose</span></span> |
 | -------------------------------- | ------- |
-| `authentication/login`           | <span data-ttu-id="7af15-223">로그인 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-223">Triggers a sign-in operation.</span></span> |
-| `authentication/login-callback`  | <span data-ttu-id="7af15-224">로그인 작업의 결과를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-224">Handles the result of any sign-in operation.</span></span> |
-| `authentication/login-failed`    | <span data-ttu-id="7af15-225">어떤 이유로든 로그인 작업이 실패한 경우 오류 메시지를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-225">Displays error messages when the sign-in operation fails for some reason.</span></span> |
-| `authentication/logout`          | <span data-ttu-id="7af15-226">로그아웃 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-226">Triggers a sign-out operation.</span></span> |
-| `authentication/logout-callback` | <span data-ttu-id="7af15-227">로그아웃 작업의 결과를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-227">Handles the result of a sign-out operation.</span></span> |
-| `authentication/logout-failed`   | <span data-ttu-id="7af15-228">어떤 이유로든 로그아웃 작업이 실패한 경우 오류 메시지를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-228">Displays error messages when the sign-out operation fails for some reason.</span></span> |
-| `authentication/logged-out`      | <span data-ttu-id="7af15-229">사용자가 성공적으로 로그아웃했음을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-229">Indicates that the user has successfully logout.</span></span> |
-| `authentication/profile`         | <span data-ttu-id="7af15-230">사용자 프로필을 편집하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-230">Triggers an operation to edit the user profile.</span></span> |
-| `authentication/register`        | <span data-ttu-id="7af15-231">새 사용자를 등록하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-231">Triggers an operation to register a new user.</span></span> |
+| `authentication/login`           | <span data-ttu-id="8bc43-219">로그인 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-219">Triggers a sign-in operation.</span></span> |
+| `authentication/login-callback`  | <span data-ttu-id="8bc43-220">로그인 작업의 결과를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-220">Handles the result of any sign-in operation.</span></span> |
+| `authentication/login-failed`    | <span data-ttu-id="8bc43-221">어떤 이유로든 로그인 작업이 실패한 경우 오류 메시지를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-221">Displays error messages when the sign-in operation fails for some reason.</span></span> |
+| `authentication/logout`          | <span data-ttu-id="8bc43-222">로그아웃 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-222">Triggers a sign-out operation.</span></span> |
+| `authentication/logout-callback` | <span data-ttu-id="8bc43-223">로그아웃 작업의 결과를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-223">Handles the result of a sign-out operation.</span></span> |
+| `authentication/logout-failed`   | <span data-ttu-id="8bc43-224">어떤 이유로든 로그아웃 작업이 실패한 경우 오류 메시지를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-224">Displays error messages when the sign-out operation fails for some reason.</span></span> |
+| `authentication/logged-out`      | <span data-ttu-id="8bc43-225">사용자가 성공적으로 로그아웃했음을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-225">Indicates that the user has successfully logout.</span></span> |
+| `authentication/profile`         | <span data-ttu-id="8bc43-226">사용자 프로필을 편집하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-226">Triggers an operation to edit the user profile.</span></span> |
+| `authentication/register`        | <span data-ttu-id="8bc43-227">새 사용자를 등록하는 작업을 트리거합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-227">Triggers an operation to register a new user.</span></span> |
 
-<span data-ttu-id="7af15-232">앞의 표에 나와 있는 경로는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType>를 통해 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-232">The routes shown in the preceding table are configurable via <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType>.</span></span> <span data-ttu-id="7af15-233">사용자 지정 경로를 제공하는 옵션을 설정할 때는 앱에 각 경로를 처리하는 경로가 있는지 확인해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-233">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
+<span data-ttu-id="8bc43-228">앞의 표에 나와 있는 경로는 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType>를 통해 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-228">The routes shown in the preceding table are configurable via <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType>.</span></span> <span data-ttu-id="8bc43-229">사용자 지정 경로를 제공하는 옵션을 설정할 때는 앱에 각 경로를 처리하는 경로가 있는지 확인해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-229">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
 
-<span data-ttu-id="7af15-234">다음 예제에서는 모든 경로에 `/security` 접두사가 붙습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-234">In the following example, all the paths are prefixed with `/security`.</span></span>
+<span data-ttu-id="8bc43-230">다음 예제에서는 모든 경로에 `/security` 접두사가 붙습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-230">In the following example, all the paths are prefixed with `/security`.</span></span>
 
-<span data-ttu-id="7af15-235">`Authentication` 구성 요소(*Pages/Authentication.razor*):</span><span class="sxs-lookup"><span data-stu-id="7af15-235">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="8bc43-231">`Authentication` 구성 요소(`Pages/Authentication.razor`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-231">`Authentication` component (`Pages/Authentication.razor`):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -694,7 +694,7 @@ builder.Services.AddSingleton<StateContainer>();
 }
 ```
 
-<span data-ttu-id="7af15-236">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="7af15-236">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="8bc43-232">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-232">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -710,7 +710,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-<span data-ttu-id="7af15-237">서로 완전히 다른 경로가 필요한 경우, 이전에 설명한 대로 경로를 설정하고 명시적 작업 매개 변수를 사용하여 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>를 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-237">If the requirement calls for completely different paths, set the routes as described previously and render the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> with an explicit action parameter:</span></span>
+<span data-ttu-id="8bc43-233">서로 완전히 다른 경로가 필요한 경우, 이전에 설명한 대로 경로를 설정하고 명시적 작업 매개 변수를 사용하여 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>를 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-233">If the requirement calls for completely different paths, set the routes as described previously and render the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> with an explicit action parameter:</span></span>
 
 ```razor
 @page "/register"
@@ -718,13 +718,13 @@ builder.Services.AddApiAuthorization(options => {
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-<span data-ttu-id="7af15-238">원하는 경우 UI를 여러 페이지로 나눌 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-238">You're allowed to break the UI into different pages if you choose to do so.</span></span>
+<span data-ttu-id="8bc43-234">원하는 경우 UI를 여러 페이지로 나눌 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-234">You're allowed to break the UI into different pages if you choose to do so.</span></span>
 
-## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="7af15-239">인증 사용자 인터페이스 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="7af15-239">Customize the authentication user interface</span></span>
+## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="8bc43-235">인증 사용자 인터페이스 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="8bc43-235">Customize the authentication user interface</span></span>
 
-<span data-ttu-id="7af15-240"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>에는 각 인증 상태에 대한 기본 UI 조각 집합이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-240"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="7af15-241">사용자 지정 <xref:Microsoft.AspNetCore.Components.RenderFragment>를 전달하여 각 상태를 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-241">Each state can be customized by passing in a custom <xref:Microsoft.AspNetCore.Components.RenderFragment>.</span></span> <span data-ttu-id="7af15-242">초기 로그인 프로세스 중에 표시되는 텍스트를 사용자 지정하려면 다음과 같이 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>를 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-242">To customize the displayed text during the initial login process, can change the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> as follows.</span></span>
+<span data-ttu-id="8bc43-236"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>에는 각 인증 상태에 대한 기본 UI 조각 집합이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-236"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="8bc43-237">사용자 지정 <xref:Microsoft.AspNetCore.Components.RenderFragment>를 전달하여 각 상태를 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-237">Each state can be customized by passing in a custom <xref:Microsoft.AspNetCore.Components.RenderFragment>.</span></span> <span data-ttu-id="8bc43-238">초기 로그인 프로세스 중에 표시되는 텍스트를 사용자 지정하려면 다음과 같이 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>를 변경할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-238">To customize the displayed text during the initial login process, can change the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> as follows.</span></span>
 
-<span data-ttu-id="7af15-243">`Authentication` 구성 요소(*Pages/Authentication.razor*):</span><span class="sxs-lookup"><span data-stu-id="7af15-243">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="8bc43-239">`Authentication` 구성 요소(`Pages/Authentication.razor`):</span><span class="sxs-lookup"><span data-stu-id="8bc43-239">`Authentication` component (`Pages/Authentication.razor`):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -742,9 +742,9 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-<span data-ttu-id="7af15-244"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>에는 다음 표에 나와 있는 인증 경로에 따라 사용할 수 있는 하나의 조각이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-244">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> has one fragment that can be used per authentication route shown in the following table.</span></span>
+<span data-ttu-id="8bc43-240"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>에는 다음 표에 나와 있는 인증 경로에 따라 사용할 수 있는 하나의 조각이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-240">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> has one fragment that can be used per authentication route shown in the following table.</span></span>
 
-| <span data-ttu-id="7af15-245">경로</span><span class="sxs-lookup"><span data-stu-id="7af15-245">Route</span></span>                            | <span data-ttu-id="7af15-246">Fragment</span><span class="sxs-lookup"><span data-stu-id="7af15-246">Fragment</span></span>                |
+| <span data-ttu-id="8bc43-241">경로</span><span class="sxs-lookup"><span data-stu-id="8bc43-241">Route</span></span>                            | <span data-ttu-id="8bc43-242">Fragment</span><span class="sxs-lookup"><span data-stu-id="8bc43-242">Fragment</span></span>                |
 | -------------------------------- | ----------------------- |
 | `authentication/login`           | `<LoggingIn>`           |
 | `authentication/login-callback`  | `<CompletingLoggingIn>` |
@@ -756,11 +756,11 @@ builder.Services.AddApiAuthorization(options => {
 | `authentication/profile`         | `<UserProfile>`         |
 | `authentication/register`        | `<Registering>`         |
 
-## <a name="customize-the-user"></a><span data-ttu-id="7af15-247">사용자의 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="7af15-247">Customize the user</span></span>
+## <a name="customize-the-user"></a><span data-ttu-id="8bc43-243">사용자의 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="8bc43-243">Customize the user</span></span>
 
-<span data-ttu-id="7af15-248">앱에 바인딩된 사용자는 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-248">Users bound to the app can be customized.</span></span> <span data-ttu-id="7af15-249">다음 예제에서는 모든 인증된 사용자가 각 사용자 인증 방법에 대한 `amr` 클레임을 받습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-249">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
+<span data-ttu-id="8bc43-244">앱에 바인딩된 사용자는 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-244">Users bound to the app can be customized.</span></span> <span data-ttu-id="8bc43-245">다음 예제에서는 모든 인증된 사용자가 각 사용자 인증 방법에 대한 `amr` 클레임을 받습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-245">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
 
-<span data-ttu-id="7af15-250"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 클래스를 확장하는 클래스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-250">Create a class that extends the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> class:</span></span>
+<span data-ttu-id="8bc43-246"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> 클래스를 확장하는 클래스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-246">Create a class that extends the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> class:</span></span>
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -773,7 +773,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-<span data-ttu-id="7af15-251"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>를 확장하는 팩터리를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-251">Create a factory that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>:</span></span>
+<span data-ttu-id="8bc43-247"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>를 확장하는 팩터리를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-247">Create a factory that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>:</span></span>
 
 ```csharp
 using System.Security.Claims;
@@ -809,9 +809,9 @@ public class CustomAccountFactory
 }
 ```
 
-<span data-ttu-id="7af15-252">사용 중인 인증 공급자에 대해 `CustomAccountFactory`를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-252">Register the `CustomAccountFactory` for the authentication provider in use.</span></span> <span data-ttu-id="7af15-253">다음 등록이 모두 유효합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-253">Any of the following registrations are valid:</span></span> 
+<span data-ttu-id="8bc43-248">사용 중인 인증 공급자에 대해 `CustomAccountFactory`를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-248">Register the `CustomAccountFactory` for the authentication provider in use.</span></span> <span data-ttu-id="8bc43-249">다음 등록이 모두 유효합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-249">Any of the following registrations are valid:</span></span> 
 
-* <span data-ttu-id="7af15-254"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="7af15-254"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span></span>
+* <span data-ttu-id="8bc43-250"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="8bc43-250"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -827,7 +827,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-* <span data-ttu-id="7af15-255"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="7af15-255"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span></span>
+* <span data-ttu-id="8bc43-251"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="8bc43-251"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -843,7 +843,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
   
-* <span data-ttu-id="7af15-256"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span><span class="sxs-lookup"><span data-stu-id="7af15-256"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span></span>
+* <span data-ttu-id="8bc43-252"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span><span class="sxs-lookup"><span data-stu-id="8bc43-252"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -859,14 +859,14 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="7af15-257">인증을 사용한 미리 렌더링 지원</span><span class="sxs-lookup"><span data-stu-id="7af15-257">Support prerendering with authentication</span></span>
+## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="8bc43-253">인증을 사용한 미리 렌더링 지원</span><span class="sxs-lookup"><span data-stu-id="8bc43-253">Support prerendering with authentication</span></span>
 
-<span data-ttu-id="7af15-258">호스트된 Blazor WebAssembly 앱 토픽 중 하나의 지침을 따른 후에는 다음 지침에 따라 다음과 같은 동작을 수행하는 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-258">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
+<span data-ttu-id="8bc43-254">호스트된 Blazor WebAssembly 앱 토픽 중 하나의 지침을 따른 후에는 다음 지침에 따라 다음과 같은 동작을 수행하는 앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-254">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
 
-* <span data-ttu-id="7af15-259">인증이 필요하지 않은 경로를 미리 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-259">Prerenders paths for which authorization isn't required.</span></span>
-* <span data-ttu-id="7af15-260">인증이 필요한 경로를 미리 렌더링하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-260">Doesn't prerender paths for which authorization is required.</span></span>
+* <span data-ttu-id="8bc43-255">인증이 필요하지 않은 경로를 미리 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-255">Prerenders paths for which authorization isn't required.</span></span>
+* <span data-ttu-id="8bc43-256">인증이 필요한 경로를 미리 렌더링하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-256">Doesn't prerender paths for which authorization is required.</span></span>
 
-<span data-ttu-id="7af15-261">클라이언트 앱의 `Program` 클래스(*Program.cs*)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-261">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
+<span data-ttu-id="8bc43-257">클라이언트 앱의 `Program` 클래스(`Program.cs`)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-257">In the Client app's `Program` class (`Program.cs`), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
 
 ```csharp
 public class Program
@@ -895,7 +895,7 @@ public class Program
 }
 ```
 
-<span data-ttu-id="7af15-262">서버 앱의 `Startup.ConfigureServices`에서 다음과 같은 추가 서비스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-262">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
+<span data-ttu-id="8bc43-258">서버 앱의 `Startup.ConfigureServices`에서 다음과 같은 추가 서비스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-258">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -915,7 +915,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="7af15-263">서버 앱의 `Startup.Configure` 메서드에서 [endpoints.MapFallbackToFile("index.html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A)을 [endpoints.MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A)로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-263">In the Server app's `Startup.Configure` method, replace [endpoints.MapFallbackToFile("index.html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) with [endpoints.MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span></span>
+<span data-ttu-id="8bc43-259">서버 앱의 `Startup.Configure` 메서드에서 [`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A)을 [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A)로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-259">In the Server app's `Startup.Configure` method, replace [`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) with [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -925,10 +925,10 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<span data-ttu-id="7af15-264">서버 앱에서 *Pages* 폴더가 없으면 이 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-264">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="7af15-265">서버 앱의 *Pages* 폴더 안에 *_Host.cshtml* 페이지를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-265">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="7af15-266">클라이언트 앱의 *wwwroot/index.html* 파일 콘텐츠를 *Pages/_Host.cshtml* 파일에 붙여넣습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-266">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="7af15-267">다음과 같이 파일 콘텐츠를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-267">Update the file's contents:</span></span>
+<span data-ttu-id="8bc43-260">서버 앱에서 `Pages` 폴더가 없으면 이 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-260">In the Server app, create a `Pages` folder if it doesn't exist.</span></span> <span data-ttu-id="8bc43-261">서버 앱의 `Pages` 폴더 안에 `_Host.cshtml` 페이지를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-261">Create a `_Host.cshtml` page inside the Server app's `Pages` folder.</span></span> <span data-ttu-id="8bc43-262">클라이언트 앱의 `wwwroot/index.html` 파일 콘텐츠를 `Pages/_Host.cshtml` 파일에 붙여넣습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-262">Paste the contents from the Client app's `wwwroot/index.html` file into the `Pages/_Host.cshtml` file.</span></span> <span data-ttu-id="8bc43-263">다음과 같이 파일 콘텐츠를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-263">Update the file's contents:</span></span>
 
-* <span data-ttu-id="7af15-268">`@page "_Host"`를 파일의 맨 위에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-268">Add `@page "_Host"` to the top of the file.</span></span>
-* <span data-ttu-id="7af15-269">`<app>Loading...</app>` 태그를 다음으로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-269">Replace the `<app>Loading...</app>` tag with the following:</span></span>
+* <span data-ttu-id="8bc43-264">`@page "_Host"`를 파일의 맨 위에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-264">Add `@page "_Host"` to the top of the file.</span></span>
+* <span data-ttu-id="8bc43-265">`<app>Loading...</app>` 태그를 다음으로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-265">Replace the `<app>Loading...</app>` tag with the following:</span></span>
 
   ```cshtml
   <app>
@@ -944,53 +944,53 @@ app.UseEndpoints(endpoints =>
   </app>
   ```
   
-## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="7af15-270">호스트된 앱 및 타사 로그인 공급자에 대한 옵션</span><span class="sxs-lookup"><span data-stu-id="7af15-270">Options for hosted apps and third-party login providers</span></span>
+## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="8bc43-266">호스트된 앱 및 타사 로그인 공급자에 대한 옵션</span><span class="sxs-lookup"><span data-stu-id="8bc43-266">Options for hosted apps and third-party login providers</span></span>
 
-<span data-ttu-id="7af15-271">타사 공급자를 사용하여 호스트된 Blazor WebAssembly 앱을 인증하고 권한을 부여하는 경우 사용자를 인증하는 데 사용할 수 있는 몇 가지 옵션이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-271">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="7af15-272">시나리오에 따라 선택하는 옵션이 달라집니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-272">Which one you choose depends on your scenario.</span></span>
+<span data-ttu-id="8bc43-267">타사 공급자를 사용하여 호스트된 Blazor WebAssembly 앱을 인증하고 권한을 부여하는 경우 사용자를 인증하는 데 사용할 수 있는 몇 가지 옵션이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-267">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="8bc43-268">시나리오에 따라 선택하는 옵션이 달라집니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-268">Which one you choose depends on your scenario.</span></span>
 
-<span data-ttu-id="7af15-273">자세한 내용은 <xref:security/authentication/social/additional-claims>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="7af15-273">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
+<span data-ttu-id="8bc43-269">자세한 내용은 <xref:security/authentication/social/additional-claims>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8bc43-269">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
 
-### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="7af15-274">보호된 타사 API만 호출하도록 사용자 인증</span><span class="sxs-lookup"><span data-stu-id="7af15-274">Authenticate users to only call protected third party APIs</span></span>
+### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="8bc43-270">보호된 타사 API만 호출하도록 사용자 인증</span><span class="sxs-lookup"><span data-stu-id="8bc43-270">Authenticate users to only call protected third party APIs</span></span>
 
-<span data-ttu-id="7af15-275">클라이언트 쪽 OAuth 흐름을 사용하여 사용자를 타사 API 공급자에 대해 인증합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-275">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
+<span data-ttu-id="8bc43-271">클라이언트 쪽 OAuth 흐름을 사용하여 사용자를 타사 API 공급자에 대해 인증합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-271">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
 
  ```csharp
  builder.services.AddOidcAuthentication(options => { ... });
  ```
  
- <span data-ttu-id="7af15-276">이 시나리오에서는</span><span class="sxs-lookup"><span data-stu-id="7af15-276">In this scenario:</span></span>
+ <span data-ttu-id="8bc43-272">이 시나리오에서는</span><span class="sxs-lookup"><span data-stu-id="8bc43-272">In this scenario:</span></span>
 
-* <span data-ttu-id="7af15-277">앱을 호스트하는 서버에서 역할을 재생하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-277">The server hosting the app doesn't play a role.</span></span>
-* <span data-ttu-id="7af15-278">서버의 API는 보호할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-278">APIs on the server can't be protected.</span></span>
-* <span data-ttu-id="7af15-279">앱은 보호된 타사 API만 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-279">The app can only call protected third-party APIs.</span></span>
+* <span data-ttu-id="8bc43-273">앱을 호스트하는 서버에서 역할을 재생하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-273">The server hosting the app doesn't play a role.</span></span>
+* <span data-ttu-id="8bc43-274">서버의 API는 보호할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-274">APIs on the server can't be protected.</span></span>
+* <span data-ttu-id="8bc43-275">앱은 보호된 타사 API만 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-275">The app can only call protected third-party APIs.</span></span>
 
-### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="7af15-280">타사 공급자를 사용하여 사용자를 인증하고 호스트 서버 및 타사에서 보호된 API 호출</span><span class="sxs-lookup"><span data-stu-id="7af15-280">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
+### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="8bc43-276">타사 공급자를 사용하여 사용자를 인증하고 호스트 서버 및 타사에서 보호된 API 호출</span><span class="sxs-lookup"><span data-stu-id="8bc43-276">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
 
-<span data-ttu-id="7af15-281">타사 로그인 공급자를 사용하여 Identity를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-281">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="7af15-282">타사 API 액세스에 필요한 토큰을 가져와 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-282">Obtain the tokens required for third-party API access and store them.</span></span>
+<span data-ttu-id="8bc43-277">타사 로그인 공급자를 사용하여 Identity를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-277">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="8bc43-278">타사 API 액세스에 필요한 토큰을 가져와 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-278">Obtain the tokens required for third-party API access and store them.</span></span>
 
-<span data-ttu-id="7af15-283">사용자가 로그인하면 Identity는 인증 프로세스의 일부로 액세스 및 새로 고침 토큰을 수집합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-283">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="7af15-284">이때 타사 API에 대한 API 호출을 수행하는 데 사용할 수 있는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-284">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
+<span data-ttu-id="8bc43-279">사용자가 로그인하면 Identity는 인증 프로세스의 일부로 액세스 및 새로 고침 토큰을 수집합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-279">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="8bc43-280">이때 타사 API에 대한 API 호출을 수행하는 데 사용할 수 있는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-280">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
 
-#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="7af15-285">서버 액세스 토큰을 사용하여 타사 액세스 토큰 검색</span><span class="sxs-lookup"><span data-stu-id="7af15-285">Use a server access token to retrieve the third-party access token</span></span>
+#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="8bc43-281">서버 액세스 토큰을 사용하여 타사 액세스 토큰 검색</span><span class="sxs-lookup"><span data-stu-id="8bc43-281">Use a server access token to retrieve the third-party access token</span></span>
 
-<span data-ttu-id="7af15-286">서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-286">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="7af15-287">여기에서 타사 액세스 토큰을 사용하여 클라이언트의 Identity에서 직접 타사 API 리소스를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-287">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
+<span data-ttu-id="8bc43-282">서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-282">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="8bc43-283">여기에서 타사 액세스 토큰을 사용하여 클라이언트의 Identity에서 직접 타사 API 리소스를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-283">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
 
-<span data-ttu-id="7af15-288">이 방법은 사용하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-288">We don't recommend this approach.</span></span> <span data-ttu-id="7af15-289">이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-289">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="7af15-290">OAuth 맥락에서, 퍼블릭 앱은 암호를 안전하게 저장하는 데 신뢰할 수 없으므로 클라이언트 암호를 갖지 않으며, 액세스 토큰은 기밀 클라이언트에 대해 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-290">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="7af15-291">기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-291">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
+<span data-ttu-id="8bc43-284">이 방법은 사용하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-284">We don't recommend this approach.</span></span> <span data-ttu-id="8bc43-285">이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-285">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="8bc43-286">OAuth 맥락에서, 퍼블릭 앱은 암호를 안전하게 저장하는 데 신뢰할 수 없으므로 클라이언트 암호를 갖지 않으며, 액세스 토큰은 기밀 클라이언트에 대해 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-286">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="8bc43-287">기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-287">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
 
-* <span data-ttu-id="7af15-292">타사 액세스 토큰에는 타사에서 더 신뢰할 수 있는 클라이언트에 대한 토큰을 내보낸 사실을 기반으로 중요한 작업을 수행하기 위한 추가 범위가 부여될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-292">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
-* <span data-ttu-id="7af15-293">마찬가지로, 신뢰할 수 없는 클라이언트에 대해서는 새로 고침 토큰을 발급하지 않아야 합니다. 발급할 경우, 다른 제한이 적용되지 않는 한 클라이언트에 무제한 액세스 권한이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-293">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
+* <span data-ttu-id="8bc43-288">타사 액세스 토큰에는 타사에서 더 신뢰할 수 있는 클라이언트에 대한 토큰을 내보낸 사실을 기반으로 중요한 작업을 수행하기 위한 추가 범위가 부여될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-288">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
+* <span data-ttu-id="8bc43-289">마찬가지로, 신뢰할 수 없는 클라이언트에 대해서는 새로 고침 토큰을 발급하지 않아야 합니다. 발급할 경우, 다른 제한이 적용되지 않는 한 클라이언트에 무제한 액세스 권한이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-289">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
 
-#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="7af15-294">타사 API를 호출하기 위해 클라이언트에서 서버 API로 API 호출 수행</span><span class="sxs-lookup"><span data-stu-id="7af15-294">Make API calls from the client to the server API in order to call third-party APIs</span></span>
+#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="8bc43-290">타사 API를 호출하기 위해 클라이언트에서 서버 API로 API 호출 수행</span><span class="sxs-lookup"><span data-stu-id="8bc43-290">Make API calls from the client to the server API in order to call third-party APIs</span></span>
 
-<span data-ttu-id="7af15-295">클라이언트에서 서버 API로 API 호출을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-295">Make an API call from the client to the server API.</span></span> <span data-ttu-id="7af15-296">서버에서 타사 API 리소스에 대한 액세스 토큰을 검색하고 필요한 호출이 무엇이든 해당 호출을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-296">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
+<span data-ttu-id="8bc43-291">클라이언트에서 서버 API로 API 호출을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-291">Make an API call from the client to the server API.</span></span> <span data-ttu-id="8bc43-292">서버에서 타사 API 리소스에 대한 액세스 토큰을 검색하고 필요한 호출이 무엇이든 해당 호출을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-292">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
 
-<span data-ttu-id="7af15-297">이 방법을 사용하려면 타사 API를 호출하기 위해 서버를 통한 추가 네트워크 홉이 필요하지만, 궁극적으로 다음과 같은 더 안전한 환경이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-297">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
+<span data-ttu-id="8bc43-293">이 방법을 사용하려면 타사 API를 호출하기 위해 서버를 통한 추가 네트워크 홉이 필요하지만, 궁극적으로 다음과 같은 더 안전한 환경이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-293">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
 
-* <span data-ttu-id="7af15-298">서버는 새로 고침 토큰을 저장하고 앱이 타사 리소스에 대한 액세스 권한을 잃지 않도록 보장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-298">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
-* <span data-ttu-id="7af15-299">앱은 더 중요한 권한을 포함할 수 있는 서버의 액세스 토큰을 누출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-299">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
+* <span data-ttu-id="8bc43-294">서버는 새로 고침 토큰을 저장하고 앱이 타사 리소스에 대한 액세스 권한을 잃지 않도록 보장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-294">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
+* <span data-ttu-id="8bc43-295">앱은 더 중요한 권한을 포함할 수 있는 서버의 액세스 토큰을 누출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-295">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a><span data-ttu-id="7af15-300">OIDC(Open ID Connect) v2.0 엔드포인트 사용</span><span class="sxs-lookup"><span data-stu-id="7af15-300">Use Open ID Connect (OIDC) v2.0 endpoints</span></span>
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a><span data-ttu-id="8bc43-296">OIDC(Open ID Connect) v2.0 엔드포인트 사용</span><span class="sxs-lookup"><span data-stu-id="8bc43-296">Use Open ID Connect (OIDC) v2.0 endpoints</span></span>
 
-<span data-ttu-id="7af15-301">인증 라이브러리 및 Blazor 템플릿은 OIDC(Open ID Connect) v1.0 엔드포인트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-301">The authentication library and Blazor templates use Open ID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="7af15-302">v2.0 엔드포인트를 사용하려면 JWT 전달자 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 옵션을 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-302">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="7af15-303">다음 예제에서는 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> 속성에 `v2.0` 세그먼트를 추가하여 v2.0에 대해 AAD를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-303">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> property:</span></span>
+<span data-ttu-id="8bc43-297">인증 라이브러리 및 Blazor 템플릿은 OIDC(Open ID Connect) v1.0 엔드포인트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-297">The authentication library and Blazor templates use Open ID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="8bc43-298">v2.0 엔드포인트를 사용하려면 JWT 전달자 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> 옵션을 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-298">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="8bc43-299">다음 예제에서는 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> 속성에 `v2.0` 세그먼트를 추가하여 v2.0에 대해 AAD를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-299">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> property:</span></span>
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1001,7 +1001,7 @@ builder.Services.Configure<JwtBearerOptions>(
     });
 ```
 
-<span data-ttu-id="7af15-304">또는 앱 설정(*appsettings.json*) 파일에서 설정을 적용할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-304">Alternatively, the setting can be made in the app settings (*appsettings.json*) file:</span></span>
+<span data-ttu-id="8bc43-300">또는 앱 설정(`appsettings.json`) 파일에서 설정을 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-300">Alternatively, the setting can be made in the app settings (`appsettings.json`) file:</span></span>
 
 ```json
 {
@@ -1012,6 +1012,6 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-<span data-ttu-id="7af15-305">인증 기관에 대한 세그먼트의 추적이 앱의 OIDC 공급자에 적합하지 않은 경우(예: 비 AAD 공급자) <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-305">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> property directly.</span></span> <span data-ttu-id="7af15-306"><xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> 또는 앱 설정 파일(*appsettings.json*)에서 `Authority` 키를 사용하여 속성을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-306">Either set the property in <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> or in the app settings file (*appsettings.json*) with the `Authority` key.</span></span>
+<span data-ttu-id="8bc43-301">인증 기관에 대한 세그먼트의 추적이 앱의 OIDC 공급자에 적합하지 않은 경우(예: 비 AAD 공급자) <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> 속성을 직접 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-301">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> property directly.</span></span> <span data-ttu-id="8bc43-302"><xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> 또는 앱 설정 파일(`appsettings.json`)에서 `Authority` 키를 사용하여 속성을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-302">Either set the property in <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> or in the app settings file (`appsettings.json`) with the `Authority` key.</span></span>
 
-<span data-ttu-id="7af15-307">ID 토큰의 클레임 목록은 v2.0 엔드포인트의 경우 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="7af15-307">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="7af15-308">자세한 내용은 [Microsoft ID 플랫폼(v2.0)으로 업데이트해야 하는 이유](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="7af15-308">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span></span>
+<span data-ttu-id="8bc43-303">ID 토큰의 클레임 목록은 v2.0 엔드포인트의 경우 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="8bc43-303">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="8bc43-304">자세한 내용은 [Microsoft ID 플랫폼(v2.0)으로 업데이트해야 하는 이유](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8bc43-304">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span></span>
