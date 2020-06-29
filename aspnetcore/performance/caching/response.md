@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408190"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459768"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱
 
@@ -176,7 +176,17 @@ Cache-Control: public,max-age=10
 
 캐시 프로필을 설정 합니다. 다음 예제에서는 샘플 앱의 30 초 캐시 프로필을 보여 줍니다 `Startup.ConfigureServices` .
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](response/samples/3.x/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 샘플 앱의 Cache4 페이지 모델은 캐시 프로필을 참조 합니다 `Default30` .
 
@@ -184,9 +194,9 @@ Cache-Control: public,max-age=10
 
 는 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> 다음에 적용할 수 있습니다.
 
-* Razor페이지 처리기 (클래스): 처리기 메서드에 특성을 적용할 수 없습니다.
-* MVC 컨트롤러 (클래스)
-* MVC 작업 (메서드): 메서드 수준 특성은 클래스 수준 특성에 지정 된 설정을 재정의 합니다.
+* RazorPages: 특성은 처리기 메서드에 적용할 수 없습니다.
+* MVC 컨트롤러.
+* MVC 작업 메서드: 메서드 수준 특성은 클래스 수준 특성에 지정 된 설정을 재정의 합니다.
 
 캐시 프로필에의 한 Cache4 페이지 응답에 적용 되는 결과 헤더는 `Default30` 다음과 같습니다.
 
@@ -194,7 +204,7 @@ Cache-Control: public,max-age=10
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [캐시에 응답 저장](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

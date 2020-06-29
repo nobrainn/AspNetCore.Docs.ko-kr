@@ -5,20 +5,22 @@ description: 데이터에 바인딩하고, 이벤트를 처리하고, 구성 요
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/11/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 02e3f7f5442a5abde0b13b7bba14d9d0f29c1de7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242437"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399090"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -427,11 +429,24 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 > [!NOTE]
 > 구성 요소 참조를 사용하여 자식 구성 요소의 상태를 변경하지 **않도록 합니다**. 대신, 일반 선언적 매개 변수를 사용하여 자식 구성 요소에 데이터를 전달합니다. 일반 선언적 매개 변수를 사용하면 자식 구성 요소가 올바른 시간에 자동으로 다시 렌더링됩니다.
 
-## <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출하여 상태 업데이트
+## <a name="synchronization-context"></a>동기화 컨텍스트
 
 Blazor는 동기화 컨텍스트(<xref:System.Threading.SynchronizationContext>)를 사용하여 단일 논리적 실행 스레드를 적용합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/components/lifecycle) 및 Blazor에서 발생하는 모든 이벤트 콜백은 이 동기화 컨텍스트에서 실행됩니다.
 
-Blazor 서버의 동기화 컨텍스트는 단일 스레드인 브라우저의 WebAssembly 모델과 거의 일치하도록 단일 스레드 환경 에뮬레이션을 시도합니다. 지정된 시점에서 작업이 정확히 하나의 스레드에서만 수행되어 단일 논리적 스레드의 느낌을 제공합니다. 두 작업이 동시에 실행되지는 않습니다.
+Blazor Server의 동기화 컨텍스트는 단일 스레드인 브라우저의 WebAssembly 모델과 거의 일치하도록 단일 스레드 환경 에뮬레이션을 시도합니다. 지정된 시점에서 작업이 정확히 하나의 스레드에서만 수행되어 단일 논리적 스레드의 느낌을 제공합니다. 두 작업이 동시에 실행되지는 않습니다.
+
+### <a name="avoid-thread-blocking-calls"></a>스레드 차단 호출 방지
+
+일반적으로 다음 메서드를 호출하지 마세요. 다음 메서드는 스레드를 차단하므로 기본 <xref:System.Threading.Tasks.Task>가 완료될 때까지 앱이 작업을 다시 시작하지 못하게 차단합니다.
+
+* <xref:System.Threading.Tasks.Task%601.Result%2A>
+* <xref:System.Threading.Tasks.Task.Wait%2A>
+* <xref:System.Threading.Tasks.Task.WaitAny%2A>
+* <xref:System.Threading.Tasks.Task.WaitAll%2A>
+* <xref:System.Threading.Thread.Sleep%2A>
+* <xref:System.Runtime.CompilerServices.TaskAwaiter.GetResult%2A>
+
+### <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출하여 상태 업데이트
 
 외부 이벤트(예: 타이머 또는 다른 알림)를 기준으로 구성 요소를 업데이트해야 하는 경우 Blazor의 동기화 컨텍스트에 디스패치되는 `InvokeAsync` 메서드를 사용합니다. 예를 들어, 업데이트된 상태를 수신 구성 요소에 알릴 수 있는 *알림 서비스*을 고려해 보세요.
 
@@ -459,7 +474,7 @@ public class NotifierService
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* Blazor 서버에서 `Startup.ConfigureServices`에 서비스를 등록합니다.
+* Blazor Server에서 `Startup.ConfigureServices`에 서비스를 등록합니다.
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -798,7 +813,7 @@ Blazor는 HTML을 렌더링하므로 SVG(Scalable Vector Graphics) 이미지(`.s
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:blazor/security/server/threat-mitigation>: 리소스를 소모하지 않도록 하는 Blazor 서버 앱을 빌드하는 방법에 대한 지침을 포함합니다.
+* <xref:blazor/security/server/threat-mitigation>: 리소스를 소모하지 않도록 하는 Blazor Server 앱을 빌드하는 방법에 대한 지침을 포함합니다.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

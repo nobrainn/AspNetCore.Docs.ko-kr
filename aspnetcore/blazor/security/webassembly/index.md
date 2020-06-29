@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor WebAssembly 보안
+title: ASP.NET Core Blazor WebAssembly 보호
 author: guardrex
 description: Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)로 보호하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,19 +8,21 @@ ms.custom: mvc
 ms.date: 06/01/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 877b2bb4b055cca25d64258383cdb39d812e2d6a
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 3fdea9f553cbd37f2c27740487cfe030ebd81937
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243241"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402093"
 ---
-# <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
+# <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보호
 
 작성자: [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -62,13 +64,13 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 
 ## <a name="refresh-tokens"></a>새로 고침 토큰
 
-새로 고침 토큰은 Blazor WebAssembly 앱에서 클라이언트 쪽으로 보호될 수 없습니다. 따라서 직접 사용하기 위해 새로 고침 토큰이 앱에 전송되어서는 안됩니다.
+새로 고침 토큰은 Blazor WebAssembly 앱에서 클라이언트 쪽으로 보호할 수 없습니다. 따라서 직접 사용하기 위해 새로 고침 토큰이 앱에 전송되어서는 안됩니다.
 
 새로 고침 토큰은 타사 API에 액세스하는 호스트된 Blazor WebAssembly 솔루션의 서버 쪽 앱에서 유지 관리하고 사용될 수 있습니다. 자세한 내용은 <xref:blazor/security/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>를 참조하세요.
 
 ## <a name="implementation-guidance"></a>구현 지침
 
-이 ‘개요’의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다.
+이 개요의 문서에서는 Blazor WebAssembly 앱에서 특정 공급자에 대해 사용자를 인증하는 방법을 안내합니다.
 
 독립 실행형 Blazor WebAssembly 앱:
 
@@ -77,7 +79,7 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 * [AAD(Azure Active Directory)](xref:blazor/security/webassembly/standalone-with-azure-active-directory)
 * [AAD(Azure Active Directory) B2C](xref:blazor/security/webassembly/standalone-with-azure-active-directory-b2c)
 
-호스트형 Blazor WebAssembly 앱:
+호스트된 Blazor WebAssembly 앱:
 
 * [AAD(Azure Active Directory)](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
 * [AAD(Azure Active Directory) B2C](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)

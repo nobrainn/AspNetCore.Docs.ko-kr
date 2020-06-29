@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: 0f0e97246b6e1381b85866bd831ee9b4b150650d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c797ce8bcb22aec2b56df2f3b108da4cbfde263d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774329"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403302"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -73,7 +75,7 @@ ASP.NET Core는 풍부한 일련의 기본 제공 미들웨어를 포함합니�
 
 ## <a name="host"></a>호스트
 
-ASP.NET Core 앱은 시작 시 ‘호스트’를 빌드합니다.  호스트는 다음과 같은 앱의 리소스를 모두 캡슐화합니다.
+ASP.NET Core 앱은 시작 시 ‘호스트’를 빌드합니다. 호스트는 다음과 같은 앱의 리소스를 모두 캡슐화합니다.
 
 * HTTP 서버 구현
 * 미들웨어 구성 요소
@@ -113,7 +115,7 @@ ASP.NET Core 앱은 HTTP 요청을 수신하기 위해 HTTP 서버 구현을 사
 ASP.NET Core는 다음과 같은 서버 구현을 제공합니다.
 
 * *Kestrel*은 플랫폼 간 웹 서버입니다. Kestrel은 보통 [IIS](https://www.iis.net/)를 사용하여 역방향 프록시 구성에서 실행됩니다. Kestrel은 ASP.NET Core 2.0 이상에서 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다.
-* ‘IIS HTTP 서버’는 IIS를 사용하는 Windows용 서버입니다.  이 서버를 사용하면 ASP.NET Core 앱 및 IIS는 동일한 프로세스에서 실행됩니다.
+* ‘IIS HTTP 서버’는 IIS를 사용하는 Windows용 서버입니다. 이 서버를 사용하면 ASP.NET Core 앱 및 IIS는 동일한 프로세스에서 실행됩니다.
 * *HTTP.sys*는 IIS에서 사용되지 않는 Windows용 서버입니다.
 
 # <a name="macos"></a>[macOS](#tab/macos)
@@ -172,7 +174,7 @@ ASP.NET Core는 다양한 기본 제공 및 타사 로깅 공급자와 함께 �
 
 ## <a name="routing"></a>라우팅
 
-*경로*는 처리기에 매핑되는 URL 패턴입니다. 처리기는 일반적으로 Razor 페이지, MVC 컨트롤러의 작업 메서드 또는 미들웨어와 같습니다. ASP.NET Core 라우팅을 사용하면 앱에서 사용되는 URL을 제어할 수 있습니다.
+*경로*는 처리기에 매핑되는 URL 패턴입니다. 처리기는 일반적으로 Razor Page, MVC 컨트롤러의 작업 메서드 또는 미들웨어와 같습니다. ASP.NET Core 라우팅을 사용하면 앱에서 사용되는 URL을 제어할 수 있습니다.
 
 자세한 내용은 <xref:fundamentals/routing>를 참조하세요.
 
@@ -223,7 +225,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 정적 파일은 기본적으로 웹 루트 디렉터리와 그 하위 디렉터리에서만 제공됩니다. 웹 루트 경로는 기본적으로 *{content root}/wwwroot*로 설정됩니다. [호스트를 빌드](#host)할 때는 경로를 설정하여 다른 웹 루트를 지정하세요. 자세한 내용은 [웹 루트](xref:fundamentals/host/generic-host#webroot)를 참조하세요.
 
-프로젝트 파일에서 [\<Content> project item](/visualstudio/msbuild/common-msbuild-project-items#content)을 사용하여 *wwwroot*에 파일을 게시하지 못하도록 합니다. 다음 예제에서는 *wwwroot/local*과 그 하위 디렉터리에서 콘텐츠가 게시되지 못하도록 합니다.
+프로젝트 파일에서 [\<Content> 프로젝트 항목](/visualstudio/msbuild/common-msbuild-project-items#content)을 사용하여 *wwwroot*에 파일을 게시하지 못하도록 합니다. 다음 예제에서는 *wwwroot/local*과 그 하위 디렉터리에서 콘텐츠가 게시되지 못하도록 합니다.
 
 ```xml
 <ItemGroup>
@@ -231,7 +233,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 </ItemGroup>
 ```
 
-Razor *.cshtml* 파일에서 물결표 슬래시(`~/`)는 웹 루트를 가리킵니다. `~/`(으)로 시작하는 경로를 *가상 경로*라고 합니다.
+Razor *.cshtml* 파일에서는 물결표 슬래시(`~/`)가 웹 루트를 가리킵니다. `~/`(으)로 시작하는 경로를 *가상 경로*라고 합니다.
 
 자세한 내용은 <xref:fundamentals/static-files>를 참조하세요.
 
@@ -327,7 +329,7 @@ ASP.NET Core 앱은 HTTP 요청을 수신하기 위해 HTTP 서버 구현을 사
 ASP.NET Core는 다음과 같은 서버 구현을 제공합니다.
 
 * *Kestrel*은 플랫폼 간 웹 서버입니다. Kestrel은 보통 [IIS](https://www.iis.net/)를 사용하여 역방향 프록시 구성에서 실행됩니다. Kestrel은 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다.
-* ‘IIS HTTP 서버’  는 IIS를 사용하는 Windows용 서버입니다. 이 서버를 사용하면 ASP.NET Core 앱 및 IIS는 동일한 프로세스에서 실행됩니다.
+* ‘IIS HTTP 서버’는 IIS를 사용하는 Windows용 서버입니다. 이 서버를 사용하면 ASP.NET Core 앱 및 IIS는 동일한 프로세스에서 실행됩니다.
 * *HTTP.sys*는 IIS에서 사용되지 않는 Windows용 서버입니다.
 
 # <a name="macos"></a>[macOS](#tab/macos)
@@ -481,7 +483,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 웹 루트 경로는 *{content root}/wwwroot*를 기본값으로 지정하지만 [호스트를 빌드](#host)할 때 다른 웹 루트를 지정할 수도 있습니다. 자세한 내용은 [웹 루트](xref:fundamentals/host/web-host#web-root)를 참조하세요.
 
-프로젝트 파일에서 [\<Content> project item](/visualstudio/msbuild/common-msbuild-project-items#content)을 사용하여 *wwwroot*에 파일을 게시하지 못하도록 합니다. 다음 예에서는 *wwwroot/local* 디렉터리 및 하위 디렉터리에 콘텐츠를 게시하지 못하도록 합니다.
+프로젝트 파일에서 [\<Content> 프로젝트 항목](/visualstudio/msbuild/common-msbuild-project-items#content)을 사용하여 *wwwroot*에 파일을 게시하지 못하도록 합니다. 다음 예에서는 *wwwroot/local* 디렉터리 및 하위 디렉터리에 콘텐츠를 게시하지 못하도록 합니다.
 
 ```xml
 <ItemGroup>

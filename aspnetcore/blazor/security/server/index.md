@@ -1,40 +1,42 @@
 ---
-title: ASP.NET Core Blazor 서버 앱 보호
+title: ASP.NET Core Blazor Server 앱 보호
 author: guardrex
-description: Blazor 서버 앱을 ASP.NET Core 애플리케이션으로 보호하는 방법을 알아봅니다.
+description: Blazor Server 앱을 ASP.NET Core 애플리케이션으로 보호하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 2811e08fd2f6c66112ffa0bb40f474158f4c7a59
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: ab3baad30f78c5d5e2f969b3292d4886fcd0406d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292687"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402314"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor 서버 앱 보호
+# <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor Server 앱 보호
 
 [Luke Latham](https://github.com/guardrex)으로
 
-Blazor 서버 앱은 ASP.NET Core 앱과 동일한 방식으로 보안을 위해 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요. 이 개요의 항목은 Blazor 서버에만 적용됩니다. 
+Blazor Server 앱은 ASP.NET Core 앱과 동일한 방식으로 보안이 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요. 이 개요의 항목은 Blazor Server에만 적용됩니다. 
 
-## <a name="blazor-server-project-template"></a>Blazor 서버 프로젝트 템플릿
+## <a name="blazor-server-project-template"></a>Blazor Server 프로젝트 템플릿
 
-프로젝트를 만들 때 인증을 위해 Blazor 서버 프로젝트 템플릿을 구성할 수 있습니다.
+프로젝트를 만들 때 인증을 위해 Blazor Server 프로젝트 템플릿을 구성할 수 있습니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-<xref:blazor/get-started> 문서의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 프로젝트를 만듭니다.
+<xref:blazor/get-started> 문서의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.
 
-**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor 서버 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.
+**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor Server 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.
 
 다른 ASP.NET Core 프로젝트에 사용할 수 있는 것과 동일한 인증 메커니즘 세트를 제공하는 대화 상자가 열립니다.
 
@@ -47,7 +49,7 @@ Blazor 서버 앱은 ASP.NET Core 앱과 동일한 방식으로 보안을 위해
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<xref:blazor/get-started> 문서의 Visual Studio Code 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 프로젝트를 만듭니다.
+<xref:blazor/get-started> 문서의 Visual Studio Code 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -75,13 +77,13 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 1. <xref:blazor/get-started> 문서의 Mac용 Visual Studio 지침을 따릅니다.
 
-1. **새 Blazor 서버 앱 구성** 단계의 **인증** 드롭다운에서 **개별 인증(앱 내)** 을 선택합니다.
+1. **새 Blazor Server 앱 구성** 단계의 **인증** 드롭다운에서 **개별 인증(앱 내)** 을 선택합니다.
 
 1. ASP.NET Core Identity을 사용하여 앱에 저장된 개별 사용자에 대한 앱이 만들어집니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-<xref:blazor/get-started> 문서의 .NET Core CLI 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 프로젝트를 만듭니다.
+<xref:blazor/get-started> 문서의 .NET Core CLI 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -109,7 +111,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 ## <a name="scaffold-identity"></a>스캐폴드 Identity
 
-Blazor 서버 프로젝트에 스캐폴드 Identity 실행:
+Blazor Server 프로젝트에 Identity를 스캐폴드합니다.
 
 * [기존 권한 없음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
 * [권한 있음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).

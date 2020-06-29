@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: 565cde233d6fc5f085ae1709e167e73980d5c3c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776235"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403367"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -31,7 +33,7 @@ ms.locfileid: "82776235"
 > * 앱을 실행합니다.
 > * Razor 페이지를 편집합니다.
 
-마지막에는 로컬 머신에서 작업 웹앱이 실행됩니다.
+최종적으로 로컬 머신에서 구동되는 웹앱을 실행할 수 있습니다.
 
 ![웹앱 홈페이지](_static/home-page.png)
 
