@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102335"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243605"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작하기
 
@@ -70,7 +70,7 @@ Blazor를 시작하려면 아래에서 원하는 도구의 지침을 따르세�
 
    두 가지 Blazor 호스팅 모델인 *Blazor WebAssembly* 및 ‘Blazor 서버’에 대한 자세한 내용은 <xref:blazor/hosting-models>를 참조하세요.
 
-1. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
+1. Visual Studio Code에서 `WebApplication1` 폴더를 엽니다.
 
 1. IDE에서 프로젝트를 빌드 및 디버그하기 위한 자산을 추가하도록 요청합니다. **Yes**를 선택합니다.
 
@@ -137,15 +137,15 @@ Blazor를 시작하려면 아래에서 원하는 도구의 지침을 따르세�
 * 카운터
 * 데이터 가져오기
 
-Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가하려면 일반적으로 JavaScript를 작성해야 하지만, Blazor에서는 C#을 사용할 수 있습니다.
+Counter 페이지에서 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가하려면 일반적으로 JavaScript를 작성해야 하지만, Blazor에서는 C#을 사용할 수 있습니다.
 
-*Pages/Counter.razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 맨 위에 있는 `@page` 지시문에 지정된 대로 브라우저에서 `/counter`를 요청하면 `Counter` 구성 요소가 해당 콘텐츠를 렌더링합니다. 구성 요소는 유연하고 효율적인 방법으로 UI를 업데이트하는 데 사용할 수 있는 렌더링 트리의 메모리 내 표시로 렌더링됩니다.
 
-**Click me** 단추를 선택할 때마다 다음 작업이 수행됩니다.
+단추를 선택할 때마다 다음 작업이 수행됩니다.
 
 * `onclick` 이벤트가 발생합니다.
 * `IncrementCount` 메서드가 호출됩니다.
@@ -156,7 +156,7 @@ Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고
 
 HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 추가합니다. 예를 들어 `Index` 구성 요소에 `<Counter />` 요소를 추가하여 앱의 홈페이지에 `Counter` 구성 요소를 추가합니다.
 
-*Pages/Index.razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -167,17 +167,17 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 추가합�
 * [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성을 사용하여 `IncrementAmount`의 공용 속성을 추가합니다.
 * `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
-*Pages/Counter.razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 특성을 사용하여 `Index` 구성 요소의 `<Counter>` 요소에 `IncrementAmount`를 지정합니다.
 
-*Pages/Index.razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-앱을 실행합니다. `Index` 구성 요소에는 **Click me** 단추를 선택할 때마다 10씩 증가하는 고유한 카운터가 있습니다. `/counter`의 `Counter` 구성 요소(*Counter.razor*)는 계속 1씩 증가합니다.
+앱을 실행합니다. `Index` 구성 요소에는 단추를 선택할 때마다 10씩 증가하는 고유한 카운터가 있습니다. `/counter`의 `Counter` 구성 요소(`Pages/Counter.razor`)는 계속 1씩 증가합니다.
 
 ## <a name="next-steps"></a>다음 단계
 

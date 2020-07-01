@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: ecc9873d7f652f27767df98196786d12789518c9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0c6f1330a5bac8ab37c957c5ed4e81678fe1f27d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103367"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242513"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -45,13 +45,13 @@ ms.locfileid: "85103367"
 1. 솔루션에 RCL을 추가합니다.
    1. 솔루션을 마우스 오른쪽 단추로 클릭합니다. **추가** > **기존 프로젝트**를 선택합니다.
    1. RCL의 프로젝트 파일로 이동합니다.
-   1. RCL의 프로젝트 파일( *.csproj*)을 선택합니다.
+   1. RCL의 프로젝트 파일(`.csproj`)을 선택합니다.
 1. 앱에서 RCL 참조를 추가합니다.
    1. 앱 프로젝트를 마우스 오른쪽 단추로 클릭합니다. **추가** > **참조**를 선택합니다.
    1. RCL 프로젝트를 선택합니다. **확인**을 선택합니다.
 
 > [!NOTE]
-> 템플릿에서 RCL을 생성할 때 **페이지 및 뷰 지원** 확인란을 선택한 경우 다음 내용을 포함하는 *_Imports.razor* 파일을 생성된 프로젝트 루트에 추가하여 Razor 구성 요소 작성을 사용하도록 설정합니다.
+> 템플릿에서 RCL을 생성할 때 **페이지 및 뷰 지원** 확인란을 선택한 경우 다음 내용을 포함하는 `_Imports.razor` 파일을 생성된 프로젝트 루트에 추가하여 Razor 구성 요소 작성을 사용하도록 설정합니다.
 >
 > ```razor
 > @using Microsoft.AspNetCore.Components.Web
@@ -61,14 +61,14 @@ ms.locfileid: "85103367"
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. 명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 통해 **Razor 클래스 라이브러리** 템플릿(`razorclasslib`)을 사용합니다. 다음 예제에서는 이름이 `MyComponentLib1`인 RCL을 만듭니다. 명령을 실행하면 `MyComponentLib1`을 포함하는 폴더가 자동으로 생성됩니다.
+1. 명령 셸에서 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 통해 **Razor 클래스 라이브러리** 템플릿(`razorclasslib`)을 사용합니다. 다음 예제에서는 이름이 `MyComponentLib1`인 RCL을 만듭니다. 명령을 실행하면 `MyComponentLib1`을 포함하는 폴더가 자동으로 생성됩니다.
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
    ```
 
    > [!NOTE]
-   > 템플릿에서 RCL을 생성할 때 `-s|--support-pages-and-views` 스위치를 사용한 경우 다음 내용을 포함하는 *_Imports.razor* 파일을 생성된 프로젝트 루트에 추가하여 Razor 구성 요소 작성을 사용하도록 설정합니다.
+   > 템플릿에서 RCL을 생성할 때 `-s|--support-pages-and-views` 스위치를 사용한 경우 다음 내용을 포함하는 `_Imports.razor` 파일을 생성된 프로젝트 루트에 추가하여 Razor 구성 요소 작성을 사용하도록 설정합니다.
    >
    > ```razor
    > @using Microsoft.AspNetCore.Components.Web
@@ -76,7 +76,7 @@ ms.locfileid: "85103367"
    >
    > 생성된 프로젝트 루트에 파일을 수동으로 추가합니다.
 
-1. 기존 프로젝트에 라이브러리를 추가하려면 명령 셸에서 [dotnet add reference](/dotnet/core/tools/dotnet-add-reference) 명령을 사용합니다. 다음 예제에서는 앱에 RCL을 추가합니다. 라이브러리 경로를 사용하여 앱의 프로젝트 폴더에서 다음 명령을 실행합니다.
+1. 기존 프로젝트에 라이브러리를 추가하려면 명령 셸에서 [`dotnet add reference`](/dotnet/core/tools/dotnet-add-reference) 명령을 사용합니다. 다음 예제에서는 앱에 RCL을 추가합니다. 라이브러리 경로를 사용하여 앱의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
    ```dotnetcli
    dotnet add reference {PATH TO LIBRARY}
@@ -115,7 +115,7 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-최상위 *_Import.razor* 파일에 `@using MyComponentLib1` 지시문을 포함하여 전체 프로젝트에서 라이브러리 구성 요소를 사용할 수 있게 합니다. 임의 수준의 *_Import.razor* 파일에 지시문을 추가하여 폴더 내의 단일 페이지 또는 페이지 집합에 네임스페이스를 적용합니다.
+최상위 `_Import.razor` 파일에 `@using MyComponentLib1` 지시문을 포함하여 전체 프로젝트에서 라이브러리 구성 요소를 사용할 수 있게 합니다. 임의 수준의 `_Import.razor` 파일에 지시문을 추가하여 폴더 내의 단일 페이지 또는 페이지 집합에 네임스페이스를 적용합니다.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>정적 자산을 사용하여 Razor 구성 요소 클래스 라이브러리 만들기
 
@@ -123,13 +123,13 @@ RCL에는 정적 자산이 포함될 수 있습니다. 정적 자산은 라이�
 
 ## <a name="build-pack-and-ship-to-nuget"></a>빌드, 패키지 및 NuGet에 제공
 
-구성 요소 라이브러리는 표준 .NET 라이브러리이기 때문에 패키지하여 NuGet에 제공하는 과정이 라이브러리를 패키지하여 NuGet에 제공하는 과정과 다르지 않습니다. 명령 셸에서 [dotnet pack](/dotnet/core/tools/dotnet-pack) 명령을 사용하여 패키지합니다.
+구성 요소 라이브러리는 표준 .NET 라이브러리이기 때문에 패키지하여 NuGet에 제공하는 과정이 라이브러리를 패키지하여 NuGet에 제공하는 과정과 다르지 않습니다. 명령 셸에서 [`dotnet pack`](/dotnet/core/tools/dotnet-pack) 명령을 사용하여 패키지합니다.
 
 ```dotnetcli
 dotnet pack
 ```
 
-명령 셸에서 [dotnet nuget push](/dotnet/core/tools/dotnet-nuget-push) 명령을 사용하여 패키지를 NuGet에 업로드합니다.
+명령 셸에서 [`dotnet nuget push`](/dotnet/core/tools/dotnet-nuget-push) 명령을 사용하여 패키지를 NuGet에 업로드합니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

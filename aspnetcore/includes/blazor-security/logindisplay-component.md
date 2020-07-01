@@ -1,9 +1,9 @@
-구성 `LoginDisplay` 요소 (*Shared/LoginDisplay*)는 `MainLayout` 구성 요소 (*shared/mainlayout. razor*)에서 렌더링 되 고 다음 동작을 관리 합니다.
+`LoginDisplay` 구성 요소(`Shared/LoginDisplay.razor`)는 `MainLayout` 구성 요소(`Shared/MainLayout.razor`)에서 렌더링되고 다음 동작을 관리합니다.
 
-* 인증 된 사용자의 경우:
-  * 현재 사용자 이름을 표시 합니다.
-  * 앱에서 로그 아웃할 수 있는 단추를 제공 합니다.
-* 익명 사용자의 경우은 로그인 할 수 있는 옵션을 제공 합니다.
+* 인증된 사용자의 경우:
+  * 현재 사용자 이름을 표시합니다.
+  * 앱에서 로그아웃하는 단추를 제공합니다.
+* 익명 사용자의 경우, 로그인 옵션을 제공합니다.
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

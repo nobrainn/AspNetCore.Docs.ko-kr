@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: f0362fbce7f1fafb413d526809ec9191c603e494
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: e777991f4cbfd22b441fb198144bbdf023b4df6b
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103332"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242786"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor 앱에서 오류 처리
 
@@ -35,7 +35,7 @@ Blazor 앱이 개발 중에 올바르게 작동하지 않는 경우 앱에서 �
 
 이 오류 처리 환경의 UI는 Blazor 프로젝트 템플릿의 일부입니다.
 
-Blazor WebAssembly 앱의 *wwwroot/index.html* 파일에서 환경을 사용자 지정합니다.
+Blazor WebAssembly 앱에서 `wwwroot/index.html` 파일의 환경을 사용자 지정합니다.
 
 ```html
 <div id="blazor-error-ui">
@@ -45,7 +45,7 @@ Blazor WebAssembly 앱의 *wwwroot/index.html* 파일에서 환경을 사용자 
 </div>
 ```
 
-Blazor 서버 앱에서 *Pages/_Host.cshtml* 파일의 환경을 사용자 지정합니다.
+Blazor 서버 앱에서 `Pages/_Host.cshtml` 파일의 환경을 사용자 지정합니다.
 
 ```cshtml
 <div id="blazor-error-ui">
@@ -60,7 +60,7 @@ Blazor 서버 앱에서 *Pages/_Host.cshtml* 파일의 환경을 사용자 지�
 </div>
 ```
 
-`blazor-error-ui` 요소는 Blazor 템플릿(*wwwroot/css/site.css*)에 포함된 스타일에 의해 숨겨지고 오류가 발생하면 표시됩니다.
+`blazor-error-ui` 요소는 Blazor 템플릿에 포함된 스타일(`wwwroot/css/site.css`)에 의해 숨겨지고 오류가 발생할 때 표시됩니다.
 
 ```css
 #blazor-error-ui {
@@ -92,7 +92,7 @@ Blazor 서버는 상태 저장 프레임워크입니다. 사용자가 앱과 상
 
 사용자가 여러 브라우저 탭에서 앱을 여는 경우 여러 개의 독립적인 회로가 있습니다.
 
-Blazor는 발생하는 대부분의 처리되지 않은 예외를 회로에 치명적인 것으로 취급합니다. 처리되지 않은 예외로 인해 회로가 종료되는 경우 사용자는 페이지를 다시 로드하여 새 회로를 만드는 방식으로 앱과 계속 상호 작용할 수 있습니다. 다른 사용자 또는 다른 브라우저 탭을 위한 회로이면서 종료된 회로의 외부에 있는 회로는 영향을 받지 않습니다. 이 시나리오는 충돌하는 데스크톱 앱과 유사합니다. 작동을 중단한 앱을 다시 시작해야 하지만 다른 앱은 영향을 받지 않습니다.
+Blazor는 발생하는 대부분의 처리되지 않은 예외를 회로에 치명적인 것으로 취급합니다. 처리되지 않은 예외로 인해 회로가 종료되는 경우 사용자는 페이지를 다시 로드하여 새 회로를 만드는 방식으로 앱과 계속 상호 작용할 수 있습니다. 다른 사용자 또는 다른 브라우저 탭을 위한 회로이면서 종료된 회로의 외부에 있는 회로는 영향을 받지 않습니다. 이 시나리오는 작동이 중단되는 데스크톱 앱과 유사합니다. 작동을 중단한 앱을 다시 시작해야 하지만 다른 앱은 영향을 받지 않습니다.
 
 다음과 같은 이유로 인해 처리되지 않은 예외가 발생하면 회로가 종료됩니다.
 
@@ -140,7 +140,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 * 구성 요소의 생성자가 호출됩니다.
 * [`@inject`](xref:mvc/views/razor#inject) 지시어 또는 [`[Inject]`](xref:blazor/fundamentals/dependency-injection#request-a-service-in-a-component) 특성을 통해 구성 요소 생성자에 제공된 단일 싱글톤 DI 서비스의 생성자가 호출됩니다.
 
-모든 `[Inject]` 속성에 대해 실행된 생성자 또는 setter가 처리되지 않은 예외를 throw하는 경우 Blazor 서버 회로가 실패합니다. 이 예외는 프레임워크에서 구성 요소를 인스턴스화할 수 없기 때문에 치명적입니다. 생성자 논리에서 예외를 throw할 수 있는 경우 앱은 오류 처리 및 로깅과 함께 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용하여 예외를 트랩해야 합니다.
+모든 `[Inject]` 속성에 대해 실행된 생성자 또는 setter가 처리되지 않은 예외를 throw하는 경우 Blazor 서버 회로가 실패합니다. 이 예외는 프레임워크에서 구성 요소를 인스턴스화할 수 없기 때문에 치명적입니다. 생성자 논리에서 예외를 throw할 수 있는 경우 앱은 오류 처리 및 로깅과 함께 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용하여 예외를 트랩해야 합니다.
 
 ### <a name="lifecycle-methods"></a>수명 주기 메서드
 
@@ -155,7 +155,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>가 제품을 가져오는 메서드를 호출하는 다음 예제에서는 다음 작업이 수행됩니다.
 
-* `ProductRepository.GetProductByIdAsync` 메서드에서 throw된 예외는 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 의해 처리됩니다.
+* `ProductRepository.GetProductByIdAsync` 메서드에서 throw된 예외는 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문에 의해 처리됩니다.
 * `catch` 블록이 실행될 때 다음이 수행됩니다.
   * `loadFailed`가 사용자에게 오류 메시지를 표시하는 데 사용되는 `true`로 설정됩니다.
   * 오류가 로깅됩니다.
@@ -185,7 +185,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 
 이벤트 처리기 코드는 이러한 시나리오에서 처리되지 않은 예외를 throw할 수 있습니다.
 
-이벤트 처리기가 처리되지 않은 예외(예: 데이터베이스 쿼리 실패)를 throw하는 경우 해당 예외는 Blazor 서버 회로에 치명적인 것이 됩니다. 앱에서 외부 이유로 인해 실패할 수 있는 코드를 호출하는 경우 오류 처리 및 로깅과 함께 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용하여 예외를 트랩합니다.
+이벤트 처리기가 처리되지 않은 예외(예: 데이터베이스 쿼리 실패)를 throw하는 경우 해당 예외는 Blazor 서버 회로에 치명적인 것이 됩니다. 앱에서 외부 이유로 인해 실패할 수 있는 코드를 호출하는 경우 오류 처리 및 로깅과 함께 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용하여 예외를 트랩합니다.
 
 사용자 코드에서 예외를 트랩 및 처리하지 않는 경우 프레임워크는 예외를 로깅하고 회로를 종료합니다.
 
@@ -193,7 +193,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 
 예를 들어, 사용자가 다른 페이지로 이동했으므로 UI에서 구성 요소가 제거될 수 있습니다. <xref:System.IDisposable?displayProperty=fullName>을 구현하는 구성 요소가 UI에서 제거되면 프레임워크는 구성 요소의 <xref:System.IDisposable.Dispose%2A> 메서드를 호출합니다.
 
-구성 요소의 `Dispose` 메서드가 처리되지 않은 예외를 throw하는 경우 예외는 Blazor 서버 회로에 치명적입니다. 삭제 논리에서 예외를 throw할 수 있는 경우 앱은 오류 처리 및 로깅이 포함된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용하여 예외를 트랩해야 합니다.
+구성 요소의 `Dispose` 메서드가 처리되지 않은 예외를 throw하는 경우 예외는 Blazor 서버 회로에 치명적입니다. 삭제 논리에서 예외를 throw할 수 있는 경우 앱은 오류 처리 및 로깅이 포함된 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용하여 예외를 트랩해야 합니다.
 
 구성 요소 삭제에 대한 자세한 내용은 <xref:blazor/components/lifecycle#component-disposal-with-idisposable>을 참조하세요.
 
@@ -204,10 +204,10 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 다음 조건은 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>의 오류 처리에 적용됩니다.
 
 * <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>에 대한 호출이 동기적으로 실패하면 .NET 예외가 발생합니다. 예를 들어, 제공된 인수를 직렬화 할 수 없기 때문에 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>에 대한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch해야 합니다. 이벤트 처리기 또는 구성 요소 수명 주기 메서드의 앱 코드가 예외를 처리하지 않는 경우 결과 예외는 Blazor 서버 회로에 치명적입니다.
-* <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>에 대한 호출이 비동기적으로 실패하면 .NET <xref:System.Threading.Tasks.Task>는 실패합니다. 예를 들어, JavaScript 쪽 코드에서 예외를 throw하거나 완료된 `Promise`를 `rejected`로 반환하기 때문에 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>에 대한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch해야 합니다. [await](/dotnet/csharp/language-reference/keywords/await) 연산자를 사용하는 경우 오류 처리 및 로깅을 사용하여 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 메서드 호출을 래핑하는 것이 좋습니다. 그렇지 않으면 오류 코드는 Blazor 서버 회로에 치명적인 처리되지 않은 예외를 발생합니다.
+* <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>에 대한 호출이 비동기적으로 실패하면 .NET <xref:System.Threading.Tasks.Task>는 실패합니다. 예를 들어, JavaScript 쪽 코드에서 예외를 throw하거나 완료된 `Promise`를 `rejected`로 반환하기 때문에 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>에 대한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch해야 합니다. [`await`](/dotnet/csharp/language-reference/keywords/await) 연산자를 사용하는 경우 오류 처리 및 로깅을 사용하여 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문에 메서드 호출을 래핑하는 것이 좋습니다. 그렇지 않으면 오류 코드는 Blazor 서버 회로에 치명적인 처리되지 않은 예외를 발생합니다.
 * 기본적으로 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> 호출은 특정 기간 내에 완료되어야 합니다. 그렇지 않으면 호출 시간이 초과됩니다. 기본 제한 시간은 1분입니다. 제한 시간은 네트워크 연결이 끊어진 코드 또는 완료 메시지를 다시 전송하지 않는 JavaScript 코드를 보호합니다. 호출 시간이 초과되면 결과 <xref:System.Threading.Tasks>는 <xref:System.OperationCanceledException>을 나타내며 실패합니다. 로깅을 사용하여 예외를 트랩하고 처리합니다.
 
-마찬가지로 JavaScript 코드는 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)](xref:blazor/call-dotnet-from-javascript) 특성으로 표시되는 .NET 메서드에 대한 호출을 시작할 수 있습니다. 이러한 .NET 메서드에서 처리되지 않은 예외를 throw하는 경우 다음이 수행됩니다.
+마찬가지로 JavaScript 코드는 [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) 특성으로 표시되는 .NET 메서드에 대한 호출을 시작할 수 있습니다. 이러한 .NET 메서드에서 처리되지 않은 예외를 throw하는 경우 다음이 수행됩니다.
 
 * 이 예외는 Blazor 서버 회로에 치명적으로 처리되지 않습니다.
 * JavaScript 쪽 `Promise`는 거부됩니다.
@@ -234,7 +234,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 
 일반적인 경우에는 사전 렌더링에 실패하면 작업 구성 요소를 렌더링할 수 없기 때문에 구성 요소를 계속 빌드 및 렌더링하는 것은 적합하지 않습니다.
 
-렌더링 중에 발생할 수 있는 오류를 허용하려면 예외를 throw할 수 있는 오류 처리 논리를 구성 요소 내부에 배치해야 합니다. 오류 처리 및 로깅과 함께 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용합니다. [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> 태그 도우미를 래핑하는 대신, <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> 태그 도우미에 의해 렌더링되는 구성 요소에 오류 처리 논리를 배치합니다.
+렌더링 중에 발생할 수 있는 오류를 허용하려면 예외를 throw할 수 있는 오류 처리 논리를 구성 요소 내부에 배치해야 합니다. 오류 처리 및 로깅과 함께 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용합니다. [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문에 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> 태그 도우미를 래핑하는 대신, <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> 태그 도우미에 의해 렌더링되는 구성 요소에 오류 처리 논리를 배치합니다.
 
 ## <a name="advanced-scenarios"></a>고급 시나리오
 
@@ -262,7 +262,7 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 
 ### <a name="custom-render-tree-logic"></a>사용자 지정 렌더링 트리 논리
 
-대부분의 Blazor 구성 요소는 *.razor* 파일로 구현되며 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>에 작동하여 출력을 렌더링하는 논리를 생성하도록 컴파일됩니다. 개발자는 프로시저 C# 코드를 사용하여 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 논리를 수동으로 구현할 수 있습니다. 자세한 내용은 <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>를 참조하세요.
+대부분의 Blazor 구성 요소는 `.razor` 파일로 구현되며 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>에 작동하여 출력을 렌더링하는 논리를 생성하도록 컴파일됩니다. 개발자는 프로시저 C# 코드를 사용하여 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 논리를 수동으로 구현할 수 있습니다. 자세한 내용은 <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>를 참조하세요.
 
 > [!WARNING]
 > 수동 렌더링 트리 작성기 논리를 사용하는 것은 일반적인 구성 요소 개발에는 권장되지 않는 안전하지 않은 고급 시나리오로 간주됩니다.
@@ -272,6 +272,6 @@ Blazor가 구성 요소의 인스턴스를 만들 경우
 * <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenElement%2A> 및 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseElement%2A>에 대한 호출은 올바르게 균형이 조정됩니다.
 * 특성은 올바른 위치에만 추가됩니다.
 
-잘못된 수동 렌더링 트리 작성기 논리가 있으면 충돌, 서버 중단 및 보안 취약성을 포함하는 정의되지 않은 임의 동작이 발생할 수 있습니다.
+잘못된 수동 렌더링 트리 작성기 논리가 있으면 작동 중단, 서버 중단 및 보안 취약성을 포함하는 정의되지 않은 임의 동작이 발생할 수 있습니다.
 
 어셈블리 코드 또는 MSIL 명령을 직접 작성하는 것과 동일한 수준의 복잡성과 동일한 수준의 위험에서 수동 렌더링 트리 작성기 논리를 고려합니다.

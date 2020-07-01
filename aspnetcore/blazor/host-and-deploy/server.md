@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 891714250bc4e8b0b241e589efb268b8f8e9f0d5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: c02d005aa5e37bc359e1c104a19c387f1c16fa34
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103308"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243553"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Blazor 서버 호스트 및 배포
 
@@ -32,7 +32,7 @@ ms.locfileid: "85103308"
 
 [Blazor 서버 호스팅 모델](xref:blazor/hosting-models#blazor-server)을 사용하면 Blazor가 서버의 ASP.NET Core 앱 내에서 실행됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
 
-ASP.NET Core 앱을 호스팅할 수 있는 웹 서버가 필요합니다. Visual Studio에는 **Blazor 서버 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorserverside` 템플릿)이 포함됩니다.
+ASP.NET Core 앱을 호스팅할 수 있는 웹 서버가 필요합니다. Visual Studio는 **Blazor 서버 앱** 프로젝트 템플릿([`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorserverside` 템플릿)을 포함합니다.
 
 ## <a name="scalability"></a>확장성
 
@@ -76,7 +76,7 @@ Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하�
 
    * 구성(다음 방법 중 **하나**를 사용):
   
-     * *appsettings.json*:
+     * `appsettings.json`:
 
        ```json
        "Azure:SignalR:ServerStickyMode": "Required"

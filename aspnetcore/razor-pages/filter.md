@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 68962d5a3a49e52510d72899e7dead2c1983d8b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ea6b897a008d1be1953928e5d90555d9a9a408ec
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775520"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347140"
 ---
 # <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>ASP.NET Core에서 Razor Pages를 위한 필터 메서드
 
@@ -36,7 +36,7 @@ Razor 페이지 필터:
 * 특정 페이지 처리기 메서드에는 적용할 수 없습니다.
 * 생성자 종속성이 DI([종속성 주입](xref:fundamentals/dependency-injection))를 통해서 채워질 수 있습니다. 자세한 내용은 [ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) 및 [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)를 참조하세요.
 
-페이지 생성자 및 미들웨어는 처리기 메서드가 실행되기 전에 사용자 지정 코드를 실행할 수 있지만 Razor 페이지 필터를 통해서만 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 및 페이지에 액세스할 수 있습니다. 미들웨어는 `HttpContext`에 액세스할 수 있지만 "페이지 컨텍스트"에는 액세스할 수 없습니다. 필터에는 `HttpContext`에 대한 액세스를 제공하는 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 파생 매개 변수가 있습니다. 예를 들어 [필터 특성 구현](#ifa) 샘플은 생성자 또는 미들웨어로 수행할 수 없는 응답에 헤더를 추가합니다.
+페이지 생성자 및 미들웨어는 처리기 메서드가 실행되기 전에 사용자 지정 코드를 실행할 수 있지만 Razor 페이지 필터를 통해서만 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 및 페이지에 액세스할 수 있습니다. 미들웨어는 `HttpContext`에 액세스할 수 있지만 "페이지 컨텍스트"에는 액세스할 수 없습니다. 필터에는 `HttpContext`에 대한 액세스를 제공하는 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 파생 매개 변수가 있습니다. 다음은 페이지 필터의 샘플로, 생성자 또는 미들웨어로 수행할 수 없는 응답에 헤더를 추가하는 [필터 특성을 구현](#ifa)합니다. 페이지의 인스턴스 및 페이지의 모델에 대한 액세스를 포함하는 페이지 컨텍스트에 대한 액세스는 Razor 페이지의 필터, 처리기 또는 본문을 실행하는 경우에만 사용할 수 있습니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 

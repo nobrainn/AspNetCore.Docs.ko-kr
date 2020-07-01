@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 42b61c9af0c1809ecb7d9a45ec8edfa815e2df22
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102325"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243592"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
 
@@ -71,7 +71,7 @@ Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla
 
 기본적으로 Blazor WebAssembly 앱에 대한 Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 링커 동작을 제어하는 방법에 대한 자세한 내용과 지침은 <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>을 참조하세요.
 
-Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요. 문화권 선택기가 포함된 Blazor WebAssembly 샘플 앱을 살펴보려면 [LocSample](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.
+Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요. 문화권 선택기가 포함된 Blazor WebAssembly 샘플 앱을 살펴보려면 [`LocSample`](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.
 
 ### <a name="blazor-server"></a>Blazor 서버
 
@@ -92,7 +92,7 @@ Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#loc
 
 문화권이 지역화 쿠키에 유지되는 경우 임의 기술을 사용하여 문화권을 할당할 수 있습니다. 앱에 서버 쪽 ASP.NET Core에 대해 설정된 지역화 체계가 이미 있는 경우 앱의 기존 지역화 인프라를 계속 사용하고 앱의 체계 내에서 지역화 문화권 쿠키를 설정합니다.
 
-다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다. *Pages/_Host.cshtml* 파일에서 여는 `<body>` 태그 바로 안에 Razor 식을 만듭니다.
+다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다. `Pages/_Host.cshtml` 파일에서 여는 `<body>` 태그 바로 안에 Razor 식을 만듭니다.
 
 ```cshtml
 @using System.Globalization
@@ -118,7 +118,7 @@ Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#loc
 
 1. 브라우저가 앱에 초기 HTTP 요청을 보냅니다.
 1. 문화권은 지역화 미들웨어에 의해 할당됩니다.
-1. `_Host` 페이지( *_Host.cshtml*)의 Razor 식은 응답의 일부로 쿠키에 문화권을 유지합니다.
+1. `_Host` 페이지(`_Host.cshtml`)의 Razor 식은 응답의 일부로 쿠키에 문화권을 유지합니다.
 1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor 서버 세션을 만듭니다.
 1. 지역화 미들웨어는 쿠키를 읽고 문화권을 할당합니다.
 1. Blazor 서버 세션이 올바른 문화권으로 시작합니다.

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: efac62c325b03b5ee19cae58abb5227f3d300b69
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 76af450df70fe666ea1b951cb4b41696057c5e67
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103313"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243579"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
 
@@ -55,7 +55,7 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 </ItemGroup>
 ```
 
-*LinkerConfig.xml*:
+`LinkerConfig.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -93,7 +93,7 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 
 특정 라이브러리의 링커를 구성하려면 XML 링커 구성 파일을 포함 리소스로 라이브러리에 추가합니다. 포함 리소스의 이름은 어셈블리와 동일해야 합니다.
 
-다음 예제에서 *LinkerConfig.xml* 파일은 라이브러리의 어셈블리와 이름이 동일한 포함 리소스로 지정됩니다.
+다음 예제에서 `LinkerConfig.xml` 파일은 라이브러리의 어셈블리와 이름이 동일한 포함 리소스로 지정됩니다.
 
 ```xml
 <ItemGroup>
@@ -118,12 +118,12 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 | 지역 값     | Mono 지역 어셈블리    |
 | ---------------- | ----------------------- |
 | `all`            | 포함된 모든 어셈블리 |
-| `cjk`            | *I18N.CJK.dll*          |
-| `mideast`        | *I18N.MidEast.dll*      |
+| `cjk`            | `I18N.CJK.dll`          |
+| `mideast`        | `I18N.MidEast.dll`      |
 | `none`(기본값) | 없음                    |
-| `other`          | *I18N.Other.dll*        |
-| `rare`           | *I18N.Rare.dll*         |
-| `west`           | *I18N.West.dll*         |
+| `other`          | `I18N.Other.dll`        |
+| `rare`           | `I18N.Rare.dll`         |
+| `west`           | `I18N.West.dll`         |
 
 여러 값을 지정할 경우 쉼표를 사용하여 구분합니다(예: `mideast,west`).
 

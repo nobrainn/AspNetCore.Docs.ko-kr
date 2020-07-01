@@ -24,7 +24,7 @@ Blazor 서버 앱을 미리 렌더링 중이면 브라우저에 연결되어 있
 }
 ```
 
-앞에 나온 예제 코드에서, *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor Server)의 `<head>` 요소 안에 `setElementText` JavaScript 함수를 제공합니다. 이 함수는 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType>를 사용하여 호출되며 값을 반환하지 않습니다.
+앞에 나온 예제 코드에서, `wwwroot/index.html`(Blazor WebAssembly) 또는 `Pages/_Host.cshtml`(Blazor 서버)의 `<head>` 요소 안에 `setElementText` JavaScript 함수를 제공합니다. 이 함수는 <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType>를 사용하여 호출되며 값을 반환하지 않습니다.
 
 ```html
 <script>
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-앞에 나온 예제 코드에서, *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor Server)의 `<head>` 요소 안에 `setElementText` JavaScript 함수를 제공합니다. 이 함수는 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>를 사용하여 호출되며 다음 값을 반환합니다.
+앞에 나온 예제 코드에서, `wwwroot/index.html`(Blazor WebAssembly) 또는 `Pages/_Host.cshtml`(Blazor 서버)의 `<head>` 요소 안에 `setElementText` JavaScript 함수를 제공합니다. 이 함수는 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>를 사용하여 호출되며 다음 값을 반환합니다.
 
 ```html
 <script>

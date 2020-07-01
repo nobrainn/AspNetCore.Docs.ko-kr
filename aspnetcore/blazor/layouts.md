@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe35645aafe29838818dcaaf7c2b42ed428ac6cc
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 6103a2e8173ccbb78372e01bd799d1bb47da4fa2
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102263"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243059"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -33,15 +33,15 @@ ms.locfileid: "85102263"
 * 레이아웃 내부에 렌더링된 콘텐츠의 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> 속성을 정의하는 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase>에서 상속합니다.
 * Razor 구문 `@Body`를 사용하여 콘텐츠가 렌더링되는 위치를 레이아웃 태그에 지정합니다.
 
-다음 코드 샘플은 레이아웃 구성 요소인 *MainLayout.razor*의 Razor 템플릿을 보여 줍니다. 레이아웃은 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase>를 상속하고 탐색 모음과 바닥글 사이에 `@Body`를 설정합니다.
+다음 코드 샘플은 레이아웃 구성 요소인 `MainLayout.razor`의 Razor 템플릿을 보여 줍니다. 레이아웃은 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase>를 상속하고 탐색 모음과 바닥글 사이에 `@Body`를 설정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Blazor 앱 템플릿 중 하나를 기반으로 하는 앱에서 `MainLayout` 구성 요소(*MainLayout.razor*)는 앱의 *Shared* 폴더에 있습니다.
+Blazor 앱 템플릿 중 하나를 기반으로 하는 앱에서 `MainLayout` 구성 요소(`MainLayout.razor`)는 앱의 `Shared` 폴더에 있습니다.
 
 ## <a name="default-layout"></a>기본 레이아웃
 
-앱의 *App.razor* 파일에 있는 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소에서 기본 앱 레이아웃을 지정합니다. 기본 Blazor 템플릿에서 제공하는 다음 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 `MainLayout` 구성 요소에 기본 레이아웃을 설정합니다.
+앱의 `App.razor` 파일에 있는 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소에서 기본 앱 레이아웃을 지정합니다. 기본 Blazor 템플릿에서 제공하는 다음 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 `MainLayout` 구성 요소에 기본 레이아웃을 설정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
@@ -61,13 +61,13 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-구성 요소에서 직접 레이아웃을 지정하면 라우터에서 설정된 ‘기본 레이아웃’이나 *_Imports.razor*에서 가져온 `@layout` 지시문이 재정의됩니다.
+구성 요소에서 직접 레이아웃을 지정하면 라우터에서 설정된 ‘기본 레이아웃’이나 `_Imports.razor`에서 가져온 `@layout` 지시문이 재정의됩니다.
 
 ## <a name="centralized-layout-selection"></a>중앙에서 레이아웃 선택
 
-앱의 모든 폴더에 이름이 *_Imports.razor*인 템플릿 파일을 선택적으로 포함할 수 있습니다. 컴파일러는 imports 파일에 지정된 지시문을 동일한 폴더와 모든 하위 폴더의 모든 Razor 템플릿에 포함합니다. 따라서 *_Imports.razor* 파일에 `@layout MyCoolLayout`을 포함하면 폴더의 모든 구성 요소가 `MyCoolLayout`을 사용하게 됩니다. 폴더와 하위 폴더에 있는 모든 *.razor* 파일에 `@layout MyCoolLayout`을 반복적으로 추가할 필요가 없습니다. `@using` 지시문은 구성 요소에도 동일한 방식으로 적용됩니다.
+앱의 모든 폴더에 이름이 `_Imports.razor`인 템플릿 파일을 선택적으로 포함할 수 있습니다. 컴파일러는 imports 파일에 지정된 지시문을 동일한 폴더와 모든 하위 폴더의 모든 Razor 템플릿에 포함합니다. 따라서 `_Imports.razor` 파일에 `@layout MyCoolLayout`을 포함하면 폴더의 모든 구성 요소가 `MyCoolLayout`을 사용하게 됩니다. 폴더와 하위 폴더에 있는 모든 `.razor` 파일에 `@layout MyCoolLayout`을 반복적으로 추가할 필요가 없습니다. `@using` 지시문은 구성 요소에도 동일한 방식으로 적용됩니다.
 
-다음 *_Imports.razor* 파일은 아래 항목을 가져옵니다.
+다음 `_Imports.razor` 파일은 아래 항목을 가져옵니다.
 
 * `MyCoolLayout`.
 * 동일한 폴더와 하위 폴더에 있는 모든 Razor 구성 요소.
@@ -75,23 +75,23 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
-*_Imports.razor* 파일은 [Razor 뷰 및 Pages용 _ViewImports.cshtml](xref:mvc/views/layout#importing-shared-directives) 파일과 유사하지만, 구체적으로 Razor 구성 요소 파일에 적용됩니다.
+`_Imports.razor` 파일은 [Razor 뷰 및 Pages용 _ViewImports.cshtml 파일](xref:mvc/views/layout#importing-shared-directives)과 유사하지만, 구체적으로 Razor 구성 요소 파일에 적용됩니다.
 
-*_Imports.razor*에서 레이아웃을 지정하면 라우터의 ‘기본 레이아웃’으로 지정된 레이아웃이 재정의됩니다.
+`_Imports.razor`에서 레이아웃을 지정하면 라우터의 ‘기본 레이아웃’으로 지정된 레이아웃이 재정의됩니다.
 
 ## <a name="nested-layouts"></a>중첩된 레이아웃
 
 앱은 중첩된 레이아웃으로 구성될 수 있습니다. 구성 요소는 레이아웃을 참조할 수 있고, 레이아웃은 자기 다른 레이아웃을 참조합니다. 예를 들어 레이아웃 중첩은 여러 수준의 메뉴 구조를 만드는 데 사용됩니다.
 
-다음 예제에서는 중첩된 레이아웃을 사용하는 방법을 보여 줍니다. *EpisodesComponent.razor* 파일은 표시할 구성 요소입니다. 이 구성 요소는 `MasterListLayout`을 참조합니다.
+다음 예제에서는 중첩된 레이아웃을 사용하는 방법을 보여 줍니다. `EpisodesComponent.razor` 파일은 표시할 구성 요소입니다. 이 구성 요소는 `MasterListLayout`을 참조합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-*MasterListLayout.razor* 파일은 `MasterListLayout`을 제공합니다. 레이아웃은 해당 레이아웃이 렌더링되는 다른 레이아웃인 `MasterLayout`을 참조합니다. `EpisodesComponent`는 `@Body`가 표시되는 위치에 렌더링됩니다.
+`MasterListLayout.razor` 파일은 `MasterListLayout`을 제공합니다. 레이아웃은 해당 레이아웃이 렌더링되는 다른 레이아웃인 `MasterLayout`을 참조합니다. `EpisodesComponent`는 `@Body`가 표시되는 위치에 렌더링됩니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-최종적으로, *MasterLayout.razor*의 `MasterLayout`에는 헤더, 주 메뉴, 바닥글 등의 최상위 레이아웃 요소가 포함됩니다. `EpisodesComponent`를 포함하는 `MasterListLayout`은 `@Body`가 표시되는 위치에 렌더링됩니다.
+최종적으로, `MasterLayout.razor`의 `MasterLayout`에는 헤더, 주 메뉴, 바닥글 등의 최상위 레이아웃 요소가 포함됩니다. `EpisodesComponent`를 포함하는 `MasterListLayout`은 `@Body`가 표시되는 위치에 렌더링됩니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

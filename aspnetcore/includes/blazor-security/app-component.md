@@ -1,8 +1,8 @@
-`App`구성 요소 (Blazor)는 다음의 구성 요소와 유사*합니다.* `App`
+`App` 구성 요소(`App.razor`)는 Blazor 서버 앱에 있는 `App` 구성 요소와 비슷합니다.
 
-* <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>구성 요소는 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> 응용 프로그램의 나머지 부분에 대 한 공개를 관리 합니다.
-* <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView>구성 요소는 현재 사용자에 게 지정 된 페이지에 액세스할 수 있는 권한이 있는지, 그렇지 않으면 구성 요소를 렌더링 하도록 합니다 `RedirectToLogin` .
-* `RedirectToLogin`구성 요소는 로그인 페이지에 대 한 권한 없는 사용자의 리디렉션을 관리 합니다.
+* <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> 구성 요소는 앱의 나머지 부분에 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>를 노출하는 것을 관리합니다.
+* <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> 구성 요소는 현재 사용자가 지정된 페이지에 액세스할 수 있는 권한이 부여받았는지 확인하고 그러지 않은 경우 `RedirectToLogin` 구성 요소를 렌더링합니다.
+* `RedirectToLogin` 구성 요소는 권한 없는 사용자를 로그인 페이지로 리디렉션하는 기능을 관리합니다.
 
 ```razor
 <CascadingAuthenticationState>

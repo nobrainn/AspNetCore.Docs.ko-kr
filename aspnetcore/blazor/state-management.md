@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 59adcce972b503a6aa6e596bc9bff63225961f84
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102510"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243202"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -135,7 +135,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ## <a name="protected-browser-storage-experimental-package"></a>보호된 브라우저 스토리지 실험적 패키지
 
-`localStorage` 및 `sessionStorage`에 대한 [데이터 보호](xref:security/data-protection/introduction) 기능을 제공하는 NuGet 패키지의 예로 [Microsoft.AspNetCore.ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)가 있습니다.
+`localStorage` 및 `sessionStorage`에 대한 [데이터 보호](xref:security/data-protection/introduction) 기능을 제공하는 NuGet 패키지의 예로 [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)가 있습니다.
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage`는 지원되지 않는 실험적 패키지로, 현재 프로덕션 사용에는 적합하지 않습니다.
@@ -144,8 +144,8 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 `Microsoft.AspNetCore.ProtectedBrowserStorage` 패키지를 설치하려면 다음을 수행합니다.
 
-1. Blazor 서버 앱 프로젝트에서 [Microsoft.AspNetCore.ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 패키지 참조를 추가합니다.
-1. 최상위 HTML(예: 기본 프로젝트 템플릿의 *Pages/_Host.cshtml* 파일)에서 다음 `<script>` 태그를 추가합니다.
+1. Blazor 서버 앱 프로젝트에서 [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 대한 패키지 참조를 추가합니다.
+1. 최상위 HTML(예: 기본 프로젝트 템플릿의 `Pages/_Host.cshtml` 파일)에서 다음 `<script>` 태그를 추가합니다.
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
@@ -171,7 +171,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-구성 요소 대신 *_Imports.razor* 파일에 `@using` 문을 배치할 수 있습니다. *_Imports.razor* 파일을 사용하면 더 큰 앱 세그먼트나 전체 앱에서 네임스페이스를 사용할 수 있게 됩니다.
+구성 요소 대신 `_Imports.razor` 파일에 `@using` 문을 배치할 수 있습니다. `_Imports.razor` 파일을 사용하면 더 큰 앱 세그먼트나 전체 앱에서 네임스페이스를 사용할 수 있게 됩니다.
 
 프로젝트 템플릿의 `Counter` 구성 요소에 `currentCount` 값을 유지하려면 `ProtectedSessionStore.SetAsync`를 사용하도록 `IncrementCount` 메서드를 수정합니다.
 
@@ -215,7 +215,7 @@ protected override async Task OnInitializedAsync()
 private int? currentCount;
 ```
 
-개수 및 **Increment** 단추를 무조건 표시하는 대신, 데이터가 로드된 경우에만 해당 요소를 표시하도록 선택합니다.
+개수 및 **`Increment`** 단추를 무조건 표시하는 대신, 데이터가 로드된 경우에만 해당 요소를 표시하도록 선택합니다.
 
 ```razor
 @if (currentCount.HasValue)
@@ -243,7 +243,7 @@ else
 
 오류를 해결하는 한 가지 방법은 미리 렌더링을 사용하지 않도록 설정하는 것입니다. 앱에서 브라우저 기반 스토리지를 많이 사용하는 경우, 일반적으로 이 옵션을 선택하는 것이 가장 좋습니다. `localStorage` 또는 `sessionStorage`를 사용할 수 있어야 앱에서 유용한 콘텐츠를 미리 렌더링할 수 있기 때문에 미리 렌더링은 복잡성만 추가하고 앱에 도움이 되지 않습니다.
 
-미리 렌더링을 사용하지 않도록 설정하려면 *Pages/_Host.cshtml* 파일을 열고 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)의 `render-mode`를 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>로 변경합니다.
+미리 렌더링을 사용하지 않도록 설정하려면 `Pages/_Host.cshtml` 파일을 열고 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)의 `render-mode`를 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>로 변경합니다.
 
 `localStorage` 또는 `sessionStorage`를 사용하지 않는 다른 페이지에는 미리 렌더링이 유용할 수 있습니다. 미리 렌더링을 사용 상태로 유지하려면 브라우저가 회로에 연결될 때까지 로드 작업을 연기합니다. 다음은 카운터 값을 저장하기 위한 예제입니다.
 
@@ -326,7 +326,7 @@ else
 
 `CounterStateProvider` 구성 요소는 로드가 완료될 때까지 자식 콘텐츠를 렌더링하지 않고 로드 단계를 처리합니다.
 
-`CounterStateProvider` 구성 요소를 사용하려면 카운터 상태에 액세스해야 하는 다른 모든 구성 요소를 이 구성 요소 인스턴스로 래핑합니다. 앱의 모든 구성 요소가 상태에 액세스할 수 있게 하려면 `App` 구성 요소(*App.razor*)의 <xref:Microsoft.AspNetCore.Components.Routing.Router>를 `CounterStateProvider` 구성 요소로 래핑합니다.
+`CounterStateProvider` 구성 요소를 사용하려면 카운터 상태에 액세스해야 하는 다른 모든 구성 요소를 이 구성 요소 인스턴스로 래핑합니다. 앱의 모든 구성 요소가 상태에 액세스할 수 있게 하려면 `App` 구성 요소(`App.razor`)의 <xref:Microsoft.AspNetCore.Components.Routing.Router>를 `CounterStateProvider` 구성 요소로 래핑합니다.
 
 ```razor
 <CounterStateProvider>

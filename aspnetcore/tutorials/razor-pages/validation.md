@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652838"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122115"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>8부. ASP.NET Core Razor Page에 유효성 검사 추가
 
@@ -140,7 +140,7 @@ public DateTime ReleaseDate { get; set; }
 * 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 형식을 사용하여 데이터를 렌더링합니다.
 * `DataType` 특성은 ASP.NET Core 프레임워크를 활성화하여 데이터를 렌더링할 올바른 필드 템플릿을 선택할 수 있습니다. 자체적으로 사용되는 경우 `DisplayFormat`은 문자열 템플릿을 사용합니다.
 
-참고: jQuery 유효성 검사는 `Range` 특성 및 `DateTime`을 사용하지 않습니다. 예를 들어 다음 코드는 날짜가 지정된 범위에 있을 경우에도 클라이언트 쪽 유효성 검사 오류를 항상 표시합니다.
+**참고:** jQuery 유효성 검사는 `Range` 특성 및 `DateTime`을 사용하지 않습니다. 예를 들어 다음 코드는 날짜가 지정된 범위에 있을 경우에도 클라이언트 쪽 유효성 검사 오류를 항상 표시합니다.
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]

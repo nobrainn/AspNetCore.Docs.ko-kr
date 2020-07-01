@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: c901ba0cbcd79bb14cb32a6a56a2595d159f8678
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103363"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242500"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 데이터 바인딩
 
@@ -240,10 +240,10 @@ Blazor에서는 기본적으로 날짜 형식을 지정할 수 있도록 지원�
 
 페이지의 요소에 [`@bind`](xref:mvc/views/razor#bind) 구문을 사용하여 체인 바인딩을 구현할 수 없습니다. 이벤트 처리기 및 값은 별도로 지정해야 합니다. 그러나 부모 구성 요소는 구성 요소의 매개 변수에서 [`@bind`](xref:mvc/views/razor#bind) 구문을 사용할 수 있습니다.
 
-다음 `PasswordField` 구성 요소(*PasswordField. razor*):
+다음 `PasswordField` 구성 요소(`PasswordField.razor`)는
 
 * `<input>` 요소의 값을 `Password` 속성으로 설정합니다.
-* [EventCallback](xref:blazor/components/event-handling#eventcallback)을 사용하여 `Password` 속성의 변경 내용을 부모 구성 요소에 노출합니다.
+* [`EventCallback`](xref:blazor/components/event-handling#eventcallback)을 사용하여 `Password` 속성의 변경 내용을 부모 구성 요소에 노출합니다.
 * `ToggleShowPassword` 메서드를 트리거하는 데 `onclick` 이벤트를 사용합니다. 자세한 내용은 <xref:blazor/components/event-handling>를 참조하세요.
 
 ```razor

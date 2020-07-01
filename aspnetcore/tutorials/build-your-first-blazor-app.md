@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 0b9854b3848a204b28d0427bef08364be0139069
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102828"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292778"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -36,15 +36,15 @@ ms.locfileid: "85102828"
 
 ## <a name="build-components"></a>구성 요소 빌드
 
-1. <xref:blazor/get-started> 문서의 지침에 따라 이 자습서에 사용할 Blazor 프로젝트를 만듭니다. 프로젝트 이름을 *ToDoList*로 지정합니다.
+1. <xref:blazor/get-started> 문서의 지침에 따라 이 자습서에 사용할 Blazor 프로젝트를 만듭니다. 프로젝트 이름을 `ToDoList`로 지정합니다.
 
-1. *Pages* 폴더에 있는 앱의 3개 페이지로 각각 이동합니다. 홈, 카운터 및 Fetch 데이터. 이 페이지는 Razor 구성 요소 파일 *Index.razor*, *Counter.razor* 및 *FetchData.razor*로 구현됩니다.
+1. `Pages` 폴더에 있는 앱의 3개 페이지 `Home`, `Counter` 및 `Fetch data`로 각각 이동합니다. 이러한 페이지는 Razor 구성 요소 파일인 `Index.razor`, `Counter.razor` 및 `FetchData.razor`로 구현됩니다.
 
-1. Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가시키려면 일반적으로 JavaScript를 작성해야 하지만, Blazor를 사용하여 C#를 대신 작성할 수 있습니다.
+1. `Counter` 페이지에서 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가시키려면 일반적으로 JavaScript를 작성해야 하지만, Blazor를 사용하여 C#를 대신 작성할 수 있습니다.
 
-1. *Counter.razor* 파일에서 `Counter` 구성 요소의 구현에 대해 살펴봅니다.
+1. `Counter.razor` 파일에서 `Counter` 구성 요소의 구현에 대해 살펴봅니다.
 
-   *Pages/Counter.razor*:
+   `Pages/Counter.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter1.razor)]
 
@@ -52,7 +52,7 @@ ms.locfileid: "85102828"
 
    구성 요소 클래스의 멤버는 `@code` 블록에서 정의됩니다. `@code` 블록에서 구성 요소 상태(속성, 필드) 및 메서드가 이벤트 처리 또는 다른 구성 요소 논리 정의를 위해 지정됩니다. 그런 다음, 이러한 멤버를 구성 요소 렌더링 논리의 일부 및 이벤트 처리에 사용합니다.
 
-   **Click me** 단추를 선택하면:
+   카운터 증분 단추를 선택하는 경우:
 
    * `Counter` 구성 요소의 등록된 `onclick` 처리기가 호출됩니다(`IncrementCount` 메서드).
    * `Counter` 구성 요소가 렌더 트리를 다시 생성합니다.
@@ -63,17 +63,17 @@ ms.locfileid: "85102828"
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter2.razor?highlight=14)]
 
-1. 앱을 다시 빌드하고 실행하여 변경 내용을 확인합니다. **Click me** 단추를 선택합니다. 카운터가 2씩 증가됩니다.
+1. 앱을 다시 빌드하고 실행하여 변경 내용을 확인합니다. 단추를 선택합니다. 카운터가 2씩 증가됩니다.
 
 ## <a name="use-components"></a>구성 요소 사용
 
 HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합니다.
 
-1. `Index` 구성 요소(*Index.razor*)에 `<Counter />` 요소를 추가하여 `Counter` 구성 요소를 앱의 `Index` 구성 요소에 추가합니다.
+1. `Index` 구성 요소(`Index.razor`)에 `<Counter />` 요소를 추가하여 `Counter` 구성 요소를 앱의 `Index` 구성 요소에 추가합니다.
 
    이 자습서의 환경으로 Blazor WebAssembly를 사용하고 있다면 `Index` 구성 요소에 `SurveyPrompt` 구성 요소가 사용되고 있을 것입니다. 해당 `<SurveyPrompt>` 요소를 `<Counter />` 요소로 대체합니다. 이 자습서의 환경으로 Blazor 서버 앱을 사용하고 있다면 `Index` 구성 요소에 `<Counter />` 요소를 추가합니다.
 
-   *Pages/Index.razor*:
+   `Pages/Index.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -88,7 +88,7 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
    * [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 특성이 지정된 공용 `IncrementAmount` 속성을 추가합니다.
    * `currentCount` 값을 증가시킬 때 `IncrementAmount` 속성을 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
-   *Pages/Counter.razor*:
+   `Pages/Counter.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter.razor?highlight=13,17)]
 
@@ -99,15 +99,15 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 1. 특성을 사용하여 `Index` 구성 요소의 `<Counter>` 요소에 `IncrementAmount` 매개 변수를 지정합니다. 카운터가 10씩 증분하도록 값을 설정합니다.
 
-   *Pages/Index.razor*:
+   `Pages/Index.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-1. `Index` 구성 요소를 다시 로드합니다. **Click me** 단추가 선택될 때마다 카운터가 10씩 증가합니다. `Counter` 구성 요소의 카운터는 계속 1씩 증가합니다.
+1. `Index` 구성 요소를 다시 로드합니다. 단추가 선택될 때마다 카운터가 10씩 증가합니다. `Counter` 구성 요소의 카운터는 계속 1씩 증가합니다.
 
 ## <a name="route-to-components"></a>구성 요소 경로
 
-*Counter.razor* 파일 맨 위의 `@page` 지시문은 `Counter` 구성 요소가 라우팅 엔드포인트임을 지정합니다. `Counter` 구성 요소는 `/counter`로 전송된 요청을 처리합니다. `@page` 지시문이 없으면 구성 요소는 라우팅된 요청을 처리하지 않지만, 해당 구성 요소는 여전히 다른 구성 요소에서 사용될 수 있습니다.
+`Counter.razor` 파일 맨 위의 `@page` 지시문은 `Counter` 구성 요소가 라우팅 엔드포인트임을 지정합니다. `Counter` 구성 요소는 `/counter`로 전송된 요청을 처리합니다. `@page` 지시문이 없으면 구성 요소는 라우팅된 요청을 처리하지 않지만, 해당 구성 요소는 여전히 다른 구성 요소에서 사용될 수 있습니다.
 
 ## <a name="dependency-injection"></a>종속성 주입
 
@@ -119,7 +119,7 @@ Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Sta
 
 [`@inject`](xref:mvc/views/razor#inject) 지시문은 `WeatherForecastService` 서비스의 인스턴스를 `FetchData` 구성 요소에 주입하기 위해 사용됩니다.
 
-*Pages/FetchData.razor*:
+`Pages/FetchData.razor`:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1.razor?highlight=3)]
 
@@ -129,9 +129,9 @@ Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Sta
 
 ### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly 환경
 
-Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져오기 위해서 <xref:System.Net.Http.HttpClient>가 주입됩니다.
+Blazor WebAssembly 앱을 사용할 경우 `wwwroot/sample-data` 폴더의 `weather.json` 파일에서 일기 예보 데이터를 가져오기 위해서 <xref:System.Net.Http.HttpClient>가 주입됩니다.
 
-*Pages/FetchData.razor*:
+`Pages/FetchData.razor`:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-9)]
 
@@ -143,7 +143,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 앱에 간단한 할 일 목록을 구현하는 새 구성 요소를 추가합니다.
 
-1. *Pages* 폴더에서 새 `Todo` Razor 구성 요소를 앱에 추가합니다. Visual Studio에서 **Pages** 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 항목** >  **Razor 구성 요소**를 선택합니다. 구성 요소의 파일 이름을 *Todo.razor*로 지정합니다. 다른 개발 환경에서는 *Todo.razor*라는 **Pages** 폴더에 빈 파일을 추가합니다.
+1. `Pages` 폴더에서 새 `Todo` Razor 구성 요소를 앱에 추가합니다. Visual Studio에서 `Pages` 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 항목** >  **Razor 구성 요소**를 선택합니다. 구성 요소의 파일 이름을 `Todo.razor`로 지정합니다. 다른 개발 환경에서는 `Todo.razor`라는 `Pages` 폴더에 빈 파일을 추가합니다. Razor 구성 요소 파일 이름에서 첫 문자는 대문자여야 하므로 `Todo` 구성 요소 파일 이름이 대문자 `T`로 시작하는지 확인합니다.
 
 1. 구성 요소에 대한 초기 태그를 제공합니다.
 
@@ -155,9 +155,9 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 1. `Todo` 구성 요소를 탐색 모음에 추가합니다.
 
-   `NavMenu` 구성 요소(*Shared/NavMenu.razor*)는 앱의 레이아웃에서 사용됩니다. 레이아웃은 앱의 콘텐츠 중복을 방지할 수 있는 구성 요소입니다.
+   `NavMenu` 구성 요소(`Shared/NavMenu.razor`)는 앱의 레이아웃에 사용됩니다. 레이아웃은 앱의 콘텐츠 중복을 방지할 수 있는 구성 요소입니다.
 
-   *Shared/NavMenu.razor* 파일의 기존 목록 항목 아래에 다음 목록 항목 태그를 추가하여 `Todo` 구성 요소에 대한 `<NavLink>` 요소를 추가합니다.
+   `Shared/NavMenu.razor` 파일의 기존 목록 항목 아래에 다음 목록 항목 태그를 추가하여 `Todo` 구성 요소에 대한 `<NavLink>` 요소를 추가합니다.
 
    ```razor
    <li class="nav-item px-3">
@@ -169,11 +169,11 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 1. 앱을 다시 빌드하고 실행합니다. 새 Todo 페이지를 방문하여 `Todo` 구성 요소에 대한 링크가 작동하는지 확인합니다.
 
-1. 프로젝트 루트에 *TodoItem.cs* 파일을 추가하여 Todo 항목을 나타내는 클래스를 저장합니다. `TodoItem` 클래스에 대해 다음 C# 코드를 사용합니다.
+1. 프로젝트 루트에 `TodoItem.cs` 파일을 추가하여 todo 항목을 나타내는 클래스를 저장합니다. `TodoItem` 클래스에 대해 다음 C# 코드를 사용합니다.
 
    [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
-1. `Todo` 구성 요소(*Pages/Todo.razor*)로 돌아갑니다.
+1. `Todo` 구성 요소(`Pages/Todo.razor`)로 돌아갑니다.
 
    * `@code` 블록에 있는 할 일 항목에 대한 필드를 추가합니다. `Todo` 구성 요소는 이 필드를 사용하여 할 일 목록의 상태를 유지 관리합니다.
    * 순서가 지정되지 않은 목록 태그 및 `foreach` 루프를 추가하여 각 할 일 항목을 목록 항목(`<li>`)으로 렌더링합니다.
@@ -184,7 +184,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. 앱을 다시 빌드하고 실행합니다. 단추에 이벤트 처리기가 연결되어 있지 않으므로 **Add todo** 단추를 선택해도 아무 일도 발생하지 않습니다.
+1. 앱을 다시 빌드하고 실행합니다. 단추에 이벤트 처리기가 연결되어 있지 않으므로 **`Add todo`** 단추를 선택해도 아무 일도 발생하지 않습니다.
 
 1. `Todo` 구성 요소에 `AddTodo` 메서드를 추가하고 `@onclick` 특성을 사용하여 이를 단추 선택에 등록합니다. 단추가 선택되면 `AddTodo` C# 메서드가 호출됩니다.
 
@@ -214,7 +214,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
-1. 완료된 `Todo` 구성 요소(*Pages/Todo.razor*)는 다음과 같습니다.
+1. 완료된 `Todo` 구성 요소(`Pages/Todo.razor`)는 다음과 같습니다.
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 

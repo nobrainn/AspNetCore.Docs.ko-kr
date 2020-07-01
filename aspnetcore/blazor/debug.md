@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84239225"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242773"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
@@ -51,13 +51,13 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio 및 Visual Studio Code의 디버깅 사용 설정
 
-기존 Blazor WebAssembly 앱에서 디버깅을 사용하도록 설정하려면 각 시작 프로필이 다음 `inspectUri` 속성을 포함하도록 프로젝트의 *launchSettings.json* 파일을 업데이트합니다.
+기존 Blazor WebAssembly 앱에서 디버깅을 사용하도록 설정하려면 각 시작 프로필이 다음 `inspectUri` 속성을 포함하도록 프로젝트의 `launchSettings.json` 파일을 업데이트합니다.
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-업데이트하면 *launchSettings.json* 파일이 다음 예와 비슷해집니다.
+업데이트하면 `launchSettings.json` 파일이 다음 예와 비슷해집니다.
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -74,8 +74,8 @@ Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면
 
 1. ASP.NET Core가 호스트한 새 Blazor WebAssembly 앱을 만듭니다.
 1. <kbd>F5</kbd> 키를 눌러 디버거에서 앱을 실행합니다.
-1. `IncrementCount` 메서드의 *Counter.razor*에 중단점을 설정합니다.
-1. **카운터** 탭으로 이동하여 중단점을 적중시키도록 단추를 선택합니다.
+1. `IncrementCount` 메서드의 `Pages/Counter.razor`에서 중단점을 설정합니다.
+1. **`Counter`** 탭으로 이동하여 중단점을 적중시키도록 단추를 선택합니다.
 
    ![디버그 카운터](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
@@ -87,9 +87,9 @@ Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면
 
 Blazor WebAssembly 앱을 디버그하는 동안 서버 코드도 디버그할 수 있습니다.
 
-1. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>의 *FetchData.razor* 페이지에 중단점을 설정합니다.
+1. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>의 `Pages/FetchData.razor` 페이지에서 중단점을 설정합니다.
 1. `Get` 작업 메서드의 `WeatherForecastController`에 중단점을 설정합니다.
-1. **데이터 페치** 탭으로 이동하여 `FetchData` 구성 요소가 서버에 HTTP 요청을 보내기 직전에 첫 번째 중단점을 적중시킵니다.
+1. **`Fetch Data`** 탭으로 이동하여 `FetchData` 구성 요소가 서버에 HTTP 요청을 보내기 직전에 첫 번째 중단점을 적중시킵니다.
 
    ![데이터 페치 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
@@ -145,11 +145,11 @@ Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
 
 1. 선택 창에서 호스트된 솔루션 내의 서버 프로젝트를 선택합니다.
 
-launch.json 파일은 디버거를 시작하기 위한 시작 구성으로 생성됩니다.
+`launch.json` 파일은 디버거를 시작하기 위한 시작 구성으로 생성됩니다.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>기존 디버깅 세션에 연결
 
-실행 중인 Blazor 앱에 연결하려면 다음 구성을 사용하여 launch.json 파일을 만듭니다.
+실행 중인 Blazor 앱에 연결하려면 다음 구성을 사용하여 `launch.json` 파일을 만듭니다.
 
 ```json
 {
@@ -222,7 +222,7 @@ launch.json 파일은 디버거를 시작하기 위한 시작 구성으로 생�
 
 1. 브라우저는 원격 디버깅이 설정된 상태로 실행되어야 합니다. 원격 디버깅을 사용하지 않도록 설정한 경우, **디버그 가능한 브라우저 탭을 찾을 수 없음** 오류 페이지가 생성됩니다. 오류 페이지에는 Blazor 디버깅 프록시가 앱에 연결할 수 있도록 디버깅 포트가 열려 있는 상태에서 브라우저를 실행하는 작업에 대한 지침이 포함되어 있습니다. ‘모든 브라우저 인스턴스를 닫고’ 지침에 따라 브라우저를 다시 시작합니다.
 
-원격 디버깅을 사용하도록 설정하여 브라우저를 실행한 후 디버깅 바로 가기 키를 누르면 새 디버거 탭이 열립니다. 잠시 후에 **소스** 탭에 앱의 .NET 어셈블리 목록이 표시됩니다. 각 어셈블리를 펼쳐 디버깅에 사용할 수 있는 *.cs*/ *.razor* 소스 파일을 찾습니다. 중단점을 설정하고 앱의 탭으로 다시 전환한 다음, 코드를 실행하면 중단점이 적중됩니다. 중단점이 적중되면 코드를 한 단계씩 실행(<kbd>F10</kbd> 키)하거나 코드 실행을 정상적으로 다시 시작(<kbd>F8</kbd> 키)합니다.
+원격 디버깅을 사용하도록 설정하여 브라우저를 실행한 후 디버깅 바로 가기 키를 누르면 새 디버거 탭이 열립니다. 잠시 후에 **소스** 탭에 앱의 .NET 어셈블리 목록이 표시됩니다. 각 어셈블리를 펼쳐 디버깅에 사용할 수 있는 `.cs`/`.razor` 원본 파일을 찾습니다. 중단점을 설정하고 앱의 탭으로 다시 전환한 다음, 코드를 실행하면 중단점이 적중됩니다. 중단점이 적중되면 코드를 한 단계씩 실행(<kbd>F10</kbd> 키)하거나 코드 실행을 정상적으로 다시 시작(<kbd>F8</kbd> 키)합니다.
 
 Blazor에서는 [Chrome DevTools 프로토콜](https://chromedevtools.github.io/devtools-protocol/)을 구현하고 .NET 특정 정보를 사용하여 프로토콜을 보강하는 디버깅 프록시를 제공합니다. 디버깅 바로 가기 키를 누르면 Blazor는 프록시에 있는 Chrome DevTools를 가리킵니다. 프록시는 디버그하려는 브라우저 창에 연결되므로 원격 디버깅을 사용하도록 설정해야 합니다.
 

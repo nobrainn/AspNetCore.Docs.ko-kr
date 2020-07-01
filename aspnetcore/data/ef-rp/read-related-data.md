@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 5ffb57f21c89e21fcbb14b933cb0d0cb29d9c71b
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652621"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240941"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>6부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 관련 데이터 읽기
 
@@ -52,7 +52,7 @@ ms.locfileid: "84652621"
 
   ![별도 쿼리 예제](read-related-data/_static/separate-queries.png)
 
-  참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다. 탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.
+  **참고:** EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다. 탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.
 
 * [명시적 로드](/ef/core/querying/related-data#explicit-loading). 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다. 별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 데이터베이스로 전송됩니다. 명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다. `Load` 메서드를 사용하여 명시적 로드를 수행합니다. 예를 들어:
 
@@ -231,7 +231,7 @@ ms.locfileid: "84652621"
 
 선택한 강사는 뷰 모델의 강사 목록에서 검색됩니다. 뷰 모델의 `Courses` 속성은 해당 강사의 `CourseAssignments` 탐색 속성에서 `Course` 엔터티로 로드됩니다.
 
-`Where` 메서드는 컬렉션도 반환합니다. 그러나 이 경우 필터는 단일 엔터티를 선택합니다. 따라서 `Single` 메서드를 호출하여 컬렉션을 단일 `Instructor` 엔터티로 변환합니다. `Instructor` 엔터티는 `CourseAssignments` 속성에 대한 액세스를 제공합니다. `CourseAssignments`는 관련 `Course` 엔터티에 대한 액세스를 제공합니다.
+`Where` 메서드는 컬렉션도 반환합니다. 그러나 이 경우 필터는 단일 엔터티를 선택하므로 `Single` 메서드를 호출하여 컬렉션을 단일 `Instructor` 엔터티로 변환합니다. `Instructor` 엔터티는 `CourseAssignments` 속성에 대한 액세스를 제공합니다. `CourseAssignments`는 관련 `Course` 엔터티에 대한 액세스를 제공합니다.
 
 ![강사 및 과정 간 관계 m:M](complex-data-model/_static/courseassignment.png)
 

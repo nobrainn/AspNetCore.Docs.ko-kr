@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 78d524bc0271fd2640302bb0de78571ab688bef5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c71067528fb34ab141bb1ee846716834204ee40
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103372"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242461"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합
 
@@ -37,7 +37,7 @@ Razor Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다. �
 
 기존 Razor Pages 또는 MVC 앱은 페이지와 뷰에 Razor 구성 요소를 통합할 수 있습니다.
 
-1. 앱의 레이아웃 파일( *_Layout.cshtml*)에서 다음을 수행합니다.
+1. 앱의 레이아웃 파일(`_Layout.cshtml`)에서 다음을 수행합니다.
 
    * `<head>` 요소에 다음 `<base>` 태그를 추가합니다.
 
@@ -47,7 +47,7 @@ Razor Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다. �
 
      위의 예제에서 `href` 값(‘앱 기본 경로’)은 앱이 루트 URL 경로(`/`)에 있는 것으로 가정합니다. 앱이 하위 애플리케이션인 경우, <xref:blazor/host-and-deploy/index#app-base-path> 문서의 ‘앱 기본 경로’ 섹션에 설명된 지침을 따르세요.
 
-     *_Layout.cshtml* 파일은 Razor Pages 앱의 *Pages/Shared* 폴더 또는 MVC 앱의 *Views/Shared* 폴더에 있습니다.
+     `_Layout.cshtml` 파일은 Razor Pages 앱의 *Pages/Shared* 폴더 또는 MVC 앱의 *Views/Shared* 폴더에 있습니다.
 
    * 닫는 `</body>` 태그 바로 앞에 *blazor.server.js* 스크립트의 `<script>` 태그를 추가합니다.
 
@@ -57,7 +57,7 @@ Razor Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다. �
 
      프레임워크가 *blazor.server.js* 스크립트를 앱에 추가합니다. 앱에 스크립트를 수동으로 추가할 필요는 없습니다.
 
-1. 다음 콘텐츠를 사용하여 프로젝트의 루트 폴더에 *_Imports.razor* 파일을 추가합니다(마지막 네임스페이스인 `MyAppNamespace`를 앱의 네임스페이스로 변경).
+1. 다음 콘텐츠를 사용하여 프로젝트의 루트 폴더에 `_Imports.razor` 파일을 추가합니다(마지막 네임스페이스인 `MyAppNamespace`를 앱의 네임스페이스로 변경).
 
    ```razor
    @using System.Net.Http
@@ -92,7 +92,7 @@ Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면
 
 1. [앱 준비](#prepare-the-app) 섹션의 지침을 따릅니다.
 
-1. 다음 콘텐츠를 사용하여 프로젝트 루트에 *App.razor* 파일을 추가합니다.
+1. 다음 콘텐츠를 사용하여 프로젝트 루트에 `App.razor` 파일을 추가합니다.
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -108,7 +108,7 @@ Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면
    </Router>
    ```
 
-1. 다음 콘텐츠를 사용하여 *Pages* 폴더에 *_Host.cshtml* 파일을 추가합니다.
+1. 다음 콘텐츠를 사용하여 `Pages` 폴더에 `_Host.cshtml` 파일을 추가합니다.
 
    ```cshtml
    @page "/blazor"
@@ -121,7 +121,7 @@ Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면
    </app>
    ```
 
-   구성 요소는 해당 레이아웃에 공유 *_Layout.cshtml* 파일을 사용합니다.
+   구성 요소는 해당 레이아웃에 공유 `_Layout.cshtml` 파일을 사용합니다.
 
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 `App` 구성 요소에 대해 다음을 구성합니다.
 
@@ -136,7 +136,7 @@ Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면
 
    구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.
 
-1. `Startup.Configure`의 엔드포인트 구성에 *_Host.cshtml* 페이지의 우선순위가 낮은 경로를 추가합니다.
+1. `Startup.Configure`의 엔드포인트 구성에 `_Host.cshtml` 페이지의 우선순위가 낮은 경로를 추가합니다.
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -167,7 +167,7 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
 
 1. [앱 준비](#prepare-the-app) 섹션의 지침을 따릅니다.
 
-1. 다음 콘텐츠를 사용하여 프로젝트 루트에 *App.razor* 파일을 추가합니다.
+1. 다음 콘텐츠를 사용하여 프로젝트 루트에 `App.razor` 파일을 추가합니다.
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -183,7 +183,7 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
    </Router>
    ```
 
-1. 다음 콘텐츠를 사용하여 *Views/Home* 폴더에 *_Host.cshtml* 파일을 추가합니다.
+1. 다음 콘텐츠를 사용하여 `Views/Home` 폴더에 `_Host.cshtml` 파일을 추가합니다.
 
    ```cshtml
    @{
@@ -195,7 +195,7 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
    </app>
    ```
 
-   구성 요소는 해당 레이아웃에 공유 *_Layout.cshtml* 파일을 사용합니다.
+   구성 요소는 해당 레이아웃에 공유 `_Layout.cshtml` 파일을 사용합니다.
    
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 `App` 구성 요소에 대해 다음을 구성합니다.
 
@@ -219,7 +219,7 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
    }
    ```
 
-1. `Startup.Configure`의 엔드포인트 구성에 *_Host.cshtml* 뷰를 반환하는 컨트롤러 작업의 우선순위가 낮은 경로를 추가합니다.
+1. `Startup.Configure`의 엔드포인트 구성에 `_Host.cshtml` 뷰를 반환하는 컨트롤러 작업의 우선순위가 낮은 경로를 추가합니다.
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -230,7 +230,7 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
    });
    ```
 
-1. *Pages* 폴더를 만들고 라우팅 가능한 구성 요소를 앱에 추가합니다. 예를 들어:
+1. `Pages` 폴더를 만들고 라우팅 가능한 구성 요소를 앱에 추가합니다. 예를 들어:
 
    ```razor
    @page "/counter"
@@ -299,7 +299,7 @@ Razor 페이지 또는 뷰에 상태 저장 대화형 구성 요소를 추가할
 
 ## <a name="component-namespaces"></a>구성 요소 네임스페이스
 
-사용자 지정 폴더를 사용하여 앱의 구성 요소를 저장하는 경우, 폴더를 나타내는 네임스페이스를 페이지/뷰 또는 *_ViewImports.cshtml* 파일에 추가합니다. 다음 예제에서는
+사용자 지정 폴더를 사용하여 앱의 구성 요소를 저장하는 경우, 폴더를 나타내는 네임스페이스를 페이지/뷰 또는 `_ViewImports.cshtml` 파일에 추가합니다. 다음 예제에서는
 
 * `MyAppNamespace`를 앱의 네임스페이스로 변경합니다.
 * 구성 요소를 저장하는 데 *Components* 폴더를 사용하지 않은 경우, `Components`를 구성 요소가 있는 폴더로 변경합니다.
@@ -308,6 +308,6 @@ Razor 페이지 또는 뷰에 상태 저장 대화형 구성 요소를 추가할
 @using MyAppNamespace.Components
 ```
 
-*_ViewImports.cshtml* 파일은 Razor Pages 앱의 *Pages* 폴더 또는 MVC 앱의 *Views* 폴더에 있습니다.
+`_ViewImports.cshtml` 파일은 Razor Pages 앱의 `Pages` 폴더 또는 MVC 앱의 `Views` 폴더에 있습니다.
 
 자세한 내용은 <xref:blazor/components/index#namespaces>를 참조하세요.
