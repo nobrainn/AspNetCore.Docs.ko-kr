@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 97cbc5f68d20c06e92a56ead85c8377d4e8ef582
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404589"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793584"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core 소개 Identity
 
@@ -75,7 +75,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들면 다음과 같습니다.
+생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들어:
 
 * /Identity/Account/Login
 * /Identity/계정/로그 아웃
@@ -93,7 +93,11 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-SQLite를 사용 하는 경우이 단계에서는 마이그레이션이 필요 하지 않습니다. LocalDB의 경우 다음 명령을 실행 합니다.
+SQLite를 사용 하는 경우이 단계에서는 마이그레이션이 필요 하지 않습니다.
+
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
+
+LocalDB의 경우 다음 명령을 실행 합니다.
 
 ```dotnetcli
 dotnet ef database update
@@ -296,7 +300,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들면 다음과 같습니다.
+생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들어:
 
 * /Identity/Account/Login
 * /Identity/계정/로그 아웃

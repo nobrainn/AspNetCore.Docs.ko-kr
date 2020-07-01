@@ -3,7 +3,7 @@ title: ASP.NET Core Web API에서 포맷터 사용자 지정
 author: rick-anderson
 description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들고 사용하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 02/08/2017
+ms.date: 06/25/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 27819f77cf86c946ab0415d3583dfbab80a24cf5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c6ec73c028c7003a40b2f09b631bdc2c976686fa
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408866"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793364"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
@@ -30,19 +30,19 @@ ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 �
 
 이 문서에서는 사용자 지정 포맷터를 만들어 추가 형식에 대한 지원을 추가하는 방법을 보여줍니다. 사용자 지정 일반 텍스트 입력 포맷터의 예제는 GitHub의 [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) 를 참조 하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-custom-formatters"></a>사용자 지정 포맷터를 사용하는 경우
 
-사용자 지정 포맷터를 사용 하 여 bult 포맷터에서 처리 하지 않는 콘텐츠 형식에 대 한 지원을 추가 합니다.
+사용자 지정 포맷터를 사용 하 여 기본 제공 포맷터에서 처리 하지 않는 콘텐츠 형식에 대 한 지원을 추가 합니다.
 
 ## <a name="overview-of-how-to-use-a-custom-formatter"></a>사용자 지정 포맷터를 사용하는 방법 개요
 
 사용자 지정 포맷터를 만들려면:
 
 * 클라이언트로 전송 된 데이터를 serialize 하려면 출력 포맷터 클래스를 만듭니다.
-* 클라이언트에서 받은 deserialzing 데이터의 경우 입력 포맷터 클래스를 만듭니다.
-* 포맷터 클래스의 인스턴스를 `InputFormatters` `OutputFormatters` [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions)의 및 컬렉션에 추가 합니다.
+* 클라이언트에서 받은 데이터를 deserialize 하는 경우 입력 포맷터 클래스를 만듭니다.
+* 포맷터 클래스의 인스턴스를 `InputFormatters` 의 및 컬렉션에 추가 `OutputFormatters` <xref:Microsoft.AspNetCore.Mvc.MvcOptions> 합니다.
 
 ## <a name="how-to-create-a-custom-formatter-class"></a>사용자 지정 포맷터 클래스를 만드는 방법
 
@@ -53,31 +53,31 @@ ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 �
 * <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> 및 <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> 메서드를 재정의합니다.
 * <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> 및 `WriteResponseBodyAsync` 메서드를 재정의합니다.
 
-다음 코드는 샘플의 `VcardOutputFormatter` 클래스를 보여 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)줍니다.
+다음 코드는 샘플의 `VcardOutputFormatter` 클래스를 보여 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)줍니다.
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=snippet)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_Class)]
   
 ### <a name="derive-from-the-appropriate-base-class"></a>적절한 기본 클래스에서 파생
 
-텍스트 미디어 형식(예: vCard)의 경우 [TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) 또는 [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) 기본 클래스에서 파생시킵니다.
+텍스트 미디어 형식 (예: vCard)의 경우 <xref:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter> 또는 기본 클래스에서 파생 <xref:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter> 됩니다.
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_ClassDeclaration)]
 
-이진 형식의 경우 [InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) 또는 [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) 기본 클래스에서 파생시킵니다.
+이진 형식의 경우 <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter> 또는 기본 클래스에서 파생 <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter> 합니다.
 
 ### <a name="specify-valid-media-types-and-encodings"></a>유효한 미디어 형식 및 인코딩 지정
 
 생성자에서 `SupportedMediaTypes` 및 `SupportedEncodings` 컬렉션에 추가하여 유효한 미디어 형식 및 인코딩을 지정합니다.
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=ctor)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_ctor)]
 
-포맷터 클래스는 해당 종속성에 대 한 생성자 삽입을 사용할 수 **없습니다** . 예를 들어는 `ILogger<VcardOutputFormatter>` 생성자에 매개 변수로 추가할 수 없습니다. 서비스에 액세스 하려면 메서드에 전달 되는 컨텍스트 개체를 사용 합니다. 이 문서의 코드 예제 및 [샘플](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample) 은이 작업을 수행 하는 방법을 보여 줍니다.
+포맷터 클래스는 해당 종속성에 대 한 생성자 삽입을 사용할 수 **없습니다** . 예를 들어는 `ILogger<VcardOutputFormatter>` 생성자에 매개 변수로 추가할 수 없습니다. 서비스에 액세스 하려면 메서드에 전달 되는 컨텍스트 개체를 사용 합니다. 이 문서의 코드 예제 및 [샘플](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples) 은이 작업을 수행 하는 방법을 보여 줍니다.
 
 ### <a name="override-canreadtype-and-canwritetype"></a>CanReadType 및 CanWriteType 재정의
 
 또는 메서드를 재정의 하 여 deserialize 하거나 serialize 할 형식을 지정 `CanReadType` 합니다 `CanWriteType` . 예를 들어 형식에서 vCard 텍스트를 만들거나 `Contact` 그 반대의 경우도 마찬가지입니다.
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_CanWriteType)]
 
 #### <a name="the-canwriteresult-method"></a>CanWriteResult 메서드
 
@@ -92,7 +92,7 @@ ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 �
 * Signature는 `Person` 형식을 반환 합니다.
 * 는 `Student` `Instructor` 에서 파생 된 또는 형식을 반환할 수 있습니다 `Person` . 
 
-포맷터가 개체만 처리 하려면 `Student` 메서드에 제공 된 컨텍스트 개체에서 [개체](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) 의 형식을 확인 합니다 `CanWriteResult` . 동작 메서드가 반환 하는 경우 `IActionResult` :
+포맷터가 개체만 처리 하려면 `Student` <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.Object> 메서드에 제공 된 컨텍스트 개체의 형식을 확인 합니다 `CanWriteResult` . 동작 메서드가 반환 하는 경우 `IActionResult` :
 
 * 를 반드시 사용할 필요는 없습니다 `CanWriteResult` .
 * `CanWriteType`메서드는 런타임 형식을 받습니다.
@@ -103,7 +103,7 @@ ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 �
 
 Deserialization 또는 serialization은 또는에서 수행 됩니다 `ReadRequestBodyAsync` `WriteResponseBodyAsync` . 다음 예제에서는 종속성 주입 컨테이너에서 서비스를 가져오는 방법을 보여 줍니다. 생성자 매개 변수에서 서비스를 가져올 수 없습니다.
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=writeresponse)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_WriteResponseBodyAsync)]
 
 ## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a>사용자 지정 포맷터를 사용하도록 MVC를 구성하는 방법
 
@@ -111,27 +111,27 @@ Deserialization 또는 serialization은 또는에서 수행 됩니다 `ReadReque
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](custom-formatters/3.1sample/Startup.cs?name=mvcoptions)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!code-csharp[](custom-formatters/sample/Startup.cs?name=mvcoptions&highlight=3-4)]
+[!code-csharp[](custom-formatters/samples/2.x/CustomFormattersSample/Startup.cs?name=mvcoptions&highlight=3-4)]
 
 ::: moniker-end
 
 포맷터는 삽입한 순서 대로 평가됩니다. 첫 번째 포맷터가 우선됩니다.
 
-## <a name="the-completed-vcardinputformatter-class"></a>Completed `VcardInputFormatter` 클래스
+## <a name="the-complete-vcardinputformatter-class"></a>Complete `VcardInputFormatter` 클래스
 
-다음 코드는 샘플의 `VcardInputFormatter` 클래스를 보여 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)줍니다.
+다음 코드는 샘플의 `VcardInputFormatter` 클래스를 보여 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)줍니다.
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardInputFormatter.cs?name=snippet)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardInputFormatter.cs?name=snippet_Class)]
 
 ## <a name="test-the-app"></a>앱 테스트
 
-기본 vCard 입력 및 출력 포맷터를 구현 하는 [이 문서에 대 한 샘플 앱을 실행](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)합니다. 앱은 다음과 유사 하 게 Vcard를 읽고 씁니다.
+기본 vCard 입력 및 출력 포맷터를 구현 하는 [이 문서에 대 한 샘플 앱을 실행](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)합니다. 앱은 다음과 유사 하 게 Vcard를 읽고 씁니다.
 
 ```
 BEGIN:VCARD

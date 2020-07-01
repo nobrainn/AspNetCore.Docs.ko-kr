@@ -14,16 +14,16 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 8244acb39a345875d80c5528a822de23f78b6e38
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9df7f370eb550172493478bcd8d94a9541926fec
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403549"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793559"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core ObjectPool에서 개체 다시 사용
 
-작성자, [Steve Gordon](https://twitter.com/stevejgordon), [Ryan nowak](https://github.com/rynowak)및 [Rick Anderson](https://twitter.com/RickAndMSFT)
+작성자, [Steve Gordon](https://twitter.com/stevejgordon), [Ryan nowak](https://github.com/rynowak)및 [Günther oidl](https://github.com/gfoidl)
 
 <xref:Microsoft.Extensions.ObjectPool>는 개체의 가비지 수집을 허용 하는 대신 다시 사용 하기 위해 메모리의 개체 그룹을 유지 하는 것을 지 원하는 ASP.NET Core 인프라의 일부입니다.
 
@@ -42,7 +42,9 @@ ms.locfileid: "85403549"
 
 응용 프로그램 또는 라이브러리에 대해 현실적인 시나리오를 사용 하 여 성능 데이터를 수집한 후에만 개체 풀링을 사용 합니다.
 
-**경고:가를 `ObjectPool` 구현 하지 않습니다 `IDisposable` . 삭제 해야 하는 형식으로는 사용 하지 않는 것이 좋습니다.**
+::: moniker range="< aspnetcore-3.0"
+**경고:가를 `ObjectPool` 구현 하지 않습니다 `IDisposable` . 삭제 해야 하는 형식으로는 사용 하지 않는 것이 좋습니다.** `ObjectPool`ASP.NET Core 3.0 이상에서는을 지원 `IDisposable` 합니다.
+::: moniker-end
 
 **참고: ObjectPool은 할당할 개체 수에 대 한 제한을 두지 않습니다. 그러면 개체 수에 대 한 제한이 유지 됩니다.**
 
@@ -63,7 +65,20 @@ ObjectPool은 여러 가지 방법으로 앱에서 사용할 수 있습니다.
 
 ## <a name="how-to-use-objectpool"></a>ObjectPool 사용 방법
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>를 호출 하 여 개체를 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 가져오고 개체를 반환 합니다.  모든 개체를 반환 하는 요구 사항은 없습니다. 개체를 반환 하지 않으면 가비지 수집 됩니다.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Get*>를 호출 하 여 개체를 <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 가져오고 개체를 반환 합니다.  모든 개체를 반환 하는 요구 사항은 없습니다. 개체를 반환 하지 않으면 가비지 수집 됩니다.
+
+::: moniker range=">= aspnetcore-3.0"
+<xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider>를 사용 하는 경우 `T` 다음을 구현 합니다 `IDisposable` .
+
+* 풀에 반환 ***되지*** 않는 항목은 삭제 됩니다.
+* DI가 풀을 삭제 하면 풀의 모든 항목이 삭제 됩니다.
+
+참고: 풀이 삭제 된 후:
+
+* `Get`를 호출 하면이 throw `ObjectDisposedException` 됩니다.
+* `return`지정 된 항목을 삭제 합니다.
+
+::: moniker-end
 
 ## <a name="objectpool-sample"></a>ObjectPool 샘플
 
