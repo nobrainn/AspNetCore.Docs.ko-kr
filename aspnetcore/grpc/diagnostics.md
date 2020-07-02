@@ -5,13 +5,21 @@ description: .NET의 gRPC 앱에서 진단을 수집하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 131144bf7a2c637eb2c1a1d5c54990dd4d429502
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ca87ba5b03e7657132e5ebaba72370bde85c85d4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417514"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406773"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET의 gRPC에서 로깅 및 진단
 
@@ -77,7 +85,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 #### <a name="as-a-console-app"></a>콘솔 앱으로
 
-콘솔 앱에서 실행하는 경우 [콘솔 로거](xref:fundamentals/logging/index#console-provider)가 기본적으로 사용되어야 합니다. gRPC 로그가 콘솔에 표시됩니다.
+콘솔 앱에서 실행하는 경우 [콘솔 로거](xref:fundamentals/logging/index#console)가 기본적으로 사용되어야 합니다. gRPC 로그가 콘솔에 표시됩니다.
 
 #### <a name="other-environments"></a>기타 환경
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/13/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 722112b6fba611e980931ffd3bc4ddf43bc08468
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 49422cdfac73e586ce3a035ee79d464e9d6a6827
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84653009"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405161"
 ---
 # <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>10부. ASP.NET Core 앱의 Details 및 Delete 메서드 검토
 

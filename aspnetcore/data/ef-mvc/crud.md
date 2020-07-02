@@ -8,17 +8,19 @@ ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 51334370b07709a773f6acd18d302f8b3ea88290
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0be63811874709db95285f4013e47bc1706050b1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773590"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401482"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -187,7 +189,7 @@ HttpPost 편집 작업 메서드를 다음 코드로 바꿉니다.
 
 초과 게시를 방지하는 가장 좋은 방법으로 **편집** 페이지에서 업데이트 가능하도록 원하는 필드가 `TryUpdateModel` 매개 변수에서 허용 목록에 추가됩니다. (매개 변수 목록에서 필드 목록 앞의 빈 문자열은 양식 필드 이름으로 사용하는 접두사에 대한 것입니다.) 현재 보호하는 추가 필드가 없지만 모델 바인더에서 바인딩하길 원하는 필드를 나열하는 것은 향후에 데이터 모델에 필드를 추가하는지 확인하며, 여기에서 명시적으로 추가할 때까지 자동으로 보호됩니다.
 
-이러한 변경 내용의 결과로 HttpPost `Edit` 메서드의 메서드 시그니처는 HttpGet `Edit` 메서드와 동일하므로 메서드 `EditPost`의 이름을 변경했습니다.
+이러한 변경 내용의 결과로 HttpPost `Edit` 메서드의 메서드 서명은 HttpGet `Edit` 메서드와 동일하므로 메서드 `EditPost`의 이름을 변경했습니다.
 
 ### <a name="alternative-httppost-edit-code-create-and-attach"></a>대체 HttpPost 편집 코드: 만들기 및 연결
 

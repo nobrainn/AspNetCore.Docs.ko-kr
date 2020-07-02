@@ -8,17 +8,19 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773551"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403224"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
 
@@ -332,7 +334,7 @@ Entity Framework에서 전체 데이터베이스를 만들 수 있도록 작성�
 
 * ID 또는 classnameID로 명명된 엔터티 속성은 기본 키 속성으로 인식됩니다.
 
-* 속성은 이름이 ‘\<탐색 속성 이름>\<기본 키 속성 이름>’인 경우 외래 키 속성으로 해석됩니다(예: `Student` 엔터티의 기본 키가 `ID`인 경우 `Student` 탐색 속성의 경우 `StudentID`).  외래 키 속성의 이름을 단순히 ‘\<기본 키 속성 이름>’으로 지정할 수 있습니다(예: `Enrollment` 엔터티의 기본 키가 `EnrollmentID`이므로 `EnrollmentID`). 
+* 속성 이름이 *\<navigation property name>\<primary key property name>* 인 경우 외래 키 속성으로는 해석됩니다(예: `Student` 엔터티의 기본 키가 `ID`이므로 `Student` 탐색 속성의 경우 `StudentID`). 외래 키 속성의 이름을 단순히 *\<primary key property name>* 으로 지정할 수 있습니다(예: `Enrollment` 엔터티의 기본 키가 `EnrollmentID`이므로 `EnrollmentID`).
 
 기본 동작은 재정의될 수 있습니다. 예를 들어 이 자습서의 앞부분에서 본 것처럼 테이블 이름을 명시적으로 지정할 수 있습니다. 또한 이 시리즈의 [이후의 자습서](complex-data-model.md)에서 볼 수 있듯이 열 이름을 설정하고 기본 키 또는 외래 키로 속성을 설정할 수 있습니다.
 

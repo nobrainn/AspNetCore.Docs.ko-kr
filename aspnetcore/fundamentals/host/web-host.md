@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 71bca4c0987059efa0e4ff35f25fe7cdb75641d5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 630191948a9013e88853ee1a31d15f2964b4a7f4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773993"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399415"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core 웹 호스트
 
@@ -562,7 +564,7 @@ using (var host = WebHost.Start(router => router
 | `http://localhost:5000/Sante/Kevin`        | Sante, Kevin!                            |
 | `http://localhost:5000`                    | Hello World!                             |
 
-`WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 종료하기 위한 키 입력을 대기합니다.
+`WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 keypress가 종료될 때까지 대기합니다.
 
 **Start(string url, Action\<IRouteBuilder> routeBuilder)**
 

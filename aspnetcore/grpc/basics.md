@@ -1,11 +1,25 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ‘SignalR’ uid: 
-
+title: C#을 사용하는 gRPC 서비스
+author: juntaoluo
+description: C#으로 gRPC 서비스를 작성하는 경우의 기본 개념을 알아봅니다.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: johluo
+ms.date: 07/03/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/basics
+ms.openlocfilehash: 08c755cf078fe71d09e8c7af2cc16f5c427495f1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407293"
 ---
 # <a name="grpc-services-with-c"></a>C\#을 사용하는 gRPC 서비스
 

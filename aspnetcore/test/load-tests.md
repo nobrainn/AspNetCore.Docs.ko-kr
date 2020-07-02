@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: test/loadtests
-ms.openlocfilehash: 0ec69ad783a4e545ea95ddcb928d03ba6a2e0050
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 5df2dd906d52aaec4fc13b07f3d92c87c802f37f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074381"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406513"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 부하/스트레스 테스트
 
