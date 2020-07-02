@@ -8,106 +8,108 @@ ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 46607fc92670bb46a155ddf3248bc8a36b600a4a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 831479f04551441b079d3f34d043c7486bad7ac0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452254"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409022"
 ---
-# <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a><span data-ttu-id="2a30f-103">ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기</span><span class="sxs-lookup"><span data-stu-id="2a30f-103">Create a web API with ASP.NET Core and MongoDB</span></span>
+# <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a><span data-ttu-id="0437c-103">ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기</span><span class="sxs-lookup"><span data-stu-id="0437c-103">Create a web API with ASP.NET Core and MongoDB</span></span>
 
-<span data-ttu-id="2a30f-104">작성자: [Pratik Khandelwal](https://twitter.com/K2Prk) 및 [Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="2a30f-104">By [Pratik Khandelwal](https://twitter.com/K2Prk) and [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
+<span data-ttu-id="0437c-104">작성자: [Pratik Khandelwal](https://twitter.com/K2Prk) 및 [Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="0437c-104">By [Pratik Khandelwal](https://twitter.com/K2Prk) and [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="2a30f-105">이 자습서에서는 [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL 데이터베이스에 대해 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 수행하는 웹 API를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-105">This tutorial creates a web API that performs Create, Read, Update, and Delete (CRUD) operations on a [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL database.</span></span>
+<span data-ttu-id="0437c-105">이 자습서에서는 [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL 데이터베이스에 대해 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 수행하는 웹 API를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-105">This tutorial creates a web API that performs Create, Read, Update, and Delete (CRUD) operations on a [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL database.</span></span>
 
-<span data-ttu-id="2a30f-106">이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-106">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="0437c-106">이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-106">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="2a30f-107">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="2a30f-107">Configure MongoDB</span></span>
-> * <span data-ttu-id="2a30f-108">MongoDB 데이터베이스 만들기</span><span class="sxs-lookup"><span data-stu-id="2a30f-108">Create a MongoDB database</span></span>
-> * <span data-ttu-id="2a30f-109">MongoDB 컬렉션 및 스키마 정의</span><span class="sxs-lookup"><span data-stu-id="2a30f-109">Define a MongoDB collection and schema</span></span>
-> * <span data-ttu-id="2a30f-110">웹 API에서 MongoDB CRUD 작업 수행</span><span class="sxs-lookup"><span data-stu-id="2a30f-110">Perform MongoDB CRUD operations from a web API</span></span>
-> * <span data-ttu-id="2a30f-111">JSON serialization 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="2a30f-111">Customize JSON serialization</span></span>
+> * <span data-ttu-id="0437c-107">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="0437c-107">Configure MongoDB</span></span>
+> * <span data-ttu-id="0437c-108">MongoDB 데이터베이스 만들기</span><span class="sxs-lookup"><span data-stu-id="0437c-108">Create a MongoDB database</span></span>
+> * <span data-ttu-id="0437c-109">MongoDB 컬렉션 및 스키마 정의</span><span class="sxs-lookup"><span data-stu-id="0437c-109">Define a MongoDB collection and schema</span></span>
+> * <span data-ttu-id="0437c-110">웹 API에서 MongoDB CRUD 작업 수행</span><span class="sxs-lookup"><span data-stu-id="0437c-110">Perform MongoDB CRUD operations from a web API</span></span>
+> * <span data-ttu-id="0437c-111">JSON serialization 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="0437c-111">Customize JSON serialization</span></span>
 
-<span data-ttu-id="2a30f-112">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="2a30f-112">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="0437c-112">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="0437c-112">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="2a30f-113">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="2a30f-113">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="0437c-113">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="0437c-113">Prerequisites</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="2a30f-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-114">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="0437c-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-114">Visual Studio</span></span>](#tab/visual-studio)
 
-* [<span data-ttu-id="2a30f-115">.NET Core SDK 3.0 이상</span><span class="sxs-lookup"><span data-stu-id="2a30f-115">.NET Core SDK 3.0 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
-* <span data-ttu-id="2a30f-116">**ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)</span><span class="sxs-lookup"><span data-stu-id="2a30f-116">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload</span></span>
-* [<span data-ttu-id="2a30f-117">MongoDB</span><span class="sxs-lookup"><span data-stu-id="2a30f-117">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+* [<span data-ttu-id="0437c-115">.NET Core SDK 3.0 이상</span><span class="sxs-lookup"><span data-stu-id="0437c-115">.NET Core SDK 3.0 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* <span data-ttu-id="0437c-116">**ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)</span><span class="sxs-lookup"><span data-stu-id="0437c-116">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload</span></span>
+* [<span data-ttu-id="0437c-117">MongoDB</span><span class="sxs-lookup"><span data-stu-id="0437c-117">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="2a30f-118">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="2a30f-118">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="0437c-118">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0437c-118">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* [<span data-ttu-id="2a30f-119">.NET Core SDK 3.0 이상</span><span class="sxs-lookup"><span data-stu-id="2a30f-119">.NET Core SDK 3.0 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
-* [<span data-ttu-id="2a30f-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="2a30f-120">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
-* [<span data-ttu-id="2a30f-121">Visual Studio Code용 C#</span><span class="sxs-lookup"><span data-stu-id="2a30f-121">C# for Visual Studio Code</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [<span data-ttu-id="2a30f-122">MongoDB</span><span class="sxs-lookup"><span data-stu-id="2a30f-122">MongoDB</span></span>](https://docs.mongodb.com/manual/administration/install-community/)
+* [<span data-ttu-id="0437c-119">.NET Core SDK 3.0 이상</span><span class="sxs-lookup"><span data-stu-id="0437c-119">.NET Core SDK 3.0 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="0437c-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0437c-120">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
+* [<span data-ttu-id="0437c-121">Visual Studio Code용 C#</span><span class="sxs-lookup"><span data-stu-id="0437c-121">C# for Visual Studio Code</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
+* [<span data-ttu-id="0437c-122">MongoDB</span><span class="sxs-lookup"><span data-stu-id="0437c-122">MongoDB</span></span>](https://docs.mongodb.com/manual/administration/install-community/)
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="2a30f-123">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-123">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="0437c-123">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-123">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* [<span data-ttu-id="2a30f-124">.NET Core SDK 3.0 이상</span><span class="sxs-lookup"><span data-stu-id="2a30f-124">.NET Core SDK 3.0 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
-* [<span data-ttu-id="2a30f-125">Mac용 Visual Studio 버전 7.7 이상</span><span class="sxs-lookup"><span data-stu-id="2a30f-125">Visual Studio for Mac version 7.7 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
-* [<span data-ttu-id="2a30f-126">MongoDB</span><span class="sxs-lookup"><span data-stu-id="2a30f-126">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+* [<span data-ttu-id="0437c-124">.NET Core SDK 3.0 이상</span><span class="sxs-lookup"><span data-stu-id="0437c-124">.NET Core SDK 3.0 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="0437c-125">Mac용 Visual Studio 버전 7.7 이상</span><span class="sxs-lookup"><span data-stu-id="0437c-125">Visual Studio for Mac version 7.7 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
+* [<span data-ttu-id="0437c-126">MongoDB</span><span class="sxs-lookup"><span data-stu-id="0437c-126">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 
 ---
 
-## <a name="configure-mongodb"></a><span data-ttu-id="2a30f-127">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="2a30f-127">Configure MongoDB</span></span>
+## <a name="configure-mongodb"></a><span data-ttu-id="0437c-127">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="0437c-127">Configure MongoDB</span></span>
 
-<span data-ttu-id="2a30f-128">Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\MongoDB*에 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-128">If using Windows, MongoDB is installed at *C:\\Program Files\\MongoDB* by default.</span></span> <span data-ttu-id="2a30f-129">*C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin*을 `Path` 환경 변수에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-129">Add *C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin* to the `Path` environment variable.</span></span> <span data-ttu-id="2a30f-130">이렇게 변경하면 개발 머신의 어디에서나 MongoDB에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-130">This change enables MongoDB access from anywhere on your development machine.</span></span>
+<span data-ttu-id="0437c-128">Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\MongoDB*에 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-128">If using Windows, MongoDB is installed at *C:\\Program Files\\MongoDB* by default.</span></span> <span data-ttu-id="0437c-129">*C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin*을 `Path` 환경 변수에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-129">Add *C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin* to the `Path` environment variable.</span></span> <span data-ttu-id="0437c-130">이렇게 변경하면 개발 머신의 어디에서나 MongoDB에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-130">This change enables MongoDB access from anywhere on your development machine.</span></span>
 
-<span data-ttu-id="2a30f-131">다음 단계에서 mongo 셸을 사용하여 데이터베이스 및 컬렉션을 만들고 문서를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-131">Use the mongo Shell in the following steps to create a database, make collections, and store documents.</span></span> <span data-ttu-id="2a30f-132">mongo 셸 명령에 대한 자세한 내용은 [mongo 셸 작업](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2a30f-132">For more information on mongo Shell commands, see [Working with the mongo Shell](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).</span></span>
+<span data-ttu-id="0437c-131">다음 단계에서 mongo 셸을 사용하여 데이터베이스 및 컬렉션을 만들고 문서를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-131">Use the mongo Shell in the following steps to create a database, make collections, and store documents.</span></span> <span data-ttu-id="0437c-132">mongo 셸 명령에 대한 자세한 내용은 [mongo 셸 작업](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="0437c-132">For more information on mongo Shell commands, see [Working with the mongo Shell](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).</span></span>
 
-1. <span data-ttu-id="2a30f-133">개발 머신에서 데이터를 저장할 디렉터리를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-133">Choose a directory on your development machine for storing the data.</span></span> <span data-ttu-id="2a30f-134">예를 들어 Windows의 경우 *C:\\BooksData*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-134">For example, *C:\\BooksData* on Windows.</span></span> <span data-ttu-id="2a30f-135">디렉터리가 없을 경우 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-135">Create the directory if it doesn't exist.</span></span> <span data-ttu-id="2a30f-136">mongo 셸은 새 디렉터리를 만들지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-136">The mongo Shell doesn't create new directories.</span></span>
-1. <span data-ttu-id="2a30f-137">명령 셸을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-137">Open a command shell.</span></span> <span data-ttu-id="2a30f-138">다음 명령을 실행하여 기본 포트 27017에서 MongoDB에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-138">Run the following command to connect to MongoDB on default port 27017.</span></span> <span data-ttu-id="2a30f-139">`<data_directory_path>`를 이전 단계에서 선택한 디렉터리로 바꿔야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-139">Remember to replace `<data_directory_path>` with the directory you chose in the previous step.</span></span>
+1. <span data-ttu-id="0437c-133">개발 머신에서 데이터를 저장할 디렉터리를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-133">Choose a directory on your development machine for storing the data.</span></span> <span data-ttu-id="0437c-134">예를 들어 Windows의 경우 *C:\\BooksData*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-134">For example, *C:\\BooksData* on Windows.</span></span> <span data-ttu-id="0437c-135">디렉터리가 없을 경우 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-135">Create the directory if it doesn't exist.</span></span> <span data-ttu-id="0437c-136">mongo 셸은 새 디렉터리를 만들지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-136">The mongo Shell doesn't create new directories.</span></span>
+1. <span data-ttu-id="0437c-137">명령 셸을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-137">Open a command shell.</span></span> <span data-ttu-id="0437c-138">다음 명령을 실행하여 기본 포트 27017에서 MongoDB에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-138">Run the following command to connect to MongoDB on default port 27017.</span></span> <span data-ttu-id="0437c-139">`<data_directory_path>`를 이전 단계에서 선택한 디렉터리로 바꿔야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-139">Remember to replace `<data_directory_path>` with the directory you chose in the previous step.</span></span>
 
    ```console
    mongod --dbpath <data_directory_path>
    ```
 
-1. <span data-ttu-id="2a30f-140">다른 명령 셸 인스턴스를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-140">Open another command shell instance.</span></span> <span data-ttu-id="2a30f-141">다음 명령을 실행하여 기본 테스트 데이터베이스에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-141">Connect to the default test database by running the following command:</span></span>
+1. <span data-ttu-id="0437c-140">다른 명령 셸 인스턴스를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-140">Open another command shell instance.</span></span> <span data-ttu-id="0437c-141">다음 명령을 실행하여 기본 테스트 데이터베이스에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-141">Connect to the default test database by running the following command:</span></span>
 
    ```console
    mongo
    ```
 
-1. <span data-ttu-id="2a30f-142">명령 셸에서 다음을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-142">Run the following in a command shell:</span></span>
+1. <span data-ttu-id="0437c-142">명령 셸에서 다음을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-142">Run the following in a command shell:</span></span>
 
    ```console
    use BookstoreDb
    ```
 
-   <span data-ttu-id="2a30f-143">아직 존재하지 않는 경우 *BookstoreDb*라는 데이터베이스가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-143">If it doesn't already exist, a database named *BookstoreDb* is created.</span></span> <span data-ttu-id="2a30f-144">데이터베이스가 있는 경우 트랜잭션을 위해 해당 연결이 열립니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-144">If the database does exist, its connection is opened for transactions.</span></span>
+   <span data-ttu-id="0437c-143">아직 존재하지 않는 경우 *BookstoreDb*라는 데이터베이스가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-143">If it doesn't already exist, a database named *BookstoreDb* is created.</span></span> <span data-ttu-id="0437c-144">데이터베이스가 있는 경우 트랜잭션을 위해 해당 연결이 열립니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-144">If the database does exist, its connection is opened for transactions.</span></span>
 
-1. <span data-ttu-id="2a30f-145">다음 명령을 사용하여 `Books` 컬렉션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-145">Create a `Books` collection using following command:</span></span>
+1. <span data-ttu-id="0437c-145">다음 명령을 사용하여 `Books` 컬렉션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-145">Create a `Books` collection using following command:</span></span>
 
    ```console
    db.createCollection('Books')
    ```
 
-   <span data-ttu-id="2a30f-146">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-146">The following result is displayed:</span></span>
+   <span data-ttu-id="0437c-146">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-146">The following result is displayed:</span></span>
 
    ```console
    { "ok" : 1 }
    ```
 
-1. <span data-ttu-id="2a30f-147">다음 명령을 사용하여 `Books` 컬렉션에 대한 스키마를 정의하고 두 개의 문서를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-147">Define a schema for the `Books` collection and insert two documents using the following command:</span></span>
+1. <span data-ttu-id="0437c-147">다음 명령을 사용하여 `Books` 컬렉션에 대한 스키마를 정의하고 두 개의 문서를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-147">Define a schema for the `Books` collection and insert two documents using the following command:</span></span>
 
    ```console
    db.Books.insertMany([{'Name':'Design Patterns','Price':54.93,'Category':'Computers','Author':'Ralph Johnson'}, {'Name':'Clean Code','Price':43.15,'Category':'Computers','Author':'Robert C. Martin'}])
    ```
 
-   <span data-ttu-id="2a30f-148">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-148">The following result is displayed:</span></span>
+   <span data-ttu-id="0437c-148">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-148">The following result is displayed:</span></span>
 
    ```console
    {
@@ -120,15 +122,15 @@ ms.locfileid: "84452254"
    ```
   
    > [!NOTE]
-   > <span data-ttu-id="2a30f-149">이 문서에 표시된 ID는 이 샘플을 실행할 때의 ID와 일치하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-149">The ID's shown in this article will not match the IDs when you run this sample.</span></span>
+   > <span data-ttu-id="0437c-149">이 문서에 표시된 ID는 이 샘플을 실행할 때의 ID와 일치하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-149">The ID's shown in this article will not match the IDs when you run this sample.</span></span>
 
-1. <span data-ttu-id="2a30f-150">다음 명령을 사용하여 데이터베이스의 문서를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-150">View the documents in the database using the following command:</span></span>
+1. <span data-ttu-id="0437c-150">다음 명령을 사용하여 데이터베이스의 문서를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-150">View the documents in the database using the following command:</span></span>
 
    ```console
    db.Books.find({}).pretty()
    ```
 
-   <span data-ttu-id="2a30f-151">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-151">The following result is displayed:</span></span>
+   <span data-ttu-id="0437c-151">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-151">The following result is displayed:</span></span>
 
    ```console
    {
@@ -147,58 +149,58 @@ ms.locfileid: "84452254"
    }
    ```
 
-   <span data-ttu-id="2a30f-152">스키마가 각 문서에 대해 자동 생성된 `ObjectId` 형식의 `_id` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-152">The schema adds an autogenerated `_id` property of type `ObjectId` for each document.</span></span>
+   <span data-ttu-id="0437c-152">스키마가 각 문서에 대해 자동 생성된 `ObjectId` 형식의 `_id` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-152">The schema adds an autogenerated `_id` property of type `ObjectId` for each document.</span></span>
 
-<span data-ttu-id="2a30f-153">데이터베이스가 준비되었습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-153">The database is ready.</span></span> <span data-ttu-id="2a30f-154">이제 ASP.NET Core 웹 API를 만들기 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-154">You can start creating the ASP.NET Core web API.</span></span>
+<span data-ttu-id="0437c-153">데이터베이스가 준비되었습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-153">The database is ready.</span></span> <span data-ttu-id="0437c-154">이제 ASP.NET Core 웹 API를 만들기 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-154">You can start creating the ASP.NET Core web API.</span></span>
 
-## <a name="create-the-aspnet-core-web-api-project"></a><span data-ttu-id="2a30f-155">ASP.NET Core 웹 API 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="2a30f-155">Create the ASP.NET Core web API project</span></span>
+## <a name="create-the-aspnet-core-web-api-project"></a><span data-ttu-id="0437c-155">ASP.NET Core 웹 API 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="0437c-155">Create the ASP.NET Core web API project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="2a30f-156">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-156">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="0437c-156">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-156">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="2a30f-157">**파일** > **새로 만들기** > **프로젝트**로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-157">Go to **File** > **New** > **Project**.</span></span>
-1. <span data-ttu-id="2a30f-158">**ASP.NET Core 웹 애플리케이션** 프로젝트 유형을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-158">Select the **ASP.NET Core Web Application** project type, and select **Next**.</span></span>
-1. <span data-ttu-id="2a30f-159">프로젝트 이름을 *BooksApi*로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-159">Name the project *BooksApi*, and select **Create**.</span></span>
-1. <span data-ttu-id="2a30f-160">**.NET Core** 대상 프레임워크 및 **ASP.NET Core 3.0**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-160">Select the **.NET Core** target framework and **ASP.NET Core 3.0**.</span></span> <span data-ttu-id="2a30f-161">**API** 프로젝트 템플릿을 선택하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-161">Select the **API** project template, and select **Create**.</span></span>
-1. <span data-ttu-id="2a30f-162">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-162">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="2a30f-163">**패키지 관리자 콘솔** 창에서 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-163">In the **Package Manager Console** window, navigate to the project root.</span></span> <span data-ttu-id="2a30f-164">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-164">Run the following command to install the .NET driver for MongoDB:</span></span>
+1. <span data-ttu-id="0437c-157">**파일** > **새로 만들기** > **프로젝트**로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-157">Go to **File** > **New** > **Project**.</span></span>
+1. <span data-ttu-id="0437c-158">**ASP.NET Core 웹 애플리케이션** 프로젝트 유형을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-158">Select the **ASP.NET Core Web Application** project type, and select **Next**.</span></span>
+1. <span data-ttu-id="0437c-159">프로젝트 이름을 *BooksApi*로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-159">Name the project *BooksApi*, and select **Create**.</span></span>
+1. <span data-ttu-id="0437c-160">**.NET Core** 대상 프레임워크 및 **ASP.NET Core 3.0**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-160">Select the **.NET Core** target framework and **ASP.NET Core 3.0**.</span></span> <span data-ttu-id="0437c-161">**API** 프로젝트 템플릿을 선택하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-161">Select the **API** project template, and select **Create**.</span></span>
+1. <span data-ttu-id="0437c-162">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-162">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="0437c-163">**패키지 관리자 콘솔** 창에서 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-163">In the **Package Manager Console** window, navigate to the project root.</span></span> <span data-ttu-id="0437c-164">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-164">Run the following command to install the .NET driver for MongoDB:</span></span>
 
    ```powershell
    Install-Package MongoDB.Driver -Version {VERSION}
    ```
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="2a30f-165">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="2a30f-165">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="0437c-165">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0437c-165">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-1. <span data-ttu-id="2a30f-166">명령 셸에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-166">Run the following commands in a command shell:</span></span>
+1. <span data-ttu-id="0437c-166">명령 셸에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-166">Run the following commands in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o BooksApi
    code BooksApi
    ```
 
-   <span data-ttu-id="2a30f-167">.NET Core를 대상으로 하는 새로운 ASP.NET Core 웹 API 프로젝트가 Visual Studio Code에서 생성되어 열립니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-167">A new ASP.NET Core web API project targeting .NET Core is generated and opened in Visual Studio Code.</span></span>
+   <span data-ttu-id="0437c-167">.NET Core를 대상으로 하는 새로운 ASP.NET Core 웹 API 프로젝트가 Visual Studio Code에서 생성되어 열립니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-167">A new ASP.NET Core web API project targeting .NET Core is generated and opened in Visual Studio Code.</span></span>
 
-1. <span data-ttu-id="2a30f-168">상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 대화 상자에 **빌드 및 디버그에 필요한 자산이 'BooksApi'에서 누락되었습니다.라는 메시지가 표시됩니다. 추가할까요?** .</span><span class="sxs-lookup"><span data-stu-id="2a30f-168">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'BooksApi'. Add them?**.</span></span> <span data-ttu-id="2a30f-169">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-169">Select **Yes**.</span></span>
-1. <span data-ttu-id="2a30f-170">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-170">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="2a30f-171">**통합 터미널**을 열고 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-171">Open **Integrated Terminal** and navigate to the project root.</span></span> <span data-ttu-id="2a30f-172">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-172">Run the following command to install the .NET driver for MongoDB:</span></span>
+1. <span data-ttu-id="0437c-168">상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 대화 상자에 **빌드 및 디버그에 필요한 자산이 'BooksApi'에서 누락되었습니다.라는 메시지가 표시됩니다. 추가할까요?** .</span><span class="sxs-lookup"><span data-stu-id="0437c-168">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'BooksApi'. Add them?**.</span></span> <span data-ttu-id="0437c-169">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-169">Select **Yes**.</span></span>
+1. <span data-ttu-id="0437c-170">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-170">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="0437c-171">**통합 터미널**을 열고 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-171">Open **Integrated Terminal** and navigate to the project root.</span></span> <span data-ttu-id="0437c-172">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-172">Run the following command to install the .NET driver for MongoDB:</span></span>
 
    ```dotnetcli
    dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
    ```
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="2a30f-173">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-173">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="0437c-173">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-173">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-1. <span data-ttu-id="2a30f-174">Mac용 Visual Studio 버전 8.6 미만에서는 사이드바에서 **파일** > **새 솔루션** >  **.NET Core** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-174">In Visual Studio for Mac earlier than version 8.6, select **File** > **New Solution** > **.NET Core** > **App** from the sidebar.</span></span> <span data-ttu-id="2a30f-175">버전 8.6 이상에서는 사이드바에서 **파일** > **새 솔루션** > **웹 및 콘솔** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-175">In version 8.6 or later, select **File** > **New Solution** > **Web and Console** > **App** from the sidebar.</span></span>
-1. <span data-ttu-id="2a30f-176">**ASP.NET Core** > **API** C# 프로젝트 템플릿을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-176">Select the **ASP.NET Core** > **API** C# project template, and select **Next**.</span></span>
-1. <span data-ttu-id="2a30f-177">**대상 프레임워크** 드롭다운 목록에서 **.NET Core 3.1**을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-177">Select **.NET Core 3.1** from the **Target Framework** drop-down list, and select **Next**.</span></span>
-1. <span data-ttu-id="2a30f-178">**프로젝트 이름**으로 *BooksApi*를 입력하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-178">Enter *BooksApi* for the **Project Name**, and select **Create**.</span></span>
-1. <span data-ttu-id="2a30f-179">**솔루션** 패드에서 프로젝트의 **종속성** 노드를 마우스 오른쪽 단추로 클릭하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-179">In the **Solution** pad, right-click the project's **Dependencies** node and select **Add Packages**.</span></span>
-1. <span data-ttu-id="2a30f-180">검색 상자에 *MongoDB.Driver*를 입력하여 *MongoDB.Driver* 패키지를 선택하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-180">Enter *MongoDB.Driver* in the search box, select the *MongoDB.Driver* package, and select **Add Package**.</span></span>
-1. <span data-ttu-id="2a30f-181">**라이선스 승인** 대화 상자에서 **동의** 단추를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-181">Select the **Accept** button in the **License Acceptance** dialog.</span></span>
+1. <span data-ttu-id="0437c-174">Mac용 Visual Studio 버전 8.6 미만에서는 사이드바에서 **파일** > **새 솔루션** >  **.NET Core** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-174">In Visual Studio for Mac earlier than version 8.6, select **File** > **New Solution** > **.NET Core** > **App** from the sidebar.</span></span> <span data-ttu-id="0437c-175">버전 8.6 이상에서는 사이드바에서 **파일** > **새 솔루션** > **웹 및 콘솔** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-175">In version 8.6 or later, select **File** > **New Solution** > **Web and Console** > **App** from the sidebar.</span></span>
+1. <span data-ttu-id="0437c-176">**ASP.NET Core** > **API** C# 프로젝트 템플릿을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-176">Select the **ASP.NET Core** > **API** C# project template, and select **Next**.</span></span>
+1. <span data-ttu-id="0437c-177">**대상 프레임워크** 드롭다운 목록에서 **.NET Core 3.1**을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-177">Select **.NET Core 3.1** from the **Target Framework** drop-down list, and select **Next**.</span></span>
+1. <span data-ttu-id="0437c-178">**프로젝트 이름**으로 *BooksApi*를 입력하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-178">Enter *BooksApi* for the **Project Name**, and select **Create**.</span></span>
+1. <span data-ttu-id="0437c-179">**솔루션** 패드에서 프로젝트의 **종속성** 노드를 마우스 오른쪽 단추로 클릭하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-179">In the **Solution** pad, right-click the project's **Dependencies** node and select **Add Packages**.</span></span>
+1. <span data-ttu-id="0437c-180">검색 상자에 *MongoDB.Driver*를 입력하여 *MongoDB.Driver* 패키지를 선택하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-180">Enter *MongoDB.Driver* in the search box, select the *MongoDB.Driver* package, and select **Add Package**.</span></span>
+1. <span data-ttu-id="0437c-181">**라이선스 승인** 대화 상자에서 **동의** 단추를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-181">Select the **Accept** button in the **License Acceptance** dialog.</span></span>
 
 ---
 
-## <a name="add-an-entity-model"></a><span data-ttu-id="2a30f-182">엔터티 모델 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-182">Add an entity model</span></span>
+## <a name="add-an-entity-model"></a><span data-ttu-id="0437c-182">엔터티 모델 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-182">Add an entity model</span></span>
 
-1. <span data-ttu-id="2a30f-183">프로젝트 루트에 *Models* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-183">Add a *Models* directory to the project root.</span></span>
-1. <span data-ttu-id="2a30f-184">다음 코드를 사용하여 *Models* 디렉터리에 `Book` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-184">Add a `Book` class to the *Models* directory with the following code:</span></span>
+1. <span data-ttu-id="0437c-183">프로젝트 루트에 *Models* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-183">Add a *Models* directory to the project root.</span></span>
+1. <span data-ttu-id="0437c-184">다음 코드를 사용하여 *Models* 디렉터리에 `Book` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-184">Add a `Book` class to the *Models* directory with the following code:</span></span>
 
    ```csharp
    using MongoDB.Bson;
@@ -224,93 +226,93 @@ ms.locfileid: "84452254"
    }
    ```
 
-   <span data-ttu-id="2a30f-185">앞의 클래스에서 `Id` 속성은</span><span class="sxs-lookup"><span data-stu-id="2a30f-185">In the preceding class, the `Id` property:</span></span>
+   <span data-ttu-id="0437c-185">앞의 클래스에서 `Id` 속성은</span><span class="sxs-lookup"><span data-stu-id="0437c-185">In the preceding class, the `Id` property:</span></span>
 
-   * <span data-ttu-id="2a30f-186">CLR(공용 언어 런타임) 개체를 MongoDB 컬렉션에 매핑하는 데 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-186">Is required for mapping the Common Language Runtime (CLR) object to the MongoDB collection.</span></span>
-   * <span data-ttu-id="2a30f-187">이 속성을 문서의 기본 키로 지정하려면 [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-187">Is annotated with [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) to designate this property as the document's primary key.</span></span>
-   * <span data-ttu-id="2a30f-188">[ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) 구조체 대신 `string` 형식으로 매개 변수를 전달할 수 있도록 [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-188">Is annotated with [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) to allow passing the parameter as type `string` instead of an [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) structure.</span></span> <span data-ttu-id="2a30f-189">Mongo는 `string`에서 `ObjectId`로 변환을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-189">Mongo handles the conversion from `string` to `ObjectId`.</span></span>
+   * <span data-ttu-id="0437c-186">CLR(공용 언어 런타임) 개체를 MongoDB 컬렉션에 매핑하는 데 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-186">Is required for mapping the Common Language Runtime (CLR) object to the MongoDB collection.</span></span>
+   * <span data-ttu-id="0437c-187">이 속성을 문서의 기본 키로 지정하려면 [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-187">Is annotated with [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) to designate this property as the document's primary key.</span></span>
+   * <span data-ttu-id="0437c-188">[ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) 구조체 대신 `string` 형식으로 매개 변수를 전달할 수 있도록 [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-188">Is annotated with [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) to allow passing the parameter as type `string` instead of an [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) structure.</span></span> <span data-ttu-id="0437c-189">Mongo는 `string`에서 `ObjectId`로 변환을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-189">Mongo handles the conversion from `string` to `ObjectId`.</span></span>
 
-   <span data-ttu-id="2a30f-190">`BookName` 속성은 [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 특성으로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-190">The `BookName` property is annotated with the [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) attribute.</span></span> <span data-ttu-id="2a30f-191">`Name`의 특성 값은 MongoDB 컬렉션의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-191">The attribute's value of `Name` represents the property name in the MongoDB collection.</span></span>
+   <span data-ttu-id="0437c-190">`BookName` 속성은 [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 특성으로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-190">The `BookName` property is annotated with the [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) attribute.</span></span> <span data-ttu-id="0437c-191">`Name`의 특성 값은 MongoDB 컬렉션의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-191">The attribute's value of `Name` represents the property name in the MongoDB collection.</span></span>
 
-## <a name="add-a-configuration-model"></a><span data-ttu-id="2a30f-192">구성 모델 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-192">Add a configuration model</span></span>
+## <a name="add-a-configuration-model"></a><span data-ttu-id="0437c-192">구성 모델 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-192">Add a configuration model</span></span>
 
-1. <span data-ttu-id="2a30f-193">다음 데이터베이스 구성 값을 *appsettings.json*에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-193">Add the following database configuration values to *appsettings.json*:</span></span>
+1. <span data-ttu-id="0437c-193">다음 데이터베이스 구성 값을 *appsettings.json*에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-193">Add the following database configuration values to *appsettings.json*:</span></span>
 
    [!code-json[](first-mongo-app/samples/3.x/SampleApp/appsettings.json?highlight=2-6)]
 
-1. <span data-ttu-id="2a30f-194">다음 코드를 사용하여 *BookstoreDatabaseSettings.cs* 파일을 *모델* 디렉터리에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-194">Add a *BookstoreDatabaseSettings.cs* file to the *Models* directory with the following code:</span></span>
+1. <span data-ttu-id="0437c-194">다음 코드를 사용하여 *BookstoreDatabaseSettings.cs* 파일을 *모델* 디렉터리에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-194">Add a *BookstoreDatabaseSettings.cs* file to the *Models* directory with the following code:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   <span data-ttu-id="2a30f-195">위의 `BookstoreDatabaseSettings` 클래스는 *appsettings.json* 파일의 `BookstoreDatabaseSettings` 속성 값을 저장하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-195">The preceding `BookstoreDatabaseSettings` class is used to store the *appsettings.json* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="2a30f-196">JSON 및 C# 속성 이름은 매핑 프로세스를 용이하게 하기 위해 동일한 이름이 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-196">The JSON and C# property names are named identically to ease the mapping process.</span></span>
+   <span data-ttu-id="0437c-195">위의 `BookstoreDatabaseSettings` 클래스는 *appsettings.json* 파일의 `BookstoreDatabaseSettings` 속성 값을 저장하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-195">The preceding `BookstoreDatabaseSettings` class is used to store the *appsettings.json* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="0437c-196">JSON 및 C# 속성 이름은 매핑 프로세스를 용이하게 하기 위해 동일한 이름이 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-196">The JSON and C# property names are named identically to ease the mapping process.</span></span>
 
-1. <span data-ttu-id="2a30f-197">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-197">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
+1. <span data-ttu-id="0437c-197">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-197">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
    [!code-csharp[](first-mongo-app/samples_snapshot/3.x/SampleApp/Startup.ConfigureServices.AddDbSettings.cs?highlight=3-8)]
 
-   <span data-ttu-id="2a30f-198">위의 코드에서</span><span class="sxs-lookup"><span data-stu-id="2a30f-198">In the preceding code:</span></span>
+   <span data-ttu-id="0437c-198">위의 코드에서</span><span class="sxs-lookup"><span data-stu-id="0437c-198">In the preceding code:</span></span>
 
-   * <span data-ttu-id="2a30f-199">*appsettings.json* 파일의 `BookstoreDatabaseSettings` 섹션이 바인딩되는 구성 인스턴스가 DI(종속성 주입) 컨테이너에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-199">The configuration instance to which the *appsettings.json* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="2a30f-200">예를 들어 `BookstoreDatabaseSettings` 개체의 `ConnectionString` 속성은 *appsettings.json*의 `BookstoreDatabaseSettings:ConnectionString` 속성으로 채워집니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-200">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *appsettings.json*.</span></span>
-   * <span data-ttu-id="2a30f-201">`IBookstoreDatabaseSettings` 인터페이스는 싱글톤 [서비스 수명](xref:fundamentals/dependency-injection#service-lifetimes)으로 DI에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-201">The `IBookstoreDatabaseSettings` interface is registered in DI with a singleton [service lifetime](xref:fundamentals/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="2a30f-202">삽입하면 인터페이스 인스턴스가 `BookstoreDatabaseSettings` 개체로 확인됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-202">When injected, the interface instance resolves to a `BookstoreDatabaseSettings` object.</span></span>
+   * <span data-ttu-id="0437c-199">*appsettings.json* 파일의 `BookstoreDatabaseSettings` 섹션이 바인딩되는 구성 인스턴스가 DI(종속성 주입) 컨테이너에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-199">The configuration instance to which the *appsettings.json* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="0437c-200">예를 들어 `BookstoreDatabaseSettings` 개체의 `ConnectionString` 속성은 *appsettings.json*의 `BookstoreDatabaseSettings:ConnectionString` 속성으로 채워집니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-200">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *appsettings.json*.</span></span>
+   * <span data-ttu-id="0437c-201">`IBookstoreDatabaseSettings` 인터페이스는 싱글톤 [서비스 수명](xref:fundamentals/dependency-injection#service-lifetimes)으로 DI에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-201">The `IBookstoreDatabaseSettings` interface is registered in DI with a singleton [service lifetime](xref:fundamentals/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="0437c-202">삽입하면 인터페이스 인스턴스가 `BookstoreDatabaseSettings` 개체로 확인됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-202">When injected, the interface instance resolves to a `BookstoreDatabaseSettings` object.</span></span>
 
-1. <span data-ttu-id="2a30f-203">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookstoreDatabaseSettings` 및 `IBookstoreDatabaseSettings` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-203">Add the following code to the top of *Startup.cs* to resolve the `BookstoreDatabaseSettings` and `IBookstoreDatabaseSettings` references:</span></span>
+1. <span data-ttu-id="0437c-203">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookstoreDatabaseSettings` 및 `IBookstoreDatabaseSettings` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-203">Add the following code to the top of *Startup.cs* to resolve the `BookstoreDatabaseSettings` and `IBookstoreDatabaseSettings` references:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Startup.cs?name=snippet_UsingBooksApiModels)]
 
-## <a name="add-a-crud-operations-service"></a><span data-ttu-id="2a30f-204">CRUD 작업 서비스 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-204">Add a CRUD operations service</span></span>
+## <a name="add-a-crud-operations-service"></a><span data-ttu-id="0437c-204">CRUD 작업 서비스 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-204">Add a CRUD operations service</span></span>
 
-1. <span data-ttu-id="2a30f-205">프로젝트 루트에 *Services* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-205">Add a *Services* directory to the project root.</span></span>
-1. <span data-ttu-id="2a30f-206">다음 코드를 사용하여 *Services* 디렉터리에 `BookService` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-206">Add a `BookService` class to the *Services* directory with the following code:</span></span>
+1. <span data-ttu-id="0437c-205">프로젝트 루트에 *Services* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-205">Add a *Services* directory to the project root.</span></span>
+1. <span data-ttu-id="0437c-206">다음 코드를 사용하여 *Services* 디렉터리에 `BookService` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-206">Add a `BookService` class to the *Services* directory with the following code:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   <span data-ttu-id="2a30f-207">위의 코드에서 생성자 주입을 통해 DI에서 `IBookstoreDatabaseSettings` 인스턴스가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-207">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="2a30f-208">이 기술은 [구성 모델 추가](#add-a-configuration-model) 섹션에 추가된 *appsettings.json* 구성 값에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-208">This technique provides access to the *appsettings.json* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
+   <span data-ttu-id="0437c-207">위의 코드에서 생성자 주입을 통해 DI에서 `IBookstoreDatabaseSettings` 인스턴스가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-207">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="0437c-208">이 기술은 [구성 모델 추가](#add-a-configuration-model) 섹션에 추가된 *appsettings.json* 구성 값에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-208">This technique provides access to the *appsettings.json* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
 
-1. <span data-ttu-id="2a30f-209">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-209">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
+1. <span data-ttu-id="0437c-209">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-209">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
    [!code-csharp[](first-mongo-app/samples_snapshot/3.x/SampleApp/Startup.ConfigureServices.AddSingletonService.cs?highlight=9)]
 
-   <span data-ttu-id="2a30f-210">위의 코드에서 `BookService` 클래스는 사용 클래스에서 생성자 주입을 지원하는 DI로 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-210">In the preceding code, the `BookService` class is registered with DI to support constructor injection in consuming classes.</span></span> <span data-ttu-id="2a30f-211">`BookService`가 `MongoClient`에 직접 종속되기 때문에 싱글톤 서비스 수명이 가장 적합합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-211">The singleton service lifetime is most appropriate because `BookService` takes a direct dependency on `MongoClient`.</span></span> <span data-ttu-id="2a30f-212">공식 [Mongo 클라이언트 재사용 지침](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)에 따라 `MongoClient`를 싱글톤 수명으로 DI에 등록해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-212">Per the official [Mongo Client reuse guidelines](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use), `MongoClient` should be registered in DI with a singleton service lifetime.</span></span>
+   <span data-ttu-id="0437c-210">위의 코드에서 `BookService` 클래스는 사용 클래스에서 생성자 주입을 지원하는 DI로 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-210">In the preceding code, the `BookService` class is registered with DI to support constructor injection in consuming classes.</span></span> <span data-ttu-id="0437c-211">`BookService`가 `MongoClient`에 직접 종속되기 때문에 싱글톤 서비스 수명이 가장 적합합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-211">The singleton service lifetime is most appropriate because `BookService` takes a direct dependency on `MongoClient`.</span></span> <span data-ttu-id="0437c-212">공식 [Mongo 클라이언트 재사용 지침](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)에 따라 `MongoClient`를 싱글톤 수명으로 DI에 등록해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-212">Per the official [Mongo Client reuse guidelines](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use), `MongoClient` should be registered in DI with a singleton service lifetime.</span></span>
 
-1. <span data-ttu-id="2a30f-213">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookService` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-213">Add the following code to the top of *Startup.cs* to resolve the `BookService` reference:</span></span>
+1. <span data-ttu-id="0437c-213">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookService` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-213">Add the following code to the top of *Startup.cs* to resolve the `BookService` reference:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Startup.cs?name=snippet_UsingBooksApiServices)]
 
-<span data-ttu-id="2a30f-214">`BookService` 클래스는 다음 `MongoDB.Driver` 멤버를 사용하여 데이터베이스에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-214">The `BookService` class uses the following `MongoDB.Driver` members to perform CRUD operations against the database:</span></span>
+<span data-ttu-id="0437c-214">`BookService` 클래스는 다음 `MongoDB.Driver` 멤버를 사용하여 데이터베이스에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-214">The `BookService` class uses the following `MongoDB.Driver` members to perform CRUD operations against the database:</span></span>
 
-* <span data-ttu-id="2a30f-215">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): 데이터베이스 작업을 수행하기 위한 서버 인스턴스를 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-215">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): Reads the server instance for performing database operations.</span></span> <span data-ttu-id="2a30f-216">이 클래스의 생성자에 MongoDB 연결 문자열이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-216">The constructor of this class is provided the MongoDB connection string:</span></span>
+* <span data-ttu-id="0437c-215">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): 데이터베이스 작업을 수행하기 위한 서버 인스턴스를 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-215">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): Reads the server instance for performing database operations.</span></span> <span data-ttu-id="0437c-216">이 클래스의 생성자에 MongoDB 연결 문자열이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-216">The constructor of this class is provided the MongoDB connection string:</span></span>
 
   [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceConstructor&highlight=3)]
 
-* <span data-ttu-id="2a30f-217">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-217">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): Represents the Mongo database for performing operations.</span></span> <span data-ttu-id="2a30f-218">이 자습서에서는 인터페이스의 일반 [GetCollection\<TDocument>(컬렉션)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-218">This tutorial uses the generic [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) method on the interface to gain access to data in a specific collection.</span></span> <span data-ttu-id="2a30f-219">이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-219">Perform CRUD operations against the collection after this method is called.</span></span> <span data-ttu-id="2a30f-220">`GetCollection<TDocument>(collection)` 메서드 호출에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-220">In the `GetCollection<TDocument>(collection)` method call:</span></span>
+* <span data-ttu-id="0437c-217">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-217">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): Represents the Mongo database for performing operations.</span></span> <span data-ttu-id="0437c-218">이 자습서에서는 인터페이스의 일반 [GetCollection\<TDocument>(컬렉션)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-218">This tutorial uses the generic [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) method on the interface to gain access to data in a specific collection.</span></span> <span data-ttu-id="0437c-219">이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-219">Perform CRUD operations against the collection after this method is called.</span></span> <span data-ttu-id="0437c-220">`GetCollection<TDocument>(collection)` 메서드 호출에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-220">In the `GetCollection<TDocument>(collection)` method call:</span></span>
 
-  * <span data-ttu-id="2a30f-221">`collection`은 컬렉션 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-221">`collection` represents the collection name.</span></span>
-  * <span data-ttu-id="2a30f-222">`TDocument`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-222">`TDocument` represents the CLR object type stored in the collection.</span></span>
+  * <span data-ttu-id="0437c-221">`collection`은 컬렉션 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-221">`collection` represents the collection name.</span></span>
+  * <span data-ttu-id="0437c-222">`TDocument`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-222">`TDocument` represents the CLR object type stored in the collection.</span></span>
 
-<span data-ttu-id="2a30f-223">`GetCollection<TDocument>(collection)`는 컬렉션을 나타내는 [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) 개체를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-223">`GetCollection<TDocument>(collection)` returns a [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) object representing the collection.</span></span> <span data-ttu-id="2a30f-224">이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-224">In this tutorial, the following methods are invoked on the collection:</span></span>
+<span data-ttu-id="0437c-223">`GetCollection<TDocument>(collection)`는 컬렉션을 나타내는 [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) 개체를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-223">`GetCollection<TDocument>(collection)` returns a [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) object representing the collection.</span></span> <span data-ttu-id="0437c-224">이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-224">In this tutorial, the following methods are invoked on the collection:</span></span>
 
-* <span data-ttu-id="2a30f-225">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-225">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Deletes a single document matching the provided search criteria.</span></span>
-* <span data-ttu-id="2a30f-226">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-226">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): Returns all documents in the collection matching the provided search criteria.</span></span>
-* <span data-ttu-id="2a30f-227">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): 제공된 개체를 컬렉션에 새 문서로 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-227">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): Inserts the provided object as a new document in the collection.</span></span>
-* <span data-ttu-id="2a30f-228">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 제공된 개체로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-228">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): Replaces the single document matching the provided search criteria with the provided object.</span></span>
+* <span data-ttu-id="0437c-225">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-225">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Deletes a single document matching the provided search criteria.</span></span>
+* <span data-ttu-id="0437c-226">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-226">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): Returns all documents in the collection matching the provided search criteria.</span></span>
+* <span data-ttu-id="0437c-227">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): 제공된 개체를 컬렉션에 새 문서로 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-227">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): Inserts the provided object as a new document in the collection.</span></span>
+* <span data-ttu-id="0437c-228">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 제공된 개체로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-228">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): Replaces the single document matching the provided search criteria with the provided object.</span></span>
 
-## <a name="add-a-controller"></a><span data-ttu-id="2a30f-229">컨트롤러 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-229">Add a controller</span></span>
+## <a name="add-a-controller"></a><span data-ttu-id="0437c-229">컨트롤러 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-229">Add a controller</span></span>
 
-<span data-ttu-id="2a30f-230">다음 코드를 사용하여 *Controllers* 디렉터리에 `BooksController` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-230">Add a `BooksController` class to the *Controllers* directory with the following code:</span></span>
+<span data-ttu-id="0437c-230">다음 코드를 사용하여 *Controllers* 디렉터리에 `BooksController` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-230">Add a `BooksController` class to the *Controllers* directory with the following code:</span></span>
 
 [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Controllers/BooksController.cs)]
 
-<span data-ttu-id="2a30f-231">앞의 웹 API 컨트롤러는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-231">The preceding web API controller:</span></span>
+<span data-ttu-id="0437c-231">앞의 웹 API 컨트롤러는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-231">The preceding web API controller:</span></span>
 
-* <span data-ttu-id="2a30f-232">`BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-232">Uses the `BookService` class to perform CRUD operations.</span></span>
-* <span data-ttu-id="2a30f-233">GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-233">Contains action methods to support GET, POST, PUT, and DELETE HTTP requests.</span></span>
-* <span data-ttu-id="2a30f-234">`Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-234">Calls <xref:System.Web.Http.ApiController.CreatedAtRoute*> in the `Create` action method to return an [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) response.</span></span> <span data-ttu-id="2a30f-235">상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-235">Status code 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span> <span data-ttu-id="2a30f-236">또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-236">`CreatedAtRoute` also adds a `Location` header to the response.</span></span> <span data-ttu-id="2a30f-237">`Location` 헤더는 새로 만든 책의 URI를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-237">The `Location` header specifies the URI of the newly created book.</span></span>
+* <span data-ttu-id="0437c-232">`BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-232">Uses the `BookService` class to perform CRUD operations.</span></span>
+* <span data-ttu-id="0437c-233">GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-233">Contains action methods to support GET, POST, PUT, and DELETE HTTP requests.</span></span>
+* <span data-ttu-id="0437c-234">`Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-234">Calls <xref:System.Web.Http.ApiController.CreatedAtRoute*> in the `Create` action method to return an [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) response.</span></span> <span data-ttu-id="0437c-235">상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-235">Status code 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span> <span data-ttu-id="0437c-236">또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-236">`CreatedAtRoute` also adds a `Location` header to the response.</span></span> <span data-ttu-id="0437c-237">`Location` 헤더는 새로 만든 책의 URI를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-237">The `Location` header specifies the URI of the newly created book.</span></span>
 
-## <a name="test-the-web-api"></a><span data-ttu-id="2a30f-238">웹 API 테스트</span><span class="sxs-lookup"><span data-stu-id="2a30f-238">Test the web API</span></span>
+## <a name="test-the-web-api"></a><span data-ttu-id="0437c-238">웹 API 테스트</span><span class="sxs-lookup"><span data-stu-id="0437c-238">Test the web API</span></span>
 
-1. <span data-ttu-id="2a30f-239">앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-239">Build and run the app.</span></span>
+1. <span data-ttu-id="0437c-239">앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-239">Build and run the app.</span></span>
 
-1. <span data-ttu-id="2a30f-240">`http://localhost:<port>/api/books`로 이동하여 컨트롤러의 매개 변수가 없는 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-240">Navigate to `http://localhost:<port>/api/books` to test the controller's parameterless `Get` action method.</span></span> <span data-ttu-id="2a30f-241">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-241">The following JSON response is displayed:</span></span>
+1. <span data-ttu-id="0437c-240">`http://localhost:<port>/api/books`로 이동하여 컨트롤러의 매개 변수가 없는 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-240">Navigate to `http://localhost:<port>/api/books` to test the controller's parameterless `Get` action method.</span></span> <span data-ttu-id="0437c-241">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-241">The following JSON response is displayed:</span></span>
 
    ```json
    [
@@ -331,7 +333,7 @@ ms.locfileid: "84452254"
    ]
    ```
 
-1. <span data-ttu-id="2a30f-242">`http://localhost:<port>/api/books/{id here}`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-242">Navigate to `http://localhost:<port>/api/books/{id here}` to test the controller's overloaded `Get` action method.</span></span> <span data-ttu-id="2a30f-243">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-243">The following JSON response is displayed:</span></span>
+1. <span data-ttu-id="0437c-242">`http://localhost:<port>/api/books/{id here}`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-242">Navigate to `http://localhost:<port>/api/books/{id here}` to test the controller's overloaded `Get` action method.</span></span> <span data-ttu-id="0437c-243">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-243">The following JSON response is displayed:</span></span>
 
    ```json
    {
@@ -343,121 +345,121 @@ ms.locfileid: "84452254"
    }
    ```
 
-## <a name="configure-json-serialization-options"></a><span data-ttu-id="2a30f-244">JSON serialization 옵션 구성</span><span class="sxs-lookup"><span data-stu-id="2a30f-244">Configure JSON serialization options</span></span>
+## <a name="configure-json-serialization-options"></a><span data-ttu-id="0437c-244">JSON serialization 옵션 구성</span><span class="sxs-lookup"><span data-stu-id="0437c-244">Configure JSON serialization options</span></span>
 
-<span data-ttu-id="2a30f-245">[웹 API 테스트](#test-the-web-api) 섹션에서 반환된 JSON 응답에 대해 변경하는 두 개의 세부 정보가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-245">There are two details to change about the JSON responses returned in the [Test the web API](#test-the-web-api) section:</span></span>
+<span data-ttu-id="0437c-245">[웹 API 테스트](#test-the-web-api) 섹션에서 반환된 JSON 응답에 대해 변경하는 두 개의 세부 정보가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-245">There are two details to change about the JSON responses returned in the [Test the web API](#test-the-web-api) section:</span></span>
 
-* <span data-ttu-id="2a30f-246">속성 이름의 기본 카멜식 대/소문자는 CLR 개체의 속성 이름의 파스칼식 대/소문자와 일치하도록 변경되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-246">The property names' default camel casing should be changed to match the Pascal casing of the CLR object's property names.</span></span>
-* <span data-ttu-id="2a30f-247">`bookName` 속성은 `Name`으로 반환되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-247">The `bookName` property should be returned as `Name`.</span></span>
+* <span data-ttu-id="0437c-246">속성 이름의 기본 카멜식 대/소문자는 CLR 개체의 속성 이름의 파스칼식 대/소문자와 일치하도록 변경되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-246">The property names' default camel casing should be changed to match the Pascal casing of the CLR object's property names.</span></span>
+* <span data-ttu-id="0437c-247">`bookName` 속성은 `Name`으로 반환되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-247">The `bookName` property should be returned as `Name`.</span></span>
 
-<span data-ttu-id="2a30f-248">앞의 요구 사항을 충족하기 위해 다음과 같이 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-248">To satisfy the preceding requirements, make the following changes:</span></span>
+<span data-ttu-id="0437c-248">앞의 요구 사항을 충족하기 위해 다음과 같이 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-248">To satisfy the preceding requirements, make the following changes:</span></span>
 
-1. <span data-ttu-id="2a30f-249">ASP.NET 공유 프레임워크에서 JSON.NET이 제거되었습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-249">JSON.NET has been removed from ASP.NET shared framework.</span></span> <span data-ttu-id="2a30f-250">[`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson)에 대한 패키지 참조를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-250">Add a package reference to [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson).</span></span>
+1. <span data-ttu-id="0437c-249">ASP.NET 공유 프레임워크에서 JSON.NET이 제거되었습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-249">JSON.NET has been removed from ASP.NET shared framework.</span></span> <span data-ttu-id="0437c-250">[`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson)에 대한 패키지 참조를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-250">Add a package reference to [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson).</span></span>
 
-1. <span data-ttu-id="2a30f-251">`Startup.ConfigureServices`에서 다음 강조 표시된 코드를 `AddControllers` 메서드 호출에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-251">In `Startup.ConfigureServices`, chain the following highlighted code on to the `AddControllers` method call:</span></span>
+1. <span data-ttu-id="0437c-251">`Startup.ConfigureServices`에서 다음 강조 표시된 코드를 `AddControllers` 메서드 호출에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-251">In `Startup.ConfigureServices`, chain the following highlighted code on to the `AddControllers` method call:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=12)]
 
-   <span data-ttu-id="2a30f-252">이전 변경으로 웹 API의 직렬화된 JSON 응답에서 속성 이름은 CLR 개체 형식의 해당 속성 이름과 일치합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-252">With the preceding change, property names in the web API's serialized JSON response match their corresponding property names in the CLR object type.</span></span> <span data-ttu-id="2a30f-253">예를 들어 `Book` 클래스의 `Author` 속성은 `Author`로 직렬화합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-253">For example, the `Book` class's `Author` property serializes as `Author`.</span></span>
+   <span data-ttu-id="0437c-252">이전 변경으로 웹 API의 직렬화된 JSON 응답에서 속성 이름은 CLR 개체 형식의 해당 속성 이름과 일치합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-252">With the preceding change, property names in the web API's serialized JSON response match their corresponding property names in the CLR object type.</span></span> <span data-ttu-id="0437c-253">예를 들어 `Book` 클래스의 `Author` 속성은 `Author`로 직렬화합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-253">For example, the `Book` class's `Author` property serializes as `Author`.</span></span>
 
-1. <span data-ttu-id="2a30f-254">*Models/Book.cs*에서 다음 [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) 특성으로 `BookName` 속성에 주석을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-254">In *Models/Book.cs*, annotate the `BookName` property with the following [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) attribute:</span></span>
+1. <span data-ttu-id="0437c-254">*Models/Book.cs*에서 다음 [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) 특성으로 `BookName` 속성에 주석을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-254">In *Models/Book.cs*, annotate the `BookName` property with the following [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) attribute:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/Book.cs?name=snippet_BookNameProperty&highlight=2)]
 
-   <span data-ttu-id="2a30f-255">`Name`의 `[JsonProperty]` 특성 값은 웹 API의 직렬화된 JSON 응답의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-255">The `[JsonProperty]` attribute's value of `Name` represents the property name in the web API's serialized JSON response.</span></span>
+   <span data-ttu-id="0437c-255">`Name`의 `[JsonProperty]` 특성 값은 웹 API의 직렬화된 JSON 응답의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-255">The `[JsonProperty]` attribute's value of `Name` represents the property name in the web API's serialized JSON response.</span></span>
 
-1. <span data-ttu-id="2a30f-256">*Models/Book.cs*의 맨 위에 다음 코드를 추가하여 `[JsonProperty]` 특성 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-256">Add the following code to the top of *Models/Book.cs* to resolve the `[JsonProperty]` attribute reference:</span></span>
+1. <span data-ttu-id="0437c-256">*Models/Book.cs*의 맨 위에 다음 코드를 추가하여 `[JsonProperty]` 특성 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-256">Add the following code to the top of *Models/Book.cs* to resolve the `[JsonProperty]` attribute reference:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/Book.cs?name=snippet_NewtonsoftJsonImport)]
 
-1. <span data-ttu-id="2a30f-257">[웹 API 테스트](#test-the-web-api) 섹션에 정의된 단계를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-257">Repeat the steps defined in the [Test the web API](#test-the-web-api) section.</span></span> <span data-ttu-id="2a30f-258">JSON 속성 이름의 차이를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-258">Notice the difference in JSON property names.</span></span>
+1. <span data-ttu-id="0437c-257">[웹 API 테스트](#test-the-web-api) 섹션에 정의된 단계를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-257">Repeat the steps defined in the [Test the web API](#test-the-web-api) section.</span></span> <span data-ttu-id="0437c-258">JSON 속성 이름의 차이를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-258">Notice the difference in JSON property names.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="2a30f-259">이 자습서에서는 [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL 데이터베이스에 대해 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 수행하는 웹 API를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-259">This tutorial creates a web API that performs Create, Read, Update, and Delete (CRUD) operations on a [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL database.</span></span>
+<span data-ttu-id="0437c-259">이 자습서에서는 [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL 데이터베이스에 대해 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 수행하는 웹 API를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-259">This tutorial creates a web API that performs Create, Read, Update, and Delete (CRUD) operations on a [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL database.</span></span>
 
-<span data-ttu-id="2a30f-260">이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-260">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="0437c-260">이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-260">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="2a30f-261">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="2a30f-261">Configure MongoDB</span></span>
-> * <span data-ttu-id="2a30f-262">MongoDB 데이터베이스 만들기</span><span class="sxs-lookup"><span data-stu-id="2a30f-262">Create a MongoDB database</span></span>
-> * <span data-ttu-id="2a30f-263">MongoDB 컬렉션 및 스키마 정의</span><span class="sxs-lookup"><span data-stu-id="2a30f-263">Define a MongoDB collection and schema</span></span>
-> * <span data-ttu-id="2a30f-264">웹 API에서 MongoDB CRUD 작업 수행</span><span class="sxs-lookup"><span data-stu-id="2a30f-264">Perform MongoDB CRUD operations from a web API</span></span>
-> * <span data-ttu-id="2a30f-265">JSON serialization 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="2a30f-265">Customize JSON serialization</span></span>
+> * <span data-ttu-id="0437c-261">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="0437c-261">Configure MongoDB</span></span>
+> * <span data-ttu-id="0437c-262">MongoDB 데이터베이스 만들기</span><span class="sxs-lookup"><span data-stu-id="0437c-262">Create a MongoDB database</span></span>
+> * <span data-ttu-id="0437c-263">MongoDB 컬렉션 및 스키마 정의</span><span class="sxs-lookup"><span data-stu-id="0437c-263">Define a MongoDB collection and schema</span></span>
+> * <span data-ttu-id="0437c-264">웹 API에서 MongoDB CRUD 작업 수행</span><span class="sxs-lookup"><span data-stu-id="0437c-264">Perform MongoDB CRUD operations from a web API</span></span>
+> * <span data-ttu-id="0437c-265">JSON serialization 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="0437c-265">Customize JSON serialization</span></span>
 
-<span data-ttu-id="2a30f-266">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="2a30f-266">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="0437c-266">[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="0437c-266">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="2a30f-267">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="2a30f-267">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="0437c-267">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="0437c-267">Prerequisites</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="2a30f-268">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-268">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="0437c-268">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-268">Visual Studio</span></span>](#tab/visual-studio)
 
-* [<span data-ttu-id="2a30f-269">.NET Core SDK 2.2</span><span class="sxs-lookup"><span data-stu-id="2a30f-269">.NET Core SDK 2.2</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
-* <span data-ttu-id="2a30f-270">**ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)</span><span class="sxs-lookup"><span data-stu-id="2a30f-270">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload</span></span>
-* [<span data-ttu-id="2a30f-271">MongoDB</span><span class="sxs-lookup"><span data-stu-id="2a30f-271">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+* [<span data-ttu-id="0437c-269">.NET Core SDK 2.2</span><span class="sxs-lookup"><span data-stu-id="0437c-269">.NET Core SDK 2.2</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* <span data-ttu-id="0437c-270">**ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)</span><span class="sxs-lookup"><span data-stu-id="0437c-270">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload</span></span>
+* [<span data-ttu-id="0437c-271">MongoDB</span><span class="sxs-lookup"><span data-stu-id="0437c-271">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="2a30f-272">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="2a30f-272">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="0437c-272">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0437c-272">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* [<span data-ttu-id="2a30f-273">.NET Core SDK 2.2</span><span class="sxs-lookup"><span data-stu-id="2a30f-273">.NET Core SDK 2.2</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
-* [<span data-ttu-id="2a30f-274">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="2a30f-274">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
-* [<span data-ttu-id="2a30f-275">Visual Studio Code용 C#</span><span class="sxs-lookup"><span data-stu-id="2a30f-275">C# for Visual Studio Code</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [<span data-ttu-id="2a30f-276">MongoDB</span><span class="sxs-lookup"><span data-stu-id="2a30f-276">MongoDB</span></span>](https://docs.mongodb.com/manual/administration/install-community/)
+* [<span data-ttu-id="0437c-273">.NET Core SDK 2.2</span><span class="sxs-lookup"><span data-stu-id="0437c-273">.NET Core SDK 2.2</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="0437c-274">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0437c-274">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
+* [<span data-ttu-id="0437c-275">Visual Studio Code용 C#</span><span class="sxs-lookup"><span data-stu-id="0437c-275">C# for Visual Studio Code</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
+* [<span data-ttu-id="0437c-276">MongoDB</span><span class="sxs-lookup"><span data-stu-id="0437c-276">MongoDB</span></span>](https://docs.mongodb.com/manual/administration/install-community/)
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="2a30f-277">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-277">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="0437c-277">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-277">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* [<span data-ttu-id="2a30f-278">.NET Core SDK 2.2</span><span class="sxs-lookup"><span data-stu-id="2a30f-278">.NET Core SDK 2.2</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
-* [<span data-ttu-id="2a30f-279">Mac용 Visual Studio 버전 7.7 이상</span><span class="sxs-lookup"><span data-stu-id="2a30f-279">Visual Studio for Mac version 7.7 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
-* [<span data-ttu-id="2a30f-280">MongoDB</span><span class="sxs-lookup"><span data-stu-id="2a30f-280">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+* [<span data-ttu-id="0437c-278">.NET Core SDK 2.2</span><span class="sxs-lookup"><span data-stu-id="0437c-278">.NET Core SDK 2.2</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="0437c-279">Mac용 Visual Studio 버전 7.7 이상</span><span class="sxs-lookup"><span data-stu-id="0437c-279">Visual Studio for Mac version 7.7 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
+* [<span data-ttu-id="0437c-280">MongoDB</span><span class="sxs-lookup"><span data-stu-id="0437c-280">MongoDB</span></span>](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 
 ---
 
-## <a name="configure-mongodb"></a><span data-ttu-id="2a30f-281">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="2a30f-281">Configure MongoDB</span></span>
+## <a name="configure-mongodb"></a><span data-ttu-id="0437c-281">MongoDB 구성</span><span class="sxs-lookup"><span data-stu-id="0437c-281">Configure MongoDB</span></span>
 
-<span data-ttu-id="2a30f-282">Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\MongoDB*에 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-282">If using Windows, MongoDB is installed at *C:\\Program Files\\MongoDB* by default.</span></span> <span data-ttu-id="2a30f-283">*C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin*을 `Path` 환경 변수에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-283">Add *C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin* to the `Path` environment variable.</span></span> <span data-ttu-id="2a30f-284">이렇게 변경하면 개발 머신의 어디에서나 MongoDB에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-284">This change enables MongoDB access from anywhere on your development machine.</span></span>
+<span data-ttu-id="0437c-282">Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\MongoDB*에 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-282">If using Windows, MongoDB is installed at *C:\\Program Files\\MongoDB* by default.</span></span> <span data-ttu-id="0437c-283">*C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin*을 `Path` 환경 변수에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-283">Add *C:\\Program Files\\MongoDB\\Server\\\<version_number>\\bin* to the `Path` environment variable.</span></span> <span data-ttu-id="0437c-284">이렇게 변경하면 개발 머신의 어디에서나 MongoDB에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-284">This change enables MongoDB access from anywhere on your development machine.</span></span>
 
-<span data-ttu-id="2a30f-285">다음 단계에서 mongo 셸을 사용하여 데이터베이스 및 컬렉션을 만들고 문서를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-285">Use the mongo Shell in the following steps to create a database, make collections, and store documents.</span></span> <span data-ttu-id="2a30f-286">mongo 셸 명령에 대한 자세한 내용은 [mongo 셸 작업](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2a30f-286">For more information on mongo Shell commands, see [Working with the mongo Shell](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).</span></span>
+<span data-ttu-id="0437c-285">다음 단계에서 mongo 셸을 사용하여 데이터베이스 및 컬렉션을 만들고 문서를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-285">Use the mongo Shell in the following steps to create a database, make collections, and store documents.</span></span> <span data-ttu-id="0437c-286">mongo 셸 명령에 대한 자세한 내용은 [mongo 셸 작업](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="0437c-286">For more information on mongo Shell commands, see [Working with the mongo Shell](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).</span></span>
 
-1. <span data-ttu-id="2a30f-287">개발 머신에서 데이터를 저장할 디렉터리를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-287">Choose a directory on your development machine for storing the data.</span></span> <span data-ttu-id="2a30f-288">예를 들어 Windows의 경우 *C:\\BooksData*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-288">For example, *C:\\BooksData* on Windows.</span></span> <span data-ttu-id="2a30f-289">디렉터리가 없을 경우 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-289">Create the directory if it doesn't exist.</span></span> <span data-ttu-id="2a30f-290">mongo 셸은 새 디렉터리를 만들지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-290">The mongo Shell doesn't create new directories.</span></span>
-1. <span data-ttu-id="2a30f-291">명령 셸을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-291">Open a command shell.</span></span> <span data-ttu-id="2a30f-292">다음 명령을 실행하여 기본 포트 27017에서 MongoDB에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-292">Run the following command to connect to MongoDB on default port 27017.</span></span> <span data-ttu-id="2a30f-293">`<data_directory_path>`를 이전 단계에서 선택한 디렉터리로 바꿔야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-293">Remember to replace `<data_directory_path>` with the directory you chose in the previous step.</span></span>
+1. <span data-ttu-id="0437c-287">개발 머신에서 데이터를 저장할 디렉터리를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-287">Choose a directory on your development machine for storing the data.</span></span> <span data-ttu-id="0437c-288">예를 들어 Windows의 경우 *C:\\BooksData*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-288">For example, *C:\\BooksData* on Windows.</span></span> <span data-ttu-id="0437c-289">디렉터리가 없을 경우 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-289">Create the directory if it doesn't exist.</span></span> <span data-ttu-id="0437c-290">mongo 셸은 새 디렉터리를 만들지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-290">The mongo Shell doesn't create new directories.</span></span>
+1. <span data-ttu-id="0437c-291">명령 셸을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-291">Open a command shell.</span></span> <span data-ttu-id="0437c-292">다음 명령을 실행하여 기본 포트 27017에서 MongoDB에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-292">Run the following command to connect to MongoDB on default port 27017.</span></span> <span data-ttu-id="0437c-293">`<data_directory_path>`를 이전 단계에서 선택한 디렉터리로 바꿔야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-293">Remember to replace `<data_directory_path>` with the directory you chose in the previous step.</span></span>
 
    ```console
    mongod --dbpath <data_directory_path>
    ```
 
-1. <span data-ttu-id="2a30f-294">다른 명령 셸 인스턴스를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-294">Open another command shell instance.</span></span> <span data-ttu-id="2a30f-295">다음 명령을 실행하여 기본 테스트 데이터베이스에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-295">Connect to the default test database by running the following command:</span></span>
+1. <span data-ttu-id="0437c-294">다른 명령 셸 인스턴스를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-294">Open another command shell instance.</span></span> <span data-ttu-id="0437c-295">다음 명령을 실행하여 기본 테스트 데이터베이스에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-295">Connect to the default test database by running the following command:</span></span>
 
    ```console
    mongo
    ```
 
-1. <span data-ttu-id="2a30f-296">명령 셸에서 다음을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-296">Run the following in a command shell:</span></span>
+1. <span data-ttu-id="0437c-296">명령 셸에서 다음을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-296">Run the following in a command shell:</span></span>
 
    ```console
    use BookstoreDb
    ```
 
-   <span data-ttu-id="2a30f-297">아직 존재하지 않는 경우 *BookstoreDb*라는 데이터베이스가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-297">If it doesn't already exist, a database named *BookstoreDb* is created.</span></span> <span data-ttu-id="2a30f-298">데이터베이스가 있는 경우 트랜잭션을 위해 해당 연결이 열립니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-298">If the database does exist, its connection is opened for transactions.</span></span>
+   <span data-ttu-id="0437c-297">아직 존재하지 않는 경우 *BookstoreDb*라는 데이터베이스가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-297">If it doesn't already exist, a database named *BookstoreDb* is created.</span></span> <span data-ttu-id="0437c-298">데이터베이스가 있는 경우 트랜잭션을 위해 해당 연결이 열립니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-298">If the database does exist, its connection is opened for transactions.</span></span>
 
-1. <span data-ttu-id="2a30f-299">다음 명령을 사용하여 `Books` 컬렉션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-299">Create a `Books` collection using following command:</span></span>
+1. <span data-ttu-id="0437c-299">다음 명령을 사용하여 `Books` 컬렉션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-299">Create a `Books` collection using following command:</span></span>
 
    ```console
    db.createCollection('Books')
    ```
 
-   <span data-ttu-id="2a30f-300">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-300">The following result is displayed:</span></span>
+   <span data-ttu-id="0437c-300">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-300">The following result is displayed:</span></span>
 
    ```console
    { "ok" : 1 }
    ```
 
-1. <span data-ttu-id="2a30f-301">다음 명령을 사용하여 `Books` 컬렉션에 대한 스키마를 정의하고 두 개의 문서를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-301">Define a schema for the `Books` collection and insert two documents using the following command:</span></span>
+1. <span data-ttu-id="0437c-301">다음 명령을 사용하여 `Books` 컬렉션에 대한 스키마를 정의하고 두 개의 문서를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-301">Define a schema for the `Books` collection and insert two documents using the following command:</span></span>
 
    ```console
    db.Books.insertMany([{'Name':'Design Patterns','Price':54.93,'Category':'Computers','Author':'Ralph Johnson'}, {'Name':'Clean Code','Price':43.15,'Category':'Computers','Author':'Robert C. Martin'}])
    ```
 
-   <span data-ttu-id="2a30f-302">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-302">The following result is displayed:</span></span>
+   <span data-ttu-id="0437c-302">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-302">The following result is displayed:</span></span>
 
    ```console
    {
@@ -470,15 +472,15 @@ ms.locfileid: "84452254"
    ```
   
    > [!NOTE]
-   > <span data-ttu-id="2a30f-303">이 문서에 표시된 ID는 이 샘플을 실행할 때의 ID와 일치하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-303">The ID's shown in this article will not match the IDs when you run this sample.</span></span>
+   > <span data-ttu-id="0437c-303">이 문서에 표시된 ID는 이 샘플을 실행할 때의 ID와 일치하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-303">The ID's shown in this article will not match the IDs when you run this sample.</span></span>
 
-1. <span data-ttu-id="2a30f-304">다음 명령을 사용하여 데이터베이스의 문서를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-304">View the documents in the database using the following command:</span></span>
+1. <span data-ttu-id="0437c-304">다음 명령을 사용하여 데이터베이스의 문서를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-304">View the documents in the database using the following command:</span></span>
 
    ```console
    db.Books.find({}).pretty()
    ```
 
-   <span data-ttu-id="2a30f-305">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-305">The following result is displayed:</span></span>
+   <span data-ttu-id="0437c-305">다음 결과가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-305">The following result is displayed:</span></span>
 
    ```console
    {
@@ -497,58 +499,58 @@ ms.locfileid: "84452254"
    }
    ```
 
-   <span data-ttu-id="2a30f-306">스키마가 각 문서에 대해 자동 생성된 `ObjectId` 형식의 `_id` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-306">The schema adds an autogenerated `_id` property of type `ObjectId` for each document.</span></span>
+   <span data-ttu-id="0437c-306">스키마가 각 문서에 대해 자동 생성된 `ObjectId` 형식의 `_id` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-306">The schema adds an autogenerated `_id` property of type `ObjectId` for each document.</span></span>
 
-<span data-ttu-id="2a30f-307">데이터베이스가 준비되었습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-307">The database is ready.</span></span> <span data-ttu-id="2a30f-308">이제 ASP.NET Core 웹 API를 만들기 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-308">You can start creating the ASP.NET Core web API.</span></span>
+<span data-ttu-id="0437c-307">데이터베이스가 준비되었습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-307">The database is ready.</span></span> <span data-ttu-id="0437c-308">이제 ASP.NET Core 웹 API를 만들기 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-308">You can start creating the ASP.NET Core web API.</span></span>
 
-## <a name="create-the-aspnet-core-web-api-project"></a><span data-ttu-id="2a30f-309">ASP.NET Core 웹 API 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="2a30f-309">Create the ASP.NET Core web API project</span></span>
+## <a name="create-the-aspnet-core-web-api-project"></a><span data-ttu-id="0437c-309">ASP.NET Core 웹 API 프로젝트 만들기</span><span class="sxs-lookup"><span data-stu-id="0437c-309">Create the ASP.NET Core web API project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="2a30f-310">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-310">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="0437c-310">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-310">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="2a30f-311">**파일** > **새로 만들기** > **프로젝트**로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-311">Go to **File** > **New** > **Project**.</span></span>
-1. <span data-ttu-id="2a30f-312">**ASP.NET Core 웹 애플리케이션** 프로젝트 유형을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-312">Select the **ASP.NET Core Web Application** project type, and select **Next**.</span></span>
-1. <span data-ttu-id="2a30f-313">프로젝트 이름을 *BooksApi*로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-313">Name the project *BooksApi*, and select **Create**.</span></span>
-1. <span data-ttu-id="2a30f-314">**.NET Core** 대상 프레임워크 및 **ASP.NET Core 2.2**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-314">Select the **.NET Core** target framework and **ASP.NET Core 2.2**.</span></span> <span data-ttu-id="2a30f-315">**API** 프로젝트 템플릿을 선택하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-315">Select the **API** project template, and select **Create**.</span></span>
-1. <span data-ttu-id="2a30f-316">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-316">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="2a30f-317">**패키지 관리자 콘솔** 창에서 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-317">In the **Package Manager Console** window, navigate to the project root.</span></span> <span data-ttu-id="2a30f-318">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-318">Run the following command to install the .NET driver for MongoDB:</span></span>
+1. <span data-ttu-id="0437c-311">**파일** > **새로 만들기** > **프로젝트**로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-311">Go to **File** > **New** > **Project**.</span></span>
+1. <span data-ttu-id="0437c-312">**ASP.NET Core 웹 애플리케이션** 프로젝트 유형을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-312">Select the **ASP.NET Core Web Application** project type, and select **Next**.</span></span>
+1. <span data-ttu-id="0437c-313">프로젝트 이름을 *BooksApi*로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-313">Name the project *BooksApi*, and select **Create**.</span></span>
+1. <span data-ttu-id="0437c-314">**.NET Core** 대상 프레임워크 및 **ASP.NET Core 2.2**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-314">Select the **.NET Core** target framework and **ASP.NET Core 2.2**.</span></span> <span data-ttu-id="0437c-315">**API** 프로젝트 템플릿을 선택하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-315">Select the **API** project template, and select **Create**.</span></span>
+1. <span data-ttu-id="0437c-316">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-316">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="0437c-317">**패키지 관리자 콘솔** 창에서 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-317">In the **Package Manager Console** window, navigate to the project root.</span></span> <span data-ttu-id="0437c-318">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-318">Run the following command to install the .NET driver for MongoDB:</span></span>
 
    ```powershell
    Install-Package MongoDB.Driver -Version {VERSION}
    ```
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="2a30f-319">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="2a30f-319">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="0437c-319">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0437c-319">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-1. <span data-ttu-id="2a30f-320">명령 셸에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-320">Run the following commands in a command shell:</span></span>
+1. <span data-ttu-id="0437c-320">명령 셸에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-320">Run the following commands in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o BooksApi
    code BooksApi
    ```
 
-   <span data-ttu-id="2a30f-321">.NET Core를 대상으로 하는 새로운 ASP.NET Core 웹 API 프로젝트가 Visual Studio Code에서 생성되어 열립니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-321">A new ASP.NET Core web API project targeting .NET Core is generated and opened in Visual Studio Code.</span></span>
+   <span data-ttu-id="0437c-321">.NET Core를 대상으로 하는 새로운 ASP.NET Core 웹 API 프로젝트가 Visual Studio Code에서 생성되어 열립니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-321">A new ASP.NET Core web API project targeting .NET Core is generated and opened in Visual Studio Code.</span></span>
 
-1. <span data-ttu-id="2a30f-322">상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 대화 상자에 **빌드 및 디버그에 필요한 자산이 'BooksApi'에서 누락되었습니다.라는 메시지가 표시됩니다. 추가할까요?** .</span><span class="sxs-lookup"><span data-stu-id="2a30f-322">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'BooksApi'. Add them?**.</span></span> <span data-ttu-id="2a30f-323">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-323">Select **Yes**.</span></span>
-1. <span data-ttu-id="2a30f-324">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-324">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="2a30f-325">**통합 터미널**을 열고 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-325">Open **Integrated Terminal** and navigate to the project root.</span></span> <span data-ttu-id="2a30f-326">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-326">Run the following command to install the .NET driver for MongoDB:</span></span>
+1. <span data-ttu-id="0437c-322">상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 대화 상자에 **빌드 및 디버그에 필요한 자산이 'BooksApi'에서 누락되었습니다.라는 메시지가 표시됩니다. 추가할까요?** .</span><span class="sxs-lookup"><span data-stu-id="0437c-322">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'BooksApi'. Add them?**.</span></span> <span data-ttu-id="0437c-323">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-323">Select **Yes**.</span></span>
+1. <span data-ttu-id="0437c-324">[NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-324">Visit the [NuGet Gallery: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) to determine the latest stable version of the .NET driver for MongoDB.</span></span> <span data-ttu-id="0437c-325">**통합 터미널**을 열고 프로젝트 루트로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-325">Open **Integrated Terminal** and navigate to the project root.</span></span> <span data-ttu-id="0437c-326">다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-326">Run the following command to install the .NET driver for MongoDB:</span></span>
 
    ```dotnetcli
    dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
    ```
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="2a30f-327">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2a30f-327">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="0437c-327">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0437c-327">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-1. <span data-ttu-id="2a30f-328">Mac용 Visual Studio 버전 8.6 미만에서는 사이드바에서 **파일** > **새 솔루션** >  **.NET Core** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-328">In Visual Studio for Mac earlier than version 8.6, select **File** > **New Solution** > **.NET Core** > **App** from the sidebar.</span></span> <span data-ttu-id="2a30f-329">버전 8.6 이상에서는 사이드바에서 **파일** > **새 솔루션** > **웹 및 콘솔** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-329">In version 8.6 or later, select **File** > **New Solution** > **Web and Console** > **App** from the sidebar.</span></span>
-1. <span data-ttu-id="2a30f-330">**ASP.NET Core Web API** C# 프로젝트 템플릿을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-330">Select the **ASP.NET Core Web API** C# project template, and select **Next**.</span></span>
-1. <span data-ttu-id="2a30f-331">**대상 프레임워크** 드롭다운 목록에서 **.NET Core 2.2**를 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-331">Select **.NET Core 2.2** from the **Target Framework** drop-down list, and select **Next**.</span></span>
-1. <span data-ttu-id="2a30f-332">**프로젝트 이름**으로 *BooksApi*를 입력하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-332">Enter *BooksApi* for the **Project Name**, and select **Create**.</span></span>
-1. <span data-ttu-id="2a30f-333">**솔루션** 패드에서 프로젝트의 **종속성** 노드를 마우스 오른쪽 단추로 클릭하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-333">In the **Solution** pad, right-click the project's **Dependencies** node and select **Add Packages**.</span></span>
-1. <span data-ttu-id="2a30f-334">검색 상자에 *MongoDB.Driver*를 입력하여 *MongoDB.Driver* 패키지를 선택하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-334">Enter *MongoDB.Driver* in the search box, select the *MongoDB.Driver* package, and select **Add Package**.</span></span>
-1. <span data-ttu-id="2a30f-335">**라이선스 승인** 대화 상자에서 **동의** 단추를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-335">Select the **Accept** button in the **License Acceptance** dialog.</span></span>
+1. <span data-ttu-id="0437c-328">Mac용 Visual Studio 버전 8.6 미만에서는 사이드바에서 **파일** > **새 솔루션** >  **.NET Core** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-328">In Visual Studio for Mac earlier than version 8.6, select **File** > **New Solution** > **.NET Core** > **App** from the sidebar.</span></span> <span data-ttu-id="0437c-329">버전 8.6 이상에서는 사이드바에서 **파일** > **새 솔루션** > **웹 및 콘솔** > **앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-329">In version 8.6 or later, select **File** > **New Solution** > **Web and Console** > **App** from the sidebar.</span></span>
+1. <span data-ttu-id="0437c-330">**ASP.NET Core Web API** C# 프로젝트 템플릿을 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-330">Select the **ASP.NET Core Web API** C# project template, and select **Next**.</span></span>
+1. <span data-ttu-id="0437c-331">**대상 프레임워크** 드롭다운 목록에서 **.NET Core 2.2**를 선택하고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-331">Select **.NET Core 2.2** from the **Target Framework** drop-down list, and select **Next**.</span></span>
+1. <span data-ttu-id="0437c-332">**프로젝트 이름**으로 *BooksApi*를 입력하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-332">Enter *BooksApi* for the **Project Name**, and select **Create**.</span></span>
+1. <span data-ttu-id="0437c-333">**솔루션** 패드에서 프로젝트의 **종속성** 노드를 마우스 오른쪽 단추로 클릭하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-333">In the **Solution** pad, right-click the project's **Dependencies** node and select **Add Packages**.</span></span>
+1. <span data-ttu-id="0437c-334">검색 상자에 *MongoDB.Driver*를 입력하여 *MongoDB.Driver* 패키지를 선택하고 **패키지 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-334">Enter *MongoDB.Driver* in the search box, select the *MongoDB.Driver* package, and select **Add Package**.</span></span>
+1. <span data-ttu-id="0437c-335">**라이선스 승인** 대화 상자에서 **동의** 단추를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-335">Select the **Accept** button in the **License Acceptance** dialog.</span></span>
 
 ---
 
-## <a name="add-an-entity-model"></a><span data-ttu-id="2a30f-336">엔터티 모델 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-336">Add an entity model</span></span>
+## <a name="add-an-entity-model"></a><span data-ttu-id="0437c-336">엔터티 모델 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-336">Add an entity model</span></span>
 
-1. <span data-ttu-id="2a30f-337">프로젝트 루트에 *Models* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-337">Add a *Models* directory to the project root.</span></span>
-1. <span data-ttu-id="2a30f-338">다음 코드를 사용하여 *Models* 디렉터리에 `Book` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-338">Add a `Book` class to the *Models* directory with the following code:</span></span>
+1. <span data-ttu-id="0437c-337">프로젝트 루트에 *Models* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-337">Add a *Models* directory to the project root.</span></span>
+1. <span data-ttu-id="0437c-338">다음 코드를 사용하여 *Models* 디렉터리에 `Book` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-338">Add a `Book` class to the *Models* directory with the following code:</span></span>
 
    ```csharp
    using MongoDB.Bson;
@@ -574,93 +576,93 @@ ms.locfileid: "84452254"
    }
    ```
 
-   <span data-ttu-id="2a30f-339">앞의 클래스에서 `Id` 속성은</span><span class="sxs-lookup"><span data-stu-id="2a30f-339">In the preceding class, the `Id` property:</span></span>
+   <span data-ttu-id="0437c-339">앞의 클래스에서 `Id` 속성은</span><span class="sxs-lookup"><span data-stu-id="0437c-339">In the preceding class, the `Id` property:</span></span>
 
-   * <span data-ttu-id="2a30f-340">CLR(공용 언어 런타임) 개체를 MongoDB 컬렉션에 매핑하는 데 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-340">Is required for mapping the Common Language Runtime (CLR) object to the MongoDB collection.</span></span>
-   * <span data-ttu-id="2a30f-341">이 속성을 문서의 기본 키로 지정하려면 [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-341">Is annotated with [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) to designate this property as the document's primary key.</span></span>
-   * <span data-ttu-id="2a30f-342">[ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) 구조체 대신 `string` 형식으로 매개 변수를 전달할 수 있도록 [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-342">Is annotated with [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) to allow passing the parameter as type `string` instead of an [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) structure.</span></span> <span data-ttu-id="2a30f-343">Mongo는 `string`에서 `ObjectId`로 변환을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-343">Mongo handles the conversion from `string` to `ObjectId`.</span></span>
+   * <span data-ttu-id="0437c-340">CLR(공용 언어 런타임) 개체를 MongoDB 컬렉션에 매핑하는 데 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-340">Is required for mapping the Common Language Runtime (CLR) object to the MongoDB collection.</span></span>
+   * <span data-ttu-id="0437c-341">이 속성을 문서의 기본 키로 지정하려면 [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-341">Is annotated with [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) to designate this property as the document's primary key.</span></span>
+   * <span data-ttu-id="0437c-342">[ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) 구조체 대신 `string` 형식으로 매개 변수를 전달할 수 있도록 [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm)로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-342">Is annotated with [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) to allow passing the parameter as type `string` instead of an [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) structure.</span></span> <span data-ttu-id="0437c-343">Mongo는 `string`에서 `ObjectId`로 변환을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-343">Mongo handles the conversion from `string` to `ObjectId`.</span></span>
 
-   <span data-ttu-id="2a30f-344">`BookName` 속성은 [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 특성으로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-344">The `BookName` property is annotated with the [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) attribute.</span></span> <span data-ttu-id="2a30f-345">`Name`의 특성 값은 MongoDB 컬렉션의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-345">The attribute's value of `Name` represents the property name in the MongoDB collection.</span></span>
+   <span data-ttu-id="0437c-344">`BookName` 속성은 [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 특성으로 주석이 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-344">The `BookName` property is annotated with the [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) attribute.</span></span> <span data-ttu-id="0437c-345">`Name`의 특성 값은 MongoDB 컬렉션의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-345">The attribute's value of `Name` represents the property name in the MongoDB collection.</span></span>
 
-## <a name="add-a-configuration-model"></a><span data-ttu-id="2a30f-346">구성 모델 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-346">Add a configuration model</span></span>
+## <a name="add-a-configuration-model"></a><span data-ttu-id="0437c-346">구성 모델 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-346">Add a configuration model</span></span>
 
-1. <span data-ttu-id="2a30f-347">다음 데이터베이스 구성 값을 *appsettings.json*에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-347">Add the following database configuration values to *appsettings.json*:</span></span>
+1. <span data-ttu-id="0437c-347">다음 데이터베이스 구성 값을 *appsettings.json*에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-347">Add the following database configuration values to *appsettings.json*:</span></span>
 
    [!code-json[](first-mongo-app/samples/2.x/SampleApp/appsettings.json?highlight=2-6)]
 
-1. <span data-ttu-id="2a30f-348">다음 코드를 사용하여 *BookstoreDatabaseSettings.cs* 파일을 *모델* 디렉터리에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-348">Add a *BookstoreDatabaseSettings.cs* file to the *Models* directory with the following code:</span></span>
+1. <span data-ttu-id="0437c-348">다음 코드를 사용하여 *BookstoreDatabaseSettings.cs* 파일을 *모델* 디렉터리에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-348">Add a *BookstoreDatabaseSettings.cs* file to the *Models* directory with the following code:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   <span data-ttu-id="2a30f-349">위의 `BookstoreDatabaseSettings` 클래스는 *appsettings.json* 파일의 `BookstoreDatabaseSettings` 속성 값을 저장하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-349">The preceding `BookstoreDatabaseSettings` class is used to store the *appsettings.json* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="2a30f-350">JSON 및 C# 속성 이름은 매핑 프로세스를 용이하게 하기 위해 동일한 이름이 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-350">The JSON and C# property names are named identically to ease the mapping process.</span></span>
+   <span data-ttu-id="0437c-349">위의 `BookstoreDatabaseSettings` 클래스는 *appsettings.json* 파일의 `BookstoreDatabaseSettings` 속성 값을 저장하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-349">The preceding `BookstoreDatabaseSettings` class is used to store the *appsettings.json* file's `BookstoreDatabaseSettings` property values.</span></span> <span data-ttu-id="0437c-350">JSON 및 C# 속성 이름은 매핑 프로세스를 용이하게 하기 위해 동일한 이름이 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-350">The JSON and C# property names are named identically to ease the mapping process.</span></span>
 
-1. <span data-ttu-id="2a30f-351">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-351">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
+1. <span data-ttu-id="0437c-351">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-351">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
    [!code-csharp[](first-mongo-app/samples_snapshot/2.x/SampleApp/Startup.ConfigureServices.AddDbSettings.cs?highlight=3-7)]
 
-   <span data-ttu-id="2a30f-352">위의 코드에서</span><span class="sxs-lookup"><span data-stu-id="2a30f-352">In the preceding code:</span></span>
+   <span data-ttu-id="0437c-352">위의 코드에서</span><span class="sxs-lookup"><span data-stu-id="0437c-352">In the preceding code:</span></span>
 
-   * <span data-ttu-id="2a30f-353">*appsettings.json* 파일의 `BookstoreDatabaseSettings` 섹션이 바인딩되는 구성 인스턴스가 DI(종속성 주입) 컨테이너에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-353">The configuration instance to which the *appsettings.json* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="2a30f-354">예를 들어 `BookstoreDatabaseSettings` 개체의 `ConnectionString` 속성은 *appsettings.json*의 `BookstoreDatabaseSettings:ConnectionString` 속성으로 채워집니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-354">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *appsettings.json*.</span></span>
-   * <span data-ttu-id="2a30f-355">`IBookstoreDatabaseSettings` 인터페이스는 싱글톤 [서비스 수명](xref:fundamentals/dependency-injection#service-lifetimes)으로 DI에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-355">The `IBookstoreDatabaseSettings` interface is registered in DI with a singleton [service lifetime](xref:fundamentals/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="2a30f-356">삽입하면 인터페이스 인스턴스가 `BookstoreDatabaseSettings` 개체로 확인됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-356">When injected, the interface instance resolves to a `BookstoreDatabaseSettings` object.</span></span>
+   * <span data-ttu-id="0437c-353">*appsettings.json* 파일의 `BookstoreDatabaseSettings` 섹션이 바인딩되는 구성 인스턴스가 DI(종속성 주입) 컨테이너에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-353">The configuration instance to which the *appsettings.json* file's `BookstoreDatabaseSettings` section binds is registered in the Dependency Injection (DI) container.</span></span> <span data-ttu-id="0437c-354">예를 들어 `BookstoreDatabaseSettings` 개체의 `ConnectionString` 속성은 *appsettings.json*의 `BookstoreDatabaseSettings:ConnectionString` 속성으로 채워집니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-354">For example, a `BookstoreDatabaseSettings` object's `ConnectionString` property is populated with the `BookstoreDatabaseSettings:ConnectionString` property in *appsettings.json*.</span></span>
+   * <span data-ttu-id="0437c-355">`IBookstoreDatabaseSettings` 인터페이스는 싱글톤 [서비스 수명](xref:fundamentals/dependency-injection#service-lifetimes)으로 DI에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-355">The `IBookstoreDatabaseSettings` interface is registered in DI with a singleton [service lifetime](xref:fundamentals/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="0437c-356">삽입하면 인터페이스 인스턴스가 `BookstoreDatabaseSettings` 개체로 확인됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-356">When injected, the interface instance resolves to a `BookstoreDatabaseSettings` object.</span></span>
 
-1. <span data-ttu-id="2a30f-357">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookstoreDatabaseSettings` 및 `IBookstoreDatabaseSettings` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-357">Add the following code to the top of *Startup.cs* to resolve the `BookstoreDatabaseSettings` and `IBookstoreDatabaseSettings` references:</span></span>
+1. <span data-ttu-id="0437c-357">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookstoreDatabaseSettings` 및 `IBookstoreDatabaseSettings` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-357">Add the following code to the top of *Startup.cs* to resolve the `BookstoreDatabaseSettings` and `IBookstoreDatabaseSettings` references:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Startup.cs?name=snippet_UsingBooksApiModels)]
 
-## <a name="add-a-crud-operations-service"></a><span data-ttu-id="2a30f-358">CRUD 작업 서비스 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-358">Add a CRUD operations service</span></span>
+## <a name="add-a-crud-operations-service"></a><span data-ttu-id="0437c-358">CRUD 작업 서비스 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-358">Add a CRUD operations service</span></span>
 
-1. <span data-ttu-id="2a30f-359">프로젝트 루트에 *Services* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-359">Add a *Services* directory to the project root.</span></span>
-1. <span data-ttu-id="2a30f-360">다음 코드를 사용하여 *Services* 디렉터리에 `BookService` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-360">Add a `BookService` class to the *Services* directory with the following code:</span></span>
+1. <span data-ttu-id="0437c-359">프로젝트 루트에 *Services* 디렉터리를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-359">Add a *Services* directory to the project root.</span></span>
+1. <span data-ttu-id="0437c-360">다음 코드를 사용하여 *Services* 디렉터리에 `BookService` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-360">Add a `BookService` class to the *Services* directory with the following code:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   <span data-ttu-id="2a30f-361">위의 코드에서 생성자 주입을 통해 DI에서 `IBookstoreDatabaseSettings` 인스턴스가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-361">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="2a30f-362">이 기술은 [구성 모델 추가](#add-a-configuration-model) 섹션에 추가된 *appsettings.json* 구성 값에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-362">This technique provides access to the *appsettings.json* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
+   <span data-ttu-id="0437c-361">위의 코드에서 생성자 주입을 통해 DI에서 `IBookstoreDatabaseSettings` 인스턴스가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-361">In the preceding code, an `IBookstoreDatabaseSettings` instance is retrieved from DI via constructor injection.</span></span> <span data-ttu-id="0437c-362">이 기술은 [구성 모델 추가](#add-a-configuration-model) 섹션에 추가된 *appsettings.json* 구성 값에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-362">This technique provides access to the *appsettings.json* configuration values that were added in the [Add a configuration model](#add-a-configuration-model) section.</span></span>
 
-1. <span data-ttu-id="2a30f-363">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-363">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
+1. <span data-ttu-id="0437c-363">다음 강조 표시된 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-363">Add the following highlighted code to `Startup.ConfigureServices`:</span></span>
 
    [!code-csharp[](first-mongo-app/samples_snapshot/2.x/SampleApp/Startup.ConfigureServices.AddSingletonService.cs?highlight=9)]
 
-   <span data-ttu-id="2a30f-364">위의 코드에서 `BookService` 클래스는 사용 클래스에서 생성자 주입을 지원하는 DI로 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-364">In the preceding code, the `BookService` class is registered with DI to support constructor injection in consuming classes.</span></span> <span data-ttu-id="2a30f-365">`BookService`가 `MongoClient`에 직접 종속되기 때문에 싱글톤 서비스 수명이 가장 적합합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-365">The singleton service lifetime is most appropriate because `BookService` takes a direct dependency on `MongoClient`.</span></span> <span data-ttu-id="2a30f-366">공식 [Mongo 클라이언트 재사용 지침](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)에 따라 `MongoClient`를 싱글톤 수명으로 DI에 등록해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-366">Per the official [Mongo Client reuse guidelines](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use), `MongoClient` should be registered in DI with a singleton service lifetime.</span></span>
+   <span data-ttu-id="0437c-364">위의 코드에서 `BookService` 클래스는 사용 클래스에서 생성자 주입을 지원하는 DI로 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-364">In the preceding code, the `BookService` class is registered with DI to support constructor injection in consuming classes.</span></span> <span data-ttu-id="0437c-365">`BookService`가 `MongoClient`에 직접 종속되기 때문에 싱글톤 서비스 수명이 가장 적합합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-365">The singleton service lifetime is most appropriate because `BookService` takes a direct dependency on `MongoClient`.</span></span> <span data-ttu-id="0437c-366">공식 [Mongo 클라이언트 재사용 지침](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)에 따라 `MongoClient`를 싱글톤 수명으로 DI에 등록해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-366">Per the official [Mongo Client reuse guidelines](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use), `MongoClient` should be registered in DI with a singleton service lifetime.</span></span>
 
-1. <span data-ttu-id="2a30f-367">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookService` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-367">Add the following code to the top of *Startup.cs* to resolve the `BookService` reference:</span></span>
+1. <span data-ttu-id="0437c-367">*Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookService` 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-367">Add the following code to the top of *Startup.cs* to resolve the `BookService` reference:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Startup.cs?name=snippet_UsingBooksApiServices)]
 
-<span data-ttu-id="2a30f-368">`BookService` 클래스는 다음 `MongoDB.Driver` 멤버를 사용하여 데이터베이스에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-368">The `BookService` class uses the following `MongoDB.Driver` members to perform CRUD operations against the database:</span></span>
+<span data-ttu-id="0437c-368">`BookService` 클래스는 다음 `MongoDB.Driver` 멤버를 사용하여 데이터베이스에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-368">The `BookService` class uses the following `MongoDB.Driver` members to perform CRUD operations against the database:</span></span>
 
-* <span data-ttu-id="2a30f-369">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): 데이터베이스 작업을 수행하기 위한 서버 인스턴스를 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-369">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): Reads the server instance for performing database operations.</span></span> <span data-ttu-id="2a30f-370">이 클래스의 생성자에 MongoDB 연결 문자열이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-370">The constructor of this class is provided the MongoDB connection string:</span></span>
+* <span data-ttu-id="0437c-369">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): 데이터베이스 작업을 수행하기 위한 서버 인스턴스를 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-369">[MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): Reads the server instance for performing database operations.</span></span> <span data-ttu-id="0437c-370">이 클래스의 생성자에 MongoDB 연결 문자열이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-370">The constructor of this class is provided the MongoDB connection string:</span></span>
 
   [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceConstructor&highlight=3)]
 
-* <span data-ttu-id="2a30f-371">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-371">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): Represents the Mongo database for performing operations.</span></span> <span data-ttu-id="2a30f-372">이 자습서에서는 인터페이스의 일반 [GetCollection\<TDocument>(컬렉션)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-372">This tutorial uses the generic [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) method on the interface to gain access to data in a specific collection.</span></span> <span data-ttu-id="2a30f-373">이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-373">Perform CRUD operations against the collection after this method is called.</span></span> <span data-ttu-id="2a30f-374">`GetCollection<TDocument>(collection)` 메서드 호출에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-374">In the `GetCollection<TDocument>(collection)` method call:</span></span>
+* <span data-ttu-id="0437c-371">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-371">[IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): Represents the Mongo database for performing operations.</span></span> <span data-ttu-id="0437c-372">이 자습서에서는 인터페이스의 일반 [GetCollection\<TDocument>(컬렉션)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-372">This tutorial uses the generic [GetCollection\<TDocument>(collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) method on the interface to gain access to data in a specific collection.</span></span> <span data-ttu-id="0437c-373">이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-373">Perform CRUD operations against the collection after this method is called.</span></span> <span data-ttu-id="0437c-374">`GetCollection<TDocument>(collection)` 메서드 호출에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-374">In the `GetCollection<TDocument>(collection)` method call:</span></span>
 
-  * <span data-ttu-id="2a30f-375">`collection`은 컬렉션 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-375">`collection` represents the collection name.</span></span>
-  * <span data-ttu-id="2a30f-376">`TDocument`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-376">`TDocument` represents the CLR object type stored in the collection.</span></span>
+  * <span data-ttu-id="0437c-375">`collection`은 컬렉션 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-375">`collection` represents the collection name.</span></span>
+  * <span data-ttu-id="0437c-376">`TDocument`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-376">`TDocument` represents the CLR object type stored in the collection.</span></span>
 
-<span data-ttu-id="2a30f-377">`GetCollection<TDocument>(collection)`는 컬렉션을 나타내는 [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) 개체를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-377">`GetCollection<TDocument>(collection)` returns a [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) object representing the collection.</span></span> <span data-ttu-id="2a30f-378">이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-378">In this tutorial, the following methods are invoked on the collection:</span></span>
+<span data-ttu-id="0437c-377">`GetCollection<TDocument>(collection)`는 컬렉션을 나타내는 [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) 개체를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-377">`GetCollection<TDocument>(collection)` returns a [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) object representing the collection.</span></span> <span data-ttu-id="0437c-378">이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-378">In this tutorial, the following methods are invoked on the collection:</span></span>
 
-* <span data-ttu-id="2a30f-379">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-379">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Deletes a single document matching the provided search criteria.</span></span>
-* <span data-ttu-id="2a30f-380">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-380">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): Returns all documents in the collection matching the provided search criteria.</span></span>
-* <span data-ttu-id="2a30f-381">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): 제공된 개체를 컬렉션에 새 문서로 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-381">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): Inserts the provided object as a new document in the collection.</span></span>
-* <span data-ttu-id="2a30f-382">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 제공된 개체로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-382">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): Replaces the single document matching the provided search criteria with the provided object.</span></span>
+* <span data-ttu-id="0437c-379">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-379">[DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Deletes a single document matching the provided search criteria.</span></span>
+* <span data-ttu-id="0437c-380">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-380">[Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): Returns all documents in the collection matching the provided search criteria.</span></span>
+* <span data-ttu-id="0437c-381">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): 제공된 개체를 컬렉션에 새 문서로 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-381">[InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): Inserts the provided object as a new document in the collection.</span></span>
+* <span data-ttu-id="0437c-382">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): 제공된 검색 조건과 일치하는 단일 문서를 제공된 개체로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-382">[ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): Replaces the single document matching the provided search criteria with the provided object.</span></span>
 
-## <a name="add-a-controller"></a><span data-ttu-id="2a30f-383">컨트롤러 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-383">Add a controller</span></span>
+## <a name="add-a-controller"></a><span data-ttu-id="0437c-383">컨트롤러 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-383">Add a controller</span></span>
 
-<span data-ttu-id="2a30f-384">다음 코드를 사용하여 *Controllers* 디렉터리에 `BooksController` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-384">Add a `BooksController` class to the *Controllers* directory with the following code:</span></span>
+<span data-ttu-id="0437c-384">다음 코드를 사용하여 *Controllers* 디렉터리에 `BooksController` 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-384">Add a `BooksController` class to the *Controllers* directory with the following code:</span></span>
 
 [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Controllers/BooksController.cs)]
 
-<span data-ttu-id="2a30f-385">앞의 웹 API 컨트롤러는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-385">The preceding web API controller:</span></span>
+<span data-ttu-id="0437c-385">앞의 웹 API 컨트롤러는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-385">The preceding web API controller:</span></span>
 
-* <span data-ttu-id="2a30f-386">`BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-386">Uses the `BookService` class to perform CRUD operations.</span></span>
-* <span data-ttu-id="2a30f-387">GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-387">Contains action methods to support GET, POST, PUT, and DELETE HTTP requests.</span></span>
-* <span data-ttu-id="2a30f-388">`Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-388">Calls <xref:System.Web.Http.ApiController.CreatedAtRoute*> in the `Create` action method to return an [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) response.</span></span> <span data-ttu-id="2a30f-389">상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-389">Status code 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span> <span data-ttu-id="2a30f-390">또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-390">`CreatedAtRoute` also adds a `Location` header to the response.</span></span> <span data-ttu-id="2a30f-391">`Location` 헤더는 새로 만든 책의 URI를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-391">The `Location` header specifies the URI of the newly created book.</span></span>
+* <span data-ttu-id="0437c-386">`BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-386">Uses the `BookService` class to perform CRUD operations.</span></span>
+* <span data-ttu-id="0437c-387">GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-387">Contains action methods to support GET, POST, PUT, and DELETE HTTP requests.</span></span>
+* <span data-ttu-id="0437c-388">`Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-388">Calls <xref:System.Web.Http.ApiController.CreatedAtRoute*> in the `Create` action method to return an [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) response.</span></span> <span data-ttu-id="0437c-389">상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-389">Status code 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span> <span data-ttu-id="0437c-390">또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-390">`CreatedAtRoute` also adds a `Location` header to the response.</span></span> <span data-ttu-id="0437c-391">`Location` 헤더는 새로 만든 책의 URI를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-391">The `Location` header specifies the URI of the newly created book.</span></span>
 
-## <a name="test-the-web-api"></a><span data-ttu-id="2a30f-392">웹 API 테스트</span><span class="sxs-lookup"><span data-stu-id="2a30f-392">Test the web API</span></span>
+## <a name="test-the-web-api"></a><span data-ttu-id="0437c-392">웹 API 테스트</span><span class="sxs-lookup"><span data-stu-id="0437c-392">Test the web API</span></span>
 
-1. <span data-ttu-id="2a30f-393">앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-393">Build and run the app.</span></span>
+1. <span data-ttu-id="0437c-393">앱을 빌드하고 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-393">Build and run the app.</span></span>
 
-1. <span data-ttu-id="2a30f-394">`http://localhost:<port>/api/books`로 이동하여 컨트롤러의 매개 변수가 없는 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-394">Navigate to `http://localhost:<port>/api/books` to test the controller's parameterless `Get` action method.</span></span> <span data-ttu-id="2a30f-395">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-395">The following JSON response is displayed:</span></span>
+1. <span data-ttu-id="0437c-394">`http://localhost:<port>/api/books`로 이동하여 컨트롤러의 매개 변수가 없는 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-394">Navigate to `http://localhost:<port>/api/books` to test the controller's parameterless `Get` action method.</span></span> <span data-ttu-id="0437c-395">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-395">The following JSON response is displayed:</span></span>
 
    ```json
    [
@@ -681,7 +683,7 @@ ms.locfileid: "84452254"
    ]
    ```
 
-1. <span data-ttu-id="2a30f-396">`http://localhost:<port>/api/books/{id here}`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-396">Navigate to `http://localhost:<port>/api/books/{id here}` to test the controller's overloaded `Get` action method.</span></span> <span data-ttu-id="2a30f-397">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-397">The following JSON response is displayed:</span></span>
+1. <span data-ttu-id="0437c-396">`http://localhost:<port>/api/books/{id here}`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-396">Navigate to `http://localhost:<port>/api/books/{id here}` to test the controller's overloaded `Get` action method.</span></span> <span data-ttu-id="0437c-397">다음 JSON 응답이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-397">The following JSON response is displayed:</span></span>
 
    ```json
    {
@@ -693,43 +695,43 @@ ms.locfileid: "84452254"
    }
    ```
 
-## <a name="configure-json-serialization-options"></a><span data-ttu-id="2a30f-398">JSON serialization 옵션 구성</span><span class="sxs-lookup"><span data-stu-id="2a30f-398">Configure JSON serialization options</span></span>
+## <a name="configure-json-serialization-options"></a><span data-ttu-id="0437c-398">JSON serialization 옵션 구성</span><span class="sxs-lookup"><span data-stu-id="0437c-398">Configure JSON serialization options</span></span>
 
-<span data-ttu-id="2a30f-399">[웹 API 테스트](#test-the-web-api) 섹션에서 반환된 JSON 응답에 대해 변경하는 두 개의 세부 정보가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-399">There are two details to change about the JSON responses returned in the [Test the web API](#test-the-web-api) section:</span></span>
+<span data-ttu-id="0437c-399">[웹 API 테스트](#test-the-web-api) 섹션에서 반환된 JSON 응답에 대해 변경하는 두 개의 세부 정보가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-399">There are two details to change about the JSON responses returned in the [Test the web API](#test-the-web-api) section:</span></span>
 
-* <span data-ttu-id="2a30f-400">속성 이름의 기본 카멜식 대/소문자는 CLR 개체의 속성 이름의 파스칼식 대/소문자와 일치하도록 변경되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-400">The property names' default camel casing should be changed to match the Pascal casing of the CLR object's property names.</span></span>
-* <span data-ttu-id="2a30f-401">`bookName` 속성은 `Name`으로 반환되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-401">The `bookName` property should be returned as `Name`.</span></span>
+* <span data-ttu-id="0437c-400">속성 이름의 기본 카멜식 대/소문자는 CLR 개체의 속성 이름의 파스칼식 대/소문자와 일치하도록 변경되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-400">The property names' default camel casing should be changed to match the Pascal casing of the CLR object's property names.</span></span>
+* <span data-ttu-id="0437c-401">`bookName` 속성은 `Name`으로 반환되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-401">The `bookName` property should be returned as `Name`.</span></span>
 
-<span data-ttu-id="2a30f-402">앞의 요구 사항을 충족하기 위해 다음과 같이 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-402">To satisfy the preceding requirements, make the following changes:</span></span>
+<span data-ttu-id="0437c-402">앞의 요구 사항을 충족하기 위해 다음과 같이 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-402">To satisfy the preceding requirements, make the following changes:</span></span>
 
-1. <span data-ttu-id="2a30f-403">`Startup.ConfigureServices`에서 다음 강조 표시된 코드를 `AddMvc` 메서드 호출에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-403">In `Startup.ConfigureServices`, chain the following highlighted code on to the `AddMvc` method call:</span></span>
+1. <span data-ttu-id="0437c-403">`Startup.ConfigureServices`에서 다음 강조 표시된 코드를 `AddMvc` 메서드 호출에 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-403">In `Startup.ConfigureServices`, chain the following highlighted code on to the `AddMvc` method call:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=12)]
 
-   <span data-ttu-id="2a30f-404">이전 변경으로 웹 API의 직렬화된 JSON 응답에서 속성 이름은 CLR 개체 형식의 해당 속성 이름과 일치합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-404">With the preceding change, property names in the web API's serialized JSON response match their corresponding property names in the CLR object type.</span></span> <span data-ttu-id="2a30f-405">예를 들어 `Book` 클래스의 `Author` 속성은 `Author`로 직렬화합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-405">For example, the `Book` class's `Author` property serializes as `Author`.</span></span>
+   <span data-ttu-id="0437c-404">이전 변경으로 웹 API의 직렬화된 JSON 응답에서 속성 이름은 CLR 개체 형식의 해당 속성 이름과 일치합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-404">With the preceding change, property names in the web API's serialized JSON response match their corresponding property names in the CLR object type.</span></span> <span data-ttu-id="0437c-405">예를 들어 `Book` 클래스의 `Author` 속성은 `Author`로 직렬화합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-405">For example, the `Book` class's `Author` property serializes as `Author`.</span></span>
 
-1. <span data-ttu-id="2a30f-406">*Models/Book.cs*에서 다음 [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) 특성으로 `BookName` 속성에 주석을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-406">In *Models/Book.cs*, annotate the `BookName` property with the following [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) attribute:</span></span>
+1. <span data-ttu-id="0437c-406">*Models/Book.cs*에서 다음 [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) 특성으로 `BookName` 속성에 주석을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-406">In *Models/Book.cs*, annotate the `BookName` property with the following [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) attribute:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/Book.cs?name=snippet_BookNameProperty&highlight=2)]
 
-   <span data-ttu-id="2a30f-407">`Name`의 `[JsonProperty]` 특성 값은 웹 API의 직렬화된 JSON 응답의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-407">The `[JsonProperty]` attribute's value of `Name` represents the property name in the web API's serialized JSON response.</span></span>
+   <span data-ttu-id="0437c-407">`Name`의 `[JsonProperty]` 특성 값은 웹 API의 직렬화된 JSON 응답의 속성 이름을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-407">The `[JsonProperty]` attribute's value of `Name` represents the property name in the web API's serialized JSON response.</span></span>
 
-1. <span data-ttu-id="2a30f-408">*Models/Book.cs*의 맨 위에 다음 코드를 추가하여 `[JsonProperty]` 특성 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-408">Add the following code to the top of *Models/Book.cs* to resolve the `[JsonProperty]` attribute reference:</span></span>
+1. <span data-ttu-id="0437c-408">*Models/Book.cs*의 맨 위에 다음 코드를 추가하여 `[JsonProperty]` 특성 참조를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-408">Add the following code to the top of *Models/Book.cs* to resolve the `[JsonProperty]` attribute reference:</span></span>
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/Book.cs?name=snippet_NewtonsoftJsonImport)]
 
-1. <span data-ttu-id="2a30f-409">[웹 API 테스트](#test-the-web-api) 섹션에 정의된 단계를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-409">Repeat the steps defined in the [Test the web API](#test-the-web-api) section.</span></span> <span data-ttu-id="2a30f-410">JSON 속성 이름의 차이를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="2a30f-410">Notice the difference in JSON property names.</span></span>
+1. <span data-ttu-id="0437c-409">[웹 API 테스트](#test-the-web-api) 섹션에 정의된 단계를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-409">Repeat the steps defined in the [Test the web API](#test-the-web-api) section.</span></span> <span data-ttu-id="0437c-410">JSON 속성 이름의 차이를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="0437c-410">Notice the difference in JSON property names.</span></span>
 
 ::: moniker-end
 
-## <a name="add-authentication-support-to-a-web-api"></a><span data-ttu-id="2a30f-411">웹 API에 인증 지원 추가</span><span class="sxs-lookup"><span data-stu-id="2a30f-411">Add authentication support to a web API</span></span>
+## <a name="add-authentication-support-to-a-web-api"></a><span data-ttu-id="0437c-411">웹 API에 인증 지원 추가</span><span class="sxs-lookup"><span data-stu-id="0437c-411">Add authentication support to a web API</span></span>
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="next-steps"></a><span data-ttu-id="2a30f-412">다음 단계</span><span class="sxs-lookup"><span data-stu-id="2a30f-412">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="0437c-412">다음 단계</span><span class="sxs-lookup"><span data-stu-id="0437c-412">Next steps</span></span>
 
-<span data-ttu-id="2a30f-413">ASP.NET Core 웹 API 빌드 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2a30f-413">For more information on building ASP.NET Core web APIs, see the following resources:</span></span>
+<span data-ttu-id="0437c-413">ASP.NET Core 웹 API 빌드 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="0437c-413">For more information on building ASP.NET Core web APIs, see the following resources:</span></span>
 
-* [<span data-ttu-id="2a30f-414">이 문서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="2a30f-414">YouTube version of this article</span></span>](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
+* [<span data-ttu-id="0437c-414">이 문서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="0437c-414">YouTube version of this article</span></span>](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
