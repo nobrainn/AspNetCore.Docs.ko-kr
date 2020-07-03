@@ -15,16 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 4239321531f3a7696a15b1dea164450ea0860c2b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce301cd7e2cbfbfc724d78bd5734dff231d0ab93
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409061"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944736"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie 샘플
 
 ASP.NET Core 2.1는 [SameSite](https://www.owasp.org/index.php/SameSite) 특성에 대 한 기본 제공 지원을 제공 하지만 원래 표준에 기록 되었습니다. [패치 된 동작이](https://github.com/dotnet/aspnetcore/issues/8212) 의 의미를 변경 `SameSite.None` 하 여 값을 `None` 전혀 내보내지 않고 sameSite 특성을 값으로 내보냅니다. 값을 내보내지 않으려면 `SameSite` 쿠키에 대 한 속성을-1로 설정할 수 있습니다.
+
+[!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a>SameSite 특성 작성
 
@@ -85,7 +87,7 @@ services.AddSession(options =>
 
 쿠키를 가로채 고 사용자의 브라우저 에이전트에서 지원에 따라 없음 값을 조정 하려면 미들웨어를 사용 해야 합니다 `CookiePolicy` . 쿠키를 작성 하 고 내에서 구성 된 구성 요소 **보다 먼저** http 요청 파이프라인에 배치 해야 합니다 `ConfigureServices()` .
 
-`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)의 메서드에서 파이프라인 사용에 삽입 합니다. 예를 들면 다음과 같습니다.
+`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)의 메서드에서 파이프라인 사용에 삽입 합니다. 예:
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -115,7 +117,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-그런 다음 쿠키가 `ConfigureServices(IServiceCollection services)` 추가 되거나 삭제 될 때 도우미 클래스를 호출 하도록 쿠키 정책을 구성 합니다. 예를 들면 다음과 같습니다.
+그런 다음 쿠키가 `ConfigureServices(IServiceCollection services)` 추가 되거나 삭제 될 때 도우미 클래스를 호출 하도록 쿠키 정책을 구성 합니다. 예:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)

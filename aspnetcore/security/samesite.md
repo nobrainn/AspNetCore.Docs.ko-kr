@@ -15,12 +15,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 68766591ec86e12e5602d741de74e20aec67cf49
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3e3c12e17de3e12ead15c405e9339761a3f2f711
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399506"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944280"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>ASP.NET Core에서 SameSite 쿠키 작업
 
@@ -37,6 +37,10 @@ SameSite은 CSRF (교차 사이트 요청 위조) 공격에 대 한 보호를 �
 이 `SameSite=Lax` 설정은 대부분의 응용 프로그램 쿠키에 대해 작동 합니다. Oidc ( [Openid connect Connect](https://openid.net/connect/) )와 같은 일부 형태의 인증 및 [ws-federation](https://auth0.com/docs/protocols/ws-fed) 은 게시 기반 리디렉션에 대해 기본적으로 사용 됩니다. 사후 기반 리디렉션은 SameSite 브라우저 보호를 트리거하고 이러한 구성 요소에 대해 SameSite을 사용할 수 없습니다. 대부분의 [OAuth](https://oauth.net/) 로그인은 요청 흐름의 차이로 인해 영향을 받지 않습니다.
 
 쿠키를 내보내는 각 ASP.NET Core 구성 요소는 SameSite가 적절 한지 결정 해야 합니다.
+
+## <a name="samesite-and-identity"></a>SameSite 및Identity
+
+[!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="samesite-test-sample-code"></a>SameSite 테스트 샘플 코드
 
@@ -223,7 +227,7 @@ SameSite 플래그는 페이지에 설정 되어 `edge://flags/#same-site-by-def
 
 버전에는 Electron 이전 버전의 Chromium가 포함 되어 있습니다. 예를 들어 팀에서 사용 하는의 버전은 Electron Chromium 66 이며,이는 이전 동작을 보여 주는 것입니다. 제품 버전을 사용 하 여 사용자 고유의 호환성 테스트를 수행 해야 합니다 Electron . 다음 섹션에서 [이전 브라우저 지원](#sob) 을 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Chromium 블로그: 개발자: 새 SameSite를 사용할 준비가 되었습니다. 보안 쿠키 설정](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite 쿠키 설명](https://web.dev/samesite-cookies-explained/)
