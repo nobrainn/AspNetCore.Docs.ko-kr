@@ -79,7 +79,7 @@
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial
-          uid: tutorials/first-blazor-app
+          uid: tutorials/build-a-blazor-app
     - name: Web API 앱
       items:
         - name: Web API 만들기
@@ -285,14 +285,14 @@
           uid: blazor/index
         - name: 지원되는 플랫폼
           uid: blazor/supported-platforms
-        - name: 시작
-          uid: blazor/get-started
+        - name: 도구
+          uid: blazor/tooling
         - name: 호스팅 모델
           uid: blazor/hosting-models
         - name: 자습서
           items:
-            - name: 첫 번째 앱 빌드
-              uid: tutorials/first-blazor-app
+            - name: Blazor 할 일 목록 앱 빌드
+              uid: tutorials/build-a-blazor-app
             - name: Blazor WebAssembly를 사용한 SignalR
               uid: tutorials/signalr-blazor-webassembly
         - name: 템플릿
