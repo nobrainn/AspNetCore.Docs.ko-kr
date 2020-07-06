@@ -15,103 +15,103 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ab3baad30f78c5d5e2f969b3292d4886fcd0406d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 69a24fc955a0f2fb524ec817eb50372052f538a1
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402314"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944258"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a><span data-ttu-id="f347f-103">ASP.NET Core Blazor Server 앱 보호</span><span class="sxs-lookup"><span data-stu-id="f347f-103">Secure ASP.NET Core Blazor Server apps</span></span>
+# <a name="secure-aspnet-core-blazor-server-apps"></a><span data-ttu-id="a355d-103">ASP.NET Core Blazor Server 앱 보호</span><span class="sxs-lookup"><span data-stu-id="a355d-103">Secure ASP.NET Core Blazor Server apps</span></span>
 
-<span data-ttu-id="f347f-104">[Luke Latham](https://github.com/guardrex)으로</span><span class="sxs-lookup"><span data-stu-id="f347f-104">By [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="a355d-104">[Luke Latham](https://github.com/guardrex)으로</span><span class="sxs-lookup"><span data-stu-id="a355d-104">By [Luke Latham](https://github.com/guardrex)</span></span>
 
-Blazor Server<span data-ttu-id="f347f-105"> 앱은 ASP.NET Core 앱과 동일한 방식으로 보안이 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-105"> apps are configured for security in the same manner as ASP.NET Core apps.</span></span> <span data-ttu-id="f347f-106">자세한 내용은 <xref:security/index>의 문서를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f347f-106">For more information, see the articles under <xref:security/index>.</span></span> <span data-ttu-id="f347f-107">이 개요의 항목은 Blazor Server에만 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-107">Topics under this overview apply specifically to Blazor Server.</span></span> 
+Blazor Server<span data-ttu-id="a355d-105"> 앱은 ASP.NET Core 앱과 동일한 방식으로 보안이 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-105"> apps are configured for security in the same manner as ASP.NET Core apps.</span></span> <span data-ttu-id="a355d-106">자세한 내용은 <xref:security/index>의 문서를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a355d-106">For more information, see the articles under <xref:security/index>.</span></span> <span data-ttu-id="a355d-107">이 개요의 항목은 Blazor Server에만 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-107">Topics under this overview apply specifically to Blazor Server.</span></span> 
 
-## <a name="blazor-server-project-template"></a>Blazor Server<span data-ttu-id="f347f-108"> 프로젝트 템플릿</span><span class="sxs-lookup"><span data-stu-id="f347f-108"> project template</span></span>
+## <a name="blazor-server-project-template"></a>Blazor Server<span data-ttu-id="a355d-108"> 프로젝트 템플릿</span><span class="sxs-lookup"><span data-stu-id="a355d-108"> project template</span></span>
 
-<span data-ttu-id="f347f-109">프로젝트를 만들 때 인증을 위해 Blazor Server 프로젝트 템플릿을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-109">The Blazor Server project template can be configured for authentication when the project is created.</span></span>
+<span data-ttu-id="a355d-109">프로젝트를 만들 때 인증을 위해 Blazor Server 프로젝트 템플릿을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-109">The Blazor Server project template can be configured for authentication when the project is created.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="f347f-110">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="f347f-110">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="a355d-110">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a355d-110">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="f347f-111"><xref:blazor/get-started> 문서의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-111">Follow the Visual Studio guidance in the <xref:blazor/get-started> article to create a new Blazor Server project with an authentication mechanism.</span></span>
+<span data-ttu-id="a355d-111"><xref:blazor/tooling>의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-111">Follow the Visual Studio guidance in <xref:blazor/tooling> to create a new Blazor Server project with an authentication mechanism.</span></span>
 
-<span data-ttu-id="f347f-112">**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor Server 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-112">After choosing the **Blazor Server App** template in the **Create a new ASP.NET Core Web Application** dialog, select **Change** under **Authentication**.</span></span>
+<span data-ttu-id="a355d-112">**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor Server 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-112">After choosing the **Blazor Server App** template in the **Create a new ASP.NET Core Web Application** dialog, select **Change** under **Authentication**.</span></span>
 
-<span data-ttu-id="f347f-113">다른 ASP.NET Core 프로젝트에 사용할 수 있는 것과 동일한 인증 메커니즘 세트를 제공하는 대화 상자가 열립니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-113">A dialog opens to offer the same set of authentication mechanisms available for other ASP.NET Core projects:</span></span>
+<span data-ttu-id="a355d-113">다른 ASP.NET Core 프로젝트에 사용할 수 있는 것과 동일한 인증 메커니즘 세트를 제공하는 대화 상자가 열립니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-113">A dialog opens to offer the same set of authentication mechanisms available for other ASP.NET Core projects:</span></span>
 
-* <span data-ttu-id="f347f-114">**인증 없음**</span><span class="sxs-lookup"><span data-stu-id="f347f-114">**No Authentication**</span></span>
-* <span data-ttu-id="f347f-115">**개별 사용자 계정**: 사용자 계정은 다음과 같이 저장될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-115">**Individual User Accounts**: User accounts can be stored:</span></span>
-  * <span data-ttu-id="f347f-116">ASP.NET Core의 [Identity](xref:security/authentication/identity) 시스템을 사용하는 앱 내에 저장</span><span class="sxs-lookup"><span data-stu-id="f347f-116">Within the app using ASP.NET Core's [Identity](xref:security/authentication/identity) system.</span></span>
-  * <span data-ttu-id="f347f-117">[Azure AD B2C](xref:security/authentication/azure-ad-b2c) 사용</span><span class="sxs-lookup"><span data-stu-id="f347f-117">With [Azure AD B2C](xref:security/authentication/azure-ad-b2c).</span></span>
-* <span data-ttu-id="f347f-118">**회사 또는 학교 계정**</span><span class="sxs-lookup"><span data-stu-id="f347f-118">**Work or School Accounts**</span></span>
-* <span data-ttu-id="f347f-119">**Windows 인증**</span><span class="sxs-lookup"><span data-stu-id="f347f-119">**Windows Authentication**</span></span>
+* <span data-ttu-id="a355d-114">**인증 없음**</span><span class="sxs-lookup"><span data-stu-id="a355d-114">**No Authentication**</span></span>
+* <span data-ttu-id="a355d-115">**개별 사용자 계정**: 사용자 계정은 다음과 같이 저장될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-115">**Individual User Accounts**: User accounts can be stored:</span></span>
+  * <span data-ttu-id="a355d-116">ASP.NET Core의 [Identity](xref:security/authentication/identity) 시스템을 사용하는 앱 내에 저장</span><span class="sxs-lookup"><span data-stu-id="a355d-116">Within the app using ASP.NET Core's [Identity](xref:security/authentication/identity) system.</span></span>
+  * <span data-ttu-id="a355d-117">[Azure AD B2C](xref:security/authentication/azure-ad-b2c) 사용</span><span class="sxs-lookup"><span data-stu-id="a355d-117">With [Azure AD B2C](xref:security/authentication/azure-ad-b2c).</span></span>
+* <span data-ttu-id="a355d-118">**회사 또는 학교 계정**</span><span class="sxs-lookup"><span data-stu-id="a355d-118">**Work or School Accounts**</span></span>
+* <span data-ttu-id="a355d-119">**Windows 인증**</span><span class="sxs-lookup"><span data-stu-id="a355d-119">**Windows Authentication**</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="f347f-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="f347f-120">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="a355d-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="a355d-120">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="f347f-121"><xref:blazor/get-started> 문서의 Visual Studio Code 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-121">Follow the Visual Studio Code guidance in the <xref:blazor/get-started> article to create a new Blazor Server project with an authentication mechanism:</span></span>
+<span data-ttu-id="a355d-121"><xref:blazor/tooling>의 Visual Studio Code 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-121">Follow the Visual Studio Code guidance in <xref:blazor/tooling> to create a new Blazor Server project with an authentication mechanism:</span></span>
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ```
 
-<span data-ttu-id="f347f-122">허용되는 인증 값(`{AUTHENTICATION}`)은 다음 표에 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-122">Permissible authentication values (`{AUTHENTICATION}`) are shown in the following table.</span></span>
+<span data-ttu-id="a355d-122">허용되는 인증 값(`{AUTHENTICATION}`)은 다음 표에 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-122">Permissible authentication values (`{AUTHENTICATION}`) are shown in the following table.</span></span>
 
-| <span data-ttu-id="f347f-123">인증 메커니즘</span><span class="sxs-lookup"><span data-stu-id="f347f-123">Authentication mechanism</span></span> | <span data-ttu-id="f347f-124">설명</span><span class="sxs-lookup"><span data-stu-id="f347f-124">Description</span></span> |
+| <span data-ttu-id="a355d-123">인증 메커니즘</span><span class="sxs-lookup"><span data-stu-id="a355d-123">Authentication mechanism</span></span> | <span data-ttu-id="a355d-124">설명</span><span class="sxs-lookup"><span data-stu-id="a355d-124">Description</span></span> |
 | ------------------------ | ----------- |
-| <span data-ttu-id="f347f-125">`None`(기본값)</span><span class="sxs-lookup"><span data-stu-id="f347f-125">`None` (default)</span></span>         | <span data-ttu-id="f347f-126">인증 없음</span><span class="sxs-lookup"><span data-stu-id="f347f-126">No authentication</span></span> |
-| `Individual`             | <span data-ttu-id="f347f-127">ASP.NET Core Identity을 사용하여 앱에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="f347f-127">Users stored in the app with ASP.NET Core Identity</span></span> |
-| `IndividualB2C`          | <span data-ttu-id="f347f-128">[Azure AD B2C](xref:security/authentication/azure-ad-b2c)에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="f347f-128">Users stored in [Azure AD B2C](xref:security/authentication/azure-ad-b2c)</span></span> |
-| `SingleOrg`              | <span data-ttu-id="f347f-129">단일 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="f347f-129">Organizational authentication for a single tenant</span></span> |
-| `MultiOrg`               | <span data-ttu-id="f347f-130">여러 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="f347f-130">Organizational authentication for multiple tenants</span></span> |
-| `Windows`                | <span data-ttu-id="f347f-131">Windows 인증</span><span class="sxs-lookup"><span data-stu-id="f347f-131">Windows Authentication</span></span> |
+| <span data-ttu-id="a355d-125">`None`(기본값)</span><span class="sxs-lookup"><span data-stu-id="a355d-125">`None` (default)</span></span>         | <span data-ttu-id="a355d-126">인증 없음</span><span class="sxs-lookup"><span data-stu-id="a355d-126">No authentication</span></span> |
+| `Individual`             | <span data-ttu-id="a355d-127">ASP.NET Core Identity을 사용하여 앱에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="a355d-127">Users stored in the app with ASP.NET Core Identity</span></span> |
+| `IndividualB2C`          | <span data-ttu-id="a355d-128">[Azure AD B2C](xref:security/authentication/azure-ad-b2c)에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="a355d-128">Users stored in [Azure AD B2C](xref:security/authentication/azure-ad-b2c)</span></span> |
+| `SingleOrg`              | <span data-ttu-id="a355d-129">단일 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="a355d-129">Organizational authentication for a single tenant</span></span> |
+| `MultiOrg`               | <span data-ttu-id="a355d-130">여러 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="a355d-130">Organizational authentication for multiple tenants</span></span> |
+| `Windows`                | <span data-ttu-id="a355d-131">Windows 인증</span><span class="sxs-lookup"><span data-stu-id="a355d-131">Windows Authentication</span></span> |
 
-<span data-ttu-id="f347f-132">`-o|--output` 옵션을 사용하면 명령에서 `{APP NAME}` 자리 표시자에 제공된 값을 사용하여 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-132">Using the `-o|--output` option, the command uses the value provided for the `{APP NAME}` placeholder to:</span></span>
+<span data-ttu-id="a355d-132">`-o|--output` 옵션을 사용하면 명령에서 `{APP NAME}` 자리 표시자에 제공된 값을 사용하여 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-132">Using the `-o|--output` option, the command uses the value provided for the `{APP NAME}` placeholder to:</span></span>
 
-* <span data-ttu-id="f347f-133">프로젝트의 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-133">Create a folder for the project.</span></span>
-* <span data-ttu-id="f347f-134">프로젝트의 이름을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-134">Name the project.</span></span>
+* <span data-ttu-id="a355d-133">프로젝트의 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-133">Create a folder for the project.</span></span>
+* <span data-ttu-id="a355d-134">프로젝트의 이름을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-134">Name the project.</span></span>
 
-<span data-ttu-id="f347f-135">자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f347f-135">For more information, see the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in the .NET Core Guide.</span></span>
+<span data-ttu-id="a355d-135">자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a355d-135">For more information, see the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in the .NET Core Guide.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="f347f-136">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="f347f-136">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="a355d-136">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a355d-136">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-1. <span data-ttu-id="f347f-137"><xref:blazor/get-started> 문서의 Mac용 Visual Studio 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-137">Follow the Visual Studio for Mac guidance in the <xref:blazor/get-started> article.</span></span>
+1. <span data-ttu-id="a355d-137"><xref:blazor/tooling>의 Mac용 Visual Studio 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-137">Follow the Visual Studio for Mac guidance in <xref:blazor/tooling>.</span></span>
 
-1. <span data-ttu-id="f347f-138">**새 Blazor Server 앱 구성** 단계의 **인증** 드롭다운에서 **개별 인증(앱 내)** 을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-138">On the **Configure your new Blazor Server App** step, select **Individual Authentication (in-app)** from the **Authentication** drop down.</span></span>
+1. <span data-ttu-id="a355d-138">**새 Blazor Server 앱 구성** 단계의 **인증** 드롭다운에서 **개별 인증(앱 내)** 을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-138">On the **Configure your new Blazor Server App** step, select **Individual Authentication (in-app)** from the **Authentication** drop down.</span></span>
 
-1. <span data-ttu-id="f347f-139">ASP.NET Core Identity을 사용하여 앱에 저장된 개별 사용자에 대한 앱이 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-139">The app is created for individual users stored in the app with ASP.NET Core Identity.</span></span>
+1. <span data-ttu-id="a355d-139">ASP.NET Core Identity을 사용하여 앱에 저장된 개별 사용자에 대한 앱이 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-139">The app is created for individual users stored in the app with ASP.NET Core Identity.</span></span>
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="f347f-140">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="f347f-140">.NET Core CLI</span></span>](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[<span data-ttu-id="a355d-140">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="a355d-140">.NET Core CLI</span></span>](#tab/netcore-cli/)
 
-<span data-ttu-id="f347f-141"><xref:blazor/get-started> 문서의 .NET Core CLI 지침에 따라 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-141">Follow the .NET Core CLI guidance in the <xref:blazor/get-started> article to create a new Blazor Server project with an authentication mechanism:</span></span>
+<span data-ttu-id="a355d-141">명령 셸에서 다음 명령을 사용해 인증 메커니즘이 있는 새 Blazor Server 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-141">Create a new Blazor Server project with an authentication mechanism using the following command in a command shell:</span></span>
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ```
 
-<span data-ttu-id="f347f-142">허용되는 인증 값(`{AUTHENTICATION}`)은 다음 표에 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-142">Permissible authentication values (`{AUTHENTICATION}`) are shown in the following table.</span></span>
+<span data-ttu-id="a355d-142">허용되는 인증 값(`{AUTHENTICATION}`)은 다음 표에 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-142">Permissible authentication values (`{AUTHENTICATION}`) are shown in the following table.</span></span>
 
-| <span data-ttu-id="f347f-143">인증 메커니즘</span><span class="sxs-lookup"><span data-stu-id="f347f-143">Authentication mechanism</span></span> | <span data-ttu-id="f347f-144">설명</span><span class="sxs-lookup"><span data-stu-id="f347f-144">Description</span></span> |
+| <span data-ttu-id="a355d-143">인증 메커니즘</span><span class="sxs-lookup"><span data-stu-id="a355d-143">Authentication mechanism</span></span> | <span data-ttu-id="a355d-144">설명</span><span class="sxs-lookup"><span data-stu-id="a355d-144">Description</span></span> |
 | ------------------------ | ----------- |
-| <span data-ttu-id="f347f-145">`None`(기본값)</span><span class="sxs-lookup"><span data-stu-id="f347f-145">`None` (default)</span></span>         | <span data-ttu-id="f347f-146">인증 없음</span><span class="sxs-lookup"><span data-stu-id="f347f-146">No authentication</span></span> |
-| `Individual`             | <span data-ttu-id="f347f-147">ASP.NET Core Identity을 사용하여 앱에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="f347f-147">Users stored in the app with ASP.NET Core Identity</span></span> |
-| `IndividualB2C`          | <span data-ttu-id="f347f-148">[Azure AD B2C](xref:security/authentication/azure-ad-b2c)에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="f347f-148">Users stored in [Azure AD B2C](xref:security/authentication/azure-ad-b2c)</span></span> |
-| `SingleOrg`              | <span data-ttu-id="f347f-149">단일 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="f347f-149">Organizational authentication for a single tenant</span></span> |
-| `MultiOrg`               | <span data-ttu-id="f347f-150">여러 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="f347f-150">Organizational authentication for multiple tenants</span></span> |
-| `Windows`                | <span data-ttu-id="f347f-151">Windows 인증</span><span class="sxs-lookup"><span data-stu-id="f347f-151">Windows Authentication</span></span> |
+| <span data-ttu-id="a355d-145">`None`(기본값)</span><span class="sxs-lookup"><span data-stu-id="a355d-145">`None` (default)</span></span>         | <span data-ttu-id="a355d-146">인증 없음</span><span class="sxs-lookup"><span data-stu-id="a355d-146">No authentication</span></span> |
+| `Individual`             | <span data-ttu-id="a355d-147">ASP.NET Core Identity을 사용하여 앱에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="a355d-147">Users stored in the app with ASP.NET Core Identity</span></span> |
+| `IndividualB2C`          | <span data-ttu-id="a355d-148">[Azure AD B2C](xref:security/authentication/azure-ad-b2c)에 저장된 사용자</span><span class="sxs-lookup"><span data-stu-id="a355d-148">Users stored in [Azure AD B2C](xref:security/authentication/azure-ad-b2c)</span></span> |
+| `SingleOrg`              | <span data-ttu-id="a355d-149">단일 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="a355d-149">Organizational authentication for a single tenant</span></span> |
+| `MultiOrg`               | <span data-ttu-id="a355d-150">여러 테넌트에 대한 조직 인증</span><span class="sxs-lookup"><span data-stu-id="a355d-150">Organizational authentication for multiple tenants</span></span> |
+| `Windows`                | <span data-ttu-id="a355d-151">Windows 인증</span><span class="sxs-lookup"><span data-stu-id="a355d-151">Windows Authentication</span></span> |
 
-<span data-ttu-id="f347f-152">`-o|--output` 옵션을 사용하면 명령에서 `{APP NAME}` 자리 표시자에 제공된 값을 사용하여 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-152">Using the `-o|--output` option, the command uses the value provided for the `{APP NAME}` placeholder to:</span></span>
+<span data-ttu-id="a355d-152">`-o|--output` 옵션을 사용하면 명령에서 `{APP NAME}` 자리 표시자에 제공된 값을 사용하여 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-152">Using the `-o|--output` option, the command uses the value provided for the `{APP NAME}` placeholder to:</span></span>
 
-* <span data-ttu-id="f347f-153">프로젝트의 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-153">Create a folder for the project.</span></span>
-* <span data-ttu-id="f347f-154">프로젝트의 이름을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-154">Name the project.</span></span>
+* <span data-ttu-id="a355d-153">프로젝트의 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-153">Create a folder for the project.</span></span>
+* <span data-ttu-id="a355d-154">프로젝트의 이름을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-154">Name the project.</span></span>
 
-<span data-ttu-id="f347f-155">자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f347f-155">For more information, see the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in the .NET Core Guide.</span></span>
+<span data-ttu-id="a355d-155">자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a355d-155">For more information, see the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in the .NET Core Guide.</span></span>
 
 ---
 
-## <a name="scaffold-identity"></a><span data-ttu-id="f347f-156">스캐폴드 Identity</span><span class="sxs-lookup"><span data-stu-id="f347f-156">Scaffold Identity</span></span>
+## <a name="scaffold-identity"></a><span data-ttu-id="a355d-156">스캐폴드 Identity</span><span class="sxs-lookup"><span data-stu-id="a355d-156">Scaffold Identity</span></span>
 
-<span data-ttu-id="f347f-157">Blazor Server 프로젝트에 Identity를 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="f347f-157">Scaffold Identity into a Blazor Server project:</span></span>
+<span data-ttu-id="a355d-157">Blazor Server 프로젝트에 Identity를 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="a355d-157">Scaffold Identity into a Blazor Server project:</span></span>
 
-* <span data-ttu-id="f347f-158">[기존 권한 없음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).</span><span class="sxs-lookup"><span data-stu-id="f347f-158">[Without existing authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).</span></span>
-* <span data-ttu-id="f347f-159">[권한 있음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).</span><span class="sxs-lookup"><span data-stu-id="f347f-159">[With authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).</span></span>
+* <span data-ttu-id="a355d-158">[기존 권한 없음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).</span><span class="sxs-lookup"><span data-stu-id="a355d-158">[Without existing authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).</span></span>
+* <span data-ttu-id="a355d-159">[권한 있음](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).</span><span class="sxs-lookup"><span data-stu-id="a355d-159">[With authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).</span></span>
