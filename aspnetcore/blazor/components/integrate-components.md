@@ -8,56 +8,57 @@ ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 1c71067528fb34ab141bb1ee846716834204ee40
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 29360174ea86623491d5d8aacd4038162855bba8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242461"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399064"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a><span data-ttu-id="4d772-103">Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합</span><span class="sxs-lookup"><span data-stu-id="4d772-103">Integrate ASP.NET Core Razor components into Razor Pages and MVC apps</span></span>
+# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a><span data-ttu-id="d4936-103">Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합</span><span class="sxs-lookup"><span data-stu-id="d4936-103">Integrate ASP.NET Core Razor components into Razor Pages and MVC apps</span></span>
 
-<span data-ttu-id="4d772-104">작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="4d772-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
+<span data-ttu-id="d4936-104">작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="d4936-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-105"> components can be integrated into Razor Pages and MVC apps.</span></span> <span data-ttu-id="4d772-106">페이지나 뷰를 렌더링할 때 구성 요소를 동시에 미리 렌더링할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-106">When the page or view is rendered, components can be prerendered at the same time.</span></span>
+Razor<span data-ttu-id="d4936-105"> Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-105"> components can be integrated into Razor Pages and MVC apps.</span></span> <span data-ttu-id="d4936-106">페이지나 뷰를 렌더링할 때 구성 요소를 동시에 미리 렌더링할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-106">When the page or view is rendered, components can be prerendered at the same time.</span></span>
 
-<span data-ttu-id="4d772-107">[앱을 준비](#prepare-the-app)한 후 앱 요구 사항에 따라 다음 섹션의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-107">After [preparing the app](#prepare-the-app), use the guidance in the following sections depending on the app's requirements:</span></span>
+<span data-ttu-id="d4936-107">[앱을 준비](#prepare-the-app)한 후 앱 요구 사항에 따라 다음 섹션의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-107">After [preparing the app](#prepare-the-app), use the guidance in the following sections depending on the app's requirements:</span></span>
 
-* <span data-ttu-id="4d772-108">라우팅 가능한 구성 요소: 사용자 요청에서 직접 라우팅할 수 있는 구성 요소.</span><span class="sxs-lookup"><span data-stu-id="4d772-108">Routable components: For components that are directly routable from user requests.</span></span> <span data-ttu-id="4d772-109">방문자가 [`@page`](xref:mvc/views/razor#page) 지시문을 사용하여 구성 요소에 대한 HTTP 요청을 브라우저에서 만들 수 있는 경우 이 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-109">Follow this guidance when visitors should be able to make an HTTP request in their browser for a component with an [`@page`](xref:mvc/views/razor#page) directive.</span></span>
-  * <span data-ttu-id="4d772-110">[Razor Pages 앱에서 라우팅 가능한 구성 요소 사용](#use-routable-components-in-a-razor-pages-app)</span><span class="sxs-lookup"><span data-stu-id="4d772-110">[Use routable components in a Razor Pages app](#use-routable-components-in-a-razor-pages-app)</span></span>
-  * [<span data-ttu-id="4d772-111">MVC 앱에서 라우팅 가능한 구성 요소 사용</span><span class="sxs-lookup"><span data-stu-id="4d772-111">Use routable components in an MVC app</span></span>](#use-routable-components-in-an-mvc-app)
-* <span data-ttu-id="4d772-112">[페이지 또는 뷰에서 구성 요소 렌더링](#render-components-from-a-page-or-view): 사용자 요청에서 직접 라우팅할 수 없는 구성 요소.</span><span class="sxs-lookup"><span data-stu-id="4d772-112">[Render components from a page or view](#render-components-from-a-page-or-view): For components that aren't directly routable from user requests.</span></span> <span data-ttu-id="4d772-113">[구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)를 사용하여 앱이 구성 요소를 기존 페이지와 뷰에 포함하는 경우 이 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-113">Follow this guidance when the app embeds components into existing pages and views with the [Component Tag Helper](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span></span>
+* <span data-ttu-id="d4936-108">라우팅 가능한 구성 요소: 사용자 요청에서 직접 라우팅할 수 있는 구성 요소.</span><span class="sxs-lookup"><span data-stu-id="d4936-108">Routable components: For components that are directly routable from user requests.</span></span> <span data-ttu-id="d4936-109">방문자가 [`@page`](xref:mvc/views/razor#page) 지시문을 사용하여 구성 요소에 대한 HTTP 요청을 브라우저에서 만들 수 있는 경우 이 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-109">Follow this guidance when visitors should be able to make an HTTP request in their browser for a component with an [`@page`](xref:mvc/views/razor#page) directive.</span></span>
+  * <span data-ttu-id="d4936-110">[Razor Pages 앱에서 라우팅 가능한 구성 요소 사용](#use-routable-components-in-a-razor-pages-app)</span><span class="sxs-lookup"><span data-stu-id="d4936-110">[Use routable components in a Razor Pages app](#use-routable-components-in-a-razor-pages-app)</span></span>
+  * [<span data-ttu-id="d4936-111">MVC 앱에서 라우팅 가능한 구성 요소 사용</span><span class="sxs-lookup"><span data-stu-id="d4936-111">Use routable components in an MVC app</span></span>](#use-routable-components-in-an-mvc-app)
+* <span data-ttu-id="d4936-112">[페이지 또는 뷰에서 구성 요소 렌더링](#render-components-from-a-page-or-view): 사용자 요청에서 직접 라우팅할 수 없는 구성 요소.</span><span class="sxs-lookup"><span data-stu-id="d4936-112">[Render components from a page or view](#render-components-from-a-page-or-view): For components that aren't directly routable from user requests.</span></span> <span data-ttu-id="d4936-113">[구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)를 사용하여 앱이 구성 요소를 기존 페이지와 뷰에 포함하는 경우 이 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-113">Follow this guidance when the app embeds components into existing pages and views with the [Component Tag Helper](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span></span>
 
-## <a name="prepare-the-app"></a><span data-ttu-id="4d772-114">앱 준비</span><span class="sxs-lookup"><span data-stu-id="4d772-114">Prepare the app</span></span>
+## <a name="prepare-the-app"></a><span data-ttu-id="d4936-114">앱 준비</span><span class="sxs-lookup"><span data-stu-id="d4936-114">Prepare the app</span></span>
 
-<span data-ttu-id="4d772-115">기존 Razor Pages 또는 MVC 앱은 페이지와 뷰에 Razor 구성 요소를 통합할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-115">An existing Razor Pages or MVC app can integrate Razor components into pages and views:</span></span>
+<span data-ttu-id="d4936-115">기존 Razor Pages 또는 MVC 앱은 페이지와 뷰에 Razor 구성 요소를 통합할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-115">An existing Razor Pages or MVC app can integrate Razor components into pages and views:</span></span>
 
-1. <span data-ttu-id="4d772-116">앱의 레이아웃 파일(`_Layout.cshtml`)에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-116">In the app's layout file (`_Layout.cshtml`):</span></span>
+1. <span data-ttu-id="d4936-116">앱의 레이아웃 파일(`_Layout.cshtml`)에서 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-116">In the app's layout file (`_Layout.cshtml`):</span></span>
 
-   * <span data-ttu-id="4d772-117">`<head>` 요소에 다음 `<base>` 태그를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-117">Add the following `<base>` tag to the `<head>` element:</span></span>
+   * <span data-ttu-id="d4936-117">`<head>` 요소에 다음 `<base>` 태그를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-117">Add the following `<base>` tag to the `<head>` element:</span></span>
 
      ```html
      <base href="~/" />
      ```
 
-     <span data-ttu-id="4d772-118">위의 예제에서 `href` 값(‘앱 기본 경로’)은 앱이 루트 URL 경로(`/`)에 있는 것으로 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-118">The `href` value (the *app base path*) in the preceding example assumes that the app resides at the root URL path (`/`).</span></span> <span data-ttu-id="4d772-119">앱이 하위 애플리케이션인 경우, <xref:blazor/host-and-deploy/index#app-base-path> 문서의 ‘앱 기본 경로’ 섹션에 설명된 지침을 따르세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-119">If the app is a sub-application, follow the guidance in the *App base path* section of the <xref:blazor/host-and-deploy/index#app-base-path> article.</span></span>
+     <span data-ttu-id="d4936-118">위의 예제에서 `href` 값(‘앱 기본 경로’)은 앱이 루트 URL 경로(`/`)에 있는 것으로 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-118">The `href` value (the *app base path*) in the preceding example assumes that the app resides at the root URL path (`/`).</span></span> <span data-ttu-id="d4936-119">앱이 하위 애플리케이션인 경우, <xref:blazor/host-and-deploy/index#app-base-path> 문서의 ‘앱 기본 경로’ 섹션에 설명된 지침을 따르세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-119">If the app is a sub-application, follow the guidance in the *App base path* section of the <xref:blazor/host-and-deploy/index#app-base-path> article.</span></span>
 
-     <span data-ttu-id="4d772-120">`_Layout.cshtml` 파일은 Razor Pages 앱의 *Pages/Shared* 폴더 또는 MVC 앱의 *Views/Shared* 폴더에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-120">The `_Layout.cshtml` file is located in the *Pages/Shared* folder in a Razor Pages app or *Views/Shared* folder in an MVC app.</span></span>
+     <span data-ttu-id="d4936-120">`_Layout.cshtml` 파일은 Razor Pages 앱의 *Pages/Shared* 폴더 또는 MVC 앱의 *Views/Shared* 폴더에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-120">The `_Layout.cshtml` file is located in the *Pages/Shared* folder in a Razor Pages app or *Views/Shared* folder in an MVC app.</span></span>
 
-   * <span data-ttu-id="4d772-121">닫는 `</body>` 태그 바로 앞에 *blazor.server.js* 스크립트의 `<script>` 태그를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-121">Add a `<script>` tag for the *blazor.server.js* script immediately before of the closing `</body>` tag:</span></span>
+   * <span data-ttu-id="d4936-121">닫는 `</body>` 태그 바로 앞에 *blazor.server.js* 스크립트의 `<script>` 태그를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-121">Add a `<script>` tag for the *blazor.server.js* script immediately before of the closing `</body>` tag:</span></span>
 
      ```html
      <script src="_framework/blazor.server.js"></script>
      ```
 
-     <span data-ttu-id="4d772-122">프레임워크가 *blazor.server.js* 스크립트를 앱에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-122">The framework adds the *blazor.server.js* script to the app.</span></span> <span data-ttu-id="4d772-123">앱에 스크립트를 수동으로 추가할 필요는 없습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-123">There's no need to manually add the script to the app.</span></span>
+     <span data-ttu-id="d4936-122">프레임워크가 *blazor.server.js* 스크립트를 앱에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-122">The framework adds the *blazor.server.js* script to the app.</span></span> <span data-ttu-id="d4936-123">앱에 스크립트를 수동으로 추가할 필요는 없습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-123">There's no need to manually add the script to the app.</span></span>
 
-1. <span data-ttu-id="4d772-124">다음 콘텐츠를 사용하여 프로젝트의 루트 폴더에 `_Imports.razor` 파일을 추가합니다(마지막 네임스페이스인 `MyAppNamespace`를 앱의 네임스페이스로 변경).</span><span class="sxs-lookup"><span data-stu-id="4d772-124">Add an `_Imports.razor` file to the root folder of the project with the following content (change the last namespace, `MyAppNamespace`, to the namespace of the app):</span></span>
+1. <span data-ttu-id="d4936-124">다음 콘텐츠를 사용하여 프로젝트의 루트 폴더에 `_Imports.razor` 파일을 추가합니다(마지막 네임스페이스인 `MyAppNamespace`를 앱의 네임스페이스로 변경).</span><span class="sxs-lookup"><span data-stu-id="d4936-124">Add an `_Imports.razor` file to the root folder of the project with the following content (change the last namespace, `MyAppNamespace`, to the namespace of the app):</span></span>
 
    ```razor
    @using System.Net.Http
@@ -70,29 +71,29 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    @using MyAppNamespace
    ```
 
-1. <span data-ttu-id="4d772-125">`Startup.ConfigureServices`에서 Blazor Server 서비스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-125">In `Startup.ConfigureServices`, register the Blazor Server service:</span></span>
+1. <span data-ttu-id="d4936-125">`Startup.ConfigureServices`에서 Blazor Server 서비스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-125">In `Startup.ConfigureServices`, register the Blazor Server service:</span></span>
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. <span data-ttu-id="4d772-126">`Startup.Configure`에서 `app.UseEndpoints`에 Blazor 허브 엔드포인트를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-126">In `Startup.Configure`, add the Blazor Hub endpoint to `app.UseEndpoints`:</span></span>
+1. <span data-ttu-id="d4936-126">`Startup.Configure`에서 `app.UseEndpoints`에 Blazor 허브 엔드포인트를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-126">In `Startup.Configure`, add the Blazor Hub endpoint to `app.UseEndpoints`:</span></span>
 
    ```csharp
    endpoints.MapBlazorHub();
    ```
 
-1. <span data-ttu-id="4d772-127">페이지 또는 뷰에 구성 요소를 통합합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-127">Integrate components into any page or view.</span></span> <span data-ttu-id="4d772-128">자세한 내용은 [페이지 또는 뷰에서 구성 요소 렌더링](#render-components-from-a-page-or-view) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-128">For more information, see the [Render components from a page or view](#render-components-from-a-page-or-view) section.</span></span>
+1. <span data-ttu-id="d4936-127">페이지 또는 뷰에 구성 요소를 통합합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-127">Integrate components into any page or view.</span></span> <span data-ttu-id="d4936-128">자세한 내용은 [페이지 또는 뷰에서 구성 요소 렌더링](#render-components-from-a-page-or-view) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-128">For more information, see the [Render components from a page or view](#render-components-from-a-page-or-view) section.</span></span>
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a><span data-ttu-id="4d772-129">Razor Pages 앱에서 라우팅 가능한 구성 요소 사용</span><span class="sxs-lookup"><span data-stu-id="4d772-129">Use routable components in a Razor Pages app</span></span>
+## <a name="use-routable-components-in-a-razor-pages-app"></a><span data-ttu-id="d4936-129">Razor Pages 앱에서 라우팅 가능한 구성 요소 사용</span><span class="sxs-lookup"><span data-stu-id="d4936-129">Use routable components in a Razor Pages app</span></span>
 
-<span data-ttu-id="4d772-130">‘이 섹션에서는 사용자 요청에서 직접 라우팅할 수 있는 구성 요소를 추가하는 방법을 설명합니다.’</span><span class="sxs-lookup"><span data-stu-id="4d772-130">*This section pertains to adding components that are directly routable from user requests.*</span></span>
+<span data-ttu-id="d4936-130">‘이 섹션에서는 사용자 요청에서 직접 라우팅할 수 있는 구성 요소를 추가하는 방법을 설명합니다.’</span><span class="sxs-lookup"><span data-stu-id="d4936-130">*This section pertains to adding components that are directly routable from user requests.*</span></span>
 
-<span data-ttu-id="4d772-131">Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-131">To support routable Razor components in Razor Pages apps:</span></span>
+<span data-ttu-id="d4936-131">Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-131">To support routable Razor components in Razor Pages apps:</span></span>
 
-1. <span data-ttu-id="4d772-132">[앱 준비](#prepare-the-app) 섹션의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-132">Follow the guidance in the [Prepare the app](#prepare-the-app) section.</span></span>
+1. <span data-ttu-id="d4936-132">[앱 준비](#prepare-the-app) 섹션의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-132">Follow the guidance in the [Prepare the app](#prepare-the-app) section.</span></span>
 
-1. <span data-ttu-id="4d772-133">다음 콘텐츠를 사용하여 프로젝트 루트에 `App.razor` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-133">Add an `App.razor` file to the project root with the following content:</span></span>
+1. <span data-ttu-id="d4936-133">다음 콘텐츠를 사용하여 프로젝트 루트에 `App.razor` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-133">Add an `App.razor` file to the project root with the following content:</span></span>
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -108,7 +109,7 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    </Router>
    ```
 
-1. <span data-ttu-id="4d772-134">다음 콘텐츠를 사용하여 `Pages` 폴더에 `_Host.cshtml` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-134">Add a `_Host.cshtml` file to the `Pages` folder with the following content:</span></span>
+1. <span data-ttu-id="d4936-134">다음 콘텐츠를 사용하여 `Pages` 폴더에 `_Host.cshtml` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-134">Add a `_Host.cshtml` file to the `Pages` folder with the following content:</span></span>
 
    ```cshtml
    @page "/blazor"
@@ -121,22 +122,22 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    </app>
    ```
 
-   <span data-ttu-id="4d772-135">구성 요소는 해당 레이아웃에 공유 `_Layout.cshtml` 파일을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-135">Components use the shared `_Layout.cshtml` file for their layout.</span></span>
+   <span data-ttu-id="d4936-135">구성 요소는 해당 레이아웃에 공유 `_Layout.cshtml` 파일을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-135">Components use the shared `_Layout.cshtml` file for their layout.</span></span>
 
-   <span data-ttu-id="4d772-136"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 `App` 구성 요소에 대해 다음을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-136"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> configures whether the `App` component:</span></span>
+   <span data-ttu-id="d4936-136"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 `App` 구성 요소에 대해 다음을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-136"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> configures whether the `App` component:</span></span>
 
-   * <span data-ttu-id="4d772-137">페이지에 미리 렌더링할지 여부</span><span class="sxs-lookup"><span data-stu-id="4d772-137">Is prerendered into the page.</span></span>
-   * <span data-ttu-id="4d772-138">페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부</span><span class="sxs-lookup"><span data-stu-id="4d772-138">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
+   * <span data-ttu-id="d4936-137">페이지에 미리 렌더링할지 여부</span><span class="sxs-lookup"><span data-stu-id="d4936-137">Is prerendered into the page.</span></span>
+   * <span data-ttu-id="d4936-138">페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부</span><span class="sxs-lookup"><span data-stu-id="d4936-138">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
 
-   | <span data-ttu-id="4d772-139">렌더링 모드</span><span class="sxs-lookup"><span data-stu-id="4d772-139">Render Mode</span></span> | <span data-ttu-id="4d772-140">설명</span><span class="sxs-lookup"><span data-stu-id="4d772-140">Description</span></span> |
+   | <span data-ttu-id="d4936-139">렌더링 모드</span><span class="sxs-lookup"><span data-stu-id="d4936-139">Render Mode</span></span> | <span data-ttu-id="d4936-140">설명</span><span class="sxs-lookup"><span data-stu-id="d4936-140">Description</span></span> |
    | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="4d772-141">`App` 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-141">Renders the `App` component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="4d772-142">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-142">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="4d772-143">Blazor 서버 앱의 표식을 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-143">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="4d772-144">`App` 구성 요소의 출력은 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-144">Output from the `App` component isn't included.</span></span> <span data-ttu-id="4d772-145">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-145">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="4d772-146">`App` 구성 요소를 정적 HTML에 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-146">Renders the `App` component into static HTML.</span></span> |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="d4936-141">`App` 구성 요소를 정적 HTML에 렌더링하고 Blazor Server 앱의 마커를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-141">Renders the `App` component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="d4936-142">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-142">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="d4936-143">Blazor Server 앱의 마커를 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-143">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="d4936-144">`App` 구성 요소의 출력은 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-144">Output from the `App` component isn't included.</span></span> <span data-ttu-id="d4936-145">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-145">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="d4936-146">`App` 구성 요소를 정적 HTML에 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-146">Renders the `App` component into static HTML.</span></span> |
 
-   <span data-ttu-id="4d772-147">구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-147">For more information on the Component Tag Helper, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+   <span data-ttu-id="d4936-147">구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-147">For more information on the Component Tag Helper, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
-1. <span data-ttu-id="4d772-148">`Startup.Configure`의 엔드포인트 구성에 `_Host.cshtml` 페이지의 우선순위가 낮은 경로를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-148">Add a low-priority route for the `_Host.cshtml` page to endpoint configuration in `Startup.Configure`:</span></span>
+1. <span data-ttu-id="d4936-148">`Startup.Configure`의 엔드포인트 구성에 `_Host.cshtml` 페이지의 우선순위가 낮은 경로를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-148">Add a low-priority route for the `_Host.cshtml` page to endpoint configuration in `Startup.Configure`:</span></span>
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -147,7 +148,7 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    });
    ```
 
-1. <span data-ttu-id="4d772-149">라우팅 가능한 구성 요소를 앱에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-149">Add routable components to the app.</span></span> <span data-ttu-id="4d772-150">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="4d772-150">For example:</span></span>
+1. <span data-ttu-id="d4936-149">라우팅 가능한 구성 요소를 앱에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-149">Add routable components to the app.</span></span> <span data-ttu-id="d4936-150">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="d4936-150">For example:</span></span>
 
    ```razor
    @page "/counter"
@@ -157,17 +158,17 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    ...
    ```
 
-<span data-ttu-id="4d772-151">네임스페이스에 대한 자세한 내용은 [구성 요소 네임스페이스](#component-namespaces) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-151">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
+<span data-ttu-id="d4936-151">네임스페이스에 대한 자세한 내용은 [구성 요소 네임스페이스](#component-namespaces) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-151">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
 
-## <a name="use-routable-components-in-an-mvc-app"></a><span data-ttu-id="4d772-152">MVC 앱에서 라우팅 가능한 구성 요소 사용</span><span class="sxs-lookup"><span data-stu-id="4d772-152">Use routable components in an MVC app</span></span>
+## <a name="use-routable-components-in-an-mvc-app"></a><span data-ttu-id="d4936-152">MVC 앱에서 라우팅 가능한 구성 요소 사용</span><span class="sxs-lookup"><span data-stu-id="d4936-152">Use routable components in an MVC app</span></span>
 
-<span data-ttu-id="4d772-153">‘이 섹션에서는 사용자 요청에서 직접 라우팅할 수 있는 구성 요소를 추가하는 방법을 설명합니다.’</span><span class="sxs-lookup"><span data-stu-id="4d772-153">*This section pertains to adding components that are directly routable from user requests.*</span></span>
+<span data-ttu-id="d4936-153">‘이 섹션에서는 사용자 요청에서 직접 라우팅할 수 있는 구성 요소를 추가하는 방법을 설명합니다.’</span><span class="sxs-lookup"><span data-stu-id="d4936-153">*This section pertains to adding components that are directly routable from user requests.*</span></span>
 
-<span data-ttu-id="4d772-154">MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-154">To support routable Razor components in MVC apps:</span></span>
+<span data-ttu-id="d4936-154">MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-154">To support routable Razor components in MVC apps:</span></span>
 
-1. <span data-ttu-id="4d772-155">[앱 준비](#prepare-the-app) 섹션의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-155">Follow the guidance in the [Prepare the app](#prepare-the-app) section.</span></span>
+1. <span data-ttu-id="d4936-155">[앱 준비](#prepare-the-app) 섹션의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-155">Follow the guidance in the [Prepare the app](#prepare-the-app) section.</span></span>
 
-1. <span data-ttu-id="4d772-156">다음 콘텐츠를 사용하여 프로젝트 루트에 `App.razor` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-156">Add an `App.razor` file to the root of the project with the following content:</span></span>
+1. <span data-ttu-id="d4936-156">다음 콘텐츠를 사용하여 프로젝트 루트에 `App.razor` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-156">Add an `App.razor` file to the root of the project with the following content:</span></span>
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -183,7 +184,7 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    </Router>
    ```
 
-1. <span data-ttu-id="4d772-157">다음 콘텐츠를 사용하여 `Views/Home` 폴더에 `_Host.cshtml` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-157">Add a `_Host.cshtml` file to the `Views/Home` folder with the following content:</span></span>
+1. <span data-ttu-id="d4936-157">다음 콘텐츠를 사용하여 `Views/Home` 폴더에 `_Host.cshtml` 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-157">Add a `_Host.cshtml` file to the `Views/Home` folder with the following content:</span></span>
 
    ```cshtml
    @{
@@ -195,22 +196,22 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    </app>
    ```
 
-   <span data-ttu-id="4d772-158">구성 요소는 해당 레이아웃에 공유 `_Layout.cshtml` 파일을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-158">Components use the shared `_Layout.cshtml` file for their layout.</span></span>
+   <span data-ttu-id="d4936-158">구성 요소는 해당 레이아웃에 공유 `_Layout.cshtml` 파일을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-158">Components use the shared `_Layout.cshtml` file for their layout.</span></span>
    
-   <span data-ttu-id="4d772-159"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 `App` 구성 요소에 대해 다음을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-159"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> configures whether the `App` component:</span></span>
+   <span data-ttu-id="d4936-159"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>는 `App` 구성 요소에 대해 다음을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-159"><xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> configures whether the `App` component:</span></span>
 
-   * <span data-ttu-id="4d772-160">페이지에 미리 렌더링할지 여부</span><span class="sxs-lookup"><span data-stu-id="4d772-160">Is prerendered into the page.</span></span>
-   * <span data-ttu-id="4d772-161">페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부</span><span class="sxs-lookup"><span data-stu-id="4d772-161">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
+   * <span data-ttu-id="d4936-160">페이지에 미리 렌더링할지 여부</span><span class="sxs-lookup"><span data-stu-id="d4936-160">Is prerendered into the page.</span></span>
+   * <span data-ttu-id="d4936-161">페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부</span><span class="sxs-lookup"><span data-stu-id="d4936-161">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
 
-   | <span data-ttu-id="4d772-162">렌더링 모드</span><span class="sxs-lookup"><span data-stu-id="4d772-162">Render Mode</span></span> | <span data-ttu-id="4d772-163">설명</span><span class="sxs-lookup"><span data-stu-id="4d772-163">Description</span></span> |
+   | <span data-ttu-id="d4936-162">렌더링 모드</span><span class="sxs-lookup"><span data-stu-id="d4936-162">Render Mode</span></span> | <span data-ttu-id="d4936-163">설명</span><span class="sxs-lookup"><span data-stu-id="d4936-163">Description</span></span> |
    | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="4d772-164">`App` 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-164">Renders the `App` component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="4d772-165">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-165">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="4d772-166">Blazor 서버 앱의 표식을 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-166">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="4d772-167">`App` 구성 요소의 출력은 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-167">Output from the `App` component isn't included.</span></span> <span data-ttu-id="4d772-168">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-168">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="4d772-169">`App` 구성 요소를 정적 HTML에 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-169">Renders the `App` component into static HTML.</span></span> |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="d4936-164">`App` 구성 요소를 정적 HTML에 렌더링하고 Blazor Server 앱의 마커를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-164">Renders the `App` component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="d4936-165">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-165">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="d4936-166">Blazor Server 앱의 마커를 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-166">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="d4936-167">`App` 구성 요소의 출력은 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-167">Output from the `App` component isn't included.</span></span> <span data-ttu-id="d4936-168">사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-168">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="d4936-169">`App` 구성 요소를 정적 HTML에 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-169">Renders the `App` component into static HTML.</span></span> |
 
-   <span data-ttu-id="4d772-170">구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-170">For more information on the Component Tag Helper, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+   <span data-ttu-id="d4936-170">구성 요소 태그 도우미에 대한 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-170">For more information on the Component Tag Helper, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
-1. <span data-ttu-id="4d772-171">홈 컨트롤러에 작업을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-171">Add an action to the Home controller:</span></span>
+1. <span data-ttu-id="d4936-171">홈 컨트롤러에 작업을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-171">Add an action to the Home controller:</span></span>
 
    ```csharp
    public IActionResult Blazor()
@@ -219,7 +220,7 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    }
    ```
 
-1. <span data-ttu-id="4d772-172">`Startup.Configure`의 엔드포인트 구성에 `_Host.cshtml` 뷰를 반환하는 컨트롤러 작업의 우선순위가 낮은 경로를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-172">Add a low-priority route for the controller action that returns the `_Host.cshtml` view to the endpoint configuration in `Startup.Configure`:</span></span>
+1. <span data-ttu-id="d4936-172">`Startup.Configure`의 엔드포인트 구성에 `_Host.cshtml` 뷰를 반환하는 컨트롤러 작업의 우선순위가 낮은 경로를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-172">Add a low-priority route for the controller action that returns the `_Host.cshtml` view to the endpoint configuration in `Startup.Configure`:</span></span>
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -230,7 +231,7 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    });
    ```
 
-1. <span data-ttu-id="4d772-173">`Pages` 폴더를 만들고 라우팅 가능한 구성 요소를 앱에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-173">Create a `Pages` folder and add routable components to the app.</span></span> <span data-ttu-id="4d772-174">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="4d772-174">For example:</span></span>
+1. <span data-ttu-id="d4936-173">`Pages` 폴더를 만들고 라우팅 가능한 구성 요소를 앱에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-173">Create a `Pages` folder and add routable components to the app.</span></span> <span data-ttu-id="d4936-174">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="d4936-174">For example:</span></span>
 
    ```razor
    @page "/counter"
@@ -240,25 +241,25 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
    ...
    ```
 
-<span data-ttu-id="4d772-175">네임스페이스에 대한 자세한 내용은 [구성 요소 네임스페이스](#component-namespaces) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-175">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
+<span data-ttu-id="d4936-175">네임스페이스에 대한 자세한 내용은 [구성 요소 네임스페이스](#component-namespaces) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-175">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
 
-## <a name="render-components-from-a-page-or-view"></a><span data-ttu-id="4d772-176">페이지 또는 뷰에서 구성 요소 렌더링</span><span class="sxs-lookup"><span data-stu-id="4d772-176">Render components from a page or view</span></span>
+## <a name="render-components-from-a-page-or-view"></a><span data-ttu-id="d4936-176">페이지 또는 뷰에서 구성 요소 렌더링</span><span class="sxs-lookup"><span data-stu-id="d4936-176">Render components from a page or view</span></span>
 
-<span data-ttu-id="4d772-177">‘이 섹션에서는 사용자 요청에서 직접 구성 요소를 라우팅할 수 없는 페이지 또는 뷰에 구성 요소를 추가하는 방법을 설명합니다.’</span><span class="sxs-lookup"><span data-stu-id="4d772-177">*This section pertains to adding components to pages or views, where the components aren't directly routable from user requests.*</span></span>
+<span data-ttu-id="d4936-177">‘이 섹션에서는 사용자 요청에서 직접 구성 요소를 라우팅할 수 없는 페이지 또는 뷰에 구성 요소를 추가하는 방법을 설명합니다.’</span><span class="sxs-lookup"><span data-stu-id="d4936-177">*This section pertains to adding components to pages or views, where the components aren't directly routable from user requests.*</span></span>
 
-<span data-ttu-id="4d772-178">페이지 또는 뷰에서 구성 요소를 렌더링하려면 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-178">To render a component from a page or view, use the [Component Tag Helper](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span></span>
+<span data-ttu-id="d4936-178">페이지 또는 뷰에서 구성 요소를 렌더링하려면 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-178">To render a component from a page or view, use the [Component Tag Helper](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span></span>
 
-### <a name="render-stateful-interactive-components"></a><span data-ttu-id="4d772-179">상태 저장 대화형 구성 요소 렌더링</span><span class="sxs-lookup"><span data-stu-id="4d772-179">Render stateful interactive components</span></span>
+### <a name="render-stateful-interactive-components"></a><span data-ttu-id="d4936-179">상태 저장 대화형 구성 요소 렌더링</span><span class="sxs-lookup"><span data-stu-id="d4936-179">Render stateful interactive components</span></span>
 
-<span data-ttu-id="4d772-180">Razor 페이지 또는 뷰에 상태 저장 대화형 구성 요소를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-180">Stateful interactive components can be added to a Razor page or view.</span></span>
+<span data-ttu-id="d4936-180">Razor 페이지 또는 뷰에 상태 저장 대화형 구성 요소를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-180">Stateful interactive components can be added to a Razor page or view.</span></span>
 
-<span data-ttu-id="4d772-181">페이지 또는 뷰를 렌더링하는 경우와 관련해서 다음 사항을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-181">When the page or view renders:</span></span>
+<span data-ttu-id="d4936-181">페이지 또는 뷰를 렌더링하는 경우와 관련해서 다음 사항을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-181">When the page or view renders:</span></span>
 
-* <span data-ttu-id="4d772-182">구성 요소가 페이지 또는 뷰와 함께 미리 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-182">The component is prerendered with the page or view.</span></span>
-* <span data-ttu-id="4d772-183">미리 렌더링하는 데 사용된 초기 구성 요소 상태가 손실됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-183">The initial component state used for prerendering is lost.</span></span>
-* <span data-ttu-id="4d772-184">SignalR 연결이 완료되면 새 구성 요소 상태가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-184">New component state is created when the SignalR connection is established.</span></span>
+* <span data-ttu-id="d4936-182">구성 요소가 페이지 또는 뷰와 함께 미리 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-182">The component is prerendered with the page or view.</span></span>
+* <span data-ttu-id="d4936-183">미리 렌더링하는 데 사용된 초기 구성 요소 상태가 손실됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-183">The initial component state used for prerendering is lost.</span></span>
+* <span data-ttu-id="d4936-184">SignalR 연결이 완료되면 새 구성 요소 상태가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-184">New component state is created when the SignalR connection is established.</span></span>
 
-<span data-ttu-id="4d772-185">다음 Razor 페이지는 `Counter` 구성 요소를 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-185">The following Razor page renders a `Counter` component:</span></span>
+<span data-ttu-id="d4936-185">다음 Razor 페이지는 `Counter` 구성 요소를 렌더링합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-185">The following Razor page renders a `Counter` component:</span></span>
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -272,11 +273,11 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
 }
 ```
 
-<span data-ttu-id="4d772-186">자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-186">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+<span data-ttu-id="d4936-186">자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-186">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
-### <a name="render-noninteractive-components"></a><span data-ttu-id="4d772-187">비대화형 구성 요소 렌더링</span><span class="sxs-lookup"><span data-stu-id="4d772-187">Render noninteractive components</span></span>
+### <a name="render-noninteractive-components"></a><span data-ttu-id="d4936-187">비대화형 구성 요소 렌더링</span><span class="sxs-lookup"><span data-stu-id="d4936-187">Render noninteractive components</span></span>
 
-<span data-ttu-id="4d772-188">다음 Razor 페이지에서 `Counter` 구성 요소는 폼을 통해 지정된 초기 값을 사용하여 정적으로 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-188">In the following Razor page, the `Counter` component is statically rendered with an initial value that's specified using a form.</span></span> <span data-ttu-id="4d772-189">구성 요소가 정적으로 렌더링되므로 구성 요소는 대화형이 아닙니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-189">Since the component is statically rendered, the component isn't interactive:</span></span>
+<span data-ttu-id="d4936-188">다음 Razor 페이지에서 `Counter` 구성 요소는 폼을 통해 지정된 초기 값을 사용하여 정적으로 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-188">In the following Razor page, the `Counter` component is statically rendered with an initial value that's specified using a form.</span></span> <span data-ttu-id="d4936-189">구성 요소가 정적으로 렌더링되므로 구성 요소는 대화형이 아닙니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-189">Since the component is statically rendered, the component isn't interactive:</span></span>
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -295,19 +296,19 @@ Razor<span data-ttu-id="4d772-105"> Pages 및 MVC 앱에 Razor 구성 요소를 
 }
 ```
 
-<span data-ttu-id="4d772-190">자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-190">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
+<span data-ttu-id="d4936-190">자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-190">For more information, see <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.</span></span>
 
-## <a name="component-namespaces"></a><span data-ttu-id="4d772-191">구성 요소 네임스페이스</span><span class="sxs-lookup"><span data-stu-id="4d772-191">Component namespaces</span></span>
+## <a name="component-namespaces"></a><span data-ttu-id="d4936-191">구성 요소 네임스페이스</span><span class="sxs-lookup"><span data-stu-id="d4936-191">Component namespaces</span></span>
 
-<span data-ttu-id="4d772-192">사용자 지정 폴더를 사용하여 앱의 구성 요소를 저장하는 경우, 폴더를 나타내는 네임스페이스를 페이지/뷰 또는 `_ViewImports.cshtml` 파일에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-192">When using a custom folder to hold the app's components, add the namespace representing the folder to either the page/view or to the `_ViewImports.cshtml` file.</span></span> <span data-ttu-id="4d772-193">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="4d772-193">In the following example:</span></span>
+<span data-ttu-id="d4936-192">사용자 지정 폴더를 사용하여 앱의 구성 요소를 저장하는 경우, 폴더를 나타내는 네임스페이스를 페이지/뷰 또는 `_ViewImports.cshtml` 파일에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-192">When using a custom folder to hold the app's components, add the namespace representing the folder to either the page/view or to the `_ViewImports.cshtml` file.</span></span> <span data-ttu-id="d4936-193">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="d4936-193">In the following example:</span></span>
 
-* <span data-ttu-id="4d772-194">`MyAppNamespace`를 앱의 네임스페이스로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-194">Change `MyAppNamespace` to the app's namespace.</span></span>
-* <span data-ttu-id="4d772-195">구성 요소를 저장하는 데 *Components* 폴더를 사용하지 않은 경우, `Components`를 구성 요소가 있는 폴더로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-195">If a folder named *Components* isn't used to hold the components, change `Components` to the folder where the components reside.</span></span>
+* <span data-ttu-id="d4936-194">`MyAppNamespace`를 앱의 네임스페이스로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-194">Change `MyAppNamespace` to the app's namespace.</span></span>
+* <span data-ttu-id="d4936-195">구성 요소를 저장하는 데 *Components* 폴더를 사용하지 않은 경우, `Components`를 구성 요소가 있는 폴더로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-195">If a folder named *Components* isn't used to hold the components, change `Components` to the folder where the components reside.</span></span>
 
 ```cshtml
 @using MyAppNamespace.Components
 ```
 
-<span data-ttu-id="4d772-196">`_ViewImports.cshtml` 파일은 Razor Pages 앱의 `Pages` 폴더 또는 MVC 앱의 `Views` 폴더에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4d772-196">The `_ViewImports.cshtml` file is located in the `Pages` folder of a Razor Pages app or the `Views` folder of an MVC app.</span></span>
+<span data-ttu-id="d4936-196">`_ViewImports.cshtml` 파일은 Razor Pages 앱의 `Pages` 폴더 또는 MVC 앱의 `Views` 폴더에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d4936-196">The `_ViewImports.cshtml` file is located in the `Pages` folder of a Razor Pages app or the `Views` folder of an MVC app.</span></span>
 
-<span data-ttu-id="4d772-197">자세한 내용은 <xref:blazor/components/index#namespaces>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="4d772-197">For more information, see <xref:blazor/components/index#namespaces>.</span></span>
+<span data-ttu-id="d4936-197">자세한 내용은 <xref:blazor/components/index#namespaces>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d4936-197">For more information, see <xref:blazor/components/index#namespaces>.</span></span>
