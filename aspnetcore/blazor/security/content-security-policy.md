@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 5c53ac64d3ae1b365b40c519eb119f913d58cad1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242981"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402444"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core Blazor에 콘텐츠 보안 정책 적용
 
@@ -38,7 +39,7 @@ CSP는 Chrome, Edge, Firefox, Opera, Safari를 비롯한 대부분의 최신 데
 
 ## <a name="policy-directives"></a>정책 지시문
 
-최소한 Blazor 앱에 대해 다음 지시문 및 원본을 지정합니다. 필요에 따라 추가 지시문 및 원본을 추가합니다. 다음 지시문은 이 문서의 [정책 적용](#apply-the-policy) 섹션에서 사용됩니다. 해당 섹션에서 Blazor WebAssembly 및 Blazor 서버의 보안 정책 예도 제공됩니다.
+최소한 Blazor 앱에 대해 다음 지시문 및 원본을 지정합니다. 필요에 따라 추가 지시문 및 원본을 추가합니다. 다음 지시문은 이 문서의 [정책 적용](#apply-the-policy) 섹션에서 사용됩니다. 해당 섹션에서 Blazor WebAssembly 및 Blazor Server의 보안 정책 예제도 제공됩니다.
 
 * [base-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): 페이지의 `<base>` 태그에 대한 URL을 제한합니다. 체계 및 포트 번호를 포함하여 앱의 원본이 유효한 원본임을 나타내려면 `self`를 지정합니다.
 * [block-all-mixed-content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): 혼합된 HTTP 및 HTTPS 콘텐츠가 로드되지 않도록 차단합니다.
@@ -56,11 +57,11 @@ CSP는 Chrome, Edge, Firefox, Opera, Safari를 비롯한 대부분의 최신 데
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * 문자열로부터 코드를 만들기 위해 `eval()` 및 메서드를 사용하려면 `unsafe-eval`을 지정합니다.
-  * Blazor 서버 앱에서, 스타일시트의 대체 감지를 수행하는 인라인 스크립트에 대해 `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` 해시를 지정합니다.
+  * Blazor Server 앱에서 스타일시트의 대체 검색을 수행하는 인라인 스크립트에 대해 `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` 해시를 지정합니다.
 * [style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): 스타일시트의 유효한 원본을 나타냅니다.
   * 부트스트랩 스타일시트의 경우 `https://stackpath.bootstrapcdn.com/` 호스트 원본을 지정합니다.
   * 체계 및 포트 번호를 포함하여 앱의 원본이 유효한 원본임을 나타내려면 `self`를 지정합니다.
-  * 인라인 스타일의 사용을 허용하려면 `unsafe-inline`을 지정합니다. 초기 요청 후에 클라이언트와 서버를 다시 연결하려면 Blazor 서버 앱에서 UI에 대한 인라인 선언이 필요합니다. 이후 릴리스에서는 `unsafe-inline`이 더 이상 필요하지 않도록 인라인 스타일이 제거될 수 있습니다.
+  * 인라인 스타일의 사용을 허용하려면 `unsafe-inline`을 지정합니다. 초기 요청 후에 클라이언트와 서버를 다시 연결하려면 Blazor Server 앱에서 UI에 대한 인라인 선언이 필요합니다. 이후 릴리스에서는 `unsafe-inline`이 더 이상 필요하지 않도록 인라인 스타일이 제거될 수 있습니다.
 * [upgrade-insecure-requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): 비보안(HTTP) 소스의 콘텐츠 URL을 HTTPS를 통해 안전하게 획득해야 함을 나타냅니다.
 
 위에 나온 지시문은 Microsoft Internet Explorer를 제외한 모든 브라우저에서 지원됩니다.
@@ -81,9 +82,9 @@ CSP는 Chrome, Edge, Firefox, Opera, Safari를 비롯한 대부분의 최신 데
 * `content` 특성 값에 지시문을 배치합니다. 지시문을 세미콜론(`;`)으로 구분합니다.
 * `meta` 태그는 항상 `<head>` 콘텐츠 안에 배치합니다.
 
-이어지는 섹션에서는 Blazor WebAssembly 및 Blazor 서버의 예제 정책을 보여 줍니다. 이 문서에서 예제는 Blazor의 각 릴리스에 대해 버전으로 관리됩니다. 사용 중인 릴리스에 적합한 버전을 사용하려면 이 웹 페이지의 **버전** 드롭다운 선택기를 사용하여 문서 버전을 선택하세요.
+다음 섹션에서는 Blazor WebAssembly 및 Blazor Server의 예제 정책을 보여 줍니다. 이 문서에서 예제는 Blazor의 각 릴리스에 대해 버전으로 관리됩니다. 사용 중인 릴리스에 적합한 버전을 사용하려면 이 웹 페이지의 **버전** 드롭다운 선택기를 사용하여 문서 버전을 선택하세요.
 
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
+### Blazor WebAssembly
 
 `wwwroot/index.html` 호스트 페이지의 `<head>` 콘텐츠에서 [정책 지시문](#policy-directives) 섹션에 설명된 지시문을 적용합니다.
 
@@ -106,7 +107,7 @@ CSP는 Chrome, Edge, Firefox, Opera, Safari를 비롯한 대부분의 최신 데
                upgrade-insecure-requests;">
 ```
 
-### <a name="blazor-server"></a>Blazor 서버
+### Blazor Server
 
 `Pages/_Host.cshtml` 호스트 페이지의 `<head>` 콘텐츠에서 [정책 지시문](#policy-directives) 섹션에 설명된 지시문을 적용합니다.
 

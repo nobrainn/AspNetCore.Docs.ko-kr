@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 7f46051193681ecac59428b77ca1e36830c7bb63
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "84466991"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408203"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -44,7 +45,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 * [MVC(모델-뷰-컨트롤러) 패턴](xref:mvc/overview)을 통해 웹 API 및 웹앱을 테스트 가능하게 합니다.
 * [Razor Pages](xref:razor-pages/index)는 웹 UI를 쉽게 빌드하고 생산성을 높일 수 있는 페이지 기반 프로그래밍 모델입니다.
-* [Razor 태그](xref:mvc/views/razor)는 [Razor 페이지](xref:razor-pages/index) 및 [MVC 보기](xref:mvc/views/overview)를 위한 생산적인 구문을 제공합니다.
+* [Razor 태그](xref:mvc/views/razor)는 [Razor Pages](xref:razor-pages/index) 및 [MVC 뷰](xref:mvc/views/overview)를 위한 생산적인 구문을 제공합니다.
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다.
 * [다양한 데이터 형식 및 콘텐츠 협상](xref:web-api/advanced/formatting)에 대한 기본 제공 지원을 통해 웹 API를 브라우저 및 모바일 디바이스를 포함한 다양한 클라이언트에 연결할 수 있습니다.
 * [모델 바인딩](xref:mvc/models/model-binding)은 HTTP 요청의 데이터를 작업 메서드 매개 변수에 자동으로 매핑합니다.
@@ -52,7 +53,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
 
 <a name="target-framework"></a>
 
@@ -76,12 +77,12 @@ ASP.NET Core 앱 개발을 소개하는 자습서는 다음의 순서대로 살�
 
    |앱 형식  |시나리오  |자습서  |
    |----------|----------|----------|
-   |웹앱                   | 새로운 서버 쪽 웹 UI 개발 |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
+   |웹앱                   | 새로운 서버 쪽 웹 UI 개발 |[Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱                   | MVC 앱 유지 관리 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
-   |웹앱                   | 클라이언트 쪽 웹 UI 개발 |[Blazor 시작](xref:tutorials/first-blazor-app) |
+   |웹앱                   | 클라이언트 쪽 웹 UI 개발 |[Blazor 시작하기](xref:tutorials/first-blazor-app) |
    |Web API                   | RESTful HTTP 서비스 |[웹 API 만들기](xref:tutorials/first-web-api)&dagger; |
    |원격 프로시저 호출 앱 | 프로토콜 버퍼를 사용하는 계약 중심 서비스 |[gRPC 서비스 시작](xref:tutorials/grpc/grpc-start) |
-   |실시간 앱             | 서버 및 연결된 클라이언트 간의 양방향 통신 |[SignalR 시작](xref:tutorials/signalr) |
+   |실시간 앱             | 서버 및 연결된 클라이언트 간의 양방향 통신 |[SignalR 시작하기](xref:tutorials/signalr) |
 
 1. 기본 데이터 액세스를 수행하는 방법을 보여 주는 자습서를 살펴보세요.
 
@@ -113,7 +114,7 @@ ASP.NET Core는 최신 클라우드 사용 인터넷 연결 앱을 빌드하기 
 
 ## <a name="why-choose-aspnet-core"></a>ASP.NET Core를 선택해야 하는 이유
 
-수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었고 지금도 만들고 있습니다. ASP.NET Core는 더 간결하고 모듈화된 프레임워크를 만드는 아키텍처 변경 내용이 담긴 ASP.NET 4.x의 재설계입니다.
+수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었고 지금도 만들고 있습니다. ASP.NET Core는 보다 간결하고 모듈화된 프레임워크를 만드는 아키텍처 변경 내용이 담긴 ASP.NET 4.x의 재설계입니다.
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -123,7 +124,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 * [MVC(모델-뷰-컨트롤러) 패턴](xref:mvc/overview)을 통해 웹 API 및 웹앱을 테스트 가능하게 합니다.
 * [Razor Pages](xref:razor-pages/index)는 웹 UI를 쉽게 빌드하고 생산성을 높일 수 있는 페이지 기반 프로그래밍 모델입니다.
-* [Razor 태그](xref:mvc/views/razor)는 [Razor 페이지](xref:razor-pages/index) 및 [MVC 보기](xref:mvc/views/overview)를 위한 생산적인 구문을 제공합니다.
+* [Razor 태그](xref:mvc/views/razor)는 [Razor Pages](xref:razor-pages/index) 및 [MVC 뷰](xref:mvc/views/overview)를 위한 생산적인 구문을 제공합니다.
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다.
 * [다양한 데이터 형식 및 콘텐츠 협상](xref:web-api/advanced/formatting)에 대한 기본 제공 지원을 통해 웹 API를 브라우저 및 모바일 디바이스를 포함한 다양한 클라이언트에 연결할 수 있습니다.
 * [모델 바인딩](xref:mvc/models/model-binding)은 HTTP 요청의 데이터를 작업 메서드 매개 변수에 자동으로 매핑합니다.
@@ -131,7 +132,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
 
 <a name="target-framework"></a>
 
@@ -164,10 +165,10 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음의 순서
 
    |앱 형식  |시나리오  |자습서  |
    |----------|----------|----------|
-   |웹앱                   | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
+   |웹앱                   | 새로운 개발의 경우        |[Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱                   | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[웹 API 만들기](xref:tutorials/first-web-api)&dagger; |
-   |실시간 앱             |                            |[SignalR 시작](xref:tutorials/signalr) |
+   |실시간 앱             |                            |[SignalR 시작하기](xref:tutorials/signalr) |
 
 1. 기본 데이터 액세스를 수행하는 방법을 보여 주는 자습서를 살펴보세요.
 

@@ -1,34 +1,35 @@
 ---
-title: ASP.NET Core Blazor 서버 추가 보안 시나리오
+title: ASP.NET Core Blazor Server 추가 보안 시나리오
 author: guardrex
-description: 추가 보안 시나리오에 대해 Blazor 서버를 구성하는 방법을 알아봅니다.
+description: 추가 보안 시나리오에 대해 Blazor Server를 구성하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 7f92f82d6e78771494b9f2358ee19153502f8dcb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 46de9a22dec540b8dfda7583b7a3c5c2dcbbc549
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243046"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402327"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor 서버 추가 보안 시나리오
+# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server 추가 보안 시나리오
 
 작성자: [Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazor 서버 앱으로 토큰 전달
+## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazor Server 앱으로 토큰 전달
 
-Blazor 서버 앱의 Razor 구성 요소 외부에서 사용할 수 있는 토큰은 이 섹션에서 설명하는 방법을 통해 구성 요소로 전달할 수 있습니다. 완전한 `Startup.ConfigureServices` 예제와 샘플 코드를 보려면 [Passing tokens to a server-side Blazor application](https://github.com/javiercn/blazor-server-aad-sample)(서버 쪽 Blazor 애플리케이션으로 토큰 전달)을 참조하세요.
+Blazor Server 앱의 Razor 구성 요소 외부에서 사용할 수 있는 토큰은 이 섹션에서 설명하는 방법을 통해 구성 요소로 전달할 수 있습니다. 완전한 `Startup.ConfigureServices` 예제와 샘플 코드를 보려면 [Passing tokens to a server-side Blazor application](https://github.com/javiercn/blazor-server-aad-sample)(서버 쪽 Blazor 애플리케이션으로 토큰 전달)을 참조하세요.
 
-일반 Razor Pages나 MVC 앱을 인증하는 것처럼 Blazor 서버 앱을 인증합니다. 토큰을 프로비저닝하고 인증 쿠키에 저장합니다. 예를 들어:
+일반 Razor Pages나 MVC 앱을 인증하는 것처럼 Blazor Server 앱을 인증합니다. 토큰을 프로비저닝하고 인증 쿠키에 저장합니다. 예를 들어:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

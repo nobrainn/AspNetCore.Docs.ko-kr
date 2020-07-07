@@ -8,21 +8,22 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
-ms.translationtype: HT
+ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240872"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402834"
 ---
 # <a name="aspnet-core-blazor-logging"></a>ASP.NET Core Blazor 로깅
 
-## <a name="blazor-webassembly"></a>Blazor WebAssembly
+## Blazor WebAssembly
 
 `Program.Main`의 `WebAssemblyHostBuilder.Logging` 속성을 사용하여 Blazor WebAssembly 앱에서 로깅을 구성합니다.
 
@@ -41,7 +42,7 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 로깅 구성은 앱 설정 파일에서 로드할 수 있습니다. 자세한 내용은 <xref:blazor/fundamentals/configuration#logging-configuration>를 참조하세요.
 
-## <a name="blazor-server"></a>Blazor 서버
+## Blazor Server
 
 일반적인 ASP.NET Core 로깅 지침은 <xref:fundamentals/logging/index>을 참조하세요.
 

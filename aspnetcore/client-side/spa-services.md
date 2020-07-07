@@ -8,17 +8,18 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 65bd5157bb3909f8352debcb1a6dfa7d888eec0e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769925"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401833"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>JavaScript Services를 사용하여 ASP.NET Core에서 단일 페이지 애플리케이션 만들기
 
@@ -103,7 +104,7 @@ npm i -S aspnet-prerendering
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/_ViewImports.cshtml?highlight=3)]
 
-이러한 태그 도우미는 Razor 뷰 내에서 HTML 유사 구문을 활용하여 하위 수준 API와 직접 통신할 때의 복잡성을 추상화합니다.
+이 태그 도우미는 Razor 뷰 내에서 HTML 유사 구문을 활용하여 하위 수준 API와 직접 통신할 때의 복잡성을 추상화합니다.
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=5)]
 

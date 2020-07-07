@@ -1,24 +1,25 @@
 ---
 title: ASP.NET Core Blazor WebAssembly 성능 모범 사례
 author: pranavkm
-description: ASP.NET Core Blazor WebAssembly 앱의 성능을 높이고 일반적인 성능 문제를 방지하기 위한 팁.
+description: ASP.NET Core Blazor WebAssembly 앱의 성능을 높이고 일반적인 성능 문제를 방지하기 위한 팁입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/08/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: f7bd0d356030e6ddb95c77d7376995320e3ec40e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243033"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401885"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly 성능 모범 사례
 
@@ -38,7 +39,7 @@ Blazor의 diff 알고리즘은 알고리즘에서 구성 요소가 변경되지 
 }
 ```
 
-대부분의 앱에는 세밀한 제어가 필요하지 않지만 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>는 UI 이벤트에 응답하는 구성 요소를 선택적으로 렌더링하는 데 사용될 수도 있습니다.
+대부분의 앱에는 세밀한 제어가 필요하지 않지만 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>는 UI 이벤트에 응답하는 구성 요소를 선택적으로 렌더링하는 데 사용될 수 있습니다. 수많은 구성 요소가 렌더링되는 시나리오에서는 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>를 사용하는 것이 중요할 수도 있습니다. 그리드의 한 셀에 있는 하나의 구성 요소에서 <xref:Microsoft.AspNetCore.Components.EventCallback>을 사용하면 그리드에서 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 호출되는 그리드를 살펴보겠습니다. <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>를 호출하면 모든 자식 구성 요소가 다시 렌더링됩니다. 적은 수의 셀만 다시 렌더링해야 하는 경우에는 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>를 사용하여 불필요한 렌더링으로 인한 성능 저하를 방지합니다.
 
 다음 예제에서는
 
@@ -93,7 +94,7 @@ Blazor의 JS interop 구현은 메모리 할당이 작은 고성능 JSON seriali
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>가능한 경우 동기식 및 역 마샬링된 JS interop API 사용
 
-Blazor WebAssembly는 Blazor 서버 앱에서 사용 가능한 단일 버전에 더해 두 개의 추가 <xref:Microsoft.JSInterop.IJSRuntime> 버전을 제공합니다.
+Blazor WebAssembly는 Blazor Server 앱에서 사용 가능한 단일 버전에 더해 두 개의 추가 <xref:Microsoft.JSInterop.IJSRuntime> 버전을 제공합니다.
 
 * <xref:Microsoft.JSInterop.IJSInProcessRuntime>을 사용하면 JS interop 호출을 동기식으로 호출할 수 있습니다. 이렇게 하면 비동기식 버전에 비해 오버헤드가 덜 발생합니다.
 

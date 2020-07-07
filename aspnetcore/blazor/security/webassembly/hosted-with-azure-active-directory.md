@@ -1,5 +1,5 @@
 ---
-title: Azure Active Directory를 사용하여 ASP.NET Core Blazor WebAssembly 호스트형 앱 보호
+title: Azure Active Directory를 사용하여 ASP.NET Core Blazor WebAssembly 호스트된 앱 보호
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
@@ -8,23 +8,24 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 3a541df51a040291f390559842ecd05ba09cee8c
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 2c1454d4fc3cd5923100e27748013873c6b4a74a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243631"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402379"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Azure Active Directory를 사용하여 ASP.NET Core Blazor WebAssembly 호스트형 앱 보호
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Azure Active Directory를 사용하여 ASP.NET Core Blazor WebAssembly 호스트된 앱 보호
 
 작성자: [Javier Calvarro Nelson](https://github.com/javiercn) 및 [Luke Latham](https://github.com/guardrex)
 
-이 문서에서는 인증을 위해 [AAD(Azure Active Directory)](https://azure.microsoft.com/services/active-directory/)를 사용하는 [Blazor WebAssembly 호스트형 앱](xref:blazor/hosting-models#blazor-webassembly)을 만드는 방법을 설명합니다.
+이 문서에서는 인증을 위해 [AAD(Azure Active Directory)](https://azure.microsoft.com/services/active-directory/)를 사용하는 [Blazor WebAssembly 호스트된 앱](xref:blazor/hosting-models#blazor-webassembly)을 만드는 방법을 설명합니다.
 
 ## <a name="register-apps-in-aad-and-create-solution"></a>AAD에 앱을 등록하고 솔루션 만들기
 
@@ -37,7 +38,7 @@ ms.locfileid: "85243631"
 [빠른 시작: Microsoft ID 플랫폼에 애플리케이션 등록](/azure/active-directory/develop/quickstart-register-app) 및 후속 Azure AAD 항목의 지침에 따라 ‘서버 API 앱’에 대해 AAD 앱을 등록하고 다음을 수행합니다.
 
 1. **Azure Active Directory** > **앱 등록**에서 **새 등록**을 선택합니다.
-1. 앱의 **이름**을 지정합니다(예: **Blazor 서버 AAD**).
+1. 앱의 **이름**을 지정합니다(예: **Blazor Server AAD**).
 1. **지원되는 계정 유형**을 선택합니다. 이 환경에서는 **이 조직 디렉터리의 계정만**(단일 테넌트)을 선택합니다.
 1. 이 시나리오에서는 ‘서버 API 앱’에 **리디렉션 URI**가 필요하지 않으므로 드롭다운이 **웹**으로 설정된 상태로 두고 리디렉션 URI를 입력하지 않습니다.
 1. **사용 권한** > **openid 및 offline_access 권한에 대한 관리자 동의 허용** 확인란을 선택 해제합니다.
@@ -90,7 +91,7 @@ ms.locfileid: "85243631"
 
 1. 앱에 **Microsoft Graph** > **User.Read** 사용 권한이 있는지 확인합니다.
 1. **사용 권한 추가**를 선택하고 **내 API**를 선택합니다.
-1. **이름** 열에서 ‘서버 API 앱’을 선택합니다(예: **Blazor 서버 AAD**).
+1. **이름** 열에서 ‘서버 API 앱’을 선택합니다(예: **Blazor Server AAD**).
 1. **API** 목록을 엽니다.
 1. API에 대한 액세스를 사용하도록 설정합니다(예: `API.Access`).
 1. **권한 추가**를 선택합니다.

@@ -1,5 +1,5 @@
 ---
-title: Azure Active Directory B2C를 사용하여 ASP.NET Core Blazor WebAssembly 호스트형 앱 보호
+title: Azure Active Directory B2C를 사용하여 ASP.NET Core Blazor WebAssembly 호스트된 앱 보호
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
@@ -8,19 +8,20 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 3dfaa043fd2e6bc092c2db828563aeaedaa9d272
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 123b664b87eb41a8f07344608713d9aed7a0aa37
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243540"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402249"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용하여 ASP.NET Core Blazor WebAssembly 호스트형 앱 보호
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용하여 ASP.NET Core Blazor WebAssembly 호스트된 앱 보호
 
 작성자: [Javier Calvarro Nelson](https://github.com/javiercn) 및 [Luke Latham](https://github.com/guardrex)
 
@@ -42,7 +43,7 @@ ms.locfileid: "85243540"
 [자습서: Azure Active Directory B2C에서 애플리케이션 등록](/azure/active-directory-b2c/tutorial-register-applications)의 지침에 따라 ‘서버 API 앱’에 대해 AAD 앱을 등록하고 다음을 수행합니다.
 
 1. **Azure Active Directory** > **앱 등록**에서 **새 등록**을 선택합니다.
-1. 앱의 **이름**을 지정합니다(예: **Blazor 서버 AAD B2C**).
+1. 앱의 **이름**을 지정합니다(예: **Blazor Server AAD B2C**).
 1. **지원되는 계정 유형**으로 다중 테넌트 옵션 **조직 디렉터리 또는 ID 공급자의 계정. Azure AD B2C를 사용하여 사용자 인증**을 선택합니다.
 1. 이 시나리오에서는 ‘서버 API 앱’에 **리디렉션 URI**가 필요하지 않으므로 드롭다운이 **웹**으로 설정된 상태로 두고 리디렉션 URI를 입력하지 않습니다.
 1. **사용 권한** > **openid 및 offline_access 권한에 대한 관리자 동의 허용**이 사용하도록 설정되었는지 확인합니다.
@@ -92,7 +93,7 @@ ms.locfileid: "85243540"
 **API 사용 권한**에서:
 
 1. **사용 권한 추가**를 선택하고 **내 API**를 선택합니다.
-1. **이름** 열에서 ‘서버 API 앱’을 선택합니다(예: **Blazor 서버 AAD B2C**).
+1. **이름** 열에서 ‘서버 API 앱’을 선택합니다(예: **Blazor Server AAD B2C**).
 1. **API** 목록을 엽니다.
 1. API에 대한 액세스를 사용하도록 설정합니다(예: `API.Access`).
 1. **권한 추가**를 선택합니다.

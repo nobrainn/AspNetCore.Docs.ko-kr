@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Blazor WebAssembly 호스트 및 배포
+title: ASP.NET Core 호스트 및 배포 Blazor WebAssembly
 author: guardrex
 description: ASP.NET Core, CDN(콘텐츠 배달 네트워크), 파일 서버 및 GitHub 페이지를 사용하여 Blazor 앱을 호스트하고 배포하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,23 +8,24 @@ ms.custom: mvc
 ms.date: 06/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7e0263200ebb9ce60f7234af3cbb18c5aeaa3e09
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 2b100ba029c08e0ce68d208df761f22a712fbbfd
+ms.sourcegitcommit: 99c784a873b62fbd97a73c5c07f4fe7a7f5db638
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243527"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85503515"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
+# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core 호스트 및 배포 Blazor WebAssembly
 
 작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams) 및 [Safia Abdalla](https://safia.rocks)
 
-[Blazor WebAssembly 호스팅 모델 사용](xref:blazor/hosting-models#blazor-webassembly):
+[Blazor WebAssembly 호스팅 모델](xref:blazor/hosting-models#blazor-webassembly)을 사용하면 다음과 같이 실행됩니다.
 
 * Blazor 앱, 해당 앱의 종속성 및 .NET 런타임이 병렬로 브라우저에 다운로드됩니다.
 * 해당 앱은 브라우저 UI 스레드에서 직접 실행됩니다.
@@ -65,16 +66,16 @@ Blazor는 호스트를 사용하여 적절한 압축 파일을 제공합니다. 
             const originalResponseArray = new Int8Array(originalResponseBuffer);
             const decompressedResponseArray = BrotliDecode(originalResponseArray);
             const contentType = type === 
-          'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+              'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
             return new Response(decompressedResponseArray, 
-          { headers: { 'content-type': contentType } });
+              { headers: { 'content-type': contentType } });
           })();
         }
       }
     });
-  </script>
-  ```
-   
+    </script>
+    ```
+ 
 압축을 해제하려면 앱의 프로젝트 파일에 `BlazorEnableCompression` MSBuild 속성을 추가하고 값을 `false`로 설정합니다.
 
 ```xml
@@ -85,7 +86,7 @@ Blazor는 호스트를 사용하여 적절한 압축 파일을 제공합니다. 
 
 ## <a name="rewrite-urls-for-correct-routing"></a>올바른 라우팅을 위해 URL 다시 생성
 
-Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 Blazor 서버에서 호스트한 앱의 요청을 라우팅하는 것처럼 간단하지 않습니다. 다음 두 가지 구성 요소가 있는 Blazor WebAssembly 앱을 생각해 보겠습니다.
+Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 Blazor Server에서 호스트된 앱의 요청을 라우팅하는 것처럼 간단하지 않습니다. 다음 두 구성 요소를 사용하는 Blazor WebAssembly 앱을 살펴보겠습니다.
 
 * `Main.razor`: 앱의 루트에 로드되며 `About` 구성 요소에 대한 링크(`href="About"`)를 포함합니다.
 * `About.razor`: `About` 구성 요소입니다.
@@ -97,7 +98,7 @@ Blazor WebAssembly 앱의 페이지 구성 요소에 대한 라우팅 요청은 
 1. `index.html`이 앱을 부트스트랩합니다.
 1. Blazor의 라우터가 로드되고 Razor `Main` 구성 요소가 렌더링됩니다.
 
-Blazor 라우터는 브라우저가 인터넷에서 `www.contoso.com`으로 `About`을 요청하는 것을 중단하고 렌더링된 `About` 구성 요소를 직접 제공하므로 기본 페이지에서 `About` 구성 요소에 대한 링크 선택은 클라이언트에서 작동합니다. *Blazor WebAssembly 앱 내*의 내부 엔드포인트에 대한 모든 요청도 같은 방법으로 작동합니다. 요청은 인터넷상에서 서버가 호스트하는 리소스에 대한 브라우저 기반 요청을 트리거하지 않습니다. 라우터가 내부적으로 요청을 처리합니다.
+Blazor 라우터는 브라우저가 인터넷에서 `www.contoso.com`으로 `About`을 요청하는 것을 중단하고 렌더링된 `About` 구성 요소를 직접 제공하므로 기본 페이지에서 `About` 구성 요소에 대한 링크 선택은 클라이언트에서 작동합니다. ‘Blazor WebAssembly 앱 내’의 내부 엔드포인트에 대한 모든 요청도 같은 방법으로 작동합니다. 요청은 인터넷상에서 서버가 호스트하는 리소스에 대한 브라우저 기반 요청을 트리거하지 않습니다. 라우터가 내부적으로 요청을 처리합니다.
 
 브라우저의 주소 표시줄을 사용하여 `www.contoso.com/About`을 요청하면 해당 요청이 실패합니다. 앱의 인터넷 호스트에 해당 리소스가 없으므로 *404 - 찾을 수 없음* 응답이 반환됩니다.
 
@@ -107,7 +108,7 @@ IIS 서버에 배포하는 경우 앱의 게시된 `web.config` 파일과 함께
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>ASP.NET Core를 사용하여 호스트된 배포
 
-*호스트된 배포*는 웹 서버에서 실행되는 [ASP.NET Core 앱](xref:index)에서 Blazor WebAssembly 앱을 브라우저에 제공하지 않습니다.
+‘호스트된 배포’는 웹 서버에서 실행되는 [ASP.NET Core 앱](xref:index)에서 Blazor WebAssembly 앱을 브라우저에 제공하지 않습니다.
 
 클라이언트 Blazor WebAssembly 앱이 서버 앱의 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 폴더에 서버 앱의 다른 정적 웹 자산과 함께 게시됩니다. 두 앱이 함께 배포됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 호스트된 배포의 경우 Visual Studio는 **`Hosted`** (`dotnet new` 명령을 사용하는 경우 `-ho|--hosted`) 옵션이 선택된 **Blazor WebAssembly 앱** 프로젝트 템플릿([`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorwasm` 템플릿)을 포함합니다.
 
@@ -117,7 +118,7 @@ Azure App Service 배포에 대한 자세한 내용은 <xref:tutorials/publish-t
 
 ## <a name="standalone-deployment"></a>독립 실행형 배포
 
-*독립 실행형 배포*는 Blazor WebAssembly 앱을 클라이언트가 직접 요청하는 정적 파일 세트로 제공합니다. 모든 정적 파일 서버는 Blazor 앱을 사용할 수 있습니다.
+‘독립 실행형 배포’는 Blazor WebAssembly 앱을 클라이언트가 직접 요청하는 정적 파일 세트로 제공합니다. 모든 정적 파일 서버는 Blazor 앱을 사용할 수 있습니다.
 
 독립 실행형 배포 자산은 `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` 폴더에 게시됩니다.
 
@@ -166,7 +167,7 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 웹 사이트의 **실제 경로**를 앱의 폴더로 설정합니다. 이 폴더는 다음을 포함합니다.
 
 * 필요한 리디렉션 규칙 및 파일 콘텐츠 형식 등 IIS가 웹 사이트를 구성하기 위해 사용하는 `web.config` 파일
-* 앱의 정적 자산 폴더
+* 앱의 정적 자산 폴더입니다.
 
 #### <a name="host-as-an-iis-sub-app"></a>IIS 하위 앱으로 호스트
 
@@ -265,7 +266,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a>Apache
 
-Blazor WebAssembly 앱을 CentOS 7 이상에 배포하려면 다음을 수행합니다.
+CentOS 7 이상에 Blazor WebAssembly 앱을 배포하려면 다음을 수행합니다.
 
 1. Apache 구성 파일을 만듭니다. 다음 예제는 단순화된 구성 파일입니다(`blazorapp.config`).
 

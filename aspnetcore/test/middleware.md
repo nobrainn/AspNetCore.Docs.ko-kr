@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: ea7fc0e889ab32cbaf23257b3e866519af0727aa
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: HT
+ms.openlocfilehash: f4ed16b136da37c093a72a8866301a188a8518a2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424531"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406487"
 ---
 # <a name="test-aspnet-core-middleware"></a>ASP.NET Core 미들웨어 테스트
 
@@ -41,6 +42,14 @@ ms.locfileid: "83424531"
 
 * <xref:Microsoft.AspNetCore.TestHost.TestServer>를 사용하는 호스트를 빌드하고 시작합니다.
 * 미들웨어에서 사용하는 모든 필요한 서비스를 추가합니다.
+* [Microsoft.AspNetCore.TestHost](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost/) NuGet 패키지를 프로젝트에 추가합니다.
+  
+  ```dotnetcli
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.*" />
+  </ItemGroup>
+  ```
+
 * 테스트에 미들웨어를 사용하도록 처리 파이프라인을 구성합니다.
 
 [!code-csharp[](middleware/samples_snapshot/3.x/setup.cs?highlight=4-18)]

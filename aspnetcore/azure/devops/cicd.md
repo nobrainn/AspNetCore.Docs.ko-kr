@@ -7,17 +7,18 @@ ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: f5b0e0ee1c903de26188815c7dc01ed547cca97e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767137"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400559"
 ---
 # <a name="continuous-integration-and-deployment"></a>연속 통합 및 배포
 
@@ -68,7 +69,7 @@ ms.locfileid: "82767137"
 
 다음 단계를 수행하여 로컬 Git 배포를 제거합니다. Azure Pipelines(Azure DevOps 서비스)는 해당 기능을 대체하고 보강합니다.
 
-1. [Azure Portal](https://portal.azure.com/)을 열고 *스테이징(mywebapp\<unique_number\>/staging)* 웹앱으로 이동합니다. 포털의 검색 상자에 *스테이징*을 입력하여 웹앱을 신속하게 찾을 수 있습니다.
+1. [Azure Portal](https://portal.azure.com/)을 열고 ‘스테이징’ *(mywebapp\<unique_number\>/staging)* 웹앱으로 이동합니다. 포털의 검색 상자에 *스테이징*을 입력하여 웹앱을 신속하게 찾을 수 있습니다.
 
     ![스테이징 웹앱 검색 용어](media/cicd/portal-search-box.png)
 
@@ -279,7 +280,7 @@ ms.locfileid: "82767137"
 
 ![릴리스 파이프라인 배포 작업을 보여 주는 스크린샷](media/cicd/release-definition-task1.png)
 
-Azure 구독, 서비스 유형, 웹앱 이름, 리소스 그룹 및 배포 슬롯은 배포 작업에 정의되어 있습니다. **패키지 또는 폴더** 텍스트 상자에는 *mywebapp\<unique_number\>* 웹앱의 *스테이징* 슬롯에 추출 및 배포할 *.zip* 파일 경로가 포함됩니다.
+Azure 구독, 서비스 유형, 웹앱 이름, 리소스 그룹 및 배포 슬롯은 배포 작업에 정의되어 있습니다. **패키지 또는 폴더** 텍스트 상자에는 *mywebapp\<unique_number\>* 웹앱의 ‘스테이징’ 슬롯에 추출 및 배포할 *.zip* 파일 경로가 포함됩니다.
 
 슬롯 교환 작업을 클릭하면 다음과 같은 작업 구성이 표시됩니다.
 

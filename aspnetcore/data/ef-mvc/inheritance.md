@@ -8,17 +8,18 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 4883c697e950cac298dec961b4cd5a5096d8e946
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: cea19044294482adf834d998b75e0f3fc386cc46
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773577"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400533"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>자습서: 상속 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -105,7 +106,7 @@ dotnet ef migrations add Inheritance
 
 `database update` 명령을 아직 실행하지 마세요. 이 명령은 Instructor 테이블을 삭제하고 Student 테이블 이름을 Person으로 변경하므로 데이터가 손실됩니다. 기존 데이터를 유지하려면 사용자 지정 코드를 제공해야 합니다.
 
-*Migrations/\<timestamp>_Inheritance.cs*를 여고 `Up` 메서드를 다음 코드로 바꿉니다.
+*Migrations/\<timestamp>_Inheritance.cs*를 열고 `Up` 메서드를 다음 코드로 바꿉니다.
 
 [!code-csharp[](intro/samples/cu/Migrations/20170216215525_Inheritance.cs?name=snippet_Up)]
 

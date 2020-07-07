@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: fde30109395065014433bebde52a9eb22458c451
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: ba85cc901127725d674b699638fef5fe363081a8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242747"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402795"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -28,11 +29,11 @@ ms.locfileid: "85242747"
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 엔드포인트 라우팅 통합
 
-Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/routing)에 통합됩니다. `Startup.Configure`의 <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A>를 사용하여 대화형 구성 요소에 대해 들어오는 연결을 허용하도록 ASP.NET Core 앱을 구성합니다.
+Blazor Server는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/routing)에 통합됩니다. `Startup.Configure`의 <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A>를 사용하여 대화형 구성 요소에 대해 들어오는 연결을 허용하도록 ASP.NET Core 앱을 구성합니다.
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-가장 일반적인 구성은 Blazor 서버 앱의 서버 쪽 호스트 역할을 하는 Razor 페이지로 모든 요청을 라우팅하는 것입니다. 규칙에 따라 ‘호스트’ 페이지의 이름은 일반적으로 `_Host.cshtml`입니다. 호스트 파일에 지정된 경로는 경로 일치 시 낮은 우선순위로 작동하기 때문에 ‘대체 경로’라고 합니다. 일치하는 다른 경로가 없는 경우 대체(fallback) 경로가 사용됩니다. 이렇게 하면 앱이 Blazor 서버 앱을 방해하지 않고 다른 컨트롤러와 페이지를 사용할 수 있습니다.
+가장 일반적인 구성은 Blazor Server 앱의 서버 쪽 호스트 역할을 하는 Razor 페이지로 모든 요청을 라우팅하는 것입니다. 규칙에 따라 ‘호스트’ 페이지의 이름은 일반적으로 `_Host.cshtml`입니다. 호스트 파일에 지정된 경로는 경로 일치 시 낮은 우선순위로 작동하기 때문에 ‘대체 경로’라고 합니다. 일치하는 다른 경로가 없는 경우 대체(fallback) 경로가 사용됩니다. 이렇게 하면 앱이 Blazor Server 앱을 방해하지 않고 다른 컨트롤러와 페이지를 사용할 수 있습니다.
 
 ## <a name="route-templates"></a>경로 템플릿
 
@@ -68,7 +69,7 @@ Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 ```
 
 > [!IMPORTANT]
-> URL을 올바르게 확인하려면 앱의 `wwwroot/index.html` 파일(Blazor WebAssembly) 또는 `Pages/_Host.cshtml` 파일(Blazor 서버)에 `<base>` 태그가 있어야 하고, 앱 기본 경로가 `href` 특성에 지정되어 있어야 합니다(`<base href="/">`). 자세한 내용은 <xref:blazor/host-and-deploy/index#app-base-path>를 참조하세요.
+> URL을 올바르게 확인하려면 앱의 `wwwroot/index.html` 파일(Blazor WebAssembly) 또는 `Pages/_Host.cshtml` 파일(Blazor Server)에 `<base>` 태그가 있어야 하고, 앱 기본 경로가 `href` 특성에 지정되어 있어야 합니다(`<base href="/">`). 자세한 내용은 <xref:blazor/host-and-deploy/index#app-base-path>를 참조하세요.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 
@@ -154,7 +155,7 @@ Blazor 서버는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 
 ### <a name="routing-with-urls-that-contain-dots"></a>점이 포함된 URL을 사용한 라우팅
 
-Blazor 서버 앱에서 `_Host.cshtml`의 기본 경로는 `/`(`@page "/"`)입니다. 점(`.`)이 포함된 요청 URL은 URL이 파일을 요청하는 것 같으므로 기본 경로와 일치되지 않습니다. Blazor 앱은 존재하지 않는 정적 파일에 대해 *404 - 찾을 수 없음* 응답을 반환합니다. 점이 포함된 경로를 사용하려면 다음 경로 템플릿을 통해 `_Host.cshtml`을 구성합니다.
+Blazor Server 앱에서 `_Host.cshtml`의 기본 경로는 `/`(`@page "/"`)입니다. 점(`.`)이 포함된 요청 URL은 URL이 파일을 요청하는 것 같으므로 기본 경로와 일치되지 않습니다. Blazor 앱은 존재하지 않는 정적 파일에 대해 *404 - 찾을 수 없음* 응답을 반환합니다. 점이 포함된 경로를 사용하려면 다음 경로 템플릿을 통해 `_Host.cshtml`을 구성합니다.
 
 ```cshtml
 @page "/{**path}"
@@ -204,7 +205,7 @@ Blazor 서버 앱에서 `_Host.cshtml`의 기본 경로는 `/`(`@page "/"`)입�
 | 멤버 | 설명 |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | 현재 절대 URI를 가져옵니다. |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | 절대 URI를 생성하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI(후행 슬래시 포함)를 가져옵니다. 일반적으로 <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri>는 `wwwroot/index.html`(Blazor WebAssembly) 또는 `Pages/_Host.cshtml`(Blazor 서버)에 있는 문서 `<base>` 요소의 `href` 특성에 해당합니다. |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | 절대 URI를 생성하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI(후행 슬래시 포함)를 가져옵니다. 일반적으로 <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri>는 `wwwroot/index.html`(Blazor WebAssembly) 또는 `Pages/_Host.cshtml`(Blazor Server)에 있는 문서 `<base>` 요소의 `href` 특성에 해당합니다. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | 지정한 URI로 이동합니다. `forceLoad`가 `true`인 경우<ul><li>클라이언트 쪽 라우팅이 무시됩니다.</li><li>클라이언트 쪽 라우터에서 URI를 정상적으로 처리했는지와 상관없이 브라우저에서 서버의 새 페이지를 강제로 로드합니다.</li></ul> |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | 탐색 위치가 변경된 경우에 발생하는 이벤트입니다. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | 상대 URI를 절대 URI로 변환합니다. |

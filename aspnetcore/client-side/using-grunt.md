@@ -6,17 +6,18 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: b51973e82bb1bd382be68a501c40ba613217fb03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: fc871e22f9bd5a9c137008f1d87019542c45b5d2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773642"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401768"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core에서 Grunt 사용
 
@@ -100,7 +101,7 @@ grunt 및 grunt-tasks를 다운로드하도록 NPM을 구성합니다.
     ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > NPM은 [유의적 버전](https://semver.org/)을 사용하여 종속성을 구성합니다. SemVer라고도 하는 유의적 버전은 번호 매기기 체계 \<major>.\<minor>.\<patch>를 사용하여 패키지를 확인합니다. Intellisense는 몇 가지 일반적인 선택 항목만 표시하여 유의적 버전을 간소화합니다. Intellisense 목록의 맨 위 항목(위 예제에서는 0.4.5)은 안정적인 최신 패키지 버전으로 간주됩니다. 캐럿(^) 기호는 가장 최근의 주 버전과 일치하고, 물결표(~)는 가장 최근의 부 버전과 일치합니다. SemVer에서 제공하는 전체 표현의 가이드로 [NPM semver 버전 파서 참조](https://www.npmjs.com/package/semver)를 참조하세요.
+    > NPM은 [유의적 버전](https://semver.org/)을 사용하여 종속성을 구성합니다. SemVer이라는 유의적 버전은 번호 매기기 체계 \<major>.\<minor>.\<patch>를 사용하여 패키지를 확인합니다. Intellisense는 몇 가지 일반적인 선택 항목만 표시하여 유의적 버전을 간소화합니다. Intellisense 목록의 맨 위 항목(위 예제에서는 0.4.5)은 안정적인 최신 패키지 버전으로 간주됩니다. 캐럿(^) 기호는 가장 최근의 주 버전과 일치하고, 물결표(~)는 가장 최근의 부 버전과 일치합니다. SemVer에서 제공하는 전체 표현의 가이드로 [NPM semver 버전 파서 참조](https://www.npmjs.com/package/semver)를 참조하세요.
 
 3. 종속성을 더 추가하여 아래 예제와 같이 *clean*, *jshint*, *concat*, *uglify*, *watch*용 grunt-contrib-\* 패키지를 로드합니다. 버전은 예제와 일치하지 않아도 됩니다.
 
@@ -194,7 +195,7 @@ Grunt는 수동으로 실행하거나 Visual Studio의 이벤트를 기준으로
 
 1. 아래 코드를 사용하여 `jshint` 작업을 추가합니다.
 
-    ‘임시’ 디렉터리에 있는 모든 JavaScript 파일에 대해 jshint `code-quality` 유틸리티를 실행합니다. 
+    ‘임시’ 디렉터리에 있는 모든 JavaScript 파일에 대해 jshint `code-quality` 유틸리티를 실행합니다.
 
     ```javascript
     jshint: {

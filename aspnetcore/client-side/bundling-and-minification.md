@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 4523ba299d5c5e50a442f84acadf06bf57c69c5d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770955"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401911"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core에서 정적 자산 번들링 및 축소하기
 
@@ -81,7 +82,7 @@ ASP.NET Core 2.0 이전에서는 MVC 및 Razor 페이지 프로젝트 템플릿�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트에 *bundleconfig.json*이라는 새로운 JSON 파일을 추가합니다. 다음 JSON을 이 파일의 시작점으로 포함시킵니다.
+ASP.NET Core 2.1 이상에서는 MVC 또는 Razor Pages 프로젝트 루트에 *bundleconfig.json*이라는 새로운 JSON 파일을 추가합니다. 다음 JSON을 이 파일의 시작점으로 포함시킵니다.
 
 ::: moniker-end
 

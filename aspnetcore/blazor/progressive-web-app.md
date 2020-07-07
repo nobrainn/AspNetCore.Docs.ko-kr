@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242812"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402587"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly를 사용하여 프로그레시브 웹 애플리케이션 빌드
 
@@ -155,7 +156,7 @@ Blazor PWA 템플릿은 사용자가 방문하여 네트워크에 연결되어 �
 
 ### <a name="support-server-rendered-pages"></a>서버에서 렌더링된 페이지 지원
 
-사용자가 `/counter`와 같은 URL 또는 앱의 기타 딥 링크로 처음 이동할 때 발생하는 상황을 고려합니다. 해당 경우에는 `/counter`로 캐시된 콘텐츠를 반환하지 않고 대신 Blazor WebAssembly 앱을 시작하기 위해 `/index.html`로 캐시된 콘텐츠를 로드하는 브라우저가 필요합니다. 이러한 초기 요청은 다음과 달리 ‘탐색’ 요청이라고 합니다.
+사용자가 `/counter`와 같은 URL 또는 앱의 기타 딥 링크로 처음 이동할 때 발생하는 상황을 고려합니다. 이 경우에는 `/counter`로 캐시된 콘텐츠를 반환하지 않고 대신 Blazor WebAssembly 앱을 시작하기 위해 `/index.html`로 캐시된 콘텐츠를 로드하는 브라우저가 필요합니다. 이러한 초기 요청은 다음과 달리 ‘탐색’ 요청이라고 합니다.
 
 * 이미지, 스타일시트 또는 기타 파일에 대한 `subresource` 요청
 * API 데이터에 대한 `fetch/XHR` 요청
@@ -210,9 +211,9 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 ## <a name="push-notifications"></a>푸시 알림
 
-다른 PWA와 마찬가지로 Blazor WebAssembly PWA는 백엔드 서버에서 푸시 알림을 받을 수 있습니다. 사용자가 앱을 활발히 사용하지 않는 경우에도 서버는 언제든지 푸시 알림을 보낼 수 있습니다. 예를 들어 다른 사용자가 관련 작업을 수행하는 경우 푸시 알림을 보낼 수 있습니다.
+다른 PWA와 마찬가지로 Blazor WebAssembly PWA는 백 엔드 서버에서 푸시 알림을 받을 수 있습니다. 사용자가 앱을 활발히 사용하지 않는 경우에도 서버는 언제든지 푸시 알림을 보낼 수 있습니다. 예를 들어 다른 사용자가 관련 작업을 수행하는 경우 푸시 알림을 보낼 수 있습니다.
 
-푸시 알림을 전송하는 메커니즘은 모든 기술을 사용할 수 있는 백엔드 서버에서 구현되기 때문에 Blazor WebAssembly와는 완전히 독립적입니다. ASP.NET Core 서버에서 푸시 알림을 보내려면 [Blazing Pizza 워크숍에서 사용하는 접근 방식과 유사한 기법을 사용](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)하는 것이 좋습니다.
+푸시 알림을 전송하는 메커니즘은 모든 기술을 사용할 수 있는 백 엔드 서버에서 구현되기 때문에 Blazor WebAssembly와는 완전히 독립적입니다. ASP.NET Core 서버에서 푸시 알림을 보내려면 [Blazing Pizza 워크숍에서 사용하는 접근 방식과 유사한 기법을 사용](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)하는 것이 좋습니다.
 
 클라이언트에서 푸시 알림을 수신하고 표시하는 메커니즘은 JavaScript 파일인 서비스 작업자에서 구현되기 때문에 이 경우 역시 Blazor WebAssembly와 무관합니다. 예제를 보려면 [Blazing Pizza 워크숍에서 사용하는 접근 방식](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications)을 참조하세요.
 

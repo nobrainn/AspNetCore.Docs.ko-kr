@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 72a8b59b06e40f6f85abe41217ae564f82c8d89c
-ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
-ms.translationtype: HT
+ms.openlocfilehash: 236dffd829bcd7c30ae1145242ce07cd8e9857e6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85347075"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402951"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor 호스팅 모델 구성
 
@@ -86,7 +87,7 @@ UI를 사용자 지정하려면 `_Host.cshtml` Razor 페이지의 `<body>`에서
 
 ‘이 섹션은 Blazor Server에 적용됩니다.’
 
-Blazor 서버 앱은 기본적으로 클라이언트가 서버에 연결되기 전에 서버에서 UI를 미리 렌더링하도록 설정되어 있습니다. 이는 `_Host.cshtml` Razor 페이지에서 설정합니다.
+Blazor Server 앱은 기본적으로 클라이언트가 서버에 연결되기 전에 서버에서 UI를 미리 렌더링하도록 설정되어 있습니다. 이는 `_Host.cshtml` Razor 페이지에서 설정합니다.
 
 ```cshtml
 <body>
@@ -105,17 +106,17 @@ Blazor 서버 앱은 기본적으로 클라이언트가 서버에 연결되기 �
 
 | <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | 설명 |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor 서버 앱의 표식을 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | 구성 요소를 정적 HTML에 렌더링하고 Blazor Server 앱의 마커를 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server 앱의 마커를 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | 구성 요소를 정적 HTML에 렌더링합니다. |
 
 정적 HTML 페이지에서 서버 구성 요소를 렌더링할 수는 없습니다.
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor 서버 앱에 적합하게 SignalR 클라이언트 구성
+## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor Server 앱에 적합하게 SignalR 클라이언트 구성
 
 ‘이 섹션은 Blazor Server에 적용됩니다.’
 
-Blazor 서버 앱에서 사용하는 SignalR 클라이언트를 구성해야 할 수도 있습니다. 예를 들어 연결 문제를 진단하기 위해 SignalR 클라이언트에서 로깅을 구성하는 것이 좋습니다.
+Blazor Server 앱에서 사용하는 SignalR 클라이언트를 구성해야 할 수도 있습니다. 예를 들어 연결 문제를 진단하기 위해 SignalR 클라이언트에서 로깅을 구성하는 것이 좋습니다.
 
 `Pages/_Host.cshtml` 파일에서 SignalR 클라이언트를 구성하려면:
 

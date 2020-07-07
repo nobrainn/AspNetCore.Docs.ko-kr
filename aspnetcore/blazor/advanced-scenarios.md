@@ -8,25 +8,26 @@ ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d4ebab0d8fc2ee48fa4d9c8b1f1b8e5cbf43cab9
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242447"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400221"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor 고급 시나리오
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Blazor 서버 회로 처리기
+## <a name="blazor-server-circuit-handler"></a>Blazor Server 회로 처리기
 
-Blazor 서버에서는 코드를 통해 사용자 회로 상태 변경 시 코드를 실행할 수 있게 해주는 ‘회로 처리기’를 정의할 수 있습니다. 회로 처리기는 `CircuitHandler`에서 파생되고 앱의 서비스 컨테이너에 클래스를 등록하여 구현됩니다. 다음 회로 처리기 예제에서는 열린 SignalR 연결을 추적합니다.
+Blazor Server에서는 코드를 통해 사용자 회로 상태 변경 시 코드를 실행할 수 있게 해주는 ‘회로 처리기’를 정의할 수 있습니다. 회로 처리기는 `CircuitHandler`에서 파생되고 앱의 서비스 컨테이너에 클래스를 등록하여 구현됩니다. 다음 회로 처리기 예제에서는 열린 SignalR 연결을 추적합니다.
 
 ```csharp
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-사용자 지정 회로 처리기의 메서드에서 처리되지 않은 예외가 throw될 경우, 이 예외는 Blazor 서버 회로에 치명적입니다. 처리기의 코드 또는 호출된 메서드에서 예외를 허용하려면 오류 처리 및 로깅 기능을 사용하여 하나 이상의 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문에 코드를 래핑합니다.
+사용자 지정 회로 처리기의 메서드에서 처리되지 않은 예외가 throw될 경우 이 예외는 Blazor Server 회로에 치명적입니다. 처리기의 코드 또는 호출된 메서드에서 예외를 허용하려면 오류 처리 및 로깅 기능을 사용하여 하나 이상의 [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) 문에 코드를 래핑합니다.
 
 사용자가 연결을 끊었으며 프레임워크에서 회로 상태를 정리하고 있어서 회로가 종료될 경우 프레임워크는 회로의 DI 범위를 삭제합니다. 범위를 삭제하면 <xref:System.IDisposable?displayProperty=fullName>을 구현하는, 회로 범위가 지정된 DI 서비스가 모두 삭제됩니다. 삭제하는 동안 처리되지 않은 예외를 throw하는 DI 서비스가 있을 경우 프레임워크에서 예외를 기록합니다.
 
@@ -221,14 +222,14 @@ builder.AddContent(seq++, "Second");
 * 시퀀스 번호를 하드 코딩한 경우, 시퀀스 번호의 값만 증가하면 diff 알고리즘을 사용할 수 있습니다. 초기 값과 간격은 관련이 없습니다. 한 가지 타당한 옵션은 코드 줄 번호를 시퀀스 번호로 사용하거나 0부터 시작하고 1씩, 100씩 또는 선호하는 간격만큼 늘리는 것입니다. 
 * Blazor는 시퀀스 번호를 사용하는 반면, 다른 트리 diff UI 프레임워크는 시퀀스 번호를 사용하지 않습니다. diff는 시퀀스 번호를 사용할 때 훨씬 더 빠르며, Blazor는 `.razor` 파일을 작성하는 개발자를 위해 시퀀스 번호를 자동으로 처리하는 컴파일 단계의 이점이 있습니다.
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor 서버 앱에서 대용량 데이터 전송 수행
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor Server 앱에서 대량 데이터 전송 수행
 
 일부 시나리오에서는 JavaScript와 Blazor 간에 대량 데이터를 전송해야 합니다. 일반적으로 다음과 같은 경우 대량 데이터 전송이 발생합니다.
 
 * 브라우저 파일 시스템 API를 사용하여 파일을 업로드하거나 다운로드하는 경우
 * 타사 라이브러리와의 interop이 필요한 경우
 
-Blazor 서버에는 성능 문제를 일으킬 수 있는 큰 단일 메시지의 전달을 방지하기 위한 제한 사항이 있습니다.
+Blazor Server에는 성능 문제를 일으킬 수 있는 큰 단일 메시지의 전달을 방지하기 위한 제한 사항이 있습니다.
 
 JavaScript와 Blazor 간에 데이터를 전송하는 코드를 개발하는 경우 다음 지침을 확인합니다.
 

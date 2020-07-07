@@ -8,26 +8,27 @@ ms.custom: mvc
 ms.date: 05/28/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: db1f6a357f63b405bf2f3b98e51c9aeffda97d66
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 2d910def31e4035c1d9cbacb3aaa721dd699c273
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242526"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400753"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 웹 API 호출
 
 작성자: [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27) 및 [Juan De la Cruz](https://github.com/juandelacruz23)
 
 > [!NOTE]
-> 이 항목은 Blazor WebAssembly에 적용됩니다. [Blazor 서버](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용하여 만드는 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 웹 API를 호출합니다. Blazor 서버에 적용되는 지침은 <xref:fundamentals/http-requests>를 참조하세요.
+> 이 항목은 Blazor WebAssembly에 적용됩니다. [Blazor Server](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용하여 만드는 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 웹 API를 호출합니다. Blazor Server에 적용되는 지침은 <xref:fundamentals/http-requests>를 참조하세요.
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 앱은 미리 구성된 <xref:System.Net.Http.HttpClient> 서비스를 사용하여 웹 API를 호출합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성합니다. Blazor WebAssembly 앱의 <xref:System.Net.Http.HttpClient> 서비스는 원본 서버에 대해 다시 요청을 수행하는 데 중점을 둡니다. 이 항목의 지침은 Blazor WebAssembly 앱과만 관련이 있습니다.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 앱은 미리 구성된 <xref:System.Net.Http.HttpClient> 서비스를 사용하여 웹 API를 호출합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성합니다. Blazor WebAssembly 앱의 <xref:System.Net.Http.HttpClient> 서비스는 원본 서버에 대해 다시 요청을 수행하는 데 중점을 둡니다. 이 항목의 지침은 Blazor WebAssembly 앱에만 관련됩니다.
 
 [샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample)): `BlazorWebAssemblySample` 앱을 선택합니다.
 
@@ -56,7 +57,7 @@ builder.Services.AddTransient(sp =>
 
 Blazor WebAssembly 앱에서 [`HttpClient`](xref:fundamentals/http-requests)는 원본 서버에 대해 다시 요청을 수행하기 위해 미리 구성된 서비스로 사용할 수 있습니다.
 
-Blazor 서버 앱은 기본적으로 <xref:System.Net.Http.HttpClient> 서비스를 포함하지 않습니다. [`HttpClient` 팩터리 인프라](xref:fundamentals/http-requests)를 사용하여 앱에 <xref:System.Net.Http.HttpClient>를 제공합니다.
+Blazor Server 앱은 기본적으로 <xref:System.Net.Http.HttpClient> 서비스를 포함하지 않습니다. [`HttpClient` 팩터리 인프라](xref:fundamentals/http-requests)를 사용하여 앱에 <xref:System.Net.Http.HttpClient>를 제공합니다.
 
 <xref:System.Net.Http.HttpClient> 및 JSON 도우미는 타사 웹 API 엔드포인트를 호출하는 데에도 사용됩니다. <xref:System.Net.Http.HttpClient>는 브라우저 [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)를 사용하여 구현되며 동일한 원본 정책 적용을 비롯한 제한 사항이 적용됩니다.
 

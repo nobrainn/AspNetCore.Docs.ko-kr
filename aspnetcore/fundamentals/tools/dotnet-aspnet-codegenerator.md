@@ -7,17 +7,18 @@ ms.author: riande
 ms.date: 07/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766474"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405603"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -62,8 +63,8 @@ dotnet aspnet-codegenerator [-h|--help]
 | ----------------- | ------------ | 
 | area      | [영역 스캐폴딩](/aspnet/core/mvc/controllers/areas) |
   Controller| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identity  | [Identity 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Razor 페이지 스캐폴딩](/aspnet/core/tutorials/razor-pages/model) |
+  identity  | [Identity 스캐폴드](/aspnet/core/security/authentication/scaffold-identity) |
+  razorpage | [Razor Pages 스캐폴드](/aspnet/core/tutorials/razor-pages/model) |
   view      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>옵션
@@ -153,7 +154,7 @@ dotnet aspnet-codegenerator controller -h
 
 <a name="rp"></a>
 
-Razor Pages는 새 페이지 이름 및 사용할 템플릿을 지정하여 개별적으로 스캐폴딩할 수 있습니다. 지원되는 템플릿은 다음과 같습니다.
+Razor Pages는 새 페이지 이름 및 사용할 템플릿을 지정하여 개별적으로 스캐폴드할 수 있습니다. 지원되는 템플릿은 다음과 같습니다.
 
 * `Empty`
 * `Create`

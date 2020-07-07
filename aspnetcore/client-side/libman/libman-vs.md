@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 45f81cbc713e7e7c1f335aef49360992d2297a81
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 504c34ccd8813273161b86504700704f8a932538
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770095"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403172"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio에서 ASP.NET Core와 함께 LibMan 사용
 
@@ -207,7 +208,7 @@ Clean libraries operation completed
 
 * *libman.json*을 엽니다.
 * 해당 `libraries` 개체 리터럴 안에 캐럿을 배치합니다.
-* 왼쪽 여백에 표시되는 전구 아이콘을 클릭하고 **\<library_name>@\<library_version> 제거**를 선택합니다.
+* 왼쪽 여백에 표시되는 전구 아이콘을 클릭하고 **제거\<library_name>@\<library_version>** 를 선택합니다.
 
   ![라이브러리 제거 상황에 맞는 메뉴 옵션](_static/uninstall-menu-option.png)
 

@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 04/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: e1367fe284c4d51a341da01c6415284f6f3e7a9c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
-ms.translationtype: HT
+ms.openlocfilehash: c936ff9a7aadd21ce99a0c37184ae8cf911c3070
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102899"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403978"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Nginx를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -156,7 +157,7 @@ server {
 }
 ```
 
-앱이 SignalR Websocket을 사용하는 Blazor Server 앱인 경우 `Connection` 헤더를 설정하는 방법에 관한 자세한 내용은 <xref:blazor/host-and-deploy/server#linux-with-nginx>를 참조하세요.
+앱이 SignalR WebSocket을 사용하는 Blazor Server 앱인 경우 `Connection` 헤더를 설정하는 방법에 관한 자세한 내용은 <xref:blazor/host-and-deploy/server#linux-with-nginx>를 참조하세요.
 
 `server_name`이 일치하지 않으면 Nginx는 기본 서버를 사용합니다. 기본 서버가 정의되지 않은 경우 구성 파일의 첫 번째 서버는 기본 서버입니다. 구성 파일에 있는 444 상태 코드를 반환하는 특정 기본 서버를 추가하는 것이 좋습니다. 기본 서버 구성 예제는 다음과 같습니다.
 
@@ -262,7 +263,7 @@ sudo systemctl enable kestrel-helloapp.service
 sudo systemctl start kestrel-helloapp.service
 sudo systemctl status kestrel-helloapp.service
 
-● kestrel-helloapp.service - Example .NET Web API App running on Ubuntu
+◝ kestrel-helloapp.service - Example .NET Web API App running on Ubuntu
     Loaded: loaded (/etc/systemd/system/kestrel-helloapp.service; enabled)
     Active: active (running) since Thu 2016-10-18 04:09:35 NZDT; 35s ago
 Main PID: 9021 (dotnet)

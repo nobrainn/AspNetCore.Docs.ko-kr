@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 4ecbf6920980e293e8c274996c6a4f25e74a5cb7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774810"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403627"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core의 세션 및 상태 관리
 
@@ -57,7 +58,7 @@ HTTP는 상태 비저장 프로토콜입니다. 기본적으로 HTTP 요청은 �
 
 세션 상태는 사용자가 웹앱을 탐색하는 동안 사용자 데이터를 스토리지하기 위한 ASP.NET Core 시나리오입니다. 세션 상태는 앱에서 유지 관리하는 저장소를 사용하여 클라이언트의 요청 간에 데이터를 유지합니다. 세션 데이터는 캐시에 백업되며 임시 데이터로 간주됩니다. 세션 데이터 없이도 사이트가 계속 작동해야 합니다. 중요한 애플리케이션 데이터는 사용자 데이터베이스에 저장되고 성능 최적화로 세션에 캐시되어야 합니다.
 
-[SignalR Hub](xref:signalr/hubs)가 HTTP 컨텍스트와 독립적으로 실행될 수 있으므로, 세션은 [SignalR](xref:signalr/index) 앱에서 지원되지 않습니다. 예를 들어, 허브에서 긴 폴링 요청이 HTTP 컨텍스트 수명을 초과하여 계속 열려 있을 경우 이 문제가 발생할 수 있습니다.
+[SignalR 허브](xref:signalr/hubs)가 HTTP 컨텍스트와 독립적으로 실행될 수 있으므로, 세션은 [SignalR](xref:signalr/index) 앱에서 지원되지 않습니다. 예를 들어, 허브에서 긴 폴링 요청이 HTTP 컨텍스트 수명을 초과하여 계속 열려 있을 경우 이 문제가 발생할 수 있습니다.
 
 ASP.NET Core는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하여 세션 상태를 유지 관리합니다. 쿠키 세션 ID와 관련해서 다음 사항을 확인합니다.
 
@@ -180,7 +181,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core는 Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 또는 컨트롤러 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>를 표시합니다. 이 속성은 다른 요청에서 읽혀질 때까지만 데이터를 저장합니다. [Keep](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)(문자열) 및 [Peek](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*)(문자열) 메서드를 사용하면 요청이 끝날 때 삭제하지 않고 데이터를 검사할 수 있습니다. [Keep](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)은 사전의 모든 항목을 보존하도록 표시합니다. `TempData`인 경우 다음과 같습니다.
+ASP.NET Core는 Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) 또는 컨트롤러 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>를 공개합니다. 이 속성은 다른 요청에서 읽혀질 때까지만 데이터를 저장합니다. [Keep](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)(문자열) 및 [Peek](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*)(문자열) 메서드를 사용하면 요청이 끝날 때 삭제하지 않고 데이터를 검사할 수 있습니다. [Keep](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*)은 사전의 모든 항목을 보존하도록 표시합니다. `TempData`인 경우 다음과 같습니다.
 
 * 데이터가 둘 이상의 요청에 필요한 경우 리디렉션에 유용합니다.
 * `TempData` 공급자가 쿠키 또는 세션 상태를 사용하여 구현합니다.
@@ -233,7 +234,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 ## <a name="query-strings"></a>쿼리 문자열
 
-제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 전자 메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
+제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 이메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
 
 의도하지 않은 공유 외에도, 쿼리 문자열에 데이터를 포함하면 앱이 [CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))(교차 사이트 요청 위조) 공격에 노출될 수 있습니다. 유지된 모든 세션 상태를 CSRF 공격으로부터 보호해야 합니다. 자세한 내용은 [교차 사이트 요청 위조(XSRF/CSRF) 공격 방지](xref:security/anti-request-forgery)를 참조하세요.
 
@@ -282,7 +283,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 오류를 확인하는 권장 방법은 앱이 세션에 기록을 마쳤을 때 `await feature.Session.CommitAsync`를 호출하는 것입니다. 백업 저장소를 사용할 수 없는 경우 <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*>에서 예외를 throw합니다. `CommitAsync`가 실패하면 앱에서 예외를 처리할 수 있습니다. 데이터 저장소를 사용할 수 없는 경우에는 동일한 조건에서 <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*>가 throw합니다.
   
-## <a name="signalr-and-session-state"></a>SignalR 및 세션 상태
+## <a name="signalr-and-session-state"></a>SignalR과 세션 상태
 
 SignalR 앱은 세션 상태를 사용하여 정보를 저장해서는 안 됩니다. SignalR 앱은 허브에서 `Context.Items`의 연결 상태별로 저장할 수 있습니다. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
@@ -329,7 +330,7 @@ HTTP는 상태 비저장 프로토콜입니다. HTTP 요청은 추가 단계를 
 세션 상태는 사용자가 웹앱을 탐색하는 동안 사용자 데이터를 스토리지하기 위한 ASP.NET Core 시나리오입니다. 세션 상태는 앱에서 유지 관리하는 저장소를 사용하여 클라이언트의 요청 간에 데이터를 유지합니다. 세션 데이터는 캐시에 의해 백업되고 임시 데이터로 간주되므로 사이트는 세션 데이터 없이 계속 작동합니다. 중요한 애플리케이션 데이터는 사용자 데이터베이스에 저장되고 성능 최적화로 세션에 캐시되어야 합니다.
 
 > [!NOTE]
-> [SignalR Hub](xref:signalr/hubs)가 HTTP 컨텍스트와 독립적으로 실행될 수 있으므로, 세션은 [SignalR](xref:signalr/index) 앱에서 지원되지 않습니다. 예를 들어, 허브에서 긴 폴링 요청이 HTTP 컨텍스트 수명을 초과하여 계속 열려 있을 경우 이 문제가 발생할 수 있습니다.
+> [SignalR 허브](xref:signalr/hubs)가 HTTP 컨텍스트와 독립적으로 실행될 수 있으므로, 세션은 [SignalR](xref:signalr/index) 앱에서 지원되지 않습니다. 예를 들어, 허브에서 긴 폴링 요청이 HTTP 컨텍스트 수명을 초과하여 계속 열려 있을 경우 이 문제가 발생할 수 있습니다.
 
 ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하여 세션 상태를 유지합니다. 앱은 세션 ID를 사용하여 세션 데이터를 가져옵니다.
 
@@ -496,7 +497,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 ## <a name="query-strings"></a>쿼리 문자열
 
-제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 전자 메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
+제한된 양의 데이터는 새 요청의 쿼리 문자열에 추가하여 한 요청에서 다른 요청으로 전달할 수 있습니다. 이는 이메일 또는 소셜 네트워크를 통해 공유되도록 포함된 상태가 있는 링크를 허용하는 영구적인 방식으로 상태를 캡처하는 데 유용합니다. URL 쿼리 문자열은 공용이므로 중요한 데이터에 쿼리 문자열을 사용하지 마세요.
 
 의도하지 않은 공유 외에도 쿼리 문자열에 데이터를 포함하면 사용자가 인증되는 동안 악성 사이트를 방문하도록 유도할 수 있는 [CSRF(교차 사이트 요청 위조)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 공격에 대한 기회를 만들 수 있습니다. 공격자는 앱에서 사용자 데이터를 도용하거나 사용자를 대신하여 악의적인 작업을 수행할 수 있습니다. 유지된 모든 앱 또는 세션 상태를 CSRF 공격으로부터 보호해야 합니다. 자세한 내용은 [교차 사이트 요청 위조(XSRF/CSRF) 공격 방지](xref:security/anti-request-forgery)를 참조하세요.
 

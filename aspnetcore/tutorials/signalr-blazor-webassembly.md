@@ -1,33 +1,34 @@
 ---
-title: Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
+title: Blazor WebAssembly와 함께 ASP.NET Core SignalR 사용
 author: guardrex
-description: Blazor WebAssembly를 활용해 ASP.NET Core SignalR을 사용하는 채팅 앱을 만듭니다.
+description: Blazor WebAssembly와 함께 ASP.NET Core SignalR을 사용하는 채팅 앱을 만듭니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 3f8aeec1e0471bab5034d1dcc8a42023f6b13c0d
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
-ms.translationtype: HT
+ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122102"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408879"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
+# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly와 함께 ASP.NET Core SignalR 사용
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
-본 자습서에서는 SignalR 및 Blazor WebAssembly를 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알아봅니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+이 자습서에서는 Blazor WebAssembly와 함께 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려 줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
 
 > [!div class="checklist"]
-> * Blazor WebAssembly 호스팅 앱 프로젝트 만들기
+> * Blazor WebAssembly 호스트된 앱 프로젝트 만들기
 > * SignalR 클라이언트 라이브러리 추가
 > * SignalR 허브 추가
 > * SignalR 서비스 및 SignalR 허브에 대한 엔드포인트 추가
@@ -279,7 +280,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 본 자습서에서는 다음 작업에 관한 방법을 학습했습니다.
 
 > [!div class="checklist"]
-> * Blazor WebAssembly 호스팅 앱 프로젝트 만들기
+> * Blazor WebAssembly 호스트된 앱 프로젝트 만들기
 > * SignalR 클라이언트 라이브러리 추가
 > * SignalR 허브 추가
 > * SignalR 서비스 및 SignalR 허브에 대한 엔드포인트 추가

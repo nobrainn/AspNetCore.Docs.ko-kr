@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: f2588665c26887a6e3864866425b887e97e656d5
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
-ms.translationtype: HT
+ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755874"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408216"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -43,13 +44,13 @@ Blazor 프레임워크 지원 시나리오:
 
 자세한 내용은 <xref:blazor/index>를 참조하세요.
 
-### <a name="blazor-server"></a>Blazor 서버
+### Blazor Server
 
-Blazor는 UI 업데이트 적용 방법에서 구성 요소 렌더링 논리를 분리합니다. Blazor 서버에서는 ASP.NET Core 앱의 서버에서 Razor 구성 요소를 호스팅할 수 있도록 지원합니다. UI 업데이트는 SignalR 연결을 통해 처리됩니다. Blazor 서버는 ASP.NET Core 3.0에서 지원됩니다.
+Blazor는 UI 업데이트 적용 방법에서 구성 요소 렌더링 논리를 분리합니다. Blazor Server에서는 ASP.NET Core 앱의 서버에서 Razor 구성 요소를 호스팅할 수 있도록 지원합니다. UI 업데이트는 SignalR 연결을 통해 처리됩니다. Blazor Server는 ASP.NET Core 3.0에서 지원됩니다.
 
 ### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly(미리 보기)
 
-Blazor 앱은 WebAssembly 기반 .NET 런타임을 사용하여 브라우저에서 직접 실행할 수도 있습니다. Blazor WebAssembly는 미리 보기로 제공되며, ASP.NET Core 3.0에서 지원되지 *않습니다*. Blazor WebAssembly는 ASP.NET Core의 이후 릴리스에서 지원될 예정입니다.
+Blazor 앱은 WebAssembly 기반 .NET 런타임을 사용하여 브라우저에서 직접 실행할 수도 있습니다. Blazor WebAssembly는 미리 보기로 제공되며, ASP.NET Core 3.0에서 지원되지 ‘않습니다’. Blazor WebAssembly는 ASP.NET Core의 이후 릴리스에서 지원될 예정입니다.
 
 ### <a name="razor-components"></a>Razor 구성 요소
 

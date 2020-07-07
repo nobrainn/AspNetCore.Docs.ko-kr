@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 4ac7b82d734f078cf50901d02e7d0c4eb8bb45bb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 2fce394202be5df9af67e8afca27a0914f410402
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242422"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399038"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor 이벤트 처리
 
@@ -139,7 +140,7 @@ private void ShowMessage(MouseEventArgs e)
 ```
 
 > [!NOTE]
-> 위 `for` 루프 예제의 `i` 또는 `foreach` 루프의 참조 변수와 같이 람다 식에서 직접 루프 변수를 사용하지 **않습니다**. 직접 사용하는 경우 모든 람다 식에서 동일한 변수가 사용되어 모든 람다에서 동일한 값이 사용됩니다. 변수 값을 항상 지역 변수에 캡처한 다음에 사용합니다. 위의 예제에서는 루프 변수 `i`가 `buttonNumber`에 할당됩니다.
+> 위 `for` 루프 예제의 `i`와 같이 람다 식에서 직접 루프 변수를 사용하지 **않습니다**. 직접 사용하는 경우 모든 람다 식에서 동일한 변수가 사용되어 모든 람다에서 동일한 값이 사용됩니다. 변수 값을 항상 지역 변수에 캡처한 다음에 사용합니다. 위의 예제에서는 루프 변수 `i`가 `buttonNumber`에 할당됩니다.
 
 ## <a name="eventcallback"></a>EventCallback
 

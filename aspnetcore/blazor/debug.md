@@ -5,20 +5,21 @@ description: Blazor 앱을 디버그하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/31/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 9fe51b8c7eafdd62cc6fc1a820135d9ee5ff010e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242773"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401014"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
@@ -63,16 +64,16 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 
 `inspectUri` 속성은
 
-* 앱이 Blazor WebAssembly 앱인지를 감지할 수 있도록 IDE를 설정합니다.
+* Blazor WebAssembly 앱이라는 것을 검색하도록 IDE를 설정합니다.
 * Blazor의 디버깅 프록시를 통해 브라우저에 연결하도록 스크립트 디버깅 인프라에 지시합니다.
 
 시작된 브라우저(`browserInspectUri`)의 Websocket 프로토콜(`wsProtocol`), 호스트(`url.hostname`), 포트(`url.port`) 및 검사기 URI에 대한 자리 표시자 값은 프레임워크에서 제공됩니다.
 
 ## <a name="visual-studio"></a>Visual Studio
 
-Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면
+Visual Studio에서 Blazor WebAssembly 앱을 디버그하려면:
 
-1. ASP.NET Core가 호스트한 새 Blazor WebAssembly 앱을 만듭니다.
+1. 새 ASP.NET Core 호스트된 Blazor WebAssembly 앱을 만듭니다.
 1. <kbd>F5</kbd> 키를 눌러 디버거에서 앱을 실행합니다.
 1. `IncrementCount` 메서드의 `Pages/Counter.razor`에서 중단점을 설정합니다.
 1. **`Counter`** 탭으로 이동하여 중단점을 적중시키도록 단추를 선택합니다.
@@ -103,7 +104,7 @@ Blazor WebAssembly 앱을 디버그하는 동안 서버 코드도 디버그할 �
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
+Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면:
  
 [C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)을 설치하고, `debug.javascript.usePreview`를 `true`로 설정하여 [JavaScript Debugger(Nightly)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 확장을 설치합니다.
 
@@ -111,7 +112,7 @@ Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
 
 ![JS 미리 보기 디버거](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
 
-### <a name="debug-standalone-blazor-webassembly"></a>디버그 독립 실행형 Blazor WebAssembly
+### <a name="debug-standalone-blazor-webassembly"></a>독립 실행형 Blazor WebAssembly 디버그
 
 1. VS Code에서 독립 실행형 Blazor WebAssembly 앱을 엽니다.
 
@@ -135,7 +136,7 @@ Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
 
    ![VS Code의 카운터 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-blazor-webassembly"></a>호스트된 Blazor WebAssembly를 디버그합니다.
+### <a name="debug-hosted-blazor-webassembly"></a>호스트된 Blazor WebAssembly 디버그
 
 1. VS Code에서 호스트된 Blazor WebAssembly 앱을 엽니다.
 
@@ -172,7 +173,7 @@ Visual Studio Code에서 Blazor WebAssembly 앱을 디버그하려면
 | `url`     | 디버깅할 때 브라우저에서 열 URL입니다. 기본값은 `https://localhost:5001`입니다. |
 | `browser` | 디버깅 세션을 시작하는 브라우저입니다. `edge` 또는 `chrome`로 설정합니다. 기본값은 `chrome`입니다. |
 | `trace`   | JS 디버거에서 로그를 생성하는 데 사용됩니다. 로그를 생성하려면 `true`로 설정합니다. |
-| `hosted`  | 호스트된 Blazor WebAssembly 앱을 시작하고 디버깅하는 경우 `true`로 설정해야 합니다. |
+| `hosted`  | 호스트된 Blazor WebAssembly 앱을 시작하고 디버그하는 경우 `true`로 설정해야 합니다. |
 | `webRoot` | 웹 서버의 절대 경로를 지정합니다. 하위 경로에서 앱이 제공되는 경우 설정해야 합니다. |
 | `timeout` | 디버깅 세션이 연결되기를 기다릴 밀리초 수입니다. 기본값은 30,000 밀리초(30초)입니다. |
 | `program` | 호스트된 앱의 서버를 실행하는 실행 파일에 대한 참조입니다. `hosted`가 `true`일 경우 설정해야 합니다. |
@@ -236,3 +237,4 @@ Blazor에서는 [Chrome DevTools 프로토콜](https://chromedevtools.github.io/
 
 * **디버거** 탭에서 브라우저의 개발자 도구를 엽니다. 콘솔에서 `localStorage.clear()`를 실행하여 중단점을 모두 제거합니다.
 * ASP.NET Core HTTPS 개발 인증서를 설치하고 신뢰할 수 있는지 확인합니다. 자세한 내용은 <xref:security/enforcing-ssl#troubleshoot-certificate-problems>를 참조하세요.
+* Visual Studio를 사용하려면 **도구** > **옵션** > **디버깅** > **일반**에서 **ASP.NET에 대해 JavaScript 디버깅 사용(Chrome, Edge 및 IE)** 옵션이 필요합니다. 이것은 Visual Studio의 기본 설정입니다. 디버깅이 작동하지 않는 경우 옵션이 선택되어 있는지 확인합니다.

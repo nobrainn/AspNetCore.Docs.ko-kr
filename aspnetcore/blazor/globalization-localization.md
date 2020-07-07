@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243592"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402730"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor 세계화 및 지역화
 
@@ -63,9 +64,9 @@ Blazor의 [`@bind`](xref:mvc/views/razor#bind) 기능은 사용자의 현재 문
 
 ## <a name="localization"></a>지역화
 
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
+### Blazor WebAssembly
 
-Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)를 사용하여 문화권을 설정합니다.
+Blazor WebAssembly 앱은 사용자의 [언어 기본 설정](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)을 사용하여 문화권을 설정합니다.
 
 문화권을 명시적으로 구성하려면 `Program.Main`에서 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType>와 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType>를 설정하세요.
 
@@ -73,9 +74,9 @@ Blazor WebAssembly 앱은 사용자의 [기본 언어](https://developer.mozilla
 
 Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요. 문화권 선택기가 포함된 Blazor WebAssembly 샘플 앱을 살펴보려면 [`LocSample`](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.
 
-### <a name="blazor-server"></a>Blazor 서버
+### Blazor Server
 
-Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용하여 지역화됩니다. 미들웨어는 앱에서 리소스를 요청하는 사용자에게 적절한 문화권을 선택합니다.
+Blazor Server 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용하여 지역화됩니다. 미들웨어는 앱에서 리소스를 요청하는 사용자에게 적절한 문화권을 선택합니다.
 
 문화권은 다음 방법 중 하나를 사용하여 설정할 수 있습니다.
 
@@ -119,9 +120,9 @@ Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#loc
 1. 브라우저가 앱에 초기 HTTP 요청을 보냅니다.
 1. 문화권은 지역화 미들웨어에 의해 할당됩니다.
 1. `_Host` 페이지(`_Host.cshtml`)의 Razor 식은 응답의 일부로 쿠키에 문화권을 유지합니다.
-1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor 서버 세션을 만듭니다.
+1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor Server 세션을 만듭니다.
 1. 지역화 미들웨어는 쿠키를 읽고 문화권을 할당합니다.
-1. Blazor 서버 세션이 올바른 문화권으로 시작합니다.
+1. Blazor Server 세션이 올바른 문화권으로 시작합니다.
 
 #### <a name="provide-ui-to-choose-the-culture"></a>문화권을 선택하기 위한 UI 제공
 
