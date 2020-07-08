@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 078392662281253b8b6cfc0d50fddc8d66482b63
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0995cd80c10f638c90a60630378518988ffb89ed
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406896"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060100"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core의 컨텍스트 헤더
 
@@ -26,7 +26,7 @@ ms.locfileid: "85406896"
 
 ## <a name="background-and-theory"></a>배경 및 이론
 
-데이터 보호 시스템에서 "키"는 인증 된 암호화 서비스를 제공할 수 있는 개체를 의미 합니다. 각 키는 고유 id (GUID)로 식별 되며 it 알고리즘 정보와 entropic 자료를 사용 하 여 전달 됩니다. 각 키가 고유한 엔트로피를 제공 하지만 시스템에서이를 적용할 수는 없지만 키 링에서 기존 키의 알고리즘 정보를 수정 하 여 키 링을 수동으로 변경할 수 있는 개발자를 고려해 야 합니다. 이러한 경우에는 보안 요구 사항을 충족 하기 위해 데이터 보호 시스템에 [암호화 민첩성](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/)이라는 개념이 있으므로 여러 암호화 알고리즘에서 단일 entropic 값을 안전 하 게 사용할 수 있습니다.
+데이터 보호 시스템에서 "키"는 인증 된 암호화 서비스를 제공할 수 있는 개체를 의미 합니다. 각 키는 고유 id (GUID)로 식별 되며 it 알고리즘 정보와 entropic 자료를 사용 하 여 전달 됩니다. 각 키가 고유한 엔트로피를 제공 하지만 시스템에서이를 적용할 수는 없지만 키 링에서 기존 키의 알고리즘 정보를 수정 하 여 키 링을 수동으로 변경할 수 있는 개발자를 고려해 야 합니다. 이러한 경우에는 보안 요구 사항을 충족 하기 위해 데이터 보호 시스템에 [암호화 민첩성](https://www.microsoft.com/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption)이라는 개념이 있으므로 여러 암호화 알고리즘에서 단일 entropic 값을 안전 하 게 사용할 수 있습니다.
 
 암호화 민첩성을 지 원하는 대부분의 시스템은 페이로드 내에서 알고리즘에 대 한 일부 식별 정보를 포함 하 여이 작업을 수행 합니다. 일반적으로 알고리즘의 OID는이에 적합 한 후보입니다. 그러나 한 가지 문제는 동일한 알고리즘을 지정 하는 여러 가지 방법이 있습니다. 즉, "AES" (CNG) 및 관리 되는 Aes, AesManaged, AesCryptoServiceProvider, AesCng 및 RijndaelManaged (지정 된 특정 매개 변수) 클래스는 모두 실제로 동일한 작업을 수행 하며, 이러한 모든 항목의 매핑을 올바른 OID로 유지 해야 합니다. 개발자가 사용자 지정 알고리즘 (또는 다른 AES! 구현)을 제공 하려는 경우 해당 OID를 알려주세요. 이 추가 등록 단계를 수행 하면 시스템 구성이 특히 어려워집니다.
 
@@ -50,21 +50,21 @@ ms.locfileid: "85406896"
 
 * [32 비트] HMAC 알고리즘의 다이제스트 크기 (바이트, 빅 endian)입니다.
 
-* 빈 문자열 입력이 제공 된 대칭 블록 암호화 알고리즘의 출력 인 EncCBC (K_E, IV, "") 이며, 여기서 IV는 모두 0 벡터입니다. K_E 구성은 아래에 설명 되어 있습니다.
+* `EncCBC(K_E, IV, "")`는 빈 문자열 입력이 제공 된 대칭 블록 암호화 알고리즘의 출력입니다. 여기서 IV는 모두 0 벡터입니다. 의 구성은 `K_E` 아래에 설명 되어 있습니다.
 
-* MAC (K_H, "")-빈 문자열 입력이 지정 된 HMAC 알고리즘의 출력입니다. K_H 구성은 아래에 설명 되어 있습니다.
+* `MAC(K_H, "")`-빈 문자열 입력이 제공 된 HMAC 알고리즘의 출력입니다. 의 구성은 `K_H` 아래에 설명 되어 있습니다.
 
-이상적으로 K_E 및 K_H에 대 한 모든 0 벡터를 전달할 수 있습니다. 그러나 기본 알고리즘에서 작업을 수행 하기 전에 weak 키의 존재 여부를 확인 하는 상황을 방지 하는 것이 좋습니다 .이 경우에는 0이 아닌 벡터와 같은 단순 하거나 반복 가능한 패턴을 사용 하지 않습니다.
+이상적으로 및에 대 한 모든 0 벡터를 전달할 수 있습니다 `K_E` `K_H` . 그러나 기본 알고리즘에서 작업을 수행 하기 전에 weak 키의 존재 여부를 확인 하는 상황을 방지 하는 것이 좋습니다 .이 경우에는 0이 아닌 벡터와 같은 단순 하거나 반복 가능한 패턴을 사용 하지 않습니다.
 
-대신, KDF 키, 레이블, 컨텍스트 및 HMACSHA512를 기본 PRF로 사용 하 여 NIST SP800-108 ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 5.1 참조)을 사용 합니다. 파생 됩니다. | K_E | + | K_H | 그런 다음 결과를 K_E으로 분해 하 고 K_H 합니다. 수학적으로 다음과 같이 표시 됩니다.
+대신, KDF 키, 레이블, 컨텍스트 및 HMACSHA512를 기본 PRF로 사용 하 여 NIST SP800-108 ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 5.1 참조)을 사용 합니다. `| K_E | + | K_H |`바이트의 출력을 파생 시킨 다음 결과를 `K_E` 및 자체로 분해 `K_H` 합니다. 수학적으로 다음과 같이 표시 됩니다.
 
-(K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, key = "", label = "", context = "")
+`( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>예: AES-192-CBC + HMACSHA256
 
 예를 들어 대칭 블록 암호화 알고리즘이 AES-192-CBC이 고 유효성 검사 알고리즘이 HMACSHA256 경우를 고려해 보세요. 시스템은 다음 단계를 사용 하 여 컨텍스트 헤더를 생성 합니다.
 
-먼저, let (K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, key = "", label = "", context = ""), 여기서 | K_E | = 192 비트 및 | K_H | = 지정 된 알고리즘 당 256 비트 이로 인해 K_E = 5BB6 .로 이어집니다. 21DD 및 K_H = A04A. 아래 예제에서 00A9.
+첫 번째는 `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` `| K_E | = 192 bits` 지정 된 알고리즘에 따라, 여기서 및입니다 `| K_H | = 256 bits` . 그러면 `K_E = 5BB6..21DD` `K_H = A04A..00A9` 아래 예제에서 및가 발생 합니다.
 
 ```
 5B B6 C9 83 13 78 22 1D 8E 10 73 CA CF 65 8E B0
@@ -73,13 +73,13 @@ ms.locfileid: "85406896"
 B7 92 3D BF 59 90 00 A9
 ```
 
-다음으로 Enc_CBC (K_E, IV, "")를 AES-192-지정 된 IV = 0 * 및 K_E에 대해 계산 합니다.
+다음으로, `Enc_CBC (K_E, IV, "")` 지정 된 및 위와 같이 AES-192-CBC를 계산 `IV = 0*` `K_E` 합니다.
 
-결과: = F474B1872B3B53E4721DE19C0841DB6F
+`result := F474B1872B3B53E4721DE19C0841DB6F`
 
-다음으로, 위와 같이 지정 된 K_H HMACSHA256에 대해 MAC (K_H, "")를 계산 합니다.
+다음으로, `MAC(K_H, "")` 위와 같이 제공 된 HMACSHA256에 대해 계산 `K_H` 합니다.
 
-결과: = D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
+`result := D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C`
 
 이렇게 하면 아래 전체 컨텍스트 헤더가 생성 됩니다.
 
@@ -93,26 +93,26 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 이 컨텍스트 헤더는 인증 된 암호화 알고리즘 쌍 (AES-192-CBC encryption + HMACSHA256 validation)의 지문입니다. [위에서](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components) 설명한 구성 요소는 다음과 같습니다.
 
-* 표식 (00 00)
+* 표식`(00 00)`
 
-* 블록 암호화 키 길이 (00 00 00 18)
+* 블록 암호화 키 길이입니다.`(00 00 00 18)`
 
-* 블록 암호화 블록 크기 (00 00 00 10)
+* 블록 암호화 블록 크기입니다.`(00 00 00 10)`
 
-* HMAC 키 길이 (00 00 00 20)
+* HMAC 키 길이입니다.`(00 00 00 20)`
 
-* HMAC 다이제스트 크기 (00 00 00 20)
+* HMAC 다이제스트 크기`(00 00 00 20)`
 
-* 블록 암호화 PRP 출력 (F4 74-DB 6F) 및
+* 블록 암호화 PRP 출력 `(F4 74 - DB 6F)` 및
 
-* HMAC PRF 출력 (D4 79-end).
+* HMAC PRF 출력 `(D4 79 - end)` 입니다.
 
 > [!NOTE]
 > Windows CNG 또는 관리 되는 System.security.cryptography.symmetricalgorithm 및 KeyedHashAlgorithm 유형에 의해 알고리즘 구현이 제공 되는지 여부에 관계 없이 CBC 모드 암호화 + HMAC 인증 컨텍스트 헤더는 동일한 방식으로 빌드됩니다. 이를 통해 다른 운영 체제에서 실행 되는 응용 프로그램은 Os 마다 알고리즘의 구현이 서로 다른 경우에도 동일한 컨텍스트 헤더를 안정적으로 생성할 수 있습니다. 실제로 KeyedHashAlgorithm는 적절 한 HMAC가 아니어도 됩니다. 키가 지정 된 해시 알고리즘 형식일 수 있습니다.
 
 ### <a name="example-3des-192-cbc--hmacsha1"></a>예: 3DES-192-CBC + HMACSHA1
 
-먼저, let (K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, key = "", label = "", context = ""), 여기서 | K_E | = 192 비트 및 | K_H | = 지정 된 알고리즘 당 160 비트 이로 인해 K_E = A219으로 이어집니다. E2BB 및 K_H = DC4A. 아래 예제에서 B464.
+첫 번째는 `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` `| K_E | = 192 bits` 지정 된 알고리즘에 따라, 여기서 및입니다 `| K_H | = 160 bits` . 그러면 `K_E = A219..E2BB` `K_H = DC4A..B464` 아래 예제에서 및가 발생 합니다.
 
 ```
 A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
@@ -120,13 +120,13 @@ A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
 D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 ```
 
-그런 다음 Enc_CBC (K_E, IV, "")에 대해 3DES-192-지정 IV = 0 * 및 K_E를 계산 합니다.
+그런 다음, `Enc_CBC (K_E, IV, "")` 지정 된 3des-192-CBC `IV = 0*` 를 `K_E` 위와 같이 계산 합니다.
 
-결과: = ABB100F81E53E10E
+`result := ABB100F81E53E10E`
 
-다음으로, 위와 같이 지정 된 K_H HMACSHA1에 대해 MAC (K_H, "")를 계산 합니다.
+다음으로, `MAC(K_H, "")` 위와 같이 제공 된 HMACSHA1에 대해 계산 `K_H` 합니다.
 
-결과: = 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
+`result := 76EB189B35CF03461DDF877CD9F4B1B4D63A7555`
 
 이렇게 하면 아래와 같이 인증 된 암호화 알고리즘 쌍 (3DES-192-CBC encryption + HMACSHA1 validation)의 지문이 되는 전체 컨텍스트 헤더가 생성 됩니다.
 
@@ -138,19 +138,19 @@ D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 
 구성 요소는 다음과 같이 구분 됩니다.
 
-* 표식 (00 00)
+* 표식`(00 00)`
 
-* 블록 암호화 키 길이 (00 00 00 18)
+* 블록 암호화 키 길이입니다.`(00 00 00 18)`
 
-* 블록 암호화 블록 크기 (00 00 00 08)
+* 블록 암호화 블록 크기입니다.`(00 00 00 08)`
 
-* HMAC 키 길이 (00 00 00 14)
+* HMAC 키 길이입니다.`(00 00 00 14)`
 
-* HMAC 다이제스트 크기 (00 00 00 14)
+* HMAC 다이제스트 크기`(00 00 00 14)`
 
-* 블록 암호화 PRP 출력 (AB B1-E1 0E) 및
+* 블록 암호화 PRP 출력 `(AB B1 - E1 0E)` 및
 
-* HMAC PRF 출력 (76 EB-end)
+* HMAC PRF 출력 `(76 EB - end)` 입니다.
 
 ## <a name="galoiscounter-mode-encryption--authentication"></a>Galois/카운터 모드 암호화 + 인증
 
@@ -166,21 +166,21 @@ D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 
 * [32 비트] 인증 된 암호화 함수에 의해 생성 된 인증 태그 크기 (바이트, 빅 endian)입니다. 시스템의 경우이는 태그 크기 = 128 비트에서 수정 되었습니다.
 
-* [128 비트] 빈 문자열 입력이 제공 된 대칭 블록 암호화 알고리즘의 출력 인 Enc_GCM (K_E, nonce, "")의 태그 이며, nonce는 96 비트의 0 비트 벡터입니다.
+* [128 비트] `Enc_GCM (K_E, nonce, "")`빈 문자열 입력이 지정 되 고 nonce가 96 비트의 0 비트 벡터로 인의 태그입니다.
 
-K_E는 CBC 암호화 + HMAC 인증 시나리오와 동일한 메커니즘을 사용 하 여 파생 됩니다. 그러나 여기에는 여기에 K_H 없습니다. K_H | = 0 이며 알고리즘이 아래 폼으로 축소 됩니다.
+`K_E`는 CBC 암호화 + HMAC 인증 시나리오와 동일한 메커니즘을 사용 하 여 파생 됩니다. 그러나 `K_H` 여기에는 재생이 없으므로 기본적으로가 있고 `| K_H | = 0` 알고리즘은 아래 형태로 축소 됩니다.
 
-K_E = SP800_108_CTR (prf = HMACSHA512, key = "", label = "", context = "")
+`K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-256-gcm"></a>예: AES-256-GCM
 
-먼저 K_E = SP800_108_CTR (prf = HMACSHA512, key = "", label = "", context = ""), 여기서 |을 사용 합니다. K_E | = 256 비트
+먼저, `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` 여기서을 사용 `| K_E | = 256 bits` 합니다.
 
-K_E: = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+`K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8`
 
-그런 다음 Enc_GCM (K_E, nonce, "")의 인증 태그를 256-GCM 지정 된 nonce = 096 및 K_E (위와 같이)로 계산 합니다.
+그런 다음, `Enc_GCM (K_E, nonce, "")` 제공 된 AES-256-GCM의 인증 태그를 `nonce = 096` `K_E` 위와 같이 계산 합니다.
 
-결과: = E7DCCE66DF855A323A6BB7BD7A59BE45
+`result := E7DCCE66DF855A323A6BB7BD7A59BE45`
 
 이렇게 하면 아래 전체 컨텍스트 헤더가 생성 됩니다.
 
@@ -192,14 +192,14 @@ BE 45
 
 구성 요소는 다음과 같이 구분 됩니다.
 
-* 표식 (00 01)
+* 표식`(00 01)`
 
-* 블록 암호화 키 길이 (00 00 00 20)
+* 블록 암호화 키 길이입니다.`(00 00 00 20)`
 
-* nonce 크기 (00 00 00 0C)
+* nonce 크기`(00 00 00 0C)`
 
-* 블록 암호화 블록 크기 (00 00 00 10)
+* 블록 암호화 블록 크기입니다.`(00 00 00 10)`
 
-* 인증 태그 크기 (00 00 00 10) 및
+* 인증 태그 크기 `(00 00 00 10)` 및
 
-* 블록 암호화를 실행 하는 인증 태그 (E7 DC-end)입니다.
+* 블록 암호화를 실행 하는 인증 태그 `(E7 DC - end)` 입니다.

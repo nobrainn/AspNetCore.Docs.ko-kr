@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408034"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060373"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>ASP.NET Core에서 하위 키 파생 및 인증 된 암호화
 
@@ -43,11 +43,11 @@ ms.locfileid: "85408034"
 
 AAD는 세 구성 요소 모두의 튜플에 대해 고유 하기 때문에 모든 암호화 작업에서 KM 자체를 사용 하는 대신 KM에서 새 키를 파생 시키는 데 사용할 수 있습니다. 모든 호출에 대해 `IAuthenticatedEncryptor.Encrypt` 다음과 같은 키 파생 프로세스가 수행 됩니다.
 
-(K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | keyModifier)
+`( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)`
 
 여기서는 다음 매개 변수를 사용 하 여 NIST SP800-108 KDF in 카운터 모드 ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 5.1 참조)를 호출 합니다.
 
-* 키 파생 키 (KDK) = K_M
+* 키 파생 키 (KDK) =`K_M`
 
 * PRF = HMACSHA512
 
@@ -55,28 +55,28 @@ AAD는 세 구성 요소 모두의 튜플에 대해 고유 하기 때문에 모�
 
 * context = contextHeader | | keyModifier
 
-컨텍스트 헤더는 가변 길이 이며 기본적으로 K_E 및 K_H를 파생 하는 알고리즘의 손 도장 (thumbprint) 역할을 합니다. 키 한정자는에 대 한 각 호출에 임의로 생성 되는 128 비트 문자열이 며, `Encrypt` KDF에 대 한 다른 모든 입력이 일정 한 경우에도이 특정 인증 암호화 작업에 대해 KE 및 KH가 고유한 확률을 보장 하기 위해 사용 됩니다.
+컨텍스트 헤더는 가변 길이 이며 기본적으로 파생 되 고 있는 알고리즘의 손 도장 (thumbprint) 역할을 `K_E` `K_H` 합니다. 키 한정자는에 대 한 각 호출에 임의로 생성 되는 128 비트 문자열이 며, `Encrypt` KDF에 대 한 다른 모든 입력이 일정 한 경우에도이 특정 인증 암호화 작업에 대해 KE 및 KH가 고유한 확률을 보장 하기 위해 사용 됩니다.
 
-CBC 모드 암호화 + HMAC 유효성 검사 작업의 경우 | K_E | 는 대칭 블록 암호화 키의 길이입니다. K_H | HMAC 루틴의 다이제스트 크기입니다. GCM 암호화 + 유효성 검사 작업의 경우 | K_H | = 0.
+CBC 모드 암호화 + HMAC 유효성 검사 작업의 경우 `| K_E |` 는 대칭 블록 암호화 키의 길이 이며은 `| K_H |` HMAC 루틴의 다이제스트 크기입니다. GCM 암호화 + 유효성 검사 작업의 경우 `| K_H | = 0` 입니다.
 
 ## <a name="cbc-mode-encryption--hmac-validation"></a>CBC 모드 암호화 + HMAC 유효성 검사
 
-위의 메커니즘을 통해 K_E 생성 되 면 임의의 초기화 벡터를 생성 하 고 대칭 블록 암호화 알고리즘을 실행 하 여 일반 텍스트를 암호화 합니다. 그런 다음 초기화 벡터와 암호 텍스트는 MAC을 생성 하기 위해 키 K_H로 초기화 된 HMAC 루틴을 통해 실행 됩니다. 이 프로세스와 반환 값은 아래에 그래픽으로 표시 됩니다.
+`K_E`위의 메커니즘을 통해 생성 된 후에는 임의의 초기화 벡터를 생성 하 고 대칭 블록 암호화 알고리즘을 실행 하 여 일반 텍스트를 암호화. 그런 다음 초기화 벡터와 암호 텍스트는 키를 사용 하 여 초기화 된 HMAC 루틴을 통해 실행 되어 `K_H` MAC을 생성 합니다. 이 프로세스와 반환 값은 아래에 그래픽으로 표시 됩니다.
 
 ![CBC 모드 프로세스 및 반환](subkeyderivation/_static/cbcprocess.png)
 
-*output: = keyModifier | | iv | | E_cbc (K_E, iv, 데이터) | | HMAC (K_H, iv | | E_cbc (K_E, iv, 데이터))*
+`output:= keyModifier || iv || E_cbc (K_E,iv,data) || HMAC(K_H, iv || E_cbc (K_E,iv,data))`
 
 > [!NOTE]
 > `IDataProtector.Protect`구현은 출력에 [매직 헤더와 키 id를 앞](xref:security/data-protection/implementation/authenticated-encryption-details) 에 추가 하 고 호출자에 게 반환 합니다. 매직 헤더와 키 id는 암시적으로 [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)에 포함 되며 키 한정자가 KDF에 대 한 입력으로 공급 되기 때문에, 최종 반환 된 페이로드의 모든 싱글바이트는 MAC에서 인증 됨을 의미 합니다.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Galois/카운터 모드 암호화 + 유효성 검사
 
-위의 메커니즘을 통해 K_E 생성 되 면 임의의 96 비트 nonce를 생성 하 고 대칭 블록 암호화 알고리즘을 실행 하 여 일반 텍스트를 암호화 128 비트 인증 태그를 생성 합니다.
+`K_E`위의 메커니즘을 통해 생성 된 후에는 임의의 96 비트 nonce를 생성 하 고 대칭 블록 암호화 알고리즘을 실행 하 여 일반 텍스트를 암호화 128 비트 인증 태그를 생성 합니다.
 
 ![GCM 모드 프로세스 및 반환](subkeyderivation/_static/galoisprocess.png)
 
-*output: = keyModifier | | nonce | | E_gcm (K_E, nonce, 데이터) | | authTag*
+`output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> GCM은 기본적으로 AAD의 개념을 지원 하지만 원래 KDF에만 AAD를 공급 하 여 AAD 매개 변수의 GCM에 빈 문자열을 전달 합니다. 이에 대 한 이유는 2 배입니다. 첫째, [민첩성을 지원 하기 위해](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) 암호화 키로 직접 K_M를 사용 하지 않으려고 합니다. 또한 GCM은 입력에 대해 매우 엄격한 고유성 요구 사항을 적용 합니다. GCM 암호화 루틴이 같은 (키, nonce) 쌍을 사용 하는 두 개 이상의 고유 입력 데이터 집합에 대해 호출 될 확률은 2 ^ 32를 초과 해서는 안 됩니다. K_E을 해결 하는 경우 2 ^-32 제한의 afoul를 실행 하기 전에 2 ^ 32 개 이상의 암호화 작업을 수행할 수 없습니다. 이는 많은 수의 작업 처럼 보일 수 있지만 트래픽이 많은 웹 서버는 이러한 키에 대 한 정상 수명 내에서 매우 40억 요청을 수행할 수 있습니다. 2 ^-32 확률 제한을 유지 하기 위해 지정 된 K_M에 대 한 사용 가능한 작업 수를 크게 확장 하는 128 비트 키 한정자 및 96 비트 nonce를 계속 사용 합니다. 디자인의 간소화를 위해 CBC와 GCM 작업 간에 KDF 코드 경로를 공유 하 고, AAD는 이미 KDF에서 고려 되므로 GCM 루틴에 전달할 필요가 없습니다.
+> GCM은 기본적으로 AAD의 개념을 지원 하지만 원래 KDF에만 AAD를 공급 하 여 AAD 매개 변수의 GCM에 빈 문자열을 전달 합니다. 이에 대 한 이유는 2 배입니다. 첫째, [민첩성을 지원 하기 위해](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) `K_M` 암호화 키로 직접를 사용 하지 않으려고 합니다. 또한 GCM은 입력에 대해 매우 엄격한 고유성 요구 사항을 적용 합니다. GCM 암호화 루틴이 같은 (키, nonce) 쌍을 사용 하는 두 개 이상의 고유 입력 데이터 집합에 대해 호출 될 확률은 2 ^ 32를 초과 해서는 안 됩니다. 문제를 해결 `K_E` 하는 경우 2 ^-32 제한 afoul를 실행 하기 전에 2 ^ 32 개 이상의 암호화 작업을 수행할 수 없습니다. 이는 많은 수의 작업 처럼 보일 수 있지만 트래픽이 많은 웹 서버는 이러한 키에 대 한 정상 수명 내에서 매우 40억 요청을 수행할 수 있습니다. 2 ^-32 확률 제한을 유지 하기 위해 지정 된에 대 한 사용 가능한 작업 수를 크게 확장 하는 128 비트 키 한정자 및 96 비트 nonce를 계속 사용 합니다 `K_M` . 디자인의 간소화를 위해 CBC와 GCM 작업 간에 KDF 코드 경로를 공유 하 고, AAD는 이미 KDF에서 고려 되므로 GCM 루틴에 전달할 필요가 없습니다.

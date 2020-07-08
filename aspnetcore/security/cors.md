@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 76e79c2d9762e242dc44857370b0ce1d13f1d1cb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0a2be31092ab491e23ab9de9be676b5b4d3963ee
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403783"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060282"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core에서 CORS (원본 간 요청) 사용
 
@@ -147,7 +147,7 @@ CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드�
 `[EnableCors]`특성은 다음에 적용 될 수 있습니다.
 
 * Razor페이지`PageModel`
-* 컨트롤러
+* Controller
 * 컨트롤러 동작 방법
 
 특성을 사용 하는 컨트롤러, 페이지 모델 또는 작업 메서드에 다른 정책을 적용할 수 있습니다 `[EnableCors]` . `[EnableCors]`특성이 컨트롤러, 페이지 모델 또는 동작 메서드에 적용 되 고 CORS가 미들웨어에서 사용 하도록 설정 된 경우 **두 정책이 모두** 적용 됩니다. **정책을 결합 하지 않는 것이 좋습니다. ** `[EnableCors]` **동일한 앱에서 특성 또는 미들웨어를 사용 합니다.**
@@ -717,7 +717,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 `[EnableCors]`특성은 다음에 적용 될 수 있습니다.
 
 * Razor페이지`PageModel`
-* 컨트롤러
+* Controller
 * 컨트롤러 동작 방법
 
 특성을 사용 하 여 컨트롤러/페이지-모델/작업에 다른 정책을 적용할 수 있습니다 `[EnableCors]` . `[EnableCors]`특성이 컨트롤러/페이지 모델/동작 메서드에 적용 되 고 CORS가 미들웨어에서 사용 하도록 설정 된 경우 두 정책이 **모두** 적용 됩니다. 정책을 결합 **하지 않는** 것이 좋습니다. `[EnableCors]`특성 또는 미들웨어를 사용 합니다 **not both**. 를 사용 하 `[EnableCors]` 는 경우 기본 정책을 정의 **하지** 마십시오.
@@ -794,7 +794,7 @@ CORS 미들웨어는 항상에 있는 4 개의 헤더 `Access-Control-Request-He
 app.UseCors(policy => policy.WithHeaders(HeaderNames.CacheControl));
 ```
 
-가 항상 허용 목록 이므로 CORS 미들웨어는 다음 요청 헤더를 사용 하 여 실행 전 요청에 응답 합니다 `Content-Language` .
+가 항상 허용 되기 때문에 CORS 미들웨어는 다음 요청 헤더를 사용 하 여 실행 전 요청에 성공적으로 응답 합니다 `Content-Language` .
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language
@@ -988,7 +988,7 @@ Test message
 CORS를 테스트 하려면:
 
 1. [API 프로젝트를 만듭니다](xref:tutorials/first-web-api). 또는 [샘플을 다운로드할](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)수 있습니다.
-1. 이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다. 예를 들면 다음과 같습니다.
+1. 이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다. 예를 들어:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 

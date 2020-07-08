@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: f039772f4276d0e8bcec2629350eba2ec0e7418c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399688"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059775"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET Membership authentication에서 ASP.NET Core 2.0으로 마이그레이션Identity
 
@@ -44,7 +44,7 @@ ASP.NET Core 2.0은 [Identity](/aspnet/identity/index) ASP.NET 4.5에 도입 된
 
 ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity 새 ASP.NET Core 2.0 앱을 만드는 것입니다. Visual Studio 2017에서 다음 단계를 수행 합니다.
 
-1. **File** > **New** > **Project**를 선택합니다.
+1. **파일** > **새로 만들기** > **프로젝트**를 선택합니다.
 1. *CoreIdentitySample*이라는 새 **ASP.NET Core 웹 응용 프로그램** 프로젝트를 만듭니다.
 1. 드롭다운 목록에서 **ASP.NET Core 2.0** 을 선택 하 고 **웹 응용 프로그램**을 선택 합니다. 이 템플릿은 [ Razor 페이지](xref:razor-pages/index) 앱을 생성 합니다. **확인**을 클릭 하기 전에 **인증 변경**을 클릭 합니다.
 1. 템플릿에 대 한 **개별 사용자 계정을** 선택 Identity 합니다. 마지막으로 **확인**을 클릭 한 다음 **확인**을 클릭 합니다. Visual Studio는 ASP.NET Core 템플릿을 사용 하 여 프로젝트를 만듭니다 Identity .
@@ -75,36 +75,33 @@ ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity
 
 ### <a name="users"></a>사용자
 
-|*Identity<br>dbo. AspNetUsers*        ||*멤버 자격 <br> (dbo. aspnet_Users/dbo. aspnet_Membership)*||
-|----------------------------------------|-----------------------------------------------------------|
-|**필드 이름**                 |**Type**|**필드 이름**                                    |**Type**|
-|`Id`                           |문자열  |`aspnet_Users.UserId`                             |문자열  |
-|`UserName`                     |문자열  |`aspnet_Users.UserName`                           |문자열  |
-|`Email`                        |문자열  |`aspnet_Membership.Email`                         |문자열  |
-|`NormalizedUserName`           |문자열  |`aspnet_Users.LoweredUserName`                    |문자열  |
-|`NormalizedEmail`              |문자열  |`aspnet_Membership.LoweredEmail`                  |문자열  |
-|`PhoneNumber`                  |문자열  |`aspnet_Users.MobileAlias`                        |문자열  |
-|`LockoutEnabled`               |bit     |`aspnet_Membership.IsLockedOut`                   |bit     |
+|Identity<br>( `dbo.AspNetUsers` ) 열  |형식     |Membership<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 열|형식      |
+|-------------------------------------------|-----------------------------------------------------------------------|
+| `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
+| `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
+| `Email`                         | `string`| `aspnet_Membership.Email`                                  | `string` |
+| `NormalizedUserName`            | `string`| `aspnet_Users.LoweredUserName`                             | `string` |
+| `NormalizedEmail`               | `string`| `aspnet_Membership.LoweredEmail`                           | `string` |
+| `PhoneNumber`                   | `string`| `aspnet_Users.MobileAlias`                                 | `string` |
+| `LockoutEnabled`                | `bit`   | `aspnet_Membership.IsLockedOut`                            | `bit`    |
 
 > [!NOTE]
 > 일부 필드 매핑은 멤버 자격에서 ASP.NET Core로의 일 대 일 관계와 비슷합니다 Identity . 위의 표에서는 기본 멤버 자격 사용자 스키마를 사용 하 여 ASP.NET Core 스키마에 매핑합니다 Identity . 멤버 자격에 사용 된 다른 모든 사용자 지정 필드는 수동으로 매핑되어야 합니다. 이 매핑에서는 암호 조건과 암호 salts 둘 사이에서 마이그레이션되지 않으므로 암호에 대 한 맵이 없습니다. **암호가 null로 유지 되 고 사용자에 게 암호를 재설정 하도록 요청 하는 것이 좋습니다.** ASP.NET Core에서 Identity `LockoutEnd` 사용자가 잠겨 있는 경우는 나중에 특정 날짜로 설정 되어야 합니다. 이는 마이그레이션 스크립트에 표시 됩니다.
 
 ### <a name="roles"></a>역할
 
-|*Identity<br>dbo. AspNetRoles)*        ||*멤버 자격 <br> (dbo. aspnet_Roles)*||
+|Identity<br>( `dbo.AspNetRoles` ) 열|형식|Membership<br>( `dbo.aspnet_Roles` ) 열|형식|
 |----------------------------------------|-----------------------------------|
-|**필드 이름**                 |**Type**|**필드 이름**   |**Type**         |
-|`Id`                           |문자열  |`RoleId`         | 문자열          |
-|`Name`                         |문자열  |`RoleName`       | 문자열          |
-|`NormalizedName`               |문자열  |`LoweredRoleName`| 문자열          |
+|`Id`                           |`string`|`RoleId`         | `string`        |
+|`Name`                         |`string`|`RoleName`       | `string`        |
+|`NormalizedName`               |`string`|`LoweredRoleName`| `string`        |
 
 ### <a name="user-roles"></a>사용자 역할
 
-|*Identity<br>dbo. AspNetUserRoles*||*멤버 자격 <br> (dbo. aspnet_UsersInRoles)*||
-|------------------------------------|------------------------------------------|
-|**필드 이름**           |**Type**  |**필드 이름**|**Type**                   |
-|`RoleId`                 |문자열    |`RoleId`      |문자열                     |
-|`UserId`                 |문자열    |`UserId`      |문자열                     |
+|Identity<br>( `dbo.AspNetUserRoles` ) 열|형식|Membership<br>( `dbo.aspnet_UsersInRoles` ) 열|형식|
+|-------------------------|----------|--------------|---------------------------|
+|`RoleId`                 |`string`  |`RoleId`      |`string`                   |
+|`UserId`                 |`string`  |`UserId`      |`string`                   |
 
 *사용자* 및 *역할*에 대 한 마이그레이션 스크립트를 만들 때 위의 매핑 테이블을 참조 합니다. 다음 예에서는 데이터베이스 서버에 데이터베이스가 두 개 있다고 가정 합니다. 하나의 데이터베이스에는 기존 ASP.NET 멤버 자격 스키마 및 데이터가 포함 됩니다. 다른 *CoreIdentitySample* 데이터베이스는 앞에서 설명한 단계를 사용 하 여 만들어졌습니다. 자세한 내용은 주석이 인라인으로 포함 되어 있습니다.
 
