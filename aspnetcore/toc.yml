@@ -369,6 +369,8 @@
           uid: blazor/call-javascript-from-dotnet
         - name: JavaScript에서 .NET 호출
           uid: blazor/call-dotnet-from-javascript
+        - name: WebAssembly에서 웹 API 호출
+          uid: blazor/call-web-api
         - name: 보안 및 ID
           items:
             - name: 개요
@@ -409,8 +411,6 @@
           uid: blazor/state-management
         - name: WebAssembly 디버그
           uid: blazor/debug
-        - name: WebAssembly에서 웹 API 호출
-          uid: blazor/call-web-api
         - name: WebAssembly 성능
           uid: blazor/webassembly-performance-best-practices
         - name: 프로그레시브 웹 애플리케이션
