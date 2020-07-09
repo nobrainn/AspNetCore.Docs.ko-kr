@@ -5,7 +5,7 @@ description: 데이터에 바인딩하고, 이벤트를 처리하고, 구성 요
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 0a8335461b4c9cd628d9c65b97f7ab6a74487fca
-ms.sourcegitcommit: 7f423602a1475736f61fc361327d4de0976c9649
+ms.openlocfilehash: 23aab2504368559b8d3dd21b3c0896ffc3348e2f
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85950892"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059820"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -83,15 +83,15 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 ### <a name="namespaces"></a>네임스페이스
 
-일반적으로 구성 요소의 네임스페이스는 앱의 루트 네임스페이스와 앱 내의 구성 요소 위치(폴더)에서 파생됩니다. 앱의 루트 네임스페이스가 `BlazorApp`이고 `Counter` 구성 요소가 `Pages` 폴더에 있다면 다음이 적용됩니다.
+일반적으로 구성 요소의 네임스페이스는 앱의 루트 네임스페이스와 앱 내의 구성 요소 위치(폴더)에서 파생됩니다. 앱의 루트 네임스페이스가 `BlazorSample`이고 `Counter` 구성 요소가 `Pages` 폴더에 있다면 다음이 적용됩니다.
 
-* `Counter` 구성 요소의 네임스페이스는 `BlazorApp.Pages`입니다.
-* 구성 요소의 정규화된 형식 이름은 `BlazorApp.Pages.Counter`입니다.
+* `Counter` 구성 요소의 네임스페이스는 `BlazorSample.Pages`입니다.
+* 구성 요소의 정규화된 형식 이름은 `BlazorSample.Pages.Counter`입니다.
 
 구성 요소를 포함하는 사용자 지정 폴더의 경우 부모 구성 요소 또는 앱의 `_Imports.razor` 파일에 [`@using`][2] 지시문을 추가합니다. 다음 예에서는 `Components` 폴더의 구성 요소를 사용할 수 있도록 만듭니다.
 
 ```razor
-@using BlazorApp.Components
+@using BlazorSample.Components
 ```
 
 구성 요소는 정규화된 이름을 사용하여 참조할 수도 있습니다. 이 경우에는 [`@using`][2] 지시문이 필요하지 않습니다.
@@ -162,7 +162,7 @@ Partial 클래스에서 코드 숨김 파일을 사용하여 `Counter` 구성 �
 `Counter.razor.cs`:
 
 ```csharp
-namespace BlazorApp.Pages
+namespace BlazorSample.Pages
 {
     public partial class Counter
     {
@@ -481,15 +481,15 @@ public class NotifierService
 }
 ```
 
-`NotifierService`를 싱글톤으로 등록합니다.
+`NotifierService`를 등록합니다.
 
-* Blazor WebAssembly에서 `Program.Main`에 서비스를 등록합니다.
+* Blazor WebAssembly에서 `Program.Main`의 singleton으로 서비스를 등록합니다.
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* Blazor Server에서 `Startup.ConfigureServices`에 서비스를 등록합니다.
+* Blazor Server에서 `Startup.ConfigureServices`에 지정된 범위대로 서비스를 등록합니다.
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -619,13 +619,19 @@ public class NotifierService
 * 구성 요소 매개 변수로 자식 콘텐츠 표시를 설정/해제합니다.
 
 ```razor
-<div @onclick="@Toggle">
-    Toggle (Expanded = @Expanded)
+<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="panel-heading">
+            <h2>Toggle (Expanded = @Expanded)</h2>
+        </div>
 
-    @if (Expanded)
-    {
-        @ChildContent
-    }
+        @if (Expanded)
+        {
+            <div class="card-text">
+                @ChildContent
+            </div>
+        }
+    </div>
 </div>
 
 @code {
@@ -645,13 +651,15 @@ public class NotifierService
 `Expander` 구성 요소는 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>를 호출할 수 있는 부모 구성 요소에 추가됩니다.
 
 ```razor
+@page "/expander"
+
 <Expander Expanded="true">
-    <h1>Hello, world!</h1>
+    Expander 1 content
 </Expander>
 
 <Expander Expanded="true" />
 
-<button @onclick="@(() => StateHasChanged())">
+<button @onclick="StateHasChanged">
     Call StateHasChanged
 </button>
 ```
@@ -660,30 +668,36 @@ public class NotifierService
 
 앞의 시나리오에서 상태를 유지하려면 `Expander` 구성 요소에서 ‘private 필드’를 사용하여 전환된 상태를 유지합니다 *.*
 
-다음 `Expander` 구성 요소는
+다음은 수정된 `Expander` 구성 요소입니다.
 
 * 부모의 `Expanded` 구성 요소 매개 변수 값을 허용합니다.
 * [OnInitialized 이벤트](xref:blazor/components/lifecycle#component-initialization-methods)에서 구성 요소 매개 변수 값을 ‘private 필드’(`expanded`)에 할당합니다 *.*
 * Private 필드를 사용하여 내부 설정/해제 상태를 유지합니다.
 
 ```razor
-<div @onclick="@Toggle">
-    Toggle (Expanded = @expanded)
+<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="panel-heading">
+            <h2>Toggle (Expanded = @expanded)</h2>
+        </div>
 
-    @if (expanded)
-    {
-        @ChildContent
-    }
+        @if (Expanded)
+        {
+            <div class="card-text">
+                @ChildContent
+            </div>
+        }
+    </div>
 </div>
 
 @code {
+    private bool expanded;
+
     [Parameter]
     public bool Expanded { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    private bool expanded;
 
     protected override void OnInitialized()
     {
