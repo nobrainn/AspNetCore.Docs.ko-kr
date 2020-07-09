@@ -15,21 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: ba43ff052fbd290412fa27cf57ace3ee3491f8d0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402561"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944219"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
 작성자: [Daniel Roth](https://github.com/danroth27)
 
 Blazor는 [WebAssembly](https://webassembly.org/) 기반 .NET 런타임( *Blazor WebAssembly* )의 브라우저에서 클라이언트 쪽을 실행하거나 ASP.NET Core( *Blazor Server* )에서 서버 쪽을 실행하도록 설계된 웹 프레임워크입니다. 호스팅 모델에 관계없이 앱 및 구성 요소 모델은 ‘동일합니다’.
-
-이 문서에서 설명하는 호스팅 모델의 프로젝트를 만들려면 <xref:blazor/get-started>를 참조하세요.
-
-고급 구성의 경우 <xref:blazor/fundamentals/configuration>을 참조하세요.
 
 ## Blazor WebAssembly
 
@@ -154,7 +151,6 @@ IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 �
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:blazor/get-started>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

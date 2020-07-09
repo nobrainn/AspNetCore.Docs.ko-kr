@@ -14,11 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408203"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944556"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -79,7 +80,7 @@ ASP.NET Core 앱 개발을 소개하는 자습서는 다음의 순서대로 살�
    |----------|----------|----------|
    |웹앱                   | 새로운 서버 쪽 웹 UI 개발 |[Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱                   | MVC 앱 유지 관리 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
-   |웹앱                   | 클라이언트 쪽 웹 UI 개발 |[Blazor 시작하기](xref:tutorials/first-blazor-app) |
+   |웹앱                   | 클라이언트 쪽 웹 UI 개발 |[Blazor 시작하기](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |Web API                   | RESTful HTTP 서비스 |[웹 API 만들기](xref:tutorials/first-web-api)&dagger; |
    |원격 프로시저 호출 앱 | 프로토콜 버퍼를 사용하는 계약 중심 서비스 |[gRPC 서비스 시작](xref:tutorials/grpc/grpc-start) |
    |실시간 앱             | 서버 및 연결된 클라이언트 간의 양방향 통신 |[SignalR 시작하기](xref:tutorials/signalr) |

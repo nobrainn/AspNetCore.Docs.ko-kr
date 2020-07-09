@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: b60fa81b3bf180cd2ba15f285df9474be42f95f8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5e04d54bedf7cce8b7a6ab546920e7dec1213a20
+ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400091"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86093356"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 모듈
 
@@ -36,7 +36,7 @@ ASP.NET Core 모듈은 다음을 위해 IIS 파이프라인에 연결되는 네�
 지원되는 Windows 버전:
 
 * Windows 7 이상
-* Windows Server 2008 R2 이상
+* Windows Server 2012 R2 이상
 
 In Process를 호스트하는 경우 모듈에서는 IIS HTTP Server(`IISHttpServer`)라는 IIS용 In Process 서버 구현을 사용합니다.
 

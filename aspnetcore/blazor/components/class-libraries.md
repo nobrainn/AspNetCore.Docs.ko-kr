@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: b54eb7142fc7e1665cc0aaaad068a67852ac2f74
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b172059407f9a08dacc0fadd804864c7aee7fb90
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399077"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944499"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -35,8 +35,6 @@ ms.locfileid: "85399077"
 구성 요소가 일반적인 .NET 형식인 것처럼, RCL에서 제공하는 구성 요소는 일반적인 .NET 어셈블리입니다.
 
 ## <a name="create-an-rcl"></a>RCL 만들기
-
-<xref:blazor/get-started> 문서의 지침에 따라 사용자 환경을 Blazor에 맞게 구성합니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
