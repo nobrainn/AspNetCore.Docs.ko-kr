@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e2ae82b9c26771ee5da16b1611026c6d62804bce
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400819"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212941"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core 프로젝트의 스 캐 폴드
 
@@ -48,7 +48,7 @@ Identity기존 개별 계정이 있는 프로젝트에 새 데이터 컨텍스�
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
 
-앞 코드는 *영역/ Identity /IdentityHostingStartup.cs* 에 중복 된 코드를 주석으로 처리 합니다.
+앞 코드는 *영역/ Identity / Identity HostingStartup.cs* 에서 중복 된 코드를 주석으로 처리 합니다.
 
 일반적으로 개별 계정을 사용 하 여 만든 앱은 새 데이터 컨텍스트 ***를 만들지 않아야 합니다.***
 
@@ -93,7 +93,7 @@ before dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
+Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
 <a name="efm"></a>
 
@@ -115,7 +115,7 @@ Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자�
 
 선택 사항: 로그인 부분 ( `_LoginPartial` )을 레이아웃 파일에 추가 합니다.
 
-[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 ## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
 
@@ -132,7 +132,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-일부 Identity 옵션은 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
+일부 Identity 옵션은 *영역/ Identity / Identity HostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity기존 권한 부여 없이 MVC 프로젝트에 스 캐 폴드
 
@@ -154,11 +154,11 @@ dotnet ef database update
 
 선택 사항: `_LoginPartial` *Views/Shared/_Layout cshtml* 파일에 로그인 부분 ()을 추가 합니다.
 
-[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 * *Pages/shared/_LoginPartial cshtml* 파일을 *Views/shared/_LoginPartial로 이동 합니다.*
 
-Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 IHostingStartup를 참조 하세요.
+Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니다. 자세한 내용은 IHostingStartup를 참조 하세요.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -184,7 +184,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
+Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
 ### <a name="migrations"></a>마이그레이션
 
@@ -304,7 +304,7 @@ Identity페이지 레이아웃 및 스타일을 수정 하 여 기본 테마를 
 > [!NOTE]
 > 이 섹션의 예제는 단순히 사용자 지정을 위한 출발점입니다. 최상의 사용자 환경을 위해 추가 작업이 필요할 수 있습니다.
 
-새 `NavMenu_IdentityLayout` 구성 요소 (*Shared/NavMenu_IdentityLayout razor*)를 만듭니다. 구성 요소의 태그와 코드에 대해 앱 `NavMenu` 구성 요소의 동일한 콘텐츠 (*Shared/NavMenu*)를 사용 합니다. `NavLink` `RedirectToLogin` 구성 요소의 자동 리디렉션이 인증 또는 권한 부여가 필요한 구성 요소에 대해 실패 하므로 익명으로 연결할 수 없는 구성 요소에 대 한 모든를 제거 합니다.
+새 `NavMenu_IdentityLayout` 구성 요소 (*공유/NavMenu_ Identity 레이아웃. razor*)를 만듭니다. 구성 요소의 태그와 코드에 대해 앱 `NavMenu` 구성 요소의 동일한 콘텐츠 (*Shared/NavMenu*)를 사용 합니다. `NavLink` `RedirectToLogin` 구성 요소의 자동 리디렉션이 인증 또는 권한 부여가 필요한 구성 요소에 대해 실패 하므로 익명으로 연결할 수 없는 구성 요소에 대 한 모든를 제거 합니다.
 
 *Pages/Shared/Layout. cshtml* 파일에서 다음과 같이 변경 합니다.
 
@@ -366,7 +366,7 @@ Identity페이지 레이아웃 및 스타일을 수정 하 여 기본 테마를 
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-일부 Identity 옵션은 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
+일부 Identity 옵션은 *영역/ Identity / Identity HostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
 <a name="full"></a>
 
@@ -472,7 +472,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 정적 Identity 자산을 웹 루트에 게시 하지 않으려면를 참조 하십시오 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 
@@ -526,7 +526,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
+Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
 <a name="efm"></a>
 
@@ -548,7 +548,7 @@ Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자�
 
 선택 사항: 로그인 부분 ( `_LoginPartial` )을 레이아웃 파일에 추가 합니다.
 
-[!code-html[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
+[!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
 ## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
 
@@ -565,7 +565,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-일부 Identity 옵션은 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
+일부 Identity 옵션은 *영역/ Identity / Identity HostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity기존 권한 부여 없이 MVC 프로젝트에 스 캐 폴드
 
@@ -587,11 +587,11 @@ dotnet ef database update
 
 선택 사항: `_LoginPartial` *Views/Shared/_Layout cshtml* 파일에 로그인 부분 ()을 추가 합니다.
 
-[!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
+[!code-cshtml[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
 * *Pages/shared/_LoginPartial cshtml* 파일을 *Views/shared/_LoginPartial로 이동 합니다.*
 
-Identity는 *영역/ Identity /IdentityHostingStartup.cs*구성 됩니다. 자세한 내용은 IHostingStartup를 참조 하세요.
+Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니다. 자세한 내용은 IHostingStartup를 참조 하세요.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -713,7 +713,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 

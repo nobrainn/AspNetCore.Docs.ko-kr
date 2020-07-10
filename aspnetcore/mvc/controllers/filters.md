@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408294"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213065"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -123,7 +123,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 구성 옵션은 [옵션 패턴](xref:fundamentals/configuration/options)을 사용하여 [구성 시스템](xref:fundamentals/configuration/index)에서 제공됩니다. 예를 들어 *appsettings.json* 파일에서 다음을 수행합니다.
 
-[!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
+[!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
 `StartUp.ConfigureServices`에서
 
@@ -184,12 +184,12 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 시퀀스 | 필터 범위 | 필터 메서드 |
+| 순서 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
-| 3 | 메서드 | `OnActionExecuting` |
-| 4 | 메서드 | `OnActionExecuted` |
+| 3 | 방법 | `OnActionExecuting` |
+| 4 | 방법 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -728,13 +728,13 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 시퀀스 | 필터 범위 | 필터 메서드 |
+| 순서 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
-| 2 | 컨트롤러 | `OnActionExecuting` |
-| 3 | 메서드 | `OnActionExecuting` |
-| 4 | 메서드 | `OnActionExecuted` |
-| 5 | 컨트롤러 | `OnActionExecuted` |
+| 2 | Controller | `OnActionExecuting` |
+| 3 | 방법 | `OnActionExecuting` |
+| 4 | 방법 | `OnActionExecuted` |
+| 5 | Controller | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
 이 시퀀스는 다음을 보여 줍니다.
@@ -788,14 +788,14 @@ Razor페이지는 [ Razor 필터 메서드를 재정의 하 여 페이지 필터
 
 이전 예제와 동일한 3개의 작업 필터를 가정해보세요. 컨트롤러와 전역 필터의 `Order` 속성을 각각 1과 2로 설정하면 실행 순서가 반대가 됩니다.
 
-| 시퀀스 | 필터 범위 | `Order` 속성 | 필터 메서드 |
+| 순서 | 필터 범위 | `Order` 속성 | 필터 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 메서드 | 0 | `OnActionExecuting` |
-| 2 | 컨트롤러 | 1  | `OnActionExecuting` |
+| 1 | 방법 | 0 | `OnActionExecuting` |
+| 2 | Controller | 1  | `OnActionExecuting` |
 | 3 | 전역 | 2  | `OnActionExecuting` |
 | 4 | 전역 | 2  | `OnActionExecuted` |
-| 5 | 컨트롤러 | 1  | `OnActionExecuted` |
-| 6 | 메서드 | 0  | `OnActionExecuted` |
+| 5 | Controller | 1  | `OnActionExecuted` |
+| 6 | 방법 | 0  | `OnActionExecuted` |
 
 `Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터가 순서에 따라 먼저 정렬된 다음, 범위는 연결을 끊는 데 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
 

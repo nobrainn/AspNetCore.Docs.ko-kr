@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 0cc452b25392fe92c87ef346b2e16350fb3ec19a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 335eac4b1533f4156e00f9d0140f921fa492e71a
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405889"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212968"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core의 보기에 종속성 주입
 
@@ -61,7 +61,7 @@ ASP.NET Core는 보기에 대한 [종속성 주입](xref:fundamentals/dependency
 
 `@inject` 지시문을 사용하여 서비스를 보기에 주입할 수 있습니다. `@inject`를 보기에 속성을 추가하고 DI를 사용하여 속성을 채우는 것으로 생각하셔도 좋습니다.
 
-[!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
+[!code-cshtml[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 
 이 보기는 전체 통계를 보여주는 요약 정보와 함께 `ToDoItem` 인스턴스 목록을 표시합니다. 요약 정보는 주입된 `StatisticsService`에서 채워집니다. 이 서비스는 *Startup.cs*의 `ConfigureServices`에서 종속성 주입을 위해 등록됩니다.
 

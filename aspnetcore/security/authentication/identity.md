@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 6ac565bfa4862168fa143417ab5a81c51b620f16
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793584"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212450"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core 소개 Identity
 
@@ -75,7 +75,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들어:
+생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들면 다음과 같습니다.
 
 * /Identity/Account/Login
 * /Identity/계정/로그 아웃
@@ -185,7 +185,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 
-[!code-csharp[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
+[!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
 ## <a name="test-identity"></a>테스트할Identity
 
@@ -216,7 +216,7 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 
 최소 암호 요구 사항을 설정 하는 예제는 [구성](#pw) 을 참조 하세요.
 
-## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity 및 AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>AddDefault Identity 및 AddIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>는 ASP.NET Core 2.1에서 도입 되었습니다. 호출은 `AddDefaultIdentity` 다음을 호출 하는 것과 비슷합니다.
 
@@ -224,7 +224,7 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-자세한 내용은 [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
+자세한 내용은 [Adddefault Identity source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>정적 자산 게시 방지 Identity
 
@@ -271,7 +271,7 @@ IdentitySQL Server 데이터베이스를 사용 하 여 사용자 이름, 암호
 
 <a name="adi"></a>
 
-## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity 및 AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>AddDefault Identity 및 AddIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>는 ASP.NET Core 2.1에서 도입 되었습니다. 호출은 `AddDefaultIdentity` 다음을 호출 하는 것과 비슷합니다.
 
@@ -279,7 +279,7 @@ IdentitySQL Server 데이터베이스를 사용 하 여 사용자 이름, 암호
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-자세한 내용은 [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/2.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
+자세한 내용은 [Adddefault Identity source](https://github.com/dotnet/AspNetCore/blob/release/2.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
 
 ## <a name="create-a-web-app-with-authentication"></a>인증을 사용 하 여 웹 앱 만들기
 
@@ -300,7 +300,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들어:
+생성 된 프로젝트는 [ASP.NET Core Identity ](xref:security/authentication/identity) [ Razor 클래스 라이브러리로](xref:razor-pages/ui-class)제공 합니다. Identity Razor 클래스 라이브러리는 영역을 사용 하 여 끝점을 노출 `Identity` 합니다. 예를 들면 다음과 같습니다.
 
 * /Identity/Account/Login
 * /Identity/계정/로그 아웃
@@ -346,7 +346,7 @@ Identity는 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authapp
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
-자세한 내용은 [IdentityOptions 클래스](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) 및 [응용 프로그램 시작](xref:fundamentals/startup)을 참조 하세요.
+자세한 내용은 [ Identity 옵션 클래스](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) 및 [응용 프로그램 시작](xref:fundamentals/startup)을 참조 하세요.
 
 ## <a name="scaffold-register-login-and-logout"></a>스 캐 폴드 Register, Login 및 LogOut
 
@@ -402,7 +402,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다. cshtml:
 
-[!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
+[!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
 ## <a name="test-identity"></a>테스트할Identity
 

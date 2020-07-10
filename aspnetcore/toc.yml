@@ -320,31 +320,31 @@
             - name: 기본 제공 구성 요소
               items:
                 - name: 앱
-                  uid: blazor/templates
+                  href: blazor/templates.md#blazor-project-structure
                 - name: 인증
-                  uid: blazor/security/webassembly/additional-scenarios
+                  href: blazor/security/webassembly/index.md#authentication-component
                 - name: AuthorizeView
-                  uid: blazor/security/index
+                  href: blazor/security/index.md#authorizeview-component
                 - name: InputCheckbox
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputDate
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputNumber
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputSelect
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputText
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: MainLayout
-                  uid: blazor/layouts
+                  href: blazor/layouts.md#mainlayout-component
                 - name: NavLink
-                  uid: blazor/fundamentals/routing
+                  href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
-                  uid: blazor/fundamentals/routing
+                  href: blazor/fundamentals/routing.md#navlink-component
                 - name: 라우터
-                  uid: blazor/fundamentals/routing
+                  href: blazor/fundamentals/routing.md#route-templates
             - name: 연계 값 및 매개 변수
               uid: blazor/components/cascading-values-and-parameters
             - name: 데이터 바인딩
@@ -927,16 +927,6 @@
     - name: 상태 확인
       uid: host-and-deploy/health-checks
       displayName: 'deploy, publish'
-    - name: Blazor
-      items:
-        - name: 개요
-          uid: blazor/host-and-deploy/index
-        - name: Blazor WebAssembly
-          uid: blazor/host-and-deploy/webassembly
-        - name: Blazor 서버
-          uid: blazor/host-and-deploy/server
-        - name: 링커 구성
-          uid: blazor/host-and-deploy/configure-linker
 - name: 보안 및 ID
   displayName: 'authentication, authorization'
   items:
@@ -1169,42 +1159,6 @@
       uid: security/ip-safelist
     - name: 애플리케이션 보안 - OWASP
       href: 'https://cheatsheetseries.owasp.org/cheatsheets/DotNet_Security_Cheat_Sheet.html'
-    - name: Blazor
-      items:
-        - name: 개요
-          uid: blazor/security/index
-        - name: Blazor WebAssembly
-          items:
-            - name: 개요
-              uid: blazor/security/webassembly/index
-            - name: 인증 라이브러리를 사용하는 독립 실행형
-              uid: blazor/security/webassembly/standalone-with-authentication-library
-            - name: Microsoft 계정을 사용하는 독립 실행형
-              uid: blazor/security/webassembly/standalone-with-microsoft-accounts
-            - name: AAD를 사용하는 독립 실행형
-              uid: blazor/security/webassembly/standalone-with-azure-active-directory
-            - name: AAD B2C를 사용하는 독립 실행형
-              uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-            - name: AAD를 사용하는 호스트형
-              uid: blazor/security/webassembly/hosted-with-azure-active-directory
-            - name: AAD B2C를 사용하는 호스트형
-              uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-            - name: ID 서버를 사용하는 호스트형
-              uid: blazor/security/webassembly/hosted-with-identity-server
-            - name: 추가 시나리오
-              uid: blazor/security/webassembly/additional-scenarios
-            - name: AAD 그룹 및 역할
-              uid: blazor/security/webassembly/aad-groups-roles
-        - name: Blazor 서버
-          items:
-            - name: 개요
-              uid: blazor/security/server/index
-            - name: 위협 해결 방법
-              uid: blazor/security/server/threat-mitigation
-            - name: 추가 시나리오
-              uid: blazor/security/server/additional-scenarios
-        - name: 콘텐츠 보안 정책
-          uid: blazor/security/content-security-policy
 - name: 성능
   items:
     - name: 개요
@@ -1229,8 +1183,6 @@
       uid: performance/diagnostic-tools
     - name: 로드 및 스트레스 테스트
       uid: test/loadtests
-    - name: Blazor WebAssembly
-      uid: blazor/webassembly-performance-best-practices
 - name: 전역화 및 지역화
   items:
     - name: 개요

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 0fef14388f83d8b4c708194954f2b75b2164b746
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a7041a976ea9f0e99bfd1eba792d0e919eaf6d3
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404498"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212825"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core의 GDPR (EU 일반 데이터 보호 규정) 지원
 
@@ -86,7 +86,7 @@ Razor프로젝트 템플릿을 사용 하 여 만든 페이지 및 MVC 프로젝
 
 * \_ CookieConsentPartial* 부분 보기:
 
-[!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
+[!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 이 부분:
 
@@ -122,7 +122,7 @@ Razor프로젝트 템플릿을 사용 하 여 만든 페이지 및 MVC 프로젝
 
 ![개인 데이터 관리 페이지](gdpr/_static/pd.png)
 
-메모:
+참고:
 
 * 코드를 생성 하려면 `Account/Manage` [스 캐 폴드 Identity ](xref:security/authentication/scaffold-identity)를 참조 하세요.
 * **삭제** 및 **다운로드** 링크는 기본 id 데이터에 대해서만 작동 합니다. 사용자 지정 사용자 데이터를 삭제/다운로드 하려면 사용자 지정 사용자 데이터를 만드는 앱을 확장 해야 합니다. 자세한 내용은 [사용자 지정 사용자 데이터 Identity 추가, 다운로드 및 삭제 ](xref:security/authentication/add-user-data)를 참조 하세요.
@@ -131,7 +131,7 @@ Razor프로젝트 템플릿을 사용 하 여 만든 페이지 및 MVC 프로젝
 
 ::: moniker-end
 
-## <a name="encryption-at-rest"></a>휴지 상태의 암호화
+## <a name="encryption-at-rest"></a>저장 데이터 암호화
 
 일부 데이터베이스 및 저장소 메커니즘은 미사용 암호화를 허용 합니다. 저장 데이터 암호화:
 
@@ -153,7 +153,7 @@ Razor프로젝트 템플릿을 사용 하 여 만든 페이지 및 MVC 프로젝
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [Encfs](https://github.com/vgough/encfs).
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [GDPR-ASP.NET Core에서 해지 동의 단추를 추가 하는 중](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)

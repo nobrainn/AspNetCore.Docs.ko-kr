@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: c767ff4c2a1e0d5d10ccb3ff855126f541c04f64
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ac9f6449e2b7b135318ecf116e1dba7b33ddff83
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408242"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212397"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core의 링크 태그 도우미
 
@@ -33,11 +33,11 @@ ms.locfileid: "85408242"
 
 다음 Razor 태그는 `head` ASP.NET Core 웹 앱 템플릿으로 만든 레이아웃 파일의 요소를 보여 줍니다.
 
-[!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
+[!code-cshtml[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
 다음은 이전 코드로부터 렌더링된 HTML입니다(개발 이외의 환경에서).
 
-[!code-csharp[](link-tag-helper/sample/HtmlPage1.html)]
+[!code-html[](link-tag-helper/sample/HtmlPage1.html)]
 
 이전 코드에서 링크 태그 도우미는 `<meta name="x-stylesheet-fallback-test" content="" class="sr-only" />` 요소와 *bootstrap.min.css* 파일을 CDN에서 사용할 수 있는지 확인하는 데 사용되는 이어지는 JavaScript를 생성합니다. 이 경우에는 CSS 파일을 사용할 수 있었기 때문에 태그 도우미가 CDN CSS 파일을 사용하여 `<link />` 요소를 생성했습니다.
 
