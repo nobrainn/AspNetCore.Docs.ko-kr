@@ -5,7 +5,7 @@ description: Blazor 앱의 재사용 가능한 레이아웃 구성 요소를 만
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 06/23/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: f405bb655b2879bd546420d99ff645401ead92fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402522"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944235"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -80,6 +80,9 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
 `_Imports.razor` 파일은 [Razor 뷰 및 Pages용 _ViewImports.cshtml 파일](xref:mvc/views/layout#importing-shared-directives)과 유사하지만, 구체적으로 Razor 구성 요소 파일에 적용됩니다.
 
 `_Imports.razor`에서 레이아웃을 지정하면 라우터의 ‘기본 레이아웃’으로 지정된 레이아웃이 재정의됩니다.
+
+> [!WARNING]
+> 루트 `_Imports.razor` 파일에 Razor `@layout` 지시어를 추가하지 **마세요**. 그러면 앱에서 레이아웃의 무한 루프가 발생합니다. 기본 앱 레이아웃을 제어하려면 `Router` 구성 요소에서 레이아웃을 지정합니다. 자세한 내용은 [기본 레이아웃](#default-layout) 섹션을 참조하세요.
 
 ## <a name="nested-layouts"></a>중첩된 레이아웃
 

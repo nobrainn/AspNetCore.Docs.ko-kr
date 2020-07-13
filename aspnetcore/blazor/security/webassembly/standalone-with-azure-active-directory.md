@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 0f7bf6de44b3fb62291b4698b67de3a350817a45
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9cd6097dfaa31a1329d3ea8ca6293b33e3bdb3c3
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402080"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147720"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory"></a>Azure Active Directory를 사용하여 ASP.NET Core Blazor WebAssembly 독립 실행형 앱 보호
 
@@ -39,8 +40,8 @@ Azure Portal의 **Azure Active Directory** > **앱 등록** 영역에서 AAD 앱
 
 다음과 같은 정보를 기록해 둡니다.
 
-* 애플리케이션 ID(클라이언트 ID)(예: `11111111-1111-1111-1111-111111111111`)
-* 디렉터리 ID(테넌트 ID)(예: `22222222-2222-2222-2222-222222222222`)
+* 애플리케이션(클라이언트) ID(예: `41451fa7-82d9-4673-8fa5-69eff5a761fd`)
+* 디렉터리(테넌트) ID(예: `e86c78e2-8bb4-4c41-aefd-918e0565a45e`)
 
 **인증** > **플랫폼 구성** > **웹**에서:
 
@@ -49,13 +50,19 @@ Azure Portal의 **Azure Active Directory** > **앱 등록** 영역에서 AAD 앱
 1. 이 환경에서는 앱의 나머지 기본값을 그대로 사용해도 좋습니다.
 1. **저장** 단추를 선택합니다.
 
-앱을 만듭니다. 다음 명령에서 자리 표시자를 앞에서 기록해 둔 정보로 바꾸고 명령 셸에서 명령을 실행합니다.
+빈 폴더에 앱을 만듭니다. 다음 명령에서 자리 표시자를 앞에서 기록해 둔 정보로 바꾸고 명령 셸에서 명령을 실행합니다.
 
 ```dotnetcli
-dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --tenant-id "{TENANT ID}"
 ```
 
-출력 위치를 지정하려면 명령에 경로와 함께 출력 옵션을 포함합니다(예: `-o BlazorSample`). 출력 위치는 프로젝트 폴더가 존재하지 않는 경우 프로젝트 폴더를 만듭니다. 폴더 이름도 프로젝트 이름의 일부가 됩니다.
+| 자리표시자   | Azure Portal 이름       | 예제                                |
+| ------------- | ----------------------- | -------------------------------------- |
+| `{APP NAME}`  | &mdash;                 | `BlazorSample`                         |
+| `{CLIENT ID}` | 애플리케이션(클라이언트) ID | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{TENANT ID}` | 디렉터리(테넌트) ID   | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
+
+`-o|--output` 옵션으로 지정된 출력 위치는 프로젝트 폴더가 없는 경우 폴더를 하나 만들고 앱 이름의 일부가 됩니다.
 
 > [!NOTE]
 > Azure Portal에서 앱의 **인증** > **플랫폼 구성** > **웹** > **리디렉션 URI**는 Kestrel 서버에서 기본 설정으로 실행되는 앱의 경우 포트 5001로 구성됩니다.

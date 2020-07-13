@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 08efb79f5085acff455744e46ca411777b2641e5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: caf9e99bcd4a1887fe5d69a3641fabee08573ef1
+ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406162"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86093310"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
@@ -104,7 +104,7 @@ gRPC는 다음과 같은 시나리오에 적합합니다.
 gRPC-웹에서 모든 gRPC 기능을 지원하지는 않습니다. 클라이언트 및 양방향 스트리밍이 지원되지 않으며 서버 스트리밍이 제한적으로 지원됩니다.
 
 > [!TIP]
-> .NET Core는 gRPC-Web에 대한 실험적인 지원을 제공합니다. 자세한 내용은 <xref:grpc/browser>를 참조하세요.
+> .NET Core는 gRPC-Web을 지원합니다. 자세한 내용은 <xref:grpc/browser>를 참조하세요.
 
 ### <a name="not-human-readable"></a>사람이 읽을 수 없음
 

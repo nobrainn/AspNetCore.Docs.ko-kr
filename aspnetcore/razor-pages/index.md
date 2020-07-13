@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 73af74c2cf65ec5e644af89c300ffa108825fb2e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e22d76be26a892fd9e5ba91ae36f8d105060e190
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404693"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213146"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor Pages 소개
 
@@ -71,7 +71,7 @@ Razor Pages 프로젝트를 만드는 방법에 대한 자세한 내용은 [Razo
 
 Razor Pages는 *Startup.cs*에서 사용할 수 있게 설정됩니다.
 
-[!code-cs[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
+[!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
 기본적인 페이지를 살펴보겠습니다. <a name="OnGet"></a>
 
@@ -85,7 +85,7 @@ Razor Pages는 *Startup.cs*에서 사용할 수 있게 설정됩니다.
 
 *Pages/Index2.cshtml.cs* 페이지 모델은 다음과 같습니다.
 
-[!code-cs[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
 규칙에 따라 `PageModel` 클래스 파일의 이름은 *.cs*가 추가된 Razor Page 파일의 이름과 동일합니다. 예를 들어 위의 Razor Page는 *Pages/Index2.cshtml*입니다. 그리고 `PageModel` 클래스가 포함된 파일의 이름은 *Pages/Index2.cshtml.cs*입니다.
 
@@ -109,15 +109,15 @@ Razor Pages는 앱을 만들 때 웹 브라우저에서 사용되는 일반적�
 
 이 문서의 예제에서 `DbContext`는 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) 파일에서 초기화됩니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
 
 데이터 모델은 다음과 같습니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
 
 db 컨텍스트는 다음과 같습니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Data/CustomerDbContext.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Data/CustomerDbContext.cs)]
 
 *Pages/Create.cshtml* 뷰 파일은 다음과 같습니다.
 
@@ -125,7 +125,7 @@ db 컨텍스트는 다음과 같습니다.
 
 *Pages/Create.cshtml.cs* 페이지 모델은 다음과 같습니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_ALL)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_ALL)]
 
 규약에 따라 `PageModel` 클래스의 이름은 `<PageName>Model`로 지정하며 페이지와 동일한 네임스페이스에 위치합니다.
 
@@ -148,7 +148,7 @@ db 컨텍스트는 다음과 같습니다.
 
 기존 `OnPostAsync` 메서드는 다음과 같습니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
 그리고 `OnPostAsync`의 기본적인 흐름은 다음과 같습니다.
 
@@ -180,7 +180,7 @@ db 컨텍스트는 다음과 같습니다.
   * `OnPostAsync` 처리기 메서드는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> 도우미 메서드를 호출합니다. `Page`는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult>의 인스턴스를 반환합니다. `Page`를 반환하는 것은 컨트롤의 액션에서 `View`를 반환하는 것과 비슷합니다. `PageResult`는 처리기 메서드의 기본 반환 형식입니다. `void`를 반환하는 처리기 메서드는 페이지를 렌더링합니다.
   * 앞의 예제에서 값이 없는 양식을 게시하면 false를 반환하는 [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid)를 반환합니다. 이 샘플에서는 클라이언트에 유효성 검사 오류가 표시되지 않습니다. 유효성 검사 오류 처리는 이 문서의 뒷부분에 설명되어 있습니다.
 
-  [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
+  [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
 * 클라이언트 쪽 유효성 검사에서 검색된 유효성 검사 오류 포함:
 
@@ -189,7 +189,7 @@ db 컨텍스트는 다음과 같습니다.
 
 `Customer` 속성은 [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 특성을 이용하여 모델 바인딩에 옵트인(opt in)합니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
 
 클라이언트에서 변경하면 안 되는 속성을 포함하는 모델에서는 `[BindProperty]`를 사용하지 **않아야** 합니다. 자세한 내용은 [초과 게시](xref:data/ef-rp/crud#overposting)를 참조하세요.
 
@@ -212,7 +212,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 연결된 `PageModel` 클래스(*Index.cshtml.cs*)는 다음과 같습니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
 
 *Index.cshtml* 파일은 다음 변경 내용을 포함합니다.
 
@@ -239,7 +239,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 이번 예제에서는 `handler`가 `delete`이므로 `POST` 요청을 처리하기 위해 `OnPostDeleteAsync` 처리기 메서드가 사용됩니다. `asp-page-handler`가 `remove` 같은 다른 값으로 설정되면 `OnPostRemoveAsync`라는 이름의 처리기 메서드가 선택됩니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet2)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet2)]
 
 `OnPostDeleteAsync` 메서드는 다음 작업을 수행합니다.
 
@@ -260,7 +260,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 *Edit.cshtml.cs* 파일:
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet)]
 
 ## <a name="validation"></a>유효성 검사
 
@@ -273,7 +273,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 `Customer` 모델 고려:
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
 
 다음 *Create.cshtml* 뷰파일 사용:
 
@@ -334,7 +334,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 일반적으로 `HEAD` 요청에 대한 `OnHead` 처리기를 만들고 호출합니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
 정의된 `OnHead` 처리기가 없다면 Razor Pages가 `OnGet` 처리기 호출로 대체합니다.
 
@@ -394,7 +394,7 @@ Razor Page의 뷰 검색에는 *Pages* 폴더가 포함됩니다. MVC 컨트롤�
 
 예를 들어 `PageModel` 클래스 *Pages/Customers/Edit.cshtml.cs*는 네임스페이스를 명시적으로 설정합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
 
 *Pages/_ViewImports.cshtml* 파일에서는 다음과 같이 네임스페이스를 설정합니다.
 
@@ -424,7 +424,7 @@ Razor Page의 뷰 검색에는 *Pages* 폴더가 포함됩니다. MVC 컨트롤�
 
 앞에서 살펴본 `Create` 페이지는 `RedirectToPage`를 사용합니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=28)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=28)]
 
 예제 앱은 다음과 같은 파일/폴더 구조를 갖고 있습니다.
 
@@ -518,7 +518,7 @@ ASP.NET Core는 <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>를 노출합
 
 다음 코드는 `TempData`를 사용하여 `Message`의 값을 설정합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
 
 *Pages/Customers/Index.cshtml* 파일의 다음 태그는 `TempData`를 사용하여 `Message` 값을 출력합니다.
 
@@ -547,7 +547,7 @@ public string Message { get; set; }
 
 페이지 모델은 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
 이 코드는 *명명된 처리기 메서드*를 사용합니다. 명명된 처리기 메서드는 `On<HTTP Verb>` 뒤와 `Async`(있는 경우) 앞에 이름의 텍스트를 결합해서 만들어집니다. 위의 예제에서 페이지 메서드는 OnPost**JoinList**Async와 OnPost**JoinListUC**Async입니다. *OnPost* 및 *Async*가 제거된 처리기 이름은 `JoinList`와 `JoinListUC`입니다.
 
@@ -579,7 +579,7 @@ URL에서 쿼리 문자열 `?handler=JoinList`를 사용하지 않으려면 경�
 
 고급 옵션을 구성하려면 확장 메서드 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 사용합니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/StartupRPoptions.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/StartupRPoptions.cs?name=snippet)]
 
 <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions>를 사용하여 페이지의 루트 디렉터리를 설정하거나 페이지에 대한 애플리케이션 모델 규칙을 추가할 수 있습니다. 규칙에 대한 자세한 내용은 [Razor Pages 권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 참조하세요.
 
@@ -589,13 +589,13 @@ URL에서 쿼리 문자열 `?handler=JoinList`를 사용하지 않으려면 경�
 
 기본적으로 Razor Pages의 루트 경로는 */Pages* 디렉터리입니다. <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*>를 추가하여 Razor Pages가 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)(<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>)가 되도록 지정합니다.
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
 ### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Razor Pages가 사용자 지정 루트 디렉터리에 있도록 지정
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*>를 추가하여 Razor Pages가 앱의 사용자 지정 루트 디렉터리에 있도록 지정합니다(상대 경로 제공).
 
-[!code-cs[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesRoot.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesRoot.cs?name=snippet)]
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -664,7 +664,7 @@ Mac용 Visual Studio에서 생성된 *.csproj* 파일을 엽니다.
 
 Razor Pages는 *Startup.cs*에서 사용할 수 있게 설정됩니다.
 
-[!code-cs[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
+[!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
 기본적인 페이지를 살펴보겠습니다. <a name="OnGet"></a>
 
@@ -678,7 +678,7 @@ Razor Pages는 *Startup.cs*에서 사용할 수 있게 설정됩니다.
 
 *Pages/Index2.cshtml.cs* 페이지 모델은 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
+[!code-csharp[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
 규칙에 따라 `PageModel` 클래스 파일의 이름은 *.cs*가 추가된 Razor Page 파일의 이름과 동일합니다. 예를 들어 위의 Razor Page는 *Pages/Index2.cshtml*입니다. 그리고 `PageModel` 클래스가 포함된 파일의 이름은 *Pages/Index2.cshtml.cs*입니다.
 
@@ -702,15 +702,15 @@ Razor Pages는 앱을 만들 때 웹 브라우저에서 사용되는 일반적�
 
 이 문서의 예제에서 `DbContext`는 [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) 파일에서 초기화됩니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Startup.cs?highlight=15-16)]
+[!code-csharp[](index/sample/RazorPagesContacts/Startup.cs?highlight=15-16)]
 
 데이터 모델은 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Data/Customer.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Data/Customer.cs)]
 
 db 컨텍스트는 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Data/AppDbContext.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Data/AppDbContext.cs)]
 
 *Pages/Create.cshtml* 뷰 파일은 다음과 같습니다.
 
@@ -718,7 +718,7 @@ db 컨텍스트는 다음과 같습니다.
 
 *Pages/Create.cshtml.cs* 페이지 모델은 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_ALL)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_ALL)]
 
 규약에 따라 `PageModel` 클래스의 이름은 `<PageName>Model`로 지정하며 페이지와 동일한 네임스페이스에 위치합니다.
 
@@ -741,7 +741,7 @@ db 컨텍스트는 다음과 같습니다.
 
 기존 `OnPostAsync` 메서드는 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
 그리고 `OnPostAsync`의 기본적인 흐름은 다음과 같습니다.
 
@@ -756,7 +756,7 @@ db 컨텍스트는 다음과 같습니다.
 
 `Customer` 속성은 `[BindProperty]` 특성을 이용해서 모델 바인딩 대상으로 명시적으로 지정(opt in)합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
 Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인딩합니다. 속성을 바인딩하면 작성해야 하는 코드의 양을 줄일 수 있습니다. 바인딩은 양식 필드 렌더링할 때와 (`<input asp-for="Customer.Name">`) 입력을 받아들일 때 동일한 속성을 사용하여 코드를 줄입니다.
 
@@ -768,7 +768,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 연결된 `PageModel` 클래스(*Index.cshtml.cs*)는 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs)]
 
 *Index.cshtml* 파일에는 각 연락처에 대한 편집 링크를 만들기 위한 다음의 태그가 포함되어 있습니다.
 
@@ -788,7 +788,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 *Pages/Edit.cshtml.cs* 파일은 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Edit.cshtml.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Edit.cshtml.cs)]
 
 또한 *Index.cshtml* 파일에는 각 고객 연락처에 대한 삭제 버튼을 만들기 위한 태그가 포함되어 있습니다.
 
@@ -809,7 +809,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 이번 예제에서는 `handler`가 `delete`이므로 `POST` 요청을 처리하기 위해 `OnPostDeleteAsync` 처리기 메서드가 사용됩니다. `asp-page-handler`가 `remove` 같은 다른 값으로 설정되면 `OnPostRemoveAsync`라는 이름의 처리기 메서드가 선택됩니다. 다음은 `OnPostDeleteAsync` 처리기를 보여 주는 코드입니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs?range=26-37)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs?range=26-37)]
 
 `OnPostDeleteAsync` 메서드는 다음 작업을 수행합니다.
 
@@ -822,7 +822,7 @@ Razor Pages는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인
 
 `PageModel`의 속성에는 [필수](/dotnet/api/system.componentmodel.dataannotations.requiredattribute) 특성을 적용할 수 있습니다.
 
-[!code-cs[](index/sample/Create.cshtml.cs?highlight=3,15-16)]
+[!code-csharp[](index/sample/Create.cshtml.cs?highlight=3,15-16)]
 
 자세한 내용은 [모델 유효성 검사](xref:mvc/models/validation)를 참조하세요.
 
@@ -913,7 +913,7 @@ Razor Page의 뷰 검색에는 *Pages* 폴더가 포함됩니다. MVC 컨트롤�
 
 예를 들어 `PageModel` 클래스 *Pages/Customers/Edit.cshtml.cs*는 네임스페이스를 명시적으로 설정합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
 
 *Pages/_ViewImports.cshtml* 파일에서는 다음과 같이 네임스페이스를 설정합니다.
 
@@ -941,7 +941,7 @@ Razor Page의 뷰 검색에는 *Pages* 폴더가 포함됩니다. MVC 컨트롤�
 
 앞에서 살펴본 `Create` 페이지는 `RedirectToPage`를 사용합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=10)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=10)]
 
 예제 앱은 다음과 같은 파일/폴더 구조를 갖고 있습니다.
 
@@ -1023,7 +1023,7 @@ ASP.NET Core는 [컨트롤러](/dotnet/api/microsoft.aspnetcore.mvc.controller)�
 
 다음 코드는 `TempData`를 사용하여 `Message`의 값을 설정합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
 
 *Pages/Customers/Index.cshtml* 파일의 다음 태그는 `TempData`를 사용하여 `Message` 값을 출력합니다.
 
@@ -1054,7 +1054,7 @@ public string Message { get; set; }
 
 페이지 모델은 다음과 같습니다.
 
-[!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
 이 코드는 *명명된 처리기 메서드*를 사용합니다. 명명된 처리기 메서드는 `On<HTTP Verb>` 뒤와 `Async`(있는 경우) 앞에 이름의 텍스트를 결합해서 만들어집니다. 위의 예제에서 페이지 메서드는 OnPost**JoinList**Async와 OnPost**JoinListUC**Async입니다. *OnPost* 및 *Async*가 제거된 처리기 이름은 `JoinList`와 `JoinListUC`입니다.
 
@@ -1084,7 +1084,7 @@ URL에서 쿼리 문자열 `?handler=JoinList`를 사용하지 않으려면 경�
 
 고급 옵션을 구성하려면 MVC 빌더에서 확장 메서드 `AddRazorPagesOptions`를 사용합니다.
 
-[!code-cs[](index/sample/RazorPagesContacts/StartupAdvanced.cs?name=snippet_1)]
+[!code-csharp[](index/sample/RazorPagesContacts/StartupAdvanced.cs?name=snippet_1)]
 
 현재 `RazorPagesOptions`를 사용하여 페이지의 루트 디렉터리를 설정하거나 페이지에 대한 애플리케이션 모델 규칙을 추가할 수 있습니다. 앞으로 이 방식으로 더 많은 확장성을 지원할 예정입니다.
 

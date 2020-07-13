@@ -5,7 +5,7 @@ description: 이벤트 인수 형식, 이벤트 콜백, 기본 브라우저 이�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 2fce394202be5df9af67e8afca27a0914f410402
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f15f7e0fc7ef460cefffd817a7d0fa40c1f919b2
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399038"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059801"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor 이벤트 처리
 
@@ -182,7 +183,7 @@ private void ShowMessage(MouseEventArgs e)
 * `ParentComponent`의 `ShowMessage` 메서드가 호출됩니다. `messageText`가 업데이트되고 `ParentComponent`에 표시됩니다.
 * [`StateHasChanged`](xref:blazor/components/lifecycle#state-changes) 호출은 콜백의 메서드(`ShowMessage`)에 필요하지 않습니다. 자식 이벤트가 자식 내에서 실행되는 이벤트 처리기에서 다시 렌더링되는 구성 요소를 트리거하는 것처럼 `ParentComponent`를 다시 렌더링하기 위해 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>가 자동으로 호출됩니다.
 
-<xref:Microsoft.AspNetCore.Components.EventCallback> 및 <xref:Microsoft.AspNetCore.Components.EventCallback%601>는 비동기 대리자를 허용합니다. <xref:Microsoft.AspNetCore.Components.EventCallback%601>는 강력한 형식으로, 특정 인수 형식이 필요합니다. <xref:Microsoft.AspNetCore.Components.EventCallback>은 약한 형식으로, 모든 인수 형식을 허용합니다.
+<xref:Microsoft.AspNetCore.Components.EventCallback> 및 <xref:Microsoft.AspNetCore.Components.EventCallback%601>는 비동기 대리자를 허용합니다. <xref:Microsoft.AspNetCore.Components.EventCallback>은 약한 형식이며 `InvokeAsync(Object)`에서 모든 형식 인수를 전달할 수 있습니다. <xref:Microsoft.AspNetCore.Components.EventCallback%601>은 강력한 형식이며 `InvokeAsync(T)`에서 `TValue`에 할당할 수 있는 `T` 인수를 전달해야 합니다.
 
 ```razor
 <ChildComponent 
@@ -228,8 +229,6 @@ await OnClickCallback.InvokeAsync(arg);
 ```razor
 <input @onkeypress:preventDefault="shouldPreventDefault" />
 ```
-
-기본 작업을 방지하기 위해 이벤트 처리기가 필요하지는 않습니다. 이벤트 처리기와 기본 작업 시나리오를 독립적으로 사용할 수 있습니다.
 
 ## <a name="stop-event-propagation"></a>이벤트 전파 중지
 

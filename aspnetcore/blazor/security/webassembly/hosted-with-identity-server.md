@@ -5,7 +5,7 @@ description: '[IdentityServer](https://identityserver.io/) 백엔드를 사용�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 001fa0885c4ef4f365d9849278d3aa36e7657c54
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402210"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147726"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Identity 서버를 사용하여 ASP.NET Core Blazor WebAssembly 호스트된 앱 보호
 
@@ -29,23 +30,39 @@ ms.locfileid: "85402210"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio에서 다음을 수행합니다.
+인증 메커니즘을 사용하여 새 Blazor WebAssembly 프로젝트를 만들려면
 
-1. 새 **Blazor WebAssembly** 앱을 만듭니다. 자세한 내용은 <xref:blazor/get-started>를 참조하세요.
-1. **새 Blazor 앱 만들기** 대화 상자의 **인증** 섹션에서 **변경**을 선택합니다.
-1. **개별 사용자 계정**을 선택하고 **확인**을 선택합니다.
+1. **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor WebAssembly 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.
+
+1. **개별 사용자 계정**을 **사용자 계정 앱 내 저장** 옵션과 함께 선택하여 ASP.NET Core의 [Identity](xref:security/authentication/identity) 시스템을 사용해 앱 내에 사용자를 저장합니다.
+
 1. **고급**  섹션에서 **ASP.NET Core 호스트형** 확인란을 선택합니다.
-1. **만들기** 단추를 선택합니다.
 
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+# <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code/.NET Core CLI](#tab/visual-studio-code+netcore-cli)
 
-명령 셸에서 앱을 만들려면 다음 명령을 실행합니다.
+인증 메커니즘을 사용하여 빈 폴더에 새 Blazor WebAssembly 프로젝트를 만들려면 `-au|--auth` 옵션으로 `Individual` 인증 메커니즘을 지정하여 ASP.NET Core의 [Identity](xref:security/authentication/identity) 시스템을 사용해 앱 내에 사용자를 저장합니다.
 
 ```dotnetcli
-dotnet new blazorwasm -au Individual -ho
+dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 ```
 
-출력 위치를 지정하려면 명령에 경로와 함께 출력 옵션을 포함합니다(예: `-o BlazorSample`). 출력 위치는 프로젝트 폴더가 존재하지 않는 경우 프로젝트 폴더를 만듭니다. 폴더 이름도 프로젝트 이름의 일부가 됩니다.
+| 자리표시자  | 예제        |
+| ------------ | -------------- |
+| `{APP NAME}` | `BlazorSample` |
+
+`-o|--output` 옵션으로 지정된 출력 위치는 프로젝트 폴더가 없는 경우 폴더를 하나 만들고 앱 이름의 일부가 됩니다.
+
+자세한 내용은 .NET Core 가이드의 [`dotnet new`](/dotnet/core/tools/dotnet-new) 명령을 참조하세요.
+
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+
+인증 메커니즘을 사용하여 새 Blazor WebAssembly 프로젝트를 만들려면
+
+1. **새 Blazor WebAssembly 앱 구성** 단계의 **인증** 드롭다운에서 **개별 인증(앱 내)** 을 선택합니다.
+
+1. ASP.NET Core [Identity](xref:security/authentication/identity)를 사용하여 앱에 저장된 개별 사용자에 대한 앱이 만들어집니다.
+
+1. **ASP.NET Core 호스트형** 확인란을 선택합니다.
 
 ---
 

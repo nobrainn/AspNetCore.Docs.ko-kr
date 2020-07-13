@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408879"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147784"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly와 함께 ASP.NET Core SignalR 사용
 
@@ -103,14 +104,7 @@ ms.locfileid: "85408879"
 
 1. **Blazor WebAssembly 앱** 템플릿을 선택합니다. **새로 만들기**를 선택합니다.
 
-   다음 구성을 확인합니다.
-
-   * **대상 프레임워크**가 **.NET Core 3.1**로 설정되어 있는지
-   * **인증**이 **인증 안 함**으로 설정되어 있는지
-
-   **ASP.NET Core에서 호스트** 확인란을 선택합니다.
-
-   **새로 만들기**를 선택합니다.
+1. **인증**이 **인증 없음**으로 설정되었는지 확인합니다. **ASP.NET Core에서 호스트** 확인란을 선택합니다. **새로 만들기**를 선택합니다.
 
 1. **프로젝트 이름** 필드에서 앱 이름을 `BlazorSignalRApp`로 지정합니다. **만들기**를 선택합니다.
 

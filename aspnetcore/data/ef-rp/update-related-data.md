@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b084404a7fdd8b2fc18c407bd11705ccd1c496c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406305"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060139"
 ---
 # <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>7부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 관련 데이터 업데이트
 
@@ -158,7 +158,7 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 `InstructorCoursesPageModel`은 편집 및 만들기 페이지 모델에 사용하는 기본 클래스입니다. `PopulateAssignedCourseData`는 `AssignedCourseDataList`를 채우도록 모든 `Course` 엔터티를 읽습니다. 각 강좌의 경우 코드는 `CourseID`, 제목 및 강사가 강좌에 할당되었는지 여부를 설정합니다. [HashSet](/dotnet/api/system.collections.generic.hashset-1)는 효율적인 조회를 위해 사용됩니다.
 
-Razor 페이지에는 과정 엔터티의 컬렉션이 없으므로 모델 바인더는 `CourseAssignments` 탐색 속성을 자동으로 업데이트할 수 없습니다. `CourseAssignments` 탐색 속성을 업데이트하는 데 모델 바인더를 사용하는 대신 새 `UpdateInstructorCourses` 메서드에서 해당 작업을 수행합니다. 따라서 모델 바인딩에서 `CourseAssignments` 속성을 제외해야 합니다. 허용 목록 오버로드를 사용하고 있으며 `CourseAssignments`는 포함 목록에 있지 않으므로 `TryUpdateModel`을 호출하는 코드에 변경 내용을 만들 필요가 없습니다.
+Razor 페이지에는 과정 엔터티의 컬렉션이 없으므로 모델 바인더는 `CourseAssignments` 탐색 속성을 자동으로 업데이트할 수 없습니다. `CourseAssignments` 탐색 속성을 업데이트하는 데 모델 바인더를 사용하는 대신 새 `UpdateInstructorCourses` 메서드에서 해당 작업을 수행합니다. 따라서 모델 바인딩에서 `CourseAssignments` 속성을 제외해야 합니다. 선언된 속성을 포함하는 오버로드를 사용 중이고 `CourseAssignments`가 포함 목록에 있지 않으므로 `TryUpdateModel`을 호출하는 코드를 변경할 필요가 없습니다.
 
 확인란이 선택되지 않은 경우 `UpdateInstructorCourses`의 코드는 빈 컬렉션으로 `CourseAssignments` 탐색 속성을 초기화하고 다음을 반환합니다.
 

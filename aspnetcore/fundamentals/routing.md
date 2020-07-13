@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 7ac6dc983454153792610a07c1df01fbc38c8d67
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400832"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060347"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -1437,25 +1437,25 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
 | 제약 조건 | 예제 | 일치하는 예제 | 참고 |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
-| `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false와 일치. 대/소문자 구분하지 않음 |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
+|------------|---------|-----------------|-------|
+| `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치|
+| `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false`와 일치. 대/소문자 구분하지 않음|
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | 유효한 `DateTime` 값 일치(고정 문화권에서) 위의 경고를 참조하세요.|
 | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | 유효한 `decimal` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | 유효한 `double` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
 | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | 유효한 `float` 값 일치(고정 문화권에서) 이전 경고를 참조하세요.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 유효한 `Guid` 값과 일치 |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | 유효한 `long` 값과 일치 |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | 문자열은 4자 이상이어야 합니다. |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | 문자열의 최대 크기는 8자입니다. |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | 문자열은 정확히 12자여야 합니다. |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | 문자열은 8자 이상이어야 하며 최대 16자여야 합니다. |
-| `min(value)` | `{age:min(18)}` | `19` | 정수 값은 18 이상이어야 합니다. |
-| `max(value)` | `{age:max(120)}` | `91` | 정수 값의 최댓값은 120입니다. |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | 정수 값은 18 이상이고 최대값은 120이어야 합니다. |
-| `alpha` | `{name:alpha}` | `Rick` | 문자열은 하나 이상의 영문자(`a`-`z`)로 구성되어야 합니다.  대/소문자 구분하지 않음 |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | 문자열은 정규식과 일치해야 합니다. 정규식을 정의하는 방법에 대한 팁을 참조하세요. |
-| `required` | `{name:required}` | `Rick` | URL을 생성하는 동안 비-매개 변수 값이 존재하도록 강제하는 데 사용됨 |
+| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 유효한 `Guid` 값과 일치|
+| `long` | `{ticks:long}` | `123456789`, `-123456789` | 유효한 `long` 값과 일치|
+| `minlength(value)` | `{username:minlength(4)}` | `Rick` | 문자열은 4자 이상이어야 합니다.|
+| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | 문자열의 최대 크기는 8자입니다.|
+| `length(length)` | `{filename:length(12)}` | `somefile.txt` | 문자열은 정확히 12자여야 합니다.|
+| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | 문자열은 8자 이상이어야 하며 최대 16자여야 합니다.|
+| `min(value)` | `{age:min(18)}` | `19` | 정수 값은 18 이상이어야 합니다.|
+| `max(value)` | `{age:max(120)}` | `91` | 정수 값의 최댓값은 120입니다.|
+| `range(min,max)` | `{age:range(18,120)}` | `91` | 정수 값은 18 이상이고 최대값은 120이어야 합니다.|
+| `alpha` | `{name:alpha}` | `Rick` | 문자열은 하나 이상의 영문자(`a`-`z`)로 구성되어야 합니다. 대/소문자 구분하지 않음|
+| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | 문자열은 정규식과 일치해야 합니다. 정규식을 정의하는 방법에 대한 팁을 참조하세요.|
+| `required` | `{name:required}` | `Rick` | URL을 생성하는 동안 비-매개 변수 값이 존재하도록 강제하는 데 사용됨|
 
 콜론으로 구분된 여러 개의 제약 조건을 단일 매개 변수에 적용할 수 있습니다. 예를 들어 다음 제약 조건은 매개 변수를 1 이상의 정수 값으로 제한합니다.
 

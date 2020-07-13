@@ -5,7 +5,7 @@ description: CORS(원본 간 리소스 공유) 요청 만들기를 포함하여 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/24/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 2d910def31e4035c1d9cbacb3aaa721dd699c273
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9c90e2a6c03e02b771cfa8f589e381d52637dc26
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400753"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147640"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 웹 API 호출
 
@@ -157,7 +158,7 @@ JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고
   <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다. 응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 확장 메서드를 사용합니다.
   
   ```csharp
-  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 <xref:System.Net.Http>는 HTTP 요청을 보내고 HTTP 응답을 받기 위한 추가 확장 메서드를 포함합니다. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>는 웹 API에 HTTP DELETE 요청을 보내는 데 사용됩니다.
@@ -313,7 +314,9 @@ protected override async Task OnInitializedAsync()
 
 [Blazor WebAssembly 샘플 앱(BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)은 웹 API 호출 구성 요소(`Pages/CallWebAPI.razor`)에서 CORS를 사용하는 방법을 보여 줍니다.
 
-다른 사이트에서 앱에 대해 CORS(원본 간 리소스 공유) 요청을 수행하도록 허용하려면 <xref:security/cors>를 참조하세요.
+Blazor 앱에서 보안 요청을 포함하는 CORS에 대한 자세한 내용은 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors>을 참조하세요.
+
+ASP.NET Core 앱을 사용하는 CORS에 대한 일반 정보는 <xref:security/cors>을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

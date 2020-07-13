@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 3fdea9f553cbd37f2c27740487cfe030ebd81937
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402093"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176150"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보호
 
@@ -55,6 +55,18 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 * Blazor WebAssembly 앱이 로그인 콜백 엔드포인트(`/authentication/login-callback`)를 로드하면 인증 응답이 처리됩니다.
   * 인증 프로세스가 완료되면 사용자는 인증되고 필요에 따라 사용자가 요청한 원래의 보호된 URL로 다시 돌아갑니다.
   * 어떤 이유로든 인증 프로세스가 실패하는 경우 사용자는 로그인 실패 페이지(`/authentication/login-failed`)로 보내지고 오류가 표시됩니다.
+
+## <a name="authentication-component"></a>`Authentication` 구성 요소
+
+`Authentication` 구성 요소(`Pages/Authentication.razor`)는 원격 인증 작업을 처리하고 앱이 다음 작업을 수행하도록 허용합니다.
+
+* 인증 상태에 대한 앱 경로를 구성합니다.
+* 인증 상태에 대한 UI 콘텐츠를 설정합니다.
+* 인증 상태를 관리합니다.
+
+사용자 등록 또는 로그인 같은 인증 작업은 인증 작업 간에 상태를 유지하고 제어하는, Blazor 프레임워크의 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore%601> 구성 요소에 전달됩니다.
+
+자세한 내용과 예제를 보려면 <xref:blazor/security/webassembly/additional-scenarios>을 참조하십시오.
 
 ## <a name="authorization"></a>권한 부여
 

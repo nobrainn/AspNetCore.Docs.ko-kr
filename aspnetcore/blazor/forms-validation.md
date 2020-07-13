@@ -5,7 +5,7 @@ description: Blazor에서 양식 및 필드 유효성 검사 시나리오를 사
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 1ed87b4aa2519334d2339b500a615aa96ef4d57d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402964"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059866"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 양식 및 유효성 검사
 
@@ -302,7 +302,7 @@ public class Starship
 }
 ```
 
-## <a name="work-with-radio-buttons"></a>라디오 단추 작업
+## <a name="radio-buttons"></a>라디오 단추
 
 양식에서 라디오 단추를 사용하는 경우, 라디오 단추는 그룹으로 평가되기 때문에 데이터 바인딩이 다른 요소와 다르게 처리됩니다. 각 라디오 단추의 값은 고정되어 있지만 라디오 단추 그룹의 값은 선택한 라디오 단추의 값입니다. 아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.
 
@@ -390,6 +390,30 @@ public class Starship
 }
 ```
 
+## <a name="binding-select-element-options-to-c-object-null-values"></a>C# 개체 `null` 값에 `<select>` 요소 옵션 바인딩
+
+다음과 같은 이유로 `<select>` 요소 옵션 값을 C# 개체 `null` 값으로 나타낼 수 있는 적절한 방법은 없습니다.
+
+* HTML 특성에는 `null` 값을 사용할 수 없습니다. HTML에서 `null`에 가장 근사한 값은 `<option>` 요소에서 HTML `value` 특성이 없는 상태입니다.
+* `value` 특성이 없는 `<option>`을 선택하면 브라우저가 해당 `<option>` 요소의 텍스트 내용을 값으로 처리합니다.
+
+Blazor 프레임워크는 기본 동작에 다음을 포함하므로 기본 동작을 억제하려고 시도하지 않습니다.
+
+* 프레임워크에서 일련의 특수 경우 해결 방법 만들기
+* 현재 프레임워크 동작에 대한 호환성이 손상되는 변경
+
+::: moniker range=">= aspnetcore-5.0"
+
+HTML에서 가장 타당한 `null` 근사값은 빈 문자열 `value`입니다. Blazor 프레임워크는 `<select>`의 값에 대한 양방향 바인딩을 위해 `null`을 빈 문자열 변환으로 처리합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Blazor 프레임워크는 `<select>`의 값에 대한 양방향 바인딩을 시도할 때 자동으로 `null`을 빈 문자열 변환으로 처리하지 않습니다. 자세한 내용은 [Null 값에 대한 `<select>` 바인딩 수정(dotnet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221)을 참조하세요.
+
+::: moniker-end
+
 ## <a name="validation-support"></a>유효성 검사 지원
 
 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> 구성 요소는 데이터 주석을 사용하여 유효성 검사 지원을 계단식 <xref:Microsoft.AspNetCore.Components.Forms.EditContext>에 연결합니다. 데이터 주석을 통해 유효성 검사 지원을 사용하도록 설정하려면 이 명시적 제스처가 필요합니다. 데이터 주석이 아닌 다른 유효성 검사 시스템을 사용하려면 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>를 사용자 지정 구현으로 바꿉니다. 참조 원본 [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs)에서 ASP.NET Core 구현을 검사할 수 있습니다. 위의 참조 원본 링크에서는 ASP.NET Core의 향후 릴리스를 위한 제품 단위의 최신 개발을 나타내는 리포지토리 `master` 분기의 코드를 제공합니다. 다른 릴리스의 분기를 선택하려면 GitHub 분기 선택기를 사용합니다(예: `release/3.1`).
@@ -421,6 +445,14 @@ Blazor는 다음 두 가지 유형의 유효성 검사를 수행합니다.
 
 <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessage%601> 및 <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> 구성 요소는 임의 특성을 지원합니다. 구성 요소 매개 변수와 일치하지 않는 특성은 생성된 `<div>` 또는 `<ul>` 요소에 추가됩니다.
 
+앱의 스타일 시트(`wwwroot/css/app.css` 또는 `wwwroot/css/site.css`)에서 유효성 검사 메시지 스타일을 제어합니다. 기본 `validation-message` 클래스는 유효성 검사 메시지의 텍스트 색을 빨간색으로 설정합니다.
+
+```css
+.validation-message {
+    color: red;
+}
+```
+
 ### <a name="custom-validation-attributes"></a>사용자 지정 유효성 검사 특성
 
 [사용자 지정 유효성 검사 특성](xref:mvc/models/validation#custom-attributes)을 사용할 때 유효성 검사 결과가 필드와 올바르게 연결되도록 하려면 <xref:System.ComponentModel.DataAnnotations.ValidationResult>를 만들 때 유효성 검사 컨텍스트의 <xref:System.ComponentModel.DataAnnotations.ValidationContext.MemberName>을 전달합니다.
@@ -429,7 +461,7 @@ Blazor는 다음 두 가지 유형의 유효성 검사를 수행합니다.
 using System;
 using System.ComponentModel.DataAnnotations;
 
-private class MyCustomValidator : ValidationAttribute
+private class CustomValidator : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, 
         ValidationContext validationContext)
@@ -441,6 +473,9 @@ private class MyCustomValidator : ValidationAttribute
     }
 }
 ```
+
+> [!NOTE]
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType>이(가) `null`인 경우 `IsValid` 메서드에서 유효성 검사를 위한 서비스 삽입은 지원되지 않습니다.
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazor 데이터 주석 유효성 검사 패키지
 
