@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f6ee60bf5e75256a9bf330f56b2f09b06f720a85
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401560"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212801"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>자습서: 동시성 처리 - ASP.NET MVC 및 EF Core 사용
 
@@ -148,7 +148,7 @@ dotnet ef database update
 
 *Views/Departments/Index.cshtml*의 코드를 다음 코드로 바꿉니다.
 
-[!code-html[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
 이는 제목을 "부서"로 변경하고, RowVersion 열을 삭제하고, 관리자의 이름 대신 전체 이름을 표시합니다.
 
@@ -198,7 +198,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 * 드롭다운 목록에 "관리자 선택" 옵션을 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
 ## <a name="test-concurrency-conflicts"></a>동시성 충돌 테스트
 
@@ -258,7 +258,7 @@ public async Task<IActionResult> Delete(Department department)
 
 *Views/Departments/Delete.cshtml*에서 스캐폴드된 코드를 DepartmentID 및 RowVersion 속성에 대해 오류 메시지 필드와 숨겨진 필드를 추가하는 다음 코드로 바꿉니다. 변경 내용은 강조 표시되어 있습니다.
 
-[!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 이렇게 하면 다음이 변경됩니다.
 
@@ -288,11 +288,11 @@ public async Task<IActionResult> Delete(Department department)
 
 *Views/Departments/Details.cshtml*의 코드를 바꿔 RowVersion 열을 삭제하고 관리자의 전체 이름을 표시합니다.
 
-[!code-html[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
 
 *Views/Departments/Create.cshtml*의 코드를 바꿔 드롭다운 목록에 선택 옵션을 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## <a name="get-the-code"></a>코드 가져오기
 

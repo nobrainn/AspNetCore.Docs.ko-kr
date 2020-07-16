@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 45aabc644fbeaeaa31d534877ba93cb0611f3f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 24643931ed84ac257d98ceb8cc6c64d0767cfc14
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401339"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212596"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용
 
@@ -78,7 +78,7 @@ Student 인덱스 페이지에 정렬을 추가하려면 Students 컨트롤러�
 
 *Views/Students/Index.cshtml*에 있는 코드를 다음 코드로 바꾸어 열 제목 하이퍼링크를 추가합니다. 변경된 선이 강조 표시됩니다.
 
-[!code-html[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
 이 코드는 `ViewData` 속성의 정보를 사용하여 하이퍼링크를 적절한 쿼리 문자열 값으로 설정합니다.
 
@@ -107,7 +107,7 @@ Student 인덱스 페이지에 정렬을 추가하려면 Students 컨트롤러�
 
 *Views/Student/Index.cshtml*에서 캡션, 텍스트 상자 및 **검색** 단추를 만들기 위해 여는 테이블 태그 바로 앞에 강조 표시된 코드를 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
 이 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자 및 단추를 추가합니다. 기본적으로는 `<form>` 태그 도우미는 폼 데이터를 POST로 제출합니다. 즉, 매개 변수를 URL에 쿼리 문자열로 전달하지 않고 HTTP 메시지 본문으로 전달합니다. HTTP GET을 지정하면 폼 데이터가 URL에 쿼리 문자열로 전달되고 이를 통해 사용자는 URL을 책갈피로 지정할 수 있습니다. W3C 지침에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
 
@@ -186,7 +186,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 *Views/Students/Index.cshtml*에서 기존 코드를 다음 코드로 바꿉니다. 변경 내용은 강조 표시되어 있습니다.
 
-[!code-html[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
 페이지 맨 위에 `@model` 문은 뷰가 `List<T>` 개체 대신 `PaginatedList<T>` 개체를 가져오는 것을 지정합니다.
 
@@ -250,7 +250,7 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 다음 코드를 사용하여 *Views/Home/About.cshtml* 파일을 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Home/About.cshtml)]
 
 앱을 실행하고 [정보] 페이지로 이동합니다. 각 등록 날짜에 대한 학생 수가 테이블에 표시됩니다.
 

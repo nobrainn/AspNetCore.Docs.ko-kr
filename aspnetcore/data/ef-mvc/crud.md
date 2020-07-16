@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c33ff357ec6b467435325578047ac851a39e533e
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060126"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212720"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -102,11 +102,11 @@ http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 
 *Views/Students/Details.cshtml*을 엽니다. 각 필드는 다음 예제와 같이 `DisplayNameFor` 및 `DisplayFor` 도우미를 사용하여 표시됩니다.
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
 마지막 필드 뒤와 닫기 `</dl>` 태그 바로 앞에 등록의 목록을 표시하도록 다음 코드를 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
 
 코드를 붙여넣은 후 코드 들여쓰기가 잘못된 경우 CTRL-K-D를 눌러 수정합니다.
 
@@ -267,7 +267,7 @@ HttpPost `Delete` 작업 메서드(`DeleteConfirmed`라는)를 실제 삭제 작
 
 *Views/Student/Delete.cshtml*에서 다음 예제와 같이 h2 제목과 h3 제목 사이에 오류 메시지를 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
 앱을 실행하고, **학생** 탭을 선택하고, **삭제** 하이퍼링크를 클릭합니다.
 

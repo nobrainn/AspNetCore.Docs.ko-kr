@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: a22bc9f9156b671d7bf17b56b62e384a60b2568b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b473b8575a870b91d83e5494103d39486ef4fee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405265"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213049"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>6부. ASP.NET Core의 컨트롤러 메서드 및 보기
 
@@ -42,7 +42,7 @@ Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게
 
 **Edit**, **Details** 및 **Delete** 링크는 *Views/Movies/Index.cshtml* 파일의 Core MVC 앵커 태그 도우미에 의해서 생성됩니다.
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
 [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다. 위의 코드에서는 `AnchorTagHelper`가 컨트롤러 작업 메서드 및 경로 ID로부터 HTML `href` 특성 값을 동적으로 생성합니다. 선호하는 브라우저에서 **소스 보기**나 개발자 도구를 사용하여 생성된 태그를 확인합니다. 생성된 HTML의 일부는 다음과 같습니다.
 
@@ -106,7 +106,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 `ValidateAntiForgeryToken` 특성은 [요청 위조 방지](xref:security/anti-request-forgery)를 위해 사용되며 편집 보기 파일(*Views/Movies/Edit.cshtml*)에서 생성된 위조 방지 토큰과 쌍을 이룹니다. 편집 보기 파일은 [Form 태그 도우미](xref:mvc/views/working-with-forms)를 통해서 위조 방지 토큰을 생성합니다.
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
 [Form 태그 도우미](xref:mvc/views/working-with-forms)는 Movies 컨트롤러의 `Edit` 메서드에서 `[ValidateAntiForgeryToken]`가 생성한 위조 방지 토큰과 일치하는 숨겨진 위조 방지 토큰을 생성합니다. 자세한 내용은 [위조 방지 요청](xref:security/anti-request-forgery)을 참조하세요.
 
@@ -116,7 +116,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 스캐폴딩 시스템은 Edit 보기를 만들 때 `Movie` 클래스를 검토하고 클래스의 각 속성에 대해 `<label>` 및 `<input>` 요소를 렌더링하기 위한 코드를 만들었습니다. 다음 예제는 Visual Studio 스캐폴딩 시스템이 생성한 Edit 보기를 보여줍니다.
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
 
 파일의 맨 위에서 보기 템플릿에 `@model MvcMovie.Models.Movie` 문이 지정된 방식을 살펴보세요. `@model MvcMovie.Models.Movie`는 이 보기가 보기 템플릿에 대한 모델로 `Movie` 형식을 기대하고 있음을 지정합니다.
 
