@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 652ee8c4bfe8980eb09246720f9ddf1743021f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 65bf5e6b022699268f9e7e5677ea8632f1a489c7
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399051"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213135"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>7부. ASP.NET Core MVC 앱에 검색 추가
 
@@ -75,7 +75,7 @@ var movies = from m in _context.Movie
 
 *Views/Movies/Index.cshtml* 파일을 열고 아래의 강조 표시된 `<form>` 표시를 추가합니다.
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
 
 이 HTML `<form>` 태그는 [Form 태그 도우미](xref:mvc/views/working-with-forms)를 사용하므로 양식을 제출할 경우 필터 문자열은 영화 컨트롤러의 `Index` 작업에 게시됩니다. 변경 내용을 저장하고 필터를 테스트합니다.
 
@@ -101,7 +101,7 @@ var movies = from m in _context.Movie
 
 검색 매개 변수가 URL이 아닌 요청 본문에 존재하기 때문에 책갈피에 해당 검색 정보를 캡처하거나 다른 사용자와 공유할 수 없습니다. *Views/Movies/Index.cshtml* 파일에서 `HTTP GET` 요청을 지정하여 이 문제를 해결합니다.
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
 이제 검색을 제출하면 URL에 검색 쿼리 문자열이 포함됩니다. `HttpPost Index` 메서드가 존재하더라도 검색은 `HttpGet Index` 작업 메서드로 이동합니다.
 

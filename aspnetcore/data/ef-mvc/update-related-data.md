@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 754ca2f94b1abde30ae650c9c3bcf00499520383
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060061"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212573"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 업데이트 - ASP.NET MVC 및 EF Core 사용
 
@@ -87,19 +87,19 @@ HttpGet `Edit` 메서드는 편집 중인 강좌에 이미 할당되어 있는 �
 
 *Views/Courses/Create.cshtml*에서 **부서** 드롭다운 목록에 "부서 선택" 옵션을 추가하고, **DepartmentID**에서  **부서**로 캡션을 변경하고, 유효성 검사 메시지를 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
 *Views/Courses/Edit.cshtml*에서 부서 필드에 대해 *Create.cshtml*에서 수행한 동일한 변경 내용을 만듭니다.
 
 또한 *Views/Courses/Edit.cshtml*에서 **제목** 필드 전에 강좌 번호 필드를 추가합니다. 강좌 번호는 기본 키이기 때문에 표시되지만 변경될 수 없습니다.
 
-[!code-html[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
 편집 보기에 강좌 번호에 대해 이미 숨겨진 필드(`<input type="hidden">`)가 있습니다. 사용자가 **편집** 페이지에서 **저장**을 클릭할 때 강좌 번호가 게시된 데이터에 삽입되도록 하지 않으므로 `<label>` 태그 도우미를 추가하는 것은 숨겨진 필드에 대한 필요성을 없애지 않습니다.
 
 *Views/Courses/Delete.cshtml*에서 위쪽에 강좌 번호 필드를 추가하고 부서 ID를 부서 이름으로 변경합니다.
 
-[!code-html[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
 *Views/Courses/Details.cshtml*에서 *Delete.cshtml*에 대해 수행한 동일한 변경 내용을 만듭니다.
 
@@ -171,7 +171,7 @@ HttpPost `Edit` 메서드를 다음 코드로 바꿔 사무실 할당 업데이�
 
 *Views/Instructors/Edit.cshtml*에서 **저장** 단추 앞의 끝에 사무실 위치를 편집하기 위해 새 필드를 추가합니다.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
 앱을 실행하고, **강사** 탭을 선택한 다음, 강사에서 **편집**을 클릭합니다. **사무실 위치**를 변경하고 **저장**을 클릭합니다.
 
@@ -235,7 +235,7 @@ HttpPost `Edit` 메서드를 다음 코드로 바꿔 사무실 할당 업데이�
 > [!NOTE]
 > Visual Studio에서 코드를 붙여넣을 때 줄 바꿈이 코드를 중단하는 방식으로 변경될 수 있습니다. 붙여넣은 후 코드가 다르게 보이면 Ctrl+Z를 한 번 눌러 자동 서식 지정을 실행 취소합니다. 여기와 같은 모양이 되도록 줄 바꿈을 수정합니다. 들여쓰기는 완벽할 필요가 없지만 `@:</tr><tr>`, `@:<td>`, `@:</td>` 및 `@:</tr>` 줄은 표시된 것처럼 각각 한 줄에 있어야 합니다. 그렇지 않으면 런타임 오류가 발생합니다. 선택된 새 코드의 블록과 함께 Tab 키를 세 번 눌러 기존 코드와 함께 새 코드를 정렬합니다. 이 문제는 Visual Studio 2019에서 해결되었습니다.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
 이 코드는 세 개의 열이 있는 HTML 테이블을 만듭니다. 각 열은 강좌 번호 및 제목으로 구성된 캡션이 뒤에 오는 확인란입니다. 확인란은 모두 모델 바인더에게 그룹으로 간주된다는 것을 알리는 동일한 이름("selectedCourses")을 갖습니다. 각 확인란의 값 특성은 `CourseID`의 값으로 설정됩니다. 페이지가 게시되면 모델 바인더는 선택된 확인란에 대한 `CourseID` 값으로 구성된 배열을 컨트롤러에 전달합니다.
 
@@ -299,7 +299,7 @@ public ICollection<CourseAssignment> CourseAssignments
 
 *Views/Instructor/Create.cshtml*에서 사무실 위치 텍스트 상자와 제출 단추 전에 강좌에 대한 확인란을 추가합니다. 편집 페이지의 경우와 같이 [Visual Studio에서 붙여넣을 때 코드의 서식을 다시 지정하는 경우 서식 지정을 수정합니다](#notepad).
 
-[!code-html[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 
 앱을 실행하고 강사를 만들어 테스트합니다.
 

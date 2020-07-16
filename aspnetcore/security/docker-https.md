@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: fd2338f433e1651fb974c95b293eaa3fb2009046
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6a83695ff2a9ac7229d1d5086ed13594626476ee
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403107"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407660"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 
@@ -34,7 +34,7 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 
 이 샘플에는 docker [클라이언트](https://www.docker.com/products/docker)의 [docker 17.06](https://docs.docker.com/release-notes/docker-ce) 이상이 필요 합니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>전제 조건
 
 이 문서의 지침 중 일부에는 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 이상이 필요 합니다.
 
@@ -90,7 +90,7 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`는 macOS 및 Windows 에서만 지원 됩니다. 배포판에서 지 원하는 방식으로 Linux에서 인증서를 신뢰 해야 합니다. 브라우저에서 인증서를 신뢰 해야 할 수도 있습니다.
+`dotnet dev-certs https --trust`는 macOS 및 Windows 에서만 지원 됩니다. 배포에서 지원 되는 방식으로 Linux에서 인증서를 신뢰 해야 합니다. 브라우저에서 인증서를 신뢰 해야 할 수도 있습니다.
 
 위의 명령에서을 암호로 바꿉니다 `{ password here }` .
 

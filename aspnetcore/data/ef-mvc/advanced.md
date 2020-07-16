@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 7233d6baf139d2ef362f4e3d1a56cf7f0e2514d2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ebeb581cf79f2d2ab60de7df43d042fa3185cd32
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403120"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212736"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>자습서: 고급 시나리오에 대해 알아보기 - ASP.NET MVC 및 EF Core 사용
 
@@ -105,7 +105,7 @@ Contoso University 관리자가 모든 과정의 학점 수를 변경하는 등 
 
 *Views/Courses/UpdateCourseCredits.cshtml*에서 템플릿 코드를 다음 코드로 바꿉니다.
 
-[!code-html[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
 
 **Courses(과정)** 탭을 선택하여 `UpdateCourseCredits` 메서드를 실행한 후 브라우저의 주소 표시줄에서 URL 끝에 "/UpdateCourseCredits"를 추가합니다(예: `http://localhost:5813/Courses/UpdateCourseCredits`). 텍스트 상자에 숫자를 입력합니다.
 

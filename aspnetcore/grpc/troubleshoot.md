@@ -5,7 +5,7 @@ description: .NET Core에서 gRPC를 사용할 때 발생하는 오류 문제를
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 9a3e7269db04b79146686668879bf47f1a7dd6af
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 385291ec6bb6719a5fade927fa9f599af8c94045
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400039"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176181"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core에서 gRPC 문제 해결
 
@@ -135,13 +135,6 @@ TLS 없이 HTTP/2 엔드포인트를 구성한 경우 엔드포인트의 [Listen
 * gRPC 도구 패키지인 [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)의 패키지 참조
 
 gRPC C# 자산을 생성하는 방법에 대한 자세한 내용은 <xref:grpc/basics>를 참조하세요.
-
-기본적으로 `<Protobuf>` 참조는 구체적인 클라이언트 및 서비스 기본 클래스를 생성합니다. reference 요소의 `GrpcServices` 특성을 사용하여 C# 자산 생성을 제한할 수 있습니다. 유효한 `GrpcServices` 옵션은 다음과 같습니다.
-
-* `Both`(없을 경우 기본값)
-* `Server`
-* `Client`
-* `None`
 
 gRPC 서비스를 호스트하는 ASP.NET Core 웹앱에는 생성된 서비스 기본 클래스만 있으면 됩니다.
 

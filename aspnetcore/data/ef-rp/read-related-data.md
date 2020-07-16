@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 14b28f04f4077cb5622858dad1bd18b81b198f3d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405798"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212660"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>6부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 관련 데이터 읽기
 
@@ -420,7 +420,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 *Pages/Courses/Index.cshtml*을 다음 강조 표시된 내용으로 업데이트합니다.
 
-[!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 스캐폴드 코드에 다음 변경 내용을 적용했습니다.
 
@@ -515,7 +515,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 *Pages/Instructors/Index.cshtml*을 다음 표시로 업데이트합니다.
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
 위의 표시로 다음이 변경됩니다.
 
@@ -595,7 +595,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 다음 태그를 *Pages/Instructors/Index.cshtml* Razor 페이지 끝에 추가합니다.
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
 위의 표시는 강사가 선택된 경우 강사와 관련된 과정의 목록을 표시합니다.
 
@@ -611,7 +611,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 *Pages/Instructors/Index.cshtml*을 업데이트합니다. 다음 표시를 파일 끝에 추가합니다.
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
 이전 표시는 선택한 과정을 등록한 학생의 목록을 표시합니다.
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408606"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212542"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>3부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 정렬, 필터, 페이징
 
@@ -337,7 +337,7 @@ Razor Page에서 열 제목 하이퍼링크를 적절한 쿼리 문자열 값으
 
 *Students/Index.cshtml*의 코드를 다음 강조 표시된 코드로 바꿉니다.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
 위의 코드는
 
@@ -393,7 +393,7 @@ Razor Page에서 열 제목 하이퍼링크를 적절한 쿼리 문자열 값으
 
 *Pages/Students/Index.cshtml*에서 다음 강조 표시된 코드를 추가하여 **검색** 단추와 다양한 크롬을 만듭니다.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
 위의 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자와 단추를 추가합니다. 기본적으로 `<form>` 태그 도우미는 POST로 양식 데이터를 전송합니다. POST를 사용하면 매개 변수가 URL에 없는 HTTP 메시지 본문에 전달됩니다. HTTP GET을 사용하는 경우 양식 데이터가 URL에 쿼리 문자열로 전달됩니다. 사용자는 쿼리 문자열로 데이터를 전달하여 URL을 책갈피로 표시할 수 있습니다. [W3C 지침](https://www.w3.org/2001/tag/doc/whenToUseGet.html)에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
 
@@ -471,15 +471,15 @@ http://localhost:5000/Students?SearchString=an
 
 *Students/Index.cshtml*의 표시를 업데이트합니다. 변경 내용은 강조 표시되어 있습니다.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
 열 제목 링크는 쿼리 문자열을 사용하여 현재 검색 문자열을 `OnGetAsync` 메서드에 전달하므로 사용자가 필터 결과 내에서 정렬할 수 있습니다.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
 
 태그 도우미에 페이징 단추가 표시됩니다.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
 
 앱을 실행하고 학생 페이지로 이동합니다.
 
@@ -525,7 +525,7 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 *Pages/About.cshtml* 파일의 코드를 다음 코드로 바꿉니다.
 
-[!code-html[](intro/samples/cu21/Pages/About.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/About.cshtml)]
 
 앱을 실행하고 정보 페이지로 이동합니다. 각 등록 날짜에 대한 학생 수가 테이블에 표시됩니다.
 

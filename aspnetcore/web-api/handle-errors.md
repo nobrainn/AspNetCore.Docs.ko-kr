@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: f756d9abfb92fd4d6d51d8762967ac2288b54b2a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0abb5e78e1971925c8e741386c65bdf71a0f0072
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405759"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407634"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core 웹 API에서 오류 처리
 
@@ -42,7 +42,7 @@ curl -i https://localhost:5001/weatherforecast/chicago
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 3.0 이전에서 클라이언트가 HTML 형식의 출력을 요청하지 않는 경우 개발자 예외 페이지에 일반 텍스트 응답이 표시됩니다. 다음 출력이 표시됩니다.
+ASP.NET Core 3.0 이전에서 클라이언트가 HTML 형식의 출력을 요청하지 않는 경우 개발자 예외 페이지에 일반 텍스트 응답이 표시됩니다. 다음과 같은 출력이 표시됩니다.
 
 ```console
 HTTP/1.1 500 Internal Server Error
@@ -76,7 +76,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-HTML 형식의 응답을 대신 표시하려면 `Accept` HTTP 요청 헤더를 `text/html` 미디어 유형으로 설정합니다. 예를 들면 다음과 같습니다.
+HTML 형식의 응답을 대신 표시하려면 `Accept` HTTP 요청 헤더를 `text/html` 미디어 유형으로 설정합니다. 예를 들어:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -290,11 +290,11 @@ Web API 컨트롤러의 경우, 모델 유효성 검사에 실패하면 MVC는 <
 1. [ProblemDetailsFactory 구현](#implement-problemdetailsfactory)
 1. [ApiBehaviorOptions.ClientErrorMapping 사용](#use-apibehavioroptionsclienterrormapping)
 
-### <a name="implement-problemdetailsfactory"></a>ProblemDetailsFactory 구현
+### <a name="implement-problemdetailsfactory"></a>`ProblemDetailsFactory` 구현
 
-MVC는 `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory`를 사용하여 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> 및 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>의 모든 인스턴스를 생성합니다. 여기에는 클라이언트 오류 응답, 유효성 검사 실패 오류 응답, `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` 및 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> 도우미 메서드가 포함됩니다.
+MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory?displayProperty=fullName>를 사용하여 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> 및 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>의 모든 인스턴스를 생성합니다. 여기에는 클라이언트 오류 응답, 유효성 검사 실패 오류 응답, <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A?displayProperty=nameWithType> 및 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A?displayProperty=nameWithType> 도우미 메서드가 포함됩니다.
 
-문제 세부 정보 응답을 사용자 지정하려면 `Startup.ConfigureServices`에서 `ProblemDetailsFactory`의 사용자 지정 구현을 등록합니다.
+문제 세부 정보 응답을 사용자 지정하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory>의 사용자 지정 구현을 등록합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)
