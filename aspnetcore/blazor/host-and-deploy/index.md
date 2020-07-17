@@ -5,7 +5,7 @@ description: Blazor 앱을 호스트하고 배포하는 방법을 알아봅니�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 040f9560bd51841063ca2785b0c0730c6bb16002
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 77202cd60d357c27237cdb925e0adc00e66d2e56
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402652"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407712"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core 호스트 및 배포 Blazor
 
@@ -106,6 +106,20 @@ dotnet run --pathbase=/CoolApp
 ```
 
 Blazor WebAssembly 앱이 `http://localhost:port/CoolApp`에서 로컬로 응답합니다.
+
+**Blazor Server `MapFallbackToPage` 구성**
+
+`Startup.Configure`에서 다음과 같은 <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A>의 경로를 전달합니다.
+
+```csharp
+endpoints.MapFallbackToPage("/{RELATIVE PATH}/{**path:nonfile}");
+```
+
+자리 표시자 `{RELATIVE PATH}`는 서버에서 루트가 아닌 경로입니다. 예를 들어 앱에 대해 루트가 아닌 URL이 `https://{HOST}:{PORT}/CoolApp/`인 경우 `CoolApp`은 자리 표시자 세그먼트입니다.
+
+```csharp
+endpoints.MapFallbackToPage("/CoolApp/{**path:nonfile}");
+```
 
 ## <a name="deployment"></a>배포
 
