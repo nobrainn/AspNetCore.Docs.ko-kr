@@ -3,6 +3,7 @@ title: ASP.NET Core 구성Identity
 author: AdrienTorris
 description: 기본값 ASP.NET Core 이해 하 Identity 고 Identity 사용자 지정 값을 사용 하도록 속성을 구성 하는 방법을 알아봅니다.
 ms.author: riande
+ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
 - Blazor
@@ -13,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 262101594d57ad63bb0bac4da3cefa8d8d380908
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408970"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464529"
 ---
 # <a name="configure-aspnet-core-identity"></a>ASP.NET Core 구성Identity
 
@@ -26,11 +27,11 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 
 ## <a name="identity-options"></a>Identity옵션
 
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) 클래스는 시스템을 구성 하는 데 사용할 수 있는 옵션을 나타냅니다 Identity . `IdentityOptions`또는를 호출한 **후** 를 설정 해야 합니다 `AddIdentity` `AddDefaultIdentity` .
+[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) 클래스는 시스템을 구성 하는 데 사용할 수 있는 옵션을 나타냅니다 Identity . `IdentityOptions`또는를 호출한 **후** 를 설정 해야 합니다 `AddIdentity` `AddDefaultIdentity` .
 
 ### <a name="claims-identity"></a>요청이Identity
 
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) 는 다음 표에 표시 된 속성을 사용 하 여 [Claimsidentityoptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) 를 지정 합니다.
+[ Identity Options. 클레임 Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) 은 다음 표에 표시 된 속성을 사용 하 여 [클레임 Identity 옵션](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) 을 지정 합니다.
 
 | 속성 | 설명 | 기본값 |
 | -------- | ----------- | :-----: |
@@ -51,11 +52,11 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
-위의 코드는 [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) 를 기본값으로 설정 합니다.
+위의 코드는 [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) [ Identity 옵션](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) 을 기본값으로 설정 합니다.
 
 성공적인 인증은 실패 한 액세스 시도 횟수를 다시 설정 하 고 시계를 다시 설정 합니다.
 
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) 는 테이블에 표시 된 속성을 사용 하 여 [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) 를 지정 합니다.
+[ Identity 옵션. 잠금](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) 표에 표시 된 속성을 사용 하 여 [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) 를 지정 합니다.
 
 | 속성 | 설명 | 기본값 |
 | -------- | ----------- | :-----: |
@@ -65,29 +66,18 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 
 ### <a name="password"></a>암호
 
-기본적으로에서는 Identity 암호에 대문자, 소문자, 숫자 및 영숫자가 아닌 문자를 포함 해야 합니다. 암호의 길이는 6 자 이상 이어야 합니다. [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) 는에서 설정할 수 있습니다 `Startup.ConfigureServices` .
+기본적으로에서는 Identity 암호에 대문자, 소문자, 숫자 및 영숫자가 아닌 문자를 포함 해야 합니다. 암호의 길이는 6 자 이상 이어야 합니다.
 
-::: moniker range=">= aspnetcore-2.1"
+암호는 다음을 사용 하 여 구성 됩니다.
+
+* `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Identity.PasswordOptions> 사용
+* [ `[StringLength]` ](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) `Password` Identity 가 [앱에 스 캐 폴드](xref:security/authentication/scaffold-identity)속성의 특성입니다. `InputModel``Password`속성은 다음 파일에 있습니다.
+  * `Areas/Identity/Pages/Account/Register.cshtml.cs`
+  * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_pw)]
 
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?range=29-37,50-52)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-[!code-csharp[](identity/sample/src/ASPNET-IdentityDemo-PrimaryKeysConfig/Startup.cs?range=58-65,84)]
-
-::: moniker-end
-
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) 는 표에 표시 된 속성을 사용 하 여 [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) 를 지정 합니다.
-
-::: moniker range=">= aspnetcore-2.0"
+[ Identity Options. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) 는 표에 표시 된 속성을 사용 하 여 [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) 를 지정 합니다.
 
 | 속성 | 설명 | 기본값 |
 | -------- | ----------- | :-----: |
@@ -98,37 +88,13 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 | [RequiredUniqueChars](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireduniquechars) | ASP.NET Core 2.0 이상에만 적용 됩니다.<br><br> 암호에 고유한 문자 수가 필요 합니다. | 1 |
 | [RequireUppercase](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireuppercase) | 암호에 대문자를 사용 해야 합니다. | `true` |
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.0"
-
-| 속성 | 설명 | 기본값 |
-| -------- | ----------- | :-----: |
-| [RequireDigit](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredigit) | 암호에 0-9 사이의 숫자가 필요 합니다. | `true` |
-| [RequiredLength](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredlength) | 암호의 최소 길이입니다. | 6 |
-| [RequireLowercase](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requirelowercase) | 암호에 소문자가 필요 합니다. | `true` |
-| [RequireNonAlphanumeric](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requirenonalphanumeric) | 암호에 영숫자가 아닌 문자가 필요 합니다. | `true` |
-| [RequireUppercase](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireuppercase) | 암호에 대문자를 사용 해야 합니다. | `true` |
-
-::: moniker-end
-
 ### <a name="sign-in"></a>로그인
 
 다음 코드는 `SignIn` 설정을 기본값으로 설정 합니다.
 
-::: moniker range=">= aspnetcore-2.1"
-
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_si)]
 
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?range=29-30,44-46,50-52)] 
-
-::: moniker-end
-
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) 는 테이블에 표시 된 속성을 사용 하 여 [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) 를 지정 합니다.
+[ Identity 옵션. SignIn](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) 은 테이블에 표시 된 속성을 사용 하 여 [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) 를 지정 합니다.
 
 | 속성 | 설명 | 기본값 |
 | -------- | ----------- | :-----: |
@@ -137,22 +103,22 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 
 ### <a name="tokens"></a>토큰
 
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) 는 테이블에 표시 된 속성을 사용 하 여 [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) 를 지정 합니다.
+[ Identity Options. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) 는 테이블에 표시 된 속성을 사용 하 여 [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) 를 지정 합니다.
 
-|                                                        속성                                                         |                                                                                      설명                                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       `AuthenticatorTokenProvider`인증자를 사용 하 여 2 단계 로그인의 유효성을 검사 하는 데 사용 되는를 가져오거나 설정 합니다.                                       |
-|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     `ChangeEmailTokenProvider`전자 메일 변경 확인 전자 메일에 사용 되는 토큰을 생성 하는 데 사용 되는를 가져오거나 설정 합니다.                                     |
-| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      `ChangePhoneNumberTokenProvider`전화 번호를 변경할 때 사용 되는 토큰을 생성 하는 데 사용 되는를 가져오거나 설정 합니다.                                      |
-| [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             계정 확인 전자 메일에 사용 되는 토큰을 생성 하는 데 사용 되는 토큰 공급자를 가져오거나 설정 합니다.                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | 암호 재설정 전자 메일에 사용 되는 토큰을 생성 하는 데 사용 되는 [IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) 를 가져오거나 설정 합니다. |
-|                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                공급자 이름으로 사용 되는 키를 사용 하 여 [사용자 토큰 공급자](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) 를 구성 하는 데 사용 됩니다.                 |
+| 속성 | 설명 |
+| -------- | ----------- |
+| [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider) | `AuthenticatorTokenProvider`인증자를 사용 하 여 2 단계 로그인의 유효성을 검사 하는 데 사용 되는를 가져오거나 설정 합니다. |
+| [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider) | `ChangeEmailTokenProvider`전자 메일 변경 확인 전자 메일에 사용 되는 토큰을 생성 하는 데 사용 되는를 가져오거나 설정 합니다. |
+| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) | `ChangePhoneNumberTokenProvider`전화 번호를 변경할 때 사용 되는 토큰을 생성 하는 데 사용 되는를 가져오거나 설정 합니다. |
+| [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) | 계정 확인 전자 메일에 사용 되는 토큰을 생성 하는 데 사용 되는 토큰 공급자를 가져오거나 설정 합니다. |
+| [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider) | 암호 재설정 전자 메일에 사용 되는 토큰을 생성 하는 데 사용 되는 [IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) 를 가져오거나 설정 합니다. |
+| [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap) | 공급자 이름으로 사용 되는 키를 사용 하 여 [사용자 토큰 공급자](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) 를 구성 하는 데 사용 됩니다. |
 
 ### <a name="user"></a>사용자
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_user)]
 
-[IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) 는 테이블에 표시 된 속성을 사용 하 여 [useroptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) 를 지정 합니다.
+[ Identity 옵션. 사용자](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) 는 테이블에 표시 된 속성을 사용 하 여 [useroptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) 를 지정 합니다.
 
 | 속성 | 설명 | 기본값 |
 | -------- | ----------- | :-----: |
@@ -163,23 +129,7 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 
 에서 앱의 쿠키를 구성 `Startup.ConfigureServices` 합니다. [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) 는 또는를 호출한 **후에** 호출 해야 합니다 `AddIdentity` `AddDefaultIdentity` .
 
-::: moniker range=">= aspnetcore-2.1"
-
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?name=snippet_configurecookie)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-[!code-csharp[](identity/sample/src/ASPNET-IdentityDemo-PrimaryKeysConfig/Startup.cs?range=58-59,72-80,84)]
-
-::: moniker-end
 
 자세한 내용은 [은 cookieauthenticationoptions.authenticationtype](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)를 참조 하세요.
 

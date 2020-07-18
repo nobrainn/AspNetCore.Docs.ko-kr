@@ -4,7 +4,7 @@ author: blowdart
 description: IIS 및 HTTP.sys에 대 한 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 01/02/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 493046e288c6b1ccd8e41f15a8e6e532a10a4adc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403198"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445127"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -40,11 +40,38 @@ ms.locfileid: "85403198"
 
 HTTPS 인증서를 획득 하 고 적용 한 다음 인증서를 요구 하도록 [서버를 구성](#configure-your-server-to-require-certificates) 합니다.
 
-웹 앱에서 패키지에 대 한 참조를 추가 `Microsoft.AspNetCore.Authentication.Certificate` 합니다. 그런 다음 `Startup.ConfigureServices` 메서드에서와 함께를 호출 하 여 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 요청을 `OnCertificateValidated` 통해 보낸 클라이언트 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 대리자를 제공 합니다. 해당 정보를로 변환 하 `ClaimsPrincipal` 고 속성에 설정 `context.Principal` 합니다.
+웹 앱에서 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Certificate) 패키지에 대 한 참조를 추가 합니다. 그런 다음 `Startup.ConfigureServices` 메서드에서와 함께를 호출 하 여 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 요청을 `OnCertificateValidated` 통해 보낸 클라이언트 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 대리자를 제공 합니다. 해당 정보를로 변환 하 `ClaimsPrincipal` 고 속성에 설정 `context.Principal` 합니다.
 
 인증이 실패 하는 경우이 처리기는 `403 (Forbidden)` 정상적으로 응답을 반환 `401 (Unauthorized)` 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 예를 들면 다음과 같습니다.
+또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 예를 들어:
+
+::: moniker range=">= aspnetcore-5.0"
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate()
+        // Adding an ICertificateValidationCache results in certificate auth caching the results.
+        // The default implementation uses a memory cache.
+        .AddCertificateCache();
+
+    // All other service configuration
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseAuthentication();
+
+    // All other app configuration
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -52,16 +79,19 @@ public void ConfigureServices(IServiceCollection services)
     services.AddAuthentication(
         CertificateAuthenticationDefaults.AuthenticationScheme)
         .AddCertificate();
-    // All the other service configuration.
+
+    // All other service configuration
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     app.UseAuthentication();
 
-    // All the other app configuration.
+    // All other app configuration
 }
 ```
+
+::: moniker-end
 
 앞의 예제에서는 인증서 인증을 추가 하는 기본 방법을 보여 줍니다. 처리기는 일반적인 인증서 속성을 사용 하 여 사용자 보안 주체를 생성 합니다.
 
@@ -343,7 +373,7 @@ namespace AspNetCoreCertificateAuthApi
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-the-httpclienthandler"></a>Certificate 및 HttpClientHandler를 사용 하 여 HttpClient 구현
 
-HttpClientHandler는 HttpClient 클래스의 생성자에 직접 추가할 수 있습니다. HttpClient의 인스턴스를 만들 때 주의 해야 합니다. 그런 다음 HttpClient는 각 요청과 함께 인증서를 보냅니다.
+는 `HttpClientHandler` 클래스의 생성자에 직접 추가할 수 있습니다 `HttpClient` . 인스턴스를 만들 때 주의 해야 합니다 `HttpClient` . `HttpClient`그러면가 각 요청과 함께 인증서를 보냅니다.
 
 ```csharp
 private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
@@ -372,7 +402,7 @@ private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-a-named-httpclient-from-ihttpclientfactory"></a>IHttpClientFactory에서 인증서 및 명명 된 HttpClient를 사용 하 여 HttpClient 구현 
 
-다음 예제에서는 처리기의 ClientCertificates 속성을 사용 하 여 클라이언트 인증서가 HttpClientHandler에 추가 됩니다. 그런 다음 ConfigurePrimaryHttpMessageHandler 메서드를 사용 하 여이 처리기를 HttpClient의 명명 된 인스턴스에서 사용할 수 있습니다. 이는 ConfigureServices 메서드의 Startup 클래스에서 설정 됩니다.
+다음 예제에서는 처리기의 속성을 사용 하 여에 클라이언트 인증서를 추가 합니다 `HttpClientHandler` `ClientCertificates` . 그런 다음 `HttpClient` 메서드를 사용 하 여의 명명 된 인스턴스에서이 처리기를 사용할 수 있습니다 `ConfigurePrimaryHttpMessageHandler` . 다음 위치에 설치 됩니다 `Startup.ConfigureServices` .
 
 ```csharp
 var clientCertificate = 
@@ -387,7 +417,7 @@ services.AddHttpClient("namedClient", c =>
 }).ConfigurePrimaryHttpMessageHandler(() => handler);
 ```
 
-그런 다음 IHttpClientFactory를 사용 하 여 처리기와 인증서를 사용 하 여 명명 된 인스턴스를 가져올 수 있습니다. Startup 클래스에 정의 된 클라이언트 이름을 가진 CreateClient 메서드는 인스턴스를 가져오는 데 사용 됩니다. 필요에 따라 클라이언트를 사용 하 여 HTTP 요청을 보낼 수 있습니다.
+`IHttpClientFactory`그런 다음를 사용 하 여 처리기와 인증서를 사용 하 여 명명 된 인스턴스를 가져올 수 있습니다. `CreateClient`클래스에 정의 된 클라이언트 이름을 가진 메서드는 인스턴스를 `Startup` 가져오는 데 사용 됩니다. 필요에 따라 클라이언트를 사용 하 여 HTTP 요청을 보낼 수 있습니다.
 
 ```csharp
 private readonly IHttpClientFactory _clientFactory;
@@ -562,12 +592,43 @@ namespace AspNetCoreCertificateAuthApi
 
 <a name="occ"></a>
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="certificate-validation-caching"></a>인증서 유효성 검사 캐싱
+
+ASP.NET Core 5.0 이상 버전에서는 유효성 검사 결과의 캐싱을 사용 하도록 설정 하는 기능을 지원 합니다. 유효성 검사는 비용이 많이 드는 작업 이므로 캐싱은 인증서 인증의 성능을 크게 향상 시킵니다.
+
+기본적으로 인증서 인증은 캐싱을 사용 하지 않습니다. 캐싱을 사용 하도록 설정 하려면에서을 호출 합니다 `AddCertificateCache` `Startup.ConfigureServices` .
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+            .AddCertificate()
+            .AddCertificateCache(options =>
+            {
+                options.CacheSize = 1024;
+                options.CacheEntryExpiration = TimeSpan.FromMinutes(2);
+            });
+}
+```
+
+기본 캐싱 구현에서는 결과를 메모리에 저장 합니다. `ICertificateValidationCache`종속성 주입을 사용 하 여 구현 하 고 등록 하 여 자체 캐시를 제공할 수 있습니다. 예: `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
+
+::: moniker-end
+
 ## <a name="optional-client-certificates"></a>클라이언트 인증서 (옵션)
 
 이 섹션에서는 인증서를 사용 하 여 앱의 하위 집합을 보호 해야 하는 앱에 대 한 정보를 제공 합니다. 예를 들어 Razor 앱의 페이지 또는 컨트롤러에 클라이언트 인증서가 필요할 수 있습니다. 클라이언트 인증서로 챌린지를 표시 합니다.
   
 * 는 HTTP 기능이 아닌 TLS 기능입니다.
-* 는 연결당 협상 되며, HTTP 데이터를 사용 하려면 먼저 연결을 시작할 때 협상 해야 합니다. 연결이 시작 될 때 SNI (서버 이름 표시)만 &dagger; 알려집니다. 클라이언트 및 서버 인증서는 연결에 대 한 첫 번째 요청 이전에 협상 되며 요청은 일반적으로 재협상을 수행할 수 없습니다. HTTP/2에서는 재협상이 금지 됩니다.
+* 는 연결당 협상 되며, HTTP 데이터를 사용 하려면 먼저 연결을 시작할 때 협상 해야 합니다. 연결이 시작 될 때 SNI (서버 이름 표시)만 &dagger; 알려집니다. 클라이언트 및 서버 인증서는 연결에 대 한 첫 번째 요청 이전에 협상 되며 요청은 일반적으로 재협상을 수행할 수 없습니다.
+
+TLS 재협상은 선택적 클라이언트 인증서를 구현 하는 기존 방법 이었습니다. 이는 다음과 같은 이유로 더 이상 권장 되지 않습니다.
+- HTTP/1.1에서 POST 요청을 수행 하는 동안 renegotiating는 요청 본문이 TCP 창에서 채워지고 재협상 패킷을 받을 수 없는 교착 상태를 일으킬 수 있습니다.
+- HTTP/2는 재협상을 [명시적으로 금지](https://tools.ietf.org/html/rfc7540#section-9.2.1) 합니다.
+- TLS 1.3에서 재협상에 대 한 지원을 [제거](https://tools.ietf.org/html/rfc8740#section-1) 했습니다.
 
 ASP.NET Core 5 preview 4 이상에서는 선택적 클라이언트 인증서에 대 한 편리한 지원을 추가 합니다. 자세한 내용은 [선택적 인증서 샘플](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)을 참조 하세요.
 

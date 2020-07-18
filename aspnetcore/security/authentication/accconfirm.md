@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: bf599487fdc3e574f72f1a3d35278cc9c2ce7513
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404654"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464555"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core의 계정 확인 및 암호 복구
 
@@ -32,15 +32,9 @@ ms.locfileid: "85404654"
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
 
-::: moniker range="<= aspnetcore-2.0"
+::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 1.1 버전은 [이 PDF 파일](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) 을 참조 하세요.
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
-
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 [.NET Core 3.0 SDK 이상](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -73,7 +67,7 @@ SendGrid 계정에는 [발신자를 추가](https://sendgrid.com/docs/ui/sending
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 예를 들면 다음과 같습니다.
+`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 예를 들어:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -135,6 +129,16 @@ dotnet add package SendGrid
 * `AuthMessageSenderOptions`구성 인스턴스를 등록 합니다.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
+
+## <a name="scaffold-registerconfirmation"></a>스 캐 폴드 RegisterConfirmation
+
+[스 캐 폴드 Identity ](xref:security/authentication/scaffold-identity) 및 스 캐 폴드에 대 한 지침을 따릅니다 `RegisterConfirmation` .
+
+<!-- .NET 5 fixes this, see
+https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+-->
+
+[!INCLUDE[](~/includes/disableVer.md)]
 
 ## <a name="register-confirm-email-and-reset-password"></a>등록, 전자 메일 확인 및 암호 재설정
 
@@ -225,9 +229,9 @@ dotnet add package SendGrid
 
 ::: moniker-end
 
-::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
+::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 [.NET Core 2.2 SDK 이상](https://dotnet.microsoft.com/download/dotnet-core)
 
@@ -244,8 +248,10 @@ dotnet aspnet-codegenerator identity -dc WebPWrecover.Data.ApplicationDbContext 
 dotnet ef database drop -f
 dotnet ef database update
 dotnet run
-
 ```
+
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Identity.PasswordOptions>이에서 구성 된 경우 `Startup.ConfigureServices` 스 캐 폴드 pages의 속성에 대 한 [ `[StringLength]` 특성](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) 구성이 필요할 수 있습니다 `Password` Identity . `InputModel` `Password` 속성은 `Areas/Identity/Pages/Account/Register.cshtml.cs` 스 캐 폴딩 후 파일에 있습니다 Identity .
 
 ## <a name="test-new-user-registration"></a>새 사용자 등록 테스트
 
@@ -281,7 +287,7 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 예를 들면 다음과 같습니다.
+`SendGridUser` `SendGridKey` [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 및를 설정 합니다. 예를 들어:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
