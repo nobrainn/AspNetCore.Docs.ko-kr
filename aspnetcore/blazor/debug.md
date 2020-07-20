@@ -5,7 +5,7 @@ description: Blazor 앱을 디버그하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: c48eb19c5a1759aace112e2afb1637c649173a3d
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059905"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407673"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
@@ -48,8 +48,8 @@ Blazor WebAssembly 앱은 Chromium 기반 브라우저(Edge/Chrome)의 브라우
 
 디버깅 작업에는 다음 브라우저 중 하나가 필요합니다.
 
+* Google Chrome(버전 70 이상)(기본값)
 * Microsoft Edge(버전 80 이상)
-* Google Chrome(버전 70 이상)
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio 및 Visual Studio Code의 디버깅 사용 설정
 
@@ -133,13 +133,13 @@ Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용
 
 ### <a name="debug-hosted-blazor-webassembly"></a>호스트된 Blazor WebAssembly 디버그
 
-1. VS Code에서 호스트된 Blazor WebAssembly 앱을 엽니다.
+1. VS Code에서 호스트된 Blazor WebAssembly 앱의 솔루션 폴더를 엽니다.
 
 1. 프로젝트에 대한 시작 구성 집합이 없는 경우 다음과 같은 알림이 나타납니다. **Yes**를 선택합니다.
 
    ![필요한 자산 추가](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
-1. 선택 창에서 호스트된 솔루션 내의 서버 프로젝트를 선택합니다.
+1. 창의 맨 위에 있는 명령 팔레트에서 호스트된 솔루션 내의 서버 프로젝트를 선택합니다.
 
 `launch.json` 파일은 디버거를 시작하기 위한 시작 구성으로 생성됩니다.
 
@@ -160,7 +160,7 @@ Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용
 
 ### <a name="launch-configuration-options"></a>구성 옵션 시작
 
-`blazorwasm` 디버그 형식에 대해 지원되는 시작 구성 옵션은 다음과 같습니다.
+`blazorwasm` 디버그 형식(`.vscode/launch.json`)에 대해 지원되는 시작 구성 옵션은 다음과 같습니다.
 
 | 옵션    | 설명 |
 | --------- | ----------- |
@@ -198,17 +198,23 @@ Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app"></a>호스트된 Blazor WebAssembly 앱 시작 및 디버그
+#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge를 사용하여 호스트된 Blazor WebAssembly 앱 시작 및 디버그
+
+브라우저 구성의 기본값은 Google Chrome입니다. 디버깅에 Microsoft Edge를 사용하는 경우 `browser`를 `edge`로 설정합니다. Google Chrome을 사용하려면 `browser` 옵션을 설정하거나 옵션의 값을 `chrome`로 설정하지 마세요.
 
 ```json
 {
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
-  "name": "Launch and Debug Hosted App",
+  "hosted": true,
   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/MyHostedApp.Server.dll",
-  "cwd": "${workspaceFolder}"
+  "cwd": "${workspaceFolder}/Server",
+  "browser": "edge"
 }
 ```
+
+앞의 예에서 `MyHostedApp.Server.dll`은  서버 앱의 어셈블리입니다. `.vscode` 폴더는 `Client`, `Server` 및 `Shared` 폴더 옆의 솔루션 폴더에 있습니다.
 
 ## <a name="debug-in-the-browser"></a>브라우저에서 디버그
 

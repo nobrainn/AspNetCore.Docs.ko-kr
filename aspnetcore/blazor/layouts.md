@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 684d7b76c7500ec19c90eb696ec0127692923297
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944235"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176260"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -39,7 +39,11 @@ ms.locfileid: "85944235"
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Blazor 앱 템플릿 중 하나를 기반으로 하는 앱에서 `MainLayout` 구성 요소(`MainLayout.razor`)는 앱의 `Shared` 폴더에 있습니다.
+## <a name="mainlayout-component"></a>`MainLayout` 구성 요소
+
+Blazor 프로젝트 템플릿 중 하나를 기반으로 하는 앱에서 `MainLayout` 구성 요소(`MainLayout.razor`)는 앱의 `Shared` 폴더에 있습니다.
+
+[!code-razor[](./common/samples/3.x/BlazorWebAssemblySample/Shared/MainLayout.razor)]
 
 ## <a name="default-layout"></a>기본 레이아웃
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 597f396237151f49a9ae333973e91d8f4f7c6ff1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ff9e01df002ac0fc94ced6d5d093099d66a14f36
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401378"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176286"
 ---
 # <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>8부. ASP.NET Core에서 EF Core를 사용한 Razor Pages - 동시성
 
@@ -86,7 +86,7 @@ EF Core는 충돌을 검색할 때 `DbConcurrencyException` 예외를 throw합�
 
 * Update 및 Delete 명령의 Where 절에서 [동시성 토큰](/ef/core/modeling/concurrency)으로 구성된 열의 원래 값을 포함하도록 EF Core를 구성합니다.
 
-  `SaveChanges`가 호출되면 Where 절은 [ConcurrencyCheck](/dotnet/api/system.componentmodel.dataannotations.concurrencycheckattribute) 특성으로 주석으로 처리된 속성의 원래 값을 찾습니다. Update 문은 행을 처음 읽은 후 동시성 토큰 속성이 변경된 경우 업데이트할 행을 찾지 못합니다. EF Core는 이 상황을 동시성 충돌로 해석합니다. 많은 열이 있는 데이터베이스 테이블의 경우 이 방법으로 많은 Where 절이 발생할 수 있으며 많은 양의 상태가 필요할 수 있습니다. 따라서 이 방법은 일반적으로 권장되지 않으며 이 자습서에서 사용되는 방법이 아닙니다.
+  `SaveChanges`가 호출되면 Where 절은 <xref:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute> 특성으로 주석 지정된 속성의 원래 값을 찾습니다. Update 문은 행을 처음 읽은 후 동시성 토큰 속성이 변경된 경우 업데이트할 행을 찾지 못합니다. EF Core는 이 상황을 동시성 충돌로 해석합니다. 많은 열이 있는 데이터베이스 테이블의 경우 이 방법으로 많은 Where 절이 발생할 수 있으며 많은 양의 상태가 필요할 수 있습니다. 따라서 이 방법은 일반적으로 권장되지 않으며 이 자습서에서 사용되는 방법이 아닙니다.
 
 * 데이터베이스 테이블에서 행이 변경된 시기를 확인하는 데 사용될 수 있는 추적 열을 포함합니다.
 
@@ -98,7 +98,7 @@ EF Core는 충돌을 검색할 때 `DbConcurrencyException` 예외를 throw합�
 
 [!code-csharp[](intro/samples/cu30/Models/Department.cs?highlight=26,27)]
 
-[Timestamp](/dotnet/api/system.componentmodel.dataannotations.timestampattribute) 특성은 열을 동시성 추적 열로 식별합니다. 흐름 API는 추적 속성을 지정하는 대체 방법입니다.
+<xref:System.ComponentModel.DataAnnotations.TimestampAttribute> 특성은 열을 동시성 추적 열로 식별합니다. 흐름 API는 추적 속성을 지정하는 대체 방법입니다.
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -250,7 +250,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 다음 코드에서는 업데이트된 페이지를 보여 줍니다.
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
 
 ## <a name="update-the-edit-page-model"></a>편집 페이지 모델 업데이트
 
@@ -258,7 +258,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_All)]
 
-[OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyentry.originalvalue?view=efcore-2.0#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyEntry_OriginalValue)는 `OnGet` 메서드에서 페치될 때 엔터티의 `rowVersion` 값을 사용하여 업데이트됩니다. EF Core는 원본 `RowVersion` 값을 포함하는 WHERE 절과 함께 SQL UPDATE 명령을 생성합니다. UPDATE 명령의 영향을 받는 행이 없는 경우(행에 원래 `RowVersion` 값이 없음) `DbUpdateConcurrencyException` 예외가 throw됩니다.
+<xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.OriginalValue>는 `OnGet` 메서드에서 페치될 때 엔터티의 `rowVersion` 값을 사용하여 업데이트됩니다. EF Core는 원본 `RowVersion` 값을 포함하는 WHERE 절과 함께 SQL UPDATE 명령을 생성합니다. UPDATE 명령의 영향을 받는 행이 없는 경우(행에 원래 `RowVersion` 값이 없음) `DbUpdateConcurrencyException` 예외가 throw됩니다.
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_RowVersion&highlight=17-18)]
 
@@ -282,11 +282,11 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 `ModelState`에 이전 `RowVersion` 값이 있으므로 `ModelState.Remove` 문이 필요합니다. Razor 페이지에서 필드의 `ModelState` 값은 모델 속성 값에 우선합니다(둘 다 있는 경우).
 
-### <a name="update-the-razor-page"></a>Razor 페이지 업데이트
+### <a name="update-the-edit-page"></a>편집 페이지 업데이트
 
 다음 코드로 *Pages/Departments/Edit.cshtml*을 업데이트합니다.
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 위의 코드는
 
@@ -323,7 +323,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 **저장**을 다시 클릭합니다. 두 번째 브라우저 탭에 입력한 값이 저장됩니다. 인덱스 페이지에 저장된 값이 표시됩니다.
 
-## <a name="update-the-delete-page"></a>삭제 페이지 업데이트
+## <a name="update-the-delete-page-model"></a>삭제 페이지 업데이트 모델
 
 다음 코드로 *Pages/Departments/Delete.cshtml.cs*를 업데이트합니다.
 
@@ -335,11 +335,11 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 * DbUpdateConcurrencyException 예외가 throw됩니다.
 * `OnGetAsync`가 `concurrencyError`를 사용하여 호출됩니다.
 
-### <a name="update-the-delete-razor-page"></a>Delete Razor 페이지 업데이트
+### <a name="update-the-delete-page"></a>삭제 페이지 업데이트
 
 *Pages/Departments/Delete.cshtml*을 다음 코드로 업데이트합니다.
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,42,51)]
 
 위의 코드로 다음이 변경됩니다.
 
@@ -347,7 +347,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 * 오류 메시지를 추가합니다.
 * **Administrator** 필드의 FirstMidName을 FullName으로 바꿉니다.
 * 마지막 바이트를 표시하도록 `RowVersion`을 변경합니다.
-* 숨겨진 행 버전을 추가합니다. postgit add back이 값을 바인딩하도록 `RowVersion`을 추가해야 합니다.
+* 숨겨진 행 버전을 추가합니다. 포스트백은 값을 바인딩하므로 `RowVersion`을 추가해야 합니다.
 
 ### <a name="test-concurrency-conflicts"></a>동시성 충돌 테스트
 
@@ -365,7 +365,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 브라우저에 변경된 값과 업데이트된 rowVersion 표시기가 있는 인덱스 페이지가 표시됩니다. 업데이트된 rowVersion 표시기는 다른 탭의 두 번째 포스트백에 표시됩니다.
 
-두 번째 탭에서 테스트 부서를 삭제합니다. 동시성 오류는 데이터베이스의 현재 값으로 표시됩니다. `RowVersion`이 업데이트되고 부서가 삭제되지 않는 한 **삭제**를 클릭하면 엔터티가 삭제됩니다.
+두 번째 탭에서 테스트 부서를 삭제합니다. 동시성 오류는 데이터베이스의 현재 값으로 표시됩니다. `RowVersion`이 업데이트되지 않았다면 **삭제**를 클릭하면 엔터티가 삭제됩니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -550,7 +550,7 @@ dotnet ef database update
 
 다음 표시는 업데이트된 페이지를 보여 줍니다.
 
-[!code-html[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
 
 ### <a name="update-the-edit-page-model"></a>편집 페이지 모델 업데이트
 
@@ -582,7 +582,7 @@ dotnet ef database update
 
 *Pages/Departments/Edit.cshtml*을 다음 표시로 업데이트합니다.
 
-[!code-html[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 위의 표시는:
 
@@ -637,7 +637,7 @@ dotnet ef database update
 
 *Pages/Departments/Delete.cshtml*을 다음 코드로 업데이트합니다.
 
-[!code-html[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
 
 위의 코드로 다음이 변경됩니다.
 
@@ -663,7 +663,7 @@ dotnet ef database update
 
 브라우저에 변경된 값과 업데이트된 rowVersion 표시기가 있는 인덱스 페이지가 표시됩니다. 업데이트된 rowVersion 표시기는 다른 탭의 두 번째 포스트백에 표시됩니다.
 
-두 번째 탭에서 테스트 부서를 삭제합니다. 동시성 오류는 DB의 현재 값으로 표시됩니다. `RowVersion`이 업데이트되고 부서가 삭제되지 않는 한 **삭제**를 클릭하면 엔터티가 삭제됩니다.
+두 번째 탭에서 테스트 부서를 삭제합니다. 동시성 오류는 DB의 현재 값으로 표시됩니다. `RowVersion`이 업데이트되지 않았다면 **삭제**를 클릭하면 엔터티가 삭제됩니다.
 
 데이터 모델을 상속하는 방법은 [상속](xref:data/ef-mvc/inheritance)을 참조하세요.
 

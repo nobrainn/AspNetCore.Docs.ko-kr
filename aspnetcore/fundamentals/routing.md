@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060347"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176202"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -84,7 +84,7 @@ ms.locfileid: "86060347"
 
 앱에서 일치시키고 실행할 수 있는 엔드포인트는 `UseEndpoints`에서 구성됩니다. 예를 들어 <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> 및 [이들과 유사한 메서드](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions)는 요청 대리자를 라우팅 시스템에 연결합니다.
 ASP.NET Core Framework 기능을 라우팅 시스템에 연결하는 데 다음과 같은 추가 메서드를 사용할 수 있습니다.
-- [Razor Pages의 MapRazorPages](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
+- Razor Pages의 [MapRazorPages ](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
 - [컨트롤러의 MapControllers](xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*)
 - [SignalR의 MapHub\<THub>](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
 - [gRPC의 MapGrpcService\<TService>](xref:grpc/aspnetcore)
@@ -936,7 +936,7 @@ app.UseEndpoints(endpoints =>
 app.UseEndpoints(endpoints =>
 {
     // Your framework
-    endpoints.MapMyFramework(...).RequrireAuthorization()
+    endpoints.MapMyFramework(...).RequireAuthorization()
                                  .WithMyFrameworkFeature(awesome: true);
 
     endpoints.MapHealthChecks("/healthz");
@@ -988,7 +988,7 @@ app.UseAuthorization(new AuthorizationPolicy() { ... });
 app.UseEndpoints(endpoints =>
 {
     // Your framework
-    endpoints.MapMyFramework(...).RequrireAuthorization();
+    endpoints.MapMyFramework(...).RequireAuthorization();
 });
 ```
 

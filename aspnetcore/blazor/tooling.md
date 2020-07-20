@@ -15,13 +15,13 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/tooling
-zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: 30a76eda0e94ee7bb2b2d3db918bc029865bdf1a
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+zone_pivot_groups: operating-systems
+ms.openlocfilehash: 33245e669b317ed577a8a1652b2eed8f9ea5b915
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147648"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407647"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 도구
 

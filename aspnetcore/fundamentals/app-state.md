@@ -14,11 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 4ecbf6920980e293e8c274996c6a4f25e74a5cb7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 30123e043a7c152b5719af8092b2ab42a70d2787
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403627"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407621"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core의 세션 및 상태 관리
 
@@ -74,7 +75,7 @@ ASP.NET Core는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하
 * 앱은 마지막 요청 이후 제한된 시간 동안 세션을 유지합니다. 앱은 세션 시간 제한을 설정하거나 20분의 기본값을 사용합니다. 세션 상태는 다음 조건을 충족하는 사용자 데이터를 저장하는 데 적합합니다.
   * 특정 세션과 관련이 있습니다.
   * 세션 간에 데이터의 영구 스토리지가 필요하지 않습니다.
-* 세션 데이터는 [ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear) 구현이 호출되거나 세션이 만료될 때 삭제됩니다.
+* 세션 데이터는 <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> 구현이 호출되거나 세션이 만료될 때 삭제됩니다.
 * 클라이언트 브라우저가 닫혔거나 세션 쿠키가 삭제 또는 클라이언트에서 만료되었을 때 앱 코드에 이를 알려주는 기본 메커니즘은 없습니다.
 * 기본적으로 세션 상태 쿠키는 필수로 표시되어 있지 않습니다. 사이트 방문자가 추적을 허용하지 않는 한, 세션 상태는 작동하지 않습니다. 자세한 내용은 <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>를 참조하세요.
 
@@ -84,7 +85,7 @@ ASP.NET Core는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하
 메모리 내 캐시 공급자는 앱이 있는 서버의 메모리에 세션 데이터를 저장합니다. 서버 팜 시나리오:
 
 * *고정 세션*을 사용하여 각 세션을 개별 서버의 특정 앱 인스턴스에 연결합니다. [Azure App Service](https://azure.microsoft.com/services/app-service/)는 [ARR(애플리케이션 요청 라우팅)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module)을 사용하여 기본적으로 고정 세션을 적용합니다. 그러나 고정 세션은 확장성에 영향을 주고 웹앱 업데이트를 복잡하게 만들 수 있습니다. 더 나은 방법은 고정 세션이 필요 없는 Redis 또는 SQL Server 분산 캐시를 사용하는 것입니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
-* 세션 쿠키는 [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector)를 통해 암호화됩니다. 데이터 보호는 각 컴퓨터에서 세션 쿠키를 읽을 수 있도록 올바르게 구성되어야 합니다. 자세한 내용은 <xref:security/data-protection/introduction> 및 [키 스토리지 공급자](xref:security/data-protection/implementation/key-storage-providers)를 참조하세요.
+* 세션 쿠키는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>를 통해 암호화됩니다. 데이터 보호는 각 컴퓨터에서 세션 쿠키를 읽을 수 있도록 올바르게 구성되어야 합니다. 자세한 내용은 <xref:security/data-protection/introduction> 및 [키 스토리지 공급자](xref:security/data-protection/implementation/key-storage-providers)를 참조하세요.
 
 ### <a name="configure-session-state"></a>세션 상태 구성
 
@@ -95,9 +96,9 @@ ASP.NET Core는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하
 
 세션 미들웨어를 활성화하려면 `Startup`은 다음을 포함해야 합니다.
 
-* [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) 메모리 캐시 중 하나 `IDistributedCache` 구현은 세션에 대한 백업 저장소로 사용됩니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
-* `ConfigureServices`의 [AddSession](/dotnet/api/microsoft.extensions.dependencyinjection.sessionservicecollectionextensions.addsession)에 대한 호출.
-* `Configure`의 [UseSession](/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions.usesession#Microsoft_AspNetCore_Builder_SessionMiddlewareExtensions_UseSession_Microsoft_AspNetCore_Builder_IApplicationBuilder_)에 대한 호출.
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 메모리 캐시 중 하나. `IDistributedCache` 구현은 세션에 대한 백업 저장소로 사용됩니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
+* `ConfigureServices`의 <xref:Microsoft.Extensions.DependencyInjection.SessionServiceCollectionExtensions.AddSession%2A>에 대한 호출.
+* `Configure`의 <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A>에 대한 호출.
 
 다음 코드에서는 `IDistributedCache`의 기본 메모리 내 구현을 사용하여 메모리 내 세션 공급자를 설정하는 방법을 보여 줍니다.
 
@@ -115,43 +116,43 @@ ASP.NET Core는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하
 
 ### <a name="load-session-state-asynchronously"></a>세션 상태를 비동기적으로 로드
 
-ASP.NET Core에서 기본 세션 공급자는 [ISession.LoadAsync](/dotnet/api/microsoft.aspnetcore.http.isession.loadasync) 메서드가 [TryGetValue](/dotnet/api/microsoft.aspnetcore.http.isession.trygetvalue), [Set](/dotnet/api/microsoft.aspnetcore.http.isession.set) 또는 [Remove](/dotnet/api/microsoft.aspnetcore.http.isession.remove) 메서드 전에 명시적으로 호출된 경우에만 기본 [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) 백업 저장소에서 비동기적으로 세션 레코드를 로드합니다. `LoadAsync`가 먼저 호출되지 않은 경우 기본 세션 레코드가 동기적으로 로드되며, 이는 크기에 따라 성능 저하를 초래할 수 있습니다.
+ASP.NET Core에서 기본 세션 공급자는 <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync%2A?displayProperty=nameWithType> 메서드가 <xref:Microsoft.AspNetCore.Http.ISession.TryGetValue%2A>, <xref:Microsoft.AspNetCore.Http.ISession.Set%2A> 또는 <xref:Microsoft.AspNetCore.Http.ISession.Remove%2A> 메서드 전에 명시적으로 호출된 경우에만 기본 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 백업 저장소에서 비동기적으로 세션 레코드를 로드합니다. `LoadAsync`가 먼저 호출되지 않은 경우 기본 세션 레코드가 동기적으로 로드되며, 이는 크기에 따라 성능 저하를 초래할 수 있습니다.
 
-이 패턴을 앱에 적용하려면 `LoadAsync` 메서드가 `TryGetValue`, `Set` 또는 `Remove` 이전에 호출되지 않은 경우 예외를 throw하는 버전으로 [DistributedSessionStore](/dotnet/api/microsoft.aspnetcore.session.distributedsessionstore) 및 [DistributedSession](/dotnet/api/microsoft.aspnetcore.session.distributedsession) 구현을 래핑합니다. 서비스 컨테이너에 래핑된 버전을 등록합니다.
+이 패턴을 앱에 적용하려면 `LoadAsync` 메서드가 `TryGetValue`, `Set` 또는 `Remove` 이전에 호출되지 않은 경우 예외를 throw하는 버전으로 <xref:Microsoft.AspNetCore.Session.DistributedSessionStore> 및 <xref:Microsoft.AspNetCore.Session.DistributedSession> 구현을 래핑합니다. 서비스 컨테이너에 래핑된 버전을 등록합니다.
 
 ### <a name="session-options"></a>세션 옵션
 
-세션 기본값을 재정의하려면 [SessionOptions](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions)를 사용합니다.
+세션 기본값을 재정의하려면 <xref:Microsoft.AspNetCore.Builder.SessionOptions>를 사용합니다.
 
 | 옵션 | 설명 |
 | ------ | ----------- |
-| [쿠키](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookie) | 쿠키를 만드는 데 사용되는 설정을 결정합니다. [Name](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.name)의 기본값은 [SessionDefaults.CookieName](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiename)(`.AspNetCore.Session`)입니다. [Path](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.path)의 기본값은 [SessionDefaults.CookiePath](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiepath)(`/`)입니다. [SameSite](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.samesite)의 기본값은 [SameSiteMode.Lax](/dotnet/api/microsoft.aspnetcore.http.samesitemode)(`1`)입니다. [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly)의 기본값은 `true`입니다. [IsEssential](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.isessential)의 기본값은 `false`입니다. |
-| [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) | `IdleTimeout`은 콘텐츠가 삭제되기 전까지 세션이 유휴 상태일 수 있는 시간을 나타냅니다. 각 세션 액세스는 시간 제한을 다시 설정합니다. 이 설정은 쿠키가 아닌 세션의 콘텐츠에만 적용됩니다. 기본값은 20분입니다. |
-| [IOTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.iotimeout) | 저장소에서 세션을 로드하거나 저장소로 다시 커밋할 수 있는 최대 시간입니다. 이 설정은 비동기 작업에만 적용될 수 있습니다. 이 시간 제한은 [InfiniteTimeSpan](/dotnet/api/system.threading.timeout.infinitetimespan)을 사용하여 비활성화할 수 있습니다. 기본값은 1분입니다. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | 쿠키를 만드는 데 사용되는 설정을 결정합니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> 기본값은 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType>(`.AspNetCore.Session`)입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> 기본값은 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType>(`/`)입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>기본값은 <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType>(`1`)입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> 기본값은 `true`입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 기본값은 `false`입니다. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout`은 콘텐츠가 삭제되기 전까지 세션이 유휴 상태일 수 있는 시간을 나타냅니다. 각 세션 액세스는 시간 제한을 다시 설정합니다. 이 설정은 쿠키가 아닌 세션의 콘텐츠에만 적용됩니다. 기본값은 20분입니다. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | 저장소에서 세션을 로드하거나 저장소로 다시 커밋할 수 있는 최대 시간입니다. 이 설정은 비동기 작업에만 적용될 수 있습니다. 이 시간 제한은 <xref:System.Threading.Timeout.InfiniteTimeSpan>을 사용하여 사용하지 않도록 설정할 수 있습니다. 기본값은 1분입니다. |
 
-세션은 쿠키를 사용하여 단일 브라우저에서 요청을 추적하고 식별합니다. 기본적으로 이 쿠키는 `.AspNetCore.Session`이라고 하며 `/`의 경로를 사용합니다. 쿠키 기본값은 도메인을 지정하지 않으므로([HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) 기본값이 `true`임으로) 페이지의 클라이언트 쪽 스크립트에 사용할 수 없습니다.
+세션은 쿠키를 사용하여 단일 브라우저에서 요청을 추적하고 식별합니다. 기본적으로 이 쿠키는 `.AspNetCore.Session`이라고 하며 `/`의 경로를 사용합니다. 쿠키 기본값은 도메인을 지정하지 않으므로 페이지에서 클라이언트 쪽 스크립트에 사용할 수 없습니다(<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> 기본값이 `true`이므로).
 
 쿠키 세션 기본값을 재정의하려면 <xref:Microsoft.AspNetCore.Builder.SessionOptions>를 사용합니다.
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Startup2.cs?name=snippet1&highlight=5-10)]
 
-앱은 [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) 속성을 사용하여 서버 캐시의 콘텐츠가 중단되기 전에 유휴 상태일 수 있는 세션의 기간을 결정합니다. 이 속성은 쿠키 만료와 무관합니다. [세션 미들웨어](/dotnet/api/microsoft.aspnetcore.session.sessionmiddleware)를 통해 전달되는 각 요청은 시간 제한을 다시 설정합니다.
+앱은 <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> 속성을 사용하여 서버 캐시의 콘텐츠가 중단되기 전에 유휴 상태일 수 있는 세션의 기간을 결정합니다. 이 속성은 쿠키 만료와 무관합니다. [세션 미들웨어](xref:Microsoft.AspNetCore.Session.SessionMiddleware)를 통해 전달되는 각 요청은 시간 제한을 다시 설정합니다.
 
 세션 상태는 *잠그지 않음*입니다. 두 요청이 동시에 세션의 콘텐츠를 수정하려고 하는 경우 마지막 요청이 첫 번째 요청을 재정의합니다. `Session`은 *일관된 세션*으로 구현됩니다. 즉, 모든 콘텐츠는 함께 저장됩니다. 두 요청이 서로 다른 세션 값을 수정하려고 할 때 마지막 요청이 첫 번째 요청에 의해 수행된 세션 변경 내용을 재정의할 수 있습니다.
 
 ### <a name="set-and-get-session-values"></a>세션 값 설정 및 가져오기
 
-세션 상태는 [HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session)이 포함된 Razor Pages [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 클래스 또는 MVC [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller) 클래스에서 액세스됩니다. 이 속성은 [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) 구현입니다.
+세션 상태는 <xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType>이 포함된 Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 클래스 또는 MVC <xref:Microsoft.AspNetCore.Mvc.Controller> 클래스에서 액세스됩니다. 이 속성은 <xref:Microsoft.AspNetCore.Http.ISession> 구현입니다.
 
-`ISession` 구현은 정수 및 문자열 값을 설정 및 검색하는 몇 가지 확장 메서드를 제공합니다. 확장 메서드는 [Microsoft.AspNetCore.Http](/dotnet/api/microsoft.aspnetcore.http) 네임스페이스에 있습니다.
+`ISession` 구현은 정수 및 문자열 값을 설정 및 검색하는 몇 가지 확장 메서드를 제공합니다. 확장 메서드는 <xref:Microsoft.AspNetCore.Http> 네임스페이스에 있습니다.
 
 `ISession` 확장명 메서드:
 
-* [Get(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.get)
-* [GetInt32(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getint32)
-* [GetString(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getstring)
-* [SetInt32(ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
-* [SetString(ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
+* [Get(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.Get%2A)
+* [GetInt32(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetInt32%2A)
+* [GetString(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetString%2A)
+* [SetInt32(ISession, String, Int32)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetInt32%2A)
+* [SetString(ISession, String, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetString%2A)
 
 다음 예제에서는 Razor Pages 페이지에서 `IndexModel.SessionKeyName` 키(샘플 앱의 `_Name`)의 세션 값을 검색합니다.
 
@@ -169,7 +170,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=18-19,22-23)]
 
-메모리 내 캐시를 사용하는 경우에도, 분산된 캐시 시나리오를 사용하려면 모든 세션 데이터를 직렬화해야 합니다. 문자열 및 정수 직렬 변환기는 [ISession](/dotnet/api/microsoft.aspnetcore.http.isession)의 확장 메서드가 제공합니다. 복합 형식은 JSON과 같은 다른 메커니즘을 사용하여 사용자가 직렬화해야 합니다.
+메모리 내 캐시를 사용하는 경우에도, 분산된 캐시 시나리오를 사용하려면 모든 세션 데이터를 직렬화해야 합니다. 문자열 및 정수 직렬 변환기는 <xref:Microsoft.AspNetCore.Http.ISession>의 확장 메서드가 제공합니다. 복합 형식은 JSON과 같은 다른 메커니즘을 사용하여 사용자가 직렬화해야 합니다.
 
 다음 샘플 코드를 사용하여 개체를 직렬화할 수 있습니다.
 
@@ -212,7 +213,7 @@ ASP.NET Core는 Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.
 
 쿠키 기반 TempData 공급자는 TempData를 쿠키에 저장하는 데 기본적으로 사용됩니다.
 
-쿠키 데이터는 [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector)를 사용하여 암호화되고, [Base64UrlTextEncoder](/dotnet/api/microsoft.aspnetcore.webutilities.base64urltextencoder)로 인코딩된 후 청크 분할됩니다. 암호화 및 청크로 인해 최대 쿠키 크기는 [4096바이트](http://www.faqs.org/rfcs/rfc2965.html) 미만입니다. 암호화된 데이터를 압축하는 것은 [범죄](https://wikipedia.org/wiki/CRIME_(security_exploit)) 및 [위반](https://wikipedia.org/wiki/BREACH_(security_exploit)) 공격과 같은 보안 문제를 일으킬 수 있으므로 쿠키 데이터는 압축되지 않습니다. 쿠키 기반 TempData 공급자에 대한 자세한 내용은 [CookieTempDataProvider](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.cookietempdataprovider)를 참조하세요.
+쿠키 데이터는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>를 사용하여 암호화되고, <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder>로 인코딩된 후 청크 분할됩니다. 암호화 및 청크로 인해 최대 쿠키 크기는 [4096바이트](http://www.faqs.org/rfcs/rfc2965.html) 미만입니다. 암호화된 데이터를 압축하는 것은 [범죄](https://wikipedia.org/wiki/CRIME_(security_exploit)) 및 [위반](https://wikipedia.org/wiki/BREACH_(security_exploit)) 공격과 같은 보안 문제를 일으킬 수 있으므로 쿠키 데이터는 압축되지 않습니다. 쿠키 기반 TempData 공급자에 대한 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider>를 참조하세요.
 
 ### <a name="choose-a-tempdata-provider"></a>TempData 공급자 선택
 
@@ -228,9 +229,9 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 쿠키 기반 TempData 공급자는 기본적으로 활성화됩니다.
 
-세션 기반 TempData 공급자를 사용하도록 설정하려면 [AddSessionStateTempDataProvider](/dotnet/api/microsoft.extensions.dependencyinjection.mvcviewfeaturesmvcbuilderextensions.addsessionstatetempdataprovider) 확장 메서드를 사용합니다. `AddSessionStateTempDataProvider`를 한 번만 호출하면 됩니다.
+세션 기반 TempData 공급자를 사용하도록 설정하려면 <xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> 확장 메서드를 사용합니다. `AddSessionStateTempDataProvider`를 한 번만 호출하면 됩니다.
 
-[!code-csharp[](app-state/samples/3.x/SessionSample/Startup3.cs?name=snippet1&highlight=4,6,30)]
+[!code-csharp[](app-state/samples/3.x/SessionSample/Startup3.cs?name=snippet1&highlight=4,6,8,30)]
 
 ## <a name="query-strings"></a>쿼리 문자열
 
@@ -244,7 +245,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 ## <a name="httpcontextitems"></a>HttpContext.Items
 
-[HttpContext.Items](/dotnet/api/microsoft.aspnetcore.http.httpcontext.items) 컬렉션은 단일 요청을 처리하는 동안 데이터를 저장하는 데 사용됩니다. 컬렉션의 콘텐츠는 요청이 처리된 후 삭제됩니다. `Items` 컬렉션은 구성 요소 또는 미들웨어가 요청 중에 다른 시점에서 작동하고 매개 변수를 전달할 직접적인 방법이 없는 경우에 통신을 지원하기 위해 자주 사용됩니다.
+<xref:Microsoft.AspNetCore.Http.HttpContext.Items?displayProperty=nameWithType> 컬렉션은 단일 요청을 처리하는 동안 데이터를 저장하는 데 사용됩니다. 컬렉션의 콘텐츠는 요청이 처리된 후 삭제됩니다. `Items` 컬렉션은 구성 요소 또는 미들웨어가 요청 중에 다른 시점에서 작동하고 매개 변수를 전달할 직접적인 방법이 없는 경우에 통신을 지원하기 위해 자주 사용됩니다.
 
 다음 예제에서 [미들웨어](xref:fundamentals/middleware/index)는 `isVerified`를 `Items` 컬렉션에 추가합니다.
 
@@ -341,7 +342,7 @@ ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함�
 * 쿠키가 만료된 세션에 대해 수신되면 동일한 세션 쿠키를 사용하는 새 세션이 생성됩니다.
 * 빈 세션은 유지되지 않습니다. 요청 간 세션을 유지하려면 세션에 하나 이상의 값이 설정되어 있어야 합니다. 세션이 유지되지 않으면 새 요청마다 새 세션 ID가 생성됩니다.
 * 앱은 마지막 요청 이후 제한된 시간 동안 세션을 유지합니다. 앱은 세션 시간 제한을 설정하거나 20분의 기본값을 사용합니다. 세션 상태는 특정 세션과 관련된 사용자 데이터를 저장하되, 데이터가 세션 간에 영구 스토리지를 요구하지 않는 경우에 적합합니다.
-* 세션 데이터는 [ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear) 구현이 호출되거나 세션이 만료될 때 삭제됩니다.
+* 세션 데이터는 <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> 구현이 호출되거나 세션이 만료될 때 삭제됩니다.
 * 클라이언트 브라우저가 닫혔거나 세션 쿠키가 삭제 또는 클라이언트에서 만료되었을 때 앱 코드에 이를 알려주는 기본 메커니즘은 없습니다.
 * ASP.NET Core MVC 및 Razor Pages 템플릿에는 GDPR(일반 데이터 보호 규정) 지원이 포함되어 있습니다. 세션 상태 쿠키는 기본적으로 필수로 표시되지 않으므로 사이트 방문자가 추적을 허용하지 않는 한 세션 상태가 작동하지 않습니다. 자세한 내용은 <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>를 참조하세요.
 
@@ -351,15 +352,15 @@ ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함�
 메모리 내 캐시 공급자는 앱이 있는 서버의 메모리에 세션 데이터를 저장합니다. 서버 팜 시나리오:
 
 * *고정 세션*을 사용하여 각 세션을 개별 서버의 특정 앱 인스턴스에 연결합니다. [Azure App Service](https://azure.microsoft.com/services/app-service/)는 [ARR(애플리케이션 요청 라우팅)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module)을 사용하여 기본적으로 고정 세션을 적용합니다. 그러나 고정 세션은 확장성에 영향을 주고 웹앱 업데이트를 복잡하게 만들 수 있습니다. 더 나은 방법은 고정 세션이 필요 없는 Redis 또는 SQL Server 분산 캐시를 사용하는 것입니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
-* 세션 쿠키는 [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector)를 통해 암호화됩니다. 데이터 보호는 각 컴퓨터에서 세션 쿠키를 읽을 수 있도록 올바르게 구성되어야 합니다. 자세한 내용은 <xref:security/data-protection/introduction> 및 [키 스토리지 공급자](xref:security/data-protection/implementation/key-storage-providers)를 참조하세요.
+* 세션 쿠키는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>를 통해 암호화됩니다. 데이터 보호는 각 컴퓨터에서 세션 쿠키를 읽을 수 있도록 올바르게 구성되어야 합니다. 자세한 내용은 <xref:security/data-protection/introduction> 및 [키 스토리지 공급자](xref:security/data-protection/implementation/key-storage-providers)를 참조하세요.
 
 ### <a name="configure-session-state"></a>세션 상태 구성
 
 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 포함된 [Microsoft.AspNetCore.Session](https://www.nuget.org/packages/Microsoft.AspNetCore.Session/) 패키지는 세션 상태 관리용 미들웨어를 제공합니다. 세션 미들웨어를 활성화하려면 `Startup`은 다음을 포함해야 합니다.
 
-* [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) 메모리 캐시 중 하나 `IDistributedCache` 구현은 세션에 대한 백업 저장소로 사용됩니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
-* `ConfigureServices`의 [AddSession](/dotnet/api/microsoft.extensions.dependencyinjection.sessionservicecollectionextensions.addsession)에 대한 호출.
-* `Configure`의 [UseSession](/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions.usesession#Microsoft_AspNetCore_Builder_SessionMiddlewareExtensions_UseSession_Microsoft_AspNetCore_Builder_IApplicationBuilder_)에 대한 호출.
+* <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 메모리 캐시 중 하나. `IDistributedCache` 구현은 세션에 대한 백업 저장소로 사용됩니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
+* `ConfigureServices`의 <xref:Microsoft.Extensions.DependencyInjection.SessionServiceCollectionExtensions.AddSession%2A>에 대한 호출.
+* `Configure`의 <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A>에 대한 호출.
 
 다음 코드에서는 `IDistributedCache`의 기본 메모리 내 구현을 사용하여 메모리 내 세션 공급자를 설정하는 방법을 보여 줍니다.
 
@@ -367,7 +368,7 @@ ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함�
 
 미들웨어의 순서가 중요합니다. 앞의 예에서 `UseMvc` 이후에 `UseSession`이 호출되면 `InvalidOperationException` 예외가 발생합니다. 자세한 내용은 [미들웨어 순서 지정](xref:fundamentals/middleware/index#order)을 참조하세요.
 
-[HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session)은 세션 상태가 구성된 후에 사용할 수 있습니다.
+<xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType>은 세션 상태가 구성된 후에 사용할 수 있습니다.
 
 `UseSession`이 호출되기 전에 `HttpContext.Session`에 액세스할 수 없습니다.
 
@@ -375,43 +376,43 @@ ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함�
 
 ### <a name="load-session-state-asynchronously"></a>세션 상태를 비동기적으로 로드
 
-ASP.NET Core에서 기본 세션 공급자는 [ISession.LoadAsync](/dotnet/api/microsoft.aspnetcore.http.isession.loadasync) 메서드가 [TryGetValue](/dotnet/api/microsoft.aspnetcore.http.isession.trygetvalue), [Set](/dotnet/api/microsoft.aspnetcore.http.isession.set) 또는 [Remove](/dotnet/api/microsoft.aspnetcore.http.isession.remove) 메서드 전에 명시적으로 호출된 경우에만 기본 [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) 백업 저장소에서 비동기적으로 세션 레코드를 로드합니다. `LoadAsync`가 먼저 호출되지 않은 경우 기본 세션 레코드가 동기적으로 로드되며, 이는 크기에 따라 성능 저하를 초래할 수 있습니다.
+ASP.NET Core에서 기본 세션 공급자는 <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync%2A?displayProperty=nameWithType> 메서드가 <xref:Microsoft.AspNetCore.Http.ISession.TryGetValue%2A>, <xref:Microsoft.AspNetCore.Http.ISession.Set%2A> 또는 <xref:Microsoft.AspNetCore.Http.ISession.Remove%2A> 메서드 전에 명시적으로 호출된 경우에만 기본 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 백업 저장소에서 비동기적으로 세션 레코드를 로드합니다. `LoadAsync`가 먼저 호출되지 않은 경우 기본 세션 레코드가 동기적으로 로드되며, 이는 크기에 따라 성능 저하를 초래할 수 있습니다.
 
-이 패턴을 앱에 적용하려면 `LoadAsync` 메서드가 `TryGetValue`, `Set` 또는 `Remove` 이전에 호출되지 않은 경우 예외를 throw하는 버전으로 [DistributedSessionStore](/dotnet/api/microsoft.aspnetcore.session.distributedsessionstore) 및 [DistributedSession](/dotnet/api/microsoft.aspnetcore.session.distributedsession) 구현을 래핑합니다. 서비스 컨테이너에 래핑된 버전을 등록합니다.
+이 패턴을 앱에 적용하려면 `LoadAsync` 메서드가 `TryGetValue`, `Set` 또는 `Remove` 이전에 호출되지 않은 경우 예외를 throw하는 버전으로 <xref:Microsoft.AspNetCore.Session.DistributedSessionStore> 및 <xref:Microsoft.AspNetCore.Session.DistributedSession> 구현을 래핑합니다. 서비스 컨테이너에 래핑된 버전을 등록합니다.
 
 ### <a name="session-options"></a>세션 옵션
 
-세션 기본값을 재정의하려면 [SessionOptions](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions)를 사용합니다.
+세션 기본값을 재정의하려면 <xref:Microsoft.AspNetCore.Builder.SessionOptions>를 사용합니다.
 
 | 옵션 | 설명 |
 | ------ | ----------- |
-| [쿠키](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookie) | 쿠키를 만드는 데 사용되는 설정을 결정합니다. [Name](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.name)의 기본값은 [SessionDefaults.CookieName](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiename)(`.AspNetCore.Session`)입니다. [Path](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.path)의 기본값은 [SessionDefaults.CookiePath](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiepath)(`/`)입니다. [SameSite](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.samesite)의 기본값은 [SameSiteMode.Lax](/dotnet/api/microsoft.aspnetcore.http.samesitemode)(`1`)입니다. [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly)의 기본값은 `true`입니다. [IsEssential](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.isessential)의 기본값은 `false`입니다. |
-| [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) | `IdleTimeout`은 콘텐츠가 삭제되기 전까지 세션이 유휴 상태일 수 있는 시간을 나타냅니다. 각 세션 액세스는 시간 제한을 다시 설정합니다. 이 설정은 쿠키가 아닌 세션의 콘텐츠에만 적용됩니다. 기본값은 20분입니다. |
-| [IOTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.iotimeout) | 저장소에서 세션을 로드하거나 저장소로 다시 커밋할 수 있는 최대 시간입니다. 이 설정은 비동기 작업에만 적용될 수 있습니다. 이 시간 제한은 [InfiniteTimeSpan](/dotnet/api/system.threading.timeout.infinitetimespan)을 사용하여 비활성화할 수 있습니다. 기본값은 1분입니다. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | 쿠키를 만드는 데 사용되는 설정을 결정합니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> 기본값은 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType>(`.AspNetCore.Session`)입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> 기본값은 <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType>(`/`)입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>기본값은 <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType>(`1`)입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> 기본값은 `true`입니다. <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 기본값은 `false`입니다. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout`은 콘텐츠가 삭제되기 전까지 세션이 유휴 상태일 수 있는 시간을 나타냅니다. 각 세션 액세스는 시간 제한을 다시 설정합니다. 이 설정은 쿠키가 아닌 세션의 콘텐츠에만 적용됩니다. 기본값은 20분입니다. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | 저장소에서 세션을 로드하거나 저장소로 다시 커밋할 수 있는 최대 시간입니다. 이 설정은 비동기 작업에만 적용될 수 있습니다. 이 시간 제한은 <xref:System.Threading.Timeout.InfiniteTimeSpan>을 사용하여 사용하지 않도록 설정할 수 있습니다. 기본값은 1분입니다. |
 
-세션은 쿠키를 사용하여 단일 브라우저에서 요청을 추적하고 식별합니다. 기본적으로 이 쿠키는 `.AspNetCore.Session`이라고 하며 `/`의 경로를 사용합니다. 쿠키 기본값은 도메인을 지정하지 않으므로([HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) 기본값이 `true`임으로) 페이지의 클라이언트 쪽 스크립트에 사용할 수 없습니다.
+세션은 쿠키를 사용하여 단일 브라우저에서 요청을 추적하고 식별합니다. 기본적으로 이 쿠키는 `.AspNetCore.Session`이라고 하며 `/`의 경로를 사용합니다. 쿠키 기본값은 도메인을 지정하지 않으므로 페이지에서 클라이언트 쪽 스크립트에 사용할 수 없습니다(<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> 기본값이 `true`이므로).
 
 쿠키 세션 기본값을 재정의하려면 `SessionOptions`를 사용합니다.
 
 [!code-csharp[](app-state/samples_snapshot/2.x/SessionSample/Startup.cs?name=snippet1&highlight=14-19)]
 
-앱은 [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) 속성을 사용하여 서버 캐시의 콘텐츠가 중단되기 전에 유휴 상태일 수 있는 세션의 기간을 결정합니다. 이 속성은 쿠키 만료와 무관합니다. [세션 미들웨어](/dotnet/api/microsoft.aspnetcore.session.sessionmiddleware)를 통해 전달되는 각 요청은 시간 제한을 다시 설정합니다.
+앱은 <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> 속성을 사용하여 서버 캐시의 콘텐츠가 중단되기 전에 유휴 상태일 수 있는 세션의 기간을 결정합니다. 이 속성은 쿠키 만료와 무관합니다. [세션 미들웨어](xref:Microsoft.AspNetCore.Session.SessionMiddleware)를 통해 전달되는 각 요청은 시간 제한을 다시 설정합니다.
 
 세션 상태는 *잠그지 않음*입니다. 두 요청이 동시에 세션의 콘텐츠를 수정하려고 하는 경우 마지막 요청이 첫 번째 요청을 재정의합니다. `Session`은 *일관된 세션*으로 구현됩니다. 즉, 모든 콘텐츠는 함께 저장됩니다. 두 요청이 서로 다른 세션 값을 수정하려고 할 때 마지막 요청이 첫 번째 요청에 의해 수행된 세션 변경 내용을 재정의할 수 있습니다.
 
 ### <a name="set-and-get-session-values"></a>세션 값 설정 및 가져오기
 
-세션 상태는 [HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session)이 포함된 Razor Pages [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) 클래스 또는 MVC [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller) 클래스에서 액세스됩니다. 이 속성은 [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) 구현입니다.
+세션 상태는 <xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType>이 포함된 Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 클래스 또는 MVC <xref:Microsoft.AspNetCore.Mvc.Controller> 클래스에서 액세스됩니다. 이 속성은 <xref:Microsoft.AspNetCore.Http.ISession> 구현입니다.
 
-`ISession` 구현은 정수 및 문자열 값을 설정 및 검색하는 몇 가지 확장 메서드를 제공합니다. 확장 메서드는 [Microsoft.AspNetCore.Http.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) 패키지가 프로젝트에서 참조될 때, [Microsoft.AspNetCore.Http](/dotnet/api/microsoft.aspnetcore.http) 네임스페이스에 있습니다(확장 메서드에 액세스하려면 `using Microsoft.AspNetCore.Http;` 문 추가). 두 패키지 모두 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 포함되어 있습니다.
+`ISession` 구현은 정수 및 문자열 값을 설정 및 검색하는 몇 가지 확장 메서드를 제공합니다. 확장 메서드는 [Microsoft.AspNetCore.Http.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) 패키지가 프로젝트에서 참조될 때, <xref:Microsoft.AspNetCore.Http> 네임스페이스에 있습니다(확장 메서드에 액세스하려면 `using Microsoft.AspNetCore.Http;` 문 추가). 두 패키지 모두 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 포함되어 있습니다.
 
 `ISession` 확장명 메서드:
 
-* [Get(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.get)
-* [GetInt32(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getint32)
-* [GetString(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getstring)
-* [SetInt32(ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
-* [SetString(ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
+* [Get(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.Get%2A)
+* [GetInt32(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetInt32%2A)
+* [GetString(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetString%2A)
+* [SetInt32(ISession, String, Int32)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetInt32%2A)
+* [SetString(ISession, String, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetString%2A)
 
 다음 예제에서는 Razor Pages 페이지에서 `IndexModel.SessionKeyName` 키(샘플 앱의 `_Name`)의 세션 값을 검색합니다.
 
@@ -429,7 +430,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 [!code-csharp[](app-state/samples/2.x/SessionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=18-19,22-23)]
 
-메모리 내 캐시를 사용하는 경우에도, 분산된 캐시 시나리오를 사용하려면 모든 세션 데이터를 직렬화해야 합니다. 문자열 및 정수 직렬 변환기는 [ISession](/dotnet/api/microsoft.aspnetcore.http.isession)의 확장 메서드가 제공합니다. 복합 형식은 JSON과 같은 다른 메커니즘을 사용하여 사용자가 직렬화해야 합니다.
+메모리 내 캐시를 사용하는 경우에도, 분산된 캐시 시나리오를 사용하려면 모든 세션 데이터를 직렬화해야 합니다. 문자열 및 정수 직렬 변환기는 <xref:Microsoft.AspNetCore.Http.ISession>의 확장 메서드가 제공합니다. 복합 형식은 JSON과 같은 다른 메커니즘을 사용하여 사용자가 직렬화해야 합니다.
 
 다음 확장 메서드를 추가하여 직렬화 가능 개체를 설정하고 가져옵니다.
 
@@ -469,7 +470,7 @@ ASP.NET Core는 Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.
 
 쿠키 기반 TempData 공급자는 TempData를 쿠키에 저장하는 데 기본적으로 사용됩니다.
 
-쿠키 데이터는 [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector)를 사용하여 암호화되고, [Base64UrlTextEncoder](/dotnet/api/microsoft.aspnetcore.webutilities.base64urltextencoder)로 인코딩된 후 청크 분할됩니다. 쿠키가 청크 분할되므로 ASP.NET Core 1.x에서 확인한 단일 쿠키 크기 제한은 적용되지 않습니다. 암호화된 데이터를 압축하는 것은 [범죄](https://wikipedia.org/wiki/CRIME_(security_exploit)) 및 [위반](https://wikipedia.org/wiki/BREACH_(security_exploit)) 공격과 같은 보안 문제를 일으킬 수 있으므로 쿠키 데이터는 압축되지 않습니다. 쿠키 기반 TempData 공급자에 대한 자세한 내용은 [CookieTempDataProvider](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.cookietempdataprovider)를 참조하세요.
+쿠키 데이터는 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>를 사용하여 암호화되고, <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder>로 인코딩된 후 청크 분할됩니다. 쿠키가 청크 분할되므로 ASP.NET Core 1.x에서 확인한 단일 쿠키 크기 제한은 적용되지 않습니다. 암호화된 데이터를 압축하는 것은 [범죄](https://wikipedia.org/wiki/CRIME_(security_exploit)) 및 [위반](https://wikipedia.org/wiki/BREACH_(security_exploit)) 공격과 같은 보안 문제를 일으킬 수 있으므로 쿠키 데이터는 압축되지 않습니다. 쿠키 기반 TempData 공급자에 대한 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider>를 참조하세요.
 
 ### <a name="choose-a-tempdata-provider"></a>TempData 공급자 선택
 
@@ -486,7 +487,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 쿠키 기반 TempData 공급자는 기본적으로 활성화됩니다.
 
-세션 기반 TempData 공급자를 활성화하려면 [AddSessionStateTempDataProvider](/dotnet/api/microsoft.extensions.dependencyinjection.mvcviewfeaturesmvcbuilderextensions.addsessionstatetempdataprovider) 확장 메서드를 사용합니다.
+세션 기반 TempData 공급자를 사용하도록 설정하려면 <xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> 확장 메서드를 사용합니다.
 
 [!code-csharp[](app-state/samples_snapshot_2/2.x/SessionSample/Startup.cs?name=snippet1&highlight=11,13,32)]
 
@@ -507,7 +508,7 @@ TempData 공급자를 선택하는 데는 다음과 같은 몇 가지 고려 사
 
 ## <a name="httpcontextitems"></a>HttpContext.Items
 
-[HttpContext.Items](/dotnet/api/microsoft.aspnetcore.http.httpcontext.items) 컬렉션은 단일 요청을 처리하는 동안 데이터를 저장하는 데 사용됩니다. 컬렉션의 콘텐츠는 요청이 처리된 후 삭제됩니다. `Items` 컬렉션은 구성 요소 또는 미들웨어가 요청 중에 다른 시점에서 작동하고 매개 변수를 전달할 직접적인 방법이 없는 경우에 통신을 지원하기 위해 자주 사용됩니다.
+<xref:Microsoft.AspNetCore.Http.HttpContext.Items?displayProperty=nameWithType> 컬렉션은 단일 요청을 처리하는 동안 데이터를 저장하는 데 사용됩니다. 컬렉션의 콘텐츠는 요청이 처리된 후 삭제됩니다. `Items` 컬렉션은 구성 요소 또는 미들웨어가 요청 중에 다른 시점에서 작동하고 매개 변수를 전달할 직접적인 방법이 없는 경우에 통신을 지원하기 위해 자주 사용됩니다.
 
 다음 예제에서 [미들웨어](xref:fundamentals/middleware/index)는 `Items` 컬렉션에 `isVerified`를 추가합니다.
 

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: c444b331f44382db885a8bac33b46dac8505dd20
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: a5401e1b423740aadf6f8de84763b5c05d451cd0
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407686"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445335"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -186,6 +186,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 ```
+
+> [!IMPORTANT]
+> [`@using`][2] `_Imports.razor` 파일의 지시문은 C# 파일(`.cs`)이 아닌 Razor 파일(`.razor`)에만 적용됩니다.
 
 ### <a name="specify-a-base-class"></a>기본 클래스 지정
 

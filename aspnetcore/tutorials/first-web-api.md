@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 63f91086a7e9d71add7f7a5d58d96f46fa76353c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407787"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212624"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -114,9 +114,7 @@ ms.locfileid: "85407787"
 
   ![macOS API 템플릿 선택](first-web-api-mac/_static/api_template.png)
 
-* **대상 프레임워크**가 **.NET Core 3.1**로 설정되었는지 확인합니다. **새로 만들기**를 선택합니다.
-
-  ![macOS .NET Core 3.1 선택](first-web-api-mac/_static/api_31_config.png)
+* **새 ASP.NET Core Web API 구성** 대화 상자에서 최신 .NET Core 3.x **대상 프레임워크**를 선택합니다. **새로 만들기**를 선택합니다.
 
 * **프로젝트 이름**으로 *TodoApi*를 입력한 다음, **만들기**를 선택합니다.
 
@@ -594,7 +592,7 @@ DTO 모델을 만듭니다.
 
 * Mac용 Visual Studio 버전 8.6 미만에서 **.NET Core** > **앱** > **API** > **다음**을 선택합니다. 버전 8.6 이상에서 **웹 및 콘솔** > **앱** > **API** > **다음**을 선택합니다.
   
-* **새 ASP.NET Core Web API 구성** 대화 상자에서 * *.NET Core 2.2*라는 기본 **대상 프레임워크**를 수락합니다.
+* **새 ASP.NET Core Web API 구성** 대화 상자에서 최신 .NET Core 2.x **대상 프레임워크**를 선택합니다. **새로 만들기**를 선택합니다.
 
 * **프로젝트 이름**으로 *TodoApi*를 입력한 다음, **만들기**를 선택합니다.
 
