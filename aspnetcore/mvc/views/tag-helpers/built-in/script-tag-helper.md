@@ -54,7 +54,7 @@ ms.locfileid: "85407410"
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-기본 스크립트가 실패할 경우 대체할 Script 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>를 참조하세요.
+기본 스크립트가 실패할 경우 대체할 Script 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
