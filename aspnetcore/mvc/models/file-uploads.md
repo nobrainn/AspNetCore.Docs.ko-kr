@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404602"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568836"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
@@ -108,7 +108,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 
 소용량 파일 버퍼링은 이 항목의 다음 섹션에서 설명합니다.
 
-* [실제 저장소](#upload-small-files-with-buffered-model-binding-to-physical-storage)
+* [물리적 스토리지](#upload-small-files-with-buffered-model-binding-to-physical-storage)
 * [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **스트리밍**
@@ -424,7 +424,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 샘플 앱에서 `GenerateAntiforgeryTokenCookieAttribute` 및는 페이지 `DisableFormValueModelBindingAttribute` `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor 규칙](xref:razor-pages/razor-pages-conventions)을 사용 하 여 및의 페이지 응용 프로그램 모델에 필터로 적용 됩니다.
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
 모델 바인딩은 양식을 읽지 않으므로 양식에서 바인딩된 매개 변수가 바인딩되지 않습니다(쿼리, 경로 및 헤더는 계속 작동함). 작업 메서드는 `Request` 속성으로 직접 작동합니다. `MultipartReader`는 각 섹션을 읽는 데 사용됩니다. 키/값 데이터는 `KeyValueAccumulator`에 저장됩니다. 다중 파트 섹션을 읽은 후 `KeyValueAccumulator`의 내용이 양식 데이터를 모델 형식으로 바인딩하는 데 사용됩니다.
 
@@ -621,18 +621,17 @@ public void ConfigureServices(IServiceCollection services)
 Razor페이지 앱에서 다음과 같은 [규칙](xref:razor-pages/razor-pages-conventions) 을 사용 하 여 필터를 적용 합니다 `Startup.ConfigureServices` .
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model.Filters.Add(
-                    new RequestFormLimitsAttribute()
-                    {
-                        // Set the limit to 256 MB
-                        MultipartBodyLengthLimit = 268435456
-                    });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model.Filters.Add(
+                new RequestFormLimitsAttribute()
+                {
+                    // Set the limit to 256 MB
+                    MultipartBodyLengthLimit = 268435456
+                });
+});
 ```
 
 페이지 Razor 앱 또는 MVC 앱에서 필터를 페이지 모델 또는 작업 메서드에 적용 합니다.
@@ -669,18 +668,17 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 Razor페이지 앱에서 다음과 같은 [규칙](xref:razor-pages/razor-pages-conventions) 을 사용 하 여 필터를 적용 합니다 `Startup.ConfigureServices` .
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model =>
-                {
-                    // Handle requests up to 50 MB
-                    model.Filters.Add(
-                        new RequestSizeLimitAttribute(52428800));
-                });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model =>
+            {
+                // Handle requests up to 50 MB
+                model.Filters.Add(
+                    new RequestSizeLimitAttribute(52428800));
+            });
+});
 ```
 
 페이지 Razor 앱 또는 MVC 앱에서 필터를 페이지 처리기 클래스 또는 작업 메서드에 적용 합니다.
@@ -837,7 +835,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 
 소용량 파일 버퍼링은 이 항목의 다음 섹션에서 설명합니다.
 
-* [실제 저장소](#upload-small-files-with-buffered-model-binding-to-physical-storage)
+* [물리적 스토리지](#upload-small-files-with-buffered-model-binding-to-physical-storage)
 * [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **스트리밍**
@@ -1478,7 +1476,7 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [HTTP 연결 요청 드레이닝](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [무제한 파일 업로드](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)

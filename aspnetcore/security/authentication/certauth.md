@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445127"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568849"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -36,7 +36,7 @@ ms.locfileid: "86445127"
 
 프록시 및 부하 분산 장치를 사용 하는 환경에서 인증서 인증에 대 한 대안은 OIDC (Openid connect Connect)를 사용 하는 페더레이션 서비스 (ADFS) Active Directory입니다.
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 
 HTTPS 인증서를 획득 하 고 적용 한 다음 인증서를 요구 하도록 [서버를 구성](#configure-your-server-to-require-certificates) 합니다.
 
@@ -44,7 +44,7 @@ HTTPS 인증서를 획득 하 고 적용 한 다음 인증서를 요구 하도�
 
 인증이 실패 하는 경우이 처리기는 `403 (Forbidden)` 정상적으로 응답을 반환 `401 (Unauthorized)` 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 예를 들어:
+또한 `app.UseAuthentication();` 메서드에를 추가 `Startup.Configure` 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 생성 된로 설정 되지 않습니다 `ClaimsPrincipal` . 예를 들면 다음과 같습니다.
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -614,7 +614,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-기본 캐싱 구현에서는 결과를 메모리에 저장 합니다. `ICertificateValidationCache`종속성 주입을 사용 하 여 구현 하 고 등록 하 여 자체 캐시를 제공할 수 있습니다. 예: `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
+기본 캐싱 구현에서는 결과를 메모리에 저장 합니다. `ICertificateValidationCache`종속성 주입을 사용 하 여 구현 하 고 등록 하 여 자체 캐시를 제공할 수 있습니다. 예들 들어 `services.AddSingleton<ICertificateValidationCache, YourCache>()`입니다.
 
 ::: moniker-end
 
@@ -630,7 +630,7 @@ TLS 재협상은 선택적 클라이언트 인증서를 구현 하는 기존 방
 - HTTP/2는 재협상을 [명시적으로 금지](https://tools.ietf.org/html/rfc7540#section-9.2.1) 합니다.
 - TLS 1.3에서 재협상에 대 한 지원을 [제거](https://tools.ietf.org/html/rfc8740#section-1) 했습니다.
 
-ASP.NET Core 5 preview 4 이상에서는 선택적 클라이언트 인증서에 대 한 편리한 지원을 추가 합니다. 자세한 내용은 [선택적 인증서 샘플](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)을 참조 하세요.
+ASP.NET Core 5 preview 7 이상에서는 선택적 클라이언트 인증서에 대 한 편리한 지원을 추가 합니다. 자세한 내용은 [선택적 인증서 샘플](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)을 참조 하세요.
 
 다음 방법에서는 선택적 클라이언트 인증서를 지원 합니다.
 
