@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213065"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869980"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -83,6 +83,8 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 동기 필터는 해당 파이프라인 단계 전후에 코드를 실행합니다. 예를 들어 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*>는 작업 메서드가 호출되기 전에 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*>는 작업 메서드가 반환된 후 호출됩니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
+
+위의 코드에서 [Mydebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs) 는 [샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)의 유틸리티 함수입니다.
 
 비동기 필터는 `On-Stage-ExecutionAsync` 메서드를 정의합니다. 예: <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>
 
@@ -184,12 +186,12 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 순서 | 필터 범위 | 필터 메서드 |
+| 시퀀스 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
-| 3 | 방법 | `OnActionExecuting` |
-| 4 | 방법 | `OnActionExecuted` |
+| 3 | 메서드 | `OnActionExecuting` |
+| 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -211,6 +213,8 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 * `OnActionExecuting` 및 `OnActionExecuted`를 재정의합니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
+
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
@@ -728,12 +732,12 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 순서 | 필터 범위 | 필터 메서드 |
+| 시퀀스 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
 | 1 | 전역 | `OnActionExecuting` |
 | 2 | Controller | `OnActionExecuting` |
-| 3 | 방법 | `OnActionExecuting` |
-| 4 | 방법 | `OnActionExecuted` |
+| 3 | 메서드 | `OnActionExecuting` |
+| 4 | 메서드 | `OnActionExecuted` |
 | 5 | Controller | `OnActionExecuted` |
 | 6 | 전역 | `OnActionExecuted` |
 
@@ -788,14 +792,14 @@ Razor페이지는 [ Razor 필터 메서드를 재정의 하 여 페이지 필터
 
 이전 예제와 동일한 3개의 작업 필터를 가정해보세요. 컨트롤러와 전역 필터의 `Order` 속성을 각각 1과 2로 설정하면 실행 순서가 반대가 됩니다.
 
-| 순서 | 필터 범위 | `Order` 속성 | 필터 메서드 |
+| 시퀀스 | 필터 범위 | `Order` 속성 | 필터 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 방법 | 0 | `OnActionExecuting` |
+| 1 | 메서드 | 0 | `OnActionExecuting` |
 | 2 | Controller | 1  | `OnActionExecuting` |
 | 3 | 전역 | 2  | `OnActionExecuting` |
 | 4 | 전역 | 2  | `OnActionExecuted` |
 | 5 | Controller | 1  | `OnActionExecuted` |
-| 6 | 방법 | 0  | `OnActionExecuted` |
+| 6 | 메서드 | 0  | `OnActionExecuted` |
 
 `Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터가 순서에 따라 먼저 정렬된 다음, 범위는 연결을 끊는 데 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
 
