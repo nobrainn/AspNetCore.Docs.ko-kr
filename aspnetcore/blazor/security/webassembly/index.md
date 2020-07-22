@@ -5,7 +5,7 @@ description: Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176150"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568810"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보호
 
@@ -73,6 +73,22 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
 **항상 클라이언트 쪽 앱을 통해 액세스한 API 엔드포인트 내에서 서버의 권한 부여 확인을 수행합니다.**
+
+## <a name="require-authorization-for-the-entire-app"></a>전체 앱에 대한 권한 부여 필요
+
+다음 방법 중 하나를 사용하여 앱의 각 Razor 구성 요소에 [`[Authorize]` 특성](xref:blazor/security/index#authorize-attribute)([API 설명서](xref:System.Web.Mvc.AuthorizeAttribute))을 적용합니다.
+
+* `_Imports.razor` 파일에 [`@attribute`](xref:mvc/views/razor#attribute) 지시문을 사용합니다.
+
+  ```razor
+  @using Microsoft.AspNetCore.Authorization
+  @attribute [Authorize]
+  ```
+
+* `Pages` 폴더의 각 Razor 구성 요소에 특성을 추가합니다.
+
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A>를 사용하는 정책에 대한 <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> 설정은 지원되지 **않습니다**.
 
 ## <a name="refresh-tokens"></a>새로 고침 토큰
 

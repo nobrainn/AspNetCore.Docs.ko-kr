@@ -5,7 +5,7 @@ description: ASP.NET Core에서 Web API 만들기에 대한 기본 사항을 알
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/02/2020
+ms.date: 07/20/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c9762d23ff612155846357bfadeaaad492c7299
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404732"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568745"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -98,16 +98,12 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.1"
-
 * [특성 라우팅 요구 사항](#attribute-routing-requirement)
 * [자동 HTTP 400 응답](#automatic-http-400-responses)
 * [바인딩 소스 매개 변수 유추](#binding-source-parameter-inference)
 * [다중 파트/폼 데이터 요청 유추](#multipartform-data-request-inference)
 
 이러한 기능을 사용하려면 [호환성 버전](xref:mvc/compatibility-version) 2.1 이상이 필요합니다.
-
-::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>특정 컨트롤러의 특성
 
@@ -232,9 +228,11 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 ::: moniker-end
 
+자동 및 사용자 지정 응답을 일관성 있게 설정하려면 <xref:System.Web.Http.ApiController.BadRequest%2A> 대신 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> 메서드를 호출합니다. `ValidationProblem`은 자동 응답뿐만 아니라 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> 개체를 반환합니다.
+
 ### <a name="log-automatic-400-responses"></a>자동 400 응답 기록
 
-[How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157)(모델 유효성 검사 오류에서 자동 400 응답을 기록하는 방법(aspnet/AspNetCore.Docs #12157))를 참조하세요.
+[How to log automatic 400 responses on model validation errors (dotnet/AspNetCore.Docs#12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157)(모델 유효성 검사 오류에서 자동 400 응답을 기록하는 방법(dotnet/AspNetCore.Docs#12157))를 참조하세요.
 
 ### <a name="disable-automatic-400-response"></a>자동 400 응답 사용 안 함
 
