@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 9c90e2a6c03e02b771cfa8f589e381d52637dc26
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 1417056beac99a8dfee47131c2cb6ab7ec52ad1e
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147640"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445270"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 웹 API 호출
 
@@ -47,7 +47,7 @@ ms.locfileid: "86147640"
 `Program.Main`에서 아직 없는 경우 <xref:System.Net.Http.HttpClient> 서비스를 추가합니다.
 
 ```csharp
-builder.Services.AddTransient(sp => 
+builder.Services.AddScoped(sp => 
     new HttpClient
     {
         BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
