@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: e88a471a35e1c2be5f77407a6c594cd6a97e1737
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 07fe7d4b64c84956be44e7d3ac0b1d8687b085c6
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944369"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445166"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -39,7 +39,7 @@ DI는 중앙 위치에 구성된 서비스에 액세스하기 위한 기술입�
 
 | 서비스 | 수명 | 설명 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Transient | URI로 식별되는 리소스에서 HTTP 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공합니다.<br><br>Blazor WebAssembly 앱의 <xref:System.Net.Http.HttpClient> 인스턴스는 브라우저를 사용하여 백그라운드에서 HTTP 트래픽을 처리합니다.<br><br>Blazor Server 앱에는 기본적으로 서비스로 구성된 <xref:System.Net.Http.HttpClient>는 포함되지 않습니다. Blazor Server 앱에 <xref:System.Net.Http.HttpClient>를 제공합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
+| <xref:System.Net.Http.HttpClient> | Scoped | URI로 식별되는 리소스에서 HTTP 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공합니다.<br><br>Blazor WebAssembly 앱의 <xref:System.Net.Http.HttpClient> 인스턴스는 브라우저를 사용하여 백그라운드에서 HTTP 트래픽을 처리합니다.<br><br>Blazor Server 앱에는 기본적으로 서비스로 구성된 <xref:System.Net.Http.HttpClient>는 포함되지 않습니다. Blazor Server 앱에 <xref:System.Net.Http.HttpClient>를 제공합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
 | <xref:Microsoft.JSInterop.IJSRuntime> | singleton(Blazor WebAssembly)<br>범위 지정됨(Blazor Server) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/call-javascript-from-dotnet>를 참조하세요. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager> | singleton(Blazor WebAssembly)<br>범위 지정됨(Blazor Server) | URI 및 탐색 상태를 사용하기 위한 도우미를 포함합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers)를 참조하세요. |
 
@@ -66,8 +66,11 @@ public class Program
         builder.Services.AddSingleton<IMyDependency, MyDependency>();
         builder.RootComponents.Add<App>("app");
         
-        builder.Services.AddTransient(sp => 
-            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddScoped(sp => 
+            new HttpClient
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
 
         await builder.Build().RunAsync();
     }
@@ -85,8 +88,11 @@ public class Program
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
         
-        builder.Services.AddTransient(sp => 
-            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddScoped(sp => 
+            new HttpClient
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
 
         var host = builder.Build();
 
@@ -109,8 +115,11 @@ public class Program
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
         
-        builder.Services.AddTransient(sp => 
-            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddScoped(sp => 
+            new HttpClient
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
 
         var host = builder.Build();
 
