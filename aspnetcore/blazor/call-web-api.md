@@ -15,65 +15,65 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 9c90e2a6c03e02b771cfa8f589e381d52637dc26
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 1417056beac99a8dfee47131c2cb6ab7ec52ad1e
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147640"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445270"
 ---
-# <a name="call-a-web-api-from-aspnet-core-blazor"></a><span data-ttu-id="a96fe-103">ASP.NET Core Blazor에서 웹 API 호출</span><span class="sxs-lookup"><span data-stu-id="a96fe-103">Call a web API from ASP.NET Core Blazor</span></span>
+# <a name="call-a-web-api-from-aspnet-core-blazor"></a><span data-ttu-id="61169-103">ASP.NET Core Blazor에서 웹 API 호출</span><span class="sxs-lookup"><span data-stu-id="61169-103">Call a web API from ASP.NET Core Blazor</span></span>
 
-<span data-ttu-id="a96fe-104">작성자: [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27) 및 [Juan De la Cruz](https://github.com/juandelacruz23)</span><span class="sxs-lookup"><span data-stu-id="a96fe-104">By [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), and [Juan De la Cruz](https://github.com/juandelacruz23)</span></span>
+<span data-ttu-id="61169-104">작성자: [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27) 및 [Juan De la Cruz](https://github.com/juandelacruz23)</span><span class="sxs-lookup"><span data-stu-id="61169-104">By [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), and [Juan De la Cruz](https://github.com/juandelacruz23)</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="a96fe-105">이 항목은 Blazor WebAssembly에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-105">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="a96fe-106">[Blazor Server](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용하여 만드는 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 웹 API를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-106">[Blazor Server](xref:blazor/hosting-models#blazor-server) apps call web APIs using <xref:System.Net.Http.HttpClient> instances, typically created using <xref:System.Net.Http.IHttpClientFactory>.</span></span> <span data-ttu-id="a96fe-107">Blazor Server에 적용되는 지침은 <xref:fundamentals/http-requests>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-107">For guidance that applies to Blazor Server, see <xref:fundamentals/http-requests>.</span></span>
+> <span data-ttu-id="61169-105">이 항목은 Blazor WebAssembly에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-105">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="61169-106">[Blazor Server](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용하여 만드는 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 웹 API를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-106">[Blazor Server](xref:blazor/hosting-models#blazor-server) apps call web APIs using <xref:System.Net.Http.HttpClient> instances, typically created using <xref:System.Net.Http.IHttpClientFactory>.</span></span> <span data-ttu-id="61169-107">Blazor Server에 적용되는 지침은 <xref:fundamentals/http-requests>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-107">For guidance that applies to Blazor Server, see <xref:fundamentals/http-requests>.</span></span>
 
-<span data-ttu-id="a96fe-108">[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 앱은 미리 구성된 <xref:System.Net.Http.HttpClient> 서비스를 사용하여 웹 API를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-108">[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) apps call web APIs using a preconfigured <xref:System.Net.Http.HttpClient> service.</span></span> <span data-ttu-id="a96fe-109">Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-109">Compose requests, which can include JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) options, using Blazor JSON helpers or with <xref:System.Net.Http.HttpRequestMessage>.</span></span> <span data-ttu-id="a96fe-110">Blazor WebAssembly 앱의 <xref:System.Net.Http.HttpClient> 서비스는 원본 서버에 대해 다시 요청을 수행하는 데 중점을 둡니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-110">The <xref:System.Net.Http.HttpClient> service in Blazor WebAssembly apps is focused on making requests back to the server of origin.</span></span> <span data-ttu-id="a96fe-111">이 항목의 지침은 Blazor WebAssembly 앱에만 관련됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-111">The guidance in this topic only pertains to Blazor WebAssembly apps.</span></span>
+<span data-ttu-id="61169-108">[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 앱은 미리 구성된 <xref:System.Net.Http.HttpClient> 서비스를 사용하여 웹 API를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-108">[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) apps call web APIs using a preconfigured <xref:System.Net.Http.HttpClient> service.</span></span> <span data-ttu-id="61169-109">Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용하여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-109">Compose requests, which can include JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) options, using Blazor JSON helpers or with <xref:System.Net.Http.HttpRequestMessage>.</span></span> <span data-ttu-id="61169-110">Blazor WebAssembly 앱의 <xref:System.Net.Http.HttpClient> 서비스는 원본 서버에 대해 다시 요청을 수행하는 데 중점을 둡니다.</span><span class="sxs-lookup"><span data-stu-id="61169-110">The <xref:System.Net.Http.HttpClient> service in Blazor WebAssembly apps is focused on making requests back to the server of origin.</span></span> <span data-ttu-id="61169-111">이 항목의 지침은 Blazor WebAssembly 앱에만 관련됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-111">The guidance in this topic only pertains to Blazor WebAssembly apps.</span></span>
 
-<span data-ttu-id="a96fe-112">[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample)): `BlazorWebAssemblySample` 앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-112">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample)): Select the `BlazorWebAssemblySample` app.</span></span>
+<span data-ttu-id="61169-112">[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample)): `BlazorWebAssemblySample` 앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-112">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample)): Select the `BlazorWebAssemblySample` app.</span></span>
 
-<span data-ttu-id="a96fe-113">`BlazorWebAssemblySample` 샘플 앱에서 다음 구성 요소를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-113">See the following components in the `BlazorWebAssemblySample` sample app:</span></span>
+<span data-ttu-id="61169-113">`BlazorWebAssemblySample` 샘플 앱에서 다음 구성 요소를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-113">See the following components in the `BlazorWebAssemblySample` sample app:</span></span>
 
-* <span data-ttu-id="a96fe-114">웹 API 호출(`Pages/CallWebAPI.razor`)</span><span class="sxs-lookup"><span data-stu-id="a96fe-114">Call Web API (`Pages/CallWebAPI.razor`)</span></span>
-* <span data-ttu-id="a96fe-115">HTTP 요청 테스터(`Components/HTTPRequestTester.razor`)</span><span class="sxs-lookup"><span data-stu-id="a96fe-115">HTTP Request Tester (`Components/HTTPRequestTester.razor`)</span></span>
+* <span data-ttu-id="61169-114">웹 API 호출(`Pages/CallWebAPI.razor`)</span><span class="sxs-lookup"><span data-stu-id="61169-114">Call Web API (`Pages/CallWebAPI.razor`)</span></span>
+* <span data-ttu-id="61169-115">HTTP 요청 테스터(`Components/HTTPRequestTester.razor`)</span><span class="sxs-lookup"><span data-stu-id="61169-115">HTTP Request Tester (`Components/HTTPRequestTester.razor`)</span></span>
 
-## <a name="packages"></a><span data-ttu-id="a96fe-116">패키지</span><span class="sxs-lookup"><span data-stu-id="a96fe-116">Packages</span></span>
+## <a name="packages"></a><span data-ttu-id="61169-116">패키지</span><span class="sxs-lookup"><span data-stu-id="61169-116">Packages</span></span>
 
-<span data-ttu-id="a96fe-117">프로젝트 파일에서 [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet 패키지를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-117">Reference the [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet package in the project file.</span></span>
+<span data-ttu-id="61169-117">프로젝트 파일에서 [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet 패키지를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-117">Reference the [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet package in the project file.</span></span>
 
-## <a name="add-the-httpclient-service"></a><span data-ttu-id="a96fe-118">HttpClient 서비스 추가</span><span class="sxs-lookup"><span data-stu-id="a96fe-118">Add the HttpClient service</span></span>
+## <a name="add-the-httpclient-service"></a><span data-ttu-id="61169-118">HttpClient 서비스 추가</span><span class="sxs-lookup"><span data-stu-id="61169-118">Add the HttpClient service</span></span>
 
-<span data-ttu-id="a96fe-119">`Program.Main`에서 아직 없는 경우 <xref:System.Net.Http.HttpClient> 서비스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-119">In `Program.Main`, add an <xref:System.Net.Http.HttpClient> service if it doesn't already exist:</span></span>
+<span data-ttu-id="61169-119">`Program.Main`에서 아직 없는 경우 <xref:System.Net.Http.HttpClient> 서비스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-119">In `Program.Main`, add an <xref:System.Net.Http.HttpClient> service if it doesn't already exist:</span></span>
 
 ```csharp
-builder.Services.AddTransient(sp => 
+builder.Services.AddScoped(sp => 
     new HttpClient
     {
         BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
     });
 ```
 
-## <a name="httpclient-and-json-helpers"></a><span data-ttu-id="a96fe-120">HttpClient 및 JSON 도우미</span><span class="sxs-lookup"><span data-stu-id="a96fe-120">HttpClient and JSON helpers</span></span>
+## <a name="httpclient-and-json-helpers"></a><span data-ttu-id="61169-120">HttpClient 및 JSON 도우미</span><span class="sxs-lookup"><span data-stu-id="61169-120">HttpClient and JSON helpers</span></span>
 
-<span data-ttu-id="a96fe-121">Blazor WebAssembly 앱에서 [`HttpClient`](xref:fundamentals/http-requests)는 원본 서버에 대해 다시 요청을 수행하기 위해 미리 구성된 서비스로 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-121">In a Blazor WebAssembly app, [`HttpClient`](xref:fundamentals/http-requests) is available as a preconfigured service for making requests back to the origin server.</span></span>
+<span data-ttu-id="61169-121">Blazor WebAssembly 앱에서 [`HttpClient`](xref:fundamentals/http-requests)는 원본 서버에 대해 다시 요청을 수행하기 위해 미리 구성된 서비스로 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-121">In a Blazor WebAssembly app, [`HttpClient`](xref:fundamentals/http-requests) is available as a preconfigured service for making requests back to the origin server.</span></span>
 
-<span data-ttu-id="a96fe-122">Blazor Server 앱은 기본적으로 <xref:System.Net.Http.HttpClient> 서비스를 포함하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-122">A Blazor Server app doesn't include an <xref:System.Net.Http.HttpClient> service by default.</span></span> <span data-ttu-id="a96fe-123">[`HttpClient` 팩터리 인프라](xref:fundamentals/http-requests)를 사용하여 앱에 <xref:System.Net.Http.HttpClient>를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-123">Provide an <xref:System.Net.Http.HttpClient> to the app using the [`HttpClient` factory infrastructure](xref:fundamentals/http-requests).</span></span>
+<span data-ttu-id="61169-122">Blazor Server 앱은 기본적으로 <xref:System.Net.Http.HttpClient> 서비스를 포함하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-122">A Blazor Server app doesn't include an <xref:System.Net.Http.HttpClient> service by default.</span></span> <span data-ttu-id="61169-123">[`HttpClient` 팩터리 인프라](xref:fundamentals/http-requests)를 사용하여 앱에 <xref:System.Net.Http.HttpClient>를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-123">Provide an <xref:System.Net.Http.HttpClient> to the app using the [`HttpClient` factory infrastructure](xref:fundamentals/http-requests).</span></span>
 
-<span data-ttu-id="a96fe-124"><xref:System.Net.Http.HttpClient> 및 JSON 도우미는 타사 웹 API 엔드포인트를 호출하는 데에도 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-124"><xref:System.Net.Http.HttpClient> and JSON helpers are also used to call third-party web API endpoints.</span></span> <span data-ttu-id="a96fe-125"><xref:System.Net.Http.HttpClient>는 브라우저 [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)를 사용하여 구현되며 동일한 원본 정책 적용을 비롯한 제한 사항이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-125"><xref:System.Net.Http.HttpClient> is implemented using the browser [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) and is subject to its limitations, including enforcement of the same origin policy.</span></span>
+<span data-ttu-id="61169-124"><xref:System.Net.Http.HttpClient> 및 JSON 도우미는 타사 웹 API 엔드포인트를 호출하는 데에도 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-124"><xref:System.Net.Http.HttpClient> and JSON helpers are also used to call third-party web API endpoints.</span></span> <span data-ttu-id="61169-125"><xref:System.Net.Http.HttpClient>는 브라우저 [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)를 사용하여 구현되며 동일한 원본 정책 적용을 비롯한 제한 사항이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-125"><xref:System.Net.Http.HttpClient> is implemented using the browser [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) and is subject to its limitations, including enforcement of the same origin policy.</span></span>
 
-<span data-ttu-id="a96fe-126">클라이언트의 기본 주소가 원래 서버의 주소로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-126">The client's base address is set to the originating server's address.</span></span> <span data-ttu-id="a96fe-127">[`@inject`](xref:mvc/views/razor#inject) 지시문을 사용하여 <xref:System.Net.Http.HttpClient> 인스턴스를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-127">Inject an <xref:System.Net.Http.HttpClient> instance using the [`@inject`](xref:mvc/views/razor#inject) directive:</span></span>
+<span data-ttu-id="61169-126">클라이언트의 기본 주소가 원래 서버의 주소로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-126">The client's base address is set to the originating server's address.</span></span> <span data-ttu-id="61169-127">[`@inject`](xref:mvc/views/razor#inject) 지시문을 사용하여 <xref:System.Net.Http.HttpClient> 인스턴스를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-127">Inject an <xref:System.Net.Http.HttpClient> instance using the [`@inject`](xref:mvc/views/razor#inject) directive:</span></span>
 
 ```razor
 @using System.Net.Http
 @inject HttpClient Http
 ```
 
-<span data-ttu-id="a96fe-128">다음 예제에서 Todo 웹 API는 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-128">In the following examples, a Todo web API processes create, read, update, and delete (CRUD) operations.</span></span> <span data-ttu-id="a96fe-129">예제는 다음을 저장하는 `TodoItem` 클래스를 기준으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-129">The examples are based on a `TodoItem` class that stores the:</span></span>
+<span data-ttu-id="61169-128">다음 예제에서 Todo 웹 API는 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-128">In the following examples, a Todo web API processes create, read, update, and delete (CRUD) operations.</span></span> <span data-ttu-id="61169-129">예제는 다음을 저장하는 `TodoItem` 클래스를 기준으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-129">The examples are based on a `TodoItem` class that stores the:</span></span>
 
-* <span data-ttu-id="a96fe-130">ID(`Id`, `long`): 항목의 고유한 ID입니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-130">ID (`Id`, `long`): Unique ID of the item.</span></span>
-* <span data-ttu-id="a96fe-131">이름(`Name`, `string`): 항목의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-131">Name (`Name`, `string`): Name of the item.</span></span>
-* <span data-ttu-id="a96fe-132">상태(`IsComplete`, `bool`): 할 일 항목이 완료되었는지 여부를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-132">Status (`IsComplete`, `bool`): Indication if the Todo item is finished.</span></span>
+* <span data-ttu-id="61169-130">ID(`Id`, `long`): 항목의 고유한 ID입니다.</span><span class="sxs-lookup"><span data-stu-id="61169-130">ID (`Id`, `long`): Unique ID of the item.</span></span>
+* <span data-ttu-id="61169-131">이름(`Name`, `string`): 항목의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="61169-131">Name (`Name`, `string`): Name of the item.</span></span>
+* <span data-ttu-id="61169-132">상태(`IsComplete`, `bool`): 할 일 항목이 완료되었는지 여부를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="61169-132">Status (`IsComplete`, `bool`): Indication if the Todo item is finished.</span></span>
 
 ```csharp
 private class TodoItem
@@ -84,11 +84,11 @@ private class TodoItem
 }
 ```
 
-<span data-ttu-id="a96fe-133">JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고 응답을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-133">JSON helper methods send requests to a URI (a web API in the following examples) and process the response:</span></span>
+<span data-ttu-id="61169-133">JSON 도우미 메서드는 URI(다음 예제의 웹 API)에 요청을 보내고 응답을 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-133">JSON helper methods send requests to a URI (a web API in the following examples) and process the response:</span></span>
 
-* <span data-ttu-id="a96fe-134"><xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-134"><xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: Sends an HTTP GET request and parses the JSON response body to create an object.</span></span>
+* <span data-ttu-id="61169-134"><xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="61169-134"><xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: Sends an HTTP GET request and parses the JSON response body to create an object.</span></span>
 
-  <span data-ttu-id="a96fe-135">다음 코드에서 `todoItems`는 구성 요소에 의해 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-135">In the following code, the `todoItems` are displayed by the component.</span></span> <span data-ttu-id="a96fe-136">`GetTodoItems` 메서드는 구성 요소가 렌더링을 완료할 때 트리거됩니다([`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods)).</span><span class="sxs-lookup"><span data-stu-id="a96fe-136">The `GetTodoItems` method is triggered when the component is finished rendering ([`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods)).</span></span> <span data-ttu-id="a96fe-137">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-137">See the sample app for a complete example.</span></span>
+  <span data-ttu-id="61169-135">다음 코드에서 `todoItems`는 구성 요소에 의해 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-135">In the following code, the `todoItems` are displayed by the component.</span></span> <span data-ttu-id="61169-136">`GetTodoItems` 메서드는 구성 요소가 렌더링을 완료할 때 트리거됩니다([`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods)).</span><span class="sxs-lookup"><span data-stu-id="61169-136">The `GetTodoItems` method is triggered when the component is finished rendering ([`OnInitializedAsync`](xref:blazor/components/lifecycle#component-initialization-methods)).</span></span> <span data-ttu-id="61169-137">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-137">See the sample app for a complete example.</span></span>
 
   ```razor
   @using System.Net.Http
@@ -102,9 +102,9 @@ private class TodoItem
   }
   ```
 
-* <span data-ttu-id="a96fe-138"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>: JSON 인코딩 콘텐츠를 포함하여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-138"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>: Sends an HTTP POST request, including JSON-encoded content, and parses the JSON response body to create an object.</span></span>
+* <span data-ttu-id="61169-138"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>: JSON 인코딩 콘텐츠를 포함하여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석하여 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="61169-138"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>: Sends an HTTP POST request, including JSON-encoded content, and parses the JSON response body to create an object.</span></span>
 
-  <span data-ttu-id="a96fe-139">다음 코드에서 구성 요소의 바인딩된 요소는 `newItemName`을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-139">In the following code, `newItemName` is provided by a bound element of the component.</span></span> <span data-ttu-id="a96fe-140">`AddItem` 메서드는 `<button>` 요소를 선택하여 트리거됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-140">The `AddItem` method is triggered by selecting a `<button>` element.</span></span> <span data-ttu-id="a96fe-141">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-141">See the sample app for a complete example.</span></span>
+  <span data-ttu-id="61169-139">다음 코드에서 구성 요소의 바인딩된 요소는 `newItemName`을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-139">In the following code, `newItemName` is provided by a bound element of the component.</span></span> <span data-ttu-id="61169-140">`AddItem` 메서드는 `<button>` 요소를 선택하여 트리거됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-140">The `AddItem` method is triggered by selecting a `<button>` element.</span></span> <span data-ttu-id="61169-141">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-141">See the sample app for a complete example.</span></span>
 
   ```razor
   @using System.Net.Http
@@ -124,15 +124,15 @@ private class TodoItem
   }
   ```
   
-  <span data-ttu-id="a96fe-142"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-142">Calls to <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> return an <xref:System.Net.Http.HttpResponseMessage>.</span></span> <span data-ttu-id="a96fe-143">응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 `ReadFromJsonAsync<T>` 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-143">To deserialize the JSON content from the response message, use the `ReadFromJsonAsync<T>` extension method:</span></span>
+  <span data-ttu-id="61169-142"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-142">Calls to <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> return an <xref:System.Net.Http.HttpResponseMessage>.</span></span> <span data-ttu-id="61169-143">응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 `ReadFromJsonAsync<T>` 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-143">To deserialize the JSON content from the response message, use the `ReadFromJsonAsync<T>` extension method:</span></span>
   
   ```csharp
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-* <span data-ttu-id="a96fe-144"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: JSON 인코딩 콘텐츠를 포함하여 HTTP PUT 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-144"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: Sends an HTTP PUT request, including JSON-encoded content.</span></span>
+* <span data-ttu-id="61169-144"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: JSON 인코딩 콘텐츠를 포함하여 HTTP PUT 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="61169-144"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: Sends an HTTP PUT request, including JSON-encoded content.</span></span>
 
-  <span data-ttu-id="a96fe-145">다음 코드에서 구성 요소의 바인딩된 요소는 `Name` 및 `IsCompleted`에 대한 `editItem` 값을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-145">In the following code, `editItem` values for `Name` and `IsCompleted` are provided by bound elements of the component.</span></span> <span data-ttu-id="a96fe-146">항목의 `Id`는 UI의 다른 부분에서 해당 항목을 선택하고 `EditItem`을 호출하면 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-146">The item's `Id` is set when the item is selected in another part of the UI and `EditItem` is called.</span></span> <span data-ttu-id="a96fe-147">`SaveItem` 메서드는 Save `<button>` 요소를 선택하여 트리거됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-147">The `SaveItem` method is triggered by selecting the Save `<button>` element.</span></span> <span data-ttu-id="a96fe-148">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-148">See the sample app for a complete example.</span></span>
+  <span data-ttu-id="61169-145">다음 코드에서 구성 요소의 바인딩된 요소는 `Name` 및 `IsCompleted`에 대한 `editItem` 값을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-145">In the following code, `editItem` values for `Name` and `IsCompleted` are provided by bound elements of the component.</span></span> <span data-ttu-id="61169-146">항목의 `Id`는 UI의 다른 부분에서 해당 항목을 선택하고 `EditItem`을 호출하면 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-146">The item's `Id` is set when the item is selected in another part of the UI and `EditItem` is called.</span></span> <span data-ttu-id="61169-147">`SaveItem` 메서드는 Save `<button>` 요소를 선택하여 트리거됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-147">The `SaveItem` method is triggered by selecting the Save `<button>` element.</span></span> <span data-ttu-id="61169-148">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-148">See the sample app for a complete example.</span></span>
 
   ```razor
   @using System.Net.Http
@@ -155,15 +155,15 @@ private class TodoItem
   }
   ```
   
-  <span data-ttu-id="a96fe-149"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-149">Calls to <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> return an <xref:System.Net.Http.HttpResponseMessage>.</span></span> <span data-ttu-id="a96fe-150">응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-150">To deserialize the JSON content from the response message, use the <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> extension method:</span></span>
+  <span data-ttu-id="61169-149"><xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>를 호출하면 <xref:System.Net.Http.HttpResponseMessage>가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-149">Calls to <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> return an <xref:System.Net.Http.HttpResponseMessage>.</span></span> <span data-ttu-id="61169-150">응답 메시지에서 JSON 콘텐츠를 역직렬화하려면 <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 확장 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-150">To deserialize the JSON content from the response message, use the <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> extension method:</span></span>
   
   ```csharp
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<span data-ttu-id="a96fe-151"><xref:System.Net.Http>는 HTTP 요청을 보내고 HTTP 응답을 받기 위한 추가 확장 메서드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-151"><xref:System.Net.Http> includes additional extension methods for sending HTTP requests and receiving HTTP responses.</span></span> <span data-ttu-id="a96fe-152"><xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>는 웹 API에 HTTP DELETE 요청을 보내는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-152"><xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> is used to send an HTTP DELETE request to a web API.</span></span>
+<span data-ttu-id="61169-151"><xref:System.Net.Http>는 HTTP 요청을 보내고 HTTP 응답을 받기 위한 추가 확장 메서드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-151"><xref:System.Net.Http> includes additional extension methods for sending HTTP requests and receiving HTTP responses.</span></span> <span data-ttu-id="61169-152"><xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>는 웹 API에 HTTP DELETE 요청을 보내는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-152"><xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> is used to send an HTTP DELETE request to a web API.</span></span>
 
-<span data-ttu-id="a96fe-153">다음 코드에서 Delete `<button>` 요소는 `DeleteItem` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-153">In the following code, the Delete `<button>` element calls the `DeleteItem` method.</span></span> <span data-ttu-id="a96fe-154">바인딩된 `<input>` 요소는 삭제할 항목의 `id`를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-154">The bound `<input>` element supplies the `id` of the item to delete.</span></span> <span data-ttu-id="a96fe-155">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-155">See the sample app for a complete example.</span></span>
+<span data-ttu-id="61169-153">다음 코드에서 Delete `<button>` 요소는 `DeleteItem` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-153">In the following code, the Delete `<button>` element calls the `DeleteItem` method.</span></span> <span data-ttu-id="61169-154">바인딩된 `<input>` 요소는 삭제할 항목의 `id`를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-154">The bound `<input>` element supplies the `id` of the item to delete.</span></span> <span data-ttu-id="61169-155">전체 예제는 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-155">See the sample app for a complete example.</span></span>
 
 ```razor
 @using System.Net.Http
@@ -180,20 +180,20 @@ private class TodoItem
 }
 ```
 
-## <a name="named-httpclient-with-ihttpclientfactory"></a><span data-ttu-id="a96fe-156">IHttpClientFactory를 사용하여 명명된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="a96fe-156">Named HttpClient with IHttpClientFactory</span></span>
+## <a name="named-httpclient-with-ihttpclientfactory"></a><span data-ttu-id="61169-156">IHttpClientFactory를 사용하여 명명된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="61169-156">Named HttpClient with IHttpClientFactory</span></span>
 
-<span data-ttu-id="a96fe-157"><xref:System.Net.Http.IHttpClientFactory> 서비스 및 명명된 <xref:System.Net.Http.HttpClient>의 구성이 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-157"><xref:System.Net.Http.IHttpClientFactory> services and the configuration of a named <xref:System.Net.Http.HttpClient> are supported.</span></span>
+<span data-ttu-id="61169-157"><xref:System.Net.Http.IHttpClientFactory> 서비스 및 명명된 <xref:System.Net.Http.HttpClient>의 구성이 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-157"><xref:System.Net.Http.IHttpClientFactory> services and the configuration of a named <xref:System.Net.Http.HttpClient> are supported.</span></span>
 
-<span data-ttu-id="a96fe-158">프로젝트 파일에서 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet 패키지를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-158">Reference the [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet package in the project file.</span></span>
+<span data-ttu-id="61169-158">프로젝트 파일에서 [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet 패키지를 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-158">Reference the [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet package in the project file.</span></span>
 
-<span data-ttu-id="a96fe-159">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="a96fe-159">`Program.Main` (`Program.cs`):</span></span>
+<span data-ttu-id="61169-159">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="61169-159">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI", client => 
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-<span data-ttu-id="a96fe-160">`FetchData` 구성 요소(`Pages/FetchData.razor`):</span><span class="sxs-lookup"><span data-stu-id="a96fe-160">`FetchData` component (`Pages/FetchData.razor`):</span></span>
+<span data-ttu-id="61169-160">`FetchData` 구성 요소(`Pages/FetchData.razor`):</span><span class="sxs-lookup"><span data-stu-id="61169-160">`FetchData` component (`Pages/FetchData.razor`):</span></span>
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -213,11 +213,11 @@ builder.Services.AddHttpClient("ServerAPI", client =>
 }
 ```
 
-## <a name="typed-httpclient"></a><span data-ttu-id="a96fe-161">형식화된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="a96fe-161">Typed HttpClient</span></span>
+## <a name="typed-httpclient"></a><span data-ttu-id="61169-161">형식화된 HttpClient</span><span class="sxs-lookup"><span data-stu-id="61169-161">Typed HttpClient</span></span>
 
-<span data-ttu-id="a96fe-162">형식화된 <xref:System.Net.Http.HttpClient>는 앱의 기본값 또는 명명된 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 하나 이상의 웹 API 엔드포인트에서 데이터를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-162">Typed <xref:System.Net.Http.HttpClient> uses one or more of the app's <xref:System.Net.Http.HttpClient> instances, default or named, to return data from one or more web API endpoints.</span></span>
+<span data-ttu-id="61169-162">형식화된 <xref:System.Net.Http.HttpClient>는 앱의 기본값 또는 명명된 <xref:System.Net.Http.HttpClient> 인스턴스를 사용하여 하나 이상의 웹 API 엔드포인트에서 데이터를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-162">Typed <xref:System.Net.Http.HttpClient> uses one or more of the app's <xref:System.Net.Http.HttpClient> instances, default or named, to return data from one or more web API endpoints.</span></span>
 
-<span data-ttu-id="a96fe-163">`WeatherForecastClient.cs`:</span><span class="sxs-lookup"><span data-stu-id="a96fe-163">`WeatherForecastClient.cs`:</span></span>
+<span data-ttu-id="61169-163">`WeatherForecastClient.cs`:</span><span class="sxs-lookup"><span data-stu-id="61169-163">`WeatherForecastClient.cs`:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -252,16 +252,16 @@ public class WeatherForecastClient
 }
 ```
 
-<span data-ttu-id="a96fe-164">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="a96fe-164">`Program.Main` (`Program.cs`):</span></span>
+<span data-ttu-id="61169-164">`Program.Main`(`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="61169-164">`Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => 
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-<span data-ttu-id="a96fe-165">구성 요소는 형식화된 <xref:System.Net.Http.HttpClient>를 삽입하여 웹 API를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-165">Components inject the typed <xref:System.Net.Http.HttpClient> to call the web API.</span></span>
+<span data-ttu-id="61169-165">구성 요소는 형식화된 <xref:System.Net.Http.HttpClient>를 삽입하여 웹 API를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-165">Components inject the typed <xref:System.Net.Http.HttpClient> to call the web API.</span></span>
 
-<span data-ttu-id="a96fe-166">`FetchData` 구성 요소(`Pages/FetchData.razor`):</span><span class="sxs-lookup"><span data-stu-id="a96fe-166">`FetchData` component (`Pages/FetchData.razor`):</span></span>
+<span data-ttu-id="61169-166">`FetchData` 구성 요소(`Pages/FetchData.razor`):</span><span class="sxs-lookup"><span data-stu-id="61169-166">`FetchData` component (`Pages/FetchData.razor`):</span></span>
 
 ```razor
 @inject WeatherForecastClient Client
@@ -278,15 +278,15 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 }
 ```
 
-## <a name="handle-errors"></a><span data-ttu-id="a96fe-167">오류 처리</span><span class="sxs-lookup"><span data-stu-id="a96fe-167">Handle errors</span></span>
+## <a name="handle-errors"></a><span data-ttu-id="61169-167">오류 처리</span><span class="sxs-lookup"><span data-stu-id="61169-167">Handle errors</span></span>
 
-<span data-ttu-id="a96fe-168">웹 API와 상호 작용하는 동안 오류가 발생하는 경우 개발자 코드로 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-168">When errors occur while interacting with a web API, they can be handled by developer code.</span></span> <span data-ttu-id="a96fe-169">예를 들어 <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>에는 `application/json`의 `Content-Type`을 가진 서버 API의 JSON 응답이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-169">For example, <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> expects a JSON response from the server API with a `Content-Type` of `application/json`.</span></span> <span data-ttu-id="a96fe-170">응답이 JSON 형식이 아닌 경우 콘텐츠 유효성 검사는 <xref:System.NotSupportedException>을 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-170">If the response isn't in JSON format, content validation throws a <xref:System.NotSupportedException>.</span></span>
+<span data-ttu-id="61169-168">웹 API와 상호 작용하는 동안 오류가 발생하는 경우 개발자 코드로 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-168">When errors occur while interacting with a web API, they can be handled by developer code.</span></span> <span data-ttu-id="61169-169">예를 들어 <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>에는 `application/json`의 `Content-Type`을 가진 서버 API의 JSON 응답이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-169">For example, <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> expects a JSON response from the server API with a `Content-Type` of `application/json`.</span></span> <span data-ttu-id="61169-170">응답이 JSON 형식이 아닌 경우 콘텐츠 유효성 검사는 <xref:System.NotSupportedException>을 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-170">If the response isn't in JSON format, content validation throws a <xref:System.NotSupportedException>.</span></span>
 
-<span data-ttu-id="a96fe-171">다음 예제에서는 날씨 예측 데이터 요청에 대한 URI 엔드포인트의 철자가 잘못되었습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-171">In the following example, the URI endpoint for the weather forecast data request is misspelled.</span></span> <span data-ttu-id="a96fe-172">URI는 `WeatherForecast`가 되어야 하지만 호출에는 `WeatherForcast`(“e” 누락)로 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-172">The URI should be to `WeatherForecast` but appears in the call as `WeatherForcast` (missing "e").</span></span>
+<span data-ttu-id="61169-171">다음 예제에서는 날씨 예측 데이터 요청에 대한 URI 엔드포인트의 철자가 잘못되었습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-171">In the following example, the URI endpoint for the weather forecast data request is misspelled.</span></span> <span data-ttu-id="61169-172">URI는 `WeatherForecast`가 되어야 하지만 호출에는 `WeatherForcast`(“e” 누락)로 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-172">The URI should be to `WeatherForecast` but appears in the call as `WeatherForcast` (missing "e").</span></span>
 
-<span data-ttu-id="a96fe-173"><xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> 호출에서는 JSON이 반환되어야 하지만, 서버는 `text/html`의 `Content-Type`을 사용하여 서버에서 처리되지 않은 예외에 대한 HTML을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-173">The <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> call expects JSON to be returned, but the server returns HTML for an unhandled exception on the server with a `Content-Type` of `text/html`.</span></span> <span data-ttu-id="a96fe-174">경로를 찾을 수 없고 미들웨어에서 요청에 대한 페이지 또는 보기를 제공할 수 없기 때문에 처리되지 않은 예외가 서버에서 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-174">The unhandled exception occurs on the server because the path isn't found and middleware can't serve a page or view for the request.</span></span>
+<span data-ttu-id="61169-173"><xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> 호출에서는 JSON이 반환되어야 하지만, 서버는 `text/html`의 `Content-Type`을 사용하여 서버에서 처리되지 않은 예외에 대한 HTML을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-173">The <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> call expects JSON to be returned, but the server returns HTML for an unhandled exception on the server with a `Content-Type` of `text/html`.</span></span> <span data-ttu-id="61169-174">경로를 찾을 수 없고 미들웨어에서 요청에 대한 페이지 또는 보기를 제공할 수 없기 때문에 처리되지 않은 예외가 서버에서 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-174">The unhandled exception occurs on the server because the path isn't found and middleware can't serve a page or view for the request.</span></span>
 
-<span data-ttu-id="a96fe-175">클라이언트의 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>에서 응답 콘텐츠가 JSON이 아닌 것으로 확인되면 <xref:System.NotSupportedException>이 throw됩니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-175">In <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> on the client, <xref:System.NotSupportedException> is thrown when the response content is validated as non-JSON.</span></span> <span data-ttu-id="a96fe-176">`catch` 블록에서 예외가 catch됩니다. 여기서 사용자 지정 논리는 오류를 기록하거나 사용자에게 친숙한 오류 메시지를 표시할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-176">The exception is caught in the `catch` block, where custom logic could log the error or present a friendly error message to the user:</span></span>
+<span data-ttu-id="61169-175">클라이언트의 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>에서 응답 콘텐츠가 JSON이 아닌 것으로 확인되면 <xref:System.NotSupportedException>이 throw됩니다.</span><span class="sxs-lookup"><span data-stu-id="61169-175">In <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> on the client, <xref:System.NotSupportedException> is thrown when the response content is validated as non-JSON.</span></span> <span data-ttu-id="61169-176">`catch` 블록에서 예외가 catch됩니다. 여기서 사용자 지정 논리는 오류를 기록하거나 사용자에게 친숙한 오류 메시지를 표시할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-176">The exception is caught in the `catch` block, where custom logic could log the error or present a friendly error message to the user:</span></span>
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -304,24 +304,24 @@ protected override async Task OnInitializedAsync()
 ```
 
 > [!NOTE]
-> <span data-ttu-id="a96fe-177">앞의 예제는 데모용입니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-177">The preceding example is for demonstration purposes.</span></span> <span data-ttu-id="a96fe-178">엔드포인트가 없거나 서버에서 처리되지 않은 예외가 발생한 경우에도 JSON을 반환하도록 웹 API 서버 앱을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-178">A web API server app can be configured to return JSON even when an endpoint doesn't exist or an unhandled exception on the server occurs.</span></span>
+> <span data-ttu-id="61169-177">앞의 예제는 데모용입니다.</span><span class="sxs-lookup"><span data-stu-id="61169-177">The preceding example is for demonstration purposes.</span></span> <span data-ttu-id="61169-178">엔드포인트가 없거나 서버에서 처리되지 않은 예외가 발생한 경우에도 JSON을 반환하도록 웹 API 서버 앱을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-178">A web API server app can be configured to return JSON even when an endpoint doesn't exist or an unhandled exception on the server occurs.</span></span>
 
-<span data-ttu-id="a96fe-179">자세한 내용은 <xref:blazor/fundamentals/handle-errors>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-179">For more information, see <xref:blazor/fundamentals/handle-errors>.</span></span>
+<span data-ttu-id="61169-179">자세한 내용은 <xref:blazor/fundamentals/handle-errors>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-179">For more information, see <xref:blazor/fundamentals/handle-errors>.</span></span>
 
-## <a name="cross-origin-resource-sharing-cors"></a><span data-ttu-id="a96fe-180">CORS(원본 간 리소스 공유)</span><span class="sxs-lookup"><span data-stu-id="a96fe-180">Cross-origin resource sharing (CORS)</span></span>
+## <a name="cross-origin-resource-sharing-cors"></a><span data-ttu-id="61169-180">CORS(원본 간 리소스 공유)</span><span class="sxs-lookup"><span data-stu-id="61169-180">Cross-origin resource sharing (CORS)</span></span>
 
-<span data-ttu-id="a96fe-181">브라우저 보안 때문에 웹 페이지에서 해당 웹 페이지를 제공한 도메인이 아닌 다른 도메인에 요청을 수행할 수는 없습니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-181">Browser security prevents a webpage from making requests to a different domain than the one that served the webpage.</span></span> <span data-ttu-id="a96fe-182">이러한 제한 사항을 *동일 원본 정책*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-182">This restriction is called the *same-origin policy*.</span></span> <span data-ttu-id="a96fe-183">동일 원본 정책은 악성 사이트에서 다른 사이트의 중요한 데이터를 읽지 못하도록 차단합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-183">The same-origin policy prevents a malicious site from reading sensitive data from another site.</span></span> <span data-ttu-id="a96fe-184">브라우저에서 원본이 다른 엔드포인트로의 요청을 만들려면 *엔드포인트*가 [CORS(원본 간 리소스 공유)](https://www.w3.org/TR/cors/)를 사용하도록 설정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-184">To make requests from the browser to an endpoint with a different origin, the *endpoint* must enable [cross-origin resource sharing (CORS)](https://www.w3.org/TR/cors/).</span></span>
+<span data-ttu-id="61169-181">브라우저 보안 때문에 웹 페이지에서 해당 웹 페이지를 제공한 도메인이 아닌 다른 도메인에 요청을 수행할 수는 없습니다.</span><span class="sxs-lookup"><span data-stu-id="61169-181">Browser security prevents a webpage from making requests to a different domain than the one that served the webpage.</span></span> <span data-ttu-id="61169-182">이러한 제한 사항을 *동일 원본 정책*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-182">This restriction is called the *same-origin policy*.</span></span> <span data-ttu-id="61169-183">동일 원본 정책은 악성 사이트에서 다른 사이트의 중요한 데이터를 읽지 못하도록 차단합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-183">The same-origin policy prevents a malicious site from reading sensitive data from another site.</span></span> <span data-ttu-id="61169-184">브라우저에서 원본이 다른 엔드포인트로의 요청을 만들려면 *엔드포인트*가 [CORS(원본 간 리소스 공유)](https://www.w3.org/TR/cors/)를 사용하도록 설정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-184">To make requests from the browser to an endpoint with a different origin, the *endpoint* must enable [cross-origin resource sharing (CORS)](https://www.w3.org/TR/cors/).</span></span>
 
-<span data-ttu-id="a96fe-185">[Blazor WebAssembly 샘플 앱(BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)은 웹 API 호출 구성 요소(`Pages/CallWebAPI.razor`)에서 CORS를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-185">The [Blazor WebAssembly sample app (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) demonstrates the use of CORS in the Call Web API component (`Pages/CallWebAPI.razor`).</span></span>
+<span data-ttu-id="61169-185">[Blazor WebAssembly 샘플 앱(BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)은 웹 API 호출 구성 요소(`Pages/CallWebAPI.razor`)에서 CORS를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="61169-185">The [Blazor WebAssembly sample app (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) demonstrates the use of CORS in the Call Web API component (`Pages/CallWebAPI.razor`).</span></span>
 
-<span data-ttu-id="a96fe-186">Blazor 앱에서 보안 요청을 포함하는 CORS에 대한 자세한 내용은 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-186">For more information on CORS with secure requests in Blazor apps, see <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors>.</span></span>
+<span data-ttu-id="61169-186">Blazor 앱에서 보안 요청을 포함하는 CORS에 대한 자세한 내용은 <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-186">For more information on CORS with secure requests in Blazor apps, see <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors>.</span></span>
 
-<span data-ttu-id="a96fe-187">ASP.NET Core 앱을 사용하는 CORS에 대한 일반 정보는 <xref:security/cors>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a96fe-187">For general information on CORS with ASP.NET Core apps, see <xref:security/cors>.</span></span>
+<span data-ttu-id="61169-187">ASP.NET Core 앱을 사용하는 CORS에 대한 일반 정보는 <xref:security/cors>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="61169-187">For general information on CORS with ASP.NET Core apps, see <xref:security/cors>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="a96fe-188">추가 자료</span><span class="sxs-lookup"><span data-stu-id="a96fe-188">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="61169-188">추가 자료</span><span class="sxs-lookup"><span data-stu-id="61169-188">Additional resources</span></span>
 
-* <span data-ttu-id="a96fe-189"><xref:blazor/security/webassembly/additional-scenarios>: 보안 웹 API 요청을 만들기 위해 <xref:System.Net.Http.HttpClient> 사용에 대한 검사를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a96fe-189"><xref:blazor/security/webassembly/additional-scenarios>: Includes coverage on using <xref:System.Net.Http.HttpClient> to make secure web API requests.</span></span>
+* <span data-ttu-id="61169-189"><xref:blazor/security/webassembly/additional-scenarios>: 보안 웹 API 요청을 만들기 위해 <xref:System.Net.Http.HttpClient> 사용에 대한 검사를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="61169-189"><xref:blazor/security/webassembly/additional-scenarios>: Includes coverage on using <xref:System.Net.Http.HttpClient> to make secure web API requests.</span></span>
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
-* [<span data-ttu-id="a96fe-190">Kestrel HTTPS 엔드포인트 구성</span><span class="sxs-lookup"><span data-stu-id="a96fe-190">Kestrel HTTPS endpoint configuration</span></span>](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [<span data-ttu-id="a96fe-191">W3C의 CORS(원본 간 리소스 공유)</span><span class="sxs-lookup"><span data-stu-id="a96fe-191">Cross Origin Resource Sharing (CORS) at W3C</span></span>](https://www.w3.org/TR/cors/)
+* [<span data-ttu-id="61169-190">Kestrel HTTPS 엔드포인트 구성</span><span class="sxs-lookup"><span data-stu-id="61169-190">Kestrel HTTPS endpoint configuration</span></span>](xref:fundamentals/servers/kestrel#endpoint-configuration)
+* [<span data-ttu-id="61169-191">W3C의 CORS(원본 간 리소스 공유)</span><span class="sxs-lookup"><span data-stu-id="61169-191">Cross Origin Resource Sharing (CORS) at W3C</span></span>](https://www.w3.org/TR/cors/)
