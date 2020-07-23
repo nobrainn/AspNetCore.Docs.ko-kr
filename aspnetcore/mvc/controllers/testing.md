@@ -5,7 +5,7 @@ description: ASP.NET Core에서 Moq 및 xUnit로 컨트롤러 논리를 테스�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 7/22/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 487e054675e40c158250fff5d38fc0e6930a68a8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e75c3a382904011e30ed50dfd465a15210c64368
+ms.sourcegitcommit: c86b4e2955dc1724f2eaa7c97894ad8b3bf763fb
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408645"
+ms.lasthandoff: 07/22/2020
+ms.locfileid: "86949084"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core에서 컨트롤러 논리 단위 테스트
 
@@ -352,9 +352,10 @@ ASP.NET Core 2.1 이상에서 [ \<T> actionresult](xref:web-api/action-return-ty
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:test/integration-tests>
 * [Visual Studio를 사용 하 여 단위 테스트 만들기 및 실행](/visualstudio/test/unit-test-your-code)
 * [AspNetCore-ASP.NET CORE mvc에 대 한 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 강력한 형식의 단위 테스트 라이브러리로, mvc 및 web API 앱 테스트를 위한 흐름 인터페이스를 제공 합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.*)
+* [JustMockLite](https://github.com/telerik/JustMockLite): .net 개발자를 위한 모의 프레임 워크입니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.*)
 
