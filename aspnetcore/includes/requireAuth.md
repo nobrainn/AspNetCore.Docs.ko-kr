@@ -1,0 +1,1 @@
+<span data-ttu-id="69c9a-101">모든 사용자를 전역적으로 인증 하도록 요구 하는 방법에 대 한 자세한 내용은 [인증 된 사용자 요구](xref:security/authorization/secure-data#rau)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="69c9a-101">For information on how to globally require all users to be authenticated, see [Require authenticated users](xref:security/authorization/secure-data#rau).</span></span>
