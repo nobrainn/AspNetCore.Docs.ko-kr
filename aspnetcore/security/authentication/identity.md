@@ -13,12 +13,12 @@ no-loc:
 - ':::no-loc(Razor):::'
 - ':::no-loc(SignalR):::'
 uid: security/authentication/identity
-ms.openlocfilehash: dd3296db568700a363c427398f02239846a46ada
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86445435"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160301"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>ASP.NET Core 소개 :::no-loc(Identity):::
 
@@ -32,6 +32,8 @@ ASP.NET Core :::no-loc(Identity)::::
 * 사용자, 암호, 프로필 데이터, 역할, 클레임, 토큰, 전자 메일 확인 등을 관리 합니다.
 
 사용자는에 저장 된 로그인 정보를 사용 하 여 계정을 만들거나 :::no-loc(Identity)::: 외부 로그인 공급자를 사용할 수 있습니다. 지원 되는 외부 로그인 공급자에는 [Facebook, Google, Microsoft 계정 및 Twitter](xref:security/authentication/social/index)가 포함 됩니다.
+
+[!INCLUDE[](~/includes/requireAuth.md)]
 
 [ :::no-loc(Identity)::: 소스 코드](https://github.com/dotnet/AspNetCore/tree/master/src/:::no-loc(Identity):::) 는 GitHub에서 사용할 수 있습니다. [스 캐 폴드 :::no-loc(Identity)::: ](xref:security/authentication/scaffold-identity) 및는 생성 된 파일을 확인 하 여와의 템플릿 상호 작용을 검토 :::no-loc(Identity)::: 합니다.
 

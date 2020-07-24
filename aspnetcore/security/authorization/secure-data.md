@@ -1,35 +1,29 @@
 ---
 title: 권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 author: rick-anderson
-description: Razor권한 부여로 보호 되는 사용자 데이터를 사용 하 여 페이지 앱을 만드는 방법을 알아봅니다. HTTPS, 인증, 보안 ASP.NET Core를 포함 Identity 합니다.
+description: '권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 웹 앱을 만드는 방법을 알아봅니다. HTTPS, 인증, 보안 ASP.NET Core를 포함 :::no-loc(Identity)::: 합니다.'
 ms.author: riande
-ms.date: 12/18/2018
+ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authorization/secure-data
-ms.openlocfilehash: f50015af864a4a62abd5e2eab508aac915cb6370
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404719"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160283"
 ---
-# <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
+# <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 웹 앱 만들기
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Joe Audette](https://twitter.com/joeaudette)
-
-::: moniker range="<= aspnetcore-1.1"
-
-ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) 를 참조 하세요. 이 자습서의 ASP.NET Core 1.1 버전은 [이](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data) 폴더에 있습니다. 1.1 ASP.NET Core 샘플은 [샘플](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2)에 있습니다.
-
-::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
@@ -77,7 +71,7 @@ ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/web
 * `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
 * `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 자습서는 고급입니다. 다음에 대해 잘 알고 있어야 합니다.
 
@@ -103,11 +97,11 @@ ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/web
 
 ### <a name="tie-the-contact-data-to-the-user"></a>사용자에 게 연락처 데이터 연결
 
-ASP.NET [Identity](xref:security/authentication/identity) 사용자 ID를 사용 하 여 사용자가 데이터를 편집할 수 있지만 다른 사용자 데이터는 편집할 수 없도록 합니다. `OwnerID` `ContactStatus` 모델에 및을 추가 합니다 `Contact` .
+ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) 사용자 ID를 사용 하 여 사용자가 데이터를 편집할 수 있지만 다른 사용자 데이터는 편집할 수 없도록 합니다. `OwnerID` `ContactStatus` 모델에 및을 추가 합니다 `Contact` .
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID``AspNetUser`데이터베이스에 있는 테이블의 사용자 ID입니다 [Identity](xref:security/authentication/identity) . `Status`필드는 일반 사용자가 연락처를 볼 수 있는지 여부를 결정 합니다.
+`OwnerID``AspNetUser`데이터베이스에 있는 테이블의 사용자 ID입니다 [:::no-loc(Identity):::](xref:security/authentication/identity) . `Status`필드는 일반 사용자가 연락처를 볼 수 있는지 여부를 결정 합니다.
 
 새 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 
@@ -116,21 +110,39 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-identity"></a>역할 서비스 추가Identity
+### <a name="add-role-services-to-no-locidentity"></a>역할 서비스 추가:::no-loc(Identity):::
 
-역할 서비스를 추가 하려면 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) 를 추가 합니다.
+역할 서비스를 추가 하려면 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) 를 추가 합니다.
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet2&highlight=9)]
 
+<a name="rau"></a>
+
 ### <a name="require-authenticated-users"></a>인증 된 사용자 필요
 
-사용자를 인증 하도록 요구 하는 기본 인증 정책을 설정 합니다.
+사용자 인증을 요구 하도록 대체 인증 정책을 설정 합니다.
 
-[!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=15-99)] 
+[!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
- 특성을 사용 하 여 Razor 페이지, 컨트롤러 또는 작업 메서드 수준에서 인증을 옵트아웃 (opt out) 할 수 있습니다 `[AllowAnonymous]` . 사용자를 인증 하도록 요구 하는 기본 인증 정책을 설정 하면 새로 추가 된 Razor 페이지와 컨트롤러를 보호 합니다. 기본적으로 인증을 요구 하는 것은 특성을 포함 하는 새 컨트롤러 및 페이지에 의존 하는 것 보다 안전 Razor 합니다 `[Authorize]` .
+위의 강조 표시 된 코드는 [대체 인증 정책을](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)설정 합니다. 대체 인증 정책에서는 ***all*** :::no-loc(Razor)::: 인증 특성이 있는 페이지, 컨트롤러 또는 작업 메서드를 제외 하 고 모든 사용자를 인증 해야 합니다. 예를 들어 :::no-loc(Razor)::: 또는를 사용 하는 페이지, 컨트롤러 또는 작업 메서드 `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` 는 대체 인증 정책 대신 적용 된 인증 특성을 사용 합니다.
 
-익명 사용자가 등록 하기 전에 사이트에 대 한 정보를 얻을 수 있도록 인덱스 및 개인 정보 페이지에 [Allowanonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) 를 추가 합니다.
+대체 인증 정책:
+
+* 는 인증 정책을 명시적으로 지정 하지 않는 모든 요청에 적용 됩니다. 끝점 라우팅을 통해 처리 되는 요청의 경우 권한 부여 특성을 지정 하지 않는 끝점이 여기에 포함 됩니다. [정적 파일과](xref:fundamentals/static-files)같이 권한 부여 미들웨어 후 다른 미들웨어에서 처리 하는 요청의 경우 모든 요청에 정책을 적용 합니다.
+
+사용자를 인증 하도록 요구 하는 대체 인증 정책을 설정 하면 새로 추가 된 :::no-loc(Razor)::: 페이지와 컨트롤러를 보호 합니다. 기본적으로 인증을 요구 하는 것은 특성을 포함 하는 새 컨트롤러 및 페이지에 의존 하는 것 보다 안전 :::no-loc(Razor)::: 합니다 `[Authorize]` .
+
+클래스에는 <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> 도 포함 <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> 됩니다. 는 `DefaultPolicy` `[Authorize]` 정책을 지정 하지 않은 경우 특성에 사용 되는 정책입니다. `[Authorize]`는와 달리 명명 된 정책을 포함 하지 않습니다 `[Authorize(PolicyName="MyPolicy")]` .
+
+정책에 대 한 자세한 내용은을 참조 하십시오 <xref:security/authorization/policies> .
+
+MVC 컨트롤러 및 :::no-loc(Razor)::: 페이지에서 모든 사용자를 인증 하도록 요구 하는 다른 방법은 권한 부여 필터를 추가 하는 것입니다.
+
+[!code-csharp[](secure-data/samples/final3/Startup2.cs?name=snippet&highlight=14-99)]
+
+이전 코드는 권한 부여 필터를 사용 하며, 대체 정책 설정에서는 끝점 라우팅을 사용 합니다. 대체 (fallback) 정책을 설정 하는 것은 모든 사용자를 인증 하도록 요구 하는 기본 방법입니다.
+
+[AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) `Index` `Privacy` 익명 사용자가 등록 하기 전에 사이트에 대 한 정보를 얻을 수 있도록 및 페이지에 allowanonymous를 추가 합니다.
 
 [!code-csharp[](secure-data/samples/final3/Pages/Index.cshtml.cs?highlight=1,7)]
 
@@ -187,7 +199,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>권한 부여 처리기 등록
 
-[Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)를 사용 하 여 [종속성 주입](xref:fundamentals/dependency-injection) 을 위해 Entity Framework Core를 사용 하는 서비스를 등록 해야 합니다. 는 `ContactIsOwnerAuthorizationHandler` Entity Framework Core를 기반으로 하는 ASP.NET Core을 사용 합니다 [Identity](xref:security/authentication/identity) . 종속성 주입을 통해에 사용할 수 있도록 서비스 컬렉션에 처리기를 `ContactsController` 등록 [dependency injection](xref:fundamentals/dependency-injection)합니다. 끝에 다음 코드를 추가 합니다 `ConfigureServices` .
+[Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)를 사용 하 여 [종속성 주입](xref:fundamentals/dependency-injection) 을 위해 Entity Framework Core를 사용 하는 서비스를 등록 해야 합니다. 는 `ContactIsOwnerAuthorizationHandler` Entity Framework Core를 기반으로 하는 ASP.NET Core을 사용 합니다 [:::no-loc(Identity):::](xref:security/authentication/identity) . 종속성 주입을 통해에 사용할 수 있도록 서비스 컬렉션에 처리기를 `ContactsController` 등록 [dependency injection](xref:fundamentals/dependency-injection)합니다. 끝에 다음 코드를 추가 합니다 `ConfigureServices` .
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -195,7 +207,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="support-authorization"></a>인증 지원
 
-이 섹션에서는 페이지를 업데이트 하 Razor 고 작업 요구 사항 클래스를 추가 합니다.
+이 섹션에서는 페이지를 업데이트 하 :::no-loc(Razor)::: 고 작업 요구 사항 클래스를 추가 합니다.
 
 ### <a name="review-the-contact-operations-requirements-class"></a>연락처 작업 요구 사항 클래스를 검토 합니다.
 
@@ -203,16 +215,16 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-razor-pages"></a>연락처 페이지에 대 한 기본 클래스 만들기 Razor
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>연락처 페이지에 대 한 기본 클래스 만들기 :::no-loc(Razor):::
 
-연락처 페이지에 사용 되는 서비스를 포함 하는 기본 클래스를 만듭니다 Razor . 기본 클래스는 초기화 코드를 한 위치에 배치 합니다.
+연락처 페이지에 사용 되는 서비스를 포함 하는 기본 클래스를 만듭니다 :::no-loc(Razor)::: . 기본 클래스는 초기화 코드를 한 위치에 배치 합니다.
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/DI_BasePageModel.cs)]
 
 위의 코드는
 
 * `IAuthorizationService`권한 부여 처리기에 액세스 하는 서비스를 추가 합니다.
-* 서비스를 추가 Identity `UserManager` 합니다.
+* 서비스를 추가 :::no-loc(Identity)::: `UserManager` 합니다.
 * `ApplicationDbContext`를 추가합니다.
 
 ### <a name="update-the-createmodel"></a>CreateModel 업데이트
@@ -261,7 +273,7 @@ dotnet user-secrets set SeedUserPW <PW>
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> 데이터를 변경할 수 있는 권한이 없는 사용자의 링크를 숨기면 앱이 보호 되지 않습니다. 링크를 숨기면 올바른 링크만 표시 하 여 앱을 보다 사용자에 게 친숙 하 게 만들 수 있습니다. 사용자는 생성 된 Url을 해킹 하 여 자신이 소유 하지 않은 데이터에 대 한 편집 및 삭제 작업을 호출할 수 있습니다. Razor페이지 또는 컨트롤러는 데이터를 보호 하기 위해 액세스 검사를 적용 해야 합니다.
+> 데이터를 변경할 수 있는 권한이 없는 사용자의 링크를 숨기면 앱이 보호 되지 않습니다. 링크를 숨기면 올바른 링크만 표시 하 여 앱을 보다 사용자에 게 친숙 하 게 만들 수 있습니다. 사용자는 생성 된 Url을 해킹 하 여 자신이 소유 하지 않은 데이터에 대 한 편집 및 삭제 작업을 호출할 수 있습니다. :::no-loc(Razor):::페이지 또는 컨트롤러는 데이터를 보호 하기 위해 액세스 검사를 적용 해야 합니다.
 
 ### <a name="update-details"></a>업데이트 세부 정보
 
@@ -284,7 +296,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="differences-between-challenge-and-forbid"></a>챌린지와 금지 간의 차이점
 
-이 앱은 인증 된 사용자를 [요구](#require-authenticated-users)하도록 기본 정책을 설정 합니다. 다음 코드는 익명 사용자를 허용 합니다. 익명 사용자는 챌린지 vs 금지 간의 차이점을 표시할 수 있습니다.
+이 앱은 인증 된 사용자를 [요구](#rau)하도록 기본 정책을 설정 합니다. 다음 코드는 익명 사용자를 허용 합니다. 익명 사용자는 챌린지 vs 금지 간의 차이점을 표시할 수 있습니다.
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/Details2.cshtml.cs?name=snippet)]
 
@@ -318,15 +330,15 @@ dotnet user-secrets set SeedUserPW <PW>
 
 | 사용자                | 앱에서 시드 | 옵션                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | No                | 자신의 데이터를 편집/삭제 합니다.                |
-| manager@contoso.com | Yes               | 자신의 데이터를 승인/거부 하 고 편집/삭제 합니다. |
-| admin@contoso.com   | Yes               | 모든 데이터를 승인/거부 하 고 편집/삭제 합니다. |
+| test@example.com    | 예                | 자신의 데이터를 편집/삭제 합니다.                |
+| manager@contoso.com | 예               | 자신의 데이터를 승인/거부 하 고 편집/삭제 합니다. |
+| admin@contoso.com   | 예               | 모든 데이터를 승인/거부 하 고 편집/삭제 합니다. |
 
 관리자의 브라우저에서 연락처를 만듭니다. 관리자 연락처에서 삭제 및 편집에 대 한 URL을 복사 합니다. 이러한 링크를 테스트 사용자의 브라우저에 붙여넣어 테스트 사용자가 이러한 작업을 수행할 수 없는지 확인 합니다.
 
 ## <a name="create-the-starter-app"></a>시작 앱 만들기
 
-* Razor"연락처 관리자" 라는 페이지 앱 만들기
+* :::no-loc(Razor):::"연락처 관리자" 라는 페이지 앱 만들기
   * **개별 사용자 계정을**사용 하 여 앱을 만듭니다.
   * 네임 스페이스는 샘플에서 사용 되는 네임 스페이스와 일치 하도록 "연락처 관리자"로 이름을 사용 합니다.
   * `-uld`SQLite 대신 LocalDB를 지정 합니다.
@@ -413,7 +425,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
 * `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 자습서는 고급입니다. 다음에 대해 잘 알고 있어야 합니다.
 
@@ -439,11 +451,11 @@ dotnet ef database update
 
 ### <a name="tie-the-contact-data-to-the-user"></a>사용자에 게 연락처 데이터 연결
 
-ASP.NET [Identity](xref:security/authentication/identity) 사용자 ID를 사용 하 여 사용자가 데이터를 편집할 수 있지만 다른 사용자 데이터는 편집할 수 없도록 합니다. `OwnerID` `ContactStatus` 모델에 및을 추가 합니다 `Contact` .
+ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) 사용자 ID를 사용 하 여 사용자가 데이터를 편집할 수 있지만 다른 사용자 데이터는 편집할 수 없도록 합니다. `OwnerID` `ContactStatus` 모델에 및을 추가 합니다 `Contact` .
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID``AspNetUser`데이터베이스에 있는 테이블의 사용자 ID입니다 [Identity](xref:security/authentication/identity) . `Status`필드는 일반 사용자가 연락처를 볼 수 있는지 여부를 결정 합니다.
+`OwnerID``AspNetUser`데이터베이스에 있는 테이블의 사용자 ID입니다 [:::no-loc(Identity):::](xref:security/authentication/identity) . `Status`필드는 일반 사용자가 연락처를 볼 수 있는지 여부를 결정 합니다.
 
 새 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 
@@ -452,11 +464,11 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-identity"></a>역할 서비스 추가Identity
+### <a name="add-role-services-to-no-locidentity"></a>역할 서비스 추가:::no-loc(Identity):::
 
-역할 서비스를 추가 하려면 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) 를 추가 합니다.
+역할 서비스를 추가 하려면 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) 를 추가 합니다.
 
-[!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=12)]
+[!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=11)]
 
 ### <a name="require-authenticated-users"></a>인증 된 사용자 필요
 
@@ -464,7 +476,7 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet&highlight=17-99)] 
 
- 특성을 사용 하 여 Razor 페이지, 컨트롤러 또는 작업 메서드 수준에서 인증을 옵트아웃 (opt out) 할 수 있습니다 `[AllowAnonymous]` . 사용자를 인증 하도록 요구 하는 기본 인증 정책을 설정 하면 새로 추가 된 Razor 페이지와 컨트롤러를 보호 합니다. 기본적으로 인증을 요구 하는 것은 특성을 포함 하는 새 컨트롤러 및 페이지에 의존 하는 것 보다 안전 Razor 합니다 `[Authorize]` .
+ 특성을 사용 하 여 :::no-loc(Razor)::: 페이지, 컨트롤러 또는 작업 메서드 수준에서 인증을 옵트아웃 (opt out) 할 수 있습니다 `[AllowAnonymous]` . 사용자를 인증 하도록 요구 하는 기본 인증 정책을 설정 하면 새로 추가 된 :::no-loc(Razor)::: 페이지와 컨트롤러를 보호 합니다. 기본적으로 인증을 요구 하는 것은 특성을 포함 하는 새 컨트롤러 및 페이지에 의존 하는 것 보다 안전 :::no-loc(Razor)::: 합니다 `[Authorize]` .
 
 익명 사용자가 등록 하기 전에 사이트에 대 한 정보를 얻을 수 있도록 인덱스, 정보 및 연락처 페이지에 [Allowanonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) 를 추가 합니다.
 
@@ -523,7 +535,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>권한 부여 처리기 등록
 
-[Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)를 사용 하 여 [종속성 주입](xref:fundamentals/dependency-injection) 을 위해 Entity Framework Core를 사용 하는 서비스를 등록 해야 합니다. 는 `ContactIsOwnerAuthorizationHandler` Entity Framework Core를 기반으로 하는 ASP.NET Core을 사용 합니다 [Identity](xref:security/authentication/identity) . 종속성 주입을 통해에 사용할 수 있도록 서비스 컬렉션에 처리기를 `ContactsController` 등록 [dependency injection](xref:fundamentals/dependency-injection)합니다. 끝에 다음 코드를 추가 합니다 `ConfigureServices` .
+[Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)를 사용 하 여 [종속성 주입](xref:fundamentals/dependency-injection) 을 위해 Entity Framework Core를 사용 하는 서비스를 등록 해야 합니다. 는 `ContactIsOwnerAuthorizationHandler` Entity Framework Core를 기반으로 하는 ASP.NET Core을 사용 합니다 [:::no-loc(Identity):::](xref:security/authentication/identity) . 종속성 주입을 통해에 사용할 수 있도록 서비스 컬렉션에 처리기를 `ContactsController` 등록 [dependency injection](xref:fundamentals/dependency-injection)합니다. 끝에 다음 코드를 추가 합니다 `ConfigureServices` .
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -531,7 +543,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="support-authorization"></a>인증 지원
 
-이 섹션에서는 페이지를 업데이트 하 Razor 고 작업 요구 사항 클래스를 추가 합니다.
+이 섹션에서는 페이지를 업데이트 하 :::no-loc(Razor)::: 고 작업 요구 사항 클래스를 추가 합니다.
 
 ### <a name="review-the-contact-operations-requirements-class"></a>연락처 작업 요구 사항 클래스를 검토 합니다.
 
@@ -539,16 +551,16 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-razor-pages"></a>연락처 페이지에 대 한 기본 클래스 만들기 Razor
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>연락처 페이지에 대 한 기본 클래스 만들기 :::no-loc(Razor):::
 
-연락처 페이지에 사용 되는 서비스를 포함 하는 기본 클래스를 만듭니다 Razor . 기본 클래스는 초기화 코드를 한 위치에 배치 합니다.
+연락처 페이지에 사용 되는 서비스를 포함 하는 기본 클래스를 만듭니다 :::no-loc(Razor)::: . 기본 클래스는 초기화 코드를 한 위치에 배치 합니다.
 
 [!code-csharp[](secure-data/samples/final2.1/Pages/Contacts/DI_BasePageModel.cs)]
 
 위의 코드는
 
 * `IAuthorizationService`권한 부여 처리기에 액세스 하는 서비스를 추가 합니다.
-* 서비스를 추가 Identity `UserManager` 합니다.
+* 서비스를 추가 :::no-loc(Identity)::: `UserManager` 합니다.
 * `ApplicationDbContext`를 추가합니다.
 
 ### <a name="update-the-createmodel"></a>CreateModel 업데이트
@@ -597,7 +609,7 @@ dotnet user-secrets set SeedUserPW <PW>
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> 데이터를 변경할 수 있는 권한이 없는 사용자의 링크를 숨기면 앱이 보호 되지 않습니다. 링크를 숨기면 올바른 링크만 표시 하 여 앱을 보다 사용자에 게 친숙 하 게 만들 수 있습니다. 사용자는 생성 된 Url을 해킹 하 여 자신이 소유 하지 않은 데이터에 대 한 편집 및 삭제 작업을 호출할 수 있습니다. Razor페이지 또는 컨트롤러는 데이터를 보호 하기 위해 액세스 검사를 적용 해야 합니다.
+> 데이터를 변경할 수 있는 권한이 없는 사용자의 링크를 숨기면 앱이 보호 되지 않습니다. 링크를 숨기면 올바른 링크만 표시 하 여 앱을 보다 사용자에 게 친숙 하 게 만들 수 있습니다. 사용자는 생성 된 Url을 해킹 하 여 자신이 소유 하지 않은 데이터에 대 한 편집 및 삭제 작업을 호출할 수 있습니다. :::no-loc(Razor):::페이지 또는 컨트롤러는 데이터를 보호 하기 위해 액세스 검사를 적용 해야 합니다.
 
 ### <a name="update-details"></a>업데이트 세부 정보
 
@@ -645,15 +657,15 @@ dotnet user-secrets set SeedUserPW <PW>
 
 | 사용자                | 앱에서 시드 | 옵션                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | No                | 자신의 데이터를 편집/삭제 합니다.                |
-| manager@contoso.com | Yes               | 자신의 데이터를 승인/거부 하 고 편집/삭제 합니다. |
-| admin@contoso.com   | Yes               | 모든 데이터를 승인/거부 하 고 편집/삭제 합니다. |
+| test@example.com    | 예                | 자신의 데이터를 편집/삭제 합니다.                |
+| manager@contoso.com | 예               | 자신의 데이터를 승인/거부 하 고 편집/삭제 합니다. |
+| admin@contoso.com   | 예               | 모든 데이터를 승인/거부 하 고 편집/삭제 합니다. |
 
 관리자의 브라우저에서 연락처를 만듭니다. 관리자 연락처에서 삭제 및 편집에 대 한 URL을 복사 합니다. 이러한 링크를 테스트 사용자의 브라우저에 붙여넣어 테스트 사용자가 이러한 작업을 수행할 수 없는지 확인 합니다.
 
 ## <a name="create-the-starter-app"></a>시작 앱 만들기
 
-* Razor"연락처 관리자" 라는 페이지 앱 만들기
+* :::no-loc(Razor):::"연락처 관리자" 라는 페이지 앱 만들기
   * **개별 사용자 계정을**사용 하 여 앱을 만듭니다.
   * 네임 스페이스는 샘플에서 사용 되는 네임 스페이스와 일치 하도록 "연락처 관리자"로 이름을 사용 합니다.
   * `-uld`SQLite 대신 LocalDB를 지정 합니다.
@@ -698,7 +710,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>추가 자료
+### <a name="additional-resources"></a>추가 리소스
 
 * [Azure App Service에서 .NET Core 및 SQL 데이터베이스 웹앱 빌드](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [권한 부여 랩을 ASP.NET Core](https://github.com/blowdart/AspNetAuthorizationWorkshop)합니다. 이 랩에서는이 자습서에서 소개 하는 보안 기능에 대해 자세히 설명 합니다.

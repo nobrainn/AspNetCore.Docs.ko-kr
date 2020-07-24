@@ -5,22 +5,22 @@ description: ASP.NET Core 웹 API를 사용한 오류 처리에 대해 알아봅
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 12/10/2019
+ms.date: 07/23/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: web-api/handle-errors
-ms.openlocfilehash: 0abb5e78e1971925c8e741386c65bdf71a0f0072
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: d9517bc14ced15094f279029abb791477f7a0004
+ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407634"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87159751"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core 웹 API에서 오류 처리
 
@@ -76,7 +76,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-HTML 형식의 응답을 대신 표시하려면 `Accept` HTTP 요청 헤더를 `text/html` 미디어 유형으로 설정합니다. 예를 들어:
+HTML 형식의 응답을 대신 표시하려면 `Accept` HTTP 요청 헤더를 `text/html` 미디어 유형으로 설정합니다. 예를 들면 다음과 같습니다.
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -229,6 +229,8 @@ HTML 형식 응답은 Postman과 같은 도구를 사용하여 테스트하는 �
 1. `HttpResponseExceptionFilter`이라는 작업 필터를 만듭니다.
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
+
+    위의 필터에서 매직 number 10은 최대 정수 값에서 뺍니다. 이 숫자를 빼면 파이프라인의 끝에서 다른 필터를 실행할 수 있습니다.
 
 1. `Startup.ConfigureServices`에서 필터 컬렉션에 작업 필터를 추가합니다.
 

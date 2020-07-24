@@ -6,20 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authorization/policies
-ms.openlocfilehash: 8c68f2a15d07909d4576a2426d92f9beaa91fbb7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408073"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160159"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 정책 기반 권한 부여
 
@@ -109,7 +109,7 @@ public void ConfigureServices(IServiceCollection services)
 
 
     services.AddControllersWithViews();
-    services.AddRazorPages();
+    services.Add:::no-loc(Razor):::Pages();
 }
 ```
 
@@ -117,21 +117,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a>MVC 컨트롤러에 정책 적용
 
-페이지를 사용 하 Razor 는 경우이 문서의 [ Razor 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.
+페이지를 사용 하 :::no-loc(Razor)::: 는 경우이 문서의 [ :::no-loc(Razor)::: 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.
 
 정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` . 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-razor-pages"></a>페이지에 정책 적용 Razor
+## <a name="apply-policies-to-no-locrazor-pages"></a>페이지에 정책 적용 :::no-loc(Razor):::
 
-정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 예를 들면 다음과 같습니다.
+정책은 :::no-loc(Razor)::: `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-정책은 페이지 처리기 수준에서 적용할 수 ***없으며*** Razor 페이지에 적용 되어야 합니다.
+정책은 페이지 처리기 수준에서 적용할 수 ***없으며*** :::no-loc(Razor)::: 페이지에 적용 되어야 합니다.
 
-Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수 있습니다.
+:::no-loc(Razor)::: [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수 있습니다.
 
 ## <a name="requirements"></a>요구 사항
 
@@ -225,7 +225,7 @@ Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorizati
 
 ## <a name="access-mvc-request-context-in-handlers"></a>처리기의 MVC 요청 컨텍스트 액세스
 
-`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다. MVC 또는와 같은 프레임 워크 SignalR `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.
+`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다. MVC 또는와 같은 프레임 워크 :::no-loc(SignalR)::: `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.
 
 끝점 라우팅을 사용 하는 경우 권한 부여는 일반적으로 권한 부여 미들웨어에 의해 처리 됩니다. 이 경우 `Resource` 속성은의 인스턴스입니다 <xref:Microsoft.AspNetCore.Http.Endpoint> . 끝점을 사용 하 여 라우팅하는 기본 리소스를 검색할 수 있습니다. 예를 들면 다음과 같습니다.
 
@@ -239,7 +239,7 @@ if (context.Resource is Endpoint endpoint)
 
 끝점이 현재에 대 한 액세스를 제공 하지 않습니다 `HttpContext` . 끝점 라우팅을 사용 하는 경우를 사용 `IHttpContextAcessor` 하 여 `HttpContext` 권한 부여 처리기 내에서 액세스 합니다. 자세한 내용은 [사용자 지정 구성 요소에서 HttpContext 사용](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components)을 참조 하세요.
 
-기존 라우팅을 사용 하거나, MVC의 권한 부여 필터의 일부로 권한 부여가 수행 되는 경우의 값은 `Resource` <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> 인스턴스입니다. 이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 Razor .
+기존 라우팅을 사용 하거나, MVC의 권한 부여 필터의 일부로 권한 부여가 수행 되는 경우의 값은 `Resource` <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> 인스턴스입니다. 이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 :::no-loc(Razor)::: .
 
 속성을 사용 하는 `Resource` 것은 프레임 워크와 관련이 있습니다. 속성의 정보를 사용 하면 `Resource` 권한 부여 정책이 특정 프레임 워크로 제한 됩니다. `Resource`키워드를 사용 하 여 속성을 캐스팅 한 `is` 다음, `InvalidCastException` 다른 프레임 워크에서 실행 될 때 코드가와 충돌 하지 않도록 캐스팅이 성공 했는지 확인 해야 합니다.
 
@@ -252,8 +252,11 @@ if (context.Resource is AuthorizationFilterContext mvcContext)
 }
 ```
 
-::: moniker-end
+## <a name="globally-require-all-users-to-be-authenticated"></a>모든 사용자를 전역적으로 인증 해야 함
 
+[!INCLUDE[](~/includes/requireAuth.md)]
+
+::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -350,19 +353,19 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a>MVC 컨트롤러에 정책 적용
 
-페이지를 사용 하 Razor 는 경우이 문서의 [ Razor 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.
+페이지를 사용 하 :::no-loc(Razor)::: 는 경우이 문서의 [ :::no-loc(Razor)::: 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.
 
 정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` . 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-razor-pages"></a>페이지에 정책 적용 Razor
+## <a name="apply-policies-to-no-locrazor-pages"></a>페이지에 정책 적용 :::no-loc(Razor):::
 
-정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 예를 들면 다음과 같습니다.
+정책은 :::no-loc(Razor)::: `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수도 있습니다.
+:::no-loc(Razor)::: [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수도 있습니다.
 
 ## <a name="requirements"></a>요구 사항
 
@@ -456,9 +459,9 @@ Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorizati
 
 ## <a name="access-mvc-request-context-in-handlers"></a>처리기의 MVC 요청 컨텍스트 액세스
 
-`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다. MVC 또는와 같은 프레임 워크 SignalR `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.
+`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다. MVC 또는와 같은 프레임 워크 :::no-loc(SignalR)::: `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.
 
-예를 들어, MVC는 속성에서 [Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext) 의 인스턴스를 전달 `Resource` 합니다. 이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 Razor .
+예를 들어, MVC는 속성에서 [Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext) 의 인스턴스를 전달 `Resource` 합니다. 이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 :::no-loc(Razor)::: .
 
 속성을 사용 하는 `Resource` 것은 프레임 워크와 관련이 있습니다. 속성의 정보를 사용 하면 `Resource` 권한 부여 정책이 특정 프레임 워크로 제한 됩니다. `Resource`키워드를 사용 하 여 속성을 캐스팅 한 `is` 다음, `InvalidCastException` 다른 프레임 워크에서 실행 될 때 코드가와 충돌 하지 않도록 캐스팅이 성공 했는지 확인 해야 합니다.
 
