@@ -5,7 +5,7 @@ description: 통합 테스트를 사용하여 앱의 구성 요소가 데이터�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/20/2020
+ms.date: 07/14/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 6e4a0065486f6d9d6744dcd21de10ec76782f210
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c050665f630c0973abe6c9d08a4652597441639f
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405876"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445283"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core의 통합 테스트
 
@@ -310,7 +310,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet4&highlight=11-18)]
 
-`TestAuthHandler`는 인증 체계가 `Test`로 설정된 사용자를 인증하도록 호출됩니다. 여기서는 `AddAuthentication`이 `ConfigureTestServices`에 등록되어 있습니다.
+`TestAuthHandler`는 인증 체계가 `Test`로 설정된 경우 사용자를 인증하도록 호출됩니다. 여기서는 `AddAuthentication`이 `ConfigureTestServices`에 등록되어 있습니다. `Test` 체계가 앱에 필요한 체계와 일치하는 것이 중요합니다. 그렇지 않으면 인증이 작동하지 않습니다.
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet3&highlight=7-12)]
 
@@ -389,7 +389,7 @@ EF 항목 [InMemory로 테스트](/ef/core/miscellaneous/testing/in-memory)에�
 
 ### <a name="test-app-organization"></a>테스트 앱 구성
 
-테스트 앱은 *tests/RazorPagesProject.Tests* 디렉터리 내에 있는 콘솔 앱입니다.
+테스트 앱은 *tests/RazorPagesProject.Tests* 디렉터리에 있는 콘솔 앱입니다.
 
 | 테스트 앱 디렉터리 | 설명 |
 | ------------------ | ----------- |
@@ -579,7 +579,7 @@ SUT에 대한 POST 요청은 앱의 [데이터 보호 위조 방지 시스템](x
 
 다음 표에서는 `HttpClient` 인스턴스를 만들 때 사용할 수 있는 기본 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions)를 보여 줍니다.
 
-| 옵션 | 설명 | 기본값 |
+| 옵션 | Description | 기본값 |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` 인스턴스가 자동으로 리디렉션 응답을 따르는지 여부를 가져오거나 설정합니다. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` 인스턴스의 기준 주소를 가져오거나 설정합니다. | `http://localhost` |
@@ -780,7 +780,7 @@ EF 항목 [InMemory로 테스트](/ef/core/miscellaneous/testing/in-memory)에�
 
 ### <a name="test-app-organization"></a>테스트 앱 구성
 
-테스트 앱은 *tests/RazorPagesProject.Tests* 디렉터리 내에 있는 콘솔 앱입니다.
+테스트 앱은 *tests/RazorPagesProject.Tests* 디렉터리에 있는 콘솔 앱입니다.
 
 | 테스트 앱 디렉터리 | 설명 |
 | ------------------ | ----------- |

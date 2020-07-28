@@ -5,7 +5,7 @@ description: Razor Pages 앱용 단위 테스트를 만드는 방법을 알아�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2019
+ms.date: 7/22/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: 756af7f2b14512bd43aefd1a4e63e195c2daa138
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ed048d600b629335b8267b63b3cfd57b525d608e
+ms.sourcegitcommit: c86b4e2955dc1724f2eaa7c97894ad8b3bf763fb
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407761"
+ms.lasthandoff: 07/22/2020
+ms.locfileid: "86949096"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core의 Razor Pages 단위 테스트
 
@@ -80,7 +81,7 @@ EF 항목 [InMemory로 테스트](/ef/core/miscellaneous/testing/in-memory)에�
 
 ## <a name="unit-tests-of-the-data-access-layer-dal"></a>DAL(데이터 액세스 계층)의 단위 테스트
 
-메시지 앱의 `AppDbContext` 클래스(*src/RazorPagesTestSample/Data/AppDbContext*)에는 4가지 메서드를 포함하는 DAL이 있습니다. 테스트 앱의 각 메서드에는 하나 또는 두 개의 단위 테스트가 있습니다.
+메시지 앱의 `AppDbContext` 클래스(*src/RazorPagesTestSample/Data/AppDbContext.cs*)에는 4가지 메서드를 포함하는 DAL이 있습니다. 테스트 앱의 각 메서드에는 하나 또는 두 개의 단위 테스트가 있습니다.
 
 | DAL 메서드               | 기능                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
@@ -101,7 +102,7 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-이 방법의 문제는 이전 테스트가 어떤 상태이든 관계없이 각 테스트가 데이터베이스를 수신한다는 것입니다. 서로 방해하지 않는 원자 단위 테스트를 작성하려고 할 때 문제가 될 수 있습니다. `AppDbContext`에서 각 테스트에 대해 강제로 새 데이터베이스 컨텍스트를 사용하도록 하려면 새 서비스 공급자를 기준으로 하는 `DbContextOptions` 인스턴스를 제공합니다. 테스트 앱은 해당 `Utilities` 클래스 메서드`TestDbContextOptions`(*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*)를 사용하여 이 작업을 수행하는 방법을 보여 줍니다.
+이 방법의 문제는 이전 테스트가 어떤 상태이든 관계없이 각 테스트가 데이터베이스를 수신한다는 것입니다. 서로 방해하지 않는 원자 단위 테스트를 작성하려고 할 때 문제가 될 수 있습니다. `AppDbContext`에서 각 테스트에 대해 강제로 새 데이터베이스 컨텍스트를 사용하도록 하려면 새 서비스 공급자를 기준으로 하는 `DbContextOptions` 인스턴스를 제공합니다. 테스트 앱은 해당 `Utilities` 클래스 메서드 `TestDbContextOptions`(*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*)를 사용하여 이 작업을 수행하는 방법을 보여 줍니다.
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
@@ -151,7 +152,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 ## <a name="unit-tests-of-the-page-model-methods"></a>페이지 모델 메서드의 단위 테스트
 
-다른 단위 테스트 세트는 페이지 모델 메서드의 테스트를 담당합니다. 메시지 앱에서 인덱스 페이지 모델은 *src/RazorPagesTestSample/Pages/Index. cshtml*의 `IndexModel` 클래스에 있습니다.
+다른 단위 테스트 세트는 페이지 모델 메서드의 테스트를 담당합니다. 메시지 앱에서 인덱스 페이지 모델은 *src/RazorPagesTestSample/Pages/Index.cshtml.cs*의 `IndexModel` 클래스에 있습니다.
 
 | 페이지 모델 메서드 | 기능 |
 | ----------------- | -------- |
@@ -179,7 +180,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage` 페이지 모델의 `OnGetAsync` 메서드(*src/RazorPagesTestSample/Pages/Index. cshtml*):
+`IndexPage` 페이지 모델의 `OnGetAsync` 메서드(*src/RazorPagesTestSample/Pages/Index.cshtml.cs*):
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -264,7 +265,7 @@ EF 항목 [InMemory로 테스트](/ef/core/miscellaneous/testing/in-memory)에�
 
 ## <a name="unit-tests-of-the-data-access-layer-dal"></a>DAL(데이터 액세스 계층)의 단위 테스트
 
-메시지 앱의 `AppDbContext` 클래스(*src/RazorPagesTestSample/Data/AppDbContext*)에는 4가지 메서드를 포함하는 DAL이 있습니다. 테스트 앱의 각 메서드에는 하나 또는 두 개의 단위 테스트가 있습니다.
+메시지 앱의 `AppDbContext` 클래스(*src/RazorPagesTestSample/Data/AppDbContext.cs*)에는 4가지 메서드를 포함하는 DAL이 있습니다. 테스트 앱의 각 메서드에는 하나 또는 두 개의 단위 테스트가 있습니다.
 
 | DAL 메서드               | 기능                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
@@ -285,7 +286,7 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-이 방법의 문제는 이전 테스트가 어떤 상태이든 관계없이 각 테스트가 데이터베이스를 수신한다는 것입니다. 서로 방해하지 않는 원자 단위 테스트를 작성하려고 할 때 문제가 될 수 있습니다. `AppDbContext`에서 각 테스트에 대해 강제로 새 데이터베이스 컨텍스트를 사용하도록 하려면 새 서비스 공급자를 기준으로 하는 `DbContextOptions` 인스턴스를 제공합니다. 테스트 앱은 해당 `Utilities` 클래스 메서드`TestDbContextOptions`(*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*)를 사용하여 이 작업을 수행하는 방법을 보여 줍니다.
+이 방법의 문제는 이전 테스트가 어떤 상태이든 관계없이 각 테스트가 데이터베이스를 수신한다는 것입니다. 서로 방해하지 않는 원자 단위 테스트를 작성하려고 할 때 문제가 될 수 있습니다. `AppDbContext`에서 각 테스트에 대해 강제로 새 데이터베이스 컨텍스트를 사용하도록 하려면 새 서비스 공급자를 기준으로 하는 `DbContextOptions` 인스턴스를 제공합니다. 테스트 앱은 해당 `Utilities` 클래스 메서드 `TestDbContextOptions`(*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*)를 사용하여 이 작업을 수행하는 방법을 보여 줍니다.
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
@@ -335,7 +336,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 ## <a name="unit-tests-of-the-page-model-methods"></a>페이지 모델 메서드의 단위 테스트
 
-다른 단위 테스트 세트는 페이지 모델 메서드의 테스트를 담당합니다. 메시지 앱에서 인덱스 페이지 모델은 *src/RazorPagesTestSample/Pages/Index. cshtml*의 `IndexModel` 클래스에 있습니다.
+다른 단위 테스트 세트는 페이지 모델 메서드의 테스트를 담당합니다. 메시지 앱에서 인덱스 페이지 모델은 *src/RazorPagesTestSample/Pages/Index.cshtml.cs*의 `IndexModel` 클래스에 있습니다.
 
 | 페이지 모델 메서드 | 기능 |
 | ----------------- | -------- |
@@ -363,7 +364,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage` 페이지 모델의 `OnGetAsync` 메서드(*src/RazorPagesTestSample/Pages/Index. cshtml*):
+`IndexPage` 페이지 모델의 `OnGetAsync` 메서드(*src/RazorPagesTestSample/Pages/Index.cshtml.cs*):
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -388,5 +389,6 @@ DAL의 `GetMessagesAsync` 메서드는 이 메서드 호출에 대한 결과를 
 * [xUnit.net 시작: .NET SDK 명령줄에서 .NET Core 사용](https://xunit.github.io/docs/getting-started-dotnet-core)
 * [Moq](https://github.com/moq/moq4)
 * [Moq 빠른 시작](https://github.com/Moq/moq4/wiki/Quickstart)
+* [JustMockLite](https://github.com/telerik/JustMockLite): .NET 개발자를 위한 모의 프레임워크입니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.* )
 
 ::: moniker-end

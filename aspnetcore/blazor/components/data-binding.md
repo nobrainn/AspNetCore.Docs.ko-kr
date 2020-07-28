@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0f2741a78b58d7380fcbe84e97f5a08ef291c27b
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 896eed0e55986678b6bb86638ca92b04a77b4fef
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944505"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869941"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor 데이터 바인딩
 
@@ -167,7 +167,7 @@ Blazor에서는 기본적으로 날짜 형식을 지정할 수 있도록 지원�
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.EventCallback%601>는 <xref:blazor/components/event-handling#eventcallback>에 설명됩니다.
+<xref:Microsoft.AspNetCore.Components.EventCallback%601>의 이름은 구성 요소 매개 변수 이름 뒤에 `Changed` 접미사(`{PARAMETER NAME}Changed`)(위의 예에서는 `YearChanged`)를 붙여 지정해야 합니다. <xref:Microsoft.AspNetCore.Components.EventCallback%601>에 대한 자세한 내용은 <xref:blazor/components/event-handling#eventcallback>를 참조하세요.
 
 다음 부모 구성 요소는
 

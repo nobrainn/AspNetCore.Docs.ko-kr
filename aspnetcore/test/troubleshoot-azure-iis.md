@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 65095f3990c72224d95f1f5fe46d320ab8f12040
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17ada36c40997353528f922bece5acc34ce760d2
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404836"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445387"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에서 ASP.NET Core 문제 해결
 
@@ -298,34 +299,24 @@ ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core 모듈 stdout 로그(Azure App Service)
 
-ASP.NET Core 모듈 stdout 로그는 종종 애플리케이션 이벤트 로그에서 찾을 수 없는 유용한 오류 메시지를 기록합니다. stdout 로그를 사용하고 보려면:
-
-1. Azure Portal에서 **문제 진단 및 해결** 블레이드로 이동합니다.
-1. **문제 범주 선택** 아래에서 **웹앱 작동 중단** 단추를 선택합니다.
-1. **추천 솔루션**> **Stdout 로그 리디렉션 사용** 아래에서 **Kudu 콘솔을 열어 Web.Config 편집** 단추를 선택합니다.
-1. Kudu **진단 콘솔**에서 **site** > **wwwroot** 경로로 폴더를 엽니다. 아래로 스크롤하여 목록 아래쪽에 있는 *web.config* 파일을 표시합니다.
-1. *web.config* 파일 옆에 있는 연필 아이콘을 클릭합니다.
-1. **stdoutLogEnabled**를 `true`로 설정하고 **stdoutLogFile** 경로를 `\\?\%home%\LogFiles\stdout`로 변경합니다.
-1. **저장**을 선택하여 업데이트된 *web.config* 파일을 저장합니다.
-1. 앱에 대한 요청을 실행합니다.
-1. Azure Portal로 돌아갑니다. **개발 도구** 영역에서 **고급 도구** 블레이드를 선택합니다. **이동&rarr;** 단추를 선택합니다. 새 브라우저 탭 또는 창에서 Kudu 콘솔이 열립니다.
-1. 페이지 위쪽의 탐색 모음을 사용하여 **디버그 콘솔**을 열고 **CMD**를 선택합니다.
-1. **LogFiles** 폴더를 선택합니다.
-1. **수정됨** 열을 검사하고 연필 아이콘을 선택하여 최신 수정 날짜가 있는 stdout 로그를 편집합니다.
-1. 로그 파일이 열리면 오류가 표시됩니다.
-
-문제 해결이 완료되면 stdout 로깅을 사용하지 않도록 설정합니다.
-
-1. Kudu **진단 콘솔**에서 **site** > **wwwroot** 경로로 돌아가서 *web.config* 파일을 표시합니다. 연필 아이콘을 선택하여 **web.config** 파일을 다시 엽니다.
-1. **stdoutLogEnabled**를 `false`로 설정합니다.
-1. **저장**을 선택하여 파일을 저장합니다.
-
-자세한 내용은 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>를 참조하세요.
-
 > [!WARNING]
 > stdout 로그를 사용하지 않도록 설정하지 않으면 앱 또는 서버 오류가 발생할 수 있습니다. 로그 파일 크기 또는 생성되는 로그 파일 수에 대한 제한은 없습니다. 앱 시작 문제를 해결하려면 stdout 로깅만 사용합니다.
 >
 > 시작 후 ASP.NET Core 앱의 일반적인 로깅에는 로그 파일 크기를 제한하고 로그를 회전하는 로깅 라이브러리를 사용합니다. 자세한 내용은 [타사 로깅 공급자](xref:fundamentals/logging/index#third-party-logging-providers)를 참조하세요.
+
+ASP.NET Core 모듈 stdout 로그는 종종 애플리케이션 이벤트 로그에서 찾을 수 없는 유용한 오류 메시지를 기록합니다. stdout 로그를 사용하고 보려면:
+
+1. Azure Portal에서 웹앱으로 이동합니다.
+1. **App Service** 블레이드에서 검색 상자에 **kudu**를 입력합니다.
+1. **고급 도구** > **이동**을 선택합니다.
+1. **디버그 콘솔 > CMD**를 선택합니다.
+1. *site/wwwroot*로 이동합니다.
+1. 연필 아이콘을 선택하여 *web.config* 파일을 편집합니다.
+1. `<aspNetCore />` 요소에서 `stdoutLogEnabled="true"`를 설정하고 **저장**를 선택합니다.
+
+문제 해결이 완료되면 stdout 로깅을 사용하지 않도록 `stdoutLogEnabled="false"`를 설정합니다.
+
+자세한 내용은 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>를 참조하세요.
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core 모듈 디버그 로그(Azure App Service)
 
@@ -420,7 +411,7 @@ stdout 로깅을 사용할 수 없는 경우 다음 단계를 따릅니다.
 1. 시작 메뉴를 열고 *이벤트 뷰어*를 검색한 다음, **이벤트 뷰어** 앱을 선택합니다.
 1. **이벤트 뷰어**에서 **Windows 로그** 노드를 엽니다.
 1. **애플리케이션**을 선택하여 애플리케이션 이벤트 로그를 엽니다.
-1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.  
+1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.
 
 ### <a name="run-the-app-at-a-command-prompt"></a>명령 프롬프트에서 앱 실행
 
@@ -517,7 +508,7 @@ stdout 로그를 사용하고 보려면:
 
 1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다. 앱 풀에는 폴더에 대한 쓰기 액세스 권한이 있어야 합니다.
 1. [EnableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
@@ -763,9 +754,9 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다.
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`(`{X.Y}`는 런타임 버전임)
-1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+1. 앱을 실행합니다. `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔에 파이프됩니다.
+오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔로 파이프됩니다.
 
 #### <a name="test-a-64-bit-x64-app"></a>64비트(x64) 앱 테스트
 
@@ -776,16 +767,16 @@ ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다
   1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 * 앱이 [자체 포함 배포](/dotnet/core/deploying/#self-contained-deployments-scd)인 경우:
   1. `cd D:\home\site\wwwroot`
-  1. 앱 실행: `{ASSEMBLY NAME}.exe`
+  1. 앱을 실행합니다. `{ASSEMBLY NAME}.exe`
 
-오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔에 파이프됩니다.
+오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔로 파이프됩니다.
 
 **미리 보기 릴리스에서 실행되는 프레임워크 종속 배포**
 
 ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다.
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`(`{X.Y}`는 런타임 버전임)
-1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+1. 앱을 실행합니다. `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔에 파이프됩니다.
 
@@ -913,7 +904,7 @@ stdout 로깅을 사용할 수 없는 경우 다음 단계를 따릅니다.
 1. 시작 메뉴를 열고 *이벤트 뷰어*를 검색한 다음, **이벤트 뷰어** 앱을 선택합니다.
 1. **이벤트 뷰어**에서 **Windows 로그** 노드를 엽니다.
 1. **애플리케이션**을 선택하여 애플리케이션 이벤트 로그를 엽니다.
-1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.  
+1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.
 
 ### <a name="run-the-app-at-a-command-prompt"></a>명령 프롬프트에서 앱 실행
 
@@ -1010,7 +1001,7 @@ stdout 로그를 사용하고 보려면:
 
 1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다. 앱 풀에는 폴더에 대한 쓰기 액세스 권한이 있어야 합니다.
 1. [EnableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
@@ -1241,9 +1232,9 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다.
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`(`{X.Y}`는 런타임 버전임)
-1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+1. 앱을 실행합니다. `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔에 파이프됩니다.
+오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔로 파이프됩니다.
 
 #### <a name="test-a-64-bit-x64-app"></a>64비트(x64) 앱 테스트
 
@@ -1254,16 +1245,16 @@ ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다
   1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 * 앱이 [자체 포함 배포](/dotnet/core/deploying/#self-contained-deployments-scd)인 경우:
   1. `cd D:\home\site\wwwroot`
-  1. 앱 실행: `{ASSEMBLY NAME}.exe`
+  1. 앱을 실행합니다. `{ASSEMBLY NAME}.exe`
 
-오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔에 파이프됩니다.
+오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔로 파이프됩니다.
 
 **미리 보기 릴리스에서 실행되는 프레임워크 종속 배포**
 
 ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다.
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`(`{X.Y}`는 런타임 버전임)
-1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
+1. 앱을 실행합니다. `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 오류를 표시하는 앱의 콘솔 출력이 Kudu 콘솔에 파이프됩니다.
 
@@ -1362,7 +1353,7 @@ stdout 로깅을 사용할 수 없는 경우 다음 단계를 따릅니다.
 1. 시작 메뉴를 열고 *이벤트 뷰어*를 검색한 다음, **이벤트 뷰어** 앱을 선택합니다.
 1. **이벤트 뷰어**에서 **Windows 로그** 노드를 엽니다.
 1. **애플리케이션**을 선택하여 애플리케이션 이벤트 로그를 엽니다.
-1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.  
+1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.
 
 ### <a name="run-the-app-at-a-command-prompt"></a>명령 프롬프트에서 앱 실행
 
@@ -1441,7 +1432,7 @@ stdout 로그를 사용하고 보려면:
 
 1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다. 앱 풀에는 폴더에 대한 쓰기 액세스 권한이 있어야 합니다.
 1. [EnableDumps PowerShell 스크립트](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) 실행:
-   * 앱에서 [in-process 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
+   * 앱에서 [ 호스팅 모델](xref:host-and-deploy/iis/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
