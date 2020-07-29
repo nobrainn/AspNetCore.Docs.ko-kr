@@ -1,45 +1,46 @@
 ---
-title: ASP.NET Core Blazor 세계화 및 지역화
+title: ASP.NET Core [Blazor 세계화 및 지역화
 author: guardrex
-description: 여러 문화권과 언어의 사용자가 Razor 구성 요소에 액세스할 수 있도록 하는 방법을 알아봅니다.
+description: 여러 문화권과 언어의 사용자가 [Razor 구성 요소에 액세스할 수 있도록 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/globalization-localization
 ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402730"
 ---
-# <a name="aspnet-core-blazor-globalization-and-localization"></a><span data-ttu-id="cf857-103">ASP.NET Core Blazor 세계화 및 지역화</span><span class="sxs-lookup"><span data-stu-id="cf857-103">ASP.NET Core Blazor globalization and localization</span></span>
+# <a name="aspnet-core-blazor-globalization-and-localization"></a><span data-ttu-id="cf857-103">ASP.NET Core [Blazor 세계화 및 지역화</span><span class="sxs-lookup"><span data-stu-id="cf857-103">ASP.NET Core [Blazor globalization and localization</span></span>
 
 <span data-ttu-id="cf857-104">작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="cf857-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-<span data-ttu-id="cf857-105">여러 문화권과 언어의 사용자가 Razor 구성 요소에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-105">Razor components can be made accessible to users in multiple cultures and languages.</span></span> <span data-ttu-id="cf857-106">다음 .NET 세계화 및 지역화 시나리오를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-106">The following .NET globalization and localization scenarios are available:</span></span>
+<span data-ttu-id="cf857-105">여러 문화권과 언어의 사용자가 [Razor 구성 요소에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-105">[Razor components can be made accessible to users in multiple cultures and languages.</span></span> <span data-ttu-id="cf857-106">다음 .NET 세계화 및 지역화 시나리오를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-106">The following .NET globalization and localization scenarios are available:</span></span>
 
 * <span data-ttu-id="cf857-107">. NET의 리소스 시스템</span><span class="sxs-lookup"><span data-stu-id="cf857-107">.NET's resources system</span></span>
 * <span data-ttu-id="cf857-108">문화권별 숫자 및 날짜 형식 지정</span><span class="sxs-lookup"><span data-stu-id="cf857-108">Culture-specific number and date formatting</span></span>
 
 <span data-ttu-id="cf857-109">다음과 같은 제한된 ASP.NET Core의 지역화 시나리오가 현재 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-109">A limited set of ASP.NET Core's localization scenarios are currently supported:</span></span>
 
-* <span data-ttu-id="cf857-110"><xref:Microsoft.Extensions.Localization.IStringLocalizer> 및 <xref:Microsoft.Extensions.Localization.IStringLocalizer%601>는 Blazor 앱에서 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-110"><xref:Microsoft.Extensions.Localization.IStringLocalizer> and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *are supported* in Blazor apps.</span></span>
-* <span data-ttu-id="cf857-111"><xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>, <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> 및 데이터 주석 지역화는 ASP.NET Core MVC 시나리오로, Blazor 앱에서 **지원되지 않습니다**.</span><span class="sxs-lookup"><span data-stu-id="cf857-111"><xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>, <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>, and Data Annotations localization are ASP.NET Core MVC scenarios and **not supported** in Blazor apps.</span></span>
+* <span data-ttu-id="cf857-110"><xref:Microsoft.Extensions.Localization.IStringLocalizer> 및 <xref:Microsoft.Extensions.Localization.IStringLocalizer%601>는 [Blazor 앱에서 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-110"><xref:Microsoft.Extensions.Localization.IStringLocalizer> and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *are supported* in [Blazor apps.</span></span>
+* <span data-ttu-id="cf857-111"><xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>, <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> 및 데이터 주석 지역화는 ASP.NET Core MVC 시나리오로, [Blazor 앱에서 **지원되지 않습니다**.</span><span class="sxs-lookup"><span data-stu-id="cf857-111"><xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>, <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>, and Data Annotations localization are ASP.NET Core MVC scenarios and **not supported** in [Blazor apps.</span></span>
 
 <span data-ttu-id="cf857-112">자세한 내용은 <xref:fundamentals/localization>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-112">For more information, see <xref:fundamentals/localization>.</span></span>
 
 ## <a name="globalization"></a><span data-ttu-id="cf857-113">전역화</span><span class="sxs-lookup"><span data-stu-id="cf857-113">Globalization</span></span>
 
-Blazor<span data-ttu-id="cf857-114">의 [`@bind`](xref:mvc/views/razor#bind) 기능은 사용자의 현재 문화권에 따라 표시하기 위해 형식을 지정하고 값을 구문 분석합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-114">'s [`@bind`](xref:mvc/views/razor#bind) functionality performs formats and parses values for display based on the user's current culture.</span></span>
+<span data-ttu-id="cf857-114">[Blazor의 [`@bind`](xref:mvc/views/razor#bind) 기능은 사용자의 현재 문화권에 따라 표시하기 위해 형식을 지정하고 값을 구문 분석합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-114">[Blazor's [`@bind`](xref:mvc/views/razor#bind) functionality performs formats and parses values for display based on the user's current culture.</span></span>
 
 <span data-ttu-id="cf857-115">현재 문화권은 <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> 속성에서 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-115">The current culture can be accessed from the <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> property.</span></span>
 
@@ -54,29 +55,29 @@ Blazor<span data-ttu-id="cf857-114">의 [`@bind`](xref:mvc/views/razor#bind) 기
 * <span data-ttu-id="cf857-119">자유 형식 텍스트를 포함할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-119">Can't contain free-form text.</span></span>
 * <span data-ttu-id="cf857-120">브라우저의 구현에 따라 사용자 상호 작용 특성을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-120">Provide user interaction characteristics based on the browser's implementation.</span></span>
 
-<span data-ttu-id="cf857-121">다음 필드 형식은 특정 형식 지정 요구 사항이 있으며, 모든 주요 브라우저에서 지원되는 것은 아니므로 현재 Blazor에서 지원되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-121">The following field types have specific formatting requirements and aren't currently supported by Blazor because they aren't supported by all major browsers:</span></span>
+<span data-ttu-id="cf857-121">다음 필드 형식은 특정 형식 지정 요구 사항이 있으며, 모든 주요 브라우저에서 지원되는 것은 아니므로 현재 [Blazor에서 지원되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-121">The following field types have specific formatting requirements and aren't currently supported by [Blazor because they aren't supported by all major browsers:</span></span>
 
 * `datetime-local`
 * `month`
 * `week`
 
-<span data-ttu-id="cf857-122">[`@bind`](xref:mvc/views/razor#bind)는 `@bind:culture` 매개 변수를 지원하여 값을 구문 분석하고 서식을 지정하기 위한 <xref:System.Globalization.CultureInfo?displayProperty=fullName>을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-122">[`@bind`](xref:mvc/views/razor#bind) supports the `@bind:culture` parameter to provide a <xref:System.Globalization.CultureInfo?displayProperty=fullName> for parsing and formatting a value.</span></span> <span data-ttu-id="cf857-123">`date` 및 `number` 필드 형식을 사용할 때는 문화권을 지정하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-123">Specifying a culture isn't recommended when using the `date` and `number` field types.</span></span> <span data-ttu-id="cf857-124">`date` 및 `number`는 필수 문화권을 제공하는 Blazor가 기본적으로 제공되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-124">`date` and `number` have built-in Blazor support that provides the required culture.</span></span>
+<span data-ttu-id="cf857-122">[`@bind`](xref:mvc/views/razor#bind)는 `@bind:culture` 매개 변수를 지원하여 값을 구문 분석하고 서식을 지정하기 위한 <xref:System.Globalization.CultureInfo?displayProperty=fullName>을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-122">[`@bind`](xref:mvc/views/razor#bind) supports the `@bind:culture` parameter to provide a <xref:System.Globalization.CultureInfo?displayProperty=fullName> for parsing and formatting a value.</span></span> <span data-ttu-id="cf857-123">`date` 및 `number` 필드 형식을 사용할 때는 문화권을 지정하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-123">Specifying a culture isn't recommended when using the `date` and `number` field types.</span></span> <span data-ttu-id="cf857-124">`date` 및 `number`는 필수 문화권을 제공하는 [Blazor가 기본적으로 제공되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-124">`date` and `number` have built-in [Blazor support that provides the required culture.</span></span>
 
 ## <a name="localization"></a><span data-ttu-id="cf857-125">지역화</span><span class="sxs-lookup"><span data-stu-id="cf857-125">Localization</span></span>
 
-### Blazor WebAssembly
+### [Blazor WebAssembly
 
-Blazor WebAssembly<span data-ttu-id="cf857-126"> 앱은 사용자의 [언어 기본 설정](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)을 사용하여 문화권을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-126"> apps set the culture using the user's [language preference](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages).</span></span>
+<span data-ttu-id="cf857-126">[Blazor WebAssembly 앱은 사용자의 [언어 기본 설정](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)을 사용하여 문화권을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-126">[Blazor WebAssembly apps set the culture using the user's [language preference](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages).</span></span>
 
 <span data-ttu-id="cf857-127">문화권을 명시적으로 구성하려면 `Program.Main`에서 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType>와 <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType>를 설정하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-127">To explicitly configure the culture, set <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> and <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> in `Program.Main`.</span></span>
 
-<span data-ttu-id="cf857-128">기본적으로 Blazor WebAssembly 앱에 대한 Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-128">By default, Blazor's linker configuration for Blazor WebAssembly apps strips out internationalization information except for locales explicitly requested.</span></span> <span data-ttu-id="cf857-129">링커 동작을 제어하는 방법에 대한 자세한 내용과 지침은 <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-129">For more information and guidance on controlling the linker's behavior, see <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>.</span></span>
+<span data-ttu-id="cf857-128">기본적으로 [Blazor WebAssembly 앱에 대한 [Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-128">By default, [Blazor's linker configuration for [Blazor WebAssembly apps strips out internationalization information except for locales explicitly requested.</span></span> <span data-ttu-id="cf857-129">링커 동작을 제어하는 방법에 대한 자세한 내용과 지침은 <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-129">For more information and guidance on controlling the linker's behavior, see <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>.</span></span>
 
-<span data-ttu-id="cf857-130">Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-130">While the culture that Blazor selects by default might be sufficient for most users, consider offering a way for users to specify their preferred locale.</span></span> <span data-ttu-id="cf857-131">문화권 선택기가 포함된 Blazor WebAssembly 샘플 앱을 살펴보려면 [`LocSample`](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-131">For a Blazor WebAssembly sample app with a culture picker, see the [`LocSample`](https://github.com/pranavkm/LocSample) localization sample app.</span></span>
+<span data-ttu-id="cf857-130">[Blazor가 선택하는 문화권은 대부분의 사용자에게 충분할 수 있지만 사용자가 원하는 로캘을 지정할 방법을 제공하는 방안도 고려하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-130">While the culture that [Blazor selects by default might be sufficient for most users, consider offering a way for users to specify their preferred locale.</span></span> <span data-ttu-id="cf857-131">문화권 선택기가 포함된 [Blazor WebAssembly 샘플 앱을 살펴보려면 [`LocSample`](https://github.com/pranavkm/LocSample) 지역화 샘플 앱을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf857-131">For a [Blazor WebAssembly sample app with a culture picker, see the [`LocSample`](https://github.com/pranavkm/LocSample) localization sample app.</span></span>
 
-### Blazor Server
+### [Blazor Server
 
-Blazor Server<span data-ttu-id="cf857-132"> 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용하여 지역화됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-132"> apps are localized using [Localization Middleware](xref:fundamentals/localization#localization-middleware).</span></span> <span data-ttu-id="cf857-133">미들웨어는 앱에서 리소스를 요청하는 사용자에게 적절한 문화권을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-133">The middleware selects the appropriate culture for users requesting resources from the app.</span></span>
+<span data-ttu-id="cf857-132">[Blazor Server 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용하여 지역화됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-132">[Blazor Server apps are localized using [Localization Middleware](xref:fundamentals/localization#localization-middleware).</span></span> <span data-ttu-id="cf857-133">미들웨어는 앱에서 리소스를 요청하는 사용자에게 적절한 문화권을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-133">The middleware selects the appropriate culture for users requesting resources from the app.</span></span>
 
 <span data-ttu-id="cf857-134">문화권은 다음 방법 중 하나를 사용하여 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-134">The culture can be set using one of the following approaches:</span></span>
 
@@ -93,7 +94,7 @@ Blazor Server<span data-ttu-id="cf857-132"> 앱은 [지역화 미들웨어](xref
 
 <span data-ttu-id="cf857-144">문화권이 지역화 쿠키에 유지되는 경우 임의 기술을 사용하여 문화권을 할당할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-144">Any technique can be used to assign a culture if the culture is persisted in a localization cookie.</span></span> <span data-ttu-id="cf857-145">앱에 서버 쪽 ASP.NET Core에 대해 설정된 지역화 체계가 이미 있는 경우 앱의 기존 지역화 인프라를 계속 사용하고 앱의 체계 내에서 지역화 문화권 쿠키를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-145">If the app already has an established localization scheme for server-side ASP.NET Core, continue to use the app's existing localization infrastructure and set the localization culture cookie within the app's scheme.</span></span>
 
-<span data-ttu-id="cf857-146">다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-146">The following example shows how to set the current culture in a cookie that can be read by the Localization Middleware.</span></span> <span data-ttu-id="cf857-147">`Pages/_Host.cshtml` 파일에서 여는 `<body>` 태그 바로 안에 Razor 식을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-147">Create a Razor expression in the `Pages/_Host.cshtml` file immediately inside the opening `<body>` tag:</span></span>
+<span data-ttu-id="cf857-146">다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-146">The following example shows how to set the current culture in a cookie that can be read by the Localization Middleware.</span></span> <span data-ttu-id="cf857-147">`Pages/_Host.cshtml` 파일에서 여는 `<body>` 태그 바로 안에 [Razor 식을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-147">Create a [Razor expression in the `Pages/_Host.cshtml` file immediately inside the opening `<body>` tag:</span></span>
 
 ```cshtml
 @using System.Globalization
@@ -119,10 +120,10 @@ Blazor Server<span data-ttu-id="cf857-132"> 앱은 [지역화 미들웨어](xref
 
 1. <span data-ttu-id="cf857-149">브라우저가 앱에 초기 HTTP 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-149">The browser sends an initial HTTP request to the app.</span></span>
 1. <span data-ttu-id="cf857-150">문화권은 지역화 미들웨어에 의해 할당됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-150">The culture is assigned by the Localization Middleware.</span></span>
-1. <span data-ttu-id="cf857-151">`_Host` 페이지(`_Host.cshtml`)의 Razor 식은 응답의 일부로 쿠키에 문화권을 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-151">The Razor expression in the `_Host` page (`_Host.cshtml`) persists the culture in a cookie as part of the response.</span></span>
-1. <span data-ttu-id="cf857-152">브라우저는 WebSocket 연결을 열어 대화형 Blazor Server 세션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-152">The browser opens a WebSocket connection to create an interactive Blazor Server session.</span></span>
+1. <span data-ttu-id="cf857-151">`_Host` 페이지(`_Host.cshtml`)의 [Razor 식은 응답의 일부로 쿠키에 문화권을 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-151">The [Razor expression in the `_Host` page (`_Host.cshtml`) persists the culture in a cookie as part of the response.</span></span>
+1. <span data-ttu-id="cf857-152">브라우저는 WebSocket 연결을 열어 대화형 [Blazor Server 세션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-152">The browser opens a WebSocket connection to create an interactive [Blazor Server session.</span></span>
 1. <span data-ttu-id="cf857-153">지역화 미들웨어는 쿠키를 읽고 문화권을 할당합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-153">The Localization Middleware reads the cookie and assigns the culture.</span></span>
-1. <span data-ttu-id="cf857-154">Blazor Server 세션이 올바른 문화권으로 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-154">The Blazor Server session begins with the correct culture.</span></span>
+1. <span data-ttu-id="cf857-154">[Blazor Server 세션이 올바른 문화권으로 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="cf857-154">The [Blazor Server session begins with the correct culture.</span></span>
 
 #### <a name="provide-ui-to-choose-the-culture"></a><span data-ttu-id="cf857-155">문화권을 선택하기 위한 UI 제공</span><span class="sxs-lookup"><span data-stu-id="cf857-155">Provide UI to choose the culture</span></span>
 

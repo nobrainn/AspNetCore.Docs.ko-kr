@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: host-and-deploy/iis/modules
 ms.openlocfilehash: 124f2a629ebd14210cb21351a720e007bba48f02
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85404017"
@@ -61,7 +62,7 @@ ms.locfileid: "85404017"
 | <span data-ttu-id="cab2b-179">**정적 콘텐츠**</span><span class="sxs-lookup"><span data-stu-id="cab2b-179">**Static Content**</span></span><br>`StaticFileModule`                                                         | <span data-ttu-id="cab2b-180">아니요</span><span class="sxs-lookup"><span data-stu-id="cab2b-180">No</span></span>  | [<span data-ttu-id="cab2b-181">정적 파일 미들웨어</span><span class="sxs-lookup"><span data-stu-id="cab2b-181">Static File Middleware</span></span>](xref:fundamentals/static-files) |
 | <span data-ttu-id="cab2b-182">**토큰 캐싱**</span><span class="sxs-lookup"><span data-stu-id="cab2b-182">**Token Caching**</span></span><br>`TokenCacheModule`                                                          | <span data-ttu-id="cab2b-183">예</span><span class="sxs-lookup"><span data-stu-id="cab2b-183">Yes</span></span> | |
 | <span data-ttu-id="cab2b-184">**URI 캐싱**</span><span class="sxs-lookup"><span data-stu-id="cab2b-184">**URI Caching**</span></span><br>`UriCacheModule`                                                              | <span data-ttu-id="cab2b-185">예</span><span class="sxs-lookup"><span data-stu-id="cab2b-185">Yes</span></span> | |
-| <span data-ttu-id="cab2b-186">**URL 권한 부여**</span><span class="sxs-lookup"><span data-stu-id="cab2b-186">**URL Authorization**</span></span><br>`UrlAuthorizationModule`                                                | <span data-ttu-id="cab2b-187">예</span><span class="sxs-lookup"><span data-stu-id="cab2b-187">Yes</span></span> | <span data-ttu-id="cab2b-188">[ASP.NET Core Identity](xref:security/authentication/identity)</span><span class="sxs-lookup"><span data-stu-id="cab2b-188">[ASP.NET Core Identity](xref:security/authentication/identity)</span></span> |
+| <span data-ttu-id="cab2b-186">**URL 권한 부여**</span><span class="sxs-lookup"><span data-stu-id="cab2b-186">**URL Authorization**</span></span><br>`UrlAuthorizationModule`                                                | <span data-ttu-id="cab2b-187">예</span><span class="sxs-lookup"><span data-stu-id="cab2b-187">Yes</span></span> | <span data-ttu-id="cab2b-188">[ASP.NET Core [Identity](xref:security/authentication/identity)</span><span class="sxs-lookup"><span data-stu-id="cab2b-188">[ASP.NET Core [Identity](xref:security/authentication/identity)</span></span> |
 | <span data-ttu-id="cab2b-189">**Windows 인증**</span><span class="sxs-lookup"><span data-stu-id="cab2b-189">**Windows Authentication**</span></span><br>`WindowsAuthenticationModule`                                      | <span data-ttu-id="cab2b-190">예</span><span class="sxs-lookup"><span data-stu-id="cab2b-190">Yes</span></span> | |
 
 <span data-ttu-id="cab2b-191">&#8224;URL 재작성 모듈의 `isFile` 및 `isDirectory` 일치 유형이 [디렉터리 구조](xref:host-and-deploy/directory-structure)의 변경으로 인해 ASP.NET Core 앱에서 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="cab2b-191">&#8224;The URL Rewrite Module's `isFile` and `isDirectory` match types don't work with ASP.NET Core apps due to the changes in [directory structure](xref:host-and-deploy/directory-structure).</span></span>
@@ -83,7 +84,7 @@ ms.locfileid: "85404017"
 | <span data-ttu-id="cab2b-207">세션</span><span class="sxs-lookup"><span data-stu-id="cab2b-207">Session</span></span>                 | [<span data-ttu-id="cab2b-208">세션 미들웨어</span><span class="sxs-lookup"><span data-stu-id="cab2b-208">Session Middleware</span></span>](xref:fundamentals/app-state) |
 | <span data-ttu-id="cab2b-209">UrlAuthorization</span><span class="sxs-lookup"><span data-stu-id="cab2b-209">UrlAuthorization</span></span>        | |
 | <span data-ttu-id="cab2b-210">UrlMappingsModule</span><span class="sxs-lookup"><span data-stu-id="cab2b-210">UrlMappingsModule</span></span>       | [<span data-ttu-id="cab2b-211">URL 재작성 미들웨어</span><span class="sxs-lookup"><span data-stu-id="cab2b-211">URL Rewriting Middleware</span></span>](xref:fundamentals/url-rewriting) |
-| <span data-ttu-id="cab2b-212">UrlRoutingModule-4.0</span><span class="sxs-lookup"><span data-stu-id="cab2b-212">UrlRoutingModule-4.0</span></span>    | <span data-ttu-id="cab2b-213">[ASP.NET Core Identity](xref:security/authentication/identity)</span><span class="sxs-lookup"><span data-stu-id="cab2b-213">[ASP.NET Core Identity](xref:security/authentication/identity)</span></span> |
+| <span data-ttu-id="cab2b-212">UrlRoutingModule-4.0</span><span class="sxs-lookup"><span data-stu-id="cab2b-212">UrlRoutingModule-4.0</span></span>    | <span data-ttu-id="cab2b-213">[ASP.NET Core [Identity](xref:security/authentication/identity)</span><span class="sxs-lookup"><span data-stu-id="cab2b-213">[ASP.NET Core [Identity](xref:security/authentication/identity)</span></span> |
 | <span data-ttu-id="cab2b-214">WindowsAuthentication</span><span class="sxs-lookup"><span data-stu-id="cab2b-214">WindowsAuthentication</span></span>   | |
 
 ## <a name="iis-manager-application-changes"></a><span data-ttu-id="cab2b-215">IIS 관리자 애플리케이션 변경 내용</span><span class="sxs-lookup"><span data-stu-id="cab2b-215">IIS Manager application changes</span></span>

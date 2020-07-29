@@ -6,16 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: aspnetcore-2.1
 ms.openlocfilehash: bf041965b009d5c10b96ad4f2a349c6efb346eb5
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85408164"
@@ -24,9 +25,9 @@ ms.locfileid: "85408164"
 
 <span data-ttu-id="2aebf-104">이 아티클에서는 ASP.NET Core 2.1의 가장 큰 변경 내용을 중점적으로 설명하고 관련 문서의 링크를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-104">This article highlights the most significant changes in ASP.NET Core 2.1, with links to relevant documentation.</span></span>
 
-## SignalR
+## [SignalR
 
-SignalR<span data-ttu-id="2aebf-105">은 ASP.NET Core 2.1에 대해 다시 작성되었습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-105"> has been rewritten for ASP.NET Core 2.1.</span></span> <span data-ttu-id="2aebf-106">ASP.NET Core SignalR에는 여러 가지 향상된 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-106">ASP.NET Core SignalR includes a number of improvements:</span></span>
+<span data-ttu-id="2aebf-105">[SignalR은 ASP.NET Core 2.1에 대해 다시 작성되었습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-105">[SignalR has been rewritten for ASP.NET Core 2.1.</span></span> <span data-ttu-id="2aebf-106">ASP.NET Core [SignalR에는 여러 가지 향상된 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-106">ASP.NET Core [SignalR includes a number of improvements:</span></span>
 
 * <span data-ttu-id="2aebf-107">간소화된 스케일 아웃 모델</span><span class="sxs-lookup"><span data-stu-id="2aebf-107">A simplified scale-out model.</span></span>
 * <span data-ttu-id="2aebf-108">JQuery에 종속되지 않는 새 JavaScript 클라이언트</span><span class="sxs-lookup"><span data-stu-id="2aebf-108">A new JavaScript client with no jQuery dependency.</span></span>
@@ -35,24 +36,24 @@ SignalR<span data-ttu-id="2aebf-105">은 ASP.NET Core 2.1에 대해 다시 작�
 * <span data-ttu-id="2aebf-111">새 스트리밍 응답 모델</span><span class="sxs-lookup"><span data-stu-id="2aebf-111">A new streaming response model.</span></span>
 * <span data-ttu-id="2aebf-112">기본 Websocket에 기반한 클라이언트에 대한 지원</span><span class="sxs-lookup"><span data-stu-id="2aebf-112">Support for clients based on bare WebSockets.</span></span>
 
-<span data-ttu-id="2aebf-113">자세한 내용은 [ASP.NET Core SignalR](xref:signalr/introduction)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2aebf-113">For more information, see [ASP.NET Core SignalR](xref:signalr/introduction).</span></span>
+<span data-ttu-id="2aebf-113">자세한 내용은 [ASP.NET Core [SignalR](xref:signalr/introduction)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2aebf-113">For more information, see [ASP.NET Core [SignalR](xref:signalr/introduction).</span></span>
 
-## <a name="razor-class-libraries"></a>Razor<span data-ttu-id="2aebf-114"> 클래스 라이브러리</span><span class="sxs-lookup"><span data-stu-id="2aebf-114"> class libraries</span></span>
+## <a name="razor-class-libraries"></a><span data-ttu-id="2aebf-114">[Razor 클래스 라이브러리</span><span class="sxs-lookup"><span data-stu-id="2aebf-114">[Razor class libraries</span></span>
 
-<span data-ttu-id="2aebf-115">ASP.NET Core 2.1을 통해 Razor 기반 UI를 빌드하고 라이브러리에 포함하고 여러 프로젝트 간에 공유합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-115">ASP.NET Core 2.1 makes it easier to build and include Razor-based UI in a library and share it across multiple projects.</span></span> <span data-ttu-id="2aebf-116">새로운 Razor SDK를 사용하면 NuGet 패키지에 포함될 수 있는 클래스 라이브러리 프로젝트에 Razor 파일을 빌드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-116">The new Razor SDK enables building Razor files into a class library project that can be packaged into a NuGet package.</span></span> <span data-ttu-id="2aebf-117">라이브러리의 보기 및 페이지는 자동으로 검색되고 앱에서 재정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-117">Views and pages in libraries are automatically discovered and can be overridden by the app.</span></span> <span data-ttu-id="2aebf-118">Razor 컴파일을 빌드에 통합하여 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-118">By integrating Razor compilation into the build:</span></span>
+<span data-ttu-id="2aebf-115">ASP.NET Core 2.1을 통해 [Razor 기반 UI를 빌드하고 라이브러리에 포함하고 여러 프로젝트 간에 공유합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-115">ASP.NET Core 2.1 makes it easier to build and include [Razor-based UI in a library and share it across multiple projects.</span></span> <span data-ttu-id="2aebf-116">새로운 [Razor SDK를 사용하면 NuGet 패키지에 포함될 수 있는 클래스 라이브러리 프로젝트에 [Razor 파일을 빌드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-116">The new [Razor SDK enables building [Razor files into a class library project that can be packaged into a NuGet package.</span></span> <span data-ttu-id="2aebf-117">라이브러리의 보기 및 페이지는 자동으로 검색되고 앱에서 재정의할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-117">Views and pages in libraries are automatically discovered and can be overridden by the app.</span></span> <span data-ttu-id="2aebf-118">[Razor 컴파일을 빌드에 통합하여 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-118">By integrating [Razor compilation into the build:</span></span>
 
 * <span data-ttu-id="2aebf-119">앱 시작 시간이 훨씬 더 빠릅니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-119">The app startup time is significantly faster.</span></span>
-* <span data-ttu-id="2aebf-120">런타임 시 Razor 뷰 및 Pages에 대한 빠른 업데이트는 반복 개발 워크플로의 일부로 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-120">Fast updates to Razor views and pages at runtime are still available as part of an iterative development workflow.</span></span>
+* <span data-ttu-id="2aebf-120">런타임 시 [Razor 뷰 및 Pages에 대한 빠른 업데이트는 반복 개발 워크플로의 일부로 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-120">Fast updates to [Razor views and pages at runtime are still available as part of an iterative development workflow.</span></span>
 
-<span data-ttu-id="2aebf-121">자세한 내용은 [Razor 클래스 라이브러리 프로젝트를 사용하여 재사용 가능한 UI 만들기](xref:razor-pages/ui-class)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2aebf-121">For more information, see [Create reusable UI using the Razor Class Library project](xref:razor-pages/ui-class).</span></span>
+<span data-ttu-id="2aebf-121">자세한 내용은 [[Razor 클래스 라이브러리 프로젝트를 사용하여 재사용 가능한 UI 만들기](xref:razor-pages/ui-class)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2aebf-121">For more information, see [Create reusable UI using the [Razor Class Library project](xref:razor-pages/ui-class).</span></span>
 
-## <a name="identity-ui-library--scaffolding"></a>Identity<span data-ttu-id="2aebf-122"> UI 라이브러리 및 스캐폴딩</span><span class="sxs-lookup"><span data-stu-id="2aebf-122"> UI library & scaffolding</span></span>
+## <a name="identity-ui-library--scaffolding"></a><span data-ttu-id="2aebf-122">[Identity UI 라이브러리 및 스캐폴딩</span><span class="sxs-lookup"><span data-stu-id="2aebf-122">[Identity UI library & scaffolding</span></span>
 
-<span data-ttu-id="2aebf-123">ASP.NET Core 2.1에서는 [ASP.NET Core Identity](xref:security/authentication/identity)[를 Razor 클래스 라이브러리](xref:razor-pages/ui-class)로 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-123">ASP.NET Core 2.1 provides [ASP.NET Core Identity](xref:security/authentication/identity) as a [Razor Class Library](xref:razor-pages/ui-class).</span></span> <span data-ttu-id="2aebf-124">Identity가 포함되는 앱은 선택적으로 Identity RCL(Razor 클래스 라이브러리)에 포함된 소스 코드를 추가하기 위해 새 Identity 스캐폴더를 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-124">Apps that include Identity can apply the new Identity scaffolder to selectively add the source code contained in the Identity Razor Class Library (RCL).</span></span> <span data-ttu-id="2aebf-125">코드를 수정하고 동작을 변경할 수 있도록 소스 코드를 생성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-125">You might want to generate source code so you can modify the code and change the behavior.</span></span> <span data-ttu-id="2aebf-126">예를 들어 등록에 사용된 코드를 생성하도록 스캐폴더를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-126">For example, you could instruct the scaffolder to generate the code used in registration.</span></span> <span data-ttu-id="2aebf-127">생성된 코드는 Identity RCL의 동일한 코드보다 우선합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-127">Generated code takes precedence over the same code in the Identity RCL.</span></span>
+<span data-ttu-id="2aebf-123">ASP.NET Core 2.1에서는 [ASP.NET Core [Identity](xref:security/authentication/identity)[를 [Razor 클래스 라이브러리](xref:razor-pages/ui-class)로 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-123">ASP.NET Core 2.1 provides [ASP.NET Core [Identity](xref:security/authentication/identity) as a [[Razor Class Library](xref:razor-pages/ui-class).</span></span> <span data-ttu-id="2aebf-124">[Identity가 포함되는 앱은 선택적으로 [Identity RCL([Razor 클래스 라이브러리)에 포함된 소스 코드를 추가하기 위해 새 [Identity 스캐폴더를 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-124">Apps that include [Identity can apply the new [Identity scaffolder to selectively add the source code contained in the [Identity [Razor Class Library (RCL).</span></span> <span data-ttu-id="2aebf-125">코드를 수정하고 동작을 변경할 수 있도록 소스 코드를 생성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-125">You might want to generate source code so you can modify the code and change the behavior.</span></span> <span data-ttu-id="2aebf-126">예를 들어 등록에 사용된 코드를 생성하도록 스캐폴더를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-126">For example, you could instruct the scaffolder to generate the code used in registration.</span></span> <span data-ttu-id="2aebf-127">생성된 코드는 [Identity RCL의 동일한 코드보다 우선합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-127">Generated code takes precedence over the same code in the [Identity RCL.</span></span>
 
-<span data-ttu-id="2aebf-128">인증을 포함하지 **않는** 앱은 RCL Identity 패키지를 추가하기 위해 Identity 스캐폴더를 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-128">Apps that do **not** include authentication can apply the Identity scaffolder to add the RCL Identity package.</span></span> <span data-ttu-id="2aebf-129">선택한 Identity 코드의 옵션이 생성되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-129">You have the option of selecting Identity code to be generated.</span></span>
+<span data-ttu-id="2aebf-128">인증을 포함하지 **않는** 앱은 RCL [Identity 패키지를 추가하기 위해 [Identity 스캐폴더를 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-128">Apps that do **not** include authentication can apply the [Identity scaffolder to add the RCL [Identity package.</span></span> <span data-ttu-id="2aebf-129">선택한 [Identity 코드의 옵션이 생성되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-129">You have the option of selecting [Identity code to be generated.</span></span>
 
-<span data-ttu-id="2aebf-130">자세한 내용은 [ASP.NET Core 프로젝트에서 Identity 스캐폴드](xref:security/authentication/scaffold-identity)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2aebf-130">For more information, see [Scaffold Identity in ASP.NET Core projects](xref:security/authentication/scaffold-identity).</span></span>
+<span data-ttu-id="2aebf-130">자세한 내용은 [ASP.NET Core 프로젝트에서 [Identity 스캐폴드](xref:security/authentication/scaffold-identity)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2aebf-130">For more information, see [Scaffold [Identity in ASP.NET Core projects](xref:security/authentication/scaffold-identity).</span></span>
 
 ## <a name="https"></a><span data-ttu-id="2aebf-131">HTTPS</span><span class="sxs-lookup"><span data-stu-id="2aebf-131">HTTPS</span></span>
 
@@ -158,17 +159,17 @@ public class BasicTests
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="razor-pages-search-for-razor-assets"></a>Razor<span data-ttu-id="2aebf-195"> 자산에 대한 Razor Pages 검색</span><span class="sxs-lookup"><span data-stu-id="2aebf-195"> Pages search for Razor assets</span></span>
+## <a name="razor-pages-search-for-razor-assets"></a><span data-ttu-id="2aebf-195">[Razor 자산에 대한 [Razor Pages 검색</span><span class="sxs-lookup"><span data-stu-id="2aebf-195">[Razor Pages search for [Razor assets</span></span>
 
-<span data-ttu-id="2aebf-196">2\.1에서는 나열된 순서로 다음 디렉터리에 있는 Razor 자산(예: 레이아웃 및 부분)에 대한 Razor Pages 검색은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-196">In 2.1, Razor Pages search for Razor assets (such as layouts and partials) in the following directories in the listed order:</span></span>
+<span data-ttu-id="2aebf-196">2\.1에서는 나열된 순서로 다음 디렉터리에 있는 [Razor 자산(예: 레이아웃 및 부분)에 대한 [Razor Pages 검색은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-196">In 2.1, [Razor Pages search for [Razor assets (such as layouts and partials) in the following directories in the listed order:</span></span>
 
 1. <span data-ttu-id="2aebf-197">현재 Pages 폴더</span><span class="sxs-lookup"><span data-stu-id="2aebf-197">Current Pages folder.</span></span>
 1. <span data-ttu-id="2aebf-198">*/Pages/Shared/*</span><span class="sxs-lookup"><span data-stu-id="2aebf-198">*/Pages/Shared/*</span></span>
 1. <span data-ttu-id="2aebf-199">*/Views/Shared/*</span><span class="sxs-lookup"><span data-stu-id="2aebf-199">*/Views/Shared/*</span></span>
 
-## <a name="razor-pages-in-an-area"></a><span data-ttu-id="2aebf-200">영역의 Razor Pages</span><span class="sxs-lookup"><span data-stu-id="2aebf-200">Razor Pages in an area</span></span>
+## <a name="razor-pages-in-an-area"></a><span data-ttu-id="2aebf-200">영역의 [Razor Pages</span><span class="sxs-lookup"><span data-stu-id="2aebf-200">[Razor Pages in an area</span></span>
 
-<span data-ttu-id="2aebf-201">이제 Razor Pages는 [영역](xref:mvc/controllers/areas)을 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-201">Razor Pages now support [areas](xref:mvc/controllers/areas).</span></span> <span data-ttu-id="2aebf-202">영역의 예제를 보려면 개별 사용자 계정을 사용하여 새 Razor Pages 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-202">To see an example of areas, create a new Razor Pages web app with individual user accounts.</span></span> <span data-ttu-id="2aebf-203">개별 사용자 계정을 사용하는 Razor Pages 웹앱에는 */Areas/Identity/Pages*가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-203">A Razor Pages web app with individual user accounts includes */Areas/Identity/Pages*.</span></span>
+<span data-ttu-id="2aebf-201">이제 [Razor Pages는 [영역](xref:mvc/controllers/areas)을 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-201">[Razor Pages now support [areas](xref:mvc/controllers/areas).</span></span> <span data-ttu-id="2aebf-202">영역의 예제를 보려면 개별 사용자 계정을 사용하여 새 [Razor Pages 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-202">To see an example of areas, create a new [Razor Pages web app with individual user accounts.</span></span> <span data-ttu-id="2aebf-203">개별 사용자 계정을 사용하는 [Razor Pages 웹앱에는 */Areas/[Identity/Pages*가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="2aebf-203">A [Razor Pages web app with individual user accounts includes */Areas/[Identity/Pages*.</span></span>
 
 ## <a name="mvc-compatibility-version"></a><span data-ttu-id="2aebf-204">MVC 호환성 버전</span><span class="sxs-lookup"><span data-stu-id="2aebf-204">MVC compatibility version</span></span>
 

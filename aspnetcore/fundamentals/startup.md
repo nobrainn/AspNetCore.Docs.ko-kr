@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/startup
 ms.openlocfilehash: 0d1bf0dd23b7f3b99d6e9383ffc72291c1b138ec
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85400715"
@@ -40,7 +41,7 @@ ms.locfileid: "85400715"
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-<span data-ttu-id="b78fa-114">앞의 샘플은 [Razor Pages](xref:razor-pages/index)에 해당하며 MVC 버전도 비슷합니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-114">The preceding sample is for [Razor Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
+<span data-ttu-id="b78fa-114">앞의 샘플은 [[Razor Pages](xref:razor-pages/index)에 해당하며 MVC 버전도 비슷합니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-114">The preceding sample is for [[Razor Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
 
 
 <span data-ttu-id="b78fa-115">앱의 [호스트](xref:fundamentals/index#host)가 빌드될 때 `Startup` 클래스가 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-115">The `Startup` class is specified when the app's [host](xref:fundamentals/index#host) is built.</span></span> <span data-ttu-id="b78fa-116">`Startup` 클래스는 일반적으로 호스트 작성기에서 [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) 메서드를 호출하여 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-116">The `Startup` class is typically specified by calling the [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) method on the host builder:</span></span>
@@ -92,12 +93,12 @@ ms.locfileid: "85400715"
 * [<span data-ttu-id="b78fa-148">HSTS(HTTP 엄격한 전송 보안)</span><span class="sxs-lookup"><span data-stu-id="b78fa-148">HTTP Strict Transport Security (HSTS)</span></span>](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [<span data-ttu-id="b78fa-149">HTTPS 리디렉션</span><span class="sxs-lookup"><span data-stu-id="b78fa-149">HTTPS redirection</span></span>](xref:security/enforcing-ssl)
 * [<span data-ttu-id="b78fa-150">정적 파일</span><span class="sxs-lookup"><span data-stu-id="b78fa-150">Static files</span></span>](xref:fundamentals/static-files)
-* <span data-ttu-id="b78fa-151">ASP.NET Core [MVC](xref:mvc/overview) 및 [Razor Pages](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="b78fa-151">ASP.NET Core [MVC](xref:mvc/overview) and [Razor Pages](xref:razor-pages/index)</span></span>
+* <span data-ttu-id="b78fa-151">ASP.NET Core [MVC](xref:mvc/overview) 및 [[Razor Pages](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="b78fa-151">ASP.NET Core [MVC](xref:mvc/overview) and [[Razor Pages](xref:razor-pages/index)</span></span>
 
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-<span data-ttu-id="b78fa-152">앞의 샘플은 [Razor Pages](xref:razor-pages/index)에 해당하며 MVC 버전도 비슷합니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-152">The preceding sample is for [Razor Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
+<span data-ttu-id="b78fa-152">앞의 샘플은 [[Razor Pages](xref:razor-pages/index)에 해당하며 MVC 버전도 비슷합니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-152">The preceding sample is for [[Razor Pages](xref:razor-pages/index); the MVC version is similar.</span></span>
 
 <span data-ttu-id="b78fa-153">각 `Use` 확장 메서드는 요청 파이프라인에 하나 이상의 미들웨어 구성 요소를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-153">Each `Use` extension method adds one or more middleware components to the request pipeline.</span></span> <span data-ttu-id="b78fa-154">예를 들어 <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>는 [정적 파일](xref:fundamentals/static-files)을 제공하도록 [미들웨어](xref:fundamentals/middleware/index)를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="b78fa-154">For instance, <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> configures [middleware](xref:fundamentals/middleware/index) to serve [static files](xref:fundamentals/static-files).</span></span>
 
@@ -226,7 +227,7 @@ ms.locfileid: "85400715"
 * [<span data-ttu-id="b78fa-238">HSTS(HTTP 엄격한 전송 보안)</span><span class="sxs-lookup"><span data-stu-id="b78fa-238">HTTP Strict Transport Security (HSTS)</span></span>](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [<span data-ttu-id="b78fa-239">HTTPS 리디렉션</span><span class="sxs-lookup"><span data-stu-id="b78fa-239">HTTPS redirection</span></span>](xref:security/enforcing-ssl)
 * [<span data-ttu-id="b78fa-240">정적 파일</span><span class="sxs-lookup"><span data-stu-id="b78fa-240">Static files</span></span>](xref:fundamentals/static-files)
-* <span data-ttu-id="b78fa-241">ASP.NET Core [MVC](xref:mvc/overview) 및 [Razor Pages](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="b78fa-241">ASP.NET Core [MVC](xref:mvc/overview) and [Razor Pages](xref:razor-pages/index)</span></span>
+* <span data-ttu-id="b78fa-241">ASP.NET Core [MVC](xref:mvc/overview) 및 [[Razor Pages](xref:razor-pages/index)</span><span class="sxs-lookup"><span data-stu-id="b78fa-241">ASP.NET Core [MVC](xref:mvc/overview) and [[Razor Pages](xref:razor-pages/index)</span></span>
 * [<span data-ttu-id="b78fa-242">GDPR(일반 데이터 보호 규정)</span><span class="sxs-lookup"><span data-stu-id="b78fa-242">General Data Protection Regulation (GDPR)</span></span>](xref:security/gdpr)
 
 [!code-csharp[](startup/sample_snapshot/Startup4.cs)]

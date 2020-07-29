@@ -6,16 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85405603"
@@ -63,8 +64,8 @@ dotnet aspnet-codegenerator [-h|--help]
 | ----------------- | ------------ | 
 | <span data-ttu-id="8373a-120">area</span><span class="sxs-lookup"><span data-stu-id="8373a-120">area</span></span>      | [<span data-ttu-id="8373a-121">영역 스캐폴딩</span><span class="sxs-lookup"><span data-stu-id="8373a-121">Scaffolds an Area</span></span>](/aspnet/core/mvc/controllers/areas) |
   <span data-ttu-id="8373a-122">Controller</span><span class="sxs-lookup"><span data-stu-id="8373a-122">controller</span></span>| [<span data-ttu-id="8373a-123">컨트롤러 스캐폴딩</span><span class="sxs-lookup"><span data-stu-id="8373a-123">Scaffolds a controller</span></span>](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  <span data-ttu-id="8373a-124">identity</span><span class="sxs-lookup"><span data-stu-id="8373a-124">identity</span></span>  | <span data-ttu-id="8373a-125">[Identity 스캐폴드](/aspnet/core/security/authentication/scaffold-identity)</span><span class="sxs-lookup"><span data-stu-id="8373a-125">[Scaffolds Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span> |
-  <span data-ttu-id="8373a-126">razorpage</span><span class="sxs-lookup"><span data-stu-id="8373a-126">razorpage</span></span> | <span data-ttu-id="8373a-127">[Razor Pages 스캐폴드](/aspnet/core/tutorials/razor-pages/model)</span><span class="sxs-lookup"><span data-stu-id="8373a-127">[Scaffolds Razor Pages](/aspnet/core/tutorials/razor-pages/model)</span></span> |
+  <span data-ttu-id="8373a-124">identity</span><span class="sxs-lookup"><span data-stu-id="8373a-124">identity</span></span>  | <span data-ttu-id="8373a-125">[[Identity 스캐폴드](/aspnet/core/security/authentication/scaffold-identity)</span><span class="sxs-lookup"><span data-stu-id="8373a-125">[Scaffolds [Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span> |
+  <span data-ttu-id="8373a-126">razorpage</span><span class="sxs-lookup"><span data-stu-id="8373a-126">razorpage</span></span> | <span data-ttu-id="8373a-127">[[Razor Pages 스캐폴드](/aspnet/core/tutorials/razor-pages/model)</span><span class="sxs-lookup"><span data-stu-id="8373a-127">[Scaffolds [Razor Pages](/aspnet/core/tutorials/razor-pages/model)</span></span> |
   <span data-ttu-id="8373a-128">view</span><span class="sxs-lookup"><span data-stu-id="8373a-128">view</span></span>      | [<span data-ttu-id="8373a-129">보기 스캐폴딩</span><span class="sxs-lookup"><span data-stu-id="8373a-129">Scaffolds a view</span></span>](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a><span data-ttu-id="8373a-130">옵션</span><span class="sxs-lookup"><span data-stu-id="8373a-130">Options</span></span>
@@ -103,7 +104,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 * <span data-ttu-id="8373a-144">Area</span><span class="sxs-lookup"><span data-stu-id="8373a-144">Area</span></span>
 * <span data-ttu-id="8373a-145">Controller</span><span class="sxs-lookup"><span data-stu-id="8373a-145">Controller</span></span>
-* Identity  
+* [Identity  
 * <span data-ttu-id="8373a-146">Razorpage</span><span class="sxs-lookup"><span data-stu-id="8373a-146">Razorpage</span></span>
 * <span data-ttu-id="8373a-147">View</span><span class="sxs-lookup"><span data-stu-id="8373a-147">View</span></span>
 
@@ -111,7 +112,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ### <a name="area-options"></a><span data-ttu-id="8373a-148">Area 옵션</span><span class="sxs-lookup"><span data-stu-id="8373a-148">Area options</span></span>
 
-<span data-ttu-id="8373a-149">이 도구는 컨트롤러와 보기가 포함된 ASP.NET Core 웹 프로젝트에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-149">This tool is intended for ASP.NET Core web projects with controllers and views.</span></span> <span data-ttu-id="8373a-150">Razor Pages 앱에는 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-150">It's not intended for Razor Pages apps.</span></span>
+<span data-ttu-id="8373a-149">이 도구는 컨트롤러와 보기가 포함된 ASP.NET Core 웹 프로젝트에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-149">This tool is intended for ASP.NET Core web projects with controllers and views.</span></span> <span data-ttu-id="8373a-150">[Razor Pages 앱에는 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-150">It's not intended for [Razor Pages apps.</span></span>
 
 <span data-ttu-id="8373a-151">사용법: `dotnet aspnet-codegenerator area AreaNameToGenerate`</span><span class="sxs-lookup"><span data-stu-id="8373a-151">Usage: `dotnet aspnet-codegenerator area AreaNameToGenerate`</span></span>
 
@@ -154,7 +155,7 @@ dotnet aspnet-codegenerator controller -h
 
 <a name="rp"></a>
 
-Razor<span data-ttu-id="8373a-178"> Pages는 새 페이지 이름 및 사용할 템플릿을 지정하여 개별적으로 스캐폴드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-178"> Pages can be individually scaffolded by specifying the name of the new page and the template to use.</span></span> <span data-ttu-id="8373a-179">지원되는 템플릿은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-179">The supported templates are:</span></span>
+<span data-ttu-id="8373a-178">[Razor Pages는 새 페이지 이름 및 사용할 템플릿을 지정하여 개별적으로 스캐폴드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-178">[Razor Pages can be individually scaffolded by specifying the name of the new page and the template to use.</span></span> <span data-ttu-id="8373a-179">지원되는 템플릿은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="8373a-179">The supported templates are:</span></span>
 
 * `Empty`
 * `Create`
@@ -197,6 +198,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 <span data-ttu-id="8373a-194">`dotnet aspnet-codegenerator razorpage`의 예제는 [동영상 모델 스캐폴드](/aspnet/core/tutorials/razor-pages/model)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8373a-194">See [Scaffold the movie model](/aspnet/core/tutorials/razor-pages/model) for an example of `dotnet aspnet-codegenerator razorpage`.</span></span>
 
-### Identity
+### [Identity
 
-<span data-ttu-id="8373a-195">[스캐폴드Identity](/aspnet/core/security/authentication/scaffold-identity)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8373a-195">See [Scaffold Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span>
+<span data-ttu-id="8373a-195">[스캐폴드[Identity](/aspnet/core/security/authentication/scaffold-identity)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8373a-195">See [Scaffold [Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span>

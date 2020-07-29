@@ -6,13 +6,13 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/policies
 ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -109,7 +109,7 @@ public void ConfigureServices(IServiceCollection services)
 
 
     services.AddControllersWithViews();
-    services.Add:::no-loc(Razor):::Pages();
+    services.AddRazorPages();
 }
 ```
 
@@ -117,21 +117,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a><span data-ttu-id="e0e88-120">MVC 컨트롤러에 정책 적용</span><span class="sxs-lookup"><span data-stu-id="e0e88-120">Apply policies to MVC controllers</span></span>
 
-<span data-ttu-id="e0e88-121">페이지를 사용 하 :::no-loc(Razor)::: 는 경우이 문서의 [ :::no-loc(Razor)::: 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="e0e88-121">If you're using :::no-loc(Razor)::: Pages, see [Apply policies to :::no-loc(Razor)::: Pages](#apply-policies-to-razor-pages) in this document.</span></span>
+<span data-ttu-id="e0e88-121">페이지를 사용 하 Razor 는 경우이 문서의 [ Razor 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="e0e88-121">If you're using Razor Pages, see [Apply policies to Razor Pages](#apply-policies-to-razor-pages) in this document.</span></span>
 
 <span data-ttu-id="e0e88-122">정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` .</span><span class="sxs-lookup"><span data-stu-id="e0e88-122">Policies are applied to controllers by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="e0e88-123">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-123">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="e0e88-124">페이지에 정책 적용 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="e0e88-124">Apply policies to :::no-loc(Razor)::: Pages</span></span>
+## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="e0e88-124">페이지에 정책 적용 Razor</span><span class="sxs-lookup"><span data-stu-id="e0e88-124">Apply policies to Razor Pages</span></span>
 
-<span data-ttu-id="e0e88-125">정책은 :::no-loc(Razor)::: `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-125">Policies are applied to :::no-loc(Razor)::: Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="e0e88-126">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-126">For example:</span></span>
+<span data-ttu-id="e0e88-125">정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-125">Policies are applied to Razor Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="e0e88-126">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-126">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-<span data-ttu-id="e0e88-127">정책은 페이지 처리기 수준에서 적용할 수 ***없으며*** :::no-loc(Razor)::: 페이지에 적용 되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-127">Policies can ***not*** be applied at the :::no-loc(Razor)::: Page handler level, they must be applied to the Page.</span></span>
+<span data-ttu-id="e0e88-127">정책은 페이지 처리기 수준에서 적용할 수 ***없으며*** Razor 페이지에 적용 되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-127">Policies can ***not*** be applied at the Razor Page handler level, they must be applied to the Page.</span></span>
 
-<span data-ttu-id="e0e88-128">:::no-loc(Razor)::: [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-128">Policies can be applied to :::no-loc(Razor)::: Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
+<span data-ttu-id="e0e88-128">Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-128">Policies can be applied to Razor Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
 
 ## <a name="requirements"></a><span data-ttu-id="e0e88-129">요구 사항</span><span class="sxs-lookup"><span data-stu-id="e0e88-129">Requirements</span></span>
 
@@ -225,7 +225,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="access-mvc-request-context-in-handlers"></a><span data-ttu-id="e0e88-185">처리기의 MVC 요청 컨텍스트 액세스</span><span class="sxs-lookup"><span data-stu-id="e0e88-185">Access MVC request context in handlers</span></span>
 
-<span data-ttu-id="e0e88-186">`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-186">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="e0e88-187">MVC 또는와 같은 프레임 워크 :::no-loc(SignalR)::: `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-187">Frameworks such as MVC or :::no-loc(SignalR)::: are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
+<span data-ttu-id="e0e88-186">`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-186">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="e0e88-187">MVC 또는와 같은 프레임 워크 SignalR `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-187">Frameworks such as MVC or SignalR are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
 
 <span data-ttu-id="e0e88-188">끝점 라우팅을 사용 하는 경우 권한 부여는 일반적으로 권한 부여 미들웨어에 의해 처리 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-188">When using endpoint routing, authorization is typically handled by the Authorization Middleware.</span></span> <span data-ttu-id="e0e88-189">이 경우 `Resource` 속성은의 인스턴스입니다 <xref:Microsoft.AspNetCore.Http.Endpoint> .</span><span class="sxs-lookup"><span data-stu-id="e0e88-189">In this case, the `Resource` property is an instance of <xref:Microsoft.AspNetCore.Http.Endpoint>.</span></span> <span data-ttu-id="e0e88-190">끝점을 사용 하 여 라우팅하는 기본 리소스를 검색할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-190">The endpoint can be used to probe the underlying resource to which you're routing.</span></span> <span data-ttu-id="e0e88-191">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-191">For example:</span></span>
 
@@ -239,7 +239,7 @@ if (context.Resource is Endpoint endpoint)
 
 <span data-ttu-id="e0e88-192">끝점이 현재에 대 한 액세스를 제공 하지 않습니다 `HttpContext` .</span><span class="sxs-lookup"><span data-stu-id="e0e88-192">The endpoint doesn't provide access to the current `HttpContext`.</span></span> <span data-ttu-id="e0e88-193">끝점 라우팅을 사용 하는 경우를 사용 `IHttpContextAcessor` 하 여 `HttpContext` 권한 부여 처리기 내에서 액세스 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-193">When using endpoint routing, use `IHttpContextAcessor` to access `HttpContext` inside of an authorization handler.</span></span> <span data-ttu-id="e0e88-194">자세한 내용은 [사용자 지정 구성 요소에서 HttpContext 사용](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="e0e88-194">For more information, see [Use HttpContext from custom components](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components).</span></span>
 
-<span data-ttu-id="e0e88-195">기존 라우팅을 사용 하거나, MVC의 권한 부여 필터의 일부로 권한 부여가 수행 되는 경우의 값은 `Resource` <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> 인스턴스입니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-195">With traditional routing, or when authorization happens as part of MVC's authorization filter, the value of `Resource` is an <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> instance.</span></span> <span data-ttu-id="e0e88-196">이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="e0e88-196">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="e0e88-195">기존 라우팅을 사용 하거나, MVC의 권한 부여 필터의 일부로 권한 부여가 수행 되는 경우의 값은 `Resource` <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> 인스턴스입니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-195">With traditional routing, or when authorization happens as part of MVC's authorization filter, the value of `Resource` is an <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> instance.</span></span> <span data-ttu-id="e0e88-196">이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 Razor .</span><span class="sxs-lookup"><span data-stu-id="e0e88-196">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and Razor Pages.</span></span>
 
 <span data-ttu-id="e0e88-197">속성을 사용 하는 `Resource` 것은 프레임 워크와 관련이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-197">The use of the `Resource` property is framework specific.</span></span> <span data-ttu-id="e0e88-198">속성의 정보를 사용 하면 `Resource` 권한 부여 정책이 특정 프레임 워크로 제한 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-198">Using information in the `Resource` property limits your authorization policies to particular frameworks.</span></span> <span data-ttu-id="e0e88-199">`Resource`키워드를 사용 하 여 속성을 캐스팅 한 `is` 다음, `InvalidCastException` 다른 프레임 워크에서 실행 될 때 코드가와 충돌 하지 않도록 캐스팅이 성공 했는지 확인 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-199">You should cast the `Resource` property using the `is` keyword, and then confirm the cast has succeeded to ensure your code doesn't crash with an `InvalidCastException` when run on other frameworks:</span></span>
 
@@ -353,19 +353,19 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a><span data-ttu-id="e0e88-217">MVC 컨트롤러에 정책 적용</span><span class="sxs-lookup"><span data-stu-id="e0e88-217">Apply policies to MVC controllers</span></span>
 
-<span data-ttu-id="e0e88-218">페이지를 사용 하 :::no-loc(Razor)::: 는 경우이 문서의 [ :::no-loc(Razor)::: 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="e0e88-218">If you're using :::no-loc(Razor)::: Pages, see [Apply policies to :::no-loc(Razor)::: Pages](#apply-policies-to-razor-pages) in this document.</span></span>
+<span data-ttu-id="e0e88-218">페이지를 사용 하 Razor 는 경우이 문서의 [ Razor 페이지에 정책 적용](#apply-policies-to-razor-pages) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="e0e88-218">If you're using Razor Pages, see [Apply policies to Razor Pages](#apply-policies-to-razor-pages) in this document.</span></span>
 
 <span data-ttu-id="e0e88-219">정책은 정책 이름으로 특성을 사용 하 여 컨트롤러에 적용 됩니다 `[Authorize]` .</span><span class="sxs-lookup"><span data-stu-id="e0e88-219">Policies are applied to controllers by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="e0e88-220">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-220">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="e0e88-221">페이지에 정책 적용 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="e0e88-221">Apply policies to :::no-loc(Razor)::: Pages</span></span>
+## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="e0e88-221">페이지에 정책 적용 Razor</span><span class="sxs-lookup"><span data-stu-id="e0e88-221">Apply policies to Razor Pages</span></span>
 
-<span data-ttu-id="e0e88-222">정책은 :::no-loc(Razor)::: `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-222">Policies are applied to :::no-loc(Razor)::: Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="e0e88-223">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-223">For example:</span></span>
+<span data-ttu-id="e0e88-222">정책은 Razor `[Authorize]` 정책 이름이 있는 특성을 사용 하 여 페이지에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-222">Policies are applied to Razor Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="e0e88-223">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-223">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-<span data-ttu-id="e0e88-224">:::no-loc(Razor)::: [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-224">Policies can also be applied to :::no-loc(Razor)::: Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
+<span data-ttu-id="e0e88-224">Razor [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 페이지에 정책을 적용할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-224">Policies can also be applied to Razor Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
 
 ## <a name="requirements"></a><span data-ttu-id="e0e88-225">요구 사항</span><span class="sxs-lookup"><span data-stu-id="e0e88-225">Requirements</span></span>
 
@@ -459,9 +459,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="access-mvc-request-context-in-handlers"></a><span data-ttu-id="e0e88-281">처리기의 MVC 요청 컨텍스트 액세스</span><span class="sxs-lookup"><span data-stu-id="e0e88-281">Access MVC request context in handlers</span></span>
 
-<span data-ttu-id="e0e88-282">`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-282">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="e0e88-283">MVC 또는와 같은 프레임 워크 :::no-loc(SignalR)::: `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-283">Frameworks such as MVC or :::no-loc(SignalR)::: are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
+<span data-ttu-id="e0e88-282">`HandleRequirementAsync`권한 부여 처리기에서 구현 하는 메서드에는 두 개의 매개 변수인 `AuthorizationHandlerContext` 및를 `TRequirement` 처리 하 고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-282">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="e0e88-283">MVC 또는와 같은 프레임 워크 SignalR `Resource` 는 `AuthorizationHandlerContext` 추가 정보를 전달 하기 위해 개체를의 속성에 자유롭게 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-283">Frameworks such as MVC or SignalR are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
 
-<span data-ttu-id="e0e88-284">예를 들어, MVC는 속성에서 [Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext) 의 인스턴스를 전달 `Resource` 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-284">For example, MVC passes an instance of [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) in the `Resource` property.</span></span> <span data-ttu-id="e0e88-285">이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="e0e88-285">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="e0e88-284">예를 들어, MVC는 속성에서 [Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext) 의 인스턴스를 전달 `Resource` 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-284">For example, MVC passes an instance of [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) in the `Resource` property.</span></span> <span data-ttu-id="e0e88-285">이 속성은 `HttpContext` `RouteData` MVC 및 페이지에서 제공 되는, 및 모든에 대 한 액세스를 제공 합니다 Razor .</span><span class="sxs-lookup"><span data-stu-id="e0e88-285">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and Razor Pages.</span></span>
 
 <span data-ttu-id="e0e88-286">속성을 사용 하는 `Resource` 것은 프레임 워크와 관련이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-286">The use of the `Resource` property is framework specific.</span></span> <span data-ttu-id="e0e88-287">속성의 정보를 사용 하면 `Resource` 권한 부여 정책이 특정 프레임 워크로 제한 됩니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-287">Using information in the `Resource` property limits your authorization policies to particular frameworks.</span></span> <span data-ttu-id="e0e88-288">`Resource`키워드를 사용 하 여 속성을 캐스팅 한 `is` 다음, `InvalidCastException` 다른 프레임 워크에서 실행 될 때 코드가와 충돌 하지 않도록 캐스팅이 성공 했는지 확인 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e0e88-288">You should cast the `Resource` property using the `is` keyword, and then confirm the cast has succeeded to ensure your code doesn't crash with an `InvalidCastException` when run on other frameworks:</span></span>
 

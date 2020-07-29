@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85399649"
@@ -39,7 +40,7 @@ ms.locfileid: "85399649"
 
 <span data-ttu-id="441cf-116">.NET Core 3.0이 출시되면 많은 ASP.NET Core 어셈블리가 더 이상 NuGet에 패키지로 게시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-116">With the release of .NET Core 3.0, many ASP.NET Core assemblies are no longer published to NuGet as packages.</span></span> <span data-ttu-id="441cf-117">대신 어셈블리는 .NET Core SDK 및 런타임 설치 관리자와 함께 설치되는 `Microsoft.AspNetCore.App` 공유 프레임워크에 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-117">Instead, the assemblies are included in the `Microsoft.AspNetCore.App` shared framework, which is installed with the .NET Core SDK and runtime installers.</span></span> <span data-ttu-id="441cf-118">더 이상 게시되지 않는 패키지 목록은 [사용되지 않는 패키지 참조 제거](xref:migration/22-to-30#remove-obsolete-package-references)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="441cf-118">For a list of packages no longer being published, see [Remove obsolete package references](xref:migration/22-to-30#remove-obsolete-package-references).</span></span>
 
-<span data-ttu-id="441cf-119">.NET Core 3.0부터 `Microsoft.NET.Sdk.Web` MSBuild SDK를 사용하는 프로젝트는 공유 프레임워크를 암시적으로 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="441cf-120">`Microsoft.NET.Sdk` 또는 `Microsoft.NET.Sdk.Razor` SDK를 사용하는 프로젝트는 공유 프레임워크에서 ASP.NET Core API를 사용하도록 ASP.NET Core을 참조해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.Razor` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
+<span data-ttu-id="441cf-119">.NET Core 3.0부터 `Microsoft.NET.Sdk.Web` MSBuild SDK를 사용하는 프로젝트는 공유 프레임워크를 암시적으로 참조합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="441cf-120">`Microsoft.NET.Sdk` 또는 `Microsoft.NET.Sdk.[Razor` SDK를 사용하는 프로젝트는 공유 프레임워크에서 ASP.NET Core API를 사용하도록 ASP.NET Core을 참조해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.[Razor` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
 
 <span data-ttu-id="441cf-121">ASP.NET Core를 참조하려면 프로젝트 파일에 다음 `<FrameworkReference>` 요소를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-121">To reference ASP.NET Core, add the following `<FrameworkReference>` element to your project file:</span></span>
 
@@ -47,17 +48,17 @@ ms.locfileid: "85399649"
 
 <span data-ttu-id="441cf-122">이러한 방식의 ASP.NET Core 참조는 .NET Core 3.x를 대상으로 하는 프로젝트에만 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-122">Referencing ASP.NET Core in this manner is only supported for projects targeting .NET Core 3.x.</span></span>
 
-## <a name="include-blazor-extensibility"></a><span data-ttu-id="441cf-123">Blazor 확장성 포함</span><span class="sxs-lookup"><span data-stu-id="441cf-123">Include Blazor extensibility</span></span>
+## <a name="include-blazor-extensibility"></a><span data-ttu-id="441cf-123">[Blazor 확장성 포함</span><span class="sxs-lookup"><span data-stu-id="441cf-123">Include [Blazor extensibility</span></span>
 
-Blazor<span data-ttu-id="441cf-124">는 WASM(WebAssembly) 및 Server [호스팅 모델](xref:blazor/hosting-models)을 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-124"> supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="441cf-125">특별한 이유가 없는 한 [Razor 구성 요소](xref:blazor/components/index) 라이브러리에서 두 호스팅 모델을 모두 지원해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-125">Unless there's a specific reason not to, a [Razor components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="441cf-126">Razor 구성 요소 라이브러리는 [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk)를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-126">A Razor components library must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="441cf-124">[Blazor는 WASM(WebAssembly) 및 Server [호스팅 모델](xref:blazor/hosting-models)을 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-124">[Blazor supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="441cf-125">특별한 이유가 없는 한 [[Razor 구성 요소](xref:blazor/components/index) 라이브러리에서 두 호스팅 모델을 모두 지원해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-125">Unless there's a specific reason not to, a [[Razor components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="441cf-126">[Razor 구성 요소 라이브러리는 [Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk)를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-126">A [Razor components library must use the [Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk).</span></span>
 
 ### <a name="support-both-hosting-models"></a><span data-ttu-id="441cf-127">두 호스팅 모델 모두 지원</span><span class="sxs-lookup"><span data-stu-id="441cf-127">Support both hosting models</span></span>
 
-<span data-ttu-id="441cf-128">[Blazor Server](xref:blazor/hosting-models#blazor-server) 및 [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) 프로젝트 모두에서 Razor 구성 요소를 사용하도록 지원하려면 편집기에 대해 다음 지침을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-128">To support Razor component consumption from both [Blazor Server](xref:blazor/hosting-models#blazor-server) and [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
+<span data-ttu-id="441cf-128">[[Blazor Server](xref:blazor/hosting-models#blazor-server) 및 [[Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) 프로젝트 모두에서 [Razor 구성 요소를 사용하도록 지원하려면 편집기에 대해 다음 지침을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-128">To support [Razor component consumption from both [[Blazor Server](xref:blazor/hosting-models#blazor-server) and [[Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="441cf-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="441cf-129">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="441cf-130">**Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-130">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="441cf-131">템플릿의 **지원 페이지 및 보기** 확인란을 선택 취소해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
+<span data-ttu-id="441cf-130">**[Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-130">Use the **[Razor Class Library** project template.</span></span> <span data-ttu-id="441cf-131">템플릿의 **지원 페이지 및 보기** 확인란을 선택 취소해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="441cf-132">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="441cf-132">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -69,7 +70,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="441cf-134">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="441cf-134">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="441cf-135">**Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-135">Use the **Razor Class Library** project template.</span></span>
+<span data-ttu-id="441cf-135">**[Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-135">Use the **[Razor Class Library** project template.</span></span>
 
 ---
 
@@ -87,7 +88,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a><span data-ttu-id="441cf-144">특정 호스팅 모델 지원</span><span class="sxs-lookup"><span data-stu-id="441cf-144">Support a specific hosting model</span></span>
 
-<span data-ttu-id="441cf-145">단일 Blazor 호스팅 모델을 지원하는 것은 일반적이지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-145">It's far less common to support a single Blazor hosting model.</span></span> <span data-ttu-id="441cf-146">예를 들어 [Blazor Server](xref:blazor/hosting-models#blazor-server) 프로젝트에서만 Razor 구성 요소를 사용하도록 지원하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-146">As an example, to support Razor component consumption from [Blazor Server](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
+<span data-ttu-id="441cf-145">단일 [Blazor 호스팅 모델을 지원하는 것은 일반적이지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-145">It's far less common to support a single [Blazor hosting model.</span></span> <span data-ttu-id="441cf-146">예를 들어 [[Blazor Server](xref:blazor/hosting-models#blazor-server) 프로젝트에서만 [Razor 구성 요소를 사용하도록 지원하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-146">As an example, to support [Razor component consumption from [[Blazor Server](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
 
 * <span data-ttu-id="441cf-147">.NET Core 3.x를 대상으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-147">Target .NET Core 3.x.</span></span>
 * <span data-ttu-id="441cf-148">공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-148">Add a `<FrameworkReference>` element for the shared framework.</span></span>
@@ -96,32 +97,32 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-<span data-ttu-id="441cf-150">Razor 구성 요소가 포함된 라이브러리에 대한 자세한 내용은 [ASP.NET Core Razor 구성 요소 클래스 라이브러리](xref:blazor/components/class-libraries)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="441cf-150">For more information on libraries containing Razor components, see [ASP.NET Core Razor components class libraries](xref:blazor/components/class-libraries).</span></span>
+<span data-ttu-id="441cf-150">[Razor 구성 요소가 포함된 라이브러리에 대한 자세한 내용은 [ASP.NET Core [Razor 구성 요소 클래스 라이브러리](xref:blazor/components/class-libraries)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="441cf-150">For more information on libraries containing [Razor components, see [ASP.NET Core [Razor components class libraries](xref:blazor/components/class-libraries).</span></span>
 
 ## <a name="include-mvc-extensibility"></a><span data-ttu-id="441cf-151">MVC 확장성 포함</span><span class="sxs-lookup"><span data-stu-id="441cf-151">Include MVC extensibility</span></span>
 
 <span data-ttu-id="441cf-152">이 섹션에서는 다음을 포함하는 라이브러리에 대한 권장 사항을 개략적으로 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-152">This section outlines recommendations for libraries that include:</span></span>
 
-* <span data-ttu-id="441cf-153">[Razor 보기 또는 Razor Pages](#razor-views-or-razor-pages)</span><span class="sxs-lookup"><span data-stu-id="441cf-153">[Razor views or Razor Pages](#razor-views-or-razor-pages)</span></span>
+* <span data-ttu-id="441cf-153">[[Razor 보기 또는 [Razor Pages](#razor-views-or-razor-pages)</span><span class="sxs-lookup"><span data-stu-id="441cf-153">[[Razor views or [Razor Pages](#razor-views-or-razor-pages)</span></span>
 * [<span data-ttu-id="441cf-154">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="441cf-154">Tag Helpers</span></span>](#tag-helpers)
 * [<span data-ttu-id="441cf-155">뷰 구성 요소</span><span class="sxs-lookup"><span data-stu-id="441cf-155">View components</span></span>](#view-components)
 
 <span data-ttu-id="441cf-156">이 섹션에서는 여러 버전의 MVC를 지원하는 멀티 타기팅에 대해서는 설명하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-156">This section doesn't discuss multi-targeting to support multiple versions of MVC.</span></span> <span data-ttu-id="441cf-157">여러 ASP.NET Core 버전을 지원하는 방법에 대한 지침은 [여러 ASP.NET Core 버전 지원](#support-multiple-aspnet-core-versions)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="441cf-157">For guidance on supporting multiple ASP.NET Core versions, see [Support multiple ASP.NET Core versions](#support-multiple-aspnet-core-versions).</span></span>
 
-### <a name="razor-views-or-razor-pages"></a>Razor<span data-ttu-id="441cf-158"> 보기 또는 Razor Pages</span><span class="sxs-lookup"><span data-stu-id="441cf-158"> views or Razor Pages</span></span>
+### <a name="razor-views-or-razor-pages"></a><span data-ttu-id="441cf-158">[Razor 보기 또는 [Razor Pages</span><span class="sxs-lookup"><span data-stu-id="441cf-158">[Razor views or [Razor Pages</span></span>
 
-<span data-ttu-id="441cf-159">[Razor 보기](xref:mvc/views/overview) 또는 [Razor Pages](xref:razor-pages/index)를 포함하는 프로젝트는 [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk)를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-159">A project that includes [Razor views](xref:mvc/views/overview) or [Razor Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="441cf-159">[[Razor 보기](xref:mvc/views/overview) 또는 [[Razor Pages](xref:razor-pages/index)를 포함하는 프로젝트는 [Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk)를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-159">A project that includes [[Razor views](xref:mvc/views/overview) or [[Razor Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk).</span></span>
 
 <span data-ttu-id="441cf-160">프로젝트가 .NET Core 3.x를 대상으로 하는 경우 다음이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-160">If the project targets .NET Core 3.x, it requires:</span></span>
 
 * <span data-ttu-id="441cf-161">`true`로 설정된 `AddRazorSupportForMvc` MSBuild 속성.</span><span class="sxs-lookup"><span data-stu-id="441cf-161">An `AddRazorSupportForMvc` MSBuild property set to `true`.</span></span>
 * <span data-ttu-id="441cf-162">공유 프레임워크에 대한 `<FrameworkReference>` 요소.</span><span class="sxs-lookup"><span data-stu-id="441cf-162">A `<FrameworkReference>` element for the shared framework.</span></span>
 
-<span data-ttu-id="441cf-163">**Razor 클래스 라이브러리** 프로젝트 템플릿은 .NET Core 3.x를 대상으로 하는 프로젝트에 대해 위 요구 사항을 충족합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-163">The **Razor Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="441cf-164">편집기에 대해 다음 지침을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-164">Use the following instructions for your editor.</span></span>
+<span data-ttu-id="441cf-163">**[Razor 클래스 라이브러리** 프로젝트 템플릿은 .NET Core 3.x를 대상으로 하는 프로젝트에 대해 위 요구 사항을 충족합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-163">The **[Razor Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="441cf-164">편집기에 대해 다음 지침을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-164">Use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="441cf-165">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="441cf-165">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="441cf-166">**Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-166">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="441cf-167">템플릿의 **지원 페이지 및 보기** 확인란을 선택해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-167">The template's **Support pages and views** checkbox should be selected.</span></span>
+<span data-ttu-id="441cf-166">**[Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-166">Use the **[Razor Class Library** project template.</span></span> <span data-ttu-id="441cf-167">템플릿의 **지원 페이지 및 보기** 확인란을 선택해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-167">The template's **Support pages and views** checkbox should be selected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="441cf-168">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="441cf-168">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -151,7 +152,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-<span data-ttu-id="441cf-180">.NET Standard를 대상으로 하는 경우(ASP.NET Core 3.x보다 이전 버전을 지원하기 위해) [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)에 대한 패키지 참조를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor).</span></span> <span data-ttu-id="441cf-181">`Microsoft.AspNetCore.Mvc.Razor` 패키지는 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-181">The `Microsoft.AspNetCore.Mvc.Razor` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="441cf-182">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="441cf-182">For example:</span></span>
+<span data-ttu-id="441cf-180">.NET Standard를 대상으로 하는 경우(ASP.NET Core 3.x보다 이전 버전을 지원하기 위해) [Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor)에 대한 패키지 참조를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor).</span></span> <span data-ttu-id="441cf-181">`Microsoft.AspNetCore.Mvc.[Razor` 패키지는 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-181">The `Microsoft.AspNetCore.Mvc.[Razor` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="441cf-182">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="441cf-182">For example:</span></span>
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
@@ -180,8 +181,8 @@ dotnet new razorclasslib -s
 <span data-ttu-id="441cf-197">이전 프로젝트 파일 사용:</span><span class="sxs-lookup"><span data-stu-id="441cf-197">With the preceding project file:</span></span>
 
 * <span data-ttu-id="441cf-198">모든 소비자에게 `Markdig` 패키지가 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-198">The `Markdig` package is added for all consumers.</span></span>
-* <span data-ttu-id="441cf-199">[Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)에 대한 참조는</span><span class="sxs-lookup"><span data-stu-id="441cf-199">A reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)</span></span> <span data-ttu-id="441cf-200">.NET Framework 4.6.1 이상 또는 .NET Core 2.x를 대상으로 하는 소비자에게 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="441cf-201">이전 버전과의 호환성으로 인해 패키지의 버전 2.1.0은 ASP.NET Core 2.2에서 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
-* <span data-ttu-id="441cf-202">공유 프레임워크는 .NET Core 3.x를 대상으로 하는 소비자에 대해 참조됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="441cf-203">`Microsoft.AspNetCore.Mvc.Razor` 패키지는 공유 프레임워크에 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-203">The `Microsoft.AspNetCore.Mvc.Razor` package is included in the shared framework.</span></span>
+* <span data-ttu-id="441cf-199">[Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor)에 대한 참조는</span><span class="sxs-lookup"><span data-stu-id="441cf-199">A reference to [Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor)</span></span> <span data-ttu-id="441cf-200">.NET Framework 4.6.1 이상 또는 .NET Core 2.x를 대상으로 하는 소비자에게 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="441cf-201">이전 버전과의 호환성으로 인해 패키지의 버전 2.1.0은 ASP.NET Core 2.2에서 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
+* <span data-ttu-id="441cf-202">공유 프레임워크는 .NET Core 3.x를 대상으로 하는 소비자에 대해 참조됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="441cf-203">`Microsoft.AspNetCore.Mvc.[Razor` 패키지는 공유 프레임워크에 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-203">The `Microsoft.AspNetCore.Mvc.[Razor` package is included in the shared framework.</span></span>
 
 <span data-ttu-id="441cf-204">또는 .NET Core 2.1 및 .NET Framework 4.6.1을 모두 대상으로 지정하는 대신 .NET Standard 2.0을 대상으로 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="441cf-204">Alternatively, .NET Standard 2.0 could be targeted instead of targeting both .NET Core 2.1 and .NET Framework 4.6.1:</span></span>
 

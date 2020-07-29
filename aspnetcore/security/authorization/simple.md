@@ -5,13 +5,13 @@ description: 권한 부여 특성을 사용 하 여 ASP.NET Core 컨트롤러 �
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/simple
 ms.openlocfilehash: 09514032349d489b73d5bb785f11e44ca18b169c
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -24,7 +24,7 @@ ms.locfileid: "87160240"
 
 <a name="security-authorization-simple"></a>
 
-<span data-ttu-id="96deb-104">ASP.NET Core의 권한 부여는 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> 및 해당 하는 다양 한 매개 변수를 사용 하 여 제어 됩니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-104">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="96deb-105">가장 간단한 형태의 `[Authorize]` 특성을 컨트롤러, 작업 또는 페이지에 적용 하면 :::no-loc(Razor)::: 해당 구성 요소에 대 한 액세스를 인증 된 사용자로 제한 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-105">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or :::no-loc(Razor)::: Page, limits access to that component to any authenticated user.</span></span>
+<span data-ttu-id="96deb-104">ASP.NET Core의 권한 부여는 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> 및 해당 하는 다양 한 매개 변수를 사용 하 여 제어 됩니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-104">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="96deb-105">가장 간단한 형태의 `[Authorize]` 특성을 컨트롤러, 작업 또는 페이지에 적용 하면 Razor 해당 구성 요소에 대 한 액세스를 인증 된 사용자로 제한 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-105">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or Razor Page, limits access to that component to any authenticated user.</span></span>
 
 <span data-ttu-id="96deb-106">예를 들어 다음 코드는에 대 한 액세스를 `AccountController` 인증 된 사용자로 제한 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-106">For example, the following code limits access to the `AccountController` to any authenticated user.</span></span>
 
@@ -86,11 +86,11 @@ public class AccountController : Controller
 
 <a name="aarp"></a>
 
-## <a name="authorize-attribute-and-no-locrazor-pages"></a><span data-ttu-id="96deb-115">특성 및 :::no-loc(Razor)::: Pages 권한 부여</span><span class="sxs-lookup"><span data-stu-id="96deb-115">Authorize attribute and :::no-loc(Razor)::: Pages</span></span>
+## <a name="authorize-attribute-and-no-locrazor-pages"></a><span data-ttu-id="96deb-115">특성 및 Razor Pages 권한 부여</span><span class="sxs-lookup"><span data-stu-id="96deb-115">Authorize attribute and Razor Pages</span></span>
 
-<span data-ttu-id="96deb-116"><xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>페이지 처리기에는를 적용할 수 ***없습니다*** :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="96deb-116">The <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> can ***not*** be applied to :::no-loc(Razor)::: Page handlers.</span></span> <span data-ttu-id="96deb-117">예를 들어,, `[Authorize]` `OnGet` `OnPost` 또는 다른 페이지 처리기에는를 적용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-117">For example, `[Authorize]` can't be applied to `OnGet`, `OnPost`, or any other page handler.</span></span> <span data-ttu-id="96deb-118">다른 처리기에 대 한 권한 부여 요구 사항이 서로 다른 페이지에는 ASP.NET Core MVC 컨트롤러를 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-118">Consider using an ASP.NET Core MVC controller for pages with different authorization requirements for different handlers.</span></span>
+<span data-ttu-id="96deb-116"><xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>페이지 처리기에는를 적용할 수 ***없습니다*** Razor .</span><span class="sxs-lookup"><span data-stu-id="96deb-116">The <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> can ***not*** be applied to Razor Page handlers.</span></span> <span data-ttu-id="96deb-117">예를 들어,, `[Authorize]` `OnGet` `OnPost` 또는 다른 페이지 처리기에는를 적용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-117">For example, `[Authorize]` can't be applied to `OnGet`, `OnPost`, or any other page handler.</span></span> <span data-ttu-id="96deb-118">다른 처리기에 대 한 권한 부여 요구 사항이 서로 다른 페이지에는 ASP.NET Core MVC 컨트롤러를 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-118">Consider using an ASP.NET Core MVC controller for pages with different authorization requirements for different handlers.</span></span>
 
-<span data-ttu-id="96deb-119">다음 두 가지 방법을 사용 하 여 페이지 처리기 메서드에 권한 부여를 적용할 수 있습니다 :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="96deb-119">The following two approaches can be used to apply authorization to :::no-loc(Razor)::: Page handler methods:</span></span>
+<span data-ttu-id="96deb-119">다음 두 가지 방법을 사용 하 여 페이지 처리기 메서드에 권한 부여를 적용할 수 있습니다 Razor .</span><span class="sxs-lookup"><span data-stu-id="96deb-119">The following two approaches can be used to apply authorization to Razor Page handler methods:</span></span>
 
 * <span data-ttu-id="96deb-120">다른 권한 부여를 필요로 하는 페이지 처리기에 대해 별도의 페이지를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-120">Use separate pages for page handlers requiring different authorization.</span></span> <span data-ttu-id="96deb-121">공유 콘텐츠를 하나 이상의 [부분 뷰로](xref:mvc/views/partial)이동 했습니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-121">Moved shared content into one or more [partial views](xref:mvc/views/partial).</span></span> <span data-ttu-id="96deb-122">가능 하면 권장 되는 방법입니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-122">When possible, this is the recommended approach.</span></span>
 * <span data-ttu-id="96deb-123">공용 페이지를 공유 해야 하는 콘텐츠의 경우 권한 부여를 Iasyncpagefilter의 일부로 수행 하는 필터를 작성 합니다 [. OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A).</span><span class="sxs-lookup"><span data-stu-id="96deb-123">For content that must share a common page, write a filter that performs authorization as part of [IAsyncPageFilter.OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A).</span></span> <span data-ttu-id="96deb-124">[Pagehandlerauth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub 프로젝트는이 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-124">The [PageHandlerAuth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub project demonstrates this approach:</span></span>
@@ -103,4 +103,4 @@ public class AccountController : Controller
 > * <span data-ttu-id="96deb-128">페이지, 페이지 모델 또는 전역에 적용 되는 권한 부여 특성으로 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-128">Compose with authorization attributes applied to the page, page model, or globally.</span></span> <span data-ttu-id="96deb-129">권한 부여 특성을 작성 하면 하나 이상의 `AuthorizeAttribute` 또는 `AuthorizeFilter` 인스턴스가 페이지에도 적용 될 때 인증 및 권한 부여가 여러 번 실행 됩니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-129">Composing authorization attributes results in authentication and authorization executing multiple times when you have one more `AuthorizeAttribute` or `AuthorizeFilter` instances also applied to the page.</span></span>
 > * <span data-ttu-id="96deb-130">ASP.NET Core 인증 및 권한 부여 시스템의 나머지 부분과 함께 작업 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-130">Work in conjunction with the rest of ASP.NET Core authentication and authorization system.</span></span> <span data-ttu-id="96deb-131">응용 프로그램에서이 접근 방식을 사용 하는 것이 제대로 작동 하는지 확인 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="96deb-131">You must verify using this approach works correctly for your application.</span></span>
 
-<span data-ttu-id="96deb-132">페이지 처리기에서를 지원할 계획이 없습니다 `AuthorizeAttribute` :::no-loc(Razor)::: .</span><span class="sxs-lookup"><span data-stu-id="96deb-132">There are no plans to support the `AuthorizeAttribute` on :::no-loc(Razor)::: Page handlers.</span></span> 
+<span data-ttu-id="96deb-132">페이지 처리기에서를 지원할 계획이 없습니다 `AuthorizeAttribute` Razor .</span><span class="sxs-lookup"><span data-stu-id="96deb-132">There are no plans to support the `AuthorizeAttribute` on Razor Page handlers.</span></span> 

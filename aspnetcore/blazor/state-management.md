@@ -1,31 +1,32 @@
 ---
-title: ASP.NET Core Blazor 상태 관리
+title: ASP.NET Core [Blazor 상태 관리
 author: guardrex
-description: Blazor Server 앱에서 상태를 유지하는 방법을 알아봅니다.
+description: '[Blazor Server 앱에서 상태를 유지하는 방법을 알아봅니다.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/state-management
 ms.openlocfilehash: a6c646425145855538f408ec6cafdb151cd24b86
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401950"
 ---
-# <a name="aspnet-core-blazor-state-management"></a><span data-ttu-id="1bbfe-103">ASP.NET Core Blazor 상태 관리</span><span class="sxs-lookup"><span data-stu-id="1bbfe-103">ASP.NET Core Blazor state management</span></span>
+# <a name="aspnet-core-blazor-state-management"></a><span data-ttu-id="1bbfe-103">ASP.NET Core [Blazor 상태 관리</span><span class="sxs-lookup"><span data-stu-id="1bbfe-103">ASP.NET Core [Blazor state management</span></span>
 
 <span data-ttu-id="1bbfe-104">작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)</span><span class="sxs-lookup"><span data-stu-id="1bbfe-104">By [Steve Sanderson](https://github.com/SteveSandersonMS)</span></span>
 
-Blazor Server<span data-ttu-id="1bbfe-105">는 상태 저장 앱 프레임워크입니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-105"> is a stateful app framework.</span></span> <span data-ttu-id="1bbfe-106">대체로 앱은 서버 연결을 지속해서 유지 관리합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-106">Most of the time, the app maintains an ongoing connection to the server.</span></span> <span data-ttu-id="1bbfe-107">사용자 상태는 서버 메모리의 ‘회로’에 저장됩니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-107">The user's state is held in the server's memory in a *circuit*.</span></span> 
+<span data-ttu-id="1bbfe-105">[Blazor Server는 상태 저장 앱 프레임워크입니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-105">[Blazor Server is a stateful app framework.</span></span> <span data-ttu-id="1bbfe-106">대체로 앱은 서버 연결을 지속해서 유지 관리합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-106">Most of the time, the app maintains an ongoing connection to the server.</span></span> <span data-ttu-id="1bbfe-107">사용자 상태는 서버 메모리의 ‘회로’에 저장됩니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-107">The user's state is held in the server's memory in a *circuit*.</span></span> 
 
 <span data-ttu-id="1bbfe-108">사용자 회로에 대해 저장되는 상태의 예는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-108">Examples of state held for a user's circuit include:</span></span>
 
@@ -34,11 +35,11 @@ Blazor Server<span data-ttu-id="1bbfe-105">는 상태 저장 앱 프레임워크
 * <span data-ttu-id="1bbfe-111">회로로 범위가 지정된 [DI](xref:fundamentals/dependency-injection)(종속성 주입) 서비스 인스턴스에 저장된 데이터</span><span class="sxs-lookup"><span data-stu-id="1bbfe-111">Data held in [dependency injection (DI)](xref:fundamentals/dependency-injection) service instances that are scoped to the circuit.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="1bbfe-112">이 문서에서는 Blazor Server 앱의 상태 지속성을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-112">This article addresses state persistence in Blazor Server apps.</span></span> Blazor WebAssembly<span data-ttu-id="1bbfe-113"> 앱은 [브라우저의 클라이언트 쪽 상태 지속성](#client-side-in-the-browser)을 활용할 수 있지만, 이 문서의 범위를 벗어난 사용자 지정 솔루션 또는 타사 패키지를 요구합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-113"> apps can take advantage of [client-side state persistence in the browser](#client-side-in-the-browser) but require custom solutions or 3rd party packages beyond the scope of this article.</span></span>
+> <span data-ttu-id="1bbfe-112">이 문서에서는 [Blazor Server 앱의 상태 지속성을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-112">This article addresses state persistence in [Blazor Server apps.</span></span> <span data-ttu-id="1bbfe-113">[Blazor WebAssembly 앱은 [브라우저의 클라이언트 쪽 상태 지속성](#client-side-in-the-browser)을 활용할 수 있지만, 이 문서의 범위를 벗어난 사용자 지정 솔루션 또는 타사 패키지를 요구합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-113">[Blazor WebAssembly apps can take advantage of [client-side state persistence in the browser](#client-side-in-the-browser) but require custom solutions or 3rd party packages beyond the scope of this article.</span></span>
 
-## <a name="blazor-circuits"></a>Blazor<span data-ttu-id="1bbfe-114"> 회로</span><span class="sxs-lookup"><span data-stu-id="1bbfe-114"> circuits</span></span>
+## <a name="blazor-circuits"></a><span data-ttu-id="1bbfe-114">[Blazor 회로</span><span class="sxs-lookup"><span data-stu-id="1bbfe-114">[Blazor circuits</span></span>
 
-<span data-ttu-id="1bbfe-115">사용자에게 임시 네트워크 연결 손실이 발생하는 경우, Blazor는 사용자가 앱을 계속 사용할 수 있도록 사용자를 원래 회로에 다시 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-115">If a user experiences a temporary network connection loss, Blazor attempts to reconnect the user to their original circuit so they can continue to use the app.</span></span> <span data-ttu-id="1bbfe-116">그러나 사용자를 서버 메모리의 원래 회로에 다시 연결할 수 없는 경우도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-116">However, reconnecting a user to their original circuit in the server's memory isn't always possible:</span></span>
+<span data-ttu-id="1bbfe-115">사용자에게 임시 네트워크 연결 손실이 발생하는 경우, [Blazor는 사용자가 앱을 계속 사용할 수 있도록 사용자를 원래 회로에 다시 연결합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-115">If a user experiences a temporary network connection loss, [Blazor attempts to reconnect the user to their original circuit so they can continue to use the app.</span></span> <span data-ttu-id="1bbfe-116">그러나 사용자를 서버 메모리의 원래 회로에 다시 연결할 수 없는 경우도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-116">However, reconnecting a user to their original circuit in the server's memory isn't always possible:</span></span>
 
 * <span data-ttu-id="1bbfe-117">서버는 연결이 끊어진 회로를 계속 유지할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-117">The server can't retain a disconnected circuit forever.</span></span> <span data-ttu-id="1bbfe-118">시간 제한 이후 또는 서버에 메모리 압력이 발생할 경우 서버는 연결이 끊어진 회로를 해제해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-118">The server must release a disconnected circuit after a timeout or when the server is under memory pressure.</span></span>
 * <span data-ttu-id="1bbfe-119">부하가 분산된 다중 서버 배포 환경에서는 지정된 시간에 요청을 처리하는 서버를 사용할 수 없게 되는 경우가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-119">In multiserver, load-balanced deployment environments, any server processing requests may become unavailable at any given time.</span></span> <span data-ttu-id="1bbfe-120">개별 서버에서 오류가 발생하거나, 전체 요청 볼륨을 처리하는 데 더는 필요하지 않은 경우 자동으로 제거될 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-120">Individual servers may fail or be automatically removed when no longer required to handle the overall volume of requests.</span></span> <span data-ttu-id="1bbfe-121">사용자가 다시 연결할 때 원본 서버를 사용하지 못할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-121">The original server may not be available when the user attempts to reconnect.</span></span>
@@ -69,7 +70,7 @@ Blazor Server<span data-ttu-id="1bbfe-105">는 상태 저장 앱 프레임워크
 
 ## <a name="where-to-persist-state"></a><span data-ttu-id="1bbfe-147">상태를 유지할 위치</span><span class="sxs-lookup"><span data-stu-id="1bbfe-147">Where to persist state</span></span>
 
-<span data-ttu-id="1bbfe-148">Blazor Server 앱에는 상태를 유지하기 위한 세 가지 공통 위치가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-148">Three common locations exist for persisting state in a Blazor Server app.</span></span> <span data-ttu-id="1bbfe-149">각 방법은 서로 다른 시나리오에 가장 적합하며, 고유한 주의 사항이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-149">Each approach is best suited to different scenarios and has different caveats:</span></span>
+<span data-ttu-id="1bbfe-148">[Blazor Server 앱에는 상태를 유지하기 위한 세 가지 공통 위치가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-148">Three common locations exist for persisting state in a [Blazor Server app.</span></span> <span data-ttu-id="1bbfe-149">각 방법은 서로 다른 시나리오에 가장 적합하며, 고유한 주의 사항이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-149">Each approach is best suited to different scenarios and has different caveats:</span></span>
 
 * [<span data-ttu-id="1bbfe-150">서버 쪽 데이터베이스</span><span class="sxs-lookup"><span data-stu-id="1bbfe-150">Server-side in a database</span></span>](#server-side-in-a-database)
 * [<span data-ttu-id="1bbfe-151">URL</span><span class="sxs-lookup"><span data-stu-id="1bbfe-151">URL</span></span>](#url)
@@ -107,7 +108,7 @@ Blazor Server<span data-ttu-id="1bbfe-105">는 상태 저장 앱 프레임워크
 <span data-ttu-id="1bbfe-173">사용자가 적극적으로 만드는 임시 데이터의 경우, 일반적인 백업 저장소는 브라우저의 `localStorage` 및 `sessionStorage` 컬렉션입니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-173">For transient data that the user is actively creating, a common backing store is the browser's `localStorage` and `sessionStorage` collections.</span></span> <span data-ttu-id="1bbfe-174">회로가 중단된 경우 앱에서 저장된 상태를 관리하거나 지울 필요가 없으므로 서버 쪽 스토리지보다 이점이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-174">The app isn't required to manage or clear the stored state if the circuit is abandoned, which is an advantage over server-side storage.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="1bbfe-175">이 섹션에서 “클라이언트 쪽”은 [Blazor WebAssembly 호스팅 모델](xref:blazor/hosting-models#blazor-webassembly)이 아니라 브라우저의 클라이언트 쪽 시나리오를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-175">"Client-side" in this section refers to client-side scenarios in the browser, not the [Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly).</span></span> <span data-ttu-id="1bbfe-176">Blazor WebAssembly 앱에서는 `localStorage` 및 `sessionStorage`를 사용할 수 있지만, 사용자 지정 코드를 작성하거나 타사 패키지를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-176">`localStorage` and `sessionStorage` can be used in Blazor WebAssembly apps but only by writing custom code or using a 3rd party package.</span></span>
+> <span data-ttu-id="1bbfe-175">이 섹션에서 “클라이언트 쪽”은 [[Blazor WebAssembly 호스팅 모델](xref:blazor/hosting-models#blazor-webassembly)이 아니라 브라우저의 클라이언트 쪽 시나리오를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-175">"Client-side" in this section refers to client-side scenarios in the browser, not the [[Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly).</span></span> <span data-ttu-id="1bbfe-176">[Blazor WebAssembly 앱에서는 `localStorage` 및 `sessionStorage`를 사용할 수 있지만, 사용자 지정 코드를 작성하거나 타사 패키지를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-176">`localStorage` and `sessionStorage` can be used in [Blazor WebAssembly apps but only by writing custom code or using a 3rd party package.</span></span>
 
 <span data-ttu-id="1bbfe-177">`localStorage` 및 `sessionStorage`는 다음과 같은 차이점이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-177">`localStorage` and `sessionStorage` differ as follows:</span></span>
 
@@ -125,7 +126,7 @@ Blazor Server<span data-ttu-id="1bbfe-105">는 상태 저장 앱 프레임워크
 
 * <span data-ttu-id="1bbfe-191">서버 쪽 데이터베이스를 사용하는 경우와 유사하게, 데이터 로드 및 저장은 비동기입니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-191">Similar to the use of a server-side database, loading and saving data are asynchronous.</span></span>
 * <span data-ttu-id="1bbfe-192">서버 쪽 데이터베이스와 달리, 미리 렌더링 단계에서는 요청한 페이지가 브라우저에 없기 때문에 미리 렌더링하는 동안 스토리지를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-192">Unlike a server-side database, storage isn't available during prerendering because the requested page doesn't exist in the browser during the prerendering stage.</span></span>
-* <span data-ttu-id="1bbfe-193">Blazor Server 앱의 경우 몇 킬로바이트의 데이터 스토리지를 유지하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-193">Storage of a few kilobytes of data is reasonable to persist for Blazor Server apps.</span></span> <span data-ttu-id="1bbfe-194">몇 킬로바이트를 넘을 경우, 네트워크를 통해 데이터를 로드하고 저장하기 때문에 성능에 미치는 영향을 고려해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-194">Beyond a few kilobytes, you must consider the performance implications because the data is loaded and saved across the network.</span></span>
+* <span data-ttu-id="1bbfe-193">[Blazor Server 앱의 경우 몇 킬로바이트의 데이터 스토리지를 유지하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-193">Storage of a few kilobytes of data is reasonable to persist for [Blazor Server apps.</span></span> <span data-ttu-id="1bbfe-194">몇 킬로바이트를 넘을 경우, 네트워크를 통해 데이터를 로드하고 저장하기 때문에 성능에 미치는 영향을 고려해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-194">Beyond a few kilobytes, you must consider the performance implications because the data is loaded and saved across the network.</span></span>
 * <span data-ttu-id="1bbfe-195">사용자가 데이터를 보거나 조작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-195">Users may view or tamper with the data.</span></span> <span data-ttu-id="1bbfe-196">ASP.NET Core [데이터 보호](xref:security/data-protection/introduction)는 위험을 완화할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-196">ASP.NET Core [Data Protection](xref:security/data-protection/introduction) can mitigate the risk.</span></span>
 
 ## <a name="third-party-browser-storage-solutions"></a><span data-ttu-id="1bbfe-197">타사 브라우저 스토리지 솔루션</span><span class="sxs-lookup"><span data-stu-id="1bbfe-197">Third-party browser storage solutions</span></span>
@@ -145,7 +146,7 @@ Blazor Server<span data-ttu-id="1bbfe-105">는 상태 저장 앱 프레임워크
 
 <span data-ttu-id="1bbfe-209">`Microsoft.AspNetCore.ProtectedBrowserStorage` 패키지를 설치하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-209">To install the `Microsoft.AspNetCore.ProtectedBrowserStorage` package:</span></span>
 
-1. <span data-ttu-id="1bbfe-210">Blazor Server 앱 프로젝트에서 [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 대한 패키지 참조를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-210">In the Blazor Server app project, add a package reference to [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).</span></span>
+1. <span data-ttu-id="1bbfe-210">[Blazor Server 앱 프로젝트에서 [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 대한 패키지 참조를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-210">In the [Blazor Server app project, add a package reference to [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).</span></span>
 1. <span data-ttu-id="1bbfe-211">최상위 HTML(예: 기본 프로젝트 템플릿의 `Pages/_Host.cshtml` 파일)에서 다음 `<script>` 태그를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="1bbfe-211">In the top-level HTML (for example, in the `Pages/_Host.cshtml` file in the default project template), add the following `<script>` tag:</span></span>
 
    ```html
