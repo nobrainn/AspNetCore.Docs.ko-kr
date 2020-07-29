@@ -1,31 +1,32 @@
 ---
-title: ASP.NET Core Blazor 상태 관리
+title: ASP.NET Core [Blazor 상태 관리
 author: guardrex
-description: Blazor Server 앱에서 상태를 유지하는 방법을 알아봅니다.
+description: '[Blazor Server 앱에서 상태를 유지하는 방법을 알아봅니다.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/state-management
 ms.openlocfilehash: a6c646425145855538f408ec6cafdb151cd24b86
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401950"
 ---
-# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 상태 관리
+# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core [Blazor 상태 관리
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Blazor Server는 상태 저장 앱 프레임워크입니다. 대체로 앱은 서버 연결을 지속해서 유지 관리합니다. 사용자 상태는 서버 메모리의 ‘회로’에 저장됩니다. 
+[Blazor Server는 상태 저장 앱 프레임워크입니다. 대체로 앱은 서버 연결을 지속해서 유지 관리합니다. 사용자 상태는 서버 메모리의 ‘회로’에 저장됩니다. 
 
 사용자 회로에 대해 저장되는 상태의 예는 다음과 같습니다.
 
@@ -34,11 +35,11 @@ Blazor Server는 상태 저장 앱 프레임워크입니다. 대체로 앱은 �
 * 회로로 범위가 지정된 [DI](xref:fundamentals/dependency-injection)(종속성 주입) 서비스 인스턴스에 저장된 데이터
 
 > [!NOTE]
-> 이 문서에서는 Blazor Server 앱의 상태 지속성을 설명합니다. Blazor WebAssembly 앱은 [브라우저의 클라이언트 쪽 상태 지속성](#client-side-in-the-browser)을 활용할 수 있지만, 이 문서의 범위를 벗어난 사용자 지정 솔루션 또는 타사 패키지를 요구합니다.
+> 이 문서에서는 [Blazor Server 앱의 상태 지속성을 설명합니다. [Blazor WebAssembly 앱은 [브라우저의 클라이언트 쪽 상태 지속성](#client-side-in-the-browser)을 활용할 수 있지만, 이 문서의 범위를 벗어난 사용자 지정 솔루션 또는 타사 패키지를 요구합니다.
 
-## <a name="blazor-circuits"></a>Blazor 회로
+## <a name="blazor-circuits"></a>[Blazor 회로
 
-사용자에게 임시 네트워크 연결 손실이 발생하는 경우, Blazor는 사용자가 앱을 계속 사용할 수 있도록 사용자를 원래 회로에 다시 연결합니다. 그러나 사용자를 서버 메모리의 원래 회로에 다시 연결할 수 없는 경우도 있습니다.
+사용자에게 임시 네트워크 연결 손실이 발생하는 경우, [Blazor는 사용자가 앱을 계속 사용할 수 있도록 사용자를 원래 회로에 다시 연결합니다. 그러나 사용자를 서버 메모리의 원래 회로에 다시 연결할 수 없는 경우도 있습니다.
 
 * 서버는 연결이 끊어진 회로를 계속 유지할 수 없습니다. 시간 제한 이후 또는 서버에 메모리 압력이 발생할 경우 서버는 연결이 끊어진 회로를 해제해야 합니다.
 * 부하가 분산된 다중 서버 배포 환경에서는 지정된 시간에 요청을 처리하는 서버를 사용할 수 없게 되는 경우가 있습니다. 개별 서버에서 오류가 발생하거나, 전체 요청 볼륨을 처리하는 데 더는 필요하지 않은 경우 자동으로 제거될 수도 있습니다. 사용자가 다시 연결할 때 원본 서버를 사용하지 못할 수 있습니다.
@@ -69,7 +70,7 @@ Blazor Server는 상태 저장 앱 프레임워크입니다. 대체로 앱은 �
 
 ## <a name="where-to-persist-state"></a>상태를 유지할 위치
 
-Blazor Server 앱에는 상태를 유지하기 위한 세 가지 공통 위치가 있습니다. 각 방법은 서로 다른 시나리오에 가장 적합하며, 고유한 주의 사항이 있습니다.
+[Blazor Server 앱에는 상태를 유지하기 위한 세 가지 공통 위치가 있습니다. 각 방법은 서로 다른 시나리오에 가장 적합하며, 고유한 주의 사항이 있습니다.
 
 * [서버 쪽 데이터베이스](#server-side-in-a-database)
 * [URL](#url)
@@ -107,7 +108,7 @@ Azure 데이터 스토리지 옵션에 대한 자세한 내용은 [Azure Storage
 사용자가 적극적으로 만드는 임시 데이터의 경우, 일반적인 백업 저장소는 브라우저의 `localStorage` 및 `sessionStorage` 컬렉션입니다. 회로가 중단된 경우 앱에서 저장된 상태를 관리하거나 지울 필요가 없으므로 서버 쪽 스토리지보다 이점이 있습니다.
 
 > [!NOTE]
-> 이 섹션에서 “클라이언트 쪽”은 [Blazor WebAssembly 호스팅 모델](xref:blazor/hosting-models#blazor-webassembly)이 아니라 브라우저의 클라이언트 쪽 시나리오를 나타냅니다. Blazor WebAssembly 앱에서는 `localStorage` 및 `sessionStorage`를 사용할 수 있지만, 사용자 지정 코드를 작성하거나 타사 패키지를 사용해야 합니다.
+> 이 섹션에서 “클라이언트 쪽”은 [[Blazor WebAssembly 호스팅 모델](xref:blazor/hosting-models#blazor-webassembly)이 아니라 브라우저의 클라이언트 쪽 시나리오를 나타냅니다. [Blazor WebAssembly 앱에서는 `localStorage` 및 `sessionStorage`를 사용할 수 있지만, 사용자 지정 코드를 작성하거나 타사 패키지를 사용해야 합니다.
 
 `localStorage` 및 `sessionStorage`는 다음과 같은 차이점이 있습니다.
 
@@ -125,7 +126,7 @@ Azure 데이터 스토리지 옵션에 대한 자세한 내용은 [Azure Storage
 
 * 서버 쪽 데이터베이스를 사용하는 경우와 유사하게, 데이터 로드 및 저장은 비동기입니다.
 * 서버 쪽 데이터베이스와 달리, 미리 렌더링 단계에서는 요청한 페이지가 브라우저에 없기 때문에 미리 렌더링하는 동안 스토리지를 사용할 수 없습니다.
-* Blazor Server 앱의 경우 몇 킬로바이트의 데이터 스토리지를 유지하는 것이 좋습니다. 몇 킬로바이트를 넘을 경우, 네트워크를 통해 데이터를 로드하고 저장하기 때문에 성능에 미치는 영향을 고려해야 합니다.
+* [Blazor Server 앱의 경우 몇 킬로바이트의 데이터 스토리지를 유지하는 것이 좋습니다. 몇 킬로바이트를 넘을 경우, 네트워크를 통해 데이터를 로드하고 저장하기 때문에 성능에 미치는 영향을 고려해야 합니다.
 * 사용자가 데이터를 보거나 조작할 수 있습니다. ASP.NET Core [데이터 보호](xref:security/data-protection/introduction)는 위험을 완화할 수 있습니다.
 
 ## <a name="third-party-browser-storage-solutions"></a>타사 브라우저 스토리지 솔루션
@@ -145,7 +146,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 `Microsoft.AspNetCore.ProtectedBrowserStorage` 패키지를 설치하려면 다음을 수행합니다.
 
-1. Blazor Server 앱 프로젝트에서 [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 대한 패키지 참조를 추가합니다.
+1. [Blazor Server 앱 프로젝트에서 [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 대한 패키지 참조를 추가합니다.
 1. 최상위 HTML(예: 기본 프로젝트 템플릿의 `Pages/_Host.cshtml` 파일)에서 다음 `<script>` 태그를 추가합니다.
 
    ```html

@@ -6,16 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: test/troubleshoot
 ms.openlocfilehash: f3c975567ee9ea5a1d9f317d3bc77997f68be928
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85398999"
@@ -82,7 +83,7 @@ ASP.NET Core에 대한 **새 프로젝트** 대화 상자에서 다음과 같은
 
 * 요청: 메서드, 체계, 호스트, pathbase, 경로, 쿼리 문자열, 헤더
 * 연결: 원격 IP 주소, 원격 포트, 로컬 IP 주소, 로컬 포트, 클라이언트 인증서
-* Identity: 이름, 표시 이름
+* [Identity: 이름, 표시 이름
 * 구성 설정
 * 환경 변수
 
@@ -124,8 +125,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env,
             sb.Append($"LocalPort: {context.Connection.LocalPort}{nl}");
             sb.Append($"ClientCert: {context.Connection.ClientCertificate}{nl}{nl}");
 
-            sb.Append($"Identity{rule}");
-            sb.Append($"User: {context.User.Identity.Name}{nl}");
+            sb.Append($"[Identity{rule}");
+            sb.Append($"User: {context.User.[Identity.Name}{nl}");
             var scheme = await authSchemeProvider
                 .GetSchemeAsync(IISDefaults.AuthenticationScheme);
             sb.Append($"DisplayName: {scheme?.DisplayName}{nl}{nl}");

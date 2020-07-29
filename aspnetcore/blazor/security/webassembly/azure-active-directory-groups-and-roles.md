@@ -1,22 +1,23 @@
 ---
-title: Azure Active Directory 그룹 및 역할을 사용한 ASP.NET Core Blazor WebAssembly
+title: Azure Active Directory 그룹 및 역할을 사용한 ASP.NET Core [Blazor WebAssembly
 author: guardrex
-description: Blazor WebAssembly에서 Azure Active Directory 그룹 및 역할을 사용하도록 구성하는 방법을 알아봅니다.
+description: '[Blazor WebAssembly에서 Azure Active Directory 그룹 및 역할을 사용하도록 구성하는 방법을 알아봅니다.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/security/webassembly/aad-groups-roles
 ms.openlocfilehash: 6e27b062d7b5a1b72804fe5d4ea31ec65358ce45
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402158"
@@ -25,7 +26,7 @@ ms.locfileid: "85402158"
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Javier Calvarro Nelson](https://github.com/javiercn)
 
-AAD(Azure Active Directory)는 ASP.NET Core Identity와 결합할 수 있는 몇 가지 권한 부여 방법을 제공합니다.
+AAD(Azure Active Directory)는 ASP.NET Core [Identity와 결합할 수 있는 몇 가지 권한 부여 방법을 제공합니다.
 
 * 사용자 정의 그룹
   * 보안
@@ -35,7 +36,7 @@ AAD(Azure Active Directory)는 ASP.NET Core Identity와 결합할 수 있는 몇
   * 기본 제공 관리 역할
   * 사용자 정의 역할
 
-이 문서의 지침은 다음 항목에서 설명하는 Blazor WebAssembly AAD 배포 시나리오에 적용됩니다.
+이 문서의 지침은 다음 항목에서 설명하는 [Blazor WebAssembly AAD 배포 시나리오에 적용됩니다.
 
 * [Microsoft 계정을 사용하는 독립 실행형](xref:blazor/security/webassembly/standalone-with-microsoft-accounts)
 * [AAD를 사용하는 독립 실행형](xref:blazor/security/webassembly/standalone-with-azure-active-directory)
@@ -94,9 +95,9 @@ public class CustomUserFactory
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
-        if (initialUser.Identity.IsAuthenticated)
+        if (initialUser.[Identity.IsAuthenticated)
         {
-            var userIdentity = (ClaimsIdentity)initialUser.Identity;
+            var userIdentity = (ClaimsIdentity)initialUser.[Identity;
 
             foreach (var role in account.Roles)
             {
@@ -285,7 +286,7 @@ Desktop Analytics 관리자 | c62c4ac5-e4c6-4096-8a2f-1ee3cbaaae15
 디렉터리 읽기 권한자 | e1fc84a6-7762-4b9b-8e29-518b4adbc23b
 Dynamics 365 관리자 | f20a9cfa-9fdf-49a8-a977-1afe446a1d6e
 Exchange 관리자 | b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652
-외부 Identity 공급자 관리자 | febfaeb4-e478-407a-b4b3-f4d9716618a2
+외부 [Identity 공급자 관리자 | febfaeb4-e478-407a-b4b3-f4d9716618a2
 전역 관리자 | a45ba61b-44db-462c-924b-3b2719152588
 글로벌 읽기 권한자 | f6903b21-6aba-4124-b44c-76671796b9d5
 그룹 관리자 | 158b3e5a-d89d-460b-92b5-3b34985f0197

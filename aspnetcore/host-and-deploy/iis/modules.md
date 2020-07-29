@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: host-and-deploy/iis/modules
 ms.openlocfilehash: 124f2a629ebd14210cb21351a720e007bba48f02
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85404017"
@@ -61,7 +62,7 @@ ms.locfileid: "85404017"
 | **정적 콘텐츠**<br>`StaticFileModule`                                                         | 아니요  | [정적 파일 미들웨어](xref:fundamentals/static-files) |
 | **토큰 캐싱**<br>`TokenCacheModule`                                                          | 예 | |
 | **URI 캐싱**<br>`UriCacheModule`                                                              | 예 | |
-| **URL 권한 부여**<br>`UrlAuthorizationModule`                                                | 예 | [ASP.NET Core Identity](xref:security/authentication/identity) |
+| **URL 권한 부여**<br>`UrlAuthorizationModule`                                                | 예 | [ASP.NET Core [Identity](xref:security/authentication/identity) |
 | **Windows 인증**<br>`WindowsAuthenticationModule`                                      | 예 | |
 
 &#8224;URL 재작성 모듈의 `isFile` 및 `isDirectory` 일치 유형이 [디렉터리 구조](xref:host-and-deploy/directory-structure)의 변경으로 인해 ASP.NET Core 앱에서 작동하지 않습니다.
@@ -83,7 +84,7 @@ ms.locfileid: "85404017"
 | 세션                 | [세션 미들웨어](xref:fundamentals/app-state) |
 | UrlAuthorization        | |
 | UrlMappingsModule       | [URL 재작성 미들웨어](xref:fundamentals/url-rewriting) |
-| UrlRoutingModule-4.0    | [ASP.NET Core Identity](xref:security/authentication/identity) |
+| UrlRoutingModule-4.0    | [ASP.NET Core [Identity](xref:security/authentication/identity) |
 | WindowsAuthentication   | |
 
 ## <a name="iis-manager-application-changes"></a>IIS 관리자 애플리케이션 변경 내용

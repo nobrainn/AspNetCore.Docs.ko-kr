@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/error-handling
 ms.openlocfilehash: 857b4935816d0010fa425ce98f938c87eb35a581
 ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 07/01/2020
 ms.locfileid: "85793458"
@@ -60,7 +61,7 @@ ms.locfileid: "85793458"
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-Razor Pages 앱 템플릿은 *Pages* 폴더에 오류 페이지( *.cshtml*) 및 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 클래스(`ErrorModel`)를 제공합니다. MVC 앱의 프로젝트 템플릿에는 오류 동작 메서드와 오류 보기가 포함됩니다. 다음은 동작 메서드입니다.
+[Razor Pages 앱 템플릿은 *Pages* 폴더에 오류 페이지( *.cshtml*) 및 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 클래스(`ErrorModel`)를 제공합니다. MVC 앱의 프로젝트 템플릿에는 오류 동작 메서드와 오류 보기가 포함됩니다. 다음은 동작 메서드입니다.
 
 ```csharp
 [AllowAnonymous]
@@ -140,7 +141,7 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithRedirect)]
 
-예제에서 볼 수 있는 것과 같이 URL 템플릿에는 상태 코드에 대한 `{0}` 자리 표시자가 포함될 수 있습니다. URL 템플릿이 물결표(~)로 시작하는 경우 물결표는 앱의 `PathBase`로 대체됩니다. 앱 내의 엔드포인트를 가리키는 경우 해당 엔드포인트에 대한 MVC 뷰 또는 Razor 페이지를 만들어야 합니다. Razor Pages 예제를 보려면 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 *Pages/StatusCode.cshtml*을 참조하세요.
+예제에서 볼 수 있는 것과 같이 URL 템플릿에는 상태 코드에 대한 `{0}` 자리 표시자가 포함될 수 있습니다. URL 템플릿이 물결표(~)로 시작하는 경우 물결표는 앱의 `PathBase`로 대체됩니다. 앱 내의 엔드포인트를 가리키는 경우 해당 엔드포인트에 대한 MVC 뷰 또는 [Razor 페이지를 만들어야 합니다. [Razor Pages 예제를 보려면 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 *Pages/StatusCode.cshtml*을 참조하세요.
 
 이 메서드는 일반적으로 앱이 다음과 같은 경우에 사용됩니다.
 
@@ -156,14 +157,14 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithReExecute)]
 
-앱 내의 엔드포인트를 가리키는 경우 해당 엔드포인트에 대한 MVC 뷰 또는 Razor 페이지를 만들어야 합니다. Razor Pages 예제를 보려면 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 *Pages/StatusCode.cshtml*을 참조하세요.
+앱 내의 엔드포인트를 가리키는 경우 해당 엔드포인트에 대한 MVC 뷰 또는 [Razor 페이지를 만들어야 합니다. [Razor Pages 예제를 보려면 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 *Pages/StatusCode.cshtml*을 참조하세요.
 
 이 메서드는 일반적으로 앱이 다음과 같은 경우에 사용됩니다.
 
 * 다른 엔드포인트로 리디렉션하지 않고 요청을 처리해야 하는 경우. 웹앱의 경우 클라이언트의 브라우저 주소 표시줄에 원래 요청된 엔드포인트가 반영됩니다.
 * 원래 상태 코드를 유지하고 응답과 함께 반환해야 하는 경우.
 
-URL 및 쿼리 문자열 템플릿에는 상태 코드에 대한 자리 표시자(`{0}`)가 포함될 수 있습니다. URL 템플릿은 슬래시(`/`)로 시작해야 합니다. 경로에서 자리 표시자를 사용하는 경우, 엔드포인트(페이지 또는 컨트롤러)가 경로 세그먼트를 처리할 수 있는지 확인하세요. 예를 들어 오류를 위한 Razor 페이지는 `@page` 지시문을 사용하여 선택적 경로 세그먼트 값을 수락해야 합니다.
+URL 및 쿼리 문자열 템플릿에는 상태 코드에 대한 자리 표시자(`{0}`)가 포함될 수 있습니다. URL 템플릿은 슬래시(`/`)로 시작해야 합니다. 경로에서 자리 표시자를 사용하는 경우, 엔드포인트(페이지 또는 컨트롤러)가 경로 세그먼트를 처리할 수 있는지 확인하세요. 예를 들어 오류를 위한 [Razor 페이지는 `@page` 지시문을 사용하여 선택적 경로 세그먼트 값을 수락해야 합니다.
 
 ```cshtml
 @page "{code?}"
@@ -177,7 +178,7 @@ URL 및 쿼리 문자열 템플릿에는 상태 코드에 대한 자리 표시�
 
 MVC 컨트롤러 또는 작업 메서드에 대한 상태 코드 페이지를 비활성화하려면 [`[SkipStatusCodePages]`](xref:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute) 특성을 사용합니다.
 
-Razor Pages 처리기 메서드 또는 MVC 컨트롤러에서 특정 요청에 대한 상태 코드 페이지를 사용하지 않으려면 <xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature>를 사용합니다.
+[Razor Pages 처리기 메서드 또는 MVC 컨트롤러에서 특정 요청에 대한 상태 코드 페이지를 사용하지 않으려면 <xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature>를 사용합니다.
 
 ```csharp
 var statusCodePagesFeature = HttpContext.Features.Get<IStatusCodePagesFeature>();
@@ -232,7 +233,7 @@ if (env.IsDevelopment())
 
 ## <a name="exception-filters"></a>예외 필터
 
-MVC 앱에서는 예외 필터를 전역으로 구성하거나 컨트롤러별 또는 작업별로 구성할 수 있습니다. Razor Pages 앱에서는 전역으로 구성하거나 페이지 모델별로 구성할 수 있습니다. 이러한 필터는 컨트롤러 작업 또는 다른 필터를 실행하는 동안 발생하는 처리되지 않은 예외를 처리합니다. 자세한 내용은 <xref:mvc/controllers/filters#exception-filters>를 참조하세요.
+MVC 앱에서는 예외 필터를 전역으로 구성하거나 컨트롤러별 또는 작업별로 구성할 수 있습니다. [Razor Pages 앱에서는 전역으로 구성하거나 페이지 모델별로 구성할 수 있습니다. 이러한 필터는 컨트롤러 작업 또는 다른 필터를 실행하는 동안 발생하는 처리되지 않은 예외를 처리합니다. 자세한 내용은 <xref:mvc/controllers/filters#exception-filters>를 참조하세요.
 
 > [!TIP]
 > 예외 필터는 MVC 작업 내에서 발생하는 예외를 트래핑하는 데 유용하지만 예외 처리 미들웨어만큼 유연하지는 않습니다. 미들웨어를 사용하는 것이 좋습니다. 선택한 MVC 작업에 따라 오류 처리를 다르게 수행해야 하는 경우에만 필터를 사용하세요.
