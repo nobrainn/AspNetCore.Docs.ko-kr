@@ -960,11 +960,11 @@ jQuery는 요청 본문에 있는 할 일 항목을 사용하여 HTTP POST 요�
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>[!INCLUDE[](~/includes/IdentityServer4.md)]
 
-[이 자습서에서 샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [다운로드하는 방법](xref:index#how-to-download-a-sample)을 참조하세요.
+추가 자료 [이 자습서에서 샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples)
 
-자세한 내용은 다음 자료를 참조하세요.
+[다운로드하는 방법](xref:index#how-to-download-a-sample)을 참조하세요.
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>
@@ -973,4 +973,4 @@ jQuery는 요청 본문에 있는 할 일 항목을 사용하여 HTTP POST 요�
 * <xref:web-api/action-return-types>
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
-* [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* 자세한 내용은 다음 자료를 참조하세요.
