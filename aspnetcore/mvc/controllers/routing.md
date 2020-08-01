@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: b917671053313c74acfff36518e8f36d5ef2eb22
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405486"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444138"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 작업에 라우팅
 
@@ -52,7 +52,7 @@ ASP.NET Core 컨트롤러는 라우팅 [미들웨어](xref:fundamentals/middlewa
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet)]
 
-호출 내 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 에서 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> 는 단일 경로를 만드는 데 사용 됩니다. 단일 경로는 경로 라는 이름으로 지정 됩니다 `default` . 컨트롤러 및 뷰를 사용 하는 대부분의 앱은 경로와 유사한 경로 템플릿을 사용 `default` 합니다. REST Api는 [특성 라우팅을](#ar)사용 해야 합니다.
+호출 내 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> 에서 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> 는 단일 경로를 만드는 데 사용 됩니다. 단일 경로는 경로 라는 이름으로 지정 됩니다 `default` . 컨트롤러 및 뷰를 사용 하는 대부분의 앱은 경로와 유사한 경로 템플릿을 사용 `default` 합니다. REST Api는 [특성 라우팅을](#ar)사용 해야 합니다.
 
 경로 템플릿 `"{controller=Home}/{action=Index}/{id?}"` :
 
@@ -89,7 +89,7 @@ public class HomeController : Controller
 
 URL 경로는 `/` 경로 템플릿 기본 `Home` 컨트롤러 및 작업을 사용 합니다 `Index` . URL 경로는 `/Home` 경로 템플릿 기본 작업을 사용 합니다 `Index` .
 
-편의 메서드인 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>를 사용하여:
+편의 메서드인 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A>를 사용하여:
 
 ```csharp
 endpoints.MapDefaultControllerRoute();
@@ -102,10 +102,10 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 ```
 
 > [!IMPORTANT]
-> 라우팅은 및 미들웨어를 사용 하 여 구성 됩니다 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> . 컨트롤러를 사용 하려면 다음을 수행 합니다.
+> 라우팅은 및 미들웨어를 사용 하 여 구성 됩니다 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> . 컨트롤러를 사용 하려면 다음을 수행 합니다.
 >
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>안쪽 `UseEndpoints` 을 호출 하 여 라우트된 컨트롤러 [특성](#ar) 을 매핑합니다.
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>또는 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 를 호출 하 여 대상 [conventionally routed](#cr) 컨트롤러 및 [특성 라우트된](#ar) 컨트롤러를 모두 매핑합니다.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A>안쪽 `UseEndpoints` 을 호출 하 여 라우트된 컨트롤러 [특성](#ar) 을 매핑합니다.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A>또는 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> 를 호출 하 여 대상 [conventionally routed](#cr) 컨트롤러 및 [특성 라우트된](#ar) 컨트롤러를 모두 매핑합니다.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -151,7 +151,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 * UI 기반 앱에 대한 유용한 시작점입니다.
 * 는 많은 웹 UI 앱에 필요한 유일한 경로 템플릿입니다. 더 큰 규모의 웹 UI 응용 프로그램의 경우에는 [영역](#areas) 을 사용 하는 다른 경로를 사용 해야 합니다.
 
-<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>및 <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> :
+<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A>및 <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> :
 
 * 호출 된 순서에 따라 해당 끝점에 **순서** 값을 자동으로 할당 합니다.
 
@@ -168,7 +168,7 @@ ASP.NET Core 3.0 이상의 엔드포인트 라우팅은 다음과 같습니다.
 
 ### <a name="multiple-conventional-routes"></a>다중 기본 경로
 
-[conventional routes](#cr) `UseEndpoints` 및에 대 한 호출을 추가 하 여 내에서 여러 개의 기존 경로를 추가할 수 있습니다 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> . 이렇게 하면 여러 가지 규칙을 정의 하거나 다음과 같이 특정 [작업](#action)에 전용으로 사용 되는 기본 경로를 추가할 수 있습니다.
+[conventional routes](#cr) `UseEndpoints` 및에 대 한 호출을 추가 하 여 내에서 여러 개의 기존 경로를 추가할 수 있습니다 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> . 이렇게 하면 여러 가지 규칙을 정의 하거나 다음과 같이 특정 [작업](#action)에 전용으로 사용 되는 기본 경로를 추가할 수 있습니다.
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
@@ -189,7 +189,7 @@ ASP.NET Core 3.0 이상의 엔드포인트 라우팅은 다음과 같습니다.
 위의 예제는 다음과 같습니다.
 
 * `blog`경로는 `default` 먼저 추가 되기 때문에 경로 보다 일치 하는 항목에 대 한 우선 순위가 높습니다.
-* 는 문서 이름을 URL의 일부로 포함 하는 것이 일반적으로 사용할 수 있는 [슬러그](https://developer.mozilla.org/docs/Glossary/Slug) 스타일 라우팅의 예입니다.
+* 는 문서 이름을 URL [의 일부로](https://developer.mozilla.org/docs/Glossary/Slug) 포함 하는 것이 일반적입니다.
 
 > [!WARNING]
 > ASP.NET Core 3.0 이상에서 라우팅은 다음과 같이 되지 않습니다.
@@ -203,7 +203,7 @@ ASP.NET Core 3.0 이상의 엔드포인트 라우팅은 다음과 같습니다.
 ### <a name="conventional-routing-order"></a>기본 라우팅 순서
 
 기존 라우팅은 앱에서 정의 된 작업과 컨트롤러의 조합만 일치 합니다. 이는 기존 경로가 중복 되는 경우를 단순화 하기 위한 것입니다.
-, 및를 사용 하 여 경로를 추가 하면 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 호출 되는 순서에 따라 해당 끝점에 순서 값이 자동으로 할당 됩니다. 이전에 표시 된 경로의 일치 항목은 우선 순위가 높습니다. 규칙 기반 라우팅은 순서에 영향을 받습니다. 일반적으로 영역이 있는 경로는 영역이 없는 경로 보다 더 구체적 이므로 앞에 배치 해야 합니다. 와 같은 모든 경로 매개 변수를 사용 하는 [전용 기본 경로](#dcr) 를 사용 하면 `{*article}` 경로를 너무 많이 사용할 수 있습니다. 즉, 다른 경로와 일치 시키려는 url과 일치 하 게 됩니다. [greedy](xref:fundamentals/routing#greedy) Greedy 일치를 방지 하려면 greedy 경로를 경로 테이블에 배치 합니다.
+, 및를 사용 하 여 경로를 추가 하면 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> 호출 되는 순서에 따라 해당 끝점에 순서 값이 자동으로 할당 됩니다. 이전에 표시 된 경로의 일치 항목은 우선 순위가 높습니다. 규칙 기반 라우팅은 순서에 영향을 받습니다. 일반적으로 영역이 있는 경로는 영역이 없는 경로 보다 더 구체적 이므로 앞에 배치 해야 합니다. 와 같은 모든 경로 매개 변수를 사용 하는 [전용 기본 경로](#dcr) 를 사용 하면 `{*article}` 경로를 너무 많이 사용할 수 있습니다. 즉, 다른 경로와 일치 시키려는 url과 일치 하 게 됩니다. [greedy](xref:fundamentals/routing#greedy) Greedy 일치를 방지 하려면 greedy 경로를 경로 테이블에 배치 합니다.
 
 [!INCLUDE[](~/includes/catchall.md)]
 
@@ -272,7 +272,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 [!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
-위의 코드에서 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> 는 `UseEndpoints` 특성 라우트된 컨트롤러를 매핑하기 위해 내부에서 호출 됩니다.
+위의 코드에서 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> 는 `UseEndpoints` 특성 라우트된 컨트롤러를 매핑하기 위해 내부에서 호출 됩니다.
 
 다음 예제에서는
 
@@ -413,7 +413,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsApiController.cs?name=snippet)]
 
-앞의 예제에서:
+이전 예제에서는 다음을 수행합니다.
 
 * URL 경로가 `/products` 일치 하는 경우`ProductsApi.ListProducts`
 * URL 경로는 `/products/5` 와 일치할 수 있습니다 `ProductsApi.GetProduct(int)` .
@@ -426,12 +426,12 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 다음 표에서는 `[Route]` 위의 코드에 있는 특성에 대해 설명 합니다.
 
-| 특성               | 와 결합`[Route("Home")]` | 경로 템플릿을 정의 합니다. |
+| attribute               | 와 결합`[Route("Home")]` | 경로 템플릿을 정의 합니다. |
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | 예 | `"Home"` |
 | `[Route("Index")]` | 예 | `"Home/Index"` |
 | `[Route("/")]` | **아니요** | `""` |
-| `[Route("About")]` | Yes | `"Home/About"` |
+| `[Route("About")]` | 예 | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -721,7 +721,7 @@ result: /UrlGeneration/Destination
 
 기본 경로를 사용 하 여이 문제가 발생할 수 있습니다 `{controller}/{action}/{id?}` . `Url.Action`항상 명시적으로 및 값을 지정 하기 때문에이 문제는 드물게 발생 `controller` `action` 합니다.
 
-Url의 여러 오버 로드. Action은 경로 값 개체를 사용 하 여 및 이외의 경로 매개 변수에 대 한 값을 제공 [합니다.](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) `controller` `action` 경로 값 개체는와 함께 자주 사용 됩니다 `id` . 예: `Url.Action("Buy", "Products", new { id = 17 })`. 경로 값 개체:
+Url의 여러 오버 로드. Action은 경로 값 개체를 사용 하 여 및 이외의 경로 매개 변수에 대 한 값을 제공 [합니다.](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) `controller` `action` 경로 값 개체는와 함께 자주 사용 됩니다 `id` . 예들 들어 `Url.Action("Buy", "Products", new { id = 17 })`입니다. 경로 값 개체:
 
 * 규칙에 따라 일반적으로 무명 형식의 개체입니다.
 * `IDictionary<>`또는 [POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)일 수 있습니다.
@@ -758,7 +758,7 @@ Url의 여러 오버 로드. Action은 경로 값 개체를 사용 하 여 및 �
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>HTML로 Url 생성Razor
+### <a name="generate-urls-in-html-and-no-locrazor"></a>HTML로 Url 생성Razor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper><xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper>및 요소를 각각 생성 하는 [Html.ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) [html.beginform](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) 및 html.actionlink 메서드를 제공 합니다 `<form>` `<a>` . 이러한 메서드는 url을 생성 하는 데 [url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) 메서드를 사용 하 여 비슷한 인수를 허용 합니다. `HtmlHelper`에 대한 `Url.RouteUrl` 보조 도구는 `Html.BeginRouteForm` 및 `Html.RouteLink`이며 서로 기능이 비슷합니다.
 
@@ -776,7 +776,7 @@ TagHelper는 `form` TagHelper 및 `<a>` TagHelper를 통해 URL을 생성합니�
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/CustomerController.cs?name=snippet)]
 
-및와 같은 작업 결과 팩터리 메서드 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction*> 는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> 의 메서드와 유사한 패턴을 따릅니다 `IUrlHelper` .
+및와 같은 작업 결과 팩터리 메서드 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction%2A> 는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction%2A> 의 메서드와 유사한 패턴을 따릅니다 `IUrlHelper` .
 
 <a name="routing-dedicated-ref-label"></a>
 
@@ -805,7 +805,7 @@ TagHelper는 `form` TagHelper 및 `<a>` TagHelper를 통해 URL을 생성합니�
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
-위의 코드에서를 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> 만들기 위해가 호출 됩니다 `"blog_route"` . 두 번째 매개 변수인는 `"Blog"` 영역 이름입니다.
+위의 코드에서를 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> 만들기 위해가 호출 됩니다 `"blog_route"` . 두 번째 매개 변수인는 `"Blog"` 영역 이름입니다.
 
 URL 경로와 일치 하는 경우 경로 `/Manage/Users/AddUser` 는 `"blog_route"` 경로 값을 생성 합니다 `{ area = Blog, controller = Users, action = AddUser }` . `area`경로 값은에 대 한 기본값으로 생성 됩니다 `area` . 에서 만든 경로는 `MapAreaControllerRoute` 다음과 같습니다.
 
@@ -851,7 +851,7 @@ URL 경로와 일치 하는 경우 경로 `/Manage/Users/AddUser` 는 `"blog_rou
 
 [비 action](xref:Microsoft.AspNetCore.Mvc.NonActionAttribute) 특성을 사용 하는 경우를 제외 하 고 컨트롤러의 공용 메서드는 동작입니다.
 
-## <a name="sample-code"></a>샘플 코드
+## <a name="sample-code"></a>예제 코드
 
  * [MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs) 메서드는 [샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) 에 포함 되어 있으며 라우팅 정보를 표시 하는 데 사용 됩니다.
 * [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([다운로드 방법](xref:index#how-to-download-a-sample))

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 6e47e627915bd8988d161f7d5af4a89f3671c0a7
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: a08993a7909d67be34446815b10d32089d9e0629
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445452"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444148"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -675,7 +675,7 @@ Index: 5  Value: value5
 
 다음 코드는 *Program.cs*에서 사용자 지정 `EFConfigurationProvider`를 사용하는 방법을 보여 줍니다.
 
-[!code-csharp[](index/samples/3.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
+[!code-csharp[](index/samples_snippets/3.x/ConfigurationSample/Program.cs?highlight=7-8)]
 
 <a name="acs"></a>
 
@@ -687,7 +687,7 @@ Index: 5  Value: value5
 
 시작 편의 메서드를 사용하여 구성에 액세스하는 방법의 예는 [앱 시작: 편리한 메서드](xref:fundamentals/startup#convenience-methods) 편을 참조하세요.
 
-## <a name="access-configuration-in-razor-pages"></a>Razor Pages의 구성 액세스
+## <a name="access-configuration-in-no-locrazor-pages"></a>Razor Pages의 구성 액세스
 
 다음 코드는 Razor 페이지의 구성 데이터를 표시합니다.
 
@@ -1108,7 +1108,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 생성된 스위치 매핑 사전은 다음 표의 데이터를 포함합니다.
 
-| Key       | 값             |
+| 키       | 값             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1685,7 +1685,7 @@ config.AddJsonFile(
 
 표에 표시된 키-값 쌍이 구성으로 로드됩니다.
 
-| Key             | 값  |
+| 키             | 값  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
@@ -1799,7 +1799,7 @@ public class Startup
 
 시작 편의 메서드를 사용하여 구성에 액세스하는 방법의 예는 [앱 시작: 편리한 메서드](xref:fundamentals/startup#convenience-methods) 편을 참조하세요.
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Razor Pages 페이지 또는 MVC 뷰에서 구성에 액세스
+## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>Razor Pages 페이지 또는 MVC 뷰에서 구성에 액세스
 
 Razor Pages 페이지나 MVC 뷰에서 구성 설정에 액세스하려면 [Microsoft.Extensions.Configuration 네임스페이스](xref:Microsoft.Extensions.Configuration)에 [using 지시문](xref:mvc/views/razor#using)([C# 참조: using 지시문](/dotnet/csharp/language-reference/keywords/using-directive))을 추가하고 <xref:Microsoft.Extensions.Configuration.IConfiguration>을 페이지 또는 뷰로 삽입합니다.
 
