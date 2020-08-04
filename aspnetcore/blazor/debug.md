@@ -5,7 +5,7 @@ description: Blazor 앱을 디버그하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/15/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: b4199c3a99af5875c5d9a87f29f7c7e2758ffd71
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407673"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303562"
 ---
-# <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 디버그
 
 [Daniel Roth](https://github.com/danroth27)
 
@@ -105,19 +105,19 @@ Blazor WebAssembly 앱을 디버그하는 동안 서버 코드도 디버그할 �
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용은 <xref:blazor/tooling>를 참조하세요.
-
-### <a name="debug-standalone-blazor-webassembly"></a>독립 실행형 Blazor WebAssembly 디버그
+### <a name="debug-standalone-no-locblazor-webassembly"></a>독립 실행형 Blazor WebAssembly 디버그
 
 1. VS Code에서 독립 실행형 Blazor WebAssembly 앱을 엽니다.
 
-   디버깅을 사용하기 위해 추가 설정이 필요하다는 다음 알림이 표시되면
+   디버깅을 사용하기 위해 추가 설정이 필요하다는 다음 알림이 표시될 수 있습니다.
    
-   * 올바른 확장을 설치했는지 확인하고
-   * JavaScript 미리 보기 디버깅이 사용되는지 확인합니다.
-   * 윈도우를 다시 로드합니다.
-
    ![추가 설정 필요](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+   
+   이러한 알림이 표시되면 다음을 수행합니다.
+
+   * 최신 [Visual Studio Code용 C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)이 설치되어 있는지 확인합니다. 설치된 확장을 검사하려면 메뉴 모음에서 **보기** > **확장**을 열거나 **작업** 사이드바에서 **확장** 아이콘을 선택합니다.
+   * JavaScript 미리 보기 디버깅이 사용되는지 확인합니다. 메뉴 모음에서 설정을 엽니다(**파일** > **기본 설정** > **설정**). `debug preview` 키워드를 사용하여 검색합니다. 검색 결과에서 **디버그 > JavaScript: 미리 보기 사용** 확인란이 선택되어 있는지 확인합니다.
+   * 윈도우를 다시 로드합니다.
 
 1. <kbd>F5</kbd> 바로 가기 키 또는 메뉴 항목을 사용하여 디버깅을 시작합니다.
 
@@ -131,11 +131,11 @@ Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용
 
    ![VS Code의 카운터 디버그](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-blazor-webassembly"></a>호스트된 Blazor WebAssembly 디버그
+### <a name="debug-hosted-no-locblazor-webassembly"></a>호스트된 Blazor WebAssembly 디버그
 
 1. VS Code에서 호스트된 Blazor WebAssembly 앱의 솔루션 폴더를 엽니다.
 
-1. 프로젝트에 대한 시작 구성 집합이 없는 경우 다음과 같은 알림이 나타납니다. **Yes**를 선택합니다.
+1. 프로젝트에 대한 시작 구성 집합이 없는 경우 다음과 같은 알림이 나타납니다. **예**를 선택합니다.
 
    ![필요한 자산 추가](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
@@ -177,7 +177,7 @@ Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용
 
 ### <a name="example-launch-configurations"></a>시작 구성 예제
 
-#### <a name="launch-and-debug-a-standalone-blazor-webassembly-app"></a>독립 실행형 Blazor WebAssembly 앱 시작 및 디버그
+#### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>독립 실행형 Blazor WebAssembly 앱 시작 및 디버그
 
 ```json
 {
@@ -198,7 +198,7 @@ Blazor 앱 개발을 위한 Visual Studio Code 설치에 대한 자세한 내용
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge를 사용하여 호스트된 Blazor WebAssembly 앱 시작 및 디버그
+#### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge를 사용하여 호스트된 Blazor WebAssembly 앱 시작 및 디버그
 
 브라우저 구성의 기본값은 Google Chrome입니다. 디버깅에 Microsoft Edge를 사용하는 경우 `browser`를 `edge`로 설정합니다. Google Chrome을 사용하려면 `browser` 옵션을 설정하거나 옵션의 값을 `chrome`로 설정하지 마세요.
 

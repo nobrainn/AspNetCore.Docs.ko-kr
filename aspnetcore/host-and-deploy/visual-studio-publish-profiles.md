@@ -5,7 +5,7 @@ description: Visual Studio에서 게시 프로필을 만들고 다양한 대상�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/14/2020
+ms.date: 07/28/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: a386066f8d780c5e71c3634065c4e06b74e83c8c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7ad85de1a566c993e59203a5efe31458f3acdc53
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403861"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303627"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core 앱 배포용 Visual Studio 게시 프로필(.pubxml)
 
@@ -160,21 +160,15 @@ Azure 대상에 게시하는 경우 *.pubxml* 파일에는 Azure 구독 식별�
 
 중요 정보(예: 게시 암호)는 사용자/컴퓨터 수준별로 암호화됩니다. 이 정보는 *Properties/PublishProfiles/{PROFILE NAME}.pubxml.user* 파일에 저장됩니다. 중요 정보가 저장될 수 있는 파일이므로 소스 제어에 체크 인하면 안 됩니다.
 
-ASP.NET Core 웹앱을 게시하는 방법에 대한 개요를 보려면 <xref:host-and-deploy/index>를 참조하세요. ASP.NET Core 웹앱을 게시하는 데 필요한 MSBuild 작업 및 대상은 [aspnet/websdk 리포지토리](https://github.com/aspnet/websdk)에 있는 오픈 소스입니다.
+ASP.NET Core 웹앱을 게시하는 방법에 대한 개요를 보려면 <xref:host-and-deploy/index>를 참조하세요. ASP.NET Core 웹앱을 게시하는 데 필요한 MSBuild 작업 및 대상은 [dotnet/websdk 리포지토리](https://github.com/dotnet/websdk)에 있는 오픈 소스입니다.
 
 다음 명령은 MSDeploy 폴더와 [Kudu](https://github.com/projectkudu/kudu/wiki) 게시 프로필을 사용할 수 있습니다. MSDeploy는 플랫폼 간 지원을 하지 않으므로 다음 MSDeploy 옵션은 Windows에서만 지원됩니다.
 
 **폴더(플랫폼 간에 작동):**
 
-<!--
-
-NOTE: Add back the following 'dotnet publish' folder publish example after https://github.com/aspnet/websdk/issues/888 is resolved.
-
 ```dotnetcli
 dotnet publish WebApplication.csproj /p:PublishProfile=<FolderProfileName>
 ```
-
--->
 
 ```dotnetcli
 dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<FolderProfileName>
@@ -205,7 +199,7 @@ dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<MsDe
 * `dotnet publish` 및 `dotnet build`는 모든 플랫폼에서 Azure에 게시할 Kudu API를 지원합니다. Visual Studio 게시는 Kudu API를 지원하지만 플랫폼 간 Azure에 게시에 대해 WebSDK에 의해 지원됩니다.
 * `dotnet publish` 명령에 `DeployOnBuild`를 전달하면 안 됩니다.
 
-자세한 내용은 [Microsoft.NET.Sdk.Publish](https://github.com/aspnet/websdk#microsoftnetsdkpublish)를 참조하세요.
+자세한 내용은 [Microsoft.NET.Sdk.Publish](https://github.com/dotnet/websdk#microsoftnetsdkpublish)를 참조하세요.
 
 다음 콘텐츠와 함께 프로젝트의 *Properties/PublishProfiles* 폴더에 게시 프로필을 추가합니다.
 
@@ -224,16 +218,17 @@ dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<MsDe
 
 *FolderProfile*이라는 프로필을 사용하여 게시할 경우 다음 명령 중 하나를 사용하세요.
 
-<!--
+```dotnetcli
+dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile`
+```
 
-NOTE: Temporarily removed until https://github.com/aspnet/websdk/issues/888 is resolved.
+```dotnetcli
+dotnet build /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+```
 
-* `dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile`
-
--->
-
-* `dotnet build /p:DeployOnBuild=true /p:PublishProfile=FolderProfile`
-* `msbuild /p:DeployOnBuild=true /p:PublishProfile=FolderProfile`
+```bash
+msbuild /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+```
 
 .NET Core CLI의 [dotnet build](/dotnet/core/tools/dotnet-build) 명령은 `msbuild`를 호출하여 빌드 및 게시 프로세스를 실행합니다. 폴더 프로필을 전달할 경우 `dotnet build` 및 `msbuild` 명령은 동일합니다. Windows에서 `msbuild`를 직접 호출하면 MSBuild의 .NET Framework 버전이 사용됩니다. 폴더가 아닌 프로필에서 `dotnet build` 호출:
 
@@ -269,19 +264,12 @@ MSBuild file.
 앞의 예제에서:
 
 * `<ExcludeApp_Data>` 속성은 XML 스키마 요구 사항을 충족하기 위해서만 존재합니다. `<ExcludeApp_Data>` 속성은 프로젝트 루트에 *App_Data* 폴더가 있는 경우에도 게시 프로세스에 영향을 주지 않습니다. *App_Data* 폴더는 ASP.NET 4.x 프로젝트처럼 특별 처리를 받지 않습니다.
-
-<!--
-
-NOTE: Temporarily removed from 'Using the .NET Core CLI' below until https://github.com/aspnet/websdk/issues/888 is resolved.
+* `<LastUsedBuildConfiguration>` 속성은 `Release`로 설정됩니다. Visual Studio에서 게시할 경우 `<LastUsedBuildConfiguration>`의 값은 게시 프로세스가 시작될 때의 값을 사용하여 설정됩니다. `<LastUsedBuildConfiguration>`은 특별하고 가져온 MSBuild 파일에서 재정의되면 안 됩니다. 그러나 이 속성은 다음 중 한 가지 접근 방법을 사용하여 명령줄에서 재정의할 수 있습니다.
+  * .NET Core CLI 사용:
 
     ```dotnetcli
     dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
     ```
-
--->
-
-* `<LastUsedBuildConfiguration>` 속성은 `Release`로 설정됩니다. Visual Studio에서 게시할 경우 `<LastUsedBuildConfiguration>`의 값은 게시 프로세스가 시작될 때의 값을 사용하여 설정됩니다. `<LastUsedBuildConfiguration>`은 특별하고 가져온 MSBuild 파일에서 재정의되면 안 됩니다. 그러나 이 속성은 다음 중 한 가지 접근 방법을 사용하여 명령줄에서 재정의할 수 있습니다.
-  * .NET Core CLI 사용:
 
     ```dotnetcli
     dotnet build -c Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
@@ -289,7 +277,7 @@ NOTE: Temporarily removed from 'Using the .NET Core CLI' below until https://git
 
   * MSBuild 사용:
 
-    ```console
+    ```bash
     msbuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     ```
 
@@ -303,7 +291,7 @@ NOTE: Temporarily removed from 'Using the .NET Core CLI' below until https://git
 
 MSBuild는 다음 명령 구문을 사용합니다.
 
-```console
+```bash
 msbuild {PATH} 
     /p:DeployOnBuild=true 
     /p:PublishProfile={PROFILE} 
@@ -311,16 +299,16 @@ msbuild {PATH}
     /p:Password={PASSWORD}
 ```
 
-* {PATH}: 앱의 프로젝트 파일 경로입니다.
-* {PROFILE}: 게시 프로필의 이름입니다.
-* {USERNAME}: MSDeploy 사용자 이름입니다. {USERNAME}은 게시 프로필에서 찾을 수 있습니다.
-* {PASSWORD}: MSDeploy 암호입니다. *{PROFILE}.PublishSettings* 파일에서 {PASSWORD}를 가져옵니다. 다음 위치에서 *.PublishSettings* 파일을 다운로드합니다.
+* `{PATH}`: 앱의 프로젝트 파일 경로입니다.
+* `{PROFILE}`: 게시 프로필의 이름입니다.
+* `{USERNAME}`: MSDeploy 사용자 이름입니다. `{USERNAME}`은 게시 프로필에서 찾을 수 있습니다.
+* `{PASSWORD}`: MSDeploy 암호입니다. *{PROFILE}.PublishSettings* 파일에서 `{PASSWORD}`를 가져옵니다. 다음 위치에서 *.PublishSettings* 파일을 다운로드합니다.
   * **솔루션 탐색기**: **보기** > **클라우드 탐색기** 를 선택합니다. Azure 구독으로 연결합니다. **App Services**를 엽니다. 앱을 마우스 오른쪽 단추로 클릭합니다. **게시 프로필 다운로드**를 선택합니다.
   * Azure Portal: 웹앱의 **개요** 패널에서 **게시 프로필 가져오기**를 선택합니다.
 
 다음 예제에서는 *AzureWebApp - 웹 배포*라는 게시 프로필을 사용합니다.
 
-```console
+```bash
 msbuild "AzureWebApp.csproj" 
     /p:DeployOnBuild=true 
     /p:PublishProfile="AzureWebApp - Web Deploy" 
@@ -482,7 +470,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 </ResolvedFileToPublish>
 ```
 
-더 많은 배포 샘플을 보려면 [웹 SDK 리포지토리 추가 정보](https://github.com/aspnet/websdk)를 참조하세요.
+더 많은 배포 샘플을 보려면 [웹 SDK 추가 정보 파일](https://github.com/dotnet/sdk/tree/master/src/WebSdk)을 참조하세요.
 
 ## <a name="run-a-target-before-or-after-publishing"></a>게시 이전 또는 이후 대상 실행
 
@@ -521,6 +509,6 @@ Azure App Service 웹앱 배포에 있는 파일을 보려면 [Kudu 서비스](h
 ## <a name="additional-resources"></a>추가 자료
 
 * [웹 배포](https://www.iis.net/downloads/microsoft/web-deploy)(MSDeploy)는 IIS 서버에 대한 웹앱 및 웹 사이트 배포를 간소화합니다.
-* [웹 SDK GitHub 리포지토리](https://github.com/aspnet/websdk/issues): 배포에 대한 파일 문제 및 요청 기능.
+* [웹 SDK GitHub 리포지토리](https://github.com/dotnet/websdk/issues): 배포에 대한 파일 문제 및 요청 기능.
 * [Visual Studio에서 Azure VM에 ASP.NET 웹앱 게시](/azure/virtual-machines/windows/publish-web-app-from-visual-studio)
 * <xref:host-and-deploy/iis/transform-webconfig>

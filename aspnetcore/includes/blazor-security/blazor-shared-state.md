@@ -5,7 +5,7 @@ Blazor 서버 앱은 서버 메모리에 존재합니다. 즉, 동일한 프로�
 
 특별히 해당 용도로 설계된 경우 Blazor 앱에서 상태 저장 싱글톤 서비스를 사용할 수 있습니다. 예를 들어 사용자가 사용되는 캐시 키를 제어할 수 없는 경우 지정된 항목에 액세스하는 데 키가 필요하므로 메모리 캐시를 싱글톤으로 사용할 수 있습니다.
 
-**또한 보안상의 이유로 다시 Blazor 앱 내에서 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>를 사용하면 안 됩니다.** Blazor 앱은 ASP.NET Core 파이프라인의 컨텍스트 외부에서 실행되고, <xref:Microsoft.AspNetCore.Http.HttpContext>는 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 내에서 사용할 수 있다고 보장되지 않으며, Blazor 앱을 시작한 컨텍스트를 유지한다고 보장되지도 않습니다.
+**또한 보안상의 이유로 다시 Blazor 앱 내에서 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>를 사용하면 안 됩니다.** Blazor 앱은 ASP.NET Core 파이프라인의 컨텍스트 외부에서 실행됩니다. <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 내에서의 <xref:Microsoft.AspNetCore.Http.HttpContext> 사용은 보장되지 않으며 Blazor 앱을 시작하는 컨텍스트 유지도 보장되지 않습니다.
 
 Blazor 앱에 요청 상태를 전달하려면 앱을 처음 렌더링할 때 루트 구성 요소에 대한 매개 변수를 사용하는 것이 좋습니다.
 
