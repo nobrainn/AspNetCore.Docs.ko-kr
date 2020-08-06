@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 6aef51a0f8bf4ec2e7cb6115856bc465a90ec2ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: a28c43ed68adb7af9c30f7ae62872811361d8f9c
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059852"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819095"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합
+# <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
@@ -86,7 +86,7 @@ Razor Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다. �
 
 1. 페이지 또는 뷰에 구성 요소를 통합합니다. 자세한 내용은 [페이지 또는 뷰에서 구성 요소 렌더링](#render-components-from-a-page-or-view) 섹션을 참조하세요.
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Razor Pages 앱에서 라우팅 가능한 구성 요소 사용
+## <a name="use-routable-components-in-a-no-locrazor-pages-app"></a>Razor Pages 앱에서 라우팅 가능한 구성 요소 사용
 
 ‘이 섹션에서는 사용자 요청에서 직접 라우팅할 수 있는 구성 요소를 추가하는 방법을 설명합니다.’
 
@@ -99,7 +99,7 @@ Razor Pages 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -174,7 +174,7 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>

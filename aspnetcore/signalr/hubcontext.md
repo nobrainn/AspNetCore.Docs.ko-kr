@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d38cb5b3e818879d3ec40a927acfdd69dc85377a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405811"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819252"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>허브 외부에서 메시지 보내기
 
@@ -28,7 +28,7 @@ ms.locfileid: "85405811"
 
 SignalR허브는 서버에 연결 된 클라이언트에 메시지를 보내기 위한 핵심 추상화입니다 SignalR . 또한 서비스를 사용 하 여 앱의 다른 위치에서 메시지를 보낼 수 있습니다 `IHubContext` . 이 문서에서는에 액세스 하 여 SignalR `IHubContext` 허브 외부에서 클라이언트에 알림을 보내는 방법을 설명 합니다.
 
-[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/)[(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="get-an-instance-of-ihubcontext"></a>IHubContext의 인스턴스 가져오기
 

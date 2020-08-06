@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 4f85c4a9803482f39446dda599f10829c9879f27
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: f7110688a7a03dd0cf533fa5f9759af3363169f8
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407764"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818939"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
+# <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor 라우팅
 
 [Luke Latham](https://github.com/guardrex)으로
 
@@ -43,7 +43,7 @@ Blazor Server는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 지정된 경로를 사용하여 각 구성 요소로 라우팅할 수 있도록 합니다. <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소는 `App.razor` 파일에 표시됩니다.
 
 ```razor
-<Router AppAssembly="typeof(Startup).Assembly">
+<Router AppAssembly="@typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
@@ -100,7 +100,7 @@ Blazor Server는 [ASP.NET Core 엔드포인트 라우팅](xref:fundamentals/rout
 
 ```razor
 <Router
-    AppAssembly="typeof(Program).Assembly"
+    AppAssembly="@typeof(Program).Assembly"
     AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
     ...
 </Router>

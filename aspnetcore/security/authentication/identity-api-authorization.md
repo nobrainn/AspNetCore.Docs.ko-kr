@@ -15,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 2b587517268208dcf66cd2895b7aa22bfa381f84
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c06f1d4bf772d7726d19163fcdee8c92d4006cd2
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060360"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819115"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
-ASP.NET Core 3.0 이상에서는 API 권한 부여에 대 한 지원을 사용 하 여 SPAs (단일 페이지 앱)의 인증을 제공 합니다. Identity사용자를 인증 하 고 저장 하는 ASP.NET Core은 OPEN ID Connect 구현에 대 한 [IdentityServer](https://identityserver.io/) 와 결합 됩니다.
+ASP.NET Core 3.0 이상에서는 API 권한 부여에 대 한 지원을 사용 하 여 SPAs (단일 페이지 앱)의 인증을 제공 합니다. Identity사용자를 인증 하 고 저장 하는 ASP.NET Core는 Openid connect Connect 구현을 위해 [ Identity 서버](https://identityserver.io/) 와 결합 됩니다.
 
 인증 매개 변수는 **웹 응용 프로그램 (모델-뷰-컨트롤러)** (MVC) 및 **웹 응용 프로그램** (페이지) 프로젝트 템플릿의 인증 매개 변수와 비슷한 **각도** 및 **반응** 프로젝트 템플릿에 추가 되었습니다 Razor . 허용 되는 매개 변수 값은 **None** 및 **개인용**입니다. 현재 **React.js 및 Redux** 프로젝트 템플릿에서 인증 매개 변수를 지원 하지 않습니다.
 
@@ -52,7 +52,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="startup-class"></a>시작 클래스
 
-다음 코드 예제는 [AspNetCore IdentityServer](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet 패키지를 사용 합니다. 이 예제에서는 <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> 및 확장 메서드를 사용 하 여 API 인증 및 권한 부여를 구성 합니다 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> . 인증을 통해 반응 또는 각도 SPA 프로젝트 템플릿을 사용 하는 프로젝트에는이 패키지에 대 한 참조가 포함 됩니다.
+다음 코드 예제에서는 AspNetCore를 사용 합니다 [. Identity 서버](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet 패키지. 이 예제에서는 <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> 및 확장 메서드를 사용 하 여 API 인증 및 권한 부여를 구성 합니다 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> . 인증을 통해 반응 또는 각도 SPA 프로젝트 템플릿을 사용 하는 프로젝트에는이 패키지에 대 한 참조가 포함 됩니다.
 
 클래스에는 `Startup` 다음과 같은 추가 항목이 있습니다.
 
@@ -67,7 +67,7 @@ dotnet new react -o <output_directory_name> -au Individual
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
-  * IdentityServer `AddApiAuthorization` IdentityServer 위에 몇 가지 기본 ASP.NET Core 규칙을 설정 하는 추가 도우미 메서드를 사용 합니다.
+  * Identity`AddApiAuthorization`서버 위에 몇 가지 기본 ASP.NET Core 규칙을 설정 하는 추가 도우미 메서드가 포함 된 서버 Identity :
 
     ```csharp
     services.AddIdentityServer()
@@ -88,7 +88,7 @@ dotnet new react -o <output_directory_name> -au Individual
     app.UseAuthentication();
     ```
 
-  * Open ID Connect 끝점을 노출 하는 IdentityServer 미들웨어입니다.
+  * IdentityOpenid connect Connect 끝점을 노출 하는 서버 미들웨어:
 
     ```csharp
     app.UseIdentityServer();
@@ -96,11 +96,11 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
 
-이 도우미 메서드는 지원 되는 구성을 사용 하도록 IdentityServer를 구성 합니다. IdentityServer는 앱 보안 문제를 처리하는 강력하고 확장성 있는 프레임워크입니다. 이와 동시에는 가장 일반적인 시나리오에 대 한 불필요 한 복잡성을 노출 합니다. 따라서 규칙 집합 및 구성 옵션이 적절 한 시작 지점으로 간주 되는 사용자에 게 제공 됩니다. 인증을 변경 해야 하는 경우에는 요구 사항에 맞게 인증을 사용자 지정할 수 있는 IdentityServer의 모든 기능을 계속 사용할 수 있습니다.
+이 도우미 메서드는 Identity 지원 되는 구성을 사용 하도록 서버를 구성 합니다. IdentityServer는 앱 보안 문제를 처리하는 강력하고 확장성 있는 프레임워크입니다. 이와 동시에는 가장 일반적인 시나리오에 대 한 불필요 한 복잡성을 노출 합니다. 따라서 규칙 집합 및 구성 옵션이 적절 한 시작 지점으로 간주 되는 사용자에 게 제공 됩니다. 인증을 변경 해야 하는 경우에는 요구 사항에 Identity 맞게 인증을 사용자 지정할 수 있도록 서버의 전체 기능을 계속 사용할 수 있습니다.
 
-### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
+### <a name="addno-locidentityserverjwt"></a>AddIdentityServerJwt
 
-이 도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. 이 정책은 Identity Identity URL 공간 "/"에서 모든 하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다 Identity . `JwtBearerHandler`는 다른 모든 요청을 처리합니다. 또한이 메서드는 `<<ApplicationName>>API` 기본 범위를 사용 하 여 IdentityServer를 사용 하 여 API 리소스를 등록 `<<ApplicationName>>API` 하 고 JWT 전달자 토큰 미들웨어를 구성 하 여 앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 합니다.
+이 도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. 이 정책은 Identity Identity URL 공간 "/"에서 모든 하위 경로로 라우팅되는 모든 요청을 처리할 수 있도록 구성 됩니다 Identity . `JwtBearerHandler`는 다른 모든 요청을 처리합니다. 또한이 메서드는 `<<ApplicationName>>API` 기본 범위를 사용 하는 서버에 API 리소스를 등록 하 Identity `<<ApplicationName>>API` 고 JWT 전달자 토큰 미들웨어를 구성 하 여 Identity 서버에서 앱에 대해 발급 한 토큰의 유효성을 검사 합니다.
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
@@ -108,7 +108,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-*Data\ApplicationDbContext.cs* 파일에서 `DbContext` Identity `ApiAuthorizationDbContext` `IdentityDbContext` IdentityServer에 대 한 스키마를 포함 하기 위해가 확장 하는 예외 (에서 더 많이 파생 된 클래스)와 동일한가 사용 됩니다.
+*Data\ApplicationDbContext.cs* 파일에서는 `DbContext` 가 Identity 확장 하는 예외 `ApiAuthorizationDbContext` (에서 더 많이 파생 된 클래스)를 사용 `IdentityDbContext` 하 여 서버에 대 한 스키마를 포함 하 Identity 는 것을 확인 합니다.
 
 데이터베이스 스키마에 대 한 모든 권한을 얻으려면 사용 가능한 클래스 중 하나에서 상속 하 Identity `DbContext` 고 Identity 메서드를 호출 하 여 스키마를 포함 하도록 컨텍스트를 구성 합니다 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` .
 
@@ -273,7 +273,7 @@ async populateWeatherData() {
 
 프로덕션 환경에 앱을 배포 하려면 다음 리소스를 프로 비전 해야 합니다.
 
-* Identity사용자 계정 및 IdentityServer 권한을 저장할 데이터베이스입니다.
+* Identity사용자 계정 및 서버에서 부여할 데이터베이스를 저장 합니다 Identity .
 * 토큰에 서명 하는 데 사용할 프로덕션 인증서입니다.
   * 이 인증서에 대 한 특정 요구 사항은 없습니다. 자체 서명 된 인증서 또는 CA 인증 기관을 통해 프로 비전 된 인증서 일 수 있습니다.
   * PowerShell 또는 OpenSSL 같은 표준 도구를 통해 생성할 수 있습니다.
@@ -310,25 +310,25 @@ Azure Portal에서 앱 및 앱 설정을 구성한 후 포털에서 앱을 다�
 
 ## <a name="other-configuration-options"></a>기타 구성 옵션
 
-API 권한 부여에 대 한 지원은 규칙, 기본값 및 향상 된 기능 집합을 사용 하 여 IdentityServer를 기반으로 빌드됩니다. 물론 ASP.NET Core 통합이 시나리오에 포함 되지 않는 경우 IdentityServer의 전체 기능을 내부적으로 사용할 수 있습니다. ASP.NET Core 지원은 조직에서 모든 앱을 만들고 배포 하는 "자사" 앱에 중점을 두었습니다. 따라서 동의 또는 페더레이션과 같은 항목에 대 한 지원이 제공 되지 않습니다. 이러한 시나리오의 경우 IdentityServer를 사용 하 고 해당 설명서를 따릅니다.
+API 권한 부여에 대 한 지원은 Identity 규칙, 기본값 및 향상 된 기능 집합을 사용 하 여 서버를 기반으로 구축 되어 SPAs에 대 한 환경을 단순화 합니다. 물론 Identity ASP.NET Core 통합이 시나리오에 포함 되지 않은 경우 서버의 전체 기능을 백그라운드에서 사용할 수 있습니다. ASP.NET Core 지원은 조직에서 모든 앱을 만들고 배포 하는 "자사" 앱에 중점을 두었습니다. 따라서 동의 또는 페더레이션과 같은 항목에 대 한 지원이 제공 되지 않습니다. 이러한 시나리오의 경우 서버를 사용 Identity 하 고 해당 설명서를 따릅니다.
 
 ### <a name="application-profiles"></a>응용 프로그램 프로필
 
 응용 프로그램 프로필은 매개 변수를 추가로 정의 하는 앱에 대 한 미리 정의 된 구성입니다. 이번에는 다음 프로필이 지원 됩니다.
 
-* `IdentityServerSPA`: 단일 단위로 IdentityServer와 함께 호스트 된 SPA를 나타냅니다.
+* `IdentityServerSPA`: 단일 단위로 서버와 함께 호스트 된 SPA를 나타냅니다 Identity .
   * `redirect_uri`기본값은 `/authentication/login-callback` 입니다.
   * `post_logout_redirect_uri`기본값은 `/authentication/logout-callback` 입니다.
   * 범위 집합에는 `openid` `profile` 앱의 api에 대해 정의 된, 및 모든 범위가 포함 됩니다.
   * 허용 되는 OIDC 응답 형식의 집합은 `id_token token` 또는 각각 개별적으로 ( `id_token` , `token` )입니다.
   * 허용 되는 응답 모드는 `fragment` 입니다.
-* `SPA`: IdentityServer를 사용 하 여 호스팅되지 않는 SPA를 나타냅니다.
+* `SPA`: 서버에서 호스팅되지 않는 SPA를 나타냅니다 Identity .
   * 범위 집합에는 `openid` `profile` 앱의 api에 대해 정의 된, 및 모든 범위가 포함 됩니다.
   * 허용 되는 OIDC 응답 형식의 집합은 `id_token token` 또는 각각 개별적으로 ( `id_token` , `token` )입니다.
   * 허용 되는 응답 모드는 `fragment` 입니다.
-* `IdentityServerJwt`: IdentityServer와 함께 호스트 되는 API를 나타냅니다.
+* `IdentityServerJwt`: 서버와 함께 호스트 되는 API를 나타냅니다 Identity .
   * 앱은 앱 이름으로 기본 설정 된 단일 범위를 갖도록 구성 됩니다.
-* `API`: IdentityServer를 사용 하 여 호스팅되지 않는 API를 나타냅니다.
+* `API`: 서버에서 호스팅되지 않는 API를 나타냅니다 Identity .
   * 앱은 앱 이름으로 기본 설정 된 단일 범위를 갖도록 구성 됩니다.
 
 ### <a name="configuration-through-appsettings"></a>AppSettings를 통한 구성
@@ -380,7 +380,7 @@ AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
 });
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:spa/angular>
 * <xref:spa/react>

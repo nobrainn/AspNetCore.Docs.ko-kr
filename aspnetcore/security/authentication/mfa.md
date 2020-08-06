@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: cb7d63aa2f04b0c53fd403dfa6e4885b2d94da0b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1ab6e5802e177aeaf77584838feea09a7ff79db7
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408996"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819180"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core에서 multi-factor authentication
 
@@ -69,7 +69,7 @@ SMS를 사용 하는 MFA는 암호 인증 (단일 요소)과 비교 하 여 보�
 
 [NIST 지침](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-## <a name="configure-mfa-for-administration-pages-using-aspnet-core-identity"></a>ASP.NET Core를 사용 하 여 관리 페이지에 대 한 MFA 구성Identity
+## <a name="configure-mfa-for-administration-pages-using-aspnet-core-no-locidentity"></a>ASP.NET Core를 사용 하 여 관리 페이지에 대 한 MFA 구성Identity
 
 사용자는 MFA를 사용 하 여 ASP.NET Core 앱 내의 중요 한 페이지에 액세스할 수 있습니다 Identity . 이는 다양 한 id에 대해 서로 다른 수준의 액세스 권한이 있는 앱에 유용할 수 있습니다. 예를 들어 사용자가 암호 로그인을 사용 하 여 프로필 데이터를 볼 수 있지만 관리자가 MFA를 사용 하 여 관리 페이지에 액세스 해야 합니다.
 
@@ -259,11 +259,11 @@ Id가 MFA를 사용 하 여 로그인 한 경우에는 도구 설명 경고 없�
 `acr_values`매개 변수를 사용 하 여 `mfa` 인증 요청에서 클라이언트의 필수 값을 서버에 전달할 수 있습니다.
 
 > [!NOTE]
-> `acr_values`이 작업을 수행 하려면 OPEN ID Connect 서버에서 매개 변수를 처리 해야 합니다.
+> `acr_values`이 작업을 수행 하려면 Openid connect Connect 서버에서 매개 변수를 처리 해야 합니다.
 
 ### <a name="openid-connect-aspnet-core-client"></a>Openid connect Connect ASP.NET Core 클라이언트
 
-ASP.NET Core Razor Pages OPEN Id connect 클라이언트 앱은 메서드를 사용 하 여 `AddOpenIdConnect` Open id connect 서버에 로그인 합니다. `acr_values`매개 변수는 값으로 설정 되 `mfa` 고 인증 요청과 함께 전송 됩니다. 는 `OpenIdConnectEvents` 이를 추가 하는 데 사용 됩니다.
+ASP.NET Core Razor Pages Openid connect connect 클라이언트 앱은 메서드를 사용 하 여 `AddOpenIdConnect` openid connect connect 서버에 로그인 합니다. `acr_values`매개 변수는 값으로 설정 되 `mfa` 고 인증 요청과 함께 전송 됩니다. 는 `OpenIdConnectEvents` 이를 추가 하는 데 사용 됩니다.
 
 권장 `acr_values` 매개 변수 값은 [인증 방법 참조 값](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)을 참조 하세요.
 
@@ -302,7 +302,7 @@ public void ConfigureServices(IServiceCollection services)
     });
 ```
 
-### <a name="example-openid-connect-identityserver-4-server-with-aspnet-core-identity"></a>예 Openid connect Connect IdentityServer 4 server with ASP.NET CoreIdentity
+### <a name="example-openid-connect-no-locidentityserver-4-server-with-aspnet-core-no-locidentity"></a>예 Openid connect Identity 서버 4 서버 ASP.NET Core 연결Identity
 
 MVC 뷰와 ASP.NET Core를 사용 하 여 구현 되는 Openid connect Connect 서버에서 Identity *ErrorEnable2FA* 라는 새 보기가 만들어집니다. 보기:
 
@@ -325,7 +325,7 @@ You can enable MFA to login here:
 <a asp-controller="Manage" asp-action="TwoFactorAuthentication">Enable MFA</a>
 ```
 
-`Login`메서드에서 `IIdentityServerInteractionService` 인터페이스 구현은 `_interaction` Open ID Connect 요청 매개 변수에 액세스 하는 데 사용 됩니다. `acr_values`매개 변수는 속성을 사용 하 여 액세스 됩니다 `AcrValues` . 클라이언트에서 set를 사용 하 여이 `mfa` 를 보내면이를 확인할 수 있습니다.
+`Login`메서드에서 `IIdentityServerInteractionService` 인터페이스 구현은 `_interaction` openid connect Connect 요청 매개 변수에 액세스 하는 데 사용 됩니다. `acr_values`매개 변수는 속성을 사용 하 여 액세스 됩니다 `AcrValues` . 클라이언트에서 set를 사용 하 여이 `mfa` 를 보내면이를 확인할 수 있습니다.
 
 MFA가 필요 하 고 ASP.NET Core 사용자에 게 Identity mfa를 사용 하도록 설정한 경우 로그인이 계속 됩니다. 사용자가 MFA를 사용 하도록 설정 하지 않은 경우 사용자는 사용자 지정 보기 *ErrorEnable2FA*리디렉션됩니다. 그런 다음에서 사용자에 게 ASP.NET Core 로그인 Identity 합니다.
 
@@ -429,9 +429,9 @@ namespace AspNetCoreRequireMfaOidc
 
 `AuthorizationHandler`클레임을 사용 하 고 값을 확인 하는이 구현 됩니다 `amr` `mfa` . 는 `amr` `id_token` 성공적인 인증의에서 반환 되며 [인증 방법 참조 값](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08) 사양에 정의 된 대로 다양 한 값을 가질 수 있습니다.
 
-반환 되는 값은 id가 인증 된 방법과 Open ID Connect 서버 구현에 따라 달라 집니다.
+반환 되는 값은 id가 인증 되는 방법 및 Openid connect Connect 서버 구현에 따라 달라 집니다.
 
-는 `AuthorizationHandler` `RequireMfa` 요구 사항을 사용 하 고 클레임의 유효성을 검사 `amr` 합니다. Openid connect Connect 서버는 ASP.NET Core와 함께 IdentityServer4를 사용 하 여 구현할 수 있습니다 Identity . 사용자가 TOTP를 사용 하 여 로그인 하는 경우에는 `amr` MFA 값을 사용 하 여 클레임이 반환 됩니다. 다른 Openid connect Connect 서버 구현 또는 다른 MFA 유형을 사용 하는 경우 클레임은 `amr` 다른 값을 가질 수 있습니다. 또한이를 허용 하려면 코드를 확장 해야 합니다.
+는 `AuthorizationHandler` `RequireMfa` 요구 사항을 사용 하 고 클레임의 유효성을 검사 `amr` 합니다. Openid connect Connect 서버는 Identity ASP.NET Core와 함께 Server4를 사용 하 여 구현할 수 있습니다 Identity . 사용자가 TOTP를 사용 하 여 로그인 하는 경우에는 `amr` MFA 값을 사용 하 여 클레임이 반환 됩니다. 다른 Openid connect Connect 서버 구현 또는 다른 MFA 유형을 사용 하는 경우 클레임은 `amr` 다른 값을 가질 수 있습니다. 또한이를 허용 하려면 코드를 확장 해야 합니다.
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -559,7 +559,7 @@ You require MFA to login here
 <a href="https://localhost:44352/Manage/TwoFactorAuthentication">Enable MFA</a>
 ```
 
-이제 MFA로 인증 하는 사용자만 페이지 또는 웹 사이트에 액세스할 수 있습니다. 다른 MFA 유형을 사용 하거나 2FA가 양호 하면 `amr` 클레임은 다른 값을 가지 며 올바르게 처리 해야 합니다. 다른 Open ID Connect 서버는이 클레임에 대해 서로 다른 값을 반환 하며 [인증 방법 참조 값](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08) 사양을 따르지 않을 수도 있습니다.
+이제 MFA로 인증 하는 사용자만 페이지 또는 웹 사이트에 액세스할 수 있습니다. 다른 MFA 유형을 사용 하거나 2FA가 양호 하면 `amr` 클레임은 다른 값을 가지 며 올바르게 처리 해야 합니다. 다른 Openid connect Connect 서버도이 클레임에 대해 다른 값을 반환 하며 [인증 방법 참조 값](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08) 사양을 따르지 않을 수 있습니다.
 
 MFA 없이 로그인 하는 경우 (예: 암호 사용):
 
@@ -575,7 +575,7 @@ MFA 없이 로그인 하는 경우 (예: 암호 사용):
 
 ![require_mfa_oidc_01.png](mfa/_static/require_mfa_oidc_01.png)
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core에서 TOTP authenticator 앱에 대 한 QR 코드 생성 사용](xref:security/authentication/identity-enable-qrcodes)
 * [Azure Active Directory에 대 한 암호 없는 인증 옵션](/azure/active-directory/authentication/concept-authentication-passwordless)
