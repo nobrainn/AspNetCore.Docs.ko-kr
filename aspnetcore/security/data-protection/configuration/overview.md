@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 65ef506d5857afb71113a0309613a2cbd82893be
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 096862b7149679c14e3d1ca17d38468a14e438a2
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399545"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913878"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호 구성
 
@@ -357,7 +357,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 대칭 블록 암호화 알고리즘의 키 길이는 >= 128 비트이 고, 블록 크기가 >= 64 비트이 고, PKCS #7 패딩을 사용 하는 CBC 모드 암호화를 지원 해야 합니다. 해시 알고리즘의 다이제스트 크기는 >= 128 비트 여야 하며, BCRYPT \_ ALG \_ 핸들 \_ HMAC \_ 플래그 플래그를 사용 하 여 열 수 있도록 지원 해야 합니다. \*지정 된 알고리즘에 대해 기본 공급자를 사용 하도록 공급자 속성을 null로 설정할 수 있습니다. 자세한 내용은 [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) 설명서를 참조 하세요.
+> 대칭 블록 암호화 알고리즘의 키 길이는 >= 128 비트이 고, 블록 크기가 >= 64 비트이 고, PKCS #7 패딩을 사용 하는 CBC 모드 암호화를 지원 해야 합니다. 해시 알고리즘의 다이제스트 크기는 >= 128 비트 여야 하며, BCRYPT \_ ALG \_ 핸들 \_ HMAC \_ 플래그 플래그를 사용 하 여 열 수 있도록 지원 해야 합니다. \*지정 된 알고리즘에 대해 기본 공급자를 사용 하도록 공급자 속성을 null로 설정할 수 있습니다. 자세한 내용은 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider) 설명서를 참조 하세요.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -400,7 +400,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 대칭 블록 암호화 알고리즘의 키 길이는 >= 128 비트이 고, 블록 크기가 정확히 128 비트인 경우 GCM 암호화를 지원 해야 합니다. 지정 된 알고리즘에 대해 기본 공급자를 사용 하도록 [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) 속성을 null로 설정할 수 있습니다. 자세한 내용은 [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) 설명서를 참조 하세요.
+> 대칭 블록 암호화 알고리즘의 키 길이는 >= 128 비트이 고, 블록 크기가 정확히 128 비트인 경우 GCM 암호화를 지원 해야 합니다. 지정 된 알고리즘에 대해 기본 공급자를 사용 하도록 [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) 속성을 null로 설정할 수 있습니다. 자세한 내용은 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider) 설명서를 참조 하세요.
 
 ### <a name="specifying-other-custom-algorithms"></a>기타 사용자 지정 알고리즘 지정
 

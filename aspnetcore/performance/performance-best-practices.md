@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408177"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913888"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -50,7 +50,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 **Do**:
 
 * [핫 코드 경로](#understand-hot-code-paths) 를 비동기식으로 만듭니다.
-* 비동기 API를 사용할 수 있는 경우 데이터 액세스, i/o 및 장기 실행 작업 Api를 비동기적으로 호출 합니다. [작업을 실행](/dotnet/api/system.threading.tasks.task.run) **하 여 synchronus** API를 비동기로 만듭니다.
+* 비동기 API를 사용할 수 있는 경우 데이터 액세스, i/o 및 장기 실행 작업 Api를 비동기적으로 호출 합니다. 작업을 실행 **하 여 동기** API를 비동기식으로 만듭니다 [.](/dotnet/api/system.threading.tasks.task.run)
 * 컨트롤러/ Razor 페이지 작업을 비동기식으로 만듭니다. 비동기 [/](/dotnet/csharp/programming-guide/concepts/async/) 대기 패턴을 활용 하기 위해 전체 호출 스택은 비동기입니다.
 
 [Perfview](https://github.com/Microsoft/perfview)와 같은 프로파일러를 사용 하 여 [스레드 풀](/windows/desktop/procthread/thread-pools)에 자주 추가 되는 스레드를 찾을 수 있습니다. 이벤트는 스레드 `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 풀에 추가 된 스레드를 나타냅니다. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -146,7 +146,7 @@ ASP.NET Core 앱에 대 한 대부분의 요청은 컨트롤러 또는 페이지
 
 ## <a name="use-the-latest-aspnet-core-release"></a>최신 ASP.NET Core 릴리스 사용
 
-ASP.NET Core의 새 릴리스에는 성능 향상이 포함 되어 있습니다. .NET Core 및 ASP.NET Core의 최적화는 일반적으로 최신 버전이 이전 버전을 내지만 것을 의미 합니다. 예를 들어 .NET Core 2.1에는 컴파일된 정규식에 대 한 지원과 [범위 \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)에서의 benefitted 추가 되었습니다. ASP.NET Core 2.2에는 HTTP/2에 대 한 지원이 추가 되었습니다. [ASP.NET Core 3.0](xref:aspnetcore-3.0) 은 메모리 사용을 줄이고 처리량을 향상 시키는 많은 향상 된 기능을 추가 합니다. 성능이 우선 되는 경우 ASP.NET Core의 현재 버전으로 업그레이드 하는 것이 좋습니다.
+ASP.NET Core의 새 릴리스에는 성능 향상이 포함 되어 있습니다. .NET Core 및 ASP.NET Core의 최적화는 일반적으로 최신 버전이 이전 버전을 내지만 것을 의미 합니다. 예를 들어 .NET Core 2.1에는 컴파일된 정규식에 대 한 지원과 [범위 \<T> ](/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay)에서의 benefitted 추가 되었습니다. ASP.NET Core 2.2에는 HTTP/2에 대 한 지원이 추가 되었습니다. [ASP.NET Core 3.0](xref:aspnetcore-3.0) 은 메모리 사용을 줄이고 처리량을 향상 시키는 많은 향상 된 기능을 추가 합니다. 성능이 우선 되는 경우 ASP.NET Core의 현재 버전으로 업그레이드 하는 것이 좋습니다.
 
 ## <a name="minimize-exceptions"></a>예외 최소화
 
@@ -192,7 +192,7 @@ ASP.NET Core의 모든 i/o는 비동기입니다. 서버는 `Stream` 동기 및 
 
 ## <a name="prefer-readformasync-over-requestform"></a>요청을 통해 ReadFormAsync를 선호 합니다.
 
-`HttpContext.Request.ReadFormAsync` 대신 `HttpContext.Request.Form`를 사용합니다.
+`HttpContext.Request.Form` 대신 `HttpContext.Request.ReadFormAsync`을(를) 사용합니다.
 `HttpContext.Request.Form`는 다음과 같은 경우에만 안전 하 게 읽을 수 있습니다.
 
 * 을 호출 하 여 폼을 읽은 `ReadFormAsync` 경우

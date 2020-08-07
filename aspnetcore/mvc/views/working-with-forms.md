@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 7a92f2b5bc791f268b897878db08a9f9f4f7bf0c
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 833939417c4973c61eca4d41aaeabe7856680190
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212412"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913866"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
 
@@ -81,7 +81,7 @@ MVC 런타임은 형식 태그 도우미 특성 `asp-controller` 및 `asp-action
 
 `formaction`의 값을 제어하기 위해 지원되는 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 특성:
 
-|attribute|설명|
+|attribute|Description|
 |---|---|
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|컨트롤러의 이름입니다.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|작업 메서드의 이름입니다.|
@@ -89,7 +89,7 @@ MVC 런타임은 형식 태그 도우미 특성 `asp-controller` 및 `asp-action
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|페이지의 이름 Razor 입니다.|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|페이지 처리기의 이름 Razor 입니다.|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|경로의 이름입니다.|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|단일 URL 경로 값입니다. 정의합니다(예: `asp-route-id="1234"`).|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|단일 URL 경로 값입니다. 예: `asp-route-id="1234"`.|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|모든 경로 값입니다.|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL 조각입니다.|
 
@@ -191,23 +191,23 @@ public class HomeController : Controller
 
 * 강력한 형식 지정을 제공합니다. 속성의 이름이 변경되고 태그 도우미를 업데이트하지 않은 경우 다음과 비슷한 오류가 표시됩니다.
 
-```
-An error occurred during the compilation of a resource required to process
-this request. Please review the following specific error details and modify
-your source code appropriately.
+  ```
+  An error occurred during the compilation of a resource required to process
+  this request. Please review the following specific error details and modify
+  your source code appropriately.
 
-Type expected
- 'RegisterViewModel' does not contain a definition for 'Email' and no
- extension method 'Email' accepting a first argument of type 'RegisterViewModel'
- could be found (are you missing a using directive or an assembly reference?)
-```
+  Type expected
+   'RegisterViewModel' does not contain a definition for 'Email' and no
+   extension method 'Email' accepting a first argument of type 'RegisterViewModel'
+   could be found (are you missing a using directive or an assembly reference?)
+  ```
 
 `Input` 태그 도우미는 .NET 형식을 기반으로 HTML `type` 특성을 설정합니다. 다음 표에서는 몇 가지 일반적인 .NET 형식 및 생성된 HTML 형식을 나열합니다(.NET 형식의 일부만 나열됨).
 
 |.NET 형식|입력 형식|
 |---|---|
 |Bool|type="checkbox"|
-|문자열|type="text"|
+|String|type="text"|
 |DateTime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|type="number"|
 |Int|type="number"|
@@ -464,7 +464,7 @@ public IActionResult Edit(int id, int colorIndex)
 |ValidationSummary.ModelOnly|모델|
 |ValidationSummary.None|없음|
 
-### <a name="sample"></a>예제
+### <a name="sample"></a>샘플
 
 다음 예제에서 데이터 모델에는 `DataAnnotation` 특성이 있습니다. 이 특성은 `<input>` 요소에 대한 유효성 검사 오류 메시지를 생성합니다.  유효성 검사 오류가 발생하는 경우 유효성 검사 태그 도우미는 다음 오류 메시지를 표시합니다.
 
@@ -499,7 +499,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 * HTML 도우미 대안 `Html.DropDownListFor` 및 `Html.ListBoxFor`가 있습니다.
 
-`Select Tag Helper` `asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예를 들면 다음과 같습니다.
+`Select Tag Helper` `asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예를 들어:
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -670,7 +670,7 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가 
  </form>
  ```
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/views/tag-helpers/intro>
 * [HTML 양식 요소](https://www.w3.org/TR/html401/interact/forms.html)

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399532"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913825"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호
 
@@ -53,7 +53,7 @@ ASP.NET Core data protection stack은 ASP.NET 1.x-4.x. &lt; x에서 machineKey �
 
 이러한 원칙을 염두에 두면 간단 하 고 [사용 하기 쉬운](xref:security/data-protection/using-data-protection) 데이터 보호 스택을 개발 했습니다.
 
-ASP.NET Core 데이터 보호 Api는 주로 기밀 페이로드의 무한 지 속성에 적합 하지 않습니다. [WINDOWS CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) 및 [Azure Rights Management](/rights-management/) 와 같은 기타 기술은 무한 저장소의 시나리오에 보다 적합 하며 강력한 키 관리 기능을 제공 합니다. 즉, 기밀 데이터의 장기 보호를 위해 개발자가 ASP.NET Core 데이터 보호 Api를 사용할 필요가 없습니다.
+ASP.NET Core 데이터 보호 Api는 주로 기밀 페이로드의 무한 지 속성에 적합 하지 않습니다. [WINDOWS CNG DPAPI](/windows/win32/seccng/cng-dpapi) 및 [Azure Rights Management](/rights-management/) 와 같은 기타 기술은 무한 저장소의 시나리오에 보다 적합 하며 강력한 키 관리 기능을 제공 합니다. 즉, 기밀 데이터의 장기 보호를 위해 개발자가 ASP.NET Core 데이터 보호 Api를 사용할 필요가 없습니다.
 
 ## <a name="audience"></a>사용자
 

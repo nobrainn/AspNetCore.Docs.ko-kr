@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: a6d99e4a8f05125e6e7968b088c5b7e29cb75e6c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b719c64e6976e65a725b28ae3f6c245f2f4874a4
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407566"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913599"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core를 사용하여 네이티브 모바일 앱용 백 엔드 서비스 만들기
 
@@ -158,7 +158,7 @@ Postman으로 테스트하려면 동사를 PUT으로 변경합니다. 요청의 
 
 앱에 대해 백 엔드 서비스를 개발하는 경우 교차 편집 문제 처리를 위해 일관적인 규칙의 집합 또는 정책을 찾을 수 있습니다. 예를 들어 위에 표시된 서비스에서 발견되지 않았던 특정 레코드에 대한 요청은 `BadRequest` 응답 대신 `NotFound` 응답을 받았습니다. 마찬가지로, 모델 바인딩 형식을 전달한 이 서비스에 대해 만든 명령은 항상 `ModelState.IsValid`를 확인했고 잘못된 모델 유형에 대해 `BadRequest`를 반환했습니다.
 
-API에 대한 일반적인 정책을 식별했으면 [필터](../mvc/controllers/filters.md)에서 캡슐화할 수 있습니다. [ASP.NET Core MVC 애플리케이션에서 일반적인 API 정책을 캡슐화하는 방법](https://msdn.microsoft.com/magazine/mt767699.aspx)에 대해 자세히 알아봅니다.
+API에 대한 일반적인 정책을 식별했으면 [필터](../mvc/controllers/filters.md)에서 캡슐화할 수 있습니다. [ASP.NET Core MVC 애플리케이션에서 일반적인 API 정책을 캡슐화하는 방법](/archive/msdn-magazine/2016/august/asp-net-core-real-world-asp-net-core-mvc-filters)에 대해 자세히 알아봅니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
