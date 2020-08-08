@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 74df2ade64e0821dcbb28252e8a637f81d15e375
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403367"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016481"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -101,7 +103,7 @@ dotnet watch run
 
 명령 셸에서 앱이 시작되었음을 확인했으면 `https://localhost:5001`로 이동합니다.
 
-## <a name="edit-a-razor-page"></a>Razor 페이지 편집
+## <a name="edit-a-no-locrazor-page"></a>Razor 페이지 편집
 
 *Pages/Index.cshtml*을 열고 다음에서 강조 표시된 영역처럼 페이지를 수정하고 저장합니다.
 

@@ -5,6 +5,8 @@ description: 인증 정책 스키마를 사용 하면 단일 논리 인증 체�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ddee613bf9c603542f17adf59a835a2ddbdc25a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408762"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017807"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core의 정책 스키마
 
-인증 정책 스키마를 사용 하면 단일 논리 인증 체계에서 잠재적으로 여러 방법을 사용할 수 있습니다. 예를 들어 정책 체계가 챌린지에 Google 인증을 사용 하 고 다른 모든 항목에 대 한 쿠키 인증을 사용할 수 있습니다. 인증 정책 스키마는 다음과 같습니다.
+인증 정책 스키마를 사용 하면 단일 논리 인증 체계에서 잠재적으로 여러 방법을 사용할 수 있습니다. 예를 들어 정책 체계는 챌린지에 대해 Google 인증을 사용 하 고 cookie 다른 모든 항목에 대 한 인증을 사용할 수 있습니다. 인증 정책 스키마는 다음과 같습니다.
 
 * 다른 체계에 인증 작업을 쉽게 전달할 수 있습니다.
 * 요청에 따라 동적으로 전달 합니다.
@@ -34,13 +36,13 @@ ms.locfileid: "85408762"
 
 [!code-csharp[sample](policyschemes/samples/AuthenticationSchemeOptions.cs?name=snippet)]
 
-## <a name="examples"></a>예제
+## <a name="examples"></a>예
 
-다음 예에서는 하위 수준 스키마를 조합 하는 더 높은 수준의 스키마를 보여 줍니다. Google 인증은 챌린지에 사용 되며 쿠키 인증은 다른 모든 항목에 사용 됩니다.
+다음 예에서는 하위 수준 스키마를 조합 하는 더 높은 수준의 스키마를 보여 줍니다. Google 인증은 챌린지에 사용 되며, cookie 다른 모든 항목에 대해 인증이 사용 됩니다.
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-다음 예에서는 요청당 스키마를 동적으로 선택할 수 있습니다. 즉, 쿠키와 API 인증을 혼합 하는 방법:
+다음 예에서는 요청당 스키마를 동적으로 선택할 수 있습니다. 즉, 및 API 인증을 혼합 하는 방법 cookie :
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 

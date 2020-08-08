@@ -5,6 +5,8 @@ description: ASP.NET Core 데이터 보호 Api를 사용 하 여 암호를 해�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: f7d15cab463972d9c0fff52b645be454865ce2ca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 643d468763c6a935fc618a22920cb79119258087
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408957"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018392"
 ---
 # <a name="hash-passwords-in-aspnet-core"></a>ASP.NET Core의 해시 암호
 

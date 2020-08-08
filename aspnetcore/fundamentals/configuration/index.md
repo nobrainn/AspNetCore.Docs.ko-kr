@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9f143523a6d02ac018ad2a869cc9d768ee25681f
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 2352bbaa3c4123cd588609e22b65cd9e268f5637
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819265"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017664"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -356,6 +358,8 @@ dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | 키: `ConnectionStrings:{KEY}_ProviderName`:<br>값: `System.Data.SqlClient`  |
 | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | 키: `ConnectionStrings:{KEY}_ProviderName`:<br>값: `System.Data.SqlClient`  |
 
+<a name="fcp"></a>
+
 ## <a name="file-configuration-provider"></a>파일 구성 공급자
 
 <xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>는 파일 시스템에서 구성을 로드하기 위한 기본 클래스입니다. 다음 구성 공급자는 `FileConfigurationProvider`에서 파생됩니다.
@@ -425,8 +429,6 @@ dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 [샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)의 다음 코드는 위의 몇 가지 구성 설정을 표시합니다.
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
-
-<a name="fcp"></a>
 
 ### <a name="xml-configuration-provider"></a>XML 구성 공급자
 
@@ -1108,7 +1110,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 생성된 스위치 매핑 사전은 다음 표의 데이터를 포함합니다.
 
-| Key       | 값             |
+| 키       | 값             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1685,7 +1687,7 @@ config.AddJsonFile(
 
 표에 표시된 키-값 쌍이 구성으로 로드됩니다.
 
-| Key             | 값  |
+| 키             | 값  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 

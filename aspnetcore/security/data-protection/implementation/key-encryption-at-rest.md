@@ -5,6 +5,8 @@ description: 미사용 데이터 보호 키 암호화 ASP.NET Core의 구현 세
 ms.author: riande
 ms.date: 07/16/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: eaa855d48437f80ab912780205530843a9c56476
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6e767c5a34f8bf4c512147e7966f7e2c363c57c5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399701"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018418"
 ---
 # <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>ASP.NET Core를 사용 하 여 Windows 및 Azure에서 휴지 상태의 키 암호화
 

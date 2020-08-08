@@ -5,6 +5,8 @@ description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f4471f54e92b940ecb0eabab82f03e0c77a0509f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406409"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018444"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core의 영역
 
@@ -67,7 +69,7 @@ ms.locfileid: "85406409"
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * 뷰
+      * 보기
         * 홈
           * Index.cshtml
         * 관리
@@ -76,7 +78,7 @@ ms.locfileid: "85406409"
     * 서비스
       * Controllers
         * HomeController.cs
-      * 뷰
+      * 보기
         * 홈
           * Index.cshtml
 
@@ -162,24 +164,24 @@ ms.locfileid: "85406409"
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>페이지가 있는 영역 Razor
+## <a name="areas-with-no-locrazor-pages"></a>페이지가 있는 영역 Razor
 
 페이지를 포함 하는 영역 Razor `Areas/<area name>/Pages` 에는 앱의 루트 폴더가 필요 합니다. [예제 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)에서는 다음 폴더 구조가 사용됩니다.
 
 * 프로젝트 이름
   * Areas
     * 제품
-      * Pages
+      * 페이지
         * _ViewImports
         * 정보
         * 인덱스
     * 서비스
-      * Pages
+      * 페이지
         * 관리
           * 정보
           * 인덱스
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>페이지 및 영역을 사용한 링크 생성 Razor
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>페이지 및 영역을 사용한 링크 생성 Razor
 
 [예제 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)의 다음 코드는 영역이 지정된(예: `asp-area="Products"`) 링크 생성을 보여줍니다.
 
@@ -222,7 +224,7 @@ ms.locfileid: "85406409"
 
 자세한 내용은 [태그 도우미 범위 관리](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) 및 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)를 참조하세요.
 
-### <a name="shared-layout-for-razor-pages-areas"></a>페이지 영역에 대 한 공유 레이아웃 Razor
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>페이지 영역에 대 한 공유 레이아웃 Razor
 
 전체 앱의 일반적인 레이아웃을 공유하려면 *_ViewStart.cshtml*을 애플리케이션 루트 폴더로 이동합니다.
 
@@ -269,7 +271,7 @@ ms.locfileid: "85406409"
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * 뷰
+      * 보기
         * 홈
           * Index.cshtml
         * 관리
@@ -278,7 +280,7 @@ ms.locfileid: "85406409"
     * 서비스
       * Controllers
         * HomeController.cs
-      * 뷰
+      * 보기
         * 홈
           * Index.cshtml
 
@@ -349,24 +351,24 @@ ASP.NET Core 2.2에서 `MapAreaRoute`를 사용하는 경우에는 [이 GitHub �
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>페이지가 있는 영역 Razor
+## <a name="areas-with-no-locrazor-pages"></a>페이지가 있는 영역 Razor
 
 페이지를 포함 하는 영역 Razor `Areas/<area name>/Pages` 에는 앱의 루트 폴더가 필요 합니다. [예제 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)에서는 다음 폴더 구조가 사용됩니다.
 
 * 프로젝트 이름
   * Areas
     * 제품
-      * Pages
+      * 페이지
         * _ViewImports
         * 정보
         * 인덱스
     * 서비스
-      * Pages
+      * 페이지
         * 관리
           * 정보
           * 인덱스
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>페이지 및 영역을 사용한 링크 생성 Razor
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>페이지 및 영역을 사용한 링크 생성 Razor
 
 [예제 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)의 다음 코드는 영역이 지정된(예: `asp-area="Products"`) 링크 생성을 보여줍니다.
 
@@ -411,7 +413,7 @@ ASP.NET Core 2.2에서 `MapAreaRoute`를 사용하는 경우에는 [이 GitHub �
 
 자세한 내용은 [태그 도우미 범위 관리](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) 및 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)를 참조하세요.
 
-### <a name="shared-layout-for-razor-pages-areas"></a>페이지 영역에 대 한 공유 레이아웃 Razor
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>페이지 영역에 대 한 공유 레이아웃 Razor
 
 전체 앱의 일반적인 레이아웃을 공유하려면 *_ViewStart.cshtml*을 애플리케이션 루트 폴더로 이동합니다.
 

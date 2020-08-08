@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: a12262d182ce84a326086935627b55d2edc4885e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 917e698d34a5d4b6c2c3f4737c08f1a590f5df1a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407007"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017950"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core에서 개발 중인 앱 비밀 안전 저장소
 
@@ -97,7 +99,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 앞의 예제에서 콜론은 `Movies` 가 속성을 사용 하는 개체 리터럴이어야 함을 나타냅니다 `ServiceApiKey` .
 
-암호 관리자 도구는 다른 디렉터리 에서도 사용할 수 있습니다. 옵션을 사용 `--project` 하 여 *.csproj* 파일이 있는 파일 시스템 경로를 제공 합니다. 예를 들면 다음과 같습니다.
+암호 관리자 도구는 다른 디렉터리 에서도 사용할 수 있습니다. 옵션을 사용 `--project` 하 여 *.csproj* 파일이 있는 파일 시스템 경로를 제공 합니다. 예:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -105,7 +107,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio의 JSON 구조 평면화
 
-Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 파일 *에secrets.js* 를 엽니다. *secrets.js* 의 내용을 저장할 키-값 쌍으로 바꿉니다. 예를 들면 다음과 같습니다.
+Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 파일 *에secrets.js* 를 엽니다. *secrets.js* 의 내용을 저장할 키-값 쌍으로 바꿉니다. 예:
 
 ```json
 {
@@ -182,13 +184,13 @@ API를 통해 사용자 암호를 검색할 수 있습니다 `Configuration` .
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-보다 안전한 방법은 암호를 비밀로 저장 하는 것입니다. 예를 들면 다음과 같습니다.
+보다 안전한 방법은 암호를 비밀로 저장 하는 것입니다. 예:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-appsettings.js의 `Password` 연결 문자열에서 키-값 쌍을 제거 *appsettings.json*합니다. 예를 들면 다음과 같습니다.
+appsettings.js의 `Password` 연결 문자열에서 키-값 쌍을 제거 *appsettings.json*합니다. 예:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -263,7 +265,7 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * IIS에서 암호 관리자에 액세스 하는 방법에 대 한 자세한 내용은 [이 문제](https://github.com/dotnet/AspNetCore.Docs/issues/16328) 를 참조 하세요.
 * <xref:fundamentals/configuration/index>
@@ -340,7 +342,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 앞의 예제에서 콜론은 `Movies` 가 속성을 사용 하는 개체 리터럴이어야 함을 나타냅니다 `ServiceApiKey` .
 
-암호 관리자 도구는 다른 디렉터리 에서도 사용할 수 있습니다. 옵션을 사용 `--project` 하 여 *.csproj* 파일이 있는 파일 시스템 경로를 제공 합니다. 예를 들면 다음과 같습니다.
+암호 관리자 도구는 다른 디렉터리 에서도 사용할 수 있습니다. 옵션을 사용 `--project` 하 여 *.csproj* 파일이 있는 파일 시스템 경로를 제공 합니다. 예:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -348,7 +350,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio의 JSON 구조 평면화
 
-Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 파일 *에secrets.js* 를 엽니다. *secrets.js* 의 내용을 저장할 키-값 쌍으로 바꿉니다. 예를 들면 다음과 같습니다.
+Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 파일 *에secrets.js* 를 엽니다. *secrets.js* 의 내용을 저장할 키-값 쌍으로 바꿉니다. 예:
 
 ```json
 {
@@ -427,13 +429,13 @@ API를 통해 사용자 암호를 검색할 수 있습니다 `Configuration` .
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-보다 안전한 방법은 암호를 비밀로 저장 하는 것입니다. 예를 들면 다음과 같습니다.
+보다 안전한 방법은 암호를 비밀로 저장 하는 것입니다. 예:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-appsettings.js의 `Password` 연결 문자열에서 키-값 쌍을 제거 *appsettings.json*합니다. 예를 들면 다음과 같습니다.
+appsettings.js의 `Password` 연결 문자열에서 키-값 쌍을 제거 *appsettings.json*합니다. 예:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -508,7 +510,7 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * IIS에서 암호 관리자에 액세스 하는 방법에 대 한 자세한 내용은 [이 문제](https://github.com/dotnet/AspNetCore.Docs/issues/16328) 를 참조 하세요.
 * <xref:fundamentals/configuration/index>

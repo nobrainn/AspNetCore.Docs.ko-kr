@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: e630bf4b0c121796315be077623abae73d240b37
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: d40b37a4ca8acf57b662124597a8ebc3b90bffd2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212457"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018170"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
@@ -39,7 +41,7 @@ ms.locfileid: "86212457"
 
 ## <a name="a-minimal-tag-helper"></a>최소한의 태그 도우미
 
-이 섹션에서는 이메일 태그를 업데이트하는 태그 도우미를 작성합니다. 예를 들면 다음과 같습니다.
+이 섹션에서는 이메일 태그를 업데이트하는 태그 도우미를 작성합니다. 예:
 
 ```html
 <email>Support</email>
