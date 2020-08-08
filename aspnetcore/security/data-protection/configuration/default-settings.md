@@ -5,6 +5,8 @@ description: ASP.NET Core의 데이터 보호 키 관리 및 수명에 대해 �
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407098"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021382"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core에서 데이터 보호 키 관리 및 수명
 
@@ -31,7 +33,7 @@ ms.locfileid: "85407098"
 1. 앱이 [Azure 앱](https://azure.microsoft.com/services/app-service/)에서 호스트 되는 경우 키는 *%HOME%\ASP.NET\DataProtection-Keys* 폴더에 유지 됩니다. 이 폴더는 네트워크 스토리지에서 지원하고, 앱을 호스트하는 모든 머신에서 동기화됩니다.
    * 저장된 키는 보호되지 않습니다.
    * *Dataprotection-Keys* 폴더는 단일 배포 슬롯의 모든 앱 인스턴스에 대 한 키 링을 제공 합니다.
-   * 준비 및 프로덕션과 같은 별도의 배포 슬롯은 키 링을 공유하지 않습니다. 스테이징을 프로덕션으로 교환 하거나 A/B 테스트를 사용 하는 경우와 같이 배포 슬롯 간에 교환 하는 경우 데이터 보호를 사용 하는 모든 앱은 이전 슬롯 내에서 키 링을 사용 하 여 저장 된 데이터의 암호를 해독할 수 없습니다. 이를 통해 사용자는 데이터 보호를 사용 하 여 쿠키를 보호 하므로 표준 ASP.NET Core 쿠키 인증을 사용 하는 앱에서 로그 아웃 됩니다. 슬롯 독립적 키 링을 원하는 경우 Azure Blob Storage, Azure Key Vault, SQL 저장소 또는 Redis cache와 같은 외부 키 링 공급자를 사용 합니다.
+   * 준비 및 프로덕션과 같은 별도의 배포 슬롯은 키 링을 공유하지 않습니다. 스테이징을 프로덕션으로 교환 하거나 A/B 테스트를 사용 하는 경우와 같이 배포 슬롯 간에 교환 하는 경우 데이터 보호를 사용 하는 모든 앱은 이전 슬롯 내에서 키 링을 사용 하 여 저장 된 데이터의 암호를 해독할 수 없습니다. 이를 통해 사용자는 cookie 데이터 보호를 사용 하 여를 보호 하므로 표준 ASP.NET Core 인증을 사용 하는 앱에서 로그 아웃 됩니다 cookie . 슬롯 독립적 키 링을 원하는 경우 Azure Blob Storage, Azure Key Vault, SQL 저장소 또는 Redis cache와 같은 외부 키 링 공급자를 사용 합니다.
 
 1. 사용자 프로필을 사용할 수 있는 경우 키가 *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* 폴더에 유지 됩니다. 운영 체제가 Windows 인 경우 키는 암호화 된 상태로 DPAPI를 사용 하 여 암호화 됩니다.
 
@@ -61,7 +63,7 @@ Docker 컨테이너에서 호스트 하는 경우 키는 Docker 볼륨 (컨테�
 
 사용 되는 기본 페이로드 보호 알고리즘은 기밀성을 위한 AES-256-HMACSHA256 및 정품 인증입니다. 90 일 마다 변경 된 512 비트 마스터 키는 페이로드에 따라 이러한 알고리즘에 사용 되는 두 개의 하위 키를 파생 하는 데 사용 됩니다. 자세한 내용은 [하위 키 파생](xref:security/data-protection/implementation/subkeyderivation#additional-authenticated-data-and-subkey-derivation) 을 참조 하십시오.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/data-protection/extensibility/key-management>
 * <xref:host-and-deploy/web-farm>

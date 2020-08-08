@@ -5,6 +5,8 @@ description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들�
 ms.author: riande
 ms.date: 06/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: c6ec73c028c7003a40b2f09b631bdc2c976686fa
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: ecf233273a28df9b2d35edf3264b8c73b16759e5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793364"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021876"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
@@ -149,7 +151,7 @@ VCard를 메모리 내 연락처 컬렉션에 추가 하려면 다음을 수행 
 * `Content-Type` 헤더를 `text/vcard`으로 설정합니다.
 * `vCard`앞의 예제와 같이 서식이 지정 된 본문에 텍스트를 설정 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:web-api/advanced/formatting>
 * <xref:grpc/dotnet-grpc>

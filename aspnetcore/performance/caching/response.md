@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459768"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021343"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱
 
@@ -49,9 +51,9 @@ HTTP 1.1 캐싱 사양을 따르는 서버 쪽 캐싱의 경우 [응답 캐싱 �
 
 캐시에서 역할을 수행 하는 다른 캐시 헤더는 다음 표에 나와 있습니다.
 
-| 헤더                                                     | 함수 |
+| header                                                     | 기능 |
 | ---------------------------------------------------------- | -------- |
-| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 응답을 생성 하거나 원본 서버에서 유효성을 검사 한 이후의 시간 (초)입니다. |
+| [연령](https://tools.ietf.org/html/rfc7234#section-5.1)     | 응답을 생성 하거나 원본 서버에서 유효성을 검사 한 이후의 시간 (초)입니다. |
 | [기간이](https://tools.ietf.org/html/rfc7234#section-5.3) | 응답이 오래 된 것으로 간주 되는 시간입니다. |
 | [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | 동작 설정에 대 한 HTTP/1.0 캐시와의 이전 버전과의 호환성을 위해 존재 `no-cache` 합니다. 헤더가 있으면 `Cache-Control` `Pragma` 헤더가 무시 됩니다. |
 | [날](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | 캐시 된 응답의 `Vary` 원래 요청과 새 요청 모두에서 헤더 필드가 모두 일치 하지 않는 경우 캐시 된 응답을 보내지 않도록 지정 합니다. |
@@ -132,8 +134,8 @@ Vary: User-Agent
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>는 대부분의 다른 속성을 재정의 합니다. 이 속성이로 설정 되 면 `true` `Cache-Control` 헤더가로 설정 됩니다 `no-store` . <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>가로 설정 된 `None` 경우
 
-* `Cache-Control`가 `no-store,no-cache`로 설정됩니다.
-* `Pragma`가 `no-cache`로 설정됩니다.
+* `Cache-Control`이 `no-store,no-cache`로 설정됩니다.
+* `Pragma`이 `no-cache`로 설정됩니다.
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>가이 `false` 고 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> 가 `None` , `Cache-Control` 및 이면가 `Pragma` 로 설정 됩니다 `no-cache` .
 

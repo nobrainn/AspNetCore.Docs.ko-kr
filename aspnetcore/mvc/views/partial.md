@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399714"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020836"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core의 부분 보기
 
@@ -80,7 +82,7 @@ MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>PageModel 페이지에서 부분 보기 사용 Razor
+### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>PageModel 페이지에서 부분 보기 사용 Razor
 
 ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드는 응답에 대 한 다음과 같은 작업을 수행 * \_ 합니다.*
 
@@ -345,7 +347,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 >
 > 그러나 크게 볼 때 우리는 전념할 수 없습 ...
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 ::: moniker range=">= aspnetcore-2.1"
 

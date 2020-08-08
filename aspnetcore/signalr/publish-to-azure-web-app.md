@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3163a2743c544d0a07d92eb7547e77c3b200ac83
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408840"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022539"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>SignalRAzure App Service에 ASP.NET Core 앱 게시
+# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalRAzure App Service에 ASP.NET Core 앱 게시
 
 [Brady Gaster](https://twitter.com/bradygaster)
 
@@ -52,7 +54,7 @@ ms.locfileid: "85408840"
 
 1. **종속성**추가 드롭다운 목록에서 **Azure SignalR 서비스** 를 선택 합니다  >  **Add** .
 
-   ![SignalR추가 드롭다운 목록에서 Azure 서비스 선택 항목을 보여 주는 종속성 영역](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![추가 드롭다운 목록에서 Azure::: no loc (SignalR)::: Service 선택 항목을 표시 하는 종속성 영역](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. **Azure SignalR 서비스** 대화 상자에서 **새 azure SignalR 서비스 인스턴스 만들기**를 선택 합니다.
 
@@ -78,7 +80,7 @@ Preview .NET Core 릴리스를 대상으로 하는 앱을 배포할 때 HTTP *50
 
 Azure 서비스 없이 호스트 되는 앱의 SignalR 경우 다음을 사용 하도록 설정 합니다.
 
-* 사용자의 요청을 동일한 App Service 인스턴스로 라우팅하는 [ARR 선호도](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html) 입니다. 기본 설정은 **On**입니다.
+* [ARR 선호도] ( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie -(ARR- cookie ) -for-Azure-web-apps.html)-사용자의 요청을 다시 동일한 App Service 인스턴스로 라우팅합니다. 기본 설정은 **On**입니다.
 * 웹 [소켓은](xref:fundamentals/websockets) 웹 소켓 전송이 작동할 수 있도록 합니다. 기본 설정은 **Off**입니다.
 
 1. Azure Portal에서 **App Services**웹 앱으로 이동 합니다.
@@ -90,7 +92,7 @@ Azure 서비스 없이 호스트 되는 앱의 SignalR 경우 다음을 사용 �
 
 웹 소켓 및 기타 전송은 선택한 App Service 계획을 기준으로 제한 됩니다. 자세한 내용은 azure [구독 및 서비스 제한, 할당량 및 제약 조건](/azure/azure-subscription-service-limits#app-service-limits) 문서의 *azure Cloud Services 제한* 및 *App Service 제한* 섹션을 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Azure 서비스인 이란 SignalR ?](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>

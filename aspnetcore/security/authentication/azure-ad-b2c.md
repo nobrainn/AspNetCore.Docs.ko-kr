@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc
 ms.date: 01/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 4933203b8bdd8f653268c1df7ff83b8e9423341f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405070"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021707"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core에서 Azure Active Directory B2C를 사용 하는 클라우드 인증
 
@@ -38,7 +40,7 @@ ms.locfileid: "85405070"
 > * Visual Studio를 사용 하 여 인증을 위해 Azure AD B2C 테 넌 트를 사용 하도록 구성 된 ASP.NET Core 웹 앱 만들기
 > * Azure AD B2C 테 넌 트의 동작을 제어 하는 정책 구성
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 연습을 수행 하려면 다음이 필요 합니다.
 
@@ -55,14 +57,14 @@ ms.locfileid: "85405070"
 
 다음 값을 사용합니다.
 
-| 설정                       | 값                     | 참고                                                                                                                                                                                              |
+| Setting                       | 값                     | 참고                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **이름**                      | *&lt;앱 이름&gt;*        | 소비자에 게 앱을 설명 하는 앱의 **이름을** 입력 합니다.                                                                                                                                 |
-| **웹앱/웹 API 포함** | Yes                       |                                                                                                                                                                                                    |
-| **암시적 흐름 허용**       | Yes                       |                                                                                                                                                                                                    |
+| **웹앱/웹 API 포함** | 예                       |                                                                                                                                                                                                    |
+| **암시적 흐름 허용**       | 예                       |                                                                                                                                                                                                    |
 | **회신 URL**                 | `https://localhost:44300/signin-oidc` | 회신 URL은 Azure AD B2C에서 앱이 요청한 토큰을 반환하는 엔드포인트입니다. Visual Studio는 사용할 회신 URL을 제공 합니다. 이제를 입력 `https://localhost:44300/signin-oidc` 하 여 양식을 완성 합니다. |
 | **앱 ID URI**                | 비워 둠               | 이 자습서에서는 필요 하지 않습니다.                                                                                                                                                                    |
-| **네이티브 클라이언트 포함**     | No                        |                                                                                                                                                                                                    |
+| **네이티브 클라이언트 포함**     | 아니요                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Localhost가 아닌 회신 URL을 설정 하는 경우 [회신 url 목록에서 허용 되는 항목에 대 한 제약 조건을](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)알고 있어야 합니다. 
@@ -89,7 +91,7 @@ Visual Studio에서 다음을 수행합니다.
 
 5. 다음 값을 사용 하 여 양식을 작성 합니다.
     
-    | 설정                       | 값                                                 |
+    | Setting                       | 값                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **도메인 이름**               | *&lt;B2C 테 넌 트의 도메인 이름&gt;*          |
     | **애플리케이션 ID**            | *&lt;클립보드에서 응용 프로그램 ID 붙여넣기&gt;* |
@@ -114,7 +116,7 @@ Azure AD B2C 설명서의 단계를 사용 하 여 [등록 또는 로그인 정�
 > [!WARNING]
 > Visual Studio의 **인증 변경** 대화 상자에서 정책 이름이 사용 되었으므로 정책 이름이 설명서에 설명 된 것과 정확 하 게 일치 하는지 확인 합니다. 정책 이름은 *appsettings.js*에서 확인할 수 있습니다.
 
-## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>기본 OpenIdConnectOptions/JwtBearer/Cookie 옵션 구성
+## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>기본 OpenIdConnectOptions/JwtBearer/options 구성 Cookie
 
 기본 옵션을 직접 구성 하려면에서 적절 한 체계 상수를 사용 합니다 `Startup.ConfigureServices` .
 
@@ -140,7 +142,7 @@ services.Configure<JwtBearerOptions>(
 
 ## <a name="run-the-app"></a>앱 실행
 
-Visual Studio에서 **f5** 키를 눌러 앱을 빌드하고 실행 합니다. 웹 앱이 시작 되 면 **동의** 를 선택 하 여 쿠키 사용을 승인한 다음 (메시지가 표시 되는 경우) **로그인**을 선택 합니다.
+Visual Studio에서 **f5** 키를 눌러 앱을 빌드하고 실행 합니다. 웹 앱이 시작 된 후 **동의 함** 을 선택 하 여 cookie s (메시지가 표시 되는 경우)를 사용 하 고 **로그인**을 선택 합니다.
 
 ![앱에 로그인](./azure-ad-b2c/_static/signin.png)
 

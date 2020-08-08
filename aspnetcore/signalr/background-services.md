@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409087"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022383"
 ---
-# <a name="host-aspnet-core-signalr-in-background-services"></a>SignalR백그라운드 서비스의 호스트 ASP.NET Core
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalR백그라운드 서비스의 호스트 ASP.NET Core
 
 [Brady Gaster](https://twitter.com/bradygaster)
 
@@ -33,16 +35,16 @@ ms.locfileid: "85409087"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x)[(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2)[(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ::: moniker-end
 
-## <a name="enable-signalr-in-startup"></a>SignalR시작 시 사용
+## <a name="enable-no-locsignalr-in-startup"></a>SignalR시작 시 사용
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -90,7 +92,7 @@ SignalR백그라운드 작업자 프로세스의 컨텍스트에서 ASP.NET Core
 
 ::: moniker-end
 
-## <a name="call-a-signalr-hub-from-a-background-service"></a>SignalR백그라운드 서비스에서 허브 호출
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a>SignalR백그라운드 서비스에서 허브 호출
 
 시작 중에 `Worker` 는를 `BackgroundService` 사용 하 여 클래스를 사용할 수 `AddHostedService` 있습니다.
 
@@ -113,7 +115,7 @@ SignalR는 단계 중에도 활성화 되므로 `Startup` 각 허브는 ASP.NET 
 
 `ExecuteAsync`메서드가 백그라운드 서비스에서 반복적으로 호출 되 면 서버의 현재 날짜 및 시간이를 사용 하 여 연결 된 클라이언트에 전송 됩니다 `ClockHub` .
 
-## <a name="react-to-signalr-events-with-background-services"></a>SignalR백그라운드 서비스를 사용 하 여 이벤트에 대응
+## <a name="react-to-no-locsignalr-events-with-background-services"></a>SignalR백그라운드 서비스를 사용 하 여 이벤트에 대응
 
 또는 .NET 데스크톱 응용 프로그램에서 JavaScript 클라이언트를 사용 하는 단일 페이지 앱과 마찬가지로를 사용 하 여를 사용할 SignalR 수 있습니다 <xref:signalr/dotnet-client> `BackgroundService` . 또는 구현을 사용 하 여 `IHostedService` 허브에 연결 하 SignalR 고 이벤트에 응답할 수도 있습니다.
 
@@ -154,7 +156,7 @@ public partial class ClockHubClient : IClock, IHostedService
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [시작](xref:tutorials/signalr)
 * [허브](xref:signalr/hubs)

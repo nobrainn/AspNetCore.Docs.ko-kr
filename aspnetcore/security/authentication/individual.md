@@ -5,6 +5,8 @@ description: 개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프�
 ms.author: riande
 ms.date: 12/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 6d3743fc31c29bed5075ac29381aea51a64a908c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b72612c12d52cfc1736c141bdad95ace6c84546
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406253"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022292"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프로젝트를 기반으로 하는 문서
 
@@ -91,7 +93,7 @@ Windows 인증을 선택 하면 앱이 [Windows 인증 IIS 모듈](xref:host-and
 | 회사 또는 학교 클라우드/여러 조직 |  여러 테넌트에 대한 조직 인증 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Windows 인증 | [Windows 인증](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 다음 문서에서는 개별 사용자 계정을 사용 하는 ASP.NET Core 템플릿에서 생성 된 코드를 사용 하는 방법을 보여 줍니다.
 

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 794465ceb69f47ee3d5cc8c100b321cb958d9cfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1e022c510dda3e39dd02d607f1d9c493aecdeb5a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407137"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021564"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core의 인증 및 권한 부여SignalR
+# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>ASP.NET Core의 인증 및 권한 부여SignalR
 
 [Andrew Stanton-간호사](https://twitter.com/anurse)
 
 [샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/)[(다운로드 방법)](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>허브에 연결 하는 사용자 인증 SignalR
+## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>허브에 연결 하는 사용자 인증 SignalR
 
 SignalR[ASP.NET Core 인증과](xref:security/authentication/identity) 함께 사용 하 여 사용자를 각 연결에 연결할 수 있습니다. 허브에서는 [HubConnectionContext](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) 속성을 사용 하 여 인증 데이터에 액세스할 수 있습니다. 인증을 통해 허브는 사용자와 연결 된 모든 연결에서 메서드를 호출할 수 있습니다. 자세한 내용은 [에서 SignalR 사용자 및 그룹 관리 ](xref:signalr/groups)를 참조 하세요. 단일 사용자에 게 여러 연결을 연결할 수 있습니다.
 
@@ -86,15 +88,15 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="cookie-authentication"></a>쿠키 인증
+### <a name="no-loccookie-authentication"></a>Cookie 인증
 
-브라우저 기반 앱에서 쿠키 인증을 사용 하면 기존 사용자 자격 증명이 자동으로 연결로 이동 SignalR 됩니다. 브라우저 클라이언트를 사용 하는 경우 추가 구성이 필요 하지 않습니다. 사용자가 앱에 로그인 한 경우에는 SignalR 연결이 자동으로이 인증을 상속 합니다.
+브라우저 기반 앱에서 cookie 인증을 사용 하면 기존 사용자 자격 증명이 자동으로 연결로 이동 SignalR 됩니다. 브라우저 클라이언트를 사용 하는 경우 추가 구성이 필요 하지 않습니다. 사용자가 앱에 로그인 한 경우에는 SignalR 연결이 자동으로이 인증을 상속 합니다.
 
-쿠키는 브라우저 별로 액세스 토큰을 보낼 수 있는 방법 이지만 브라우저가 아닌 클라이언트는이를 보낼 수 있습니다. [.Net 클라이언트](xref:signalr/dotnet-client)를 사용 하는 경우 `Cookies` 호출에서 속성을 구성 하 여 쿠키를 제공할 수 있습니다 `.WithUrl` . 그러나 .NET 클라이언트에서 쿠키 인증을 사용 하려면 앱이 쿠키에 대 한 인증 데이터를 교환 하는 API를 제공 해야 합니다.
+Cookies는 브라우저 별로 액세스 토큰을 보낼 수 있지만 브라우저가 아닌 클라이언트는이를 보낼 수 있습니다. [.Net 클라이언트](xref:signalr/dotnet-client)를 사용 하는 경우 `Cookies` 호출에서 속성을 구성 `.WithUrl` 하 여를 제공할 수 있습니다 cookie . 그러나 cookie .net 클라이언트에서 인증을 사용 하려면 앱이에 대 한 인증 데이터를 교환 하는 API를 제공 해야 합니다 cookie .
 
 ### <a name="bearer-token-authentication"></a>전달자 토큰 인증
 
-클라이언트는 쿠키를 사용 하는 대신 액세스 토큰을 제공할 수 있습니다. 서버는 토큰의 유효성을 검사하고 사용자를 확인하는 데 사용합니다. 이 유효성 검사는 연결이 설정 된 경우에만 수행 됩니다. 연결 수명이 지속 되는 동안 서버는 토큰 해지 검사를 위해 자동으로 유효성을 다시 검사 하지 않습니다.
+클라이언트는를 사용 하는 대신 액세스 토큰을 제공할 수 있습니다 cookie . 서버는 토큰의 유효성을 검사하고 사용자를 확인하는 데 사용합니다. 이 유효성 검사는 연결이 설정 된 경우에만 수행 됩니다. 연결 수명이 지속 되는 동안 서버는 토큰 해지 검사를 위해 자동으로 유효성을 다시 검사 하지 않습니다.
 
 서버에서 [JWT 전달자 미들웨어](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)를 사용하여 전달자 토큰 인증을 구성합니다.
 
@@ -125,9 +127,9 @@ var connection = new HubConnectionBuilder()
 > [!NOTE]
 > 쿼리 문자열은 브라우저 API 제한으로 인해 Websocket 및 서버에서 전송한 이벤트에 연결할 때 브라우저에서 사용 됩니다. HTTPS를 사용 하는 경우 쿼리 문자열 값은 TLS 연결을 통해 보안이 유지 됩니다. 그러나 많은 서버에서 쿼리 문자열 값을 기록 합니다. 자세한 내용은 [ASP.NET Core SignalR 의 보안 고려 사항 ](xref:signalr/security)을 참조 하세요. SignalR는 헤더를 사용 하 여 토큰 (예: .NET 및 Java 클라이언트)을 지 원하는 환경에서 토큰을 전송 합니다.
 
-### <a name="cookies-vs-bearer-tokens"></a>쿠키 및 전달자 토큰 
+### <a name="no-loccookies-vs-bearer-tokens"></a>Cookies와 전달자 토큰 비교 
 
-쿠키는 브라우저에만 적용 됩니다. 다른 종류의 클라이언트에서 전송 하면 전달자 토큰 전송과 비교 하 여 복잡성이 증가 합니다. 따라서 앱이 브라우저 클라이언트에서 사용자를 인증 해야 하는 경우를 제외 하 고는 쿠키 인증을 권장 하지 않습니다. 전달자 토큰 인증은 브라우저 클라이언트 이외의 클라이언트를 사용 하는 경우 권장 되는 방법입니다.
+Cookie는 브라우저에만 적용 됩니다. 다른 종류의 클라이언트에서 전송 하면 전달자 토큰 전송과 비교 하 여 복잡성이 증가 합니다. 따라서 cookie 앱이 브라우저 클라이언트에서 사용자를 인증 해야 하는 경우를 제외 하 고는 인증을 권장 하지 않습니다. 전달자 토큰 인증은 브라우저 클라이언트 이외의 클라이언트를 사용 하는 경우 권장 되는 방법입니다.
 
 ### <a name="windows-authentication"></a>Windows 인증
 
@@ -296,7 +298,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core에서 전달자 토큰 인증](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [리소스 기반 권한 부여](xref:security/authorization/resourcebased)

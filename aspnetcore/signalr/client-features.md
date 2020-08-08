@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 10752e8cace82dc08721af7d38c0250182e9bfb0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4f5fa2f4ff1ac3d00b04845aedc26fb0118b9991
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408489"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021473"
 ---
-# <a name="aspnet-core-signalr-clients"></a>ASP.NET Core SignalR 클라이언트
+# <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR 클라이언트
 
 ## <a name="versioning-support-and-compatibility"></a>버전 관리, 지원 및 호환성
 
@@ -57,7 +59,7 @@ SignalR클라이언트는 서버 구성 요소와 함께 제공 되며 일치 �
 
 추가 클라이언트 기능 사용에 대 한 지원은 [문제 추적기](https://github.com/dotnet/AspNetCore/issues)에서 추적 됩니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [SignalRASP.NET Core에 대 한 시작](xref:tutorials/signalr)
 * [지원되는 플랫폼](xref:signalr/supported-platforms)

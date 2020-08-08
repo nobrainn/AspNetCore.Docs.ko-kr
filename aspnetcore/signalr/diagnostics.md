@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409100"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021837"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core의 로깅 및 진단SignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core의 로깅 및 진단SignalR
 
 [Andrew Stanton-간호사](https://twitter.com/anurse)
 
@@ -102,11 +104,11 @@ JavaScript 클라이언트를 사용 하는 경우의 메서드를 사용 하 �
 
 자세한 정도를 구성 하면 로그가 브라우저 콘솔에 기록 되거나 NodeJS 앱의 표준 출력에 기록 됩니다.
 
-로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 예를 들면 다음과 같습니다.
+로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다 `ILogger` . 구현 해야 하는 유일한 방법은 이벤트 `log` 의 수준 및 이벤트와 연결 된 메시지를 가져오는입니다. 예:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
-## <a name="net-client-logging"></a>.NET 클라이언트 로깅
+## <a name="net-client-logging"></a> .NET 클라이언트 로깅
 
 > [!WARNING]
 > 클라이언트 쪽 로그에는 앱의 중요 한 정보가 포함 될 수 있습니다. 프로덕션 앱의 원시 로그를 GitHub와 같은 공용 포럼에 게시 **하지 마세요** .
@@ -218,7 +220,7 @@ tcpdump -i [interface] -w trace.pcap
 
 메트릭은 시간 간격에 대 한 데이터 측정값의 표현입니다. 예를 들어 초당 요청 수입니다. 메트릭 데이터를 사용 하면 상위 수준에서 앱의 상태를 확인할 수 있습니다. .NET gRPC 메트릭은를 사용 하 여 내보내집니다 <xref:System.Diagnostics.Tracing.EventCounter> .
 
-### <a name="signalr-server-metrics"></a>SignalR서버 메트릭
+### <a name="no-locsignalr-server-metrics"></a>SignalR서버 메트릭
 
 SignalR서버 메트릭은 이벤트 원본에 보고 됩니다 <xref:Microsoft.AspNetCore.Http.Connections> .
 
@@ -247,7 +249,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

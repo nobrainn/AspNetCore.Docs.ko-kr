@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a1182b793c7d05a11f0b5f16f4d406a9063f023
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408515"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021031"
 ---
-# <a name="manage-users-and-groups-in-signalr"></a>에서 사용자 및 그룹 관리SignalR
+# <a name="manage-users-and-groups-in-no-locsignalr"></a>에서 사용자 및 그룹 관리SignalR
 
 만든 사람 [Brennan Conroy](https://github.com/BrennanConroy)
 
 SignalR지정 된 연결 그룹 뿐만 아니라 특정 사용자와 연결 된 모든 연결에 메시지를 보낼 수 있습니다.
 
-[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/)[(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/)([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="users-in-signalr"></a>사용자의SignalR
+## <a name="users-in-no-locsignalr"></a>사용자의SignalR
 
 의 단일 사용자는 SignalR 앱에 대 한 여러 연결을 가질 수 있습니다. 예를 들어 사용자는 자신의 데스크톱 및 휴대폰에 연결 될 수 있습니다. 각 장치에는 별도의 SignalR 연결이 있지만 모두 동일한 사용자와 연결 됩니다. 사용자에 게 메시지를 보내는 경우 해당 사용자와 연결 된 모든 연결에서 메시지를 받습니다. 허브의 속성을 사용 하 여 연결에 대 한 사용자 id에 액세스할 수 있습니다 `Context.UserIdentifier` .
 
@@ -43,7 +45,7 @@ SignalR지정 된 연결 그룹 뿐만 아니라 특정 사용자와 연결 된 
 
 [!code-csharp[Configure service](groups/sample/Hubs/ChatHub.cs?range=29-32)]
 
-## <a name="groups-in-signalr"></a>그룹SignalR
+## <a name="groups-in-no-locsignalr"></a>그룹SignalR
 
 그룹은 이름과 연결 된 연결의 컬렉션입니다. 그룹의 모든 연결에 메시지를 보낼 수 있습니다. 그룹은 응용 프로그램에서 관리 되기 때문에 연결 또는 다중 연결에 전송 하는 데 권장 되는 방법입니다. 연결은 여러 그룹의 멤버일 수 있습니다. 그룹은 각 공간을 그룹으로 표시할 수 있는 채팅 응용 프로그램과 같은 항목에 적합 합니다. 연결은 및 메서드를 통해 그룹에 추가 되거나 제거 `AddToGroupAsync` 됩니다 `RemoveFromGroupAsync` .
 

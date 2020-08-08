@@ -5,6 +5,8 @@ description: ASP.NET Core 앱에 대해 열린 리디렉션 공격을 방지 하
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: eb18c599d84fd08ffe97867b67a837303af188db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a58c25bbd54803ce0b8c42a2667222d6e14c050
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408151"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021018"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core에서 열기 리디렉션 공격 방지
 

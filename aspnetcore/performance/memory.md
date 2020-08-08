@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406396"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020940"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
 [Sébastien Ros](https://github.com/sebastienros) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-.NET 등의 관리 되는 프레임 워크 에서도 메모리 관리가 복잡 합니다. 메모리 문제를 분석 하 고 이해 하는 것은 어려울 수 있습니다. 이 문서의 내용:
+.NET 등의 관리 되는 프레임 워크 에서도 메모리 관리가 복잡 합니다. 메모리 문제를 분석 하 고 이해 하는 것은 어려울 수 있습니다. 이 문서의 내용은 다음과 같습니다.
 
 * 는 많은 *메모리 누수로* 인해 발생 했으며 *GC가 작동 하지 않습니다* . 이러한 문제의 대부분은 .NET Core에서 메모리 소비가 어떻게 작동 하는지 이해 하거나 측정 방법을 이해 하지 못하는 경우에 발생 합니다.
 * 문제가 있는 메모리 사용을 보여 주고 대체 방법을 제안 합니다.
@@ -440,7 +442,7 @@ public byte[] GetPooledArray(int size)
 
 주요 차이점은 바이트를 할당 하는 것이 고, 결과적으로 0 세대 수집이 훨씬 더 적기 때문입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [가비지 수집](/dotnet/standard/garbage-collection/)
 * [동시성 시각화 도우미를 사용 하 여 다양 한 GC 모드 이해](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

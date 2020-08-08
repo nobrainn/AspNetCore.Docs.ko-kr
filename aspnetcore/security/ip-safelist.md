@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 5b74205bc7b17d61edbb73cf309f6e24e4318391
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 75c1ea3a6087f89a200d1f73b1ff65080c819ccd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409009"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021772"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core에 대 한 클라이언트 IP safelist
 
@@ -64,7 +66,7 @@ ms.locfileid: "85409009"
 
 ## <a name="action-filter"></a>작업 필터
 
-특정 MVC 컨트롤러나 작업 메서드에 대 한 safelist 기반 액세스 제어를 원하는 경우 작업 필터를 사용 합니다. 예를 들면 다음과 같습니다.
+특정 MVC 컨트롤러나 작업 메서드에 대 한 safelist 기반 액세스 제어를 원하는 경우 작업 필터를 사용 합니다. 예:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
@@ -99,9 +101,9 @@ ms.locfileid: "85409009"
 
 * GET이 아닌 HTTP 요청 동사로 `AdminSafeListMiddleware` 미들웨어는 클라이언트 IP 주소의 유효성을 검사 합니다.
 
-## <a name="razor-pages-filter"></a>Razor페이지 필터
+## <a name="no-locrazor-pages-filter"></a>Razor페이지 필터
 
-페이지 앱에 대 한 safelist 기반 access control Razor 을 사용 하려면 Razor 페이지 필터를 사용 합니다. 예를 들면 다음과 같습니다.
+페이지 앱에 대 한 safelist 기반 access control Razor 을 사용 하려면 Razor 페이지 필터를 사용 합니다. 예:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
@@ -126,7 +128,7 @@ dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]
       Remote IpAddress: ::1
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:fundamentals/middleware/index>
 * [작업 필터](xref:mvc/controllers/filters#action-filters)

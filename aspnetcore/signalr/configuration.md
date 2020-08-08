@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: c711c2163908e3fdd20e3bb497f333ebd495d921
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d451e8807d761ab11509d33951009a98845f7e5e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406838"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021863"
 ---
-# <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 구성
+# <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR 구성
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -30,7 +32,7 @@ ms.locfileid: "85406838"
 
 ASP.NET Core SignalR 는 메시지 인코딩에 [JSON](https://www.json.org/) 및 [MessagePack](https://msgpack.org/index.html)의 두 가지 프로토콜을 지원 합니다. 각 프로토콜에는 serialization 구성 옵션이 있습니다.
 
-JSON serialization은 [AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 구성할 수 있습니다. `AddJsonProtocol`[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 뒤에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions) 속성은 `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> 인수와 반환 값의 serialization을 구성 하는 데 사용할 수 있는 개체입니다. 자세한 내용은 [설명서의System.Text.Js](/dotnet/api/system.text.json)을 참조 하세요.
+JSON serialization은 [AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 구성할 수 있습니다. `AddJsonProtocol`[추가 SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 된 후에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions) 속성은 `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> 인수와 반환 값의 serialization을 구성 하는 데 사용할 수 있는 개체입니다. 자세한 내용은 [설명서의System.Text.Js](/dotnet/api/system.text.json)을 참조 하세요.
 
 예를 들어 기본 "camelCase" 이름 대신 속성 이름의 대/소문자를 변경 하지 않도록 serializer를 구성 하려면에서 다음 코드를 사용 합니다 `Startup.ConfigureServices` .
 
@@ -134,8 +136,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 | `AuthorizationData` | 허브 클래스에 적용 된 특성에서 자동으로 수집 된 데이터 `Authorize` 입니다. | 클라이언트에 허브에 연결할 수 있는 권한이 있는지 여부를 확인 하는 데 사용 되는 [IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata) 개체의 목록입니다. |
 | `TransportMaxBufferSize` | 32KB | 서버에서 백 압력을 관찰 하기 전에 버퍼링 하는 앱에서 보낸 최대 바이트 수입니다. 이 값을 늘리면 서버에서 백 압력을 대기 하지 않고 더 큰 메시지를 더 빨리 버퍼링 할 수 있지만 메모리 소비가 증가할 수 있습니다. |
 | `Transports` | 모든 전송을 사용할 수 있습니다. | `HttpTransportType`클라이언트에서 연결 하는 데 사용할 수 있는 전송을 제한할 수 있는 값의 비트 플래그 열거형입니다. |
-| `LongPolling` | 아래를 참조하십시오. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
-| `WebSockets` | 아래를 참조하십시오. | Websocket 전송과 관련 된 추가 옵션입니다. |
+| `LongPolling` | 아래 내용을 참조하세요. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
+| `WebSockets` | 아래 내용을 참조하세요. | Websocket 전송과 관련 된 추가 옵션입니다. |
 | `MinimumProtocolVersion` | 0 | Negotiate 프로토콜의 최소 버전을 지정 합니다. 클라이언트를 최신 버전으로 제한 하는 데 사용 됩니다. |
 
 긴 폴링 전송에는 속성을 사용 하 여 구성할 수 있는 추가 옵션이 있습니다 `LongPolling` .
@@ -198,8 +200,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **or** `information` | `LogLevel.Information` |
-| `warn` **or** `warning`     | `LogLevel.Warning`     |
+| `info` **또는** `information` | `LogLevel.Information` |
+| `warn` **또는** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -340,11 +342,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
 | `SkipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 | `ClientCertificates` | Empty | 인증 요청에 보낼 TLS 인증서 컬렉션입니다. |
-| `Cookies` | Empty | 모든 HTTP 요청과 함께 보낼 HTTP 쿠키의 컬렉션입니다. |
+| `Cookies` | Empty | cookie모든 http 요청과 함께 보낼 http s의 컬렉션입니다. |
 | `Credentials` | Empty | 모든 HTTP 요청과 함께 전송할 자격 증명입니다. |
 | `CloseTimeout` | 5초 | Websocket 전용입니다. 서버가 닫기 요청을 승인할 때까지 대기한 후 클라이언트에서 대기 하는 최대 시간입니다. 이 시간 내에 서버에서 닫기를 승인 하지 않으면 클라이언트 연결이 끊어집니다. |
 | `Headers` | Empty | 모든 HTTP 요청과 함께 보낼 추가 HTTP 헤더의 맵입니다. |
-| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: 쿠키 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
+| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: Cookie s 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
 | `Proxy` | `null` | HTTP 요청을 보낼 때 사용할 HTTP 프록시입니다. |
 | `UseDefaultCredentials` | `false` | HTTP 및 Websocket 요청에 대 한 기본 자격 증명을 보내려면이 부울 값을 설정 합니다. 이렇게 하면 Windows 인증을 사용할 수 있습니다. |
 | `WebSocketConfiguration` | `null` | 추가 WebSocket 옵션을 구성 하는 데 사용할 수 있는 대리자입니다. 옵션을 구성 하는 데 사용할 수 있는 [ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions) 의 인스턴스를 수신 합니다. |
@@ -357,7 +359,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `headers` | `null` | 모든 HTTP 요청과 함께 전송 되는 헤더의 사전입니다. 브라우저에서 헤더 보내기가 Websocket 또는 스트림에 대해 작동 하지 않습니다 <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> . |
 | `logMessageContent` | `null` | `true`클라이언트에서 보내고 받은 메시지의 바이트/문자를 기록 하려면로 설정 합니다. |
 | `skipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
-| `withCredentials` | `true` | CORS 요청과 함께 자격 증명을 보낼지 여부를 지정 합니다. Azure App Service는 고정 세션에 쿠키를 사용 하며이 옵션이 사용 하도록 설정 되어 있어야 제대로 작동 합니다. CORS에 대 한 자세한 SignalR 내용은을 참조 하십시오 <xref:signalr/security#cross-origin-resource-sharing> . |
+| `withCredentials` | `true` | CORS 요청과 함께 자격 증명을 보낼지 여부를 지정 합니다. Azure App Service는 cookie 고정 세션에 s를 사용 하 고 올바르게 작동 하려면이 옵션을 사용 하도록 설정 해야 합니다. CORS에 대 한 자세한 SignalR 내용은을 참조 하십시오 <xref:signalr/security#cross-origin-resource-sharing> . |
 
 # <a name="java"></a>[Java](#tab/java)
 
@@ -402,7 +404,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -418,7 +420,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ASP.NET Core SignalR 는 메시지 인코딩에 [JSON](https://www.json.org/) 및 [MessagePack](https://msgpack.org/index.html)의 두 가지 프로토콜을 지원 합니다. 각 프로토콜에는 serialization 구성 옵션이 있습니다.
 
-JSON serialization은 [AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 구성할 수 있습니다. `AddJsonProtocol`[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 뒤에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions) 속성은 `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> 인수와 반환 값의 serialization을 구성 하는 데 사용할 수 있는 개체입니다. 자세한 내용은 [설명서의System.Text.Js](/dotnet/api/system.text.json)을 참조 하세요.
+JSON serialization은 [AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 구성할 수 있습니다. `AddJsonProtocol`[추가 SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 된 후에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions) 속성은 `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> 인수와 반환 값의 serialization을 구성 하는 데 사용할 수 있는 개체입니다. 자세한 내용은 [설명서의System.Text.Js](/dotnet/api/system.text.json)을 참조 하세요.
 
 예를 들어 기본 "camelCase" 이름 대신 속성 이름의 대/소문자를 변경 하지 않도록 serializer를 구성 하려면에서 다음 코드를 사용 합니다 `Startup.ConfigureServices` .
 
@@ -522,8 +524,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 | `AuthorizationData` | 허브 클래스에 적용 된 특성에서 자동으로 수집 된 데이터 `Authorize` 입니다. | 클라이언트에 허브에 연결할 수 있는 권한이 있는지 여부를 확인 하는 데 사용 되는 [IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata) 개체의 목록입니다. |
 | `TransportMaxBufferSize` | 32KB | 서버에서 백 압력을 관찰 하기 전에 버퍼링 하는 앱에서 보낸 최대 바이트 수입니다. 이 값을 늘리면 서버에서 백 압력을 대기 하지 않고 더 큰 메시지를 더 빨리 버퍼링 할 수 있지만 메모리 소비가 증가할 수 있습니다. |
 | `Transports` | 모든 전송을 사용할 수 있습니다. | `HttpTransportType`클라이언트에서 연결 하는 데 사용할 수 있는 전송을 제한할 수 있는 값의 비트 플래그 열거형입니다. |
-| `LongPolling` | 아래를 참조하십시오. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
-| `WebSockets` | 아래를 참조하십시오. | Websocket 전송과 관련 된 추가 옵션입니다. |
+| `LongPolling` | 아래 내용을 참조하세요. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
+| `WebSockets` | 아래 내용을 참조하세요. | Websocket 전송과 관련 된 추가 옵션입니다. |
 | `MinimumProtocolVersion` | 0 | Negotiate 프로토콜의 최소 버전을 지정 합니다. 클라이언트를 최신 버전으로 제한 하는 데 사용 됩니다. |
 
 긴 폴링 전송에는 속성을 사용 하 여 구성할 수 있는 추가 옵션이 있습니다 `LongPolling` .
@@ -586,8 +588,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **or** `information` | `LogLevel.Information` |
-| `warn` **or** `warning`     | `LogLevel.Warning`     |
+| `info` **또는** `information` | `LogLevel.Information` |
+| `warn` **또는** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -728,11 +730,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
 | `SkipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 | `ClientCertificates` | Empty | 인증 요청에 보낼 TLS 인증서 컬렉션입니다. |
-| `Cookies` | Empty | 모든 HTTP 요청과 함께 보낼 HTTP 쿠키의 컬렉션입니다. |
+| `Cookies` | Empty | cookie모든 http 요청과 함께 보낼 http s의 컬렉션입니다. |
 | `Credentials` | Empty | 모든 HTTP 요청과 함께 전송할 자격 증명입니다. |
 | `CloseTimeout` | 5초 | Websocket 전용입니다. 서버가 닫기 요청을 승인할 때까지 대기한 후 클라이언트에서 대기 하는 최대 시간입니다. 이 시간 내에 서버에서 닫기를 승인 하지 않으면 클라이언트 연결이 끊어집니다. |
 | `Headers` | Empty | 모든 HTTP 요청과 함께 보낼 추가 HTTP 헤더의 맵입니다. |
-| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: 쿠키 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
+| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: Cookie s 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
 | `Proxy` | `null` | HTTP 요청을 보낼 때 사용할 HTTP 프록시입니다. |
 | `UseDefaultCredentials` | `false` | HTTP 및 Websocket 요청에 대 한 기본 자격 증명을 보내려면이 부울 값을 설정 합니다. 이렇게 하면 Windows 인증을 사용할 수 있습니다. |
 | `WebSocketConfiguration` | `null` | 추가 WebSocket 옵션을 구성 하는 데 사용할 수 있는 대리자입니다. 옵션을 구성 하는 데 사용할 수 있는 [ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions) 의 인스턴스를 수신 합니다. |
@@ -788,7 +790,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -804,7 +806,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ASP.NET Core SignalR 는 메시지 인코딩에 [JSON](https://www.json.org/) 및 [MessagePack](https://msgpack.org/index.html)의 두 가지 프로토콜을 지원 합니다. 각 프로토콜에는 serialization 구성 옵션이 있습니다.
 
-JSON serialization은 [AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 구성할 수 있습니다. `AddJsonProtocol`[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 뒤에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions) 속성은 `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> 인수와 반환 값의 serialization을 구성 하는 데 사용할 수 있는 개체입니다. 자세한 내용은 [설명서의System.Text.Js](/dotnet/api/system.text.json)을 참조 하세요.
+JSON serialization은 [AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 구성할 수 있습니다. `AddJsonProtocol`[추가 SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 된 후에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions) 속성은 `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> 인수와 반환 값의 serialization을 구성 하는 데 사용할 수 있는 개체입니다. 자세한 내용은 [설명서의System.Text.Js](/dotnet/api/system.text.json)을 참조 하세요.
 
 예를 들어 기본 "camelCase" 이름 대신 속성 이름의 대/소문자를 변경 하지 않도록 serializer를 구성 하려면에서 다음 코드를 사용 합니다 `Startup.ConfigureServices` .
 
@@ -908,8 +910,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 | `AuthorizationData` | 허브 클래스에 적용 된 특성에서 자동으로 수집 된 데이터 `Authorize` 입니다. | 클라이언트에 허브에 연결할 수 있는 권한이 있는지 여부를 확인 하는 데 사용 되는 [IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata) 개체의 목록입니다. |
 | `TransportMaxBufferSize` | 32KB | 서버에서 백 압력을 관찰 하기 전에 버퍼링 하는 앱에서 보낸 최대 바이트 수입니다. 이 값을 늘리면 서버에서 백 압력을 대기 하지 않고 더 큰 메시지를 더 빨리 버퍼링 할 수 있지만 메모리 소비가 증가할 수 있습니다. |
 | `Transports` | 모든 전송을 사용할 수 있습니다. | `HttpTransportType`클라이언트에서 연결 하는 데 사용할 수 있는 전송을 제한할 수 있는 값의 비트 플래그 열거형입니다. |
-| `LongPolling` | 아래를 참조하십시오. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
-| `WebSockets` | 아래를 참조하십시오. | Websocket 전송과 관련 된 추가 옵션입니다. |
+| `LongPolling` | 아래 내용을 참조하세요. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
+| `WebSockets` | 아래 내용을 참조하세요. | Websocket 전송과 관련 된 추가 옵션입니다. |
 
 긴 폴링 전송에는 속성을 사용 하 여 구성할 수 있는 추가 옵션이 있습니다 `LongPolling` .
 
@@ -971,8 +973,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **or** `information` | `LogLevel.Information` |
-| `warn` **or** `warning`     | `LogLevel.Warning`     |
+| `info` **또는** `information` | `LogLevel.Information` |
+| `warn` **또는** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1113,11 +1115,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
 | `SkipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 | `ClientCertificates` | Empty | 인증 요청에 보낼 TLS 인증서 컬렉션입니다. |
-| `Cookies` | Empty | 모든 HTTP 요청과 함께 보낼 HTTP 쿠키의 컬렉션입니다. |
+| `Cookies` | Empty | cookie모든 http 요청과 함께 보낼 http s의 컬렉션입니다. |
 | `Credentials` | Empty | 모든 HTTP 요청과 함께 전송할 자격 증명입니다. |
 | `CloseTimeout` | 5초 | Websocket 전용입니다. 서버가 닫기 요청을 승인할 때까지 대기한 후 클라이언트에서 대기 하는 최대 시간입니다. 이 시간 내에 서버에서 닫기를 승인 하지 않으면 클라이언트 연결이 끊어집니다. |
 | `Headers` | Empty | 모든 HTTP 요청과 함께 보낼 추가 HTTP 헤더의 맵입니다. |
-| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: 쿠키 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
+| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: Cookie s 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
 | `Proxy` | `null` | HTTP 요청을 보낼 때 사용할 HTTP 프록시입니다. |
 | `UseDefaultCredentials` | `false` | HTTP 및 Websocket 요청에 대 한 기본 자격 증명을 보내려면이 부울 값을 설정 합니다. 이렇게 하면 Windows 인증을 사용할 수 있습니다. |
 | `WebSocketConfiguration` | `null` | 추가 WebSocket 옵션을 구성 하는 데 사용할 수 있는 대리자입니다. 옵션을 구성 하는 데 사용할 수 있는 [ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions) 의 인스턴스를 수신 합니다. |
@@ -1173,7 +1175,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1189,7 +1191,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ASP.NET Core SignalR 는 메시지 인코딩에 [JSON](https://www.json.org/) 및 [MessagePack](https://msgpack.org/index.html)의 두 가지 프로토콜을 지원 합니다. 각 프로토콜에는 serialization 구성 옵션이 있습니다.
 
-[AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 JSON serialization을 구성할 수 있습니다 .이 메서드는 메서드에서 [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 뒤에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings) 속성은 `JsonSerializerSettings` 인수 및 반환 값의 serialization을 구성 하는 데 사용할 수 있는 JSON.NET 개체입니다. 자세한 내용은 [JSON.NET 설명서](https://www.newtonsoft.com/json/help/html/Introduction.htm)를 참조 하세요.
+[AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 JSON serialization을 구성할 수 있습니다 .이 메서드는 [메서드에 SignalR 추가](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 된 후에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings) 속성은 `JsonSerializerSettings` 인수 및 반환 값의 serialization을 구성 하는 데 사용할 수 있는 JSON.NET 개체입니다. 자세한 내용은 [JSON.NET 설명서](https://www.newtonsoft.com/json/help/html/Introduction.htm)를 참조 하세요.
  
 예를 들어 기본 "camelCase" 이름 대신 "대/소문자 구분" 속성 이름을 사용 하도록 serializer를 구성 하려면에서 다음 코드를 사용 합니다 `Startup.ConfigureServices` .
  
@@ -1289,8 +1291,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 | `AuthorizationData` | 허브 클래스에 적용 된 특성에서 자동으로 수집 된 데이터 `Authorize` 입니다. | 클라이언트에 허브에 연결할 수 있는 권한이 있는지 여부를 확인 하는 데 사용 되는 [IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata) 개체의 목록입니다. |
 | `TransportMaxBufferSize` | 32KB | 서버가 버퍼링 하는 앱에서 보낸 최대 바이트 수입니다. 이 값을 늘리면 서버에서 더 큰 메시지를 보낼 수 있지만 메모리 사용에 부정적인 영향을 줄 수 있습니다. |
 | `Transports` | 모든 전송을 사용할 수 있습니다. | `HttpTransportType`클라이언트에서 연결 하는 데 사용할 수 있는 전송을 제한할 수 있는 값의 비트 플래그 열거형입니다. |
-| `LongPolling` | 아래를 참조하십시오. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
-| `WebSockets` | 아래를 참조하십시오. | Websocket 전송과 관련 된 추가 옵션입니다. |
+| `LongPolling` | 아래 내용을 참조하세요. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
+| `WebSockets` | 아래 내용을 참조하세요. | Websocket 전송과 관련 된 추가 옵션입니다. |
 
 긴 폴링 전송에는 속성을 사용 하 여 구성할 수 있는 추가 옵션이 있습니다 `LongPolling` .
 
@@ -1462,11 +1464,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
 | `SkipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 | `ClientCertificates` | Empty | 인증 요청에 보낼 TLS 인증서 컬렉션입니다. |
-| `Cookies` | Empty | 모든 HTTP 요청과 함께 보낼 HTTP 쿠키의 컬렉션입니다. |
+| `Cookies` | Empty | cookie모든 http 요청과 함께 보낼 http s의 컬렉션입니다. |
 | `Credentials` | Empty | 모든 HTTP 요청과 함께 전송할 자격 증명입니다. |
 | `CloseTimeout` | 5초 | Websocket 전용입니다. 서버가 닫기 요청을 승인할 때까지 대기한 후 클라이언트에서 대기 하는 최대 시간입니다. 이 시간 내에 서버에서 닫기를 승인 하지 않으면 클라이언트 연결이 끊어집니다. |
 | `Headers` | Empty | 모든 HTTP 요청과 함께 보낼 추가 HTTP 헤더의 맵입니다. |
-| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: 쿠키 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
+| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: Cookie s 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
 | `Proxy` | `null` | HTTP 요청을 보낼 때 사용할 HTTP 프록시입니다. |
 | `UseDefaultCredentials` | `false` | HTTP 및 Websocket 요청에 대 한 기본 자격 증명을 보내려면이 부울 값을 설정 합니다. 이렇게 하면 Windows 인증을 사용할 수 있습니다. |
 | `WebSocketConfiguration` | `null` | 추가 WebSocket 옵션을 구성 하는 데 사용할 수 있는 대리자입니다. 옵션을 구성 하는 데 사용할 수 있는 [ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions) 의 인스턴스를 수신 합니다. |
@@ -1522,7 +1524,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1538,7 +1540,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ASP.NET Core SignalR 는 메시지 인코딩에 [JSON](https://www.json.org/) 및 [MessagePack](https://msgpack.org/index.html)의 두 가지 프로토콜을 지원 합니다. 각 프로토콜에는 serialization 구성 옵션이 있습니다.
 
-[AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 JSON serialization을 구성할 수 있습니다 .이 메서드는 메서드에서 [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 뒤에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings) 속성은 `JsonSerializerSettings` 인수 및 반환 값의 serialization을 구성 하는 데 사용할 수 있는 JSON.NET 개체입니다. 자세한 내용은 [JSON.NET 설명서](https://www.newtonsoft.com/json/help/html/Introduction.htm)를 참조 하세요.
+[AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol) 확장 메서드를 사용 하 여 서버에서 JSON serialization을 구성할 수 있습니다 .이 메서드는 [메서드에 SignalR 추가](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr) 된 후에 추가할 수 있습니다 `Startup.ConfigureServices` . `AddJsonProtocol`메서드는 개체를 받는 대리자를 사용 합니다 `options` . 해당 개체의 [PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings) 속성은 `JsonSerializerSettings` 인수 및 반환 값의 serialization을 구성 하는 데 사용할 수 있는 JSON.NET 개체입니다. 자세한 내용은 [JSON.NET 설명서](https://www.newtonsoft.com/json/help/html/Introduction.htm)를 참조 하세요.
  
 예를 들어 기본 "camelCase" 이름 대신 "대/소문자 구분" 속성 이름을 사용 하도록 serializer를 구성 하려면에서 다음 코드를 사용 합니다 `Startup.ConfigureServices` .
  
@@ -1637,8 +1639,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 | `AuthorizationData` | 허브 클래스에 적용 된 특성에서 자동으로 수집 된 데이터 `Authorize` 입니다. | 클라이언트에 허브에 연결할 수 있는 권한이 있는지 여부를 확인 하는 데 사용 되는 [IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata) 개체의 목록입니다. |
 | `TransportMaxBufferSize` | 32KB | 서버가 버퍼링 하는 앱에서 보낸 최대 바이트 수입니다. 이 값을 늘리면 서버에서 더 큰 메시지를 보낼 수 있지만 메모리 사용에 부정적인 영향을 줄 수 있습니다. |
 | `Transports` | 모든 전송을 사용할 수 있습니다. | `HttpTransportType`클라이언트에서 연결 하는 데 사용할 수 있는 전송을 제한할 수 있는 값의 비트 플래그 열거형입니다. |
-| `LongPolling` | 아래를 참조하십시오. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
-| `WebSockets` | 아래를 참조하십시오. | Websocket 전송과 관련 된 추가 옵션입니다. |
+| `LongPolling` | 아래 내용을 참조하세요. | 긴 폴링 전송과 관련 된 추가 옵션입니다. |
+| `WebSockets` | 아래 내용을 참조하세요. | Websocket 전송과 관련 된 추가 옵션입니다. |
 
 긴 폴링 전송에는 속성을 사용 하 여 구성할 수 있는 추가 옵션이 있습니다 `LongPolling` .
 
@@ -1805,11 +1807,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공 되는 문자열을 반환 하는 함수입니다. |
 | `SkipNegotiation` | `false` | 협상 단계를 건너뛰려면이를로 설정 `true` 합니다. **Websocket 전송이 유일 하 게 설정 된 전송 인 경우에만 지원 됩니다**. Azure 서비스를 사용 하는 경우이 설정을 사용 하도록 설정할 수 없습니다 SignalR . |
 | `ClientCertificates` | Empty | 인증 요청에 보낼 TLS 인증서 컬렉션입니다. |
-| `Cookies` | Empty | 모든 HTTP 요청과 함께 보낼 HTTP 쿠키의 컬렉션입니다. |
+| `Cookies` | Empty | cookie모든 http 요청과 함께 보낼 http s의 컬렉션입니다. |
 | `Credentials` | Empty | 모든 HTTP 요청과 함께 전송할 자격 증명입니다. |
 | `CloseTimeout` | 5초 | Websocket 전용입니다. 서버가 닫기 요청을 승인할 때까지 대기한 후 클라이언트에서 대기 하는 최대 시간입니다. 이 시간 내에 서버에서 닫기를 승인 하지 않으면 클라이언트 연결이 끊어집니다. |
 | `Headers` | Empty | 모든 HTTP 요청과 함께 보낼 추가 HTTP 헤더의 맵입니다. |
-| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: 쿠키 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
+| `HttpMessageHandlerFactory` | `null` | HTTP 요청을 보내는 데 사용 되는을 구성 하거나 바꾸는 데 사용할 수 있는 대리자입니다 `HttpMessageHandler` . WebSocket 연결에는 사용 되지 않습니다. 이 대리자는 null이 아닌 값을 반환 해야 하며 기본값을 매개 변수로 받습니다. 해당 기본값에 대 한 설정을 수정 하 고 반환 하거나 새 인스턴스를 반환 `HttpMessageHandler` 합니다. **처리기를 대체할 때 제공 된 처리기에서 유지할 설정을 복사 해야 합니다. 그렇지 않으면 구성 된 옵션 (예: Cookie s 및 헤더)이 새 처리기에 적용 되지 않습니다.** |
 | `Proxy` | `null` | HTTP 요청을 보낼 때 사용할 HTTP 프록시입니다. |
 | `UseDefaultCredentials` | `false` | HTTP 및 Websocket 요청에 대 한 기본 자격 증명을 보내려면이 부울 값을 설정 합니다. 이렇게 하면 Windows 인증을 사용할 수 있습니다. |
 | `WebSocketConfiguration` | `null` | 추가 WebSocket 옵션을 구성 하는 데 사용할 수 있는 대리자입니다. 옵션을 구성 하는 데 사용할 수 있는 [ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions) 의 인스턴스를 수신 합니다. |
@@ -1865,7 +1867,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>

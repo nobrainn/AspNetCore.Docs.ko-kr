@@ -5,6 +5,8 @@ description: ASP.NET Core에 대 한 오픈 소스 인증 옵션을 검색 합�
 ms.author: riande
 ms.date: 10/28/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/community
-ms.openlocfilehash: 8f99294b6aa51eae350b3fa3f356b0b4807d0e58
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a4e32f8525447e0adb543730cd26296775d40e11
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403133"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020992"
 ---
 # <a name="community-oss-authentication-options-for-aspnet-core"></a>ASP.NET Core에 대 한 커뮤니티 OSS 인증 옵션
 
@@ -32,7 +34,7 @@ ms.locfileid: "85403133"
 | ---- | ----------- |
 | [AspNet. OpenIdConnect. 서버 (ASOS)](https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Server) | ASOS는 ASP.NET Core 및 OWIN/Katana에 대 한 낮은 수준의 프로토콜 우선 Openid connect Connect 서버 프레임 워크입니다. |
 | [Gluu 서버](https://gluu.org/) | Id, 액세스 관리 (IAM) 및 Single Sign-On (SSO)에 대 한 엔터프라이즈 준비, 오픈 소스 소프트웨어입니다. 자세한 내용은 [Gluu 제품 설명서](https://gluu.org/docs/)를 참조 하세요. |
-| [IdentityServer](https://identityserver.io/) | IdentityServer는 Openid connect Foundation 및 .NET Foundation의 거 버 넌 스에서 공식적으로 인증 된 ASP.NET Core에 대 한 Openid connect Connect 및 OAuth 2.0 프레임 워크입니다. 자세한 내용은 [IdentityServer4 (설명서) 시작](https://identityserver4.readthedocs.io/en/latest/)을 참조 하세요. |
+| [Identity서버](https://identityserver.io/) | Identity서버는 Openid connect Foundation 및 .NET Foundation의 거 버 넌 스에 의해 공식적으로 인증 된 ASP.NET Core에 대 한 Openid connect Connect 및 OAuth 2.0 프레임 워크입니다. 자세한 내용은 [ Identity Server4 (설명서) 시작](https://identityserver4.readthedocs.io/en/latest/)을 참조 하세요. |
 | [OpenIddict](https://github.com/openiddict/openiddict-core) | OpenIddict는 ASP.NET Core에 사용 하기 쉬운 Openid connect Connect 서버입니다. |
 
 공급자를 추가 하려면 [이 페이지를 편집](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Faspnet%2FDocs%2Fedit%2Fmaster%2Faspnetcore%2Fsecurity%2Fauthentication%2Fcommunity.md)합니다.

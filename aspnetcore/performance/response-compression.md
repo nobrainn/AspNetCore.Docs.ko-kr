@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 83f5b2da8fdba784131e8d159171b8433b13a091
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1dd931d0ee654b888814df8a0d0675d32b5c3a20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406474"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020966"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 응답 압축
 
@@ -53,12 +55,12 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Accept-Encoding`헤더 값 | 미들웨어 지원 | 설명 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 예(‘기본값’)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | No                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | No                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Yes                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Yes                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
-| `pack200-gzip`                  | No                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Yes                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
+| `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | 예                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
+| `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
 
 자세한 내용은 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)을 참조 하세요.
 
@@ -70,7 +72,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| 헤더             | 역할 |
+| header             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -107,7 +109,7 @@ public class Startup
 }
 ```
 
-메모:
+참고:
 
 * `app.UseResponseCompression`응답을 압축 하는 미들웨어 전에를 호출 해야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index#middleware-order>를 참조하세요.
 * [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)또는 [postman](https://www.getpostman.com/) 과 같은 도구를 사용 하 여 요청 헤더를 설정 하 `Accept-Encoding` 고 응답 헤더, 크기 및 본문을 연구 합니다.
@@ -259,7 +261,7 @@ Nginx에서 요청을 프록시 하는 경우 `Accept-Encoding` 헤더가 제거
 * 요청은 헤더를 포함 하지 않아야 합니다 `Content-Range` .
 * 응답 압축 미들웨어 옵션에 보안 프로토콜 (https)이 구성 되지 않은 경우 요청은 안전 하지 않은 프로토콜 (http)을 사용 해야 합니다. *보안 콘텐츠 압축을 사용 하도록 설정할 때 [위에서 설명한](#compression-with-secure-protocol) 위험에 유의 하십시오.*
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -299,12 +301,12 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Accept-Encoding`헤더 값 | 미들웨어 지원 | 설명 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 예(‘기본값’)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | No                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | No                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Yes                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Yes                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
-| `pack200-gzip`                  | No                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Yes                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
+| `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | 예                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
+| `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
 
 자세한 내용은 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)을 참조 하세요.
 
@@ -316,7 +318,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| 헤더             | 역할 |
+| header             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -353,7 +355,7 @@ public class Startup
 }
 ```
 
-메모:
+참고:
 
 * `app.UseResponseCompression`응답을 압축 하는 미들웨어 전에를 호출 해야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index#middleware-order>를 참조하세요.
 * [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)또는 [postman](https://www.getpostman.com/) 과 같은 도구를 사용 하 여 요청 헤더를 설정 하 `Accept-Encoding` 고 응답 헤더, 크기 및 본문을 연구 합니다.
@@ -504,7 +506,7 @@ Nginx에서 요청을 프록시 하는 경우 `Accept-Encoding` 헤더가 제거
 * 요청은 헤더를 포함 하지 않아야 합니다 `Content-Range` .
 * 응답 압축 미들웨어 옵션에 보안 프로토콜 (https)이 구성 되지 않은 경우 요청은 안전 하지 않은 프로토콜 (http)을 사용 해야 합니다. *보안 콘텐츠 압축을 사용 하도록 설정할 때 [위에서 설명한](#compression-with-secure-protocol) 위험에 유의 하십시오.*
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -544,12 +546,12 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Accept-Encoding`헤더 값 | 미들웨어 지원 | 설명 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 아니요                   | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | No                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | No                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | 예(‘기본값’)        | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Yes                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
-| `pack200-gzip`                  | No                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Yes                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
+| `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
+| `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
 
 자세한 내용은 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)을 참조 하세요.
 
@@ -561,7 +563,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| 헤더             | 역할 |
+| header             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -598,7 +600,7 @@ public class Startup
 }
 ```
 
-메모:
+참고:
 
 * `app.UseResponseCompression`응답을 압축 하는 미들웨어 전에를 호출 해야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index#middleware-order>를 참조하세요.
 * [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)또는 [postman](https://www.getpostman.com/) 과 같은 도구를 사용 하 여 요청 헤더를 설정 하 `Accept-Encoding` 고 응답 헤더, 크기 및 본문을 연구 합니다.
@@ -709,7 +711,7 @@ Nginx에서 요청을 프록시 하는 경우 `Accept-Encoding` 헤더가 제거
 * 요청은 헤더를 포함 하지 않아야 합니다 `Content-Range` .
 * 응답 압축 미들웨어 옵션에 보안 프로토콜 (https)이 구성 되지 않은 경우 요청은 안전 하지 않은 프로토콜 (http)을 사용 해야 합니다. *보안 콘텐츠 압축을 사용 하도록 설정할 때 [위에서 설명한](#compression-with-secure-protocol) 위험에 유의 하십시오.*
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

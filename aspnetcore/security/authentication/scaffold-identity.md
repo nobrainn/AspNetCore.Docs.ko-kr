@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a8ca520d84d382b95cd4c0e2962ba4e5c922049e
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464568"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022331"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core 프로젝트의 스 캐 폴드
+# <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>IdentityASP.NET Core 프로젝트의 스 캐 폴드
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -52,7 +54,7 @@ Identity기존 개별 계정이 있는 프로젝트에 새 데이터 컨텍스�
 
 일반적으로 개별 계정을 사용 하 여 만든 앱은 새 데이터 컨텍스트 ***를 만들지 않아야 합니다.***
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Identity빈 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Identity빈 프로젝트로 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -64,7 +66,7 @@ Identity기존 개별 계정이 있는 프로젝트에 새 데이터 컨텍스�
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identity Razor 기존 권한 부여 없이 프로젝트에 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Identity Razor 기존 권한 부여 없이 프로젝트에 스 캐 폴드
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -117,7 +119,7 @@ Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니�
 
 [!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Identity Razor 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -134,7 +136,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 일부 Identity 옵션은 *영역/ Identity / Identity HostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity기존 권한 부여 없이 MVC 프로젝트에 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Identity기존 권한 부여 없이 MVC 프로젝트에 스 캐 폴드
 
 <!--
 set projNam=MvcNoAuth
@@ -168,7 +170,7 @@ Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니�
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Identity권한 부여를 사용 하 여 MVC 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Identity권한 부여를 사용 하 여 MVC 프로젝트로 스 캐 폴드
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -180,7 +182,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Server 기존 권한 부여 없이 프로젝트에 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-without-existing-authorization"></a>Identity Blazor Server 기존 권한 부여 없이 프로젝트에 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -194,7 +196,7 @@ Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니�
 
 토큰은 구성 요소에 전달할 수 있습니다.
 
-* 인증 토큰을 프로 비전 하 여 인증 쿠키에 저장 하는 경우 구성 요소에 전달할 수 있습니다.
+* 인증 토큰이 프로 비전 되 고 인증에 저장 될 때 cookie 구성 요소에 전달 될 수 있습니다.
 * Razor구성 요소 `HttpContext` 는 직접 사용할 수 없으므로의 로그 아웃 끝점에 게시 하기 위해 [XSRF (요청 방지 위조) 토큰](xref:security/anti-request-forgery) 을 얻을 수 있는 방법이 없습니다 Identity `/Identity/Account/Logout` . XSRF 토큰을 구성 요소에 전달할 수 있습니다.
 
 자세한 내용은 <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>를 참조하세요.
@@ -293,11 +295,11 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 Blazor Server에서는 페이지 Razor 페이지를 사용 하므로 Identity 방문자가 Identity 페이지와 구성 요소 간을 탐색할 때 UI의 스타일이 변경 됩니다. Incongruous 스타일을 해결 하는 두 가지 옵션이 있습니다.
 
-#### <a name="build-identity-components"></a>빌드 Identity 구성 요소
+#### <a name="build-no-locidentity-components"></a>빌드 Identity 구성 요소
 
 페이지 대신 구성 요소를 사용 하는 방법은 Identity 구성 요소를 빌드하는 것입니다 Identity . `SignInManager`및 `UserManager` 는 구성 요소에서 지원 되지 않으므로 Razor 앱에서 API 끝점을 사용 Blazor Server 하 여 사용자 계정 작업을 처리 합니다.
 
-#### <a name="use-a-custom-layout-with-blazor-app-styles"></a>앱 스타일을 사용 하 여 사용자 지정 레이아웃 사용 Blazor
+#### <a name="use-a-custom-layout-with-no-locblazor-app-styles"></a>앱 스타일을 사용 하 여 사용자 지정 레이아웃 사용 Blazor
 
 Identity페이지 레이아웃 및 스타일을 수정 하 여 기본 테마를 사용 하는 페이지를 만들 수 있습니다 Blazor .
 
@@ -362,7 +364,7 @@ Identity페이지 레이아웃 및 스타일을 수정 하 여 기본 테마를 
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Server 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-with-authorization"></a>Identity Blazor Server 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -370,7 +372,7 @@ Identity페이지 레이아웃 및 스타일을 수정 하 여 기본 테마를 
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>전체 Identity UI 원본 만들기
+## <a name="create-full-no-locidentity-ui-source"></a>전체 Identity UI 원본 만들기
 
 UI에 대 한 모든 권한을 유지 하려면 Identity 스 캐 폴더을 실행 하 Identity 고 **모든 파일 재정의**를 선택 합니다.
 
@@ -414,7 +416,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들어:
+* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -476,11 +478,11 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
-## <a name="prevent-publish-of-static-identity-assets"></a>정적 자산 게시 방지 Identity
+## <a name="prevent-publish-of-static-no-locidentity-assets"></a>정적 자산 게시 방지 Identity
 
 정적 Identity 자산을 웹 루트에 게시 하지 않으려면를 참조 하십시오 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 
@@ -501,7 +503,7 @@ ASP.NET Core 2.1 이상에서는 [ASP.NET Core Identity ](xref:security/authenti
 > [!NOTE]
 > 서비스는 [두 가지 요소 인증](xref:security/authentication/identity-enable-qrcodes), [계정 확인 및 암호 복구](xref:security/authentication/accconfirm)및 기타 보안 기능을 사용 하는 경우에 필요 Identity 합니다. 스 캐 폴딩 할 때 서비스 또는 서비스 스텁이 생성 되지 않습니다 Identity . 이러한 기능을 사용 하도록 설정 하는 서비스는 수동으로 추가 해야 합니다. 예를 들어 [전자 메일 확인 필요](xref:security/authentication/accconfirm#require-email-confirmation)를 참조 하세요.
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Identity빈 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Identity빈 프로젝트로 스 캐 폴드
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -513,7 +515,7 @@ ASP.NET Core 2.1 이상에서는 [ASP.NET Core Identity ](xref:security/authenti
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identity Razor 기존 권한 부여 없이 프로젝트에 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Identity Razor 기존 권한 부여 없이 프로젝트에 스 캐 폴드
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -558,7 +560,7 @@ Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니�
 
 [!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Identity Razor 권한 부여를 사용 하 여 프로젝트로 스 캐 폴드
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -575,7 +577,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 일부 Identity 옵션은 *영역/ Identity / Identity HostingStartup.cs*구성 됩니다. 자세한 내용은 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)를 참조 하세요.
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity기존 권한 부여 없이 MVC 프로젝트에 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Identity기존 권한 부여 없이 MVC 프로젝트에 스 캐 폴드
 
 <!--
 set projNam=MvcNoAuth
@@ -609,7 +611,7 @@ Identity는 *영역/ Identity / Identity HostingStartup.cs*에서 구성 됩니�
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Identity권한 부여를 사용 하 여 MVC 프로젝트로 스 캐 폴드
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Identity권한 부여를 사용 하 여 MVC 프로젝트로 스 캐 폴드
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -625,7 +627,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>전체 Identity UI 원본 만들기
+## <a name="create-full-no-locidentity-ui-source"></a>전체 Identity UI 원본 만들기
 
 UI에 대 한 모든 권한을 유지 하려면 Identity 스 캐 폴더을 실행 하 Identity 고 **모든 파일 재정의**를 선택 합니다.
 
@@ -667,7 +669,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들어:
+* 스 캐 폴드 Identity . Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -729,7 +731,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 

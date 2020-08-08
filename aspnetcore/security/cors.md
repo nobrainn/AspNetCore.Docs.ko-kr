@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: ee640ded37f40175e3e150f713fa970e9705b62c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212896"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021109"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core에서 CORS (원본 간 요청) 사용
 
@@ -79,7 +81,7 @@ CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드�
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,32)]
 
-앞의 코드는:
+위의 코드는
 
 * 정책 이름을로 설정 `_myAllowSpecificOrigins` 합니다. 정책 이름은 임의로입니다.
 * <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>확장 메서드를 호출 하 고 `_myAllowSpecificOrigins` CORS 정책을 지정 합니다. `UseCors`CORS 미들웨어를 추가 합니다. 에 대 `UseCors` 한 호출은 앞에 배치 해야 `UseRouting` `UseAuthorization` 합니다. 자세한 내용은 [미들웨어 순서](xref:fundamentals/middleware/index#middleware-order)를 참조 하세요.
@@ -123,7 +125,7 @@ CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드�
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
-앞의 코드에서 다음을 확인할 수 있습니다.
+위의 코드에서
 
 * `app.UseCors`CORS 미들웨어를 사용 하도록 설정 합니다. 기본 정책은 구성 되지 않았기 때문에 `app.UseCors()` CORS를 사용 하도록 설정 하지 않습니다.
 * `/echo`및 컨트롤러 끝점은 지정 된 정책을 사용 하 여 원본 간 요청을 허용 합니다.
@@ -184,7 +186,7 @@ CORS 요청 제한의 가장 적합 한 제어:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet&highlight=1,23)]
 
-앞의 코드는:
+위의 코드는
 
 * [끝점 라우팅을](#ecors)사용 하 여 CORS를 사용 하도록 설정 하지 않습니다.
 * [기본 CORS 정책을](#dp)정의 하지 않습니다.
@@ -272,7 +274,7 @@ CORS 사양은 이러한 헤더 *단순 응답 헤더*를 호출 합니다. 앱�
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a>원본 간 요청에 대 한 자격 증명
 
-자격 증명을 CORS 요청에서 특수 하 게 처리 해야 합니다. 기본적으로 브라우저는 원본 간 요청과 함께 자격 증명을 보내지 않습니다. 자격 증명에는 쿠키 및 HTTP 인증 스키마가 포함 됩니다. 원본 간 요청을 사용 하 여 자격 증명을 보내려면 클라이언트는를로 설정 해야 합니다 `XMLHttpRequest.withCredentials` `true` .
+자격 증명을 CORS 요청에서 특수 하 게 처리 해야 합니다. 기본적으로 브라우저는 원본 간 요청과 함께 자격 증명을 보내지 않습니다. 자격 증명 cookie 에는 및 HTTP 인증 스키마가 포함 됩니다. 원본 간 요청을 사용 하 여 자격 증명을 보내려면 클라이언트는를로 설정 해야 합니다 `XMLHttpRequest.withCredentials` `true` .
 
 `XMLHttpRequest`직접 사용:
 
@@ -370,7 +372,7 @@ User-Agent: Mozilla/5.0
 
 콘솔 앱은 F12 도구를 사용 하 여 브라우저에 따라 다음과 같은 오류를 표시 합니다.
 
-* Firefox: 크로스-원본 요청 차단 됨: 동일한 원본 정책이에서 원격 리소스를 읽을 것을 허용 하지 `https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5` 않습니다. (원인: CORS 요청이 실패 했습니다.) [자세한 정보](https://developer.mozilla.org/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed)
+* Firefox: 크로스-원본 요청 차단 됨: 동일한 원본 정책이에서 원격 리소스를 읽을 것을 허용 하지 `https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5` 않습니다. (원인: CORS 요청이 실패 했습니다.) [자세한 내용](https://developer.mozilla.org/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed)
 * Chromium based: ' ' 원본에서 ' '의 fetch에 대 한 액세스가 https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5 https://cors3.azurewebsites.net CORS 정책에 의해 차단 되었습니다. 실행 전 요청에 대 한 응답은 액세스 제어 확인을 통과 하지 않습니다. 요청한 리소스에 ' 액세스 제어-허용-원본 ' 헤더가 없습니다. 사용자 요구에 불명확한 응답이 제공되면 요청 모드를 'no-cors'로 설정하여 CORS가 사용되지 않도록 설정된 리소스를 가져옵니다.
 
 특정 헤더를 허용 하려면 다음을 호출 합니다 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
@@ -665,7 +667,7 @@ CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드�
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
-앞의 코드는:
+위의 코드는
 
 * 정책 이름을 " \_ myAllowSpecificOrigins"로 설정 합니다. 정책 이름은 임의로입니다.
 * <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>CORS를 사용 하도록 설정 하는 확장 메서드를 호출 합니다.
@@ -819,7 +821,7 @@ CORS 사양은 이러한 헤더 *단순 응답 헤더*를 호출 합니다. 앱�
 
 ### <a name="credentials-in-cross-origin-requests"></a>원본 간 요청에 대 한 자격 증명
 
-자격 증명을 CORS 요청에서 특수 하 게 처리 해야 합니다. 기본적으로 브라우저는 원본 간 요청과 함께 자격 증명을 보내지 않습니다. 자격 증명에는 쿠키 및 HTTP 인증 스키마가 포함 됩니다. 원본 간 요청을 사용 하 여 자격 증명을 보내려면 클라이언트는를로 설정 해야 합니다 `XMLHttpRequest.withCredentials` `true` .
+자격 증명을 CORS 요청에서 특수 하 게 처리 해야 합니다. 기본적으로 브라우저는 원본 간 요청과 함께 자격 증명을 보내지 않습니다. 자격 증명 cookie 에는 및 HTTP 인증 스키마가 포함 됩니다. 원본 간 요청을 사용 하 여 자격 증명을 보내려면 클라이언트는를로 설정 해야 합니다 `XMLHttpRequest.withCredentials` `true` .
 
 `XMLHttpRequest`직접 사용:
 
@@ -988,7 +990,7 @@ Test message
 CORS를 테스트 하려면:
 
 1. [API 프로젝트를 만듭니다](xref:tutorials/first-web-api). 또는 [샘플을 다운로드할](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)수 있습니다.
-1. 이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다. 예를 들면 다음과 같습니다.
+1. 이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다. 예:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 

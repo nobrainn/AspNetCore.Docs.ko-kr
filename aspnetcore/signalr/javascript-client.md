@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 8c7acad42f3a49ccf1bc60f8ae5b4f68a602d97b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 04200ced41113eb9a68cefc2f485f2d3798476c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406929"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022344"
 ---
-# <a name="aspnet-core-signalr-javascript-client"></a>SignalRJavaScript 클라이언트 ASP.NET Core
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript 클라이언트 ASP.NET Core
 
 작성자: [Rachel Appel](https://twitter.com/rachelappel)
 
@@ -30,7 +32,7 @@ ms.locfileid: "85406929"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-signalr-client-package"></a>클라이언트 패키지를 설치 합니다. SignalR
+## <a name="install-the-no-locsignalr-client-package"></a>클라이언트 패키지를 설치 합니다. SignalR
 
 SignalRJavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.com/) 패키지로 제공 됩니다. 다음 섹션에서는 클라이언트 라이브러리를 설치 하는 다양 한 방법에 대해 간략하게 설명 합니다.
 
@@ -60,7 +62,7 @@ npm 패키지 콘텐츠를 *node_modules \\ @aspnet\signalr\dist\browser * 폴�
 
 ::: moniker-end
 
-SignalR요소에서 JavaScript 클라이언트를 참조 `<script>` 합니다. 예를 들면 다음과 같습니다.
+SignalR요소에서 JavaScript 클라이언트를 참조 `<script>` 합니다. 예:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -68,7 +70,7 @@ SignalR요소에서 JavaScript 클라이언트를 참조 `<script>` 합니다. �
 
 ### <a name="use-a-content-delivery-network-cdn"></a>CDN (Content Delivery Network) 사용
 
-Npm 필수 구성 요소 없이 클라이언트 라이브러리를 사용 하려면 클라이언트 라이브러리의 CDN 호스트 복사본을 참조 합니다. 예를 들면 다음과 같습니다.
+Npm 필수 구성 요소 없이 클라이언트 라이브러리를 사용 하려면 클라이언트 라이브러리의 CDN 호스트 복사본을 참조 합니다. 예:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -309,7 +311,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 실제 구현에서는 지 수 백오프를 사용 하거나 지정 된 횟수 만큼 다시 시도 하 여 포기 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [JavaScript API 참조](/javascript/api/?view=signalr-js-latest)
 * [JavaScript 자습서](xref:tutorials/signalr)

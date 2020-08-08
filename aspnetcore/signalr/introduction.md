@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6f3cec83c9af5ec6e820db4a15061eddac613f36
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404953"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022175"
 ---
-# <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core SignalR 소개
+# <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core SignalR 소개
 
-## <a name="what-is-signalr"></a>SignalR란?
+## <a name="what-is-no-locsignalr"></a>SignalR란?
 
 ASP.NET Core SignalR 는 응용 프로그램에 실시간 웹 기능 추가를 간소화 하는 오픈 소스 라이브러리입니다. 실시간 웹 기능을 사용 하면 서버측 코드에서 클라이언트에 콘텐츠를 즉시 푸시할 수 있습니다.
 
@@ -64,7 +66,7 @@ SignalR*허브* 를 사용 하 여 클라이언트와 서버 간에 통신 합�
 
 허브는 클라이언트 쪽 메서드의 이름 및 매개 변수를 포함 하는 메시지를 전송 하 여 클라이언트 쪽 코드를 호출 합니다. 메서드 매개 변수로 보낸 개체는 구성 된 프로토콜을 사용 하 여 deserialize 됩니다. 클라이언트는 클라이언트 쪽 코드의 메서드와 이름을 일치 시 키 려 고 시도 합니다. 클라이언트에서 일치 하는 항목을 찾으면 메서드를 호출 하 여 deserialize 된 매개 변수 데이터를 전달 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [SignalRASP.NET Core에 대 한 시작](xref:tutorials/signalr)
 * [지원 되는 플랫폼](xref:signalr/supported-platforms)

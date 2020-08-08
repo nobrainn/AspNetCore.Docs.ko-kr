@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 4e125fd6c4ad2cd4989d692dd28a63638218ee57
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400416"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022474"
 ---
-# <a name="security-considerations-in-aspnet-core-signalr"></a>ASP.NET Core의 보안 고려 사항SignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>ASP.NET Core의 보안 고려 사항SignalR
 
 [Andrew Stanton-간호사](https://twitter.com/anurse)
 
@@ -30,7 +32,7 @@ ms.locfileid: "85400416"
 
 ## <a name="cross-origin-resource-sharing"></a>크로스-원본 자원 공유
 
-[CORS (크로스-원본 자원 공유)](https://www.w3.org/TR/cors/) 를 사용 하 여 브라우저에서 크로스-원본 연결을 허용할 수 있습니다 SignalR . JavaScript 코드가 앱과 다른 도메인에서 호스트 되는 경우 SignalR javascript가 앱에 연결할 수 있도록 [CORS 미들웨어](xref:security/cors) 를 사용 하도록 설정 해야 합니다 SignalR . 신뢰 하거나 제어 하는 도메인 에서만 원본 간 요청을 허용 합니다. 예를 들면 다음과 같습니다.
+[CORS (크로스-원본 자원 공유)](https://www.w3.org/TR/cors/) 를 사용 하 여 브라우저에서 크로스-원본 연결을 허용할 수 있습니다 SignalR . JavaScript 코드가 앱과 다른 도메인에서 호스트 되는 경우 SignalR javascript가 앱에 연결할 수 있도록 [CORS 미들웨어](xref:security/cors) 를 사용 하도록 설정 해야 합니다 SignalR . 신뢰 하거나 제어 하는 도메인 에서만 원본 간 요청을 허용 합니다. 예:
 
 * 사이트는에서 호스트 됩니다.`http://www.example.com`
 * SignalR앱이에서 호스팅됩니다.`http://signalr.example.com`
@@ -41,12 +43,12 @@ CORS를 구성 하는 방법에 대 한 자세한 내용은 [cors (원본 간 �
 
 * 필요한 특정 원본을 허용 합니다. 모든 원본을 허용 하는 것은 가능 하지만 안전 하거나 권장 **하지** 않습니다.
 * HTTP 메서드 `GET` 및가 `POST` 허용 되어야 합니다.
-* 쿠키 기반 고정 세션이 제대로 작동 하려면 자격 증명을 허용 해야 합니다. 인증을 사용 하지 않는 경우에도 사용 하도록 설정 해야 합니다.
+* cookie기반 고정 세션이 제대로 작동 하려면 자격 증명을 허용 해야 합니다. 인증을 사용 하지 않는 경우에도 사용 하도록 설정 해야 합니다.
 
 ::: moniker range=">= aspnetcore-5.0"
 
 그러나 5.0에서는 자격 증명을 사용 하지 않도록 TypeScript 클라이언트에서 옵션을 제공 했습니다.
-자격 증명을 사용 하지 않는 옵션은 쿠키와 같은 자격 증명이 앱에 필요 하지 않은 100%를 알고 있는 경우에만 사용 해야 합니다. 고정 세션에 여러 서버를 사용 하는 경우 azure app service에서 쿠키를 사용 합니다.
+자격 증명을 사용 하지 않도록 하는 옵션은 응용 프로그램에서와 같은 자격 증명이 필요 하지 않은 100%를 알고 있는 경우에만 사용 해야 합니다 Cookie ( cookie 고정 세션에 여러 서버를 사용 하는 경우 azure app service에서 사용 됨).
 
 ::: moniker-end
 
@@ -120,7 +122,7 @@ ASP.NET Core 2.1 이상에서 헤더 유효성 검사는 이전에 배치 된 �
 
 ## <a name="access-token-logging"></a>액세스 토큰 로깅
 
-Websocket 또는 서버에서 보낸 이벤트를 사용 하는 경우 browser 클라이언트는 쿼리 문자열에 액세스 토큰을 보냅니다. 쿼리 문자열을 통해 액세스 토큰을 받는 것은 일반적으로 표준 헤더를 사용 하는 것 만큼 안전 `Authorization` 합니다. 항상 HTTPS를 사용 하 여 클라이언트와 서버 간의 안전한 종단 간 연결을 보장 합니다. 많은 웹 서버는 쿼리 문자열을 포함 하 여 각 요청에 대 한 URL을 기록 합니다. Url을 기록 하면 액세스 토큰이 기록 될 수 있습니다. ASP.NET Core은 기본적으로 쿼리 문자열을 포함 하는 각 요청에 대 한 URL을 기록 합니다. 예를 들면 다음과 같습니다.
+Websocket 또는 서버에서 보낸 이벤트를 사용 하는 경우 browser 클라이언트는 쿼리 문자열에 액세스 토큰을 보냅니다. 쿼리 문자열을 통해 액세스 토큰을 받는 것은 일반적으로 표준 헤더를 사용 하는 것 만큼 안전 `Authorization` 합니다. 항상 HTTPS를 사용 하 여 클라이언트와 서버 간의 안전한 종단 간 연결을 보장 합니다. 많은 웹 서버는 쿼리 문자열을 포함 하 여 각 요청에 대 한 URL을 기록 합니다. Url을 기록 하면 액세스 토큰이 기록 될 수 있습니다. ASP.NET Core은 기본적으로 쿼리 문자열을 포함 하는 각 요청에 대 한 URL을 기록 합니다. 예:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

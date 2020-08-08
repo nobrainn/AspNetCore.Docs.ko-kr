@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: cfa1a4c67649e1816f510a33cc53e559c4a59153
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2d128d54dc9b1189124563e45d72d74b19704ab1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408684"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022526"
 ---
-# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
+# <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
 
 [Andrew Stanton-간호사](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster)및 [Tom Dykstra](https://github.com/tdykstra)
 
@@ -48,7 +50,7 @@ SignalR특정 연결에 대 한 모든 HTTP 요청을 동일한 서버 프로세
 
 에서 연결 관련 리소스를 많이 사용 하는 SignalR 것은 동일한 서버에서 호스트 되는 다른 웹 앱에 영향을 줄 수 있습니다. SignalR가 열리고 사용 가능한 마지막 TCP 연결을 보유 하는 경우 동일한 서버의 다른 웹 앱에도 더 이상 사용할 수 있는 연결이 없습니다.
 
-서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 예를 들면 다음과 같습니다.
+서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 예:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -62,15 +64,15 @@ SignalR다른 웹 앱에서 리소스를 사용 하 여 오류가 발생 하는 
 
 를 사용 하는 앱은 SignalR 모든 연결을 추적 해야 하므로 서버 팜에 대 한 문제가 발생 합니다. 서버를 추가 하 고 다른 서버에서 알지 못하는 새 연결을 가져옵니다. 예를 들어 SignalR 다음 다이어그램의 각 서버에서 다른 서버에 대 한 연결을 인식 하지 못합니다. SignalR서버 중 하나에서 모든 클라이언트에 게 메시지를 보내려고 하면 해당 서버에 연결 된 클라이언트에만 메시지가 전달 됩니다.
 
-![SignalR후면판 없이 크기 조정](scale/_static/scale-no-backplane.png)
+![크기 조정::: no-loc (SignalR)::: 후면판 없음](scale/_static/scale-no-backplane.png)
 
 이 문제를 해결 하기 위한 옵션은 [Azure SignalR 서비스](#azure-signalr-service) 및 [Redis 후면판](#redis-backplane)입니다.
 
-## <a name="azure-signalr-service"></a>Azure SignalR 서비스
+## <a name="azure-no-locsignalr-service"></a>Azure SignalR 서비스
 
 Azure SignalR 서비스는 후면판이 아닌 프록시입니다. 클라이언트는 서버에 대 한 연결을 시작할 때마다 서비스에 연결 하기 위해 리디렉션됩니다. 이 프로세스는 다음 다이어그램에 설명 되어 있습니다.
 
-![Azure 서비스에 대 한 연결 설정 SignalR](scale/_static/azure-signalr-service-one-connection.png)
+![Azure::: no loc (SignalR)::: Service에 대 한 연결 설정](scale/_static/azure-signalr-service-one-connection.png)
 
 그 결과 서비스는 모든 클라이언트 연결을 관리 하는 반면, 각 서버는 다음 다이어그램에 표시 된 것과 같이 서비스에 대 한 연결 수가 작은 경우에만 필요 합니다.
 
@@ -126,7 +128,7 @@ proxy_set_header Connection $connection_upgrade;
 
 자세한 내용은 [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)(NGINX를 WebSocket 프록시로 사용)를 참조하세요.
 
-## <a name="third-party-signalr-backplane-providers"></a>타사 SignalR 후면판 공급자
+## <a name="third-party-no-locsignalr-backplane-providers"></a>타사 SignalR 후면판 공급자
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)

@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160283"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021188"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 웹 앱 만들기
 
@@ -330,7 +332,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 | 사용자                | 앱에서 시드 | 옵션                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | 예                | 자신의 데이터를 편집/삭제 합니다.                |
+| test@example.com    | 아니요                | 자신의 데이터를 편집/삭제 합니다.                |
 | manager@contoso.com | 예               | 자신의 데이터를 승인/거부 하 고 편집/삭제 합니다. |
 | admin@contoso.com   | 예               | 모든 데이터를 승인/거부 하 고 편집/삭제 합니다. |
 
@@ -657,7 +659,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 | 사용자                | 앱에서 시드 | 옵션                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | 예                | 자신의 데이터를 편집/삭제 합니다.                |
+| test@example.com    | 아니요                | 자신의 데이터를 편집/삭제 합니다.                |
 | manager@contoso.com | 예               | 자신의 데이터를 승인/거부 하 고 편집/삭제 합니다. |
 | admin@contoso.com   | 예               | 모든 데이터를 승인/거부 하 고 편집/삭제 합니다. |
 

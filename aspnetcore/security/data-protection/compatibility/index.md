@@ -5,6 +5,8 @@ description: 이 문서는 다양한 ASP.NET Core 데이터 보호 호환성 항
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/index
-ms.openlocfilehash: 75eea8721910b5ecba4578440a5290599bdc1735
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f6bcbdced248ca33b3df4ae40c946e68e6471cb0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408008"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021798"
 ---
 # <a name="compatibility-in-aspnet-core"></a>ASP.NET Core의 호환성
 
