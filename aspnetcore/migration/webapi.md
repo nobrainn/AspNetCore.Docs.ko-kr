@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407228"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014817"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API에서 ASP.NET Core로 마이그레이션
 
@@ -77,7 +79,7 @@ Visual Studio에서 비어 있는 새 솔루션을 만들고 마이그레이션�
 
 ASP.NET Core *App_Start* 폴더 또는 *global.asax* 파일을 사용 하지 않습니다. 또한 *web.config* 파일은 게시할 때 추가 됩니다.
 
-`Startup` 클래스는:
+`Startup` 클래스:
 
 * *Global.asax*를 바꿉니다.
 * 모든 앱 시작 작업을 처리 합니다.
@@ -142,9 +144,9 @@ ASP.NET Core *API* 프로젝트 템플릿에는 생성 된 코드의 끝점 라�
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)작업에 특성을 적용 `GetAllProducts` 합니다.
     * `[HttpGet("{id}")]`작업에 특성을 적용 `GetProduct` 합니다.
 
-마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1` ) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
+마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. `/api/products/1`으로 이동합니다. 첫 번째 제품이 표시 됩니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -153,7 +155,7 @@ ASP.NET Core *API* 프로젝트 템플릿에는 생성 된 코드의 끝점 라�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -190,7 +192,7 @@ Visual Studio에서 다음 단계를 완료 합니다.
 * *App_Start* 폴더 또는 *global.asax* 파일
 * *web.config* 파일은 게시할 때 추가 됩니다.
 
-`Startup` 클래스는:
+`Startup` 클래스:
 
 * *Global.asax*를 바꿉니다.
 * 모든 앱 시작 작업을 처리 합니다.
@@ -255,7 +257,7 @@ ASP.NET Core에는 다음 구성 요소가 없습니다.
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)작업에 특성을 적용 `GetAllProducts` 합니다.
     * `[HttpGet("{id}")]`작업에 특성을 적용 `GetProduct` 합니다.
 
-마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1` ) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
+마이그레이션된 프로젝트를 실행 하 고로 이동 `/api/products` 합니다. 세 제품의 전체 목록이 표시 됩니다. `/api/products/1`으로 이동합니다. 첫 번째 제품이 표시 됩니다.
 
 ## <a name="compatibility-shim"></a>호환성 shim
 
@@ -288,7 +290,7 @@ Web API 호환성 shim은 ASP.NET Core로의 large ASP.NET 4.x 웹 API 프로젝
 1. 에서를 호출 하 여 앱의 DI 컨테이너에 호환성 shim의 서비스를 등록 `services.AddMvc().AddWebApiConventions()` `Startup.ConfigureServices` 합니다.
 1. 앱 호출의에서를 사용 하 여 웹 API 관련 경로를 정의 `MapWebApiRoute` `IRouteBuilder` `IApplicationBuilder.UseMvc` 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

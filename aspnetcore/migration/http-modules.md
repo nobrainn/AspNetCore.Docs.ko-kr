@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403653"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014986"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP 처리기 및 모듈을 ASP.NET Core 미들웨어로 마이그레이션
 
@@ -291,7 +293,7 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext. 쿠키** 는 다음과 같이 변환 됩니다.
+**HttpContext 요청. Cookie **는 다음과 같이 변환 됩니다.
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -374,9 +376,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-**Httpcontext.current 응답 쿠키**
+**HttpContext 응답입니다. Cookie 삭제**
 
-쿠키는 *집합 쿠키* 응답 헤더의 브라우저로 이동 합니다. 따라서 쿠키를 보내려면 응답 헤더를 보내는 데 사용 되는 것과 동일한 콜백이 필요 합니다.
+Cookies는 *설정- Cookie * 응답 헤더의 브라우저로 이동 합니다. 따라서를 보내는 cookie 데는 응답 헤더를 보내는 데 사용 되는 것과 동일한 콜백이 필요 합니다.
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -390,9 +392,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [HTTP 처리기 및 HTTP 모듈 개요](/iis/configuration/system.webserver/)
-* [구성](xref:fundamentals/configuration/index)
+* [Configuration](xref:fundamentals/configuration/index)
 * [응용 프로그램 시작](xref:fundamentals/startup)
 * [미들웨어](xref:fundamentals/middleware/index)

@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: 545027c128214f7b0936126c47068fc234065520
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: afbc5196eaaaa402ddbf50f6330a683ee88984eb
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951911"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014869"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 
@@ -27,7 +29,7 @@ ms.locfileid: "85951911"
 
 이 문서는 ASP.NET 애플리케이션을 ASP.NET Core 2.0으로 마이그레이션하기 위한 참조 가이드로 사용됩니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 [.Net 다운로드: Windows](https://dotnet.microsoft.com/download)에서 다음 중 **하나** 를 설치 합니다.
 

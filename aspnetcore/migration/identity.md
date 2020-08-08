@@ -5,6 +5,8 @@ description: ASP.NET MVC 프로젝트에서 ASP.NET Core MVC 프로젝트로 인
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 995de894bc77c4db5e5683b36e691b0c5a3463d3
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a6cc1e612dbf59dc2db2eca165dd1a03ab92f81
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403757"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014934"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core"></a>인증 및 Identity ASP.NET Core로 마이그레이션
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>인증 및 Identity ASP.NET Core로 마이그레이션
 
 작성자: [Steve Smith](https://ardalis.com/)
 
 이전 문서에서는 [ASP.NET mvc 프로젝트에서 ASP.NET CORE mvc로 구성을 마이그레이션](xref:migration/configuration)했습니다. 이 문서에서는 등록, 로그인 및 사용자 관리 기능을 마이그레이션합니다.
 
-## <a name="configure-identity-and-membership"></a>구성 Identity 및 멤버 자격
+## <a name="configure-no-locidentity-and-membership"></a>구성 Identity 및 멤버 자격
 
-ASP.NET MVC에서 인증 및 id 기능은 Identity *App_Start* 폴더에 있는 *Startup.Auth.cs* 및 *IdentityConfig.cs*의 ASP.NET를 사용 하 여 구성 됩니다. ASP.NET Core MVC에서 이러한 기능은 *Startup.cs*에서 구성 됩니다.
+ASP.NET MVC에서 인증 및 id 기능은 Identity *App_Start* 폴더에 있는 *Startup.Auth.cs* 및 * Identity Config.cs*의 ASP.NET를 사용 하 여 구성 됩니다. ASP.NET Core MVC에서 이러한 기능은 *Startup.cs*에서 구성 됩니다.
 
 다음 NuGet 패키지를 설치 합니다.
 
@@ -53,7 +55,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-이 시점에서 ASP.NET MVC 프로젝트에서 아직 마이그레이션하지 않은 두 가지 형식이 위의 코드에서 참조 되었습니다. `ApplicationDbContext` 및 `ApplicationUser` . ASP.NET Core 프로젝트에서 새 *모델* 폴더를 만들고 이러한 형식에 해당 하는 두 개의 클래스를 추가 합니다. */Models/IdentityModels.cs*에서 이러한 클래스의 ASP.NET MVC 버전을 찾을 수 있지만 마이그레이션된 프로젝트에서 클래스 당 파일 하나를 사용 하는 것이 더 명확 하기 때문입니다.
+이 시점에서 ASP.NET MVC 프로젝트에서 아직 마이그레이션하지 않은 두 가지 형식이 위의 코드에서 참조 되었습니다. `ApplicationDbContext` 및 `ApplicationUser` . ASP.NET Core 프로젝트에서 새 *모델* 폴더를 만들고 이러한 형식에 해당 하는 두 개의 클래스를 추가 합니다. */Models/ Identity Models.cs*에서 이러한 클래스의 ASP.NET MVC 버전을 찾을 수 있지만 마이그레이션된 프로젝트에서 클래스 당 파일 하나를 사용 하는 것이 더 명확 하기 때문입니다.
 
 *ApplicationUser.cs*:
 

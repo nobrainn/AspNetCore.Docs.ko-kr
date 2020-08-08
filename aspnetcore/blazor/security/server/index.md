@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 69a24fc955a0f2fb524ec817eb50372052f538a1
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944258"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013998"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor Server 앱 보호
+# <a name="secure-aspnet-core-no-locblazor-server-apps"></a>ASP.NET Core Blazor Server 앱 보호
 
 [Luke Latham](https://github.com/guardrex)으로
 
 Blazor Server 앱은 ASP.NET Core 앱과 동일한 방식으로 보안이 구성됩니다. 자세한 내용은 <xref:security/index>의 문서를 참조하세요. 이 개요의 항목은 Blazor Server에만 적용됩니다. 
 
-## <a name="blazor-server-project-template"></a>Blazor Server 프로젝트 템플릿
+## <a name="no-locblazor-server-project-template"></a>Blazor Server 프로젝트 템플릿
 
 프로젝트를 만들 때 인증을 위해 Blazor Server 프로젝트 템플릿을 구성할 수 있습니다.
 
@@ -109,7 +111,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 ---
 
-## <a name="scaffold-identity"></a>스캐폴드 Identity
+## <a name="scaffold-no-locidentity"></a>스캐폴드 Identity
 
 Blazor Server 프로젝트에 Identity를 스캐폴드합니다.
 

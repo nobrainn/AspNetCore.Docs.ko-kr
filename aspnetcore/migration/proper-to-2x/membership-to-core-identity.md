@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059775"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014895"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET Membership authentication에서 ASP.NET Core 2.0으로 마이그레이션Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>ASP.NET Membership authentication에서 ASP.NET Core 2.0으로 마이그레이션Identity
 
 작성자: [Isaac Levin](https://isaaclevin.com)
 
@@ -38,14 +40,14 @@ ASP.NET 2.0 이전에는 개발자가 앱에 대 한 전체 인증 및 권한 �
 
 기존 앱을 ASP.NET Core 2.0로 마이그레이션하려면 Identity 이러한 테이블의 데이터를 새 스키마에서 사용 하는 테이블로 마이그레이션해야 합니다 Identity .
 
-## <a name="aspnet-core-identity-20-schema"></a>ASP.NET Core Identity 2.0 스키마
+## <a name="aspnet-core-no-locidentity-20-schema"></a>ASP.NET Core Identity 2.0 스키마
 
 ASP.NET Core 2.0은 [Identity](/aspnet/identity/index) ASP.NET 4.5에 도입 된 원칙을 따릅니다. 원칙이 공유 되기는 하지만 프레임 워크 간의 구현은 ASP.NET Core 버전 간에도 다릅니다 ( [인증 마이그레이션 및 Identity ASP.NET Core 2.0](xref:migration/1x-to-2x/index)참조).
 
 ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity 새 ASP.NET Core 2.0 앱을 만드는 것입니다. Visual Studio 2017에서 다음 단계를 수행 합니다.
 
 1. **파일** > **새로 만들기** > **프로젝트**를 선택합니다.
-1. *CoreIdentitySample*이라는 새 **ASP.NET Core 웹 응용 프로그램** 프로젝트를 만듭니다.
+1. *핵심 Identity 샘플*이라는 새 **ASP.NET Core 웹 응용 프로그램** 프로젝트를 만듭니다.
 1. 드롭다운 목록에서 **ASP.NET Core 2.0** 을 선택 하 고 **웹 응용 프로그램**을 선택 합니다. 이 템플릿은 [ Razor 페이지](xref:razor-pages/index) 앱을 생성 합니다. **확인**을 클릭 하기 전에 **인증 변경**을 클릭 합니다.
 1. 템플릿에 대 한 **개별 사용자 계정을** 선택 Identity 합니다. 마지막으로 **확인**을 클릭 한 다음 **확인**을 클릭 합니다. Visual Studio는 ASP.NET Core 템플릿을 사용 하 여 프로젝트를 만듭니다 Identity .
 1. **도구**  >  **NuGet 패키지 관리자**  >  **패키지 관리자 콘솔** 을 선택 하 여 PMC ( **패키지 관리자 콘솔** ) 창을 엽니다.
@@ -67,7 +69,7 @@ ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity
 
     `Update-Database`명령은 스키마를 사용 하 여 지정 된 데이터베이스와 앱 초기화에 필요한 모든 데이터를 만들었습니다. 다음 그림에서는 앞의 단계를 사용 하 여 만든 테이블 구조를 보여 줍니다.
 
-    ![Identity표의](identity/_static/identity-tables.png)
+    ![::: no loc (Id)::: Tables](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>스키마 마이그레이션
 
@@ -75,7 +77,7 @@ ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity
 
 ### <a name="users"></a>사용자
 
-|Identity<br>( `dbo.AspNetUsers` ) 열  |형식     |Membership<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 열|형식      |
+|Identity<br>( `dbo.AspNetUsers` ) 열  |Type     |Membership<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 열|Type      |
 |-------------------------------------------|-----------------------------------------------------------------------|
 | `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
 | `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
@@ -90,7 +92,7 @@ ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity
 
 ### <a name="roles"></a>역할
 
-|Identity<br>( `dbo.AspNetRoles` ) 열|형식|Membership<br>( `dbo.aspnet_Roles` ) 열|형식|
+|Identity<br>( `dbo.AspNetRoles` ) 열|Type|Membership<br>( `dbo.aspnet_Roles` ) 열|Type|
 |----------------------------------------|-----------------------------------|
 |`Id`                           |`string`|`RoleId`         | `string`        |
 |`Name`                         |`string`|`RoleName`       | `string`        |
@@ -98,12 +100,12 @@ ASP.NET Core 2.0에 대 한 스키마를 보는 가장 빠른 방법은 Identity
 
 ### <a name="user-roles"></a>사용자 역할
 
-|Identity<br>( `dbo.AspNetUserRoles` ) 열|형식|Membership<br>( `dbo.aspnet_UsersInRoles` ) 열|형식|
+|Identity<br>( `dbo.AspNetUserRoles` ) 열|Type|Membership<br>( `dbo.aspnet_UsersInRoles` ) 열|Type|
 |-------------------------|----------|--------------|---------------------------|
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-*사용자* 및 *역할*에 대 한 마이그레이션 스크립트를 만들 때 위의 매핑 테이블을 참조 합니다. 다음 예에서는 데이터베이스 서버에 데이터베이스가 두 개 있다고 가정 합니다. 하나의 데이터베이스에는 기존 ASP.NET 멤버 자격 스키마 및 데이터가 포함 됩니다. 다른 *CoreIdentitySample* 데이터베이스는 앞에서 설명한 단계를 사용 하 여 만들어졌습니다. 자세한 내용은 주석이 인라인으로 포함 되어 있습니다.
+*사용자* 및 *역할*에 대 한 마이그레이션 스크립트를 만들 때 위의 매핑 테이블을 참조 합니다. 다음 예에서는 데이터베이스 서버에 데이터베이스가 두 개 있다고 가정 합니다. 하나의 데이터베이스에는 기존 ASP.NET 멤버 자격 스키마 및 데이터가 포함 됩니다. 다른 *핵심 Identity 샘플* 데이터베이스는 앞에서 설명한 단계를 사용 하 여 만들어졌습니다. 자세한 내용은 주석이 인라인으로 포함 되어 있습니다.
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB

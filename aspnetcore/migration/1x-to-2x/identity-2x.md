@@ -5,6 +5,8 @@ description: 이 문서에서는 ASP.NET Core 1.x 인증 및 ASP.NET Core 2.0를
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: dacf6fa7191f51f36b9ba65a90746a26f958fc03
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408671"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015292"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>인증과 Identity ASP.NET Core 2.0으로 마이그레이션
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>인증과 Identity ASP.NET Core 2.0으로 마이그레이션
 
 [Scott Addie](https://github.com/scottaddie) 및 [jia-hao Kung](https://github.com/HaoK)
 
@@ -86,19 +88,19 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 각 주요 인증 체계에 대 한 2.0 마이그레이션 지침은 다음과 같습니다.
 
-### <a name="cookie-based-authentication"></a>쿠키 기반 인증
+### <a name="no-loccookie-based-authentication"></a>Cookie기반 인증
 
 아래 두 옵션 중 하나를 선택 하 고 *Startup.cs*에서 필요한 변경을 수행 합니다.
 
-1. 쿠키 사용Identity
+1. cookie에서 사용Identity
     - `UseIdentity`메서드에서를로 바꿉니다 `UseAuthentication` `Configure` .
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - `AddIdentity`메서드에서 메서드를 호출 `ConfigureServices` 하 여 쿠키 인증 서비스를 추가 합니다.
-    - 필요에 따라 `ConfigureApplicationCookie` 메서드에서 또는 `ConfigureExternalCookie` 메서드를 호출 `ConfigureServices` 하 여 Identity 쿠키 설정을 조정 합니다.
+    - `AddIdentity`메서드에서 메서드를 호출 `ConfigureServices` 하 여 인증 서비스를 추가 cookie 합니다.
+    - 필요에 따라 `ConfigureApplicationCookie` 메서드에서 또는 `ConfigureExternalCookie` 메서드를 호출 `ConfigureServices` 하 여 설정을 조정 Identity cookie 합니다.
 
         ```csharp
         services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -108,7 +110,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. 쿠키를 사용 하지 않고 사용Identity
+2. 을 사용 cookie 하지 않고 s 사용Identity
     - `UseCookieAuthentication`메서드의 메서드 호출을 `Configure` 다음으로 바꿉니다 `UseAuthentication` .
 
         ```csharp
@@ -277,7 +279,7 @@ Microsoft 계정 인증에 대 한 자세한 내용은 [이 GitHub 문제](https
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-위의 코드 조각에서 기본 체계는 `CookieAuthenticationDefaults.AuthenticationScheme` ("쿠키")로 설정 됩니다.
+위의 코드 조각에서 기본 체계는 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s")로 설정 됩니다.
 
 또는 오버 로드 된 버전의 메서드를 사용 하 여 둘 이상의 `AddAuthentication` 속성을 설정 합니다. 다음의 오버 로드 된 메서드 예제에서 기본 체계는로 설정 됩니다 `CookieAuthenticationDefaults.AuthenticationScheme` . 개별 `[Authorize]` 특성 또는 권한 부여 정책 내에서 인증 체계를 지정할 수 있습니다.
 
@@ -293,7 +295,7 @@ services.AddAuthentication(options =>
 - 사용자에 게 자동으로 로그인 하려고 합니다.
 - `[Authorize]`스키마를 지정 하지 않고 특성 또는 권한 부여 정책을 사용 합니다.
 
-이 규칙의 예외는 `AddIdentity` 메서드입니다. 이 메서드는 쿠키를 추가 하 고 기본 인증 및 챌린지 체계를 응용 프로그램 쿠키로 설정 합니다 `IdentityConstants.ApplicationScheme` . 또한 기본 로그인 체계를 외부 쿠키로 설정 합니다 `IdentityConstants.ExternalScheme` .
+이 규칙의 예외는 `AddIdentity` 메서드입니다. 이 메서드는를 추가 하 cookie 고 응용 프로그램에 기본 인증 및 챌린지 체계를 설정 합니다 cookie `IdentityConstants.ApplicationScheme` . 또한 기본 로그인 체계를 외부로 설정 합니다 cookie `IdentityConstants.ExternalScheme` .
 
 <a name="obsolete-interface"></a>
 
@@ -342,11 +344,11 @@ Windows 인증에는 두 가지 변형이 있습니다.
 
 <a name="identity-cookie-options"></a>
 
-## <a name="identitycookieoptions-instances"></a>IdentityCookieOptions 인스턴스
+## <a name="no-locidentityno-loccookieoptions-instances"></a>IdentityCookie옵션 인스턴스
 
-2.0 변경의 부작용은 쿠키 옵션 인스턴스 대신 명명 된 옵션을 사용 하도록 전환 하는 것입니다. 쿠키 체계 이름을 사용자 지정 하는 기능이 Identity 제거 됩니다.
+2.0 변경의 부작용은 옵션 인스턴스 대신 명명 된 옵션을 사용 하는 것으로 전환 되는 것입니다 cookie . 스키마 이름을 사용자 지정 하는 기능이 Identity cookie 제거 됩니다.
 
-예를 들어 1. x 프로젝트는 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection) 을 사용 하 여 `IdentityCookieOptions` 매개 변수를 *AccountController.cs* 및 *ManageController.cs*에 전달 합니다. 외부 쿠키 인증 체계는 제공 된 인스턴스에서 액세스할 수 있습니다.
+예를 들어 1. x 프로젝트는 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection) 을 사용 하 여 `IdentityCookieOptions` 매개 변수를 *AccountController.cs* 및 *ManageController.cs*에 전달 합니다. 외부 cookie 인증 체계는 제공 된 인스턴스에서 액세스할 수 있습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -368,7 +370,7 @@ Windows 인증에는 두 가지 변형이 있습니다.
 
 <a name="navigation-properties"></a>
 
-## <a name="add-identityuser-poco-navigation-properties"></a>IdentityUser POCO 탐색 속성 추가
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a>Identity사용자 POCO 탐색 속성 추가
 
 기본 `IdentityUser` POCO (일반 이전 CLR 개체)의 Entity Framework (EF) 핵심 탐색 속성이 제거 되었습니다. 1.x 프로젝트에서 이러한 속성을 사용 하는 경우 수동으로 2.0 프로젝트에 다시 추가 합니다.
 
@@ -456,6 +458,6 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 <a name="additional-resources"></a>
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 자세한 내용은 GitHub의 [Auth 2.0 문제에 대 한 설명을](https://github.com/aspnet/Security/issues/1338) 참조 하세요.
