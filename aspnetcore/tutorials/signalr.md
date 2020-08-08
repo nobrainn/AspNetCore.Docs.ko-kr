@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core [SignalR 시작하기
 author: bradygaster
-description: 이 자습서에서는 ASP.NET Core [SignalR을 사용하는 채팅 앱을 만듭니다.
+description: 이 자습서에서는 ASP.NET Core SignalR을 사용하는 채팅 앱을 만듭니다.
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
@@ -29,14 +29,14 @@ ms.locfileid: "85406955"
 
 > [!div class="checklist"]
 > * 웹 프로젝트를 만듭니다.
-> * [SignalR 클라이언트 라이브러리를 추가합니다.
-> * [SignalR 허브를 만듭니다.
-> * [SignalR을 사용하도록 프로젝트를 구성합니다.
+> * SignalR 클라이언트 라이브러리를 추가합니다.
+> * SignalR 허브를 만듭니다.
+> * SignalR을 사용하도록 프로젝트를 구성합니다.
 > * 모든 클라이언트에서 연결된 모든 클라이언트로 메시지를 보내는 코드를 추가합니다.
 
 이 모든 과정을 마치면 동작하는 채팅 앱이 만들어집니다.
 
-![[SignalR 샘플 앱](signalr/_static/3.x/signalr-get-started-finished.png)
+![SignalR 샘플 앱](signalr/_static/3.x/signalr-get-started-finished.png)
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
@@ -93,9 +93,9 @@ ms.locfileid: "85406955"
 
 ---
 
-## <a name="add-the-signalr-client-library"></a>[SignalR 클라이언트 라이브러리 추가
+## <a name="add-the-signalr-client-library"></a>SignalR 클라이언트 라이브러리 추가
 
-[SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 CDN(콘텐츠 배달 네트워크)입니다.
+SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 CDN(콘텐츠 배달 네트워크)입니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -171,7 +171,7 @@ ms.locfileid: "85406955"
 
 ---
 
-## <a name="create-a-signalr-hub"></a>[SignalR 허브 만들기
+## <a name="create-a-signalr-hub"></a>SignalR 허브 만들기
 
 *허브*는 클라이언트-서버 통신을 처리하는 높은 수준의 파이프라인으로 제공되는 클래스입니다.
 
@@ -181,21 +181,21 @@ ms.locfileid: "85406955"
 
   [!code-csharp[ChatHub](signalr/sample-snapshot/3.x/ChatHub.cs)]
 
-  `ChatHub` 클래스는 [SignalR `Hub` 클래스에서 상속합니다. `Hub` 클래스는 연결, 그룹 및 메시징을 관리합니다.
+  `ChatHub` 클래스는 SignalR `Hub` 클래스에서 상속합니다. `Hub` 클래스는 연결, 그룹 및 메시징을 관리합니다.
 
   연결된 클라이언트에서 `SendMessage` 메서드를 호출하여 모든 클라이언트에 메시지를 보낼 수 있습니다. 메서드를 호출하는 JavaScript 클라이언트 코드는 자습서 뒷부분에 나와 있습니다. [SignalR 코드는 최대한의 확장성을 제공할 수 있도록 비동기적입니다.
 
-## <a name="configure-signalr"></a>[SignalR 구성
+## <a name="configure-signalr"></a>SignalR 구성
 
-[SignalR에 [SignalR 요청을 전달하도록 [SignalR 서버를 구성해야 합니다.
+SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합니다.
 
 * 다음 강조 표시된 코드를 *Startup.cs* 파일에 추가합니다.
 
   [!code-csharp[Startup](signalr/sample-snapshot/3.x/Startup.cs?highlight=11,28,55)]
 
-  이러한 변경 사항은 ASP.NET Core 종속성 주입 및 라우팅 시스템에 [SignalR을 추가합니다.
+  이러한 변경 사항은 ASP.NET Core 종속성 주입 및 라우팅 시스템에 SignalR을 추가합니다.
 
-## <a name="add-signalr-client-code"></a>[SignalR 클라이언트 코드 추가
+## <a name="add-signalr-client-code"></a>SignalR 클라이언트 코드 추가
 
 * *Pages\Index.cshtml*의 콘텐츠를 다음 코드로 바꿉니다.
 
@@ -204,8 +204,8 @@ ms.locfileid: "85406955"
   위의 코드는
 
   * 이름 및 메시지 텍스트에 대한 텍스트 상자 및 전송 단추를 만듭니다.
-  * [SignalR 허브에서 받은 메시지를 표시하기 위해 `id="messagesList"`를 사용하여 목록을 만듭니다.
-  * [SignalR 및 *chat.js* 애플리케이션 코드(다음 단계에서 만듦)에 대한 참조를 포함합니다.
+  * SignalR 허브에서 받은 메시지를 표시하기 위해 `id="messagesList"`를 사용하여 목록을 만듭니다.
+  * SignalR 및 *chat.js* 애플리케이션 코드(다음 단계에서 만듦)에 대한 참조를 포함합니다.
 
 * *wwwroot/js* 폴더에서 다음 코드를 사용하여 *chat.js* 파일을 만듭니다.
 
@@ -243,7 +243,7 @@ ms.locfileid: "85406955"
 
   이름과 메시지는 두 페이지 모두에 즉시 표시됩니다.
 
-  ![[SignalR 샘플 앱](signalr/_static/3.x/signalr-get-started-finished.png)
+  ![SignalR 샘플 앱](signalr/_static/3.x/signalr-get-started-finished.png)
 
 > [!TIP]
 > * 앱이 작동하지 않는 경우 브라우저 개발자 도구(F12)를 열고 콘솔로 이동합니다. HTML 및 JavaScript 코드와 관련된 오류를 볼 수 있습니다. 예를 들어 지정되지 않은 다른 폴더에 *signalr.js*를 넣었다고 가정합니다. 이 경우 해당 파일에 대한 참조는 작동하지 않으며 콘솔에 404 오류가 표시됩니다.
@@ -259,7 +259,7 @@ ms.locfileid: "85406955"
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 자습서에서는 [SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다. 
+이 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다. 
 
 > [!div class="checklist"]  
 > * 웹 프로젝트를 만듭니다.   
