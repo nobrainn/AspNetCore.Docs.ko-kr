@@ -5,6 +5,8 @@ description: ASP.NET Core MVC 컨트롤러가 ASP.NET Core의 종속성 주입�
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: bae31e38c3b4146ec5e4b7a398a2e0fa290fd34c
-ms.sourcegitcommit: 99c784a873b62fbd97a73c5c07f4fe7a7f5db638
+ms.openlocfilehash: aabb7f893fd9650e2e901dcfdfe845faba391435
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85503541"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019174"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core의 컨트롤러에 종속성 주입
 
@@ -62,7 +64,7 @@ ASP.NET Core MVC 컨트롤러는 생성자를 통해 명시적으로 종속성�
 
 컨트롤러 내에서 앱 또는 구성 설정에 액세스하는 것은 일반적인 패턴입니다. <xref:fundamentals/configuration/options>에 설명된 *옵션 패턴*은 설정을 관리하기 위해 선호되는 방법입니다. 일반적으로 컨트롤러에 <xref:Microsoft.Extensions.Configuration.IConfiguration>을 직접 주입하지 마세요.
 
-옵션을 나타내는 클래스를 만듭니다. 예를 들면 다음과 같습니다.
+옵션을 나타내는 클래스를 만듭니다. 예:
 
 [!code-csharp[](dependency-injection/3.1sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -126,7 +128,7 @@ ASP.NET Core MVC 컨트롤러는 생성자를 통해 명시적으로 종속성�
 
 컨트롤러 내에서 앱 또는 구성 설정에 액세스하는 것은 일반적인 패턴입니다. <xref:fundamentals/configuration/options>에 설명된 *옵션 패턴*은 설정을 관리하기 위해 선호되는 방법입니다. 일반적으로 컨트롤러에 <xref:Microsoft.Extensions.Configuration.IConfiguration>을 직접 주입하지 마세요.
 
-옵션을 나타내는 클래스를 만듭니다. 예를 들면 다음과 같습니다.
+옵션을 나타내는 클래스를 만듭니다. 예:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

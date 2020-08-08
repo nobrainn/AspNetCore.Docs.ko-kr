@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 5c999b426742cf75b1997f5b40223e2dda112901
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160294"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020602"
 ---
 # <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core 구성Identity
 
-ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설정에 기본값을 사용 합니다. 이러한 설정은 클래스에서 재정의할 수 있습니다 `Startup` .
+ASP.NET Core Identity 는 암호 정책, 잠금, 구성 등의 설정에 기본값을 사용 cookie 합니다. 이러한 설정은 클래스에서 재정의할 수 있습니다 `Startup` .
 
 ## <a name="no-locidentity-options"></a>Identity옵션
 
@@ -125,13 +127,13 @@ ASP.NET Core Identity 는 암호 정책, 잠금 및 쿠키 구성과 같은 설�
 | [AllowedUserNameCharacters](/dotnet/api/microsoft.aspnetcore.identity.useroptions.allowedusernamecharacters) | 사용자 이름에 허용 되는 문자입니다. | abcdefghijklmnopqrstuvwxyz<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>0123456789<br>-.\_@+ |
 | [RequireUniqueEmail](/dotnet/api/microsoft.aspnetcore.identity.useroptions.requireuniqueemail) | 각 사용자는 고유한 전자 메일을 사용 해야 합니다. | `false` |
 
-### <a name="cookie-settings"></a>쿠키 설정
+### <a name="no-loccookie-settings"></a>Cookie 설정
 
-에서 앱의 쿠키를 구성 `Startup.ConfigureServices` 합니다. [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) 는 또는를 호출한 **후에** 호출 해야 합니다 `AddIdentity` `AddDefaultIdentity` .
+에서 앱을 구성 cookie `Startup.ConfigureServices` 합니다. [ConfigureApplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) 또는를 호출한 **후** 를 호출 해야 합니다 `AddIdentity` `AddDefaultIdentity` .
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
-자세한 내용은 [은 cookieauthenticationoptions.authenticationtype](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)를 참조 하세요.
+자세한 내용은 [ Cookie authenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)를 참조 하세요.
 
 ## <a name="password-hasher-options"></a>암호 Hasher 옵션
 

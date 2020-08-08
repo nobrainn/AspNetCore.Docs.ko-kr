@@ -6,6 +6,8 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400156"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019159"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -155,13 +157,13 @@ public class Pet
 
 ### <a name="additional-sources"></a>추가 원본
 
-원본 데이터는 *값 공급 기업*에 의해 모델 바인딩 시스템에 제공됩니다. 다른 원본에서 모델 바인딩에 대한 데이터를 가져오는 사용자 지정 값 공급 기업을 작성 및 등록할 수 있습니다. 예를 들어 쿠키 또는 세션 상태의 데이터를 원할 수 있습니다. 새 원본에서 데이터를 가져오려면 다음을 수행합니다.
+원본 데이터는 *값 공급 기업*에 의해 모델 바인딩 시스템에 제공됩니다. 다른 원본에서 모델 바인딩에 대한 데이터를 가져오는 사용자 지정 값 공급 기업을 작성 및 등록할 수 있습니다. 예를 들어 또는 세션 상태의 데이터를 사용할 수 있습니다 cookie . 새 원본에서 데이터를 가져오려면 다음을 수행합니다.
 
 * `IValueProvider`를 구현하는 클래스를 만듭니다.
 * `IValueProviderFactory`를 구현하는 클래스를 만듭니다.
 * `Startup.ConfigureServices`에서 팩터리 클래스를 등록합니다.
 
-샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
+샘플 앱에는의 값을 가져오는 [값 공급자](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제가 포함 되어 있습니다 cookie . 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -314,7 +316,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>컬렉션
 
-단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
 
 * 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
 
@@ -359,7 +361,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>사전
 
-`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
 
 * 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
 
@@ -503,7 +505,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 이 특성의 이름은 데이터 원본을 지정하는 모델 바인딩 특성의 패턴을 따릅니다. 그러나 값 공급 기업의 바인딩 데이터에 대한 것은 아닙니다. [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에서 형식의 인스턴스를 가져옵니다. 특정 메서드가 호출되는 경우에만 서비스가 필요할 때 생성자 주입에 대안을 제공하는 것이 목적입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
@@ -641,13 +643,13 @@ public class Pet
 
 ### <a name="additional-sources"></a>추가 원본
 
-원본 데이터는 *값 공급 기업*에 의해 모델 바인딩 시스템에 제공됩니다. 다른 원본에서 모델 바인딩에 대한 데이터를 가져오는 사용자 지정 값 공급 기업을 작성 및 등록할 수 있습니다. 예를 들어 쿠키 또는 세션 상태의 데이터를 원할 수 있습니다. 새 원본에서 데이터를 가져오려면 다음을 수행합니다.
+원본 데이터는 *값 공급 기업*에 의해 모델 바인딩 시스템에 제공됩니다. 다른 원본에서 모델 바인딩에 대한 데이터를 가져오는 사용자 지정 값 공급 기업을 작성 및 등록할 수 있습니다. 예를 들어 또는 세션 상태의 데이터를 사용할 수 있습니다 cookie . 새 원본에서 데이터를 가져오려면 다음을 수행합니다.
 
 * `IValueProvider`를 구현하는 클래스를 만듭니다.
 * `IValueProviderFactory`를 구현하는 클래스를 만듭니다.
 * `Startup.ConfigureServices`에서 팩터리 클래스를 등록합니다.
 
-샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
+샘플 앱에는의 값을 가져오는 [값 공급자](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제가 포함 되어 있습니다 cookie . 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
@@ -800,7 +802,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>컬렉션
 
-단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
 
 * 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
 
@@ -845,7 +847,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>사전
 
-`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예를 들면 다음과 같습니다.
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
 
 * 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
 
@@ -964,7 +966,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 이 특성의 이름은 데이터 원본을 지정하는 모델 바인딩 특성의 패턴을 따릅니다. 그러나 값 공급 기업의 바인딩 데이터에 대한 것은 아닙니다. [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에서 형식의 인스턴스를 가져옵니다. 특정 메서드가 호출되는 경우에만 서비스가 필요할 때 생성자 주입에 대안을 제공하는 것이 목적입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>

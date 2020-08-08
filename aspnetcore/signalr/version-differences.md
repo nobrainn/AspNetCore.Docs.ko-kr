@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: b5b5686f87d6e511672f6a50db7be8e2613a8a9e
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: f52bf6c82cd5125e0905d9bcbda5dd5499d6455e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060152"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020043"
 ---
-# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR 와 ASP.NET Core 간의 차이점SignalR
+# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR 와 ASP.NET Core 간의 차이점SignalR
 
 ASP.NET Core SignalR ASP.NET의 클라이언트 또는 서버와 호환 되지 않습니다 SignalR . 이 문서에서는 ASP.NET Core에서 제거 되거나 변경 된 기능에 대해 자세히 설명 SignalR 합니다.
 
-## <a name="how-to-identify-the-signalr-version"></a>버전을 확인 하는 방법 SignalR
+## <a name="how-to-identify-the-no-locsignalr-version"></a>버전을 확인 하는 방법 SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -147,7 +149,7 @@ ASP.NET Core에서는 SignalR 연결 모델이 간소화 되었습니다. 여러
 
 ASP.NET Core는 SignalR 이제 허브에서 클라이언트로의 [스트리밍 데이터](xref:signalr/streaming) 를 지원 합니다.
 
-### <a name="state"></a>시스템 상태
+### <a name="state"></a>주
 
 클라이언트와 허브 (라고도 함) 간에 임의의 상태를 전달 하는 기능이 `HubState` 제거 되었으며 진행 메시지를 지원 합니다. 현재 허브 프록시의 대응 항목이 없습니다.
 
@@ -286,7 +288,7 @@ ASP.NET는 SignalR SQL Server 및 Redis를 지원 합니다. ASP.NET Core는 Sig
 * [Azure SignalR 서비스](/azure/azure-signalr/)
 * [Redis 백플레인](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [허브](xref:signalr/hubs)
 * [JavaScript 클라이언트](xref:signalr/javascript-client)

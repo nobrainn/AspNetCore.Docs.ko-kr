@@ -5,6 +5,8 @@ description: 권한 부여 특성을 사용 하 여 ASP.NET Core 컨트롤러 �
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: 09514032349d489b73d5bb785f11e44ca18b169c
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b503f5e79cbfbbd3e74e18356884c3223ede66a6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160240"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019029"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core의 단순 권한 부여
 
@@ -60,7 +62,7 @@ public class AccountController : Controller
 
 이제 인증 된 사용자만 함수에 액세스할 수 있습니다 `Logout` .
 
-또한 특성을 사용 `AllowAnonymous` 하 여 인증 되지 않은 사용자의 개별 작업에 대 한 액세스를 허용할 수 있습니다. 예를 들면 다음과 같습니다.
+또한 특성을 사용 `AllowAnonymous` 하 여 인증 되지 않은 사용자의 개별 작업에 대 한 액세스를 허용할 수 있습니다. 예:
 
 ```csharp
 [Authorize]

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 6a83695ff2a9ac7229d1d5086ed13594626476ee
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: bba72a8c795312b3f7fe3fbf16514ba9f2448fbf
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407660"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020342"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 
@@ -34,7 +36,7 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 
 이 샘플에는 docker [클라이언트](https://www.docker.com/products/docker)의 [docker 17.06](https://docs.docker.com/release-notes/docker-ce) 이상이 필요 합니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 문서의 지침 중 일부에는 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 이상이 필요 합니다.
 

@@ -6,6 +6,8 @@ description: ASP.NET Core 스크립트 태그 도우미 특성 및 HTML 스크�
 ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: b9b90c1c40fccbc7bb6b6c9050bd525b5fa8cd92
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b2f10b8230c1292614927d61c1e6d997dcb5640c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407410"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020225"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core의 스크립트 태그 도우미
 
@@ -54,7 +56,7 @@ ms.locfileid: "85407410"
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-기본 스크립트가 실패할 경우 대체할 Script 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>을 참조하세요.
+기본 스크립트가 실패할 경우 대체할 Script 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

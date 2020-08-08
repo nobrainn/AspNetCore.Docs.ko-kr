@@ -5,6 +5,8 @@ description: RazorASP.NET Core의 응용 프로그램 부분을 사용 하 여 �
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 690ef0843f567dc2335f4d51436e428207fd6eb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399753"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019575"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Razor응용 프로그램 파트를 사용 하 여 컨트롤러, 뷰, 페이지 등 공유
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a>Razor응용 프로그램 파트를 사용 하 여 컨트롤러, 뷰, 페이지 등 공유
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
 기능 공급자는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>에서 상속됩니다. 여기서 `T`는 기능의 형식입니다. 기능 공급자는 이전에 나열된 모든 기능 형식에 대해 구현할 수 있습니다. `ApplicationPartManager.FeatureProviders`의 기능 공급자 순서는 런타임 동작에 영향을 줄 수 있습니다. 나중에 추가된 공급자는 이전에 추가된 공급자가 수행한 작업에 반응할 수 있습니다.
 

@@ -5,6 +5,8 @@ description: ASP.NET Core MVC가 라우팅 미들웨어를 사용하여 들어�
 ms.author: riande
 ms.date: 3/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 4d367a6b15fdcf9ef6be1bac749368fd48fa259e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444138"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020368"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 작업에 라우팅
 
@@ -216,7 +218,7 @@ ASP.NET Core 3.0 이상의 엔드포인트 라우팅은 다음과 같습니다.
 * 가장 적합 한 후보를 선택 합니다.
 * 예외를 throw합니다.
 
-예를 들면 다음과 같습니다.
+예:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -274,7 +276,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 위의 코드에서 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> 는 `UseEndpoints` 특성 라우트된 컨트롤러를 매핑하기 위해 내부에서 호출 됩니다.
 
-다음 예제에서는
+다음 예제에서,
 
 * 위의 `Configure` 메서드가 사용 됩니다.
 * `HomeController`기본 기본 경로와 유사한 Url 집합과 일치 `{controller=Home}/{action=Index}/{id?}` 합니다.
@@ -413,7 +415,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsApiController.cs?name=snippet)]
 
-이전 예제에서는 다음을 수행합니다.
+앞의 예제에서:
 
 * URL 경로가 `/products` 일치 하는 경우`ProductsApi.ListProducts`
 * URL 경로는 `/products/5` 와 일치할 수 있습니다 `ProductsApi.GetProduct(int)` .
@@ -430,7 +432,7 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 | ----------------- | ------------ | --------- |
 | `[Route("")]` | 예 | `"Home"` |
 | `[Route("Index")]` | 예 | `"Home/Index"` |
-| `[Route("/")]` | **아니요** | `""` |
+| `[Route("/")]` | ‘아니요’ | `""` |
 | `[Route("About")]` | 예 | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
@@ -721,7 +723,7 @@ result: /UrlGeneration/Destination
 
 기본 경로를 사용 하 여이 문제가 발생할 수 있습니다 `{controller}/{action}/{id?}` . `Url.Action`항상 명시적으로 및 값을 지정 하기 때문에이 문제는 드물게 발생 `controller` `action` 합니다.
 
-Url의 여러 오버 로드. Action은 경로 값 개체를 사용 하 여 및 이외의 경로 매개 변수에 대 한 값을 제공 [합니다.](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) `controller` `action` 경로 값 개체는와 함께 자주 사용 됩니다 `id` . 예들 들어 `Url.Action("Buy", "Products", new { id = 17 })`입니다. 경로 값 개체:
+Url의 여러 오버 로드. Action은 경로 값 개체를 사용 하 여 및 이외의 경로 매개 변수에 대 한 값을 제공 [합니다.](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) `controller` `action` 경로 값 개체는와 함께 자주 사용 됩니다 `id` . 정의합니다(예: `Url.Action("Buy", "Products", new { id = 17 })`). 경로 값 개체:
 
 * 규칙에 따라 일반적으로 무명 형식의 개체입니다.
 * `IDictionary<>`또는 [POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)일 수 있습니다.
@@ -1009,7 +1011,7 @@ app.UseMvc(routes =>
 
 ### <a name="disambiguating-actions"></a>명확한 작업 구분
 
-두 작업이 라우팅을 통해 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외가 throw됩니다. 예를 들면 다음과 같습니다.
+두 작업이 라우팅을 통해 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외가 throw됩니다. 예:
 
 ```csharp
 public class ProductsController : Controller

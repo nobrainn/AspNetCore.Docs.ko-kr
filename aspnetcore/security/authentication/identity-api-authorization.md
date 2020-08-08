@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: c06f1d4bf772d7726d19163fcdee8c92d4006cd2
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 21bd1db322a984b5644b817e82a293b6c0b2d91e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819115"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019331"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
@@ -194,7 +196,7 @@ services.Configure<JwtBearerOptions>(
 
 API의 JWT 처리기는를 사용 하 여 인증 프로세스를 제어할 수 있는 이벤트를 발생 시킵니다 `JwtBearerEvents` . API 권한 부여에 대 한 지원을 제공 하기 위해는 `AddIdentityServerJwt` 자체 이벤트 처리기를 등록 합니다.
 
-이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예를 들어:
+이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예:
 
 ```csharp
 services.Configure<JwtBearerOptions>(

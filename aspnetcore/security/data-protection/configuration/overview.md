@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 096862b7149679c14e3d1ca17d38468a14e438a2
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 0ff211624b7cf363da393a627c761302d9f3d8ed
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913878"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019757"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호 구성
 
@@ -417,7 +419,7 @@ services.AddDataProtection()
 
 [Redis 데이터 지 속성](/azure/azure-cache-for-redis/cache-how-to-premium-persistence) 을 지 원하는 Redis 버전만 사용 하 여 키를 저장 해야 합니다. [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction) 는 영구적 이며 키를 저장 하는 데 사용할 수 있습니다. 자세한 내용은 [이 GitHub 이슈](https://github.com/dotnet/AspNetCore/issues/13476)를 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/data-protection/configuration/non-di-scenarios>
 * <xref:security/data-protection/configuration/machine-wide-policy>

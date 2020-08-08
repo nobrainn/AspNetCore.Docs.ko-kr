@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 0d99c5881b1ca786287d8643c82cab6a3f98f988
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913888"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019861"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -108,7 +110,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 ## <a name="keep-common-code-paths-fast"></a>자주 공용 코드 경로 유지
 
-모든 코드를 빠르게 만들려고 합니다. 자주 호출 되는 코드 경로를 최적화 하는 것이 가장 중요 합니다. 여기에는 다음이 포함됩니다.
+모든 코드를 빠르게 만들려고 합니다. 자주 호출 되는 코드 경로를 최적화 하는 것이 가장 중요 합니다. 내용은 다음과 같습니다.
 
 * 앱의 요청 처리 파이프라인에 있는 미들웨어 구성 요소, 특히 미들웨어는 파이프라인 초기에 실행 됩니다. 이러한 구성 요소는 성능에 큰 영향을 줍니다.
 * 요청 마다 또는 요청 마다 여러 번 실행 되는 코드입니다. 예를 들어 사용자 지정 로깅, 권한 부여 처리기 또는 임시 서비스 초기화가 있습니다.

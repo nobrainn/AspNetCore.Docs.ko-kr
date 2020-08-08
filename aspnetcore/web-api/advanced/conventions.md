@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: eece8130c152fdada1e1d86cf3c94932c5ee9f63
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e18a2096c3b9fa788ba2a9713d0f25c1e76af2db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408450"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019965"
 ---
 # <a name="use-web-api-conventions"></a>웹 API 규칙 사용
 
@@ -81,7 +83,7 @@ ASP.NET Core MVC 2.2 이상에는 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConve
 
 ### <a name="response-types"></a>응답 형식
 
-이러한 메서드에는 `[ProducesResponseType]` 또는 `[ProducesDefaultResponseType]` 특성으로 주석이 추가됩니다. 예를 들면 다음과 같습니다.
+이러한 메서드에는 `[ProducesResponseType]` 또는 `[ProducesDefaultResponseType]` 특성으로 주석이 추가됩니다. 예:
 
 ```csharp
 public static class MyAppConventions
@@ -101,7 +103,7 @@ public static class MyAppConventions
 
 ### <a name="naming-requirements"></a>명명 요구 사항
 
-`[ApiConventionNameMatch]` 및 `[ApiConventionTypeMatch]` 특성은 적용할 작업을 결정하는 규칙 메서드에 적용될 수 있습니다. 예를 들면 다음과 같습니다.
+`[ApiConventionNameMatch]` 및 `[ApiConventionTypeMatch]` 특성은 적용할 작업을 결정하는 규칙 메서드에 적용될 수 있습니다. 예:
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]
@@ -118,7 +120,7 @@ public static void Find(
 * 메서드에 적용된 `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix` 옵션은 규칙이 "찾기"로 접두사가 지정된 모든 작업과 일치함을 나타냅니다. 일치하는 작업의 예로는 `Find`, `FindPet` 및 `FindById`가 있습니다.
 * 매개 변수에 적용된 `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix`는 규칙이 접미사 식별자로 끝나는 정확히 하나의 매개 변수와 메서드가 일치함을 나타냅니다. 예제에는 `id` 또는 `petId`와 같은 매개 변수가 포함됩니다. `ApiConventionTypeMatch`는 매개 변수 유형을 제한하는 형식에 유사하게 적용할 수 있습니다. `params[]` 인수는 명시적으로 일치할 필요가 없는 나머지 매개 변수를 나타냅니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:web-api/advanced/analyzers>
 * <xref:tutorials/web-api-help-pages-using-swagger>

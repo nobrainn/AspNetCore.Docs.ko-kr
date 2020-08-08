@@ -5,6 +5,8 @@ description: ASP.NET Core 앱에서 뷰를 렌더링하기 전에 일반적인 �
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406656"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020446"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core의 레이아웃
 
@@ -41,7 +43,7 @@ ms.locfileid: "85406656"
 
 ![페이지 레이아웃 예제](layout/_static/page-layout.png)
 
-스크립트 및 스타일시트와 같은 공통 HTML 구조는 앱 내에서 여러 페이지에서도 자주 사용됩니다. 이러한 모든 공유 요소를 *레이아웃* 파일에 정의한 후 앱 내에 사용된 모든 뷰에서 참조할 수 있습니다. 레이아웃은 보기에서 중복 코드를 줄입니다.
+스크립트 및 스타일시트와 같은 일반적인 HTML 구조도 앱 내의 많은 페이지에서 자주 사용됩니다. 이러한 공유 요소는 모두 응용 프로그램 내에서 사용 되는 보기에서 참조할 수 있는 *레이아웃* 파일에 정의 될 수 있습니다. 레이아웃은 뷰의 중복 코드를 줄입니다.
 
 규칙에 따라, ASP.NET Core 앱의 기본 레이아웃 이름을 *_Layout.cshtml*로 지정합니다. 템플릿을 사용하여 생성된 새로운 ASP.NET Core 프로젝트의 레이아웃 파일:
 
@@ -53,7 +55,7 @@ ms.locfileid: "85406656"
 
   ![솔루션 탐색기의 Views 폴더](layout/_static/mvc-web-project-views.png)
 
-이 레이아웃은 앱의 뷰에 대한 최상위 수준 템플릿을 정의합니다. 앱에는 레이아웃이 필요하지 않습니다. 앱은 다른 레이아웃을 지정하는 서로 다른 뷰를 포함하는 둘 이상의 레이아웃을 정의할 수 있습니다.
+이 레이아웃은 앱의 뷰에 대한 최상위 수준 템플릿을 정의합니다. 앱에는 레이아웃이 필요하지 않습니다. 앱은 각 뷰에서 다른 레이아웃을 지정하여 두 개 이상의 레이아웃을 정의할 수 있습니다.
 
 다음 코드는 컨트롤러 및 보기를 사용하여 만든 템플릿 프로젝트의 레이아웃 파일을 보여줍니다.
 

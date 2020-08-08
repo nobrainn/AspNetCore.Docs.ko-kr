@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 291897b06d3d8294bc170996683f36532712ebe4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f7a440a13891cd51226cad12924cfc65684632ea
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399012"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020186"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>ASP.NET Core의 외부 공급자에서 추가 클레임 및 토큰 유지
 
@@ -53,7 +55,7 @@ OAuth 인증 공급자는 클라이언트 ID 및 클라이언트 암호를 사�
 
 을 지정 하 여 공급자에서 검색할 사용 권한 목록을 지정 <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*> 합니다. 일반적인 외부 공급자에 대 한 인증 범위는 다음 표에 나와 있습니다.
 
-| 공급자  | Scope                                                            |
+| 공급자  | 범위                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -80,19 +82,19 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-기본적으로 사용자의 클레임은 인증 쿠키에 저장 됩니다. 인증 쿠키가 너무 크면 다음 이유로 인해 앱이 실패할 수 있습니다.
+기본적으로 사용자의 클레임은 인증에 저장 됩니다 cookie . 인증이 cookie 너무 크면 다음 이유로 인해 앱이 실패할 수 있습니다.
 
-* 브라우저에서 쿠키 헤더가 너무 긴 것을 감지 합니다.
+* 브라우저가 cookie 헤더가 너무 긴 것을 감지 합니다.
 * 요청의 전체 크기가 너무 깁니다.
 
 사용자 요청을 처리 하기 위해 많은 양의 사용자 데이터가 필요한 경우:
 
 * 요청 처리에 대 한 사용자 클레임 수와 크기를 앱에 필요한 것 으로만 제한 합니다.
-* 쿠키 인증 미들웨어의 사용자 지정을 사용 <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> 하 여 요청 간에 id를 저장 합니다. 클라이언트에 작은 세션 식별자 키를 보내는 경우에만 서버에서 많은 양의 id 정보를 유지 합니다.
+* 인증 미들웨어의 사용자 지정를 사용 <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> Cookie 하 여 요청에 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> id를 저장 합니다. 클라이언트에 작은 세션 식별자 키를 보내는 경우에만 서버에서 많은 양의 id 정보를 유지 합니다.
 
 ## <a name="save-the-access-token"></a>액세스 토큰 저장
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>인증에 성공한 후에 액세스 및 새로 고침 토큰을에 저장 해야 하는지 여부를 정의 합니다 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`는 `false` 최종 인증 쿠키의 크기를 줄이기 위해 기본적으로로 설정 됩니다.
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>인증에 성공한 후에 액세스 및 새로 고침 토큰을에 저장 해야 하는지 여부를 정의 합니다 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`는 `false` 최종 인증의 크기를 줄이기 위해 기본적으로로 설정 됩니다 cookie .
 
 샘플 앱은의 값 `SaveTokens` 을의로 설정 합니다 `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> .
 
@@ -193,7 +195,7 @@ OAuth 인증 공급자는 클라이언트 ID 및 클라이언트 암호를 사�
 
 을 지정 하 여 공급자에서 검색할 사용 권한 목록을 지정 <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*> 합니다. 일반적인 외부 공급자에 대 한 인증 범위는 다음 표에 나와 있습니다.
 
-| 공급자  | Scope                                                            |
+| 공급자  | 범위                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -220,19 +222,19 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-기본적으로 사용자의 클레임은 인증 쿠키에 저장 됩니다. 인증 쿠키가 너무 크면 다음 이유로 인해 앱이 실패할 수 있습니다.
+기본적으로 사용자의 클레임은 인증에 저장 됩니다 cookie . 인증이 cookie 너무 크면 다음 이유로 인해 앱이 실패할 수 있습니다.
 
-* 브라우저에서 쿠키 헤더가 너무 긴 것을 감지 합니다.
+* 브라우저가 cookie 헤더가 너무 긴 것을 감지 합니다.
 * 요청의 전체 크기가 너무 깁니다.
 
 사용자 요청을 처리 하기 위해 많은 양의 사용자 데이터가 필요한 경우:
 
 * 요청 처리에 대 한 사용자 클레임 수와 크기를 앱에 필요한 것 으로만 제한 합니다.
-* 쿠키 인증 미들웨어의 사용자 지정을 사용 <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> 하 여 요청 간에 id를 저장 합니다. 클라이언트에 작은 세션 식별자 키를 보내는 경우에만 서버에서 많은 양의 id 정보를 유지 합니다.
+* 인증 미들웨어의 사용자 지정를 사용 <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> Cookie 하 여 요청에 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> id를 저장 합니다. 클라이언트에 작은 세션 식별자 키를 보내는 경우에만 서버에서 많은 양의 id 정보를 유지 합니다.
 
 ## <a name="save-the-access-token"></a>액세스 토큰 저장
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>인증에 성공한 후에 액세스 및 새로 고침 토큰을에 저장 해야 하는지 여부를 정의 합니다 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`는 `false` 최종 인증 쿠키의 크기를 줄이기 위해 기본적으로로 설정 됩니다.
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>인증에 성공한 후에 액세스 및 새로 고침 토큰을에 저장 해야 하는지 여부를 정의 합니다 <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`는 `false` 최종 인증의 크기를 줄이기 위해 기본적으로로 설정 됩니다 cookie .
 
 샘플 앱은의 값 `SaveTokens` 을의로 설정 합니다 `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> .
 
@@ -304,6 +306,6 @@ Authentication Properties
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [dotnet/AspNetCore 공학적 AspNetCore Alsample 앱](https://github.com/dotnet/AspNetCore/tree/master/src/Security/Authentication/samples/SocialSample): 연결 된 샘플 앱은 [Dotnet/GitHub 리포지토리의](https://github.com/dotnet/AspNetCore) `master` 엔지니어링 분기에 있습니다. 분기에는 `master` ASP.NET Core의 다음 릴리스에 대해 활성 개발 중인 코드가 포함 됩니다. ASP.NET Core의 릴리스 버전에 대 한 샘플 앱 버전을 보려면 **분기** 드롭다운 목록을 사용 하 여 릴리스 분기 (예:)를 선택 `release/{X.Y}` 합니다.

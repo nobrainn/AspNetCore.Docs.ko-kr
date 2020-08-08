@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400364"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019939"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -143,7 +145,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예를 들면 다음과 같습니다.
+`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예:
 
 ```csharp
 public IActionResult Get()
@@ -163,7 +165,7 @@ ASP.NET Core 3.0 이전에는 `Newtonsoft.Json` 패키지를 사용하여 구현
 
 일부 기능은 `System.Text.Json` 기반 포맷터와 잘 호환되지 않고 `Newtonsoft.Json` 기반 포맷터에 대한 참조를 필요로 할 수 있습니다. 앱이 다음과 같은 경우 `Newtonsoft.Json` 기반 포맷터를 계속해서 사용합니다.
 
-* `Newtonsoft.Json` 속성을 사용합니다. 예를 들어 `[JsonProperty]` 또는 `[JsonIgnore]`로 이름을 지정할 수 있습니다.
+* `Newtonsoft.Json` 속성을 사용합니다. 예를 들어 `[JsonProperty]` 또는 `[JsonIgnore]`입니다.
 * 직렬화 설정을 사용자 지정합니다.
 * `Newtonsoft.Json`은 제공하는 기능에 의존합니다.
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings`를 구성하는 경우. ASP.NET Core 3.0 이전의 `JsonResult.SerializerSettings`는 `Newtonsoft.Json` 고유의 `JsonSerializerSettings`의 인스턴스를 허용합니다.
@@ -182,7 +184,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예를 들면 다음과 같습니다.
+`JsonResult`를 사용하여 동작 단위로 출력 serialization 옵션을 구성할 수 있습니다. 예:
 
 ```csharp
 public IActionResult Get()
@@ -238,7 +240,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 `StringOutputFormatter`가 없으면 기본 제공 JSON 포맷터가 `string` 반환 형식의 형식을 지정합니다. 기본 제공 JSON 포맷터가 제거되고 XML 포맷터를 사용할 수 있는 경우, XML 포맷터가 `string` 반환 형식의 형식을 지정합니다. 그렇지 않으면 `string` 반환 형식이 `406 Not Acceptable`을 반환합니다.
 
-`HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 예를 들면 다음과 같습니다.
+`HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 예:
 
 * JSON 포맷터는 `null`의 본문이 포함된 응답을 반환합니다.
 * XML 포맷터는 `xsi:nil="true"`로 설정된 특성을 사용하여 빈 XML 요소를 반환합니다.
@@ -250,13 +252,13 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 * 쿼리 문자열 또는 경로의 부분에서.
 * .Xml 또는 .json과 같은 서식 지정 파일 확장명을 사용하여.
 
-요청 경로의 매핑은 API가 사용하는 경로에 지정해야 합니다. 예를 들면 다음과 같습니다.
+요청 경로의 매핑은 API가 사용하는 경로에 지정해야 합니다. 예:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
 위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. 특성은에 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 형식 값이 있는지 확인 `RouteData` 하 고 응답이 생성 될 때 응답 형식을 적절 한 포맷터에 매핑합니다.
 
-|           경로        |             포맷터              |
+|           라우팅        |             포맷터              |
 |------------------------|------------------------------------|
 |   `/api/products/5`    |    기본 출력 포맷터    |
 | `/api/products/5.json` | JSON 포맷터(구성된 경우) |

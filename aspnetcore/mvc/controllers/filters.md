@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869980"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019344"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -746,7 +748,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 * 메서드 필터는 컨트롤러 필터 내에서 중첩됩니다.
 * 컨트롤러 필터는 전역 필터 내에서 중첩됩니다.
 
-### <a name="controller-and-razor-page-level-filters"></a>컨트롤러 및 Razor 페이지 수준 필터
+### <a name="controller-and-no-locrazor-page-level-filters"></a>컨트롤러 및 Razor 페이지 수준 필터
 
 <xref:Microsoft.AspNetCore.Mvc.Controller> 기본 클래스에서 상속되는 모든 컨트롤러에는 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) 및 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted` 메서드가 포함됩니다. 이러한 메서드는: 다음 메서드는

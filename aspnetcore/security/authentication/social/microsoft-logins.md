@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: df3e738880902e3005221c6047b6be9e924f2929
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce0e56595611a8a34d0ad11680e67e2252da66c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406136"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020615"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
@@ -38,12 +40,12 @@ Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 하�
 * **새 등록** 선택
 * **이름**을 입력합니다.
 * **지원 되는 계정 유형에**대 한 옵션을 선택 합니다.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
-* **URI 리디렉션**에서 추가 된로 개발 URL을 입력 `/signin-microsoft` 합니다. 예: `https://localhost:5001/signin-microsoft`. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 구현 하는 경로에서 요청을 자동으로 처리 합니다 `/signin-microsoft` .
+* **URI 리디렉션**에서 추가 된로 개발 URL을 입력 `/signin-microsoft` 합니다. 정의합니다(예: `https://localhost:5001/signin-microsoft`). 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 구현 하는 경로에서 요청을 자동으로 처리 합니다 `/signin-microsoft` .
 * **등록**을 선택합니다.
 
 ### <a name="create-client-secret"></a>클라이언트 암호 만들기
 
-* 왼쪽 창에서 **인증서 & 암호**를 선택 합니다.
+* 왼쪽 창에서 **인증서 및 암호**를 선택합니다.
 * **클라이언트 암호**에서 **새 클라이언트 암호** 를 선택 합니다.
 
   * 클라이언트 암호에 대 한 설명을 추가 합니다.

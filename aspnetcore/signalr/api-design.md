@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 9ad8d30da552d3d3084534b8c7ca57386ad111ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ef0285c611bd41d7fe686a4b370b6daae9be9174
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407800"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018990"
 ---
-# <a name="signalr-api-design-considerations"></a>SignalRAPI 디자인 고려 사항
+# <a name="no-locsignalr-api-design-considerations"></a>SignalRAPI 디자인 고려 사항
 
 [Andrew Stanton-간호사](https://twitter.com/anurse)
 
@@ -40,7 +42,7 @@ JavaScript 클라이언트는 다음과 같이를 사용 하 여이 메서드를
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-나중에 서버 메서드에 두 번째 매개 변수를 추가 하는 경우 이전 클라이언트는이 매개 변수 값을 제공 하지 않습니다. 예를 들면 다음과 같습니다.
+나중에 서버 메서드에 두 번째 매개 변수를 추가 하는 경우 이전 클라이언트는이 매개 변수 값을 제공 하지 않습니다. 예:
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 
